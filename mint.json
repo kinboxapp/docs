@@ -76,7 +76,13 @@
         },
         {
             "group": "Tags",
-            "pages": ["api-reference/tags/post-v3tags"]
+            "pages": [
+                "api-reference/tags/list-tags",
+                "api-reference/tags/get-tag",
+                "api-reference/tags/create-tag",
+                "api-reference/tags/update-tag",
+                "api-reference/tags/delete-tag"
+            ]
         }
     ],
     "footerSocials": {
@@ -84,5 +90,11 @@
         "github": "https://github.com/mintlify",
         "linkedin": "https://www.linkedin.com/company/mintsearch"
     },
-    "openapi": "https://api4-staging.kinbox.com.br/docs-json"
+    "openapi": "https://api4-staging.kinbox.com.br/docs-json",
+    "api": {
+        "baseUrl": "https://api4-staging.kinbox.com.br",
+        "auth": {
+            "method": "bearer"
+        }
+    }
 }

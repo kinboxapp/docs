@@ -1,32 +1,40 @@
-# Mintlify Starter Kit
+<p align="center">
+  <a href="https://kinbox.com.br">
+    <img src="https://i.imgur.com/Sp8kcvA.png" width="250" alt="Kinbox-api Logo2" />
+  </a>
+</p>
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+<h1 align="center">Kinbox Docs</h1>
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+<div align="center">
 
-### Development
+✨✨✨ Kinbox Docs & API Reference ✨✨✨
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+[![Prod Kinbox](https://img.shields.io/badge/Prod-Kinbox-blue)](https://app.kinbox.com.br/settings/instagram-demo)
+[![Staging Kinbox](https://img.shields.io/badge/Staging-Kinbox-green)](https://app.kinbox.com.br/settings/instagram-demo)
 
+</div>
+
+## 📦 Install
+
+```bash
+$ npm i -g mintlify
 ```
-npm i -g mintlify
+
+## ⚔️ Run
+
+```bash
+$ yarn dev
 ```
 
-Run the following command at the root of your documentation (where mint.json is)
+## ⚔️ Generate OpenAPI pages
 
+```bash
+$ yarn generate
 ```
-mintlify dev
+
+## 🔨 Deploy
+
+```bash
+$ git push origin master
 ```
-
-### Publishing Changes
-
-Install our Github App to autopropagate changes from youre repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
-
-#### Troubleshooting
-
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `mint.json`
