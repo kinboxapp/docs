@@ -1,17 +1,17 @@
 {
     "$schema": "https://mintlify.com/schema.json",
-    "name": "Starter Kit",
+    "name": "Kinbox Docs",
     "logo": {
         "dark": "/logo/dark.svg",
         "light": "/logo/light.svg"
     },
     "favicon": "/favicon.png",
     "colors": {
-        "primary": "#9563FF",
-        "light": "#AE87FF",
-        "dark": "#0D001D",
+        "primary": "#367fee",
+        "light": "#87abff",
+        "dark": "#04001d",
         "background": {
-            "dark": "#090014"
+            "dark": "#020014"
         },
         "anchors": {
             "from": "#FF7F57",
@@ -20,13 +20,13 @@
     },
     "topbarLinks": [
         {
-            "name": "Support",
-            "url": "mailto:hi@mintlify.com"
+            "name": "Suporte",
+            "url": "https://api.whatsapp.com/send/?phone=5585997508547"
         }
     ],
     "topbarCtaButton": {
-        "name": "Dashboard",
-        "url": "https://dashboard.mintlify.com"
+        "name": "Abrir Kinbox",
+        "url": "https://app.kinbox.com.br"
     },
     "tabs": [
         {
@@ -34,45 +34,14 @@
             "url": "api-reference"
         }
     ],
-    "anchors": [
-        {
-            "name": "Documentation",
-            "icon": "book-open-cover",
-            "url": "https://mintlify.com/docs"
-        },
-        {
-            "name": "Community",
-            "icon": "slack",
-            "url": "https://mintlify.com/community"
-        },
-        {
-            "name": "Blog",
-            "icon": "newspaper",
-            "url": "https://mintlify.com/blog"
-        }
-    ],
     "navigation": [
         {
-            "group": "Get Started",
-            "pages": ["introduction", "quickstart", "development"]
-        },
-        {
-            "group": "Essentials",
-            "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
-        },
-        {
-            "group": "API Documentation",
+            "group": "Documentação",
             "pages": ["api-reference/authentication"]
         },
         {
-            "group": "Endpoint Examples",
-            "pages": [
-                "api-reference/endpoint/get",
-                "api-reference/endpoint/create",
-                "api-reference/endpoint/update",
-                "api-reference/endpoint/delete",
-                "api-reference/tags/post-v3tags"
-            ]
+            "group": "Contatos",
+            "pages": ["api-reference/contatos/list-contacts", "api-reference/contatos/get-contact"]
         },
         {
             "group": "Tags",
@@ -86,13 +55,11 @@
         }
     ],
     "footerSocials": {
-        "twitter": "https://twitter.com/mintlify",
-        "github": "https://github.com/mintlify",
-        "linkedin": "https://www.linkedin.com/company/mintsearch"
+        "instagram": "https://www.instagram.com/appkinbox"
     },
-    "openapi": "https://api4-staging.kinbox.com.br/docs-json",
+    "openapi": "https://api4.kinbox.com.br/docs-json",
     "api": {
-        "baseUrl": "https://api4-staging.kinbox.com.br",
+        "baseUrl": "https://api4.kinbox.com.br",
         "auth": {
             "method": "bearer"
         }
