@@ -41,7 +41,16 @@
         },
         {
             "group": "Contatos",
-            "pages": ["api-reference/contatos/list-contacts", "api-reference/contatos/get-contact"]
+            "pages": [
+                "api-reference/contatos/list-contacts",
+                "api-reference/contatos/get-contact",
+                "api-reference/contatos/create-contact",
+                "api-reference/contatos/update-contact"
+            ]
+        },
+        {
+            "group": "Campos Personalizados",
+            "pages": ["api-reference/campos-customizados/list-custom-fields", "api-reference/campos-customizados/get-custom-field"]
         },
         {
             "group": "Tags",
