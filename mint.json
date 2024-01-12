@@ -21,7 +21,7 @@
     "topbarLinks": [
         {
             "name": "Suporte",
-            "url": "https://api.whatsapp.com/send/?phone=5585997508547"
+            "url": "https://api.whatsapp.com/send/?phone=558001151777"
         }
     ],
     "topbarCtaButton": {
@@ -43,6 +43,7 @@
             "group": "Contatos",
             "pages": [
                 "api-reference/contatos/list-contacts",
+                "api-reference/contatos/list-all-contacts",
                 "api-reference/contatos/get-contact",
                 "api-reference/contatos/create-contact",
                 "api-reference/contatos/update-contact"
@@ -51,6 +52,10 @@
         {
             "group": "Campos Personalizados",
             "pages": ["api-reference/campos-customizados/list-custom-fields", "api-reference/campos-customizados/get-custom-field"]
+        },
+        {
+            "group": "Conversas",
+            "pages": ["api-reference/relatórios/list-all-sessions", "api-reference/relatórios/list-sessions"]
         },
         {
             "group": "Tags",
@@ -64,7 +69,7 @@
         }
     ],
     "footerSocials": {
-        "instagram": "https://www.instagram.com/appkinbox"
+        "instagram": "https://www.instagram.com/kinboxoficial"
     },
     "openapi": "https://api4.kinbox.com.br/docs-json",
     "api": {
