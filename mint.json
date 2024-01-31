@@ -51,11 +51,17 @@
         },
         {
             "group": "Campos Personalizados",
-            "pages": ["api-reference/campos-customizados/list-custom-fields", "api-reference/campos-customizados/get-custom-field"]
+            "pages": [
+                "api-reference/campos-customizados/list-custom-fields",
+                "api-reference/campos-customizados/get-custom-field"
+            ]
         },
         {
             "group": "Conversas",
-            "pages": ["api-reference/relatórios/list-all-sessions", "api-reference/relatórios/list-sessions"]
+            "pages": [
+                "api-reference/relatórios/list-all-sessions",
+                "api-reference/relatórios/list-sessions"
+            ]
         },
         {
             "group": "Tags",
@@ -65,6 +71,19 @@
                 "api-reference/tags/create-tag",
                 "api-reference/tags/update-tag",
                 "api-reference/tags/delete-tag"
+            ]
+        },
+        {
+            "group": "Campanhas",
+            "pages": [
+                "api-reference/campanhas/list-campaigns",
+                "api-reference/campanhas/list-all-campaigns",
+                "api-reference/campanhas/get-campaign",
+                "api-reference/campanhas/create-campaign",
+                "api-reference/campanhas/delete-campaign",
+                "api-reference/campanhas/get-campaign-leads",
+                "api-reference/campanhas/pause-campaign",
+                "api-reference/campanhas/resume-campaign"
             ]
         }
     ],
