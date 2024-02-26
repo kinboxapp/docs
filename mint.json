@@ -77,7 +77,6 @@
             "group": "Campanhas",
             "pages": [
                 "api-reference/campanhas/list-campaigns",
-                "api-reference/campanhas/list-all-campaigns",
                 "api-reference/campanhas/get-campaign",
                 "api-reference/campanhas/create-campaign",
                 "api-reference/campanhas/delete-campaign",
