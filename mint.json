@@ -14,8 +14,8 @@
             "dark": "#020014"
         },
         "anchors": {
-            "from": "#FF7F57",
-            "to": "#9563FF"
+            "from": "#367fee",
+            "to": "#87abff"
         }
     },
     "topbarLinks": [
@@ -28,66 +28,82 @@
         "name": "Abrir Kinbox",
         "url": "https://app.kinbox.com.br"
     },
-    "tabs": [
+    "anchors": [
         {
             "name": "API Reference",
+            "icon": "rectangle-terminal",
             "url": "api-reference"
         }
     ],
     "navigation": [
         {
             "group": "Documentação",
+            "pages": ["docs/changelog"]
+        },
+        {
+            "group": "API",
             "pages": ["api-reference/authentication"]
         },
         {
-            "group": "Contatos",
+            "group": "Ambiente",
             "pages": [
-                "api-reference/contatos/list-contacts",
-                "api-reference/contatos/list-all-contacts",
-                "api-reference/contatos/get-contact",
-                "api-reference/contatos/create-contact",
-                "api-reference/contatos/update-contact"
-            ]
-        },
-        {
-            "group": "Campos Personalizados",
-            "pages": [
-                "api-reference/campos-customizados/list-custom-fields",
-                "api-reference/campos-customizados/get-custom-field"
-            ]
-        },
-        {
-            "group": "Conversas",
-            "pages": [
-                "api-reference/relatórios/list-all-sessions",
-                "api-reference/relatórios/list-sessions"
-            ]
-        },
-        {
-            "group": "Tags",
-            "pages": [
-                "api-reference/tags/list-tags",
-                "api-reference/tags/get-tag",
-                "api-reference/tags/create-tag",
-                "api-reference/tags/update-tag",
-                "api-reference/tags/delete-tag"
-            ]
-        },
-        {
-            "group": "Campanhas",
-            "pages": [
-                "api-reference/campanhas/list-campaigns",
-                "api-reference/campanhas/get-campaign",
-                "api-reference/campanhas/create-campaign",
-                "api-reference/campanhas/delete-campaign",
-                "api-reference/campanhas/get-campaign-leads",
-                "api-reference/campanhas/pause-campaign",
-                "api-reference/campanhas/resume-campaign"
+                {
+                    "group": "Contatos",
+                    "icon": "address-card",
+                    "pages": [
+                        "api-reference/contatos/list-contacts",
+                        "api-reference/contatos/list-all-contacts",
+                        "api-reference/contatos/get-contact",
+                        "api-reference/contatos/create-contact",
+                        "api-reference/contatos/update-contact"
+                    ]
+                },
+                {
+                    "group": "Campos Personalizados",
+                    "icon": "keyboard",
+                    "pages": [
+                        "api-reference/campos-customizados/list-custom-fields",
+                        "api-reference/campos-customizados/get-custom-field"
+                    ]
+                },
+                {
+                    "group": "Conversas",
+                    "icon": "message-dots",
+                    "pages": [
+                        "api-reference/relatórios/list-all-sessions",
+                        "api-reference/relatórios/list-sessions"
+                    ]
+                },
+                {
+                    "group": "Tags",
+                    "icon": "tag",
+                    "pages": [
+                        "api-reference/tags/list-tags",
+                        "api-reference/tags/get-tag",
+                        "api-reference/tags/create-tag",
+                        "api-reference/tags/update-tag",
+                        "api-reference/tags/delete-tag"
+                    ]
+                },
+                {
+                    "group": "Campanhas",
+                    "icon": "bullseye-arrow",
+                    "pages": [
+                        "api-reference/campanhas/list-campaigns",
+                        "api-reference/campanhas/get-campaign",
+                        "api-reference/campanhas/create-campaign",
+                        "api-reference/campanhas/delete-campaign",
+                        "api-reference/campanhas/get-campaign-leads",
+                        "api-reference/campanhas/pause-campaign",
+                        "api-reference/campanhas/resume-campaign"
+                    ]
+                }
             ]
         }
     ],
     "footerSocials": {
-        "instagram": "https://www.instagram.com/kinboxoficial"
+        "instagram": "https://www.instagram.com/kinboxoficial",
+        "whatsapp": "https://www.linkedin.com/company/kinbox"
     },
     "openapi": "https://api4.kinbox.com.br/docs-json",
     "api": {
