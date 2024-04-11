@@ -6,6 +6,36 @@ icon: "megaphone"
 🔷 = Novidade
 🔶 = Correção de bug
 
+### 2 a 10 de abril de 2024
+- 🔷 Nova funcionalidade de linha do tempo nos detalhes da conversa
+- 🔷 Agora mostra mensagem de sistema sempre que uma nova sessão for iniciado mostrando o protoloco da sessão 
+- 🔷 Mensagens enviadas por um operador diretamente a partir do Direct agora são exibidas no Kinbox
+- 🔷 Novo sistema de balanceamento para atribuições automáticas que distribuem entre operadores online de grupos
+- 🔷 Novo domínio para API pública: https://api-v1.kinbox.com.br
+- 🔷 Nos cards das negociações agora mostra quando a conversa associada está pendente de resposta
+- 🔷 Novas ordenação no funil de vendas: "Mensagem mais recente da conversa associada"
+- 🔷 Novo gatilho de automação: Tempo pendente
+- 🔷 Nova configuração de notificação: Notificar ganho
+- 🔷 As respostas de avaliação de atendimento tinham um parâmetro automático de similaridade de 60% na resposta do cliente. Aumentamos o padrão de similaridade para 75%.
+- 🔷 Atualização no processo de busca de detalhes de uma conversa que visa carregar mais rápido as informações do contato
+- 🔷 Nova opção de "Considerar última mensagem do contato" no menu do bot
+- 🔷 Agora está trackeando log de automação na auditoria
+- 🔷 Nova permissão: Limitar horário que pode ficar disponível
+- 🔷 Automação de avaliação com notas com valores padrão de 1 à 5
+- 🔷 Adicionamos um recurso para evitar recebimento de webhooks duplicados para canais de WhatsApp Oficial (Cloud API)
+- 🔷 Nova função de executar ação em lote nas Negociações. 
+- 🔷 Adicionado modo de pagamento cartão de crédito para link de pagamento
+- 🔶 Fix ação de decisão de bot para checar o grupo do operador não estava indo para a opção correta
+- 🔶 Fix loop infinito causado pela opção "Considerar última mensagem do contato" no bot
+- 🔶 Fix bug que não permitia loop no inteligencia artificial no bot
+- 🔶 Após a atualização que permite exibir mensagem de instagram enviada diretamente do direct, quando um operador envia áudio pelo Kinbox esse áudio é exibido duplicado na conversa, esse comportamento foi corrigido.
+- 🔶 Fix bug no simulador do bot que não verificava corretamente a decisão de se o operador pertence ao grupo da conversa
+- 🔶 Fix bug que no chat documentos enviados e recebidos não tinha fundo
+- 🔶 Bot de avaliação agora é limitado a notas de 0 a 5
+- 🔶 Fix bug que em alguns ambientes cadastrados não estava gerando o bot de avaliação padrão nem o horário de relatório
+- 🔶 Fix bug que pesquisar por nome nas negociações não funcionava caso o cliente tivesse limitação de visualização de negócios
+
+
 ### 1 de abril de 2024
 - 🔶 Fix bug na notificação de tarefa que não mostrava o preview da tarefa e nem o som e nem notificada no horario correto.
 - 🔶 Fix pré-visualização da campanha que não mostrava as quebras de linha.
