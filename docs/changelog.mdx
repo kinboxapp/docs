@@ -6,6 +6,17 @@ icon: "megaphone"
 🔷 = Novidade
 🔶 = Correção de bug
 
+### 11 de abril de 2024
+- 🔷 Adicionado tab de "notas" na linha do tempo
+- 🔷 Nova integração "Sensedata" com plugin
+- 🔷 Nova integração com webhook do rdstation marketing para receber leads inbound
+- 🔶 Agora integrações e plugins somente carregarão informações nos detalhes se estiverem abertos.
+- 🔶 Fix bug em ambientes com a configuração de "preservar tags" não transferia as tags para a sessão no relatório
+- 🔶 Fix bug: Corrigido erro na ação de decisão do bot com "qualquer"
+- 🔶 Novo Fix bug para casos em que alguns ambientes cadastrados não estava gerando o bot de avaliação padrão nem o horário de relatório
+- 🔶 Corrigido o cálculo do totalizador dos tempos médios de atendimento e espera no relatório de produtividade. O cálculo antes era impreciso pois ele fazia a média das médias dos dias o que dá um valor diferente do que simplesmente usar a média individual de cada sessão no período selecionado. 
+- 🔶 Fix bug nos relatórios em que se colocasse um horário específico no dia e o usuário clicasse na linha do dia específico, carregava todas as sessões do dia e não apenas do horario selecionado. Agora respeita o horário do dia.
+
 ### 2 a 10 de abril de 2024
 - 🔷 Nova funcionalidade de linha do tempo nos detalhes da conversa
 - 🔷 Agora mostra mensagem de sistema sempre que uma nova sessão for iniciado mostrando o protoloco da sessão 
