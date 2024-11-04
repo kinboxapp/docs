@@ -6,7 +6,7 @@
         "dev": "npx mintlify dev --port 3333",
         "generate": "npx @mintlify/scraping@latest openapi-file https://api4.kinbox.com.br/docs-json -o api-reference",
         "generate-local": "npx @mintlify/scraping@latest openapi-file http://localhost:3000/docs-json -o api-reference",
-        "generate-file": "npx @mintlify/scraping@latest openapi-file openapi.json -o api-reference"
+        "generate-file": "npx @mintlify/scraping@3.0.153 openapi-file openapi.json -o api-reference"
     },
     "peerDependencies": {
         "typescript": "^5.0.0"

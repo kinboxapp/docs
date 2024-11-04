@@ -61,18 +61,12 @@
                 {
                     "group": "Campos Personalizados",
                     "icon": "keyboard",
-                    "pages": [
-                        "api-reference/campos-customizados/list-custom-fields",
-                        "api-reference/campos-customizados/get-custom-field"
-                    ]
+                    "pages": ["api-reference/campos-customizados/list-custom-fields", "api-reference/campos-customizados/get-custom-field"]
                 },
                 {
                     "group": "Conversas",
                     "icon": "message-dots",
-                    "pages": [
-                        "api-reference/relatórios/list-all-sessions",
-                        "api-reference/relatórios/list-sessions"
-                    ]
+                    "pages": ["api-reference/relatórios/list-all-sessions", "api-reference/relatórios/list-sessions", "api-reference/relatórios/get-session"]
                 },
                 {
                     "group": "Tags",
@@ -83,6 +77,17 @@
                         "api-reference/tags/create-tag",
                         "api-reference/tags/update-tag",
                         "api-reference/tags/delete-tag"
+                    ]
+                },
+                {
+                    "group": "Produtos",
+                    "icon": "box",
+                    "pages": [
+                        "api-reference/produtos/list-products",
+                        "api-reference/produtos/create-product",
+                        "api-reference/produtos/delete-product",
+                        "api-reference/produtos/update-product",
+                        "api-reference/produtos/get-product"
                     ]
                 },
                 {
