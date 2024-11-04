@@ -107,8 +107,7 @@
         }
     ],
     "footerSocials": {
-        "instagram": "https://www.instagram.com/kinboxoficial",
-        "whatsapp": "https://www.linkedin.com/company/kinbox"
+        "instagram": "https://www.instagram.com/kinboxoficial"
     },
     "openapi": "https://api4.kinbox.com.br/docs-json",
     "api": {
