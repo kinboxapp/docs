@@ -91,6 +91,17 @@
                     ]
                 },
                 {
+                    "group": "Negócios",
+                    "icon": "fire",
+                    "pages": [
+                        "api-reference/negócios/list-deals",
+                        "api-reference/negócios/get-deal",
+                        "api-reference/negócios/create-deal",
+                        "api-reference/negócios/delete-deal",
+                        "api-reference/negócios/update-deal"
+                    ]
+                },
+                {
                     "group": "Campanhas",
                     "icon": "bullseye-arrow",
                     "pages": [
