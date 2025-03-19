@@ -113,6 +113,20 @@
                         "api-reference/campanhas/pause-campaign",
                         "api-reference/campanhas/resume-campaign"
                     ]
+                },
+                {
+                    "group": "Dashboards",
+                    "icon": "chart-column",
+                    "pages": [
+                        "api-reference/dashboards/list-dashboards",
+                        "api-reference/dashboards/get-dashboard",
+                        "api-reference/dashboards/create-dashboard",
+                        "api-reference/dashboards/delete-dashboard",
+                        "api-reference/dashboards/list-snapshots",
+                        "api-reference/dashboards/update-dashboard",
+                        "api-reference/dashboards/create-snapshot",
+                        "api-reference/dashboards/get-snapshot"
+                    ]
                 }
             ]
         }
