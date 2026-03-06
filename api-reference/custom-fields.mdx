@@ -1,0 +1,24 @@
+---
+title: "Campos personalizados"
+description: "Onde usar"
+---
+
+Os objetos atualizáveis ​​do Kinbox — incluindo Contatos, Conversas, Sessões, Membros, Grupos, Canais, Produtos, Tarefas, Negócios — possuem um parâmetro de customFields. Você pode usar esse parâmetro para associar dados de chave-valor a esses objetos do Kinbox.
+
+Você pode usar customFields para armazenar informações adicionais e estruturadas em um objeto. Por exemplo, você pode armazenar o cpf do contato e/ou um identificador único usado pelo seu sistema.
+
+Os customFields sempre vão ter o mesmo formato em todos os objetos:
+
+```json
+{
+  "customFields": {
+    "cpf": {
+      "value": "060.715.303-54"
+    },
+    "age": {
+      "value": 30
+    }
+    ...
+  }
+}
+```

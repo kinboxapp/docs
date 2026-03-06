@@ -1,0 +1,16 @@
+---
+title: "Autenticação"
+description: "Como se autenticar no Kinbox"
+---
+
+A API do Kinbox usa tokens para identificar e autorizar chamadas para a API.
+
+Você pode obter esse token dentro da plataforma Kinbox indo em [Configurações > Integrações > API](https://go.kinbox.com.br/settings/integrations/api) clicando na aba API e criando um novo token.
+
+Seu token de API é capaz de autenticar no Kinbox e realizar ações em sua conta, por isso é importante que você o mantenha seguro da mesma forma que faria com uma senha.
+
+Para manter seu token de API seguro, você deve sempre conectar-se à API do Kinbox usando HTTPS usando o Bearer token. Para fazer isso, passe no header das suas requisições o Authorization como o exemplo abaixo:
+
+```bash
+'Authorization': 'Bearer <token>'
+```

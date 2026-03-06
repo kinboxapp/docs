@@ -1,0 +1,125 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "almond",
+  "name": "Kinbox Docs",
+  "colors": {
+    "primary": "#367fee",
+    "light": "#87abff",
+    "dark": "#15803D"
+  },
+  "favicon": "/favicon.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": ["index", "quickstart", "development"]
+          },
+          {
+            "group": "Customization",
+            "pages": ["essentials/settings", "essentials/navigation"]
+          },
+          {
+            "group": "Writing content",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/reusable-snippets"
+            ]
+          },
+          {
+            "group": "AI tools",
+            "pages": [
+              "ai-tools/cursor",
+              "ai-tools/claude-code",
+              "ai-tools/windsurf"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "API documentation",
+            "pages": [
+              "api-reference/authentication",
+              "api-reference/custom-fields"
+            ]
+          },
+          {
+            "group": "Contatos",
+            "icon": "address-card",
+            "pages": [
+              "api-reference/auto/v1contacts/list-all-contacts",
+              "api-reference/auto/v1contacts/retrieve-a-contact-by-id",
+              "api-reference/auto/v1contacts/create-a-contact",
+              "api-reference/auto/v1contacts/update-a-contact"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Documentation",
+          "href": "https://mintlify.com/docs",
+          "icon": "book-open-cover"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://mintlify.com/blog",
+          "icon": "newspaper"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Suporte",
+        "icon": "whatsapp",
+        "href": "https://api.whatsapp.com/send?text=Oi%20preciso%20de%20ajuda&phone=%2B558001151777&type=phone_number&app_absent=0"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://dashboard.mintlify.com"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "instagram": "https://www.instagram.com/kinboxoficial",
+      "github": "https://github.com/kinboxapp"
+    }
+  },
+  "api": {
+    "mdx": {
+      "server": "https://api4.kinbox.com.br",
+      "auth": {
+        "method": "bearer"
+      }
+    }
+  }
+}
