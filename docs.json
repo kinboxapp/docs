@@ -100,6 +100,17 @@
               "api-reference/auto/v1deals/update-a-deal",
               "api-reference/auto/v1deals/delete-a-deal"
             ]
+          },
+          {
+            "group": "Funis",
+            "icon": "pipelines",
+            "pages": [
+              "api-reference/auto/v1pipelines/list-all-pipelines",
+              "api-reference/auto/v1pipelines/retrieve-a-pipeline",
+              "api-reference/auto/v1pipelines/create-a-pipeline",
+              "api-reference/auto/v1pipelines/update-a-pipeline",
+              "api-reference/auto/v1pipelines/delete-a-pipeline"
+            ]
           }
         ]
       }
