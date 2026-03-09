@@ -66,5 +66,5 @@ npx @mintlify/scraping@latest openapi-file openapi.json -o api-reference/auto
 From localserver
 
 ```
-curl -s http://localhost:3000/docs-json > openapi.json && bun generate-file
+curl -s http://localhost:3000/docs-json > openapi.json && npx @mintlify/scraping@latest openapi-file openapi.json -o api-reference/auto
 ```

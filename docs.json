@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "almond",
+  "theme": "maple",
   "name": "Kinbox Docs",
   "colors": {
     "primary": "#367fee",
@@ -55,9 +55,50 @@
             "icon": "address-card",
             "pages": [
               "api-reference/auto/v1contacts/list-all-contacts",
-              "api-reference/auto/v1contacts/retrieve-a-contact-by-id",
+              "api-reference/auto/v1contacts/retrieve-a-contact",
               "api-reference/auto/v1contacts/create-a-contact",
               "api-reference/auto/v1contacts/update-a-contact"
+            ]
+          },
+          {
+            "group": "Campos personalizados",
+            "icon": "keyboard",
+            "pages": [
+              "api-reference/auto/v1customfields/list-all-custom-fields",
+              "api-reference/auto/v1customfields/retrieve-a-custom-field"
+            ]
+          },
+          {
+            "group": "Tags",
+            "icon": "tags",
+            "pages": [
+              "api-reference/auto/v1tags/list-all-tags",
+              "api-reference/auto/v1tags/retrieve-a-tag",
+              "api-reference/auto/v1tags/create-a-tag",
+              "api-reference/auto/v1tags/update-a-tag",
+              "api-reference/auto/v1tags/delete-a-tag"
+            ]
+          },
+          {
+            "group": "Produtos",
+            "icon": "products",
+            "pages": [
+              "api-reference/auto/v1products/list-all-products",
+              "api-reference/auto/v1products/retrieve-a-product",
+              "api-reference/auto/v1products/create-a-product",
+              "api-reference/auto/v1products/update-a-product",
+              "api-reference/auto/v1products/delete-a-product"
+            ]
+          },
+          {
+            "group": "Negócios",
+            "icon": "deals",
+            "pages": [
+              "api-reference/auto/v1deals/list-all-deals",
+              "api-reference/auto/v1deals/retrieve-a-deal",
+              "api-reference/auto/v1deals/create-a-deal",
+              "api-reference/auto/v1deals/update-a-deal",
+              "api-reference/auto/v1deals/delete-a-deal"
             ]
           }
         ]
@@ -92,8 +133,8 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Abrir Kinbox",
+      "href": "https://go.kinbox.com.br"
     }
   },
   "contextual": {
