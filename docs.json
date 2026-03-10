@@ -11,36 +11,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": ["index", "quickstart", "development"]
-          },
-          {
-            "group": "Customization",
-            "pages": ["essentials/settings", "essentials/navigation"]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "API reference",
         "groups": [
           {
@@ -111,24 +81,24 @@
               "api-reference/auto/v1pipelines/update-a-pipeline",
               "api-reference/auto/v1pipelines/delete-a-pipeline"
             ]
+          },
+          {
+            "group": "Campanhas",
+            "icon": "campaigns",
+            "pages": [
+              "api-reference/auto/v1campaigns/list-all-campaigns",
+              "api-reference/auto/v1campaigns/retrieve-a-campaign",
+              "api-reference/auto/v1campaigns/create-a-campaign",
+              "api-reference/auto/v1campaigns/update-a-campaign",
+              "api-reference/auto/v1campaigns/delete-a-campaign",
+              "api-reference/auto/v1campaigns/pause-a-campaign",
+              "api-reference/auto/v1campaigns/resume-a-campaign",
+              "api-reference/auto/v1campaigns/get-campaign-leads"
+            ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
