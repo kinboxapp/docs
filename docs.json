@@ -51,7 +51,7 @@
           },
           {
             "group": "Produtos",
-            "icon": "products",
+            "icon": "barcode",
             "pages": [
               "api-reference/auto/v1products/list-all-products",
               "api-reference/auto/v1products/retrieve-a-product",
@@ -62,7 +62,7 @@
           },
           {
             "group": "Negócios",
-            "icon": "deals",
+            "icon": "badge-dollar",
             "pages": [
               "api-reference/auto/v1deals/list-all-deals",
               "api-reference/auto/v1deals/retrieve-a-deal",
@@ -73,7 +73,7 @@
           },
           {
             "group": "Funis",
-            "icon": "pipelines",
+            "icon": "filter",
             "pages": [
               "api-reference/auto/v1pipelines/list-all-pipelines",
               "api-reference/auto/v1pipelines/retrieve-a-pipeline",
@@ -84,7 +84,7 @@
           },
           {
             "group": "Campanhas",
-            "icon": "campaigns",
+            "icon": "bullseye-arrow",
             "pages": [
               "api-reference/auto/v1campaigns/list-all-campaigns",
               "api-reference/auto/v1campaigns/retrieve-a-campaign",
@@ -94,6 +94,14 @@
               "api-reference/auto/v1campaigns/pause-a-campaign",
               "api-reference/auto/v1campaigns/resume-a-campaign",
               "api-reference/auto/v1campaigns/get-campaign-leads"
+            ]
+          },
+          {
+            "group": "Sessões",
+            "icon": "comments",
+            "pages": [
+              "api-reference/auto/v1sessions/list-all-sessions",
+              "api-reference/auto/v1sessions/retrieve-a-session"
             ]
           }
         ]
