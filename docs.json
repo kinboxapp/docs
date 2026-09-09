@@ -160,7 +160,7 @@
     "primary": {
       "type": "button",
       "label": "Abrir Kinbox",
-      "href": "https://go.kinbox.com.br"
+      "href": "https://app.kinbox.com.br"
     }
   },
   "contextual": {
