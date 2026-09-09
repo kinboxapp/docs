@@ -1680,6 +1680,54 @@
         ]
       }
     },
+    "/v3/user-info/home": {
+      "get": {
+        "operationId": "getHomeConfig",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get authenticated user home config",
+        "tags": [
+          "UserInfo"
+        ]
+      },
+      "patch": {
+        "operationId": "updateHomeConfig",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserInfoHomeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update authenticated user home config",
+        "tags": [
+          "UserInfo"
+        ]
+      }
+    },
     "/v3/user-info/{id}": {
       "get": {
         "description": "Buscar usuário por ID",
@@ -8800,6 +8848,27 @@
         ]
       }
     },
+    "/v3/dashboards/repurchase/deals": {
+      "get": {
+        "description": "Drill-down do card de taxa de recompra: lista os deals que compõem a base ou a recompra do período",
+        "operationId": "getRepurchaseDeals",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get Repurchase Rate Deals",
+        "tags": [
+          "Dashboards"
+        ]
+      }
+    },
     "/v3/dashboards/{dashboardId}/snapshots": {
       "get": {
         "description": "Listar snapshots paginado",
@@ -8882,6 +8951,14 @@
         "description": "Buscar snapshot por ID",
         "operationId": "getSnapshot",
         "parameters": [
+          {
+            "name": "dashboardId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "required": true,
@@ -13059,6 +13136,123 @@
           "Meta Ads"
         ]
       }
+    },
+    "/v3/mcp/oauth/authorizations/{requestId}": {
+      "get": {
+        "operationId": "describeAuthorization",
+        "parameters": [
+          {
+            "name": "requestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Dados do pedido de autorização para a tela de consent",
+        "tags": [
+          "MCP"
+        ]
+      }
+    },
+    "/v3/mcp/oauth/authorizations/{requestId}/decision": {
+      "post": {
+        "operationId": "decide",
+        "parameters": [
+          {
+            "name": "requestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsentDecisionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Aprova ou recusa o pedido de autorização",
+        "tags": [
+          "MCP"
+        ]
+      }
+    },
+    "/v3/mcp/connections": {
+      "get": {
+        "operationId": "listConnections",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Lista conexões MCP (OAuth) do workspace",
+        "tags": [
+          "MCP"
+        ]
+      }
+    },
+    "/v3/mcp/connections/{id}": {
+      "delete": {
+        "operationId": "revokeConnection",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Revoga uma conexão MCP",
+        "tags": [
+          "MCP"
+        ]
+      }
     }
   },
   "info": {
@@ -13354,6 +13548,18 @@
             "type": "string",
             "description": "Nome descritivo do token",
             "maxLength": 100
+          },
+          "scopes": {
+            "type": "array",
+            "description": "Escopos do token (read, write, send). Padrão: read e write. `send` libera envio de mensagens ao cliente final.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "read",
+                "write",
+                "send"
+              ]
+            }
           }
         },
         "required": [
@@ -14689,6 +14895,27 @@
           "_id"
         ]
       },
+      "UpdateUserInfoHomeDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "string",
+            "enum": [
+              "inbox",
+              "dashboard"
+            ]
+          },
+          "dashboardId": {
+            "type": "string"
+          },
+          "snapshotId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "page"
+        ]
+      },
       "CreateUserInfoDto": {
         "type": "object",
         "properties": {
@@ -14883,7 +15110,7 @@
           },
           "hidden": {
             "type": "boolean",
-            "default": true,
+            "default": false,
             "description": "Quando true, a conversa não é aberta para os atendentes (fica oculta/resolvida)."
           },
           "isMedia": {
@@ -15260,10 +15487,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -15440,10 +15667,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -15611,10 +15838,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -15785,10 +16012,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -15969,10 +16196,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -16141,10 +16368,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -19555,6 +19782,10 @@
             "example": 90
           }
         }
+      },
+      "ConsentDecisionDto": {
+        "type": "object",
+        "properties": {}
       }
     }
   }
