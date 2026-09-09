@@ -57,7 +57,8 @@
               "api-reference/auto/v1products/retrieve-a-product",
               "api-reference/auto/v1products/create-a-product",
               "api-reference/auto/v1products/update-a-product",
-              "api-reference/auto/v1products/delete-a-product"
+              "api-reference/auto/v1products/delete-a-product",
+              "api-reference/auto/v1products/retrieve-a-product-by-external-id"
             ]
           },
           {
@@ -102,6 +103,42 @@
             "pages": [
               "api-reference/auto/v1sessions/list-all-sessions",
               "api-reference/auto/v1sessions/retrieve-a-session"
+            ]
+          },
+          {
+            "group": "Mensagens",
+            "icon": "message",
+            "pages": [
+              "api-reference/auto/v1messages/send-a-message",
+              "api-reference/auto/v1messages/retrieve-queued-message-status"
+            ]
+          },
+          {
+            "group": "Canais",
+            "icon": "plug",
+            "pages": [
+              "api-reference/auto/v1channels/list-all-channels",
+              "api-reference/auto/v1channels/retrieve-a-channel",
+              "api-reference/auto/v1channels/list-channel-templates",
+              "api-reference/auto/v1channels/check-if-a-phone-has-whatsapp"
+            ]
+          },
+          {
+            "group": "Grupos",
+            "icon": "users",
+            "pages": [
+              "api-reference/auto/v1groups/list-all-groups",
+              "api-reference/auto/v1groups/retrieve-a-group",
+              "api-reference/auto/v1groups/list-group-users",
+              "api-reference/auto/v1groups/retrieve-a-group-user"
+            ]
+          },
+          {
+            "group": "Frases rápidas",
+            "icon": "bolt",
+            "pages": [
+              "api-reference/auto/v1quickphrases/list-all-quick-phrases",
+              "api-reference/auto/v1quickphrases/retrieve-a-quick-phrase"
             ]
           }
         ]
