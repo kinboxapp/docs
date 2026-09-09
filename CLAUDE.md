@@ -47,7 +47,7 @@ openapi: get /v1/contacts
 ---
 ```
 
-The API playground server and auth are configured in `docs.json` under `api.mdx` (`server: https://api4.kinbox.com.br`, bearer auth).
+The API playground server and auth are configured in `docs.json` under `api.mdx` (`server: https://platform.kinbox.com.br`, bearer auth).
 
 ## Hand-written content
 

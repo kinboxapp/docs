@@ -183,7 +183,7 @@
   },
   "api": {
     "mdx": {
-      "server": "https://api4.kinbox.com.br",
+      "server": "https://platform.kinbox.com.br",
       "auth": {
         "method": "bearer"
       }
