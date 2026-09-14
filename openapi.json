@@ -1680,54 +1680,6 @@
         ]
       }
     },
-    "/v3/user-info/home": {
-      "get": {
-        "operationId": "getHomeConfig",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Get authenticated user home config",
-        "tags": [
-          "UserInfo"
-        ]
-      },
-      "patch": {
-        "operationId": "updateHomeConfig",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserInfoHomeDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Update authenticated user home config",
-        "tags": [
-          "UserInfo"
-        ]
-      }
-    },
     "/v3/user-info/{id}": {
       "get": {
         "description": "Buscar usuário por ID",
@@ -2360,6 +2312,122 @@
           }
         },
         "summary": "Retrieve queued message status",
+        "tags": [
+          "v1Messages"
+        ]
+      }
+    },
+    "/v1/messages/{id}": {
+      "get": {
+        "description": "Returns a single message by its id. Use GET /v1/conversations/{id}/messages to list the messages of a conversation.",
+        "operationId": "getMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessagePublicDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieve a message",
+        "tags": [
+          "v1Messages"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/messages": {
+      "get": {
+        "description": "Lists the messages of a conversation, newest first by default. The conversation id is the `call.customerPlatformId` returned by the sessions endpoints. Paginate with the returned `nextCursor`.",
+        "operationId": "getConversationMessages",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Conversation id (customerPlatformId)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100.",
+            "schema": {
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "description": "A cursor for use in pagination. Use the `nextCursor` returned by the previous request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "description": "Sort order by creation. `desc` returns the newest messages first.",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at_from",
+            "required": false,
+            "in": "query",
+            "description": "Only return messages created after this date.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at_to",
+            "required": false,
+            "in": "query",
+            "description": "Only return messages created before this date.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageCursorPaginatedResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List conversation messages",
         "tags": [
           "v1Messages"
         ]
@@ -8848,27 +8916,6 @@
         ]
       }
     },
-    "/v3/dashboards/repurchase/deals": {
-      "get": {
-        "description": "Drill-down do card de taxa de recompra: lista os deals que compõem a base ou a recompra do período",
-        "operationId": "getRepurchaseDeals",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Get Repurchase Rate Deals",
-        "tags": [
-          "Dashboards"
-        ]
-      }
-    },
     "/v3/dashboards/{dashboardId}/snapshots": {
       "get": {
         "description": "Listar snapshots paginado",
@@ -8951,14 +8998,6 @@
         "description": "Buscar snapshot por ID",
         "operationId": "getSnapshot",
         "parameters": [
-          {
-            "name": "dashboardId",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "id",
             "required": true,
@@ -13253,6 +13292,46 @@
           "MCP"
         ]
       }
+    },
+    "/v3/mcp/admin/audit": {
+      "get": {
+        "operationId": "search",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Chamadas MCP feitas com escopo admin",
+        "tags": [
+          "MCP"
+        ]
+      }
+    },
+    "/v3/mcp/admin/audit/meta": {
+      "get": {
+        "operationId": "meta",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Opções de filtro (tools e operadores)",
+        "tags": [
+          "MCP"
+        ]
+      }
     }
   },
   "info": {
@@ -14381,7 +14460,7 @@
             }
           },
           "nextCursor": {
-            "type": "object",
+            "type": "string",
             "nullable": true,
             "description": "Cursor for the next page. Null if there are no more results."
           }
@@ -14895,27 +14974,6 @@
           "_id"
         ]
       },
-      "UpdateUserInfoHomeDto": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "string",
-            "enum": [
-              "inbox",
-              "dashboard"
-            ]
-          },
-          "dashboardId": {
-            "type": "string"
-          },
-          "snapshotId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "page"
-        ]
-      },
       "CreateUserInfoDto": {
         "type": "object",
         "properties": {
@@ -15174,6 +15232,194 @@
         },
         "required": [
           "queue_status"
+        ]
+      },
+      "MessageMediaDto": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "example": "image",
+            "description": "Tipo da mídia (image, video, audio, file...)"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://cdn.kinbox.com.br/media/abc.jpg"
+          }
+        },
+        "required": [
+          "kind",
+          "url"
+        ]
+      },
+      "MessagePublicDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "37826587",
+            "description": "Id da mensagem. Numérico para mensagens comuns; pode ser um ObjectId para mensagens sem id numérico."
+          },
+          "conversationId": {
+            "type": "number",
+            "example": 1234567,
+            "description": "Id da conversa (contato no canal) a que a mensagem pertence"
+          },
+          "callId": {
+            "type": "number",
+            "example": 987654,
+            "nullable": true,
+            "description": "Id da sessão de atendimento (call) da mensagem"
+          },
+          "channelId": {
+            "type": "number",
+            "example": 103,
+            "nullable": true,
+            "description": "Id do canal pelo qual a mensagem passou"
+          },
+          "sender": {
+            "type": "string",
+            "enum": [
+              "contact",
+              "operator",
+              "bot",
+              "note",
+              "system"
+            ],
+            "example": "contact"
+          },
+          "type": {
+            "type": "number",
+            "example": 0,
+            "description": "Tipo bruto: 0 comum, 1 sistema, 2 nota interna, 3 bot, 4 e-mail"
+          },
+          "operatorId": {
+            "type": "number",
+            "example": 42,
+            "nullable": true
+          },
+          "operatorName": {
+            "type": "string",
+            "example": "Maria",
+            "nullable": true
+          },
+          "contactName": {
+            "type": "string",
+            "example": "Fulano",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "example": "[{\"insert\":\"Olá\"}]",
+            "description": "Conteúdo bruto como armazenado (normalmente um Quill Delta serializado)"
+          },
+          "text": {
+            "type": "string",
+            "example": "Olá",
+            "description": "Texto extraído de `content`"
+          },
+          "media": {
+            "description": "Mídias extraídas de `content`",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageMediaDto"
+            }
+          },
+          "isMedia": {
+            "type": "boolean",
+            "example": false
+          },
+          "fileName": {
+            "type": "string",
+            "example": "contrato.pdf",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "example": "wamid.HBgLNTU4NT...",
+            "nullable": true,
+            "description": "Id da mensagem na plataforma de origem (ex.: WhatsApp)"
+          },
+          "replyTo": {
+            "type": "object",
+            "nullable": true,
+            "description": "Referência da mensagem respondida, quando houver"
+          },
+          "status": {
+            "type": "number",
+            "example": 6,
+            "nullable": true,
+            "description": "Status de envio: 0 enviada ao módulo, 2 enviada à API, 4 aguardando reenvio, 6 entregue, 8 erro"
+          },
+          "isSent": {
+            "type": "boolean",
+            "example": true
+          },
+          "isError": {
+            "type": "boolean",
+            "example": false
+          },
+          "errorDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "example": false
+          },
+          "isScheduled": {
+            "type": "boolean",
+            "example": false
+          },
+          "isForwarding": {
+            "type": "boolean",
+            "example": false
+          },
+          "viewedAt": {
+            "type": "string",
+            "example": "2026-09-14T12:00:00.000Z",
+            "nullable": true,
+            "description": "Quando a mensagem foi visualizada pelo destinatário"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2026-09-14T11:58:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "conversationId",
+          "sender",
+          "type",
+          "content",
+          "text",
+          "isMedia",
+          "isSent",
+          "isError",
+          "isDeleted",
+          "isScheduled",
+          "isForwarding",
+          "createdAt"
+        ]
+      },
+      "MessageCursorPaginatedResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessagePublicDto"
+            }
+          },
+          "nextCursor": {
+            "type": "string",
+            "nullable": true,
+            "description": "Cursor for the next page. Null if there are no more results."
+          }
+        },
+        "required": [
+          "data",
+          "nextCursor"
         ]
       },
       "Rating": {
@@ -15487,10 +15733,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -15667,10 +15913,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -15838,10 +16084,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -16012,10 +16258,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -16057,7 +16303,7 @@
             }
           },
           "nextCursor": {
-            "type": "object",
+            "type": "string",
             "nullable": true,
             "description": "Cursor for the next page. Null if there are no more results."
           }
@@ -16196,10 +16442,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -16368,10 +16614,10 @@
               "$ref": "#/components/schemas/DealTask"
             }
           },
-          "cadenceOccurrences": {
+          "timeInStage": {
             "type": "object"
           },
-          "timeInStage": {
+          "cadenceOccurrences": {
             "type": "object"
           },
           "lastStageChanged": {
@@ -17449,7 +17695,7 @@
             }
           },
           "nextCursor": {
-            "type": "object",
+            "type": "string",
             "nullable": true,
             "description": "Cursor for the next page. Null if there are no more results."
           }
@@ -18643,7 +18889,7 @@
             }
           },
           "nextCursor": {
-            "type": "object",
+            "type": "string",
             "nullable": true,
             "description": "Cursor for the next page. Null if there are no more results."
           }
@@ -18993,15 +19239,604 @@
         "type": "object",
         "properties": {}
       },
+      "SessionCallDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 987654,
+            "description": "Id da sessão de atendimento (call)"
+          },
+          "customerPlatformId": {
+            "type": "number",
+            "example": 1234567,
+            "description": "Id da conversa (contato no canal). Use em GET /v1/conversations/{id}/messages."
+          },
+          "workspacePlatformId": {
+            "type": "number",
+            "example": 103,
+            "nullable": true,
+            "description": "Id do canal"
+          },
+          "operatorId": {
+            "type": "number",
+            "example": 42,
+            "nullable": true
+          },
+          "groupId": {
+            "type": "number",
+            "example": 10,
+            "nullable": true
+          },
+          "chatBotId": {
+            "type": "number",
+            "nullable": true
+          },
+          "lastBotId": {
+            "type": "number",
+            "nullable": true
+          },
+          "lastCallMessageId": {
+            "type": "number",
+            "nullable": true
+          },
+          "protocol": {
+            "type": "string",
+            "example": "2026091412345",
+            "nullable": true
+          },
+          "uniqueIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFinished": {
+            "type": "boolean",
+            "example": false
+          },
+          "isChatBotActive": {
+            "type": "boolean",
+            "example": false
+          },
+          "isFromIntegration": {
+            "type": "boolean",
+            "example": false
+          },
+          "isHidden": {
+            "type": "boolean",
+            "example": false
+          },
+          "isImported": {
+            "type": "boolean",
+            "example": false
+          },
+          "isReopened": {
+            "type": "boolean",
+            "example": false
+          },
+          "isWithoutOperatorAnswer": {
+            "type": "boolean",
+            "example": false
+          },
+          "isWithoutClientAnswer": {
+            "type": "boolean",
+            "example": false
+          },
+          "isCreatedByActiveChat": {
+            "type": "boolean",
+            "example": false
+          },
+          "isRatingActive": {
+            "type": "boolean",
+            "example": false
+          },
+          "isNewContact": {
+            "type": "boolean",
+            "example": false
+          },
+          "isNewConversation": {
+            "type": "boolean",
+            "example": false
+          },
+          "hasScheduledAutomation": {
+            "type": "boolean",
+            "example": false
+          },
+          "botLoopCount": {
+            "type": "number",
+            "nullable": true
+          },
+          "extraData": {
+            "type": "object",
+            "nullable": true,
+            "description": "Dados extras do canal (ex.: anúncio de origem)"
+          },
+          "referral": {
+            "type": "object",
+            "nullable": true,
+            "description": "Referral do WhatsApp (click-to-chat), quando houver"
+          },
+          "customFields": {
+            "type": "object",
+            "description": "Campos customizados da sessão no formato { chave: { value } }",
+            "example": {
+              "origem": {
+                "value": "site"
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2026-09-14T11:58:00.000Z"
+          },
+          "answeredAt": {
+            "type": "string",
+            "nullable": true,
+            "example": "2026-09-14T12:00:00.000Z"
+          },
+          "finishedAt": {
+            "type": "string",
+            "nullable": true,
+            "example": "2026-09-14T12:30:00.000Z"
+          },
+          "callExpiresAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstOperatorMessageAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastOperatorMessageAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstCustomerMessageAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastCustomerMessageAt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "customerPlatformId"
+        ]
+      },
+      "SessionContactDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 555
+          },
+          "name": {
+            "type": "string",
+            "example": "João Silva"
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "example": "joao@gmail.com",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "example": "5585988887777",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "newContact": {
+            "type": "boolean",
+            "example": false
+          },
+          "isPrivate": {
+            "type": "boolean",
+            "example": false
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2026-01-10T10:00:00.000Z"
+          },
+          "customFields": {
+            "type": "object",
+            "description": "Campos customizados do contato no formato { chave: { value } }",
+            "example": {
+              "cpf": {
+                "value": "000.000.000-00"
+              }
+            }
+          }
+        }
+      },
+      "SessionConversationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1234567,
+            "description": "Id da conversa (customerPlatformId)"
+          },
+          "customerId": {
+            "type": "number"
+          },
+          "platformId": {
+            "type": "number"
+          },
+          "workspacePlatformId": {
+            "type": "number",
+            "example": 103
+          },
+          "identifier": {
+            "type": "string",
+            "example": "5585988887777",
+            "description": "Identificador do contato no canal (telefone, id do Instagram etc.)"
+          },
+          "uniqueIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastCallId": {
+            "type": "number",
+            "nullable": true
+          },
+          "origin": {
+            "type": "string",
+            "nullable": true
+          },
+          "newCustomer": {
+            "type": "boolean",
+            "example": false
+          },
+          "hasNewMessages": {
+            "type": "boolean",
+            "example": false
+          },
+          "showPending": {
+            "type": "boolean",
+            "example": false
+          },
+          "wasImported": {
+            "type": "boolean",
+            "example": false
+          },
+          "isDbMigrated": {
+            "type": "boolean",
+            "example": false
+          },
+          "isBlocked": {
+            "type": "boolean",
+            "example": false
+          },
+          "isGroup": {
+            "type": "boolean",
+            "example": false
+          },
+          "importationTimestamp": {
+            "type": "number",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastSeen": {
+            "type": "string",
+            "nullable": true
+          },
+          "customerLastSeen": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastMessageAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "customerLastMessageAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "operatorLastMessageAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "operatorLastMessageTriggerAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "pendingAt": {
+            "type": "string",
+            "nullable": true
+          },
+          "expirationDate": {
+            "type": "string",
+            "nullable": true,
+            "description": "Fim da janela de 24h do WhatsApp, quando aplicável"
+          }
+        }
+      },
+      "SessionLastMessageDto": {
+        "type": "object",
+        "properties": {
+          "idMessage": {
+            "type": "number",
+            "example": 37826587,
+            "description": "Id da mensagem. Use em GET /v1/messages/{id}."
+          },
+          "_id": {
+            "type": "string",
+            "description": "ObjectId da mensagem"
+          },
+          "operatorId": {
+            "type": "number",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "example": "[{\"insert\":\"Olá\"}]"
+          },
+          "type": {
+            "type": "number",
+            "example": 0,
+            "description": "0 comum, 1 sistema, 2 nota interna, 3 bot, 4 e-mail"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2026-09-14T12:30:00.000Z"
+          }
+        }
+      },
+      "SessionRatingDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "example": 5
+          },
+          "operatorId": {
+            "type": "number",
+            "nullable": true
+          },
+          "operatorName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "SessionTrailDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2026-09-14T12:00:00.000Z"
+          },
+          "isodate": {
+            "type": "string",
+            "example": "2026-09-14T12:00:00.000Z"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "operator",
+              "bot",
+              "contact",
+              "automation",
+              "assignmentRule",
+              "group"
+            ],
+            "example": "operator"
+          },
+          "id": {
+            "type": "number",
+            "example": 42,
+            "description": "Id do operador, bot, grupo ou regra"
+          }
+        },
+        "required": [
+          "date",
+          "isodate",
+          "type",
+          "id"
+        ]
+      },
+      "SessionInteractionDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2026-09-14T12:00:00.000Z"
+          },
+          "operatorId": {
+            "type": "number",
+            "example": 42
+          }
+        },
+        "required": [
+          "date",
+          "operatorId"
+        ]
+      },
       "SessionSummaryPublicDto": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "example": "66e2f1c9a1b2c3d4e5f60718",
+            "description": "Id da sessão (ObjectId)"
+          },
+          "_id": {
+            "type": "string",
+            "example": "66e2f1c9a1b2c3d4e5f60718"
+          },
+          "workspaceId": {
+            "type": "number",
+            "example": 1
+          },
+          "call": {
+            "$ref": "#/components/schemas/SessionCallDto"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/SessionContactDto"
+          },
+          "conversation": {
+            "$ref": "#/components/schemas/SessionConversationDto"
+          },
+          "lastMessage": {
+            "$ref": "#/components/schemas/SessionLastMessageDto"
+          },
+          "rating": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionRatingDto"
+              }
+            ]
+          },
+          "trails": {
+            "description": "Histórico de quem assumiu a sessão",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionTrailDto"
+            }
+          },
+          "interactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionInteractionDto"
+            }
+          },
+          "interactionDates": {
+            "example": [
+              "2026-09-14"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "example": [
+              3,
+              8
+            ],
+            "description": "Ids das tags da sessão",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "followers": {
+            "description": "Ids dos operadores seguindo a conversa",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "scheduledMessages": {
+            "description": "Ids das mensagens agendadas",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "deals": {
+            "type": "object",
+            "nullable": true,
+            "description": "Negócios (deals) vinculados"
+          },
+          "operatorMessagesCount": {
+            "type": "number",
+            "example": 4
+          },
+          "assignedOperatorMessagesCount": {
+            "type": "number",
+            "example": 4
+          },
+          "botMessagesCount": {
+            "type": "number",
+            "example": 2
+          },
+          "contactMessagesCount": {
+            "type": "number",
+            "example": 5
+          },
+          "totalMessagesCount": {
+            "type": "number",
+            "example": 11
+          },
+          "messagesCountByDate": {
+            "type": "object",
+            "description": "Contagem de mensagens por dia: { \"2026-09-14\": { bot, operator, contact } }",
+            "example": {
+              "2026-09-14": {
+                "bot": 2,
+                "operator": 4,
+                "contact": 5
+              }
+            }
+          },
+          "tma": {
+            "type": "number",
+            "nullable": true,
+            "example": 1800,
+            "description": "Tempo médio de atendimento, em segundos"
+          },
+          "tme": {
+            "type": "number",
+            "nullable": true,
+            "example": 120,
+            "description": "Tempo médio de espera, em segundos"
+          },
+          "tmp": {
+            "type": "number",
+            "nullable": true,
+            "example": 90,
+            "description": "Tempo de primeira resposta, em segundos"
+          },
+          "tmpResetOnNewAssignment": {
+            "type": "boolean",
+            "example": false
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true,
+            "description": "Resumo da sessão gerado por IA"
+          },
+          "campaignId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Id da campanha que originou a sessão"
+          },
+          "mergedFromCustomerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2026-09-14T11:58:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2026-09-14T12:30:00.000Z"
           }
         },
         "required": [
-          "id"
+          "id",
+          "_id",
+          "workspaceId",
+          "call",
+          "createdAt",
+          "updatedAt"
         ]
       },
       "SessionSummaryCursorPaginatedResponseDto": {
@@ -19014,7 +19849,7 @@
             }
           },
           "nextCursor": {
-            "type": "object",
+            "type": "string",
             "nullable": true,
             "description": "Cursor for the next page. Null if there are no more results."
           }

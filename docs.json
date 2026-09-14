@@ -110,7 +110,9 @@
             "icon": "message",
             "pages": [
               "api-reference/auto/v1messages/send-a-message",
-              "api-reference/auto/v1messages/retrieve-queued-message-status"
+              "api-reference/auto/v1messages/retrieve-queued-message-status",
+              "api-reference/auto/v1messages/retrieve-a-message",
+              "api-reference/auto/v1messages/list-conversation-messages"
             ]
           },
           {
