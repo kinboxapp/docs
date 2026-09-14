@@ -19,25 +19,19 @@ Install the CLI with `npm i -g mint` (requires Node 19+). There is no test/lint 
 
 ## Regenerating the API reference
 
-The API reference under `api-reference/auto/` is **machine-generated from the OpenAPI spec — do not hand-edit those files.** The source of truth is `openapi.json` at the repo root (~315 KB, the full Kinbox API spec). Regenerate after the spec changes:
+The endpoint pages under `api-reference/<resource>/` (`contacts`, `messages`, `sessions`, ...) are **machine-generated from the OpenAPI spec — do not hand-edit those files.** The source of truth is `openapi.json` at the repo root (the full Kinbox API spec). Regeneration is driven from the API repo by the `deploy-api-reference` skill (`kinbox-workspace/api/.claude/skills/deploy-api-reference`):
 
-```bash
-# from a local spec file
-npx @mintlify/scraping@latest openapi-file openapi.json -o api-reference/auto
-
-# pull a fresh spec from a running server, then scrape
-curl -s http://localhost:3000/docs-json > openapi.json && npx @mintlify/scraping@latest openapi-file openapi.json -o api-reference/auto
-```
+1. `fetch-openapi.sh` pulls `/docs-json` from a running API into `openapi.json`.
+2. `scrape-openapi.sh` runs `@mintlify/scraping` into a temp dir and copies only the `v1*` tag folders into `api-reference/<resource>/` (tag `v1Messages` → folder `messages`, mapping function `public_dir` in the script).
+3. `check-docs-nav.ts` reports generated pages missing from `docs.json` and listed pages without a file.
 
 Note: `api-reference/openapi.json` is a small leftover sample and is **not** the spec used for the site — the root `openapi.json` is.
 
 ## How navigation works (important)
 
-`api-reference/auto/` contains scraped pages for the *entire* API surface (dozens of tag folders: `contatos`, `negócios`, `agents`, `copilot`, `dashboards`, internal `v3*` endpoints, etc.). **The site only exposes what is explicitly listed in `docs.json`.** Currently that is the stable public **v1** API — the `v1contacts`, `v1customfields`, `v1tags`, `v1products`, `v1deals`, `v1pipelines`, `v1campaigns` folders — plus the hand-written `api-reference/authentication` and `api-reference/custom-fields` pages.
-
-So publishing a new endpoint is a two-step process:
-1. Scrape (regenerates the `.mdx` under `api-reference/auto/...`).
-2. Add the page path to the appropriate `group.pages` array in `docs.json`. A scraped file that isn't referenced in `docs.json` simply won't appear on the site.
+Only the stable public **v1** API is published. Internal `/v3/*` routes exist in `openapi.json` but never get pages in the repo. **The site only exposes what is explicitly listed in `docs.json`**, so publishing a new endpoint is a two-step process:
+1. Regenerate the pages (see above).
+2. Add the page path to the appropriate `group.pages` array in `docs.json`. A generated file that isn't referenced in `docs.json` simply won't appear on the site.
 
 Generated endpoint pages are minimal — they reference the OpenAPI operation by frontmatter, e.g.:
 
@@ -46,6 +40,8 @@ Generated endpoint pages are minimal — they reference the OpenAPI operation by
 openapi: get /v1/contacts
 ---
 ```
+
+Public URLs follow the file path: `api-reference/messages/list-conversation-messages.mdx` → `developer.kinbox.com.br/api-reference/messages/list-conversation-messages`. Renaming a folder needs a `redirects` entry in `docs.json` (the old `api-reference/auto/v1<tag>/` layout is redirected this way).
 
 The API playground server and auth are configured in `docs.json` under `api.mdx` (`server: https://platform.kinbox.com.br`, bearer auth).
 

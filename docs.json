@@ -24,123 +24,123 @@
             "group": "Contatos",
             "icon": "address-card",
             "pages": [
-              "api-reference/auto/v1contacts/list-all-contacts",
-              "api-reference/auto/v1contacts/retrieve-a-contact",
-              "api-reference/auto/v1contacts/create-a-contact",
-              "api-reference/auto/v1contacts/update-a-contact"
+              "api-reference/contacts/list-all-contacts",
+              "api-reference/contacts/retrieve-a-contact",
+              "api-reference/contacts/create-a-contact",
+              "api-reference/contacts/update-a-contact"
             ]
           },
           {
             "group": "Campos personalizados",
             "icon": "keyboard",
             "pages": [
-              "api-reference/auto/v1customfields/list-all-custom-fields",
-              "api-reference/auto/v1customfields/retrieve-a-custom-field"
+              "api-reference/custom-fields/list-all-custom-fields",
+              "api-reference/custom-fields/retrieve-a-custom-field"
             ]
           },
           {
             "group": "Tags",
             "icon": "tags",
             "pages": [
-              "api-reference/auto/v1tags/list-all-tags",
-              "api-reference/auto/v1tags/retrieve-a-tag",
-              "api-reference/auto/v1tags/create-a-tag",
-              "api-reference/auto/v1tags/update-a-tag",
-              "api-reference/auto/v1tags/delete-a-tag"
+              "api-reference/tags/list-all-tags",
+              "api-reference/tags/retrieve-a-tag",
+              "api-reference/tags/create-a-tag",
+              "api-reference/tags/update-a-tag",
+              "api-reference/tags/delete-a-tag"
             ]
           },
           {
             "group": "Produtos",
             "icon": "barcode",
             "pages": [
-              "api-reference/auto/v1products/list-all-products",
-              "api-reference/auto/v1products/retrieve-a-product",
-              "api-reference/auto/v1products/create-a-product",
-              "api-reference/auto/v1products/update-a-product",
-              "api-reference/auto/v1products/delete-a-product",
-              "api-reference/auto/v1products/retrieve-a-product-by-external-id"
+              "api-reference/products/list-all-products",
+              "api-reference/products/retrieve-a-product",
+              "api-reference/products/create-a-product",
+              "api-reference/products/update-a-product",
+              "api-reference/products/delete-a-product",
+              "api-reference/products/retrieve-a-product-by-external-id"
             ]
           },
           {
             "group": "Negócios",
             "icon": "badge-dollar",
             "pages": [
-              "api-reference/auto/v1deals/list-all-deals",
-              "api-reference/auto/v1deals/retrieve-a-deal",
-              "api-reference/auto/v1deals/create-a-deal",
-              "api-reference/auto/v1deals/update-a-deal",
-              "api-reference/auto/v1deals/delete-a-deal"
+              "api-reference/deals/list-all-deals",
+              "api-reference/deals/retrieve-a-deal",
+              "api-reference/deals/create-a-deal",
+              "api-reference/deals/update-a-deal",
+              "api-reference/deals/delete-a-deal"
             ]
           },
           {
             "group": "Funis",
             "icon": "filter",
             "pages": [
-              "api-reference/auto/v1pipelines/list-all-pipelines",
-              "api-reference/auto/v1pipelines/retrieve-a-pipeline",
-              "api-reference/auto/v1pipelines/create-a-pipeline",
-              "api-reference/auto/v1pipelines/update-a-pipeline",
-              "api-reference/auto/v1pipelines/delete-a-pipeline"
+              "api-reference/pipelines/list-all-pipelines",
+              "api-reference/pipelines/retrieve-a-pipeline",
+              "api-reference/pipelines/create-a-pipeline",
+              "api-reference/pipelines/update-a-pipeline",
+              "api-reference/pipelines/delete-a-pipeline"
             ]
           },
           {
             "group": "Campanhas",
             "icon": "bullseye-arrow",
             "pages": [
-              "api-reference/auto/v1campaigns/list-all-campaigns",
-              "api-reference/auto/v1campaigns/retrieve-a-campaign",
-              "api-reference/auto/v1campaigns/create-a-campaign",
-              "api-reference/auto/v1campaigns/update-a-campaign",
-              "api-reference/auto/v1campaigns/delete-a-campaign",
-              "api-reference/auto/v1campaigns/pause-a-campaign",
-              "api-reference/auto/v1campaigns/resume-a-campaign",
-              "api-reference/auto/v1campaigns/get-campaign-leads"
+              "api-reference/campaigns/list-all-campaigns",
+              "api-reference/campaigns/retrieve-a-campaign",
+              "api-reference/campaigns/create-a-campaign",
+              "api-reference/campaigns/update-a-campaign",
+              "api-reference/campaigns/delete-a-campaign",
+              "api-reference/campaigns/pause-a-campaign",
+              "api-reference/campaigns/resume-a-campaign",
+              "api-reference/campaigns/get-campaign-leads"
             ]
           },
           {
             "group": "Sessões",
             "icon": "comments",
             "pages": [
-              "api-reference/auto/v1sessions/list-all-sessions",
-              "api-reference/auto/v1sessions/retrieve-a-session"
+              "api-reference/sessions/list-all-sessions",
+              "api-reference/sessions/retrieve-a-session"
             ]
           },
           {
             "group": "Mensagens",
             "icon": "message",
             "pages": [
-              "api-reference/auto/v1messages/send-a-message",
-              "api-reference/auto/v1messages/retrieve-queued-message-status",
-              "api-reference/auto/v1messages/retrieve-a-message",
-              "api-reference/auto/v1messages/list-conversation-messages"
+              "api-reference/messages/send-a-message",
+              "api-reference/messages/retrieve-queued-message-status",
+              "api-reference/messages/retrieve-a-message",
+              "api-reference/messages/list-conversation-messages"
             ]
           },
           {
             "group": "Canais",
             "icon": "plug",
             "pages": [
-              "api-reference/auto/v1channels/list-all-channels",
-              "api-reference/auto/v1channels/retrieve-a-channel",
-              "api-reference/auto/v1channels/list-channel-templates",
-              "api-reference/auto/v1channels/check-if-a-phone-has-whatsapp"
+              "api-reference/channels/list-all-channels",
+              "api-reference/channels/retrieve-a-channel",
+              "api-reference/channels/list-channel-templates",
+              "api-reference/channels/check-if-a-phone-has-whatsapp"
             ]
           },
           {
             "group": "Grupos",
             "icon": "users",
             "pages": [
-              "api-reference/auto/v1groups/list-all-groups",
-              "api-reference/auto/v1groups/retrieve-a-group",
-              "api-reference/auto/v1groups/list-group-users",
-              "api-reference/auto/v1groups/retrieve-a-group-user"
+              "api-reference/groups/list-all-groups",
+              "api-reference/groups/retrieve-a-group",
+              "api-reference/groups/list-group-users",
+              "api-reference/groups/retrieve-a-group-user"
             ]
           },
           {
             "group": "Frases rápidas",
             "icon": "bolt",
             "pages": [
-              "api-reference/auto/v1quickphrases/list-all-quick-phrases",
-              "api-reference/auto/v1quickphrases/retrieve-a-quick-phrase"
+              "api-reference/quick-phrases/list-all-quick-phrases",
+              "api-reference/quick-phrases/retrieve-a-quick-phrase"
             ]
           }
         ]
@@ -190,5 +190,55 @@
         "method": "bearer"
       }
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/api-reference/auto/v1campaigns/:slug*",
+      "destination": "/api-reference/campaigns/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1channels/:slug*",
+      "destination": "/api-reference/channels/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1contacts/:slug*",
+      "destination": "/api-reference/contacts/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1customfields/:slug*",
+      "destination": "/api-reference/custom-fields/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1deals/:slug*",
+      "destination": "/api-reference/deals/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1groups/:slug*",
+      "destination": "/api-reference/groups/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1messages/:slug*",
+      "destination": "/api-reference/messages/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1pipelines/:slug*",
+      "destination": "/api-reference/pipelines/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1products/:slug*",
+      "destination": "/api-reference/products/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1quickphrases/:slug*",
+      "destination": "/api-reference/quick-phrases/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1sessions/:slug*",
+      "destination": "/api-reference/sessions/:slug*"
+    },
+    {
+      "source": "/api-reference/auto/v1tags/:slug*",
+      "destination": "/api-reference/tags/:slug*"
+    }
+  ]
 }
