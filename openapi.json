@@ -1100,6 +1100,68 @@
         ]
       }
     },
+    "/v3/contacts/import": {
+      "post": {
+        "description": "Importa contatos da agenda do celular em lotes de até 500. Contatos com telefone já cadastrado são ignorados; os novos são criados em segundo plano.",
+        "operationId": "importContacts",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportContactsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Import Contacts",
+        "tags": [
+          "Contatos"
+        ]
+      }
+    },
+    "/v3/contacts/find-or-create": {
+      "post": {
+        "description": "Busca o contato por qualquer um dos telefones informados (com e sem DDI e nono dígito) e o cria se não existir.",
+        "operationId": "findOrCreate",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneBookContactDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Find or Create Contact by Phone",
+        "tags": [
+          "Contatos"
+        ]
+      }
+    },
     "/v3/business-hours": {
       "get": {
         "description": "Listar todos os horários",
@@ -5678,6 +5740,36 @@
         ]
       }
     },
+    "/v3/widget/upload/{license}": {
+      "post": {
+        "description": "Upload público (multipart, campo `file`) de imagem ou arquivo enviado pelo visitante do widget. Exige o identifier da sessão.",
+        "operationId": "uploadWidgetFile",
+        "parameters": [
+          {
+            "name": "license",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Upload Widget File",
+        "tags": [
+          "Widget"
+        ]
+      }
+    },
     "/v3/widget/settings": {
       "get": {
         "description": "Buscar ou criar settings do widget",
@@ -5822,6 +5914,36 @@
           }
         ],
         "summary": "Rehydrate Tasks",
+        "tags": [
+          "Tasks"
+        ]
+      }
+    },
+    "/v3/tasks/open-count/deal/{dealId}": {
+      "get": {
+        "description": "Buscar quantidade de tarefas abertas de uma negociação",
+        "operationId": "getOpenTasksCountByDeal",
+        "parameters": [
+          {
+            "name": "dealId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get Deal Open Tasks Count",
         "tags": [
           "Tasks"
         ]
@@ -6202,6 +6324,63 @@
         "summary": "Voximplant Recording Webhook",
         "tags": [
           "Webhooks"
+        ]
+      }
+    },
+    "/v3/push-notifications/mobile/installations": {
+      "put": {
+        "operationId": "registerMobile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MobileInstallationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Push Notifications"
+        ]
+      }
+    },
+    "/v3/push-notifications/mobile/installations/{deviceId}": {
+      "delete": {
+        "operationId": "revokeMobile",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Push Notifications"
         ]
       }
     },
@@ -8244,7 +8423,7 @@
             "name": "updated_at_from",
             "required": false,
             "in": "query",
-            "description": "Only return sessions that were updated after this date.",
+            "description": "Only return sessions that were updated after this date (ISO 8601). If no timezone offset is given (e.g. `2026-09-22` or `2026-09-22T10:00:00`), the date is interpreted in the workspace timezone.",
             "schema": {
               "type": "string"
             }
@@ -8253,7 +8432,7 @@
             "name": "updated_at_to",
             "required": false,
             "in": "query",
-            "description": "Only return sessions that were updated before this date.",
+            "description": "Only return sessions that were updated before this date (ISO 8601). If no timezone offset is given (e.g. `2026-09-22` or `2026-09-22T10:00:00`), the date is interpreted in the workspace timezone.",
             "schema": {
               "type": "string"
             }
@@ -14814,6 +14993,42 @@
           "data"
         ]
       },
+      "PhoneBookContactDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "João Silva"
+          },
+          "phones": {
+            "description": "Telefones do contato em ordem de preferência. O primeiro válido é salvo; todos são usados para encontrar um contato existente.",
+            "example": [
+              "+55 85 99728-1648"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "phones"
+        ]
+      },
+      "ImportContactsDto": {
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhoneBookContactDto"
+            }
+          }
+        },
+        "required": [
+          "contacts"
+        ]
+      },
       "BusinessHourDay": {
         "type": "object",
         "properties": {
@@ -15765,8 +15980,7 @@
           "value",
           "status",
           "pipelineId",
-          "stageId",
-          "customFields"
+          "stageId"
         ]
       },
       "ReportDto": {
@@ -15944,8 +16158,7 @@
           "value",
           "status",
           "pipelineId",
-          "stageId",
-          "customFields"
+          "stageId"
         ]
       },
       "UpdateDealDto": {
@@ -16289,8 +16502,7 @@
           "value",
           "status",
           "pipelineId",
-          "stageId",
-          "customFields"
+          "stageId"
         ]
       },
       "DealCursorPaginatedResponseDto": {
@@ -16477,7 +16689,6 @@
           "status",
           "pipelineId",
           "stageId",
-          "customFields",
           "contactId"
         ]
       },
@@ -17996,6 +18207,10 @@
         }
       },
       "RdStationWebhook": {
+        "type": "object",
+        "properties": {}
+      },
+      "MobileInstallationDto": {
         "type": "object",
         "properties": {}
       },
