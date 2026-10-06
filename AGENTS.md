@@ -1,33 +1,57 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# AGENTS.md
 
-# Documentation project instructions
+## What this is
 
-## About this project
+The Kinbox documentation site, built on [Mintlify](https://mintlify.com). Kinbox is a Brazilian CRM / omnichannel messaging platform, so **all reader-facing content is written in Brazilian Portuguese**. Pages are MDX files with YAML frontmatter; the entire site is configured by `docs.json` (no `package.json` — Mintlify provides the build via its CLI).
 
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Run `mint dev` to preview locally
-- Run `mint broken-links` to check links
+## Commands
 
-## Terminology
+```bash
+mint dev                 # local preview at http://localhost:3000 (run from repo root, where docs.json lives)
+mint dev --port 3333     # custom port
+mint broken-links        # validate all internal links
+mint update              # upgrade the CLI when local preview drifts from production
+```
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+Install the CLI with `npm i -g mint` (requires Node 19+). There is no test/lint step beyond `mint broken-links`. Deployment is automatic: pushing to `main` (the default branch) deploys to production via the Mintlify GitHub app — there is no manual build/deploy command.
 
-## Style preferences
+## Regenerating the API reference
 
-{/* Add any project-specific style rules below */}
+The endpoint pages under `api-reference/<resource>/` (`contacts`, `messages`, `sessions`, ...) are **machine-generated from the OpenAPI spec — do not hand-edit those files.** The source of truth is `openapi.json` at the repo root (the full Kinbox API spec). Regeneration is driven from the API repo by the `kinbox-deploy-api-reference` skill (`kinbox-workspace/api/.claude/skills/kinbox-deploy-api-reference`, available in sessions opened in `api/`):
 
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
+1. `fetch-openapi.sh` pulls `/docs-json` from a running API into `openapi.json`.
+2. `scrape-openapi.sh` runs `@mintlify/scraping` into a temp dir and copies only the `v1*` tag folders into `api-reference/<resource>/` (tag `v1Messages` → folder `messages`, mapping function `public_dir` in the script).
+3. `check-docs-nav.ts` reports generated pages missing from `docs.json` and listed pages without a file.
 
-## Content boundaries
+Note: `api-reference/openapi.json` is a small leftover sample and is **not** the spec used for the site — the root `openapi.json` is.
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+## How navigation works (important)
+
+Only the stable public **v1** API is published. Internal `/v3/*` routes exist in `openapi.json` but never get pages in the repo. **The site only exposes what is explicitly listed in `docs.json`**, so publishing a new endpoint is a two-step process:
+1. Regenerate the pages (see above).
+2. Add the page path to the appropriate `group.pages` array in `docs.json`. A generated file that isn't referenced in `docs.json` simply won't appear on the site.
+
+Generated endpoint pages are minimal — they reference the OpenAPI operation by frontmatter, e.g.:
+
+```yaml
+---
+openapi: get /v1/contacts
+---
+```
+
+Public URLs follow the file path: `api-reference/messages/list-conversation-messages.mdx` → `developer.kinbox.com.br/api-reference/messages/list-conversation-messages`. Renaming a folder needs a `redirects` entry in `docs.json` (the old `api-reference/auto/v1<tag>/` layout is redirected this way).
+
+The API playground server and auth are configured in `docs.json` under `api.mdx` (`server: https://platform.kinbox.com.br`, bearer auth).
+
+## Hand-written content
+
+- `api-reference/authentication.mdx`, `api-reference/custom-fields.mdx` — curated API concept pages (Portuguese).
+- `essentials/`, `snippets/`, `quickstart.mdx`, `development.mdx`, `ai-tools/` — Mintlify starter-kit guide pages.
+
+## Writing style
+
+- Active voice, second person ("você"); one idea per sentence; sentence case for headings.
+- Bold for UI elements (Click **Settings**); code formatting for file names, commands, and paths.
+- Consistent terminology — don't alternate synonyms for the same concept.
+
+For Mintlify component/configuration questions, the Mintlify skill is installed (`.claude/skills/mintlify`); invoke it rather than guessing component syntax.
