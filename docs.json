@@ -31,11 +31,29 @@
             ]
           },
           {
+            "group": "Organizações",
+            "icon": "building",
+            "pages": [
+              "api-reference/organizations/list-all-organizations",
+              "api-reference/organizations/retrieve-an-organization",
+              "api-reference/organizations/create-an-organization",
+              "api-reference/organizations/update-an-organization",
+              "api-reference/organizations/delete-an-organization",
+              "api-reference/organizations/list-organization-contacts",
+              "api-reference/organizations/link-a-contact-to-an-organization",
+              "api-reference/organizations/unlink-a-contact-from-an-organization",
+              "api-reference/organizations/list-contact-organizations"
+            ]
+          },
+          {
             "group": "Campos personalizados",
             "icon": "keyboard",
             "pages": [
               "api-reference/custom-fields/list-all-custom-fields",
-              "api-reference/custom-fields/retrieve-a-custom-field"
+              "api-reference/custom-fields/retrieve-a-custom-field",
+              "api-reference/custom-fields/create-a-custom-field",
+              "api-reference/custom-fields/update-a-custom-field",
+              "api-reference/custom-fields/reorder-custom-fields"
             ]
           },
           {
@@ -84,6 +102,18 @@
             ]
           },
           {
+            "group": "Tarefas",
+            "icon": "list-check",
+            "pages": [
+              "api-reference/tasks/list-all-tasks",
+              "api-reference/tasks/retrieve-a-task",
+              "api-reference/tasks/create-a-task",
+              "api-reference/tasks/update-a-task",
+              "api-reference/tasks/delete-a-task",
+              "api-reference/tasks/complete-a-task"
+            ]
+          },
+          {
             "group": "Campanhas",
             "icon": "bullseye-arrow",
             "pages": [
@@ -103,6 +133,25 @@
             "pages": [
               "api-reference/sessions/list-all-sessions",
               "api-reference/sessions/retrieve-a-session"
+            ]
+          },
+          {
+            "group": "Conversas",
+            "icon": "inbox",
+            "pages": [
+              "api-reference/conversations/resolve-a-conversation",
+              "api-reference/conversations/reopen-a-conversation",
+              "api-reference/conversations/assign-a-conversation",
+              "api-reference/conversations/move-a-conversation-to-a-group",
+              "api-reference/conversations/add-a-tag-to-a-conversation",
+              "api-reference/conversations/remove-a-tag-from-a-conversation"
+            ]
+          },
+          {
+            "group": "Execuções de ferramentas",
+            "icon": "robot",
+            "pages": [
+              "api-reference/agent-tool-executions/list-agent-tool-executions-for-a-conversation"
             ]
           },
           {
@@ -126,13 +175,62 @@
             ]
           },
           {
+            "group": "Usuários",
+            "icon": "user",
+            "pages": [
+              "api-reference/users/list-users",
+              "api-reference/users/invite-a-user",
+              "api-reference/users/update-a-user",
+              "api-reference/users/resend-an-invite",
+              "api-reference/users/deactivate-a-user",
+              "api-reference/users/reactivate-a-user",
+              "api-reference/users/remove-a-user"
+            ]
+          },
+          {
+            "group": "Funções",
+            "icon": "id-badge",
+            "pages": [
+              "api-reference/roles/list-roles",
+              "api-reference/roles/retrieve-a-role",
+              "api-reference/roles/create-a-role",
+              "api-reference/roles/update-a-role",
+              "api-reference/roles/delete-a-role"
+            ]
+          },
+          {
             "group": "Grupos",
             "icon": "users",
             "pages": [
               "api-reference/groups/list-all-groups",
               "api-reference/groups/retrieve-a-group",
+              "api-reference/groups/create-a-group",
+              "api-reference/groups/update-a-group",
+              "api-reference/groups/delete-a-group",
               "api-reference/groups/list-group-users",
-              "api-reference/groups/retrieve-a-group-user"
+              "api-reference/groups/retrieve-a-group-user",
+              "api-reference/groups/add-users-to-a-group",
+              "api-reference/groups/remove-a-user-from-a-group"
+            ]
+          },
+          {
+            "group": "Atribuição automática",
+            "icon": "shuffle",
+            "pages": [
+              "api-reference/assignment-rules/list-assignment-rules",
+              "api-reference/assignment-rules/create-an-assignment-rule",
+              "api-reference/assignment-rules/update-an-assignment-rule",
+              "api-reference/assignment-rules/delete-an-assignment-rule"
+            ]
+          },
+          {
+            "group": "Horários de atendimento",
+            "icon": "clock",
+            "pages": [
+              "api-reference/business-hours/list-business-hours",
+              "api-reference/business-hours/create-business-hours",
+              "api-reference/business-hours/update-business-hours",
+              "api-reference/business-hours/delete-business-hours"
             ]
           },
           {
@@ -140,7 +238,10 @@
             "icon": "bolt",
             "pages": [
               "api-reference/quick-phrases/list-all-quick-phrases",
-              "api-reference/quick-phrases/retrieve-a-quick-phrase"
+              "api-reference/quick-phrases/retrieve-a-quick-phrase",
+              "api-reference/quick-phrases/create-a-quick-phrase",
+              "api-reference/quick-phrases/update-a-quick-phrase",
+              "api-reference/quick-phrases/delete-a-quick-phrase"
             ]
           }
         ]

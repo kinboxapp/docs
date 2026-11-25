@@ -547,6 +547,62 @@
         ]
       }
     },
+    "/v3/api-tokens/scopes": {
+      "get": {
+        "operationId": "availableScopes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiTokenAvailableScopesDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Escopos que o operador pode dar a um token novo",
+        "tags": [
+          "API Tokens"
+        ]
+      }
+    },
+    "/v3/api-tokens/{id}/legacy-v1-send": {
+      "delete": {
+        "operationId": "removeLegacyV1Send",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remover a compatibilidade de envio legado da /v1 (o token passa a precisar do escopo send)",
+        "tags": [
+          "API Tokens"
+        ]
+      }
+    },
     "/v3/api-tokens/{id}": {
       "delete": {
         "operationId": "revoke",
@@ -1201,6 +1257,30 @@
         "tags": [
           "v1CustomFields"
         ]
+      },
+      "post": {
+        "description": "Exige a permissão \"Gerenciar campos personalizados\". A chave (`key`) é única no workspace.",
+        "operationId": "createCustomField",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomFieldPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create a custom field",
+        "tags": [
+          "v1CustomFields"
+        ]
       }
     },
     "/v1/custom-fields/{id}": {
@@ -1229,6 +1309,39 @@
           }
         },
         "summary": "Retrieve a custom field",
+        "tags": [
+          "v1CustomFields"
+        ]
+      },
+      "patch": {
+        "description": "Nome, tipo, opções, descrição e obrigatório. Campo de integração não muda (400).",
+        "operationId": "updateCustomField",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomFieldPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update a custom field",
         "tags": [
           "v1CustomFields"
         ]
@@ -2346,6 +2459,44 @@
           }
         ],
         "summary": "List Conversations",
+        "tags": [
+          "Conversations"
+        ]
+      }
+    },
+    "/v3/conversations/statuses": {
+      "get": {
+        "description": "Status (enviado, entregue, lido) por mensagem de uma conversa de WhatsApp. `channelIdentifier` é o id do canal ou, na API oficial, o identifier.",
+        "operationId": "getStatuses",
+        "parameters": [
+          {
+            "name": "channelIdentifier",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerIdentifier",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Status de entrega das mensagens",
         "tags": [
           "Conversations"
         ]
@@ -4082,6 +4233,30 @@
         "tags": [
           "v1Groups"
         ]
+      },
+      "post": {
+        "description": "Exige a permissão \"Gerenciar grupos\". Nome único.",
+        "operationId": "createGroup",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGroupPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create a group",
+        "tags": [
+          "v1Groups"
+        ]
       }
     },
     "/v1/groups/{id}": {
@@ -4113,6 +4288,61 @@
         "tags": [
           "v1Groups"
         ]
+      },
+      "patch": {
+        "operationId": "updateGroup",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGroupPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update a group",
+        "tags": [
+          "v1Groups"
+        ]
+      },
+      "delete": {
+        "description": "As conversas do grupo ficam sem grupo.",
+        "operationId": "deleteGroup",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete a group",
+        "tags": [
+          "v1Groups"
+        ]
       }
     },
     "/v1/groups/{id}/users": {
@@ -4141,6 +4371,39 @@
           }
         },
         "summary": "List group users",
+        "tags": [
+          "v1Groups"
+        ]
+      },
+      "post": {
+        "description": "Adiciona os usuários, mantendo os membros atuais.",
+        "operationId": "addGroupUsers",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupUsersPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Add users to a group",
         "tags": [
           "v1Groups"
         ]
@@ -4180,6 +4443,36 @@
           }
         },
         "summary": "Retrieve a group user",
+        "tags": [
+          "v1Groups"
+        ]
+      },
+      "delete": {
+        "operationId": "removeGroupUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Remove a user from a group",
         "tags": [
           "v1Groups"
         ]
@@ -5429,6 +5722,39 @@
           }
         },
         "summary": "Unlink a contact from an organization",
+        "tags": [
+          "v1Organizations"
+        ]
+      }
+    },
+    "/v1/contacts/{contactId}/organizations": {
+      "get": {
+        "description": "Lista as organizações vinculadas ao contato, com a organização principal primeiro. Organizações excluídas não aparecem. Cada item traz o cargo do contato, a indicação de organização principal e os dados completos da organização.",
+        "operationId": "getAllContactOrganizations",
+        "parameters": [
+          {
+            "name": "contactId",
+            "required": true,
+            "in": "path",
+            "description": "ID do contato",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactOrganizationsPublicResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List contact organizations",
         "tags": [
           "v1Organizations"
         ]
@@ -8307,6 +8633,306 @@
         ]
       }
     },
+    "/v1/tasks": {
+      "get": {
+        "description": "Lista as tarefas, das mais recentes para as mais antigas, paginadas por `limit`/`offset`. Sem a permissão \"Pode ver tarefas atribuídas a outros\", só as do usuário do token. Exige ao menos um filtro indexado: `operatorId`, `dealId`, `contactId`, um `status` de prazo (`today`, `tomorrow`, `this_week`, `next_week`, `this_month`, `next_month`) ou `from` e `to` (até 92 dias); sem isso responde 400. Quando o token só vê as próprias tarefas, o responsável já conta como filtro.",
+        "operationId": "getAllTasks",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Quantidade máxima de tarefas (1 a 100).",
+            "schema": {
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Quantas tarefas pular.",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "`todo` = pendentes; `overdue` = atrasadas; `done` = concluídas; os demais filtram pelo prazo.",
+            "schema": {
+              "enum": [
+                "todo",
+                "overdue",
+                "done",
+                "today",
+                "tomorrow",
+                "this_week",
+                "next_week",
+                "this_month",
+                "next_month"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": false,
+            "in": "query",
+            "description": "ID do responsável. Sem a permissão \"Pode ver tarefas atribuídas a outros\", só o próprio usuário do token.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "dealId",
+            "required": false,
+            "in": "query",
+            "description": "ID da negociação",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contactId",
+            "required": false,
+            "in": "query",
+            "description": "ID do contato: tarefas ligadas a ele ou a negociações dele",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "task",
+                "call",
+                "meeting",
+                "deadline",
+                "mail",
+                "lunch",
+                "init-bot"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "Busca pelo nome da tarefa",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Prazo a partir desta data (ISO 8601)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Prazo até esta data (ISO 8601)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskPaginatedResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Lista sem filtro indexado ou período maior que 92 dias."
+          }
+        },
+        "summary": "List all tasks",
+        "tags": [
+          "v1Tasks"
+        ]
+      },
+      "post": {
+        "description": "Cria uma tarefa. Somente `name` é obrigatório; o responsável padrão é o usuário do token e o início padrão é agora.",
+        "operationId": "createTaskPublic",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskPublicDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a task",
+        "tags": [
+          "v1Tasks"
+        ]
+      }
+    },
+    "/v1/tasks/{id}": {
+      "get": {
+        "description": "Retorna uma tarefa pelo ID (com `parent: { id, name }` quando é subtarefa).",
+        "operationId": "retrieveTask",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da tarefa",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskPublicDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Retrieve a task",
+        "tags": [
+          "v1Tasks"
+        ]
+      },
+      "patch": {
+        "description": "Atualiza os campos enviados. `status` troca entre pendente, em andamento, concluída e cancelada.",
+        "operationId": "updateTaskPublic",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da tarefa",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaskPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskPublicDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update a task",
+        "tags": [
+          "v1Tasks"
+        ]
+      },
+      "delete": {
+        "description": "Exclui a tarefa com as subtarefas, os comentários e o histórico. Bloqueado para usuários com a restrição \"Proibir excluir tarefas\".",
+        "operationId": "deleteTaskPublic",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da tarefa",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete a task",
+        "tags": [
+          "v1Tasks"
+        ]
+      }
+    },
+    "/v1/tasks/{id}/complete": {
+      "post": {
+        "description": "Marca a tarefa como concluída e avisa os inscritos.",
+        "operationId": "completeTask",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da tarefa",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskPublicDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Complete a task",
+        "tags": [
+          "v1Tasks"
+        ]
+      }
+    },
     "/v3/system-metrics": {
       "get": {
         "operationId": "getSystemMetrics",
@@ -9943,6 +10569,7 @@
         ]
       },
       "post": {
+        "description": "Requires the send scope: the campaign is queued to send.",
         "operationId": "createCampaign",
         "parameters": [],
         "requestBody": {
@@ -10004,6 +10631,7 @@
         ]
       },
       "patch": {
+        "description": "Changing what is sent (message, template, attachments, leads, channels, schedule, status or active) requires the send scope. Prefer POST /v1/campaigns/{id}/pause and /resume to change the status: the status field here is deprecated.",
         "operationId": "updateCampaign",
         "parameters": [
           {
@@ -10098,6 +10726,7 @@
     },
     "/v1/campaigns/{id}/resume": {
       "post": {
+        "description": "Requires the send scope: sending starts again.",
         "operationId": "resumeCampaign",
         "parameters": [
           {
@@ -12130,6 +12759,30 @@
         "tags": [
           "v1QuickPhrases"
         ]
+      },
+      "post": {
+        "description": "Exige a permissão \"Gerenciar respostas rápidas\".",
+        "operationId": "createQuickPhrase",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateQuickPhrasePublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create a quick phrase",
+        "tags": [
+          "v1QuickPhrases"
+        ]
       }
     },
     "/v1/quick-phrases/{id}": {
@@ -12158,6 +12811,61 @@
           }
         },
         "summary": "Retrieve a quick phrase",
+        "tags": [
+          "v1QuickPhrases"
+        ]
+      },
+      "patch": {
+        "description": "Só respostas que o usuário do token vê (públicas, dele ou de grupo dele; o dono vê todas).",
+        "operationId": "updateQuickPhrase",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateQuickPhrasePublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update a quick phrase",
+        "tags": [
+          "v1QuickPhrases"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteQuickPhrase",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete a quick phrase",
         "tags": [
           "v1QuickPhrases"
         ]
@@ -13089,16 +13797,7 @@
     "/v3/copilot/transcribe/audio/messages": {
       "post": {
         "operationId": "transcribeAudioMessages",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "required": true,
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -13208,6 +13907,193 @@
         ],
         "tags": [
           "Copilot"
+        ]
+      }
+    },
+    "/v3/assist/completion/stream": {
+      "post": {
+        "description": "Gera o texto dos `promptMessages`. Com `socketId`, o operador recebe os pedaços no evento `chatgpt-stream` enquanto gera.",
+        "operationId": "complete",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistCompletionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Gerar texto com o Assistente Kin",
+        "tags": [
+          "Assist"
+        ]
+      }
+    },
+    "/v3/assist/transcribe": {
+      "post": {
+        "description": "Transcreve o áudio (até 1 MB) e grava o texto em `extra.transcription` da mensagem; o inbox é avisado pela v0.",
+        "operationId": "transcribe",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistTranscribeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Transcrever áudio de mensagem",
+        "tags": [
+          "Assist"
+        ]
+      }
+    },
+    "/v3/assist/internal/completion": {
+      "post": {
+        "description": "Chamada interna da v0 (nós de mensagem/menu com prompt).",
+        "operationId": "completeForV0",
+        "parameters": [
+          {
+            "name": "secret",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistCompletionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Gerar texto para o bot (v0)",
+        "tags": [
+          "Assist"
+        ]
+      }
+    },
+    "/v3/assist/internal/transcribe": {
+      "post": {
+        "description": "Chamada interna da v0 (menu com \"Transcrever áudio\").",
+        "operationId": "transcribeForV0",
+        "parameters": [
+          {
+            "name": "secret",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistTranscribeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Transcrever áudio para o bot (v0)",
+        "tags": [
+          "Assist"
+        ]
+      }
+    },
+    "/v3/assist-logs/{id}": {
+      "get": {
+        "operationId": "getLog",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Um registro de uso do Assistente Kin",
+        "tags": [
+          "Assist"
         ]
       }
     },
@@ -15885,6 +16771,941 @@
         "summary": "Transcrever gravação de chamada de voz",
         "tags": [
           "Voip"
+        ]
+      }
+    },
+    "/v3/wallet/sub-wallet/balance": {
+      "get": {
+        "operationId": "getSubWalletBalance",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Saldo de uma subcarteira liberada",
+        "tags": [
+          "Wallet"
+        ]
+      }
+    },
+    "/v3/wallet/transactions/report": {
+      "get": {
+        "operationId": "getReport",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Início do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Fim do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "credit",
+                "debit"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletHash",
+            "required": false,
+            "in": "query",
+            "description": "Hash da carteira do parceiro, ou 'none' para débitos sem hash",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": false,
+            "in": "query",
+            "description": "Ambiente: transações dele ou débitos via hash em que ele consumiu",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Movimentação do ambiente por dia e por serviço",
+        "tags": [
+          "Wallet"
+        ]
+      }
+    },
+    "/v3/wallet/transactions/report/admin": {
+      "get": {
+        "operationId": "getReportAdmin",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Início do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Fim do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "credit",
+                "debit"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletHash",
+            "required": false,
+            "in": "query",
+            "description": "Hash da carteira do parceiro, ou 'none' para débitos sem hash",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": false,
+            "in": "query",
+            "description": "Ambiente: transações dele ou débitos via hash em que ele consumiu",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Movimentação de todos os ambientes (admin)",
+        "tags": [
+          "Wallet"
+        ]
+      }
+    },
+    "/v3/wallet/transactions/report/admin/workspaces": {
+      "get": {
+        "operationId": "getConsumptionByWorkspace",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Início do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Fim do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "credit",
+                "debit"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletHash",
+            "required": false,
+            "in": "query",
+            "description": "Hash da carteira do parceiro, ou 'none' para débitos sem hash",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": false,
+            "in": "query",
+            "description": "Ambiente: transações dele ou débitos via hash em que ele consumiu",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Consumo por ambiente no período (admin)",
+        "tags": [
+          "Wallet"
+        ]
+      }
+    },
+    "/v3/wallet/transactions": {
+      "get": {
+        "operationId": "getTransactions",
+        "parameters": [
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "description": "Início do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "description": "Fim do período (ISO). Padrão: hoje.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "credit",
+                "debit"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "walletHash",
+            "required": false,
+            "in": "query",
+            "description": "Hash da carteira do parceiro, ou 'none' para débitos sem hash",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": false,
+            "in": "query",
+            "description": "Ambiente: transações dele ou débitos via hash em que ele consumiu",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 20,
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "description": "Filtra pelo serviço (descrição do débito)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Extrato do ambiente (paginado)",
+        "tags": [
+          "Wallet"
+        ]
+      }
+    },
+    "/v3/wallet/transactions/admin": {
+      "get": {
+        "operationId": "getCreditsAdmin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Compras de crédito de todos os ambientes (admin)",
+        "tags": [
+          "Wallet"
+        ]
+      }
+    },
+    "/v3/wallet/transactions/{id}": {
+      "get": {
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Um registro do extrato do ambiente",
+        "tags": [
+          "Wallet"
+        ]
+      }
+    },
+    "/v3/assets/upload": {
+      "post": {
+        "description": "Multipart com um ou mais arquivos (qualquer nome de campo), até 100 MB cada. Os bytes vão para o S3 enquanto chegam. Devolve a URL pública de cada um.",
+        "operationId": "upload",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Upload de anexos",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v3/assets/upload/voice": {
+      "post": {
+        "description": "Como o upload comum, mas reencoda o áudio em Ogg Opus para o WhatsApp Cloud aceitar. Até 25 MB por áudio.",
+        "operationId": "uploadVoice",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Upload de áudio gravado",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v3/assets/audio/m4a": {
+      "post": {
+        "description": "Para o player do iOS anterior ao 26, que não abre OGG. Converte uma vez por áudio.",
+        "operationId": "toM4a",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudioM4aDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Cópia m4a de um áudio OGG",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
+    "/v3/proxy/exec-request": {
+      "post": {
+        "description": "Repassa a requisição para a URL informada e devolve o corpo da resposta. Erros da API externa voltam no corpo.",
+        "operationId": "exec",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Chamar uma API externa",
+        "tags": [
+          "Proxy"
+        ]
+      },
+      "get": {
+        "operationId": "execGet",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Chamar uma API externa (GET)",
+        "tags": [
+          "Proxy"
+        ]
+      }
+    },
+    "/v3/admin/invoices": {
+      "get": {
+        "operationId": "findAll",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 30,
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": false,
+            "in": "query",
+            "description": "Ambiente das notas. Outro ambiente só para admin ou para o parceiro do ambiente.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Notas fiscais do ambiente",
+        "tags": [
+          "Invoices"
+        ]
+      },
+      "post": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvoiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Cadastrar nota fiscal (admin)",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
+    "/v3/admin/invoices/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Uma nota fiscal",
+        "tags": [
+          "Invoices"
+        ]
+      },
+      "patch": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvoiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Editar nota fiscal (admin)",
+        "tags": [
+          "Invoices"
+        ]
+      }
+    },
+    "/v3/knowledge-bases": {
+      "get": {
+        "operationId": "findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Bases de conhecimento do ambiente",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      },
+      "post": {
+        "description": "Cria com status `pending`; indexe com `POST /:id/ingest`.",
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateKnowledgeBaseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Criar base de conhecimento",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      }
+    },
+    "/v3/knowledge-bases/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Uma base de conhecimento",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      },
+      "patch": {
+        "description": "Se a origem (tipo, texto ou arquivo) mudar, os trechos indexados são apagados e a base volta para `pending`.",
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateKnowledgeBaseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Editar base de conhecimento",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Excluir base de conhecimento",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      }
+    },
+    "/v3/knowledge-bases/{id}/ingest": {
+      "post": {
+        "description": "Lê a origem, divide em trechos e grava no Pinecone. Responde quando termina.",
+        "operationId": "ingest",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Indexar base de conhecimento",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      }
+    },
+    "/v3/knowledge-bases/{id}/ask": {
+      "post": {
+        "description": "Usado pelo teste do bot no web.",
+        "operationId": "ask",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskKnowledgeBaseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Perguntar à base de conhecimento",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      }
+    },
+    "/v3/knowledge-bases/internal/{id}/ask": {
+      "post": {
+        "description": "Chamada interna do nó `llm` antigo do bot da v0.",
+        "operationId": "askForV0",
+        "parameters": [
+          {
+            "name": "secret",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskKnowledgeBaseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Perguntar à base de conhecimento (v0)",
+        "tags": [
+          "Knowledge Bases"
+        ]
+      }
+    },
+    "/v3/reports/contacts-by-conversation": {
+      "get": {
+        "description": "Um item por conversa, com os dados do contato, campos personalizados, dados da sessão e etiquetas. Os filtros vão como na api-v1 (`/v1/reports/conversations`).",
+        "operationId": "getContactsByConversation",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Contatos por conversa",
+        "tags": [
+          "Reports"
         ]
       }
     },
@@ -18598,6 +20419,36 @@
         ]
       }
     },
+    "/v3/whatsapp-calls/channels/{channelId}/sip/disable": {
+      "post": {
+        "description": "Desliga o SIP do número na Meta. Com o SIP ativado, a Meta bloqueia as ligações pela Calling API.",
+        "operationId": "disableSip",
+        "parameters": [
+          {
+            "name": "channelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Desativar o SIP do número",
+        "tags": [
+          "WhatsApp Calling"
+        ]
+      }
+    },
     "/v3/whatsapp-calls/channels/{channelId}/permission-template": {
       "post": {
         "description": "Cria (ou reenvia, se rejeitado) o template que pede ao cliente permissão para ligar",
@@ -18852,6 +20703,112 @@
           }
         },
         "summary": "Recebe o snapshot de campanhas do Google Ads Script",
+        "tags": [
+          "Google Ads"
+        ]
+      }
+    },
+    "/v3/google-ads/offline-conversions/pending": {
+      "get": {
+        "description": "Chamado pelo Google Ads Script (scripts/google-ads-sync.js). Recalcula \"Lead ativado\" e \"Assinatura paga\" dos cadastros com clique do Google nos últimos 90 dias e devolve as que ainda não foram enviadas. Autenticado pelo header x-sync-token.",
+        "operationId": "getPendingOfflineConversions",
+        "parameters": [
+          {
+            "name": "x-sync-token",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clickIdTypes",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Conversões offline da Kinbox a enviar ao Google Ads",
+        "tags": [
+          "Google Ads"
+        ]
+      }
+    },
+    "/v3/google-ads/offline-conversions/results": {
+      "post": {
+        "description": "Chamado pelo Google Ads Script depois do upload, para gravar o que foi enviado e não reenviar. Autenticado pelo header x-sync-token.",
+        "operationId": "reportOfflineConversions",
+        "parameters": [
+          {
+            "name": "x-sync-token",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportGoogleAdsOfflineConversionsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Resultado do upload das conversões offline",
+        "tags": [
+          "Google Ads"
+        ]
+      }
+    },
+    "/v3/google-ads/offline-conversions": {
+      "get": {
+        "description": "Usado pela página admin de Campanhas (colunas \"Ativou\" e \"Pagou\"). Datas ISO; padrão: últimos 30 dias.",
+        "operationId": "getOfflineConversions",
+        "parameters": [
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Ativação, pagamento e envio ao Google Ads dos ambientes criados no período",
         "tags": [
           "Google Ads"
         ]
@@ -19212,6 +21169,1390 @@
           "MCP"
         ]
       }
+    },
+    "/v1/conversations/{id}/resolve": {
+      "post": {
+        "description": "Resolve (encerra) o atendimento atual. Se o workspace tem mensagem de encerramento, ela é enviada ao cliente. Exige a permissão \"Resolver\". Respeita a visibilidade de conversas do papel do usuário do token (403 fora dela).",
+        "operationId": "resolve",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da conversa (`call.customerPlatformId` devolvido pelas rotas de sessões)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationActionPublicResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Resolve a conversation",
+        "tags": [
+          "v1Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/reopen": {
+      "post": {
+        "description": "Reabre uma conversa resolvida. Exige a permissão \"Reabrir\". Respeita a visibilidade de conversas do papel do usuário do token (403 fora dela).",
+        "operationId": "reopen",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da conversa (`call.customerPlatformId` devolvido pelas rotas de sessões)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationActionPublicResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Reopen a conversation",
+        "tags": [
+          "v1Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/assign": {
+      "post": {
+        "description": "Atribui a conversa a um usuário, ou tira a atribuição sem `operatorId`. Exige a permissão \"Atribuir\"; com \"Somente pode atribuir para quem pertence ao grupo do membro\", só para quem tem grupo em comum. Respeita a visibilidade de conversas do papel do usuário do token (403 fora dela).",
+        "operationId": "assign",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da conversa (`call.customerPlatformId` devolvido pelas rotas de sessões)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignConversationPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationActionPublicResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Assign a conversation",
+        "tags": [
+          "v1Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/group": {
+      "post": {
+        "description": "Move a conversa para um grupo, ou tira do grupo sem `groupId`. Exige a permissão \"Mover para grupo\"; com \"Somente pode mover para grupo que pertence\", só para grupos do usuário. Respeita a visibilidade de conversas do papel do usuário do token (403 fora dela).",
+        "operationId": "moveToGroup",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da conversa (`call.customerPlatformId` devolvido pelas rotas de sessões)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveConversationGroupPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationActionPublicResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Move a conversation to a group",
+        "tags": [
+          "v1Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/tags": {
+      "post": {
+        "description": "Adiciona uma tag ao atendimento atual. Exige a permissão \"Categorizar\". Tag que não existe no workspace: 404. Respeita a visibilidade de conversas do papel do usuário do token (403 fora dela).",
+        "operationId": "addTag",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da conversa (`call.customerPlatformId` devolvido pelas rotas de sessões)",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddConversationTagPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationActionPublicResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Add a tag to a conversation",
+        "tags": [
+          "v1Conversations"
+        ]
+      }
+    },
+    "/v1/conversations/{id}/tags/{tagId}": {
+      "delete": {
+        "description": "Remove uma tag do atendimento atual. Exige a permissão \"Categorizar\" e é bloqueado pela restrição \"Não pode remover tags\". Tag que não existe no workspace: 404. Respeita a visibilidade de conversas do papel do usuário do token (403 fora dela).",
+        "operationId": "removeTag",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da conversa (`call.customerPlatformId` devolvido pelas rotas de sessões)",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "tagId",
+            "required": true,
+            "in": "path",
+            "description": "ID da tag",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationActionPublicResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Remove a tag from a conversation",
+        "tags": [
+          "v1Conversations"
+        ]
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "description": "Usuários do workspace com papel, grupos e convite pendente. Exige a permissão \"Gerenciar usuários\".",
+        "operationId": "listUsers",
+        "parameters": [
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Busca por nome ou e-mail",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "`invited` = convite ainda não aceito",
+            "schema": {
+              "enum": [
+                "active",
+                "inactive",
+                "invited"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "List users",
+        "tags": [
+          "v1Users"
+        ]
+      },
+      "post": {
+        "description": "Convida por e-mail com um papel (e grupos). Respeita o limite de usuários do plano (402). Quem não é dono só concede permissões que o próprio papel tem, mantém as restrições que tem e não muda o próprio papel (403).",
+        "operationId": "invite",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InviteUserPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Invite a user",
+        "tags": [
+          "v1Users"
+        ]
+      }
+    },
+    "/v1/users/{id}/resend-invite": {
+      "post": {
+        "description": "Reenvia o convite de um usuário que ainda não aceitou.",
+        "operationId": "resendInvite",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Resend an invite",
+        "tags": [
+          "v1Users"
+        ]
+      }
+    },
+    "/v1/users/{id}": {
+      "patch": {
+        "description": "Muda nome, papel e grupos (lista final; exige também \"Gerenciar grupos\"). Quem não é dono só concede permissões que o próprio papel tem, mantém as restrições que tem e não muda o próprio papel (403). O dono do workspace não pode ser alterado por esta rota (403).",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update a user",
+        "tags": [
+          "v1Users"
+        ]
+      },
+      "delete": {
+        "description": "Remove o usuário do workspace. Com `transferToUserId`, antes passa as conversas abertas dele; sem, elas ficam sem responsável. O dono do workspace não pode ser alterado por esta rota (403).",
+        "operationId": "remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "transferToUserId",
+            "required": false,
+            "in": "query",
+            "description": "Passa as conversas abertas do usuário para este outro usuário antes (até 100 por chamada; com mais, a resposta vem com `done: false` e é só chamar de novo).",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Remove a user",
+        "tags": [
+          "v1Users"
+        ]
+      }
+    },
+    "/v1/users/{id}/deactivate": {
+      "post": {
+        "description": "Desativa o usuário (ele perde o acesso). Com `transferToUserId`, antes passa as conversas abertas dele. O dono do workspace não pode ser alterado por esta rota (403).",
+        "operationId": "deactivate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "transferToUserId",
+            "required": false,
+            "in": "query",
+            "description": "Passa as conversas abertas do usuário para este outro usuário antes (até 100 por chamada; com mais, a resposta vem com `done: false` e é só chamar de novo).",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Deactivate a user",
+        "tags": [
+          "v1Users"
+        ]
+      }
+    },
+    "/v1/users/{id}/reactivate": {
+      "post": {
+        "description": "Reativa um usuário desativado. Respeita o limite de usuários do plano (402).",
+        "operationId": "reactivate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Reactivate a user",
+        "tags": [
+          "v1Users"
+        ]
+      }
+    },
+    "/v1/roles": {
+      "get": {
+        "description": "Papéis com o número de usuários. Exige \"Gerenciar papéis\" ou \"Gerenciar usuários\".",
+        "operationId": "listRoles",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "List roles",
+        "tags": [
+          "v1Roles"
+        ]
+      },
+      "post": {
+        "description": "Cria um papel com as permissões informadas. Quem não é dono só concede permissões que o próprio papel tem, mantém as restrições que tem e não muda o próprio papel (403).",
+        "operationId": "createRole",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRolePublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create a role",
+        "tags": [
+          "v1Roles"
+        ]
+      }
+    },
+    "/v1/roles/{id}": {
+      "get": {
+        "description": "Permissões ligadas (`granted`), restrições (`restrictions`) e valores do papel.",
+        "operationId": "getRole",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Retrieve a role",
+        "tags": [
+          "v1Roles"
+        ]
+      },
+      "patch": {
+        "description": "`permissions` traz só as chaves que mudam (as demais ficam). Quem não é dono só concede permissões que o próprio papel tem, mantém as restrições que tem e não muda o próprio papel (403).",
+        "operationId": "updateRole",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRolePublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update a role",
+        "tags": [
+          "v1Roles"
+        ]
+      },
+      "delete": {
+        "description": "Exclui um papel sem usuários nem convites (400 se estiver em uso).",
+        "operationId": "deleteRole",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete a role",
+        "tags": [
+          "v1Roles"
+        ]
+      }
+    },
+    "/v1/assignment-rules": {
+      "get": {
+        "description": "Regras de atribuição automática. Exige \"Gerenciar atribuição automática\".",
+        "operationId": "listAssignmentRules",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "List assignment rules",
+        "tags": [
+          "v1AssignmentRules"
+        ]
+      },
+      "post": {
+        "description": "Cria a regra (desativada, a menos que `isActive: true`). Os campos exigidos dependem de `assignTo`.",
+        "operationId": "createAssignmentRule",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssignmentRulePublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create an assignment rule",
+        "tags": [
+          "v1AssignmentRules"
+        ]
+      }
+    },
+    "/v1/assignment-rules/{id}": {
+      "patch": {
+        "description": "Altera os campos enviados; `isActive` liga ou desliga.",
+        "operationId": "updateAssignmentRule",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAssignmentRulePublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update an assignment rule",
+        "tags": [
+          "v1AssignmentRules"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAssignmentRule",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete an assignment rule",
+        "tags": [
+          "v1AssignmentRules"
+        ]
+      }
+    },
+    "/v1/custom-fields/order": {
+      "put": {
+        "description": "Define a ordem dos campos pela lista de IDs.",
+        "operationId": "reorderCustomFields",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReorderCustomFieldsPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Reorder custom fields",
+        "tags": [
+          "v1CustomFields"
+        ]
+      }
+    },
+    "/v1/business-hours": {
+      "get": {
+        "description": "Horários de atendimento com os dias abertos e o padrão do workspace (`isDefault`).",
+        "operationId": "listBusinessHours",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "List business hours",
+        "tags": [
+          "v1BusinessHours"
+        ]
+      },
+      "post": {
+        "description": "Exige a permissão \"Gerenciar horários\".",
+        "operationId": "createBusinessHours",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBusinessHoursPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Create business hours",
+        "tags": [
+          "v1BusinessHours"
+        ]
+      }
+    },
+    "/v1/business-hours/{id}": {
+      "patch": {
+        "description": "Só os dias enviados mudam (`[]` fecha o dia).",
+        "operationId": "updateBusinessHours",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBusinessHoursPublicDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update business hours",
+        "tags": [
+          "v1BusinessHours"
+        ]
+      },
+      "delete": {
+        "description": "Recusa o horário padrão do workspace e o usado por bot (400).",
+        "operationId": "deleteBusinessHours",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Delete business hours",
+        "tags": [
+          "v1BusinessHours"
+        ]
+      }
+    },
+    "/v3/rooms/search": {
+      "get": {
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 30,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "roomId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Buscar mensagens nas salas acessíveis",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/mentions": {
+      "get": {
+        "operationId": "mentions",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 30,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Mensagens que mencionam o usuário",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/saved": {
+      "get": {
+        "operationId": "listSaved",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Mensagens salvas do usuário",
+        "tags": [
+          "Rooms"
+        ]
+      },
+      "post": {
+        "operationId": "save",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveRoomMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Salvar mensagem",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/saved/{messageId}": {
+      "delete": {
+        "operationId": "unsave",
+        "parameters": [
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remover mensagem dos salvos",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/messages": {
+      "get": {
+        "operationId": "listMessages",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 30,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Mensagens da sala (sem respostas de thread)",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/messages/{messageId}": {
+      "patch": {
+        "operationId": "editMessage",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRoomMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Editar mensagem (autor)",
+        "tags": [
+          "Rooms"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteMessage",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Excluir mensagem (autor ou dono)",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/messages/{messageId}/reactions": {
+      "post": {
+        "operationId": "react",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomReactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Reagir ou desfazer reação",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/messages/{messageId}/pin": {
+      "post": {
+        "operationId": "pin",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Fixar mensagem",
+        "tags": [
+          "Rooms"
+        ]
+      },
+      "delete": {
+        "operationId": "unpin",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Desafixar mensagem",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/pins": {
+      "get": {
+        "operationId": "listPins",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Mensagens fixadas da sala",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/messages/{messageId}/thread": {
+      "get": {
+        "operationId": "getThread",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Thread de uma mensagem",
+        "tags": [
+          "Rooms"
+        ]
+      },
+      "post": {
+        "operationId": "replyInThread",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomThreadReplyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Responder na thread",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/typing": {
+      "post": {
+        "operationId": "typing",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomTypingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Avisar que o usuário está digitando",
+        "tags": [
+          "Rooms"
+        ]
+      }
+    },
+    "/v3/rooms/{roomId}/read": {
+      "post": {
+        "operationId": "read",
+        "parameters": [
+          {
+            "name": "roomId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Marcar sala como lida",
+        "tags": [
+          "Rooms"
+        ]
+      }
     }
   },
   "info": {
@@ -19510,19 +22851,43 @@
           },
           "scopes": {
             "type": "array",
-            "description": "Escopos do token (read, write, send). Padrão: read e write. `send` libera envio de mensagens ao cliente final.",
+            "description": "Escopos do token (read, write, send, partner). Padrão: read e write. `send` libera envio de mensagens ao cliente final. `partner` libera, no MCP, os workspaces clientes do parceiro.",
             "items": {
               "type": "string",
               "enum": [
                 "read",
                 "write",
-                "send"
+                "send",
+                "partner"
               ]
             }
           }
         },
         "required": [
           "name"
+        ]
+      },
+      "ApiTokenAvailableScopesDto": {
+        "type": "object",
+        "properties": {
+          "scopes": {
+            "type": "array",
+            "description": "Escopos que este operador pode marcar ao criar um token",
+            "items": {
+              "type": "string",
+              "enum": [
+                "read",
+                "write",
+                "send",
+                "partner",
+                "admin",
+                "admin:finance"
+              ]
+            }
+          }
+        },
+        "required": [
+          "scopes"
         ]
       },
       "CustomFieldPlaceholder": {
@@ -24101,6 +27466,59 @@
           "success"
         ]
       },
+      "ContactOrganizationPublicDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "ID do vínculo"
+          },
+          "organizationId": {
+            "type": "number"
+          },
+          "contactId": {
+            "type": "number"
+          },
+          "role": {
+            "type": "string",
+            "nullable": true,
+            "description": "Cargo / função do contato na organização"
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "Indica se esta é a organização principal do contato. Todo contato com vínculo tem exatamente uma principal."
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationPublicDto"
+          }
+        },
+        "required": [
+          "id",
+          "organizationId",
+          "contactId",
+          "isPrimary",
+          "createdAt",
+          "organization"
+        ]
+      },
+      "ContactOrganizationsPublicResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactOrganizationPublicDto"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "ExchangeCodeForAccessTokenDto": {
         "type": "object",
         "properties": {}
@@ -25167,6 +28585,175 @@
         "required": [
           "emoji"
         ]
+      },
+      "TaskPublicDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "urgent"
+            ]
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskAttachment"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "_id"
+        ]
+      },
+      "TaskPaginatedResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskPublicDto"
+            }
+          },
+          "totalCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "totalCount"
+        ]
+      },
+      "CreateTaskPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da tarefa"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "task",
+              "call",
+              "meeting",
+              "deadline",
+              "mail",
+              "lunch",
+              "init-bot"
+            ],
+            "default": "task"
+          },
+          "operatorId": {
+            "type": "number",
+            "description": "ID do responsável. Padrão: o usuário dono do token."
+          },
+          "dueAt": {
+            "type": "string",
+            "description": "Início da tarefa (ISO 8601 com fuso). Padrão: agora. Agenda o lembrete do responsável."
+          },
+          "durationMinutes": {
+            "type": "number",
+            "default": 5,
+            "description": "Duração em minutos"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "urgent"
+            ]
+          },
+          "contactId": {
+            "type": "number",
+            "description": "ID do contato vinculado"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "ID da tarefa pai (cria uma subtarefa; só um nível)"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateTaskPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da tarefa"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "task",
+              "call",
+              "meeting",
+              "deadline",
+              "mail",
+              "lunch",
+              "init-bot"
+            ],
+            "default": "task"
+          },
+          "operatorId": {
+            "type": "number",
+            "description": "ID do responsável. Padrão: o usuário dono do token."
+          },
+          "dueAt": {
+            "type": "string",
+            "description": "Início da tarefa (ISO 8601 com fuso). Padrão: agora. Agenda o lembrete do responsável."
+          },
+          "durationMinutes": {
+            "type": "number",
+            "default": 5,
+            "description": "Duração em minutos"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "urgent"
+            ]
+          },
+          "contactId": {
+            "type": "number",
+            "description": "ID do contato vinculado"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "in_progress",
+              "done",
+              "canceled"
+            ]
+          }
+        }
       },
       "Webhook": {
         "type": "object",
@@ -26279,18 +29866,6 @@
             "type": "string",
             "description": "Data de agendamento"
           },
-          "nextScheduledTo": {
-            "type": "string",
-            "description": "Próxima data de agendamento"
-          },
-          "originalScheduledTo": {
-            "type": "string",
-            "description": "Data de agendamento original"
-          },
-          "finishedAtPrediction": {
-            "type": "string",
-            "description": "Previsão de término"
-          },
           "leadsAssetUrl": {
             "type": "string",
             "description": "URL do arquivo de leads"
@@ -26337,14 +29912,6 @@
               "done-sent"
             ]
           },
-          "chunksCount": {
-            "type": "number",
-            "description": "Quantidade de chunks"
-          },
-          "leadsCount": {
-            "type": "number",
-            "description": "Quantidade de leads"
-          },
           "secondsBetweenMessages": {
             "type": "number",
             "description": "Segundos entre as mensagens"
@@ -26369,35 +29936,6 @@
           "template": {
             "type": "object",
             "description": "Template da campanha"
-          },
-          "progress": {
-            "type": "number",
-            "description": "Progresso da campanha"
-          },
-          "resultCounts": {
-            "description": "Contagem de resultados",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CampaignResultCounts"
-              }
-            ]
-          },
-          "messagesProcessed": {
-            "type": "number",
-            "description": "Quantidade de mensagens processadas"
-          },
-          "lastMessageProcessedAt": {
-            "format": "date-time",
-            "type": "string",
-            "description": "Data de processamento da última mensagem"
-          },
-          "healthCheckData": {
-            "description": "Dados do health check",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/HealthCheckData"
-              }
-            ]
           }
         }
       },
@@ -27582,6 +31120,64 @@
         "type": "object",
         "properties": {}
       },
+      "PromptMessageDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "system",
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "content"
+        ]
+      },
+      "AssistCompletionDto": {
+        "type": "object",
+        "properties": {
+          "promptMessages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PromptMessageDto"
+            }
+          },
+          "socketId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "promptMessages"
+        ]
+      },
+      "AssistTranscribeDto": {
+        "type": "object",
+        "properties": {
+          "audioUrl": {
+            "type": "string",
+            "description": "URL https do áudio"
+          },
+          "conversationId": {
+            "type": "object"
+          },
+          "messageId": {
+            "type": "object",
+            "description": "`idMessage` da mensagem que recebe a transcrição"
+          }
+        },
+        "required": [
+          "audioUrl",
+          "conversationId",
+          "messageId"
+        ]
+      },
       "App": {
         "type": "object",
         "properties": {
@@ -27886,6 +31482,152 @@
       "VoipAccessTokenDto": {
         "type": "object",
         "properties": {}
+      },
+      "AudioM4aDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL https do áudio OGG no bucket de assets"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "ExecRequestDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL http(s) da API externa"
+          },
+          "method": {
+            "type": "string",
+            "default": "post"
+          },
+          "body": {
+            "type": "object",
+            "description": "Corpo enviado à API externa"
+          },
+          "query": {
+            "type": "object",
+            "description": "Query string"
+          },
+          "headers": {
+            "type": "object"
+          },
+          "timeout": {
+            "type": "number",
+            "description": "Tempo máximo em ms (até 120000)"
+          },
+          "formData": {
+            "type": "object",
+            "description": "Campos enviados como multipart/form-data"
+          },
+          "certificate": {
+            "type": "object",
+            "description": "Certificado de cliente (mTLS)"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "CreateInvoiceDto": {
+        "type": "object",
+        "properties": {
+          "workspaceId": {
+            "type": "object"
+          },
+          "externalId": {
+            "type": "string",
+            "description": "Id da transação de pagamento"
+          },
+          "nf": {
+            "type": "string",
+            "description": "URL ou número da nota fiscal"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "externalId",
+          "nf"
+        ]
+      },
+      "UpdateInvoiceDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateKnowledgeBaseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "pdf",
+              "docx",
+              "text_file",
+              "notion",
+              "notion_db"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "description": "Conteúdo quando `type = text`"
+          },
+          "asset": {
+            "type": "object",
+            "description": "Arquivo de origem (resposta do upload de anexos)"
+          }
+        }
+      },
+      "UpdateKnowledgeBaseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "pdf",
+              "docx",
+              "text_file",
+              "notion",
+              "notion_db"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "description": "Conteúdo quando `type = text`"
+          },
+          "asset": {
+            "type": "object",
+            "description": "Arquivo de origem (resposta do upload de anexos)"
+          }
+        }
+      },
+      "AskKnowledgeBaseDto": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "Pergunta do cliente ou URL do áudio"
+          },
+          "conversationId": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "question",
+          "conversationId"
+        ]
       },
       "Knowledge": {
         "type": "object",
@@ -28262,6 +32004,10 @@
         "type": "object",
         "properties": {}
       },
+      "ReportGoogleAdsOfflineConversionsDto": {
+        "type": "object",
+        "properties": {}
+      },
       "SubscribeConversionDto": {
         "type": "object",
         "properties": {
@@ -28283,6 +32029,644 @@
       "ConsentDecisionDto": {
         "type": "object",
         "properties": {}
+      },
+      "ConversationActionPublicResponseDto": {
+        "type": "object",
+        "properties": {
+          "resolved": {
+            "type": "boolean"
+          },
+          "alreadyResolved": {
+            "type": "boolean",
+            "description": "A conversa já estava resolvida"
+          },
+          "reopened": {
+            "type": "boolean"
+          },
+          "alreadyOpen": {
+            "type": "boolean",
+            "description": "A conversa já estava aberta"
+          },
+          "assigned": {
+            "type": "boolean"
+          },
+          "operatorId": {
+            "type": "object",
+            "nullable": true
+          },
+          "moved": {
+            "type": "boolean"
+          },
+          "groupId": {
+            "type": "object",
+            "nullable": true
+          },
+          "added": {
+            "type": "boolean"
+          },
+          "alreadyPresent": {
+            "type": "boolean",
+            "description": "A tag já estava na conversa"
+          },
+          "removed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AssignConversationPublicDto": {
+        "type": "object",
+        "properties": {
+          "operatorId": {
+            "type": "object",
+            "nullable": true,
+            "description": "ID do usuário que recebe a conversa. Omita ou envie `null` para tirar a atribuição."
+          }
+        }
+      },
+      "MoveConversationGroupPublicDto": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "object",
+            "nullable": true,
+            "description": "ID do grupo de destino. Omita ou envie `null` para tirar a conversa do grupo."
+          }
+        }
+      },
+      "AddConversationTagPublicDto": {
+        "type": "object",
+        "properties": {
+          "tagId": {
+            "type": "number",
+            "description": "ID da tag (GET /v1/tags)."
+          }
+        },
+        "required": [
+          "tagId"
+        ]
+      },
+      "InviteUserPublicDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "ana@empresa.com"
+          },
+          "roleId": {
+            "type": "number",
+            "description": "ID do papel (GET /v1/roles)"
+          },
+          "name": {
+            "type": "string"
+          },
+          "groupIds": {
+            "description": "IDs dos grupos (GET /v1/groups). Exige também a permissão \"Gerenciar grupos\".",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "email",
+          "roleId"
+        ]
+      },
+      "UpdateUserPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "number",
+            "description": "Novo papel. Quem não é dono não muda o próprio papel nem atribui papel com permissões que não tem."
+          },
+          "groupIds": {
+            "description": "Lista final de grupos do usuário. Exige também a permissão \"Gerenciar grupos\".",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "CreateRolePublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "scope_all": true,
+              "chat_respond": true,
+              "chat_resolve": true
+            },
+            "description": "Permissões `{ chave: true/false }`, as mesmas chaves do editor de papéis. Quem não é dono só concede permissões que o próprio papel tem e mantém as restrições que tem."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateRolePublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "scope_all": true,
+              "chat_respond": true,
+              "chat_resolve": true
+            },
+            "description": "Permissões `{ chave: true/false }`, as mesmas chaves do editor de papéis. Quem não é dono só concede permissões que o próprio papel tem e mantém as restrições que tem."
+          }
+        }
+      },
+      "CreateAssignmentRulePublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string",
+            "enum": [
+              "all",
+              "new",
+              "existing"
+            ],
+            "description": "`all` todas as conversas, `new` primeiro contato no canal, `existing` contato que já falou no canal. Padrão `all`."
+          },
+          "assignTo": {
+            "type": "string",
+            "enum": [
+              "agent",
+              "group",
+              "agent_group",
+              "round_robin_agent",
+              "round_robin_group",
+              "round_robin_agent_group",
+              "round_robin_online_agent_group",
+              "round_robin_agent_groups",
+              "round_robin_online_agent_groups",
+              "weight_agent",
+              "weight_agent_group",
+              "weight_agent_online",
+              "last_assigned_agent",
+              "last_assigned_group",
+              "nearest_group",
+              "group_by_ddd",
+              "group_by_ddd_with_transship",
+              "group_by_uf_with_transship",
+              "round_robin_group_with_transship",
+              "last_assigned_agent_to_contact"
+            ]
+          },
+          "userId": {
+            "type": "number",
+            "description": "`assignTo: agent`: usuário que recebe"
+          },
+          "groupId": {
+            "type": "number",
+            "description": "Grupo (`group`, `round_robin_agent_group`, `round_robin_online_agent_group`, `weight_agent_group`)"
+          },
+          "groupIds": {
+            "description": "Grupos participantes (tipos com vários grupos); vazio = todos",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Ativa a regra. Padrão: desativada"
+          },
+          "maximumDistanceKm": {
+            "type": "number",
+            "description": "`nearest_group`: distância máxima (km)"
+          },
+          "transhipmentGroupIds": {
+            "description": "Tipos `*_with_transship`: grupos de transbordo",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "operatorAvailabilityRequired": {
+            "type": "boolean",
+            "description": "`last_assigned_agent`, `last_assigned_agent_to_contact`: só se o usuário estiver disponível"
+          },
+          "excludeChannelIds": {
+            "description": "`last_assigned_agent_to_contact`: canais ignorados",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "assignTo"
+        ]
+      },
+      "UpdateAssignmentRulePublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string",
+            "enum": [
+              "all",
+              "new",
+              "existing"
+            ],
+            "description": "`all` todas as conversas, `new` primeiro contato no canal, `existing` contato que já falou no canal. Padrão `all`."
+          },
+          "assignTo": {
+            "type": "string",
+            "enum": [
+              "agent",
+              "group",
+              "agent_group",
+              "round_robin_agent",
+              "round_robin_group",
+              "round_robin_agent_group",
+              "round_robin_online_agent_group",
+              "round_robin_agent_groups",
+              "round_robin_online_agent_groups",
+              "weight_agent",
+              "weight_agent_group",
+              "weight_agent_online",
+              "last_assigned_agent",
+              "last_assigned_group",
+              "nearest_group",
+              "group_by_ddd",
+              "group_by_ddd_with_transship",
+              "group_by_uf_with_transship",
+              "round_robin_group_with_transship",
+              "last_assigned_agent_to_contact"
+            ]
+          },
+          "userId": {
+            "type": "number",
+            "description": "`assignTo: agent`: usuário que recebe"
+          },
+          "groupId": {
+            "type": "number",
+            "description": "Grupo (`group`, `round_robin_agent_group`, `round_robin_online_agent_group`, `weight_agent_group`)"
+          },
+          "groupIds": {
+            "description": "Grupos participantes (tipos com vários grupos); vazio = todos",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Ativa a regra. Padrão: desativada"
+          },
+          "maximumDistanceKm": {
+            "type": "number",
+            "description": "`nearest_group`: distância máxima (km)"
+          },
+          "transhipmentGroupIds": {
+            "description": "Tipos `*_with_transship`: grupos de transbordo",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "operatorAvailabilityRequired": {
+            "type": "boolean",
+            "description": "`last_assigned_agent`, `last_assigned_agent_to_contact`: só se o usuário estiver disponível"
+          },
+          "excludeChannelIds": {
+            "description": "`last_assigned_agent_to_contact`: canais ignorados",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "CreateQuickPhrasePublicDto": {
+        "type": "object",
+        "properties": {
+          "shortcut": {
+            "type": "string",
+            "description": "Atalho (ex.: `boasvindas`)"
+          },
+          "text": {
+            "type": "string"
+          },
+          "privacy": {
+            "type": "string",
+            "enum": [
+              "public",
+              "group",
+              "private"
+            ],
+            "description": "Padrão `public`"
+          },
+          "groupId": {
+            "type": "number",
+            "description": "Obrigatório com `privacy: group`"
+          },
+          "hotkey": {
+            "type": "string",
+            "description": "Tecla de atalho"
+          }
+        },
+        "required": [
+          "shortcut",
+          "text"
+        ]
+      },
+      "UpdateQuickPhrasePublicDto": {
+        "type": "object",
+        "properties": {
+          "shortcut": {
+            "type": "string",
+            "description": "Atalho (ex.: `boasvindas`)"
+          },
+          "text": {
+            "type": "string"
+          },
+          "privacy": {
+            "type": "string",
+            "enum": [
+              "public",
+              "group",
+              "private"
+            ],
+            "description": "Padrão `public`"
+          },
+          "groupId": {
+            "type": "number",
+            "description": "Obrigatório com `privacy: group`"
+          },
+          "hotkey": {
+            "type": "string",
+            "description": "Tecla de atalho"
+          }
+        }
+      },
+      "CreateCustomFieldPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "entity": {
+            "type": "string",
+            "enum": [
+              "contact",
+              "deal",
+              "session",
+              "organization",
+              "group",
+              "channel",
+              "user",
+              "product",
+              "task"
+            ],
+            "description": "`session` = conversa"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "textarea",
+              "select",
+              "multi-select",
+              "boolean",
+              "number",
+              "decimal",
+              "day",
+              "datetime",
+              "json"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "Chave usada em `customFields` (padrão: gerada do nome, sem acento e com `_`). Não muda depois."
+          },
+          "options": {
+            "description": "Opções de `select` e `multi-select` (obrigatório nesses tipos)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Obrigatório para resolver a conversa"
+          }
+        },
+        "required": [
+          "name",
+          "entity",
+          "type"
+        ]
+      },
+      "ReorderCustomFieldsPublicDto": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "description": "IDs na ordem desejada. Campos fora da lista vão para o fim, na ordem atual.",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "ids"
+        ]
+      },
+      "UpdateCustomFieldPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "textarea",
+              "select",
+              "multi-select",
+              "boolean",
+              "number",
+              "decimal",
+              "day",
+              "datetime",
+              "json"
+            ]
+          },
+          "options": {
+            "description": "Opções de `select` e `multi-select` (obrigatório nesses tipos)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Obrigatório para resolver a conversa"
+          }
+        }
+      },
+      "CreateGroupPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "userIds": {
+            "description": "IDs dos usuários membros",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateGroupPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "GroupUsersPublicDto": {
+        "type": "object",
+        "properties": {
+          "userIds": {
+            "description": "IDs dos usuários a adicionar",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "userIds"
+        ]
+      },
+      "CreateBusinessHoursPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "days": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Intervalos por dia (`mon`..`sun`), em HH:mm, ex.: `{ \"mon\": [[\"08:00\",\"12:00\"],[\"13:00\",\"18:00\"]] }`. Dia ausente fica fechado ao criar; ao editar, só os dias enviados mudam (`[]` fecha o dia)."
+          }
+        },
+        "required": [
+          "name",
+          "days"
+        ]
+      },
+      "UpdateBusinessHoursPublicDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "days": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Intervalos por dia (`mon`..`sun`), em HH:mm, ex.: `{ \"mon\": [[\"08:00\",\"12:00\"],[\"13:00\",\"18:00\"]] }`. Dia ausente fica fechado ao criar; ao editar, só os dias enviados mudam (`[]` fecha o dia)."
+          }
+        }
+      },
+      "SaveRoomMessageDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "EditRoomMessageDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "RoomReactionDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "RoomThreadReplyDto": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "video",
+              "audio",
+              "file"
+            ]
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "tempId": {
+            "type": "string"
+          },
+          "operatorName": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomTypingDto": {
+        "type": "object",
+        "properties": {
+          "threadId": {
+            "type": "string"
+          }
+        }
       }
     }
   }
