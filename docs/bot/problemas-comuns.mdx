@@ -1,0 +1,133 @@
+---
+title: O bot não ativa, travou ou repete mensagens
+description: Causas e soluções quando o bot não liga, não começa numa conversa, para no meio, repete mensagens, atende fora do horário ou a integração não funciona.
+keywords: [bot não funciona, bot não ativa, bot não responde, bot travou, bot parou, bot em loop, bot repetindo, loop inválido detectado, fim do bot, bot fora do horário, bot respondeu no grupo, integração não funciona, chatbot não responde, robô não responde]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/bot/helpers/pathTester.ts
+  - web:src/pages/settings/bot/Bot.tsx
+  - api-v0:server/modules/chat/chatBotHandler.js
+  - api-v0:server/modules/chat/botFlowV2.js
+  - api-v0:server/modules/scheduler/callExpirationScheduler.js
+codigo:
+  - web:src/pages/settings/bot/helpers/pathTester.ts
+  - web:src/pages/settings/bot/Bot.tsx
+  - web:src/pages/settings/bot/EditBot.tsx
+  - api-v0:server/modules/chat/chatBotHandler.js
+  - api-v0:server/services/BotService.js
+  - api-v0:server/modules/chat/botFlowV2.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageByClient.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+  - api-v0:server/modules/scheduler/callExpirationScheduler.js
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+Você tenta ligar ou publicar um bot e recebe um erro, o bot está ativo mas não responde ou não começa em um canal, para no meio do atendimento, repete mensagens em loop, atende fora do horário ou em grupo de WhatsApp, ignora alterações recentes ou o bloco **Agente de IA** / **Integração** parece não funcionar.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title='Erro: Necessário que todos os caminhos acabem no nó "Fim do Bot"'>
+    **Como confirmar:** o **Início do fluxo** não está ligado a nenhum bloco. O que você vê depende de onde tentou:
+    - **Publicar** no editor: nada é salvo e o editor centraliza e seleciona o **Início do fluxo**, sem mensagem.
+    - Interruptor ao lado do nome, no editor: aparece o aviso 'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar ou salvar esse Bot.' e o interruptor volta para desligado.
+    - Interruptor na lista de bots: aparece o aviso 'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar esse Bot.', sem abrir o editor.
+
+    **O que fazer:** abra o bot, ligue a bolinha de saída do **Início do fluxo** ao primeiro bloco e clique em **Publicar**.
+  </Accordion>
+
+  <Accordion title='Erro "Loop inválido detectado." ao ligar ou publicar'>
+    **Como confirmar:** o editor destaca um bloco que faz parte de uma volta fechada sem nenhum bloco que aguarde resposta do contato (por exemplo, **Mensagem** → **Decisão** → **Mensagem**).
+
+    **O que fazer:** insira na volta um bloco que pausa o fluxo (**Menu**, **Entrada de dados**, **Esperar um tempo** ou **Agente de IA**) ou remova a ligação que fecha o ciclo.
+  </Accordion>
+
+  <Accordion title="O bot está ligado, mas não começa na conversa">
+    O bot só inicia sozinho quando o **contato** envia a mensagem que abre uma [sessão](/docs/conceitos/conversas-e-sessoes) nova em um canal atendido pelo bot, com o bot ligado e sendo o primeiro da lista que serve.
+
+    **Como confirmar e resolver cada causa:**
+    - **Sessão já aberta ou reaberta:** confira se apareceu a faixa **Nova sessão** antes da mensagem do contato. Se a conversa já estava aberta ou foi reaberta dentro do **Tempo de tolerância ao resolver conversa**, o bot não inicia sozinho. Para começar agora, use **Mais ações** → **Executar bot**. Para o bot começar sozinho, a próxima mensagem do contato precisa abrir uma sessão nova: isso só acontece com a sessão resolvida e, se o workspace usa o **Tempo de tolerância ao resolver conversa**, depois que esse prazo passar.
+    - **Canal fora da configuração:** abra **Configurações do bot** e confirme se o canal está em **Canais que atende**.
+    - **Fora do horário:** confira os **Horários** configurados no bot.
+    - **Outro bot ligado acima na lista:** procure nas mensagens de sistema da conversa por "Bot [nome] iniciado" com outro nome. A lista funciona por ordem de prioridade — arraste o bot desejado para cima (veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
+    - **Conversa iniciada por membro ou pelo celular:** o bot não começa sozinho quando um membro inicia a conversa ou quando a mensagem parte do celular do número. Use **Executar bot** se quiser iniciar manualmente.
+    - **Grupo do WhatsApp:** ligue **Atende grupos do WhatsApp** em **Configurações do bot**, selecione o canal em **Canais que atende** e confirme que **Permitir Grupos de WhatsApp** está ativo nas configurações do canal de WhatsApp por QR Code.
+  </Accordion>
+
+  <Accordion title='Ícone de alerta "Bot não está atendendo nenhum canal." na lista'>
+    **Como confirmar:** a linha do bot em **Configurações** → **Automação** → **Bot** exibe um ícone de alerta com essa mensagem.
+
+    **O que fazer:** abra o bot, vá em **Configurações**, escolha os canais em **Canais que atende** (ou ligue **Atende todos os canais** se não usar **Horários** nem restrição de grupos), clique em **Salvar** e depois em **Publicar**.
+  </Accordion>
+
+  <Accordion title="O bot atende fora do horário ou responde em grupos de WhatsApp">
+    **Como confirmar:** abra **Configurações do bot** e verifique se **Atende todos os canais** está ligado. Com **Atende todos os canais** ativo, o bot ignora **Horários** e **Atende grupos do WhatsApp**, atendendo também fora do expediente e em grupos.
+
+    **O que fazer:** desligue **Atende todos os canais**, escolha os canais específicos em **Canais que atende**, ajuste **Horários** e **Atende grupos do WhatsApp**, clique em **Salvar** e em **Publicar**.
+  </Accordion>
+
+  <Accordion title="Alterei o bot ou as configurações e nada mudou">
+    **Como confirmar:** abra o editor do bot e olhe o botão **Publicar** no topo direito. Se ele estiver ativo, existem alterações salvas apenas no editor (inclusive mudanças em **Configurações do bot** em que você clicou só em **Salvar**).
+
+    **O que fazer:** clique em **Publicar** e confirme o aviso "Bot publicado!".
+  </Accordion>
+
+  <Accordion title="O bot para no meio da conversa">
+    **Como confirmar:** verifique as mensagens de sistema na conversa e confira o desenho do fluxo no editor:
+    - **Bloco sem saída ligada ou Fim do bot:** qualquer bloco sem ligação na saída seguida encerra o bot ali. Na **Decisão**, se uma das saídas ficar solta, o fluxo segue pela outra saída ligada.
+    - **Intervenção de um membro:** quando um membro envia uma mensagem comum, atribui a conversa ou move para um grupo pela conversa, o bot sai automaticamente (veja [Atribuir e transferir](/docs/conversas/atribuir-e-transferir)). Para conversar com o time sem parar o bot, use **Nota pro time**.
+    - **Sessão expirada:** a conversa mostra "Essa sessão expirou e foi finalizada" conforme a regra de **Expirar Sessão**.
+    - **Muitas respostas inválidas:** após mais de 15 respostas inválidas seguidas em um **Menu** ou **Entrada de dados**, o bot para com "Número máximo de respostas inválidas excedido".
+    - **Outro bot assumiu no mesmo momento:** a conversa mostra "Bot [nome] não está mais ativo na conversa" ou "Execução do bot cancelada, outro bot já está em execução" — revise automações, cenários e a ordem da lista de bots.
+
+    **O que fazer:** ligue todas as saídas dos blocos (veja [Blocos do bot](/docs/bot/blocos-do-bot)), ajuste **Expirar Sessão** se necessário e revise automações que também executam bots.
+  </Accordion>
+
+  <Accordion title='O bot repete mensagens ou mostra "Bot interrompido por detecção de loop"'>
+    **Como confirmar:** a conversa registra a mensagem de sistema "Bot interrompido por detecção de loop". Isso ocorre quando o fluxo executa mais de 200 blocos seguidos sem passar por um **Menu**, **Entrada de dados** ou **Fim do bot** sem transferência.
+
+    **O que fazer:** revise as ligações que voltam para etapas anteriores e garanta que o caminho passe por **Menu** ou **Entrada de dados** para aguardar o contato, ou encerre em **Fim do bot**.
+  </Accordion>
+
+  <Accordion title="O bloco Agente de IA não responde">
+    **Como confirmar:**
+    - **Na simulação:** aparece o texto "Não posso responder na simulação de bot no momento, somente na aplicação real." — o bloco **Agente de IA** não responde no simulador.
+    - **Na conversa real:** confira o saldo da carteira (veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)) e se houve mensagem de erro "Houve um erro ao processar a mensagem pelo Agente de IA". Se as saídas **Sem saldo** ou **Erro** não estiverem ligadas, o bot permanece parado no bloco.
+
+    **O que fazer:** teste em uma conversa real com **Executar bot**, garanta saldo suficiente (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)) e ligue as saídas **Sem saldo** e **Erro** do bloco **Agente de IA** para encaminhar o atendimento.
+  </Accordion>
+
+  <Accordion title="O bloco Integração não faz nada ou não grava os dados">
+    **Como confirmar:** falhas em **Chamar endpoint**, **Executar código** ou integrações prontas não exibem erro na conversa e o bot segue pela saída única.
+
+    **O que fazer:**
+    - **Chamar endpoint** e **Executar código:** teste no **Simular bot** com **Pular integrações** desligado em **Ver dados do contato** e veja a caixa **Resultado da integração** (erros aparecem em vermelho). Nesse teste, o sistema externo é chamado de verdade: use um endereço ou dados de teste se a chamada criar ou alterar algo.
+    - **JSON do Chamar endpoint:** confira se o JSON é válido e se cada chave em `mapReturnToCustomField` tem um caminho preenchido e é a **Chave reservada** de um campo existente (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot) e [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo)).
+    - **Integrações prontas de Outros:** teste numa conversa real com **Executar bot**, porque o simulador as pula.
+  </Accordion>
+
+  <Accordion title="O bot pede senha para abrir ou o interruptor está travado">
+    **Como confirmar e resolver:**
+    - **Ícone de cadeado na lista:** o bot está protegido por senha. Informe a senha na janela **Digite a senha do bot** ou veja [Histórico de publicações, clonar, exportar e bloquear um bot](/docs/bot/versoes-e-bloqueio).
+    - **Etiqueta Agente de IA e interruptor travado:** esse bot é gerenciado por um agente de IA. Clique na linha (ou em **Abrir agente**) para ativar, desativar ou editar pelo próprio agente (veja [Ligar o agente aos canais e passar para um humano](/docs/agente-de-ia/conectar-canais)).
+  </Accordion>
+
+  <Accordion title="Não vejo Bot em Configurações ou não aparece o botão Publicar">
+    **Como confirmar e resolver:**
+    - **Item Bot não aparece em Configurações → Automação:** sua conta não tem a permissão **Bot**. Peça ao proprietário ou administrador do workspace para liberar essa permissão.
+    - **Botão Publicar ou painel de blocos não aparecem no editor:** você está acessando pelo celular. Abra o editor pelo computador para montar, editar e publicar bots.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte da Kinbox informando:
+
+- o nome do bot;
+- o canal em que o problema aconteceu;
+- o link ou o protocolo da conversa (número da sessão);
+- o horário da mensagem do contato;
+- o que apareceu nas mensagens de sistema da conversa.

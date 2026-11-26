@@ -1,0 +1,137 @@
+---
+title: Criar e publicar um bot
+description: Passo a passo para criar um bot na Kinbox, configurar canais e horários, montar o fluxo com blocos, simular, publicar e ligar.
+keywords: [criar bot, novo bot, publicar bot, ativar bot, ligar bot, simular bot, configurações do bot, canais que atende, horários do bot, expirar sessão, executar bot, importar bot, chatbot, menu automático, menu de opções, atendimento automático]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/bot/EditBot.tsx
+  - web:src/pages/settings/bot/EditBotSettings.tsx
+  - web:src/pages/settings/bot/panels/TopRightPanel.tsx
+  - web:src/pages/settings/bot/helpers/pathTester.ts
+  - web:src/pages/settings/bot/run/run.tsx
+  - api-v0:server/modules/scheduler/callExpirationScheduler.js
+codigo:
+  - web:src/pages/settings/bot/Bot.tsx
+  - web:src/pages/settings/bot/EditBot.tsx
+  - web:src/pages/settings/bot/EditBotSettings.tsx
+  - web:src/pages/settings/bot/panels/**
+  - web:src/pages/settings/bot/helpers/pathTester.ts
+  - web:src/pages/settings/bot/run/**
+  - web:src/pages/inbox/ChatHeader/index.tsx
+  - api-v0:server/controllers/BotController.js
+  - api-v0:server/modules/chat/chatBotHandler.js
+  - api-v0:server/modules/scheduler/callExpirationScheduler.js
+verificado_em: 2026-11-26
+---
+
+Crie um fluxo de atendimento automático, configure em quais canais e horários ele entra, teste no simulador e publique para começar a atender.
+
+<Note>
+  Quem pode: permissão **Bot** ou proprietário do workspace. Monte e publique o bot pelo computador — no celular o editor esconde o botão **Publicar**, o painel de blocos e o interruptor de ativação.
+</Note>
+
+## Antes de começar
+
+- Se o bot vai atribuir conversas a um membro ou grupo, chamar um agente de IA, aplicar tags ou preencher campos personalizados, crie esses cadastros antes: os blocos selecionam apenas itens que já existem no workspace.
+- Se quiser restringir o bot por horário, cadastre antes o horário de atendimento em **Configurações** → **Ambiente** → **Horários**.
+
+## Passo a passo
+
+<Steps>
+  <Step title="Crie um novo bot">
+    Vá em **Configurações** → **Automação** → **Bot** e clique em **Novo Bot**.
+
+    O editor abre desligado, com o nome inicial "Meu chatbot" e dois blocos na tela: **Início do fluxo** e **Fim do bot**. Um bot novo só passa a existir na lista depois do primeiro **Publicar**.
+  </Step>
+
+  <Step title="Configure canais, horários e expiração">
+    Clique em **Configurações** (ícone de controles no topo direito) ou clique no nome do bot no topo esquerdo para abrir **Configurações do bot**. Preencha os campos que precisar e clique em **Salvar**:
+
+    - **Nome** e **Cor:** identificam o bot na lista e no editor.
+    - **Horários:** limita o início automático do bot aos horários escolhidos (vazio = qualquer horário).
+    - **Canais que atende** ou **Atende todos os canais:** define em quais canais o bot pode iniciar sozinho.
+    - **Atende grupos do WhatsApp:** permite iniciar automaticamente em conversas de grupo de WhatsApp (o canal de WhatsApp por QR Code também precisa estar com **Permitir Grupos de WhatsApp** ligado e o grupo selecionado; veja [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes)).
+    - **Expirar Sessão:** define um tempo em horas e minutos sem resposta do contato para encerrar a sessão com **Mensagem ao expirar** ou transferir com **Executar bot ao expirar**.
+    - **Reabrir conversa:** quando o bot é executado manualmente ou por automação em uma sessão já resolvida, ele reabre a conversa automaticamente.
+
+    **Horários** e **Atende grupos do WhatsApp** só valem quando você escolhe os canais em **Canais que atende**. Com **Atende todos os canais** ligado, o bot começa também fora dos horários e em grupos do WhatsApp — para usar horário ou controlar grupos, desligue **Atende todos os canais** e selecione cada canal.
+
+    Clicar em **Salvar** apenas guarda as configurações no editor; elas só passam a valer depois de **Publicar**.
+
+    <Frame caption="Painel Configurações do bot com nome, cor, horários, canais, grupos, Expirar Sessão e Reabrir conversa">
+      <img src="/images/ajuda/bot/configuracoes-do-bot.webp" alt="Painel Configurações do bot mostrando os campos Nome preenchido com Atendimento inicial, Cor, Horários, Canais que atende com Chat do site e os interruptores Atende todos os canais, Atende grupos do WhatsApp, Expirar Sessão e Reabrir conversa, além dos botões Salvar e Cancelar" />
+    </Frame>
+  </Step>
+
+  <Step title="Monte o fluxo com blocos">
+    Arraste os blocos do painel à esquerda para a área do fluxo. Para configurar um bloco, clique duas vezes nele ou selecione-o e clique em **Editar**. Para conectar etapas, arraste da bolinha de saída de um bloco até a entrada do próximo.
+
+    Ligue o **Início do fluxo** ao primeiro bloco e termine cada caminho em um **Fim do bot** (você pode usar mais de um **Fim do bot** no mesmo fluxo). Para conhecer todos os 17 blocos e suas saídas, veja [Blocos do bot](/docs/bot/blocos-do-bot).
+
+    Na barra do editor você também encontra **Desfazer**, **Refazer** e **Pesquisar ação** (lupa para localizar um bloco pelo tipo, número ou texto). Ao selecionar vários blocos de uma vez, aparecem **Clonar selecionados** e **Excluir selecionados**.
+
+    <Frame caption="Editor do bot: barra superior, barra de blocos à esquerda (ela rola para mostrar todos os 17) e um fluxo do Início do fluxo ao Fim do bot">
+      <img src="/images/ajuda/bot/editor-do-bot.webp" alt="Editor do bot com barra superior (nome, interruptor desligado, desfazer, refazer, Publicar, simular, configurações, histórico e pesquisa), barra vertical de ícones de blocos à esquerda e fluxo de exemplo com Início do fluxo, Mensagem, Menu com três opções e mensagem de resposta inválida, duas Mensagens, Atendimento e Fim do bot" />
+    </Frame>
+  </Step>
+
+  <Step title="Teste no simulador">
+    Clique em **Simular bot** (ícone de play no topo direito) para testar o fluxo antes de publicar. Digite uma mensagem ou clique em **Iniciar**; você também pode usar **Enviar áudio**, **Enviar arquivo**, clicar em **Reiniciar** ou ajustar os dados fictícios em **Ver dados do contato**. Para começar a simulação a partir de um bloco específico, selecione o bloco e clique em **Executar**.
+
+    Nem tudo funciona igual na simulação: o bloco **Agente de IA** não responde no simulador, e os blocos **Notificar** e **Ação de CRM** são pulados sem executar ações reais.
+
+    <Warning>
+      Na simulação, **Chamar endpoint** chama o endereço de verdade e as chamadas externas (`axios`) em **Executar código** também acontecem de verdade. As integrações prontas do grupo **Outros** são puladas. Se você não quiser disparar requisições para o seu sistema durante o teste, abra **Ver dados do contato** e ligue **Pular integrações**.
+    </Warning>
+  </Step>
+
+  <Step title="Publique o bot">
+    Clique em **Publicar** no topo direito. O botão só fica ativo quando há alterações não publicadas. Se o fluxo passar na validação, aparece o aviso "Bot publicado!".
+
+    Se você sair do editor sem publicar, a Kinbox avisa que há mudanças não salvas.
+  </Step>
+
+  <Step title="Ligue o bot">
+    Você pode ativar o bot de duas formas:
+
+    - **Na lista de bots:** ative o interruptor da linha. A mudança é salva na hora.
+    - **No editor:** ative o interruptor ao lado do nome do bot e clique em **Publicar** para salvar.
+  </Step>
+
+  <Step title="Defina a ordem de prioridade na lista">
+    Todo bot novo, clonado ou importado entra no fim da lista. Quando mais de um bot ligado atende ao mesmo canal, a Kinbox percorre a lista de cima para baixo e inicia o primeiro que serve — arraste as linhas pela alça à esquerda para mudar a prioridade.
+
+    <Note>
+      Bots gerenciados por agentes de IA entram no topo da lista quando criados. Se você arrastar um bot comum ativo do mesmo canal para cima de um agente de IA, o bot comum atende primeiro e o agente não entra (veja [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns)).
+    </Note>
+  </Step>
+</Steps>
+
+## Depois de publicar
+
+### Quando o bot começa e quando sai
+
+O bot ligado começa sozinho quando o contato abre uma sessão nova num canal do bot e ele é o primeiro bot ligado da lista que serve àquela conversa; ele sai quando um membro responde ou atribui a conversa, quando o fluxo termina ou quando a sessão expira. Veja todas as regras em [Bot: visão geral](/docs/bot/visao-geral).
+
+### Testar em uma conversa real
+
+Para validar um bot em uma conversa real — inclusive blocos que não rodam no simulador — abra a conversa na **Caixa de entrada** e clique em **Mais ações** → **Executar bot** → nome do bot (veja [Atender uma conversa](/docs/conversas/gerenciar-conversas)). É preciso ter a permissão **Iniciar Bot** (ou ser proprietário). Em conversas do Mercado Livre, **Executar bot** fica desativado. Para testar em grupo de WhatsApp por QR Code, o canal precisa estar com **Permitir Grupos de WhatsApp** ligado e o grupo selecionado.
+
+A ação **Executar bot** roda o bot mesmo se ele estiver desligado e ignora canais e horários configurados. A conversa registra a mensagem de sistema indicando que o membro executou o bot. O mesmo vale quando o bot é disparado por automações, cenários, ações em lote de funil ou agentes de IA.
+
+### Gerenciar bots na lista
+
+No menu de três pontos de cada linha, **Editar** abre o fluxo e **Excluir** apaga o bot e os vínculos com canais e horários (as conversas que estavam com ele ficam sem esse bot). **Clonar**, **Exportar**, **Importar** (no menu de três pontos acima da lista, à direita), o histórico de publicações e o bloqueio com senha estão em [Histórico de publicações, clonar, exportar e bloquear um bot](/docs/bot/versoes-e-bloqueio).
+
+<Warning>
+  Excluir um bot não avisa se outro bot (em **Fim do bot** ou **Executar bot ao expirar**), automação ou cenário aponta para ele. Confira esses vínculos antes de confirmar a exclusão.
+</Warning>
+
+## Problemas comuns
+
+- **Erro `Necessário que todos os caminhos acabem no nó "Fim do Bot"...` ao ligar, ou Publicar que só seleciona o Início do fluxo:** o **Início do fluxo** não está ligado a nenhum bloco. Ligue-o ao primeiro bloco do fluxo.
+- **Erro `Loop inválido detectado.`:** existe uma volta no fluxo formada só por blocos que não esperam o contato. Coloque um bloco que espera (**Menu**, **Entrada de dados**, **Esperar um tempo** ou **Agente de IA**) na volta ou desfaça a ligação.
+- **Mudei o bot e nada mudou nas conversas:** clique em **Publicar** no editor. Salvar um bloco ou clicar em **Salvar** nas **Configurações do bot** não publica as alterações.
+
+Para outros cenários — como bot ligado que não começa, para no meio ou atende fora do horário — veja [O bot não ativa, travou ou repete mensagens](/docs/bot/problemas-comuns).

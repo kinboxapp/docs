@@ -340,6 +340,105 @@ async function garantirAgente(api: Api) {
   log(`agente de IA: "${AGENTE.name}"${existente ? ' (reaproveitado)' : ''}`)
 }
 
+/**
+ * Bot de exemplo "Atendimento inicial" (prints da seção bot): Início → Mensagem → Menu → Mensagem/Atendimento → Fim.
+ * Nasce e fica DESLIGADO, com o widget fictício em "Canais que atende".
+ */
+function montarBotExemplo(grupoId: string, canalId: string) {
+  const pos = (x: number, y: number) => ({ x, y })
+  const cores: Record<string, string> = { message: '#686de0', menu: '#0984e3', assign: '#38ada9', integration: '#000' }
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { backgroundColor: cores[type], action } })
+  const aresta = (source: string, sourceHandle: string, target: string) => ({
+    id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
+    type: 'removable_edge', animated: true, arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
+  })
+  const nos = [
+    { id: '1', type: 'start', position: pos(-60, 200), data: { label: 'Início' }, sourcePosition: 'right' },
+    no('boas-vindas', 'message', 260, 180, { text: 'Olá, {{first_name}}! Bem-vindo à Loja Exemplo.' }),
+    no('menu', 'menu', 560, 150, {
+      text: 'Como podemos ajudar? Digite o número da opção:',
+      menu_options: [{ value: '1', name: 'Acompanhar meu pedido' }, { value: '2', name: 'Trocas e devoluções' }, { value: '3', name: 'Falar com a equipe' }],
+      menu_validate_text: 'Resposta inválida. Digite 1, 2 ou 3.', similarity_rate: 20,
+      menu_response_timeout_value: 10, menu_response_timeout_unit: 'seconds',
+    }),
+    no('pedido', 'message', 940, -120, { text: 'Para acompanhar o pedido, acesse Minha conta > Pedidos no site.' }),
+    no('trocas', 'message', 940, 170, { text: 'Você pode trocar qualquer produto em até 30 dias após o recebimento, com a nota fiscal.' }),
+    no('equipe', 'assign', 940, 480, { assign_type: 'group', assign_to_group_id: grupoId }),
+    { id: 'end', type: 'end', position: pos(1320, 200), data: { label: 'Fim', action: {} }, sourcePosition: 'left' },
+  ]
+  const arestas = [
+    aresta('1', 'start', 'boas-vindas'), aresta('boas-vindas', 'a', 'menu'),
+    aresta('menu', '1', 'pedido'), aresta('menu', '2', 'trocas'), aresta('menu', '3', 'equipe'),
+    aresta('pedido', 'a', 'end'), aresta('trocas', 'a', 'end'), aresta('equipe', 'a', 'end'),
+  ]
+  const elements = [...nos, ...arestas]
+  const actions = nos.map((n: any) => ({
+    id: n.id, type: n.type,
+    targets: arestas.filter((e) => e.source === n.id).map((e) => ({ sourceHandle: e.sourceHandle, target: e.target })),
+    ...(n.data?.action || {}),
+  }))
+  return {
+    name: 'Atendimento inicial', color: '#6c5ce7', isActive: false, channels: [canalId], businessHours: [],
+    isEnabledForAllChannels: false, expirable: false, settings: {}, actions, elements,
+  }
+}
+
+async function garantirBot(api: Api, canal: string) {
+  const existente = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Atendimento inicial')
+  if (!existente) {
+    const grupo = lista(await api.v0('GET', '/group')).find((g) => g.name === EQUIPE.name)
+    if (!grupo) throw new Error(`Equipe "${EQUIPE.name}" não encontrada`)
+    await api.v0('POST', '/bot', montarBotExemplo(String(grupo.id), canal))
+  }
+  log(`bot: "Atendimento inicial" (desligado)${existente ? ' (reaproveitado)' : ''}`)
+}
+
+/**
+ * Segundo bot de exemplo "Consulta de pedido" (prints de integração): Chamar endpoint grava o pedido no campo Json
+ * `pedido` (sessão) e Executar código marca o cliente; endereços em exemplo.com. Desligado e sem canal.
+ */
+function montarBotIntegracao() {
+  const pos = (x: number, y: number) => ({ x, y })
+  const cores: Record<string, string> = { message: '#686de0', menu: '#0984e3', assign: '#38ada9', integration: '#000' }
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { backgroundColor: cores[type], action } })
+  const aresta = (source: string, sourceHandle: string, target: string) => ({
+    id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
+    type: 'removable_edge', animated: true, arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
+  })
+  const json = JSON.stringify({
+    url: 'https://exemplo.com/api/pedidos?email={{email}}',
+    method: 'GET',
+    headers: { Authorization: 'Bearer SEU_TOKEN' },
+    mapReturnToCustomField: { pedido: 'data' },
+  }, null, 2)
+  const codigo = `async function run(kinbox) {\n  const { contact } = kinbox\n\n  // Consulta um sistema externo (endereço fictício)\n  const url = "https://exemplo.com/api/clientes"\n  const { data } = await axios.get(url, {\n    params: { email: contact.email },\n  })\n\n  if (data.vip) {\n    await kinbox.addTag("vip")\n  }\n\n  return data\n}`
+  const nos = [
+    { id: '1', type: 'start', position: pos(-60, 200), data: { label: 'Início' }, sourcePosition: 'right' },
+    no('consulta', 'integration', 260, 170, { code: 'custom', integration_description: 'Consultar pedido', script: json }),
+    no('codigo', 'integration', 600, 170, { code: 'run_code', integration_description: 'Marcar cliente VIP', scriptCode: codigo }),
+    no('resposta', 'message', 940, 170, { text: 'Seu pedido {{json:pedido.numero}} está: {{json:pedido.status}}.' }),
+    { id: 'end', type: 'end', position: pos(1300, 200), data: { label: 'Fim', action: {} }, sourcePosition: 'left' },
+  ]
+  const arestas = [aresta('1', 'start', 'consulta'), aresta('consulta', 'a', 'codigo'), aresta('codigo', 'a', 'resposta'), aresta('resposta', 'a', 'end')]
+  const elements = [...nos, ...arestas]
+  const actions = nos.map((n: any) => ({
+    id: n.id, type: n.type,
+    targets: arestas.filter((e) => e.source === n.id).map((e) => ({ sourceHandle: e.sourceHandle, target: e.target })),
+    ...(n.data?.action || {}),
+  }))
+  return { name: 'Consulta de pedido', color: '#00b894', isActive: false, channels: [], businessHours: [], isEnabledForAllChannels: false, expirable: false, settings: {}, actions, elements }
+}
+
+async function garantirBotIntegracao(api: Api) {
+  const campos = lista(await api.v0('GET', '/custom-fields'))
+  if (!campos.some((c) => c.placeholder === 'pedido')) {
+    await api.v0('POST', '/custom-fields', { name: 'Pedido', placeholder: 'pedido', type: 'json', entity: 'session', description: 'Dados do pedido consultado pelo bot' })
+  }
+  const existente = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Consulta de pedido')
+  if (!existente) await api.v0('POST', '/bot', montarBotIntegracao())
+  log(`bot: "Consulta de pedido" (desligado, sem canal) e campo Json "pedido"${existente ? ' (reaproveitado)' : ''}`)
+}
+
 const workspace = await garantirWorkspace()
 const api = client(workspace.token)
 await pularOnboarding(api)
@@ -355,6 +454,8 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['membros', () => garantirMembros(api)],
   ['respostas rápidas', () => garantirRespostasRapidas(api)],
   ['agente', () => garantirAgente(api)],
+  ['bot', () => garantirBot(api, canal)],
+  ['bot de integração', () => garantirBotIntegracao(api)],
 ]
 for (const [nome, etapa] of etapas) {
   try {

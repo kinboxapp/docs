@@ -112,6 +112,19 @@
                   "docs/agente-de-ia/agente-de-voz",
                   "docs/agente-de-ia/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Bot",
+                "pages": [
+                  "docs/bot/visao-geral",
+                  "docs/bot/aprender-a-usar-o-bot",
+                  "docs/bot/blocos-do-bot",
+                  "docs/bot/versoes-e-bloqueio",
+                  "docs/bot/integracoes-do-bot",
+                  "docs/bot/usando-integracao-execucao-codigo",
+                  "docs/bot/usar-campo-personalizado-em-json",
+                  "docs/bot/problemas-comuns"
+                ]
               }
             ]
           },
@@ -715,6 +728,22 @@
     {
       "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",
       "destination": "/docs/agente-de-ia/visao-geral"
+    },
+    {
+      "source": "/docs/bot/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
+    },
+    {
+      "source": "/docs/bot/usando-campo-personalizado-json",
+      "destination": "/docs/bot/usar-campo-personalizado-em-json"
+    },
+    {
+      "source": "/docs/bot/usando-integracao-por-execucao-de-codigo",
+      "destination": "/docs/bot/usando-integracao-execucao-codigo"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
     }
   ]
 }

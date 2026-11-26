@@ -371,6 +371,114 @@
   paginas:
     - docs/conceitos/visao-geral
 
+# Seção bot — o bot de exemplo "Atendimento inicial" fica DESLIGADO no workspace de documentação (só o widget fictício
+# "Chat do site" em Canais que atende). Criado por garantirBot no seed.ts.
+
+# Configurações → Automação → Bot: título Bots, Novo Bot, busca, filtros Status e Tipo e a linha do bot (desligado).
+- id: bot-lista
+  url: /settings/bots
+  passos:
+    - esperar: 'tr:has-text("Atendimento inicial")'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Novo Bot")'
+    - 'input[placeholder="Pesquisar por nome"]'
+    - 'tr:has-text("Atendimento inicial")'
+  mascarar: []
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/bot/lista-de-bots.webp
+  paginas:
+    - docs/bot/visao-geral
+    - docs/bot/aprender-a-usar-o-bot
+
+# Editor do bot com o fluxo inteiro (botão de ajustar à tela): barra de cima (voltar, nome, interruptor, desfazer/refazer,
+# Publicar, Simular, Configurações, Histórico, Pesquisar), painel de blocos à esquerda e o fluxo Início → Mensagem → Menu
+# → Mensagem/Atendimento → Fim.
+- id: bot-editor
+  url: /settings/bots/1186
+  altura: 1120
+  passos:
+    - esperar: '.react-flow__node-menu'
+    - clicar: 'button:has(.fa-expand)'
+    - pausa: 1200
+  alvo: '.react-flow'
+  mascarar: []
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/bot/editor-do-bot.webp
+  paginas:
+    - docs/bot/aprender-a-usar-o-bot
+
+# Botão Configurações (ícone de controles) do editor: painel Configurações do bot (Nome, Cor, Horários, Canais que
+# atende, Atende todos os canais, Atende grupos do WhatsApp, Expirar Sessão, Reabrir conversa, Salvar).
+- id: bot-configuracoes
+  url: /settings/bots/1186
+  passos:
+    - esperar: '.react-flow__node-menu'
+    - clicar: 'button:has(.fa-sliders)'
+    - esperar: '.ant-drawer-title >> text=Configurações do bot'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Configurações do bot") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Configurações do bot") button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/bot/configuracoes-do-bot.webp
+  paginas:
+    - docs/bot/aprender-a-usar-o-bot
+
+# Bot de exemplo "Consulta de pedido" (desligado, sem canal; criado por garantirBot no seed.ts): gaveta Integração do bloco
+# "Consultar pedido" com Tipo de integração = Chamar endpoint e o Json fictício (exemplo.com, mapReturnToCustomField → pedido).
+- id: bot-integracao-endpoint
+  url: /settings/bots/1187
+  passos:
+    - esperar: '.react-flow__node:has-text("Consultar pedido")'
+    - clicar: '.react-flow__node:has-text("Consultar pedido")'
+    - clicar: '.react-flow__node:has-text("Consultar pedido") button:has(.fa-edit)'
+    - esperar: '.ant-drawer-content:has-text("Tipo de integração")'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-content:has-text("Tipo de integração") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Tipo de integração") .ace_editor'
+    - '.ant-drawer-content:has-text("Tipo de integração") button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/bot/integracao-chamar-endpoint.webp
+  paginas:
+    - docs/bot/integracoes-do-bot
+
+# Mesmo bot: gaveta Integração do bloco "Marcar cliente VIP" com Executar código e a função run(kinbox) de exemplo.
+- id: bot-integracao-codigo
+  url: /settings/bots/1187
+  passos:
+    - esperar: '.react-flow__node:has-text("Marcar cliente VIP")'
+    - clicar: '.react-flow__node:has-text("Marcar cliente VIP")'
+    - clicar: '.react-flow__node:has-text("Marcar cliente VIP") button:has(.fa-edit)'
+    - esperar: '.ant-drawer-content:has-text("Tipo de integração")'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-content:has-text("Tipo de integração") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Tipo de integração") .ace_editor'
+    - '.ant-drawer-content:has-text("Tipo de integração") button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/bot/integracao-executar-codigo.webp
+  paginas:
+    - docs/bot/usando-integracao-execucao-codigo
+
+# Bot "Atendimento inicial": gaveta do bloco Menu (texto, três opções e os demais campos do bloco).
+- id: bot-bloco-menu
+  url: /settings/bots/1186
+  passos:
+    - esperar: '.react-flow__node-menu'
+    - clicar: '.react-flow__node-menu'
+    - clicar: '.react-flow__node-menu button:has(.fa-edit)'
+    - esperar: '.ant-drawer-content:has-text("Opções")'
+    - pausa: 1500
+  alvo: '.ant-drawer-content:has-text("Opções")'
+  mascarar: []
+  arquivo: images/ajuda/bot/bloco-menu.webp
+  paginas:
+    - docs/bot/blocos-do-bot
+
 # Seção agente-de-ia (Automação e IA › Agentes de IA)
 #
 # Agente "Lia" do seed (sem canal e sem agente de voz, que é recurso em teste e não está ligado no workspace de
