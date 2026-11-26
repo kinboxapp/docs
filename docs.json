@@ -186,6 +186,17 @@
                 ]
               },
               {
+                "group": "Cenários",
+                "pages": [
+                  "docs/cenarios/visao-geral",
+                  "docs/cenarios/criar-um-cenario",
+                  "docs/cenarios/integrar-via-webhook-com-cenarios",
+                  "docs/cenarios/execucoes",
+                  "docs/cenarios/gatilhos-e-acoes",
+                  "docs/cenarios/problemas-comuns"
+                ]
+              },
+              {
                 "group": "Copiloto",
                 "pages": [
                   "docs/copiloto/copiloto-atualizado",

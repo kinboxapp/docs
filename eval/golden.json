@@ -1279,5 +1279,54 @@
     "pergunta": "A Kinbox mostra se o SMS foi entregue no celular do cliente?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Meu formulário do site precisa mandar os leads direto para a Kinbox e criar o contato. Como faço?",
+    "esperado": [
+      "docs/cenarios/integrar-via-webhook-com-cenarios"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Liguei o cenário mas ele nunca aparece no Analítico, o que pode ser?",
+    "esperado": [
+      "docs/cenarios/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá pra cadastrar uma URL para a Kinbox me avisar toda vez que chegar mensagem nova?",
+    "esperado": [
+      "llm/faq/cenarios-webhook-de-saida"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Rodar cenário gasta créditos da carteira? O que são essas operações?",
+    "esperado": [
+      "llm/faq/cenarios-operacoes",
+      "docs/cenarios/execucoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quero mandar todo fim de dia os negócios de um funil para o meu ERP. Qual o limite de itens que o loop aguenta?",
+    "esperado": [
+      "docs/cenarios/gatilhos-e-acoes",
+      "llm/cenarios/gatilhos-e-acoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Como eu ligo um cenário depois de montar os passos? Mexi no botão e não mudou nada.",
+    "esperado": [
+      "docs/cenarios/criar-um-cenario"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para montar um cenário que publica stories no Instagram da loja todo dia de manhã?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
