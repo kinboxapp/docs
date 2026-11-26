@@ -1686,3 +1686,121 @@
   arquivo: images/ajuda/widget/balao-no-site.webp
   paginas:
     - docs/canais/widget/configuracoes
+
+# Seção integracoes (Integrações e API › Apps e CRMs). Só abre os painéis, sem salvar credencial nem autorizar em
+# terceiros. Os exemplos de endereço dentro dos campos do Bitrix24 levam tarja. O botão Novo da tela Apps não cria nada para o cliente: some do print. Pipedrive e NectarCRM listam os
+# membros do workspace: a linha do dono (conta real) leva tarja.
+
+# Configurações → Integrações → Apps: título, busca, filtro e as primeiras linhas (até RD Station Marketing).
+- id: integracoes-apps-lista
+  url: /settings/apps
+  passos:
+    - esperar: 'tr:has(img[alt="RD Station Marketing"])'
+    - pausa: 800
+  alvo:
+    - '.g_static_page header'
+    - 'tr:has(img[alt="RD Station Marketing"])'
+  esconder:
+    - '.global-add-button-link'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/lista-de-apps.webp
+  paginas:
+    - docs/integracoes/visao-geral
+
+- id: integracoes-hubspot
+  url: /settings/apps/hubspot
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/hubspot.webp
+  paginas:
+    - docs/integracoes/hubspot
+
+- id: integracoes-pipedrive
+  url: /settings/apps/pipedrive
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body .ant-row:has(> .ant-col-14 > #data_tokens_5) > .ant-col-10'
+  arquivo: images/ajuda/integracoes/pipedrive.webp
+  paginas:
+    - docs/integracoes/pipedrive
+
+- id: integracoes-rdstation-crm
+  url: /settings/apps/rdstation
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/rdstation-crm.webp
+  paginas:
+    - docs/integracoes/rdstation-crm
+
+- id: integracoes-rdstation-marketing
+  url: /settings/apps/rdstation-marketing
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/rdstation-marketing.webp
+  paginas:
+    - docs/integracoes/rdstation-marketing
+
+- id: integracoes-bitrix24
+  url: /settings/apps/bitrix24
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body #data_token_url'
+    - '.ant-drawer-body #data_token_url_users'
+    - '.ant-drawer-body #data_webhookUrl'
+  arquivo: images/ajuda/integracoes/bitrix24.webp
+  paginas:
+    - docs/integracoes/bitrix24
+
+# O exemplo do campo ID da Organização vem do código e parece um ID de verdade: tarja.
+- id: integracoes-zoho
+  url: /settings/apps/zoho
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body #data_org_id'
+  arquivo: images/ajuda/integracoes/zoho.webp
+  paginas:
+    - docs/integracoes/zoho
+
+- id: integracoes-nectarcrm
+  url: /settings/apps/nectarcrm
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body .ant-row:has(> .ant-col-14 > #data_tokens_5) > .ant-col-10'
+  arquivo: images/ajuda/integracoes/nectarcrm.webp
+  paginas:
+    - docs/integracoes/nectarcrm

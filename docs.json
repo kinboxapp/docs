@@ -197,6 +197,26 @@
             ]
           },
           {
+            "group": "Integrações e API",
+            "icon": "puzzle-piece",
+            "pages": [
+              {
+                "group": "Apps e CRMs",
+                "pages": [
+                  "docs/integracoes/visao-geral",
+                  "docs/integracoes/hubspot",
+                  "docs/integracoes/pipedrive",
+                  "docs/integracoes/rdstation-crm",
+                  "docs/integracoes/rdstation-marketing",
+                  "docs/integracoes/rdstation-marketing-webhook",
+                  "docs/integracoes/bitrix24",
+                  "docs/integracoes/zoho",
+                  "docs/integracoes/nectarcrm"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Administração",
             "icon": "gear",
             "pages": [
@@ -667,6 +687,22 @@
     },
     {
       "source": "/docs/integracoes",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/followize",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/banco-inter",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/smarters",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/tiny-erp",
       "destination": "/docs/integracoes/visao-geral"
     },
     {

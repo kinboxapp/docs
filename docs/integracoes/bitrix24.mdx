@@ -1,0 +1,90 @@
+---
+title: Integrar com o Bitrix24
+description: Como ligar o Bitrix24 à Kinbox com webhooks de entrada, criar leads a partir da conversa e usar as ações prontas do Bitrix24 no bot.
+keywords: [bitrix24, bitrix, integração bitrix24, webhook bitrix24, criar lead no bitrix, crm.lead.add, user.get, negócio bitrix, oportunidade bitrix]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/integrations/**
+  - web:src/components-old/chat/side/integrationApps/Bitrix24App/index.tsx
+  - web:src/pages/settings/bot/drawers/integration/ConsultaDealBitrix.tsx
+  - api-v0:server/modules/**
+codigo:
+  - web:src/pages/settings/integrations/**
+  - web:src/pages/settings/integrations/bitrix/**
+  - web:src/components-old/chat/side/integrationApps/Bitrix24App/**
+  - web:src/pages/settings/bot/drawers/integration/ConsultaDealBitrix.tsx
+  - web:src/pages/settings/bot/drawers/integration/FieldMapBitrix.tsx
+  - api-v0:server/modules/**
+  - api-v0:server/services/BitrixService.js
+verificado_em: 2026-11-26
+---
+
+Com a integração do Bitrix24 ligada, o quadro **Bitrix24** na conversa cria um lead no Bitrix24 a partir do contato e abre esse lead. No bot, ações prontas criam ou atualizam contatos e negócios no Bitrix24. Tudo acontece quando o membro clica no quadro ou quando o fluxo do bot passa pelo bloco.
+
+<Note>
+  Quem pode configurar: proprietário do workspace ou membros com a permissão **Integrações** (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Você precisa de endereços de webhook de entrada do Bitrix24.
+</Note>
+
+## Antes de começar
+
+Crie no Bitrix24 os webhooks de entrada conforme o que você vai usar na Kinbox:
+
+- **Para o quadro da conversa (criar lead):** um webhook de entrada com acesso ao CRM.
+- **Para definir o responsável do lead no quadro (opcional):** um webhook de entrada com acesso a usuários.
+- **Para ações prontas no bot (opcional):** um webhook de entrada com acesso ao CRM (contatos, negócios e funis) e a usuários.
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra o app Bitrix24">
+    Vá em **Configurações** → **Integrações** → **Apps** e clique em **Bitrix24**.
+  </Step>
+
+  <Step title="Preencha os endereços de webhook">
+    Cole o endereço inteiro de cada webhook, terminado em `/` (como no exemplo mostrado dentro do campo). O quadro da conversa e o bot usam campos diferentes:
+
+    | Campo | Obrigatório? | Para que serve |
+    | --- | --- | --- |
+    | **Webhook para API REST de chamada (crm.lead.add)** | Sim, com a integração ligada | Usado pelo quadro da conversa para criar o lead. Sem ele, o botão **Add lead** fica desativado. |
+    | **Webhook para API REST de chamada de usuário (user.get)** | Não | Quando preenchido, atribui o lead criado no quadro ao usuário do Bitrix24 com o mesmo e-mail do membro que clicou. |
+    | **Webhook Url** | Não | Usado pelas ações prontas do Bitrix24 no bot. Sem ele, as ações do bot não executam nada. |
+
+    <Frame caption="Painel de configuração do Bitrix24">
+      <img src="/images/ajuda/integracoes/bitrix24.webp" alt="Painel Bitrix24 com os campos Webhook para API REST de chamada (crm.lead.add), Webhook para API REST de chamada de usuário (user.get), Webhook Url, o botão Configurações, o interruptor Habilitar integração e o botão Salvar" />
+    </Frame>
+  </Step>
+
+  <Step title="Habilite e salve">
+    Ligue **Habilitar integração** e clique em **Salvar**. Aparece "Salvo".
+  </Step>
+</Steps>
+
+## Usar na conversa
+
+Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **Bitrix24** no painel **Detalhes** (veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O quadro não aparece para membros com a restrição **Esconder informações de integração** nem no modo de treino da Academia.
+
+- **Contato ainda não ligado:** o quadro mostra o botão **Add lead** (desativado se **Webhook para API REST de chamada (crm.lead.add)** estiver vazio). Clicar cria um lead no Bitrix24 com o título "Lead \<nome do contato\>", nome (primeira palavra), sobrenome (segunda palavra), e-mail e telefone do contato, e define o responsável se o webhook de usuário estiver configurado e o e-mail do membro existir no Bitrix24. Ao concluir, exibe "Lead criado no Bitrix24.".
+- **Contato já ligado:** o quadro mostra o botão **Ver lead** (abre o lead no Bitrix24 em uma nova aba) e o menu **Ações** com **Desfazer integração** (botão **Desfazer**), que remove apenas o vínculo na Kinbox. O quadro não lê nem exibe dados ou etapa do lead.
+
+## No bot
+
+No bloco **Integração** do bot (grupo **Outros**), existem três ações prontas do Bitrix24 (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)):
+
+- **Cria ou atualiza contato no Bitrix:** permite configurar o **Mapa de campos** para enviar dados do contato ou da sessão aos campos de contato do Bitrix24.
+- **Cria Oportunidade no Bitrix:** pede **Funil de vendas** (a lista começa com **Padrão**), **Etapa do funil** e **Mapa de campos**; cria um novo negócio apenas se o contato ainda não tiver negócio aberto naquele funil.
+- **Atualiza Oportunidade no Bitrix:** pede **Funil de vendas**, **Etapa do funil** e **Mapa de campos** para atualizar um negócio aberto do contato.
+
+As ações do bot exigem o campo **Webhook Url** preenchido no painel do app e telefone cadastrado no contato. Além disso, **Cria Oportunidade no Bitrix** exige que o contato já exista no Bitrix24 (use **Cria ou atualiza contato no Bitrix** antes, se necessário). O mapa de campos que vale para o bot é o configurado dentro do próprio bloco.
+
+## Desligar a integração
+
+Para desligar, abra **Bitrix24** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. Os endereços salvos continuam guardados no painel.
+
+## Problemas comuns
+
+- **Botão Add lead desativado.** O campo **Webhook para API REST de chamada (crm.lead.add)** está vazio. Preencha o endereço e salve.
+- **O lead foi criado sem o responsável certo.** O campo **Webhook para API REST de chamada de usuário (user.get)** está vazio ou o e-mail do membro na Kinbox é diferente do e-mail do usuário no Bitrix24.
+- **A ação do bot não faz nada.** Confira se **Webhook Url** está preenchido no painel **Bitrix24**, se o contato tem telefone e, no caso de **Cria Oportunidade no Bitrix**, se o contato já existe no Bitrix24 (adicione **Cria ou atualiza contato no Bitrix** antes no fluxo).
+- **Listas de funil, etapas ou campos aparecem vazias no bot.** O endereço do webhook foi colado sem a barra `/` no final, está inválido ou não tem acesso ao CRM no Bitrix24.
+- **Botão Configurações desativado.** Ele só libera depois que **Webhook para API REST de chamada (crm.lead.add)** ou **Webhook Url** está preenchido. Para o bot, o mapa de campos que vale é o do próprio bloco no editor do bot.

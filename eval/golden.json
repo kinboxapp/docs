@@ -794,5 +794,51 @@
     "pergunta": "A Kinbox calcula e paga bônus para os atendentes de acordo com a nota das avaliações?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero criar o negócio no HubSpot sem sair da conversa com o cliente, como configuro?",
+    "esperado": [
+      "docs/integracoes/hubspot",
+      "llm/integracoes/hubspot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde coloco o token do Pipedrive de cada vendedor?",
+    "esperado": [
+      "docs/integracoes/pipedrive",
+      "llm/integracoes/pipedrive"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Autorizei o RD Station Marketing e a tela ficou carregando sem terminar",
+    "esperado": [
+      "docs/integracoes/rdstation-marketing",
+      "llm/integracoes/rdstation-marketing"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como faço os leads que convertem no RD Station virarem contatos na Kinbox?",
+    "esperado": [
+      "docs/integracoes/rdstation-marketing-webhook",
+      "llm/integracoes/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quais CRMs dá para integrar com a Kinbox?",
+    "esperado": [
+      "docs/integracoes/visao-geral",
+      "llm/integracoes/visao-geral",
+      "llm/faq/integracao-nao-listada"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "A Kinbox importa automaticamente todo o histórico de negócios do Salesforce para os Funis?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

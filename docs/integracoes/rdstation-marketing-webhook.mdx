@@ -1,0 +1,51 @@
+---
+title: Receber leads do RD Station Marketing por webhook
+description: O que acontece quando o RD Station Marketing envia leads para a Kinbox por webhook, quais dados viram contato e como pedir o endereço do webhook.
+keywords: [webhook rd station, rd station marketing webhook, receber leads do rd, conversão rd station, criar contato pela conversão, integração rd webhook, lead do rd na kinbox]
+publico: humano
+tipo: guia
+fontes:
+  - api:src/modules/webhooks/webhooks.controller.ts
+  - api:src/modules/webhooks/rdstation/rdstation-webhook.consumer.ts
+  - api:src/modules/contacts/contacts.repository.ts
+codigo:
+  - api:src/modules/webhooks/webhooks.controller.ts
+  - api:src/modules/webhooks/rdstation/**
+  - api:src/modules/contacts/contacts.repository.ts
+verificado_em: 2026-11-26
+---
+
+O webhook de leads permite que o RD Station Marketing envie uma conversão para a Kinbox e crie o contato no seu workspace. Esse recurso não aparece na lista **Apps** e funciona de forma independente da integração de envio do RD Station Marketing.
+
+Se você quer o caminho inverso — enviar contatos e conversões da Kinbox para o RD — veja [Integrar com o RD Station Marketing](/docs/integracoes/rdstation-marketing).
+
+<Note>
+  O endereço do webhook leva uma credencial que não aparece nas telas da Kinbox. Para obter o endereço pronto para o seu workspace, fale com o suporte da Kinbox.
+</Note>
+
+## Como configurar
+
+1. Fale com o suporte da Kinbox e solicite o endereço do webhook de leads do RD Station Marketing para o seu workspace.
+2. No RD Station Marketing, cadastre esse endereço como um webhook de conversão de leads.
+
+## O que entra na Kinbox
+
+Para cada lead recebido na conversão, a Kinbox grava apenas três dados no contato:
+
+- **Nome** do lead.
+- **E-mail** do lead.
+- **Telefone:** usa o celular do lead; se o celular estiver vazio, usa o telefone pessoal.
+
+Tags, campos personalizados, empresa e origem da conversão não são importados. O webhook cria apenas o contato no workspace — não abre conversa nem envia mensagem.
+
+## Regras
+
+- **Contato já existente:** a Kinbox procura no workspace pelo **telefone** do lead (não procura por e-mail). Se encontrar um contato com aquele telefone, não altera nome nem e-mail.
+- **Lead sem telefone:** como não há telefone para comparar, a Kinbox cria um contato novo a cada conversão recebida, o que pode gerar contatos repetidos com o mesmo e-mail.
+
+## Problemas comuns
+
+- **O RD Station Marketing mostra erro ao enviar o webhook.** Fale com o suporte da Kinbox para conferir ou gerar um novo endereço de webhook para o workspace.
+- **O teste no RD dá certo, mas nenhum contato aparece na Kinbox.** O webhook precisa estar configurado no formato de conversão de leads do RD, e se o telefone do lead já existir na Kinbox o contato não muda.
+- **Contatos duplicados no workspace.** Leads enviados sem telefone criam um contato novo a cada conversão.
+- **Nome ou e-mail do contato não atualizam.** O telefone já pertence a um contato existente na Kinbox, e o webhook não altera contatos já cadastrados.
