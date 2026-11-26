@@ -29,7 +29,7 @@ Para contratar ou alterar o plano, o próprio cliente acessa **Configurações**
 
 Se a sua parceria naquele cliente permite inspeção e o seu papel tem **Pode inspecionar clientes (Avançado)**, você também pode abrir a tela **Assinatura** do cliente durante a inspeção (veja [Inspecionar o workspace de um cliente](/docs/programa-de-parceiros/inspecionar-cliente)). Com **Pode inspecionar clientes (Básico)**, a tela **Assinatura** não aparece. Se os botões de contratar ou mudar de plano não aparecerem no workspace do cliente, fale com a Kinbox.
 
-O painel não gera link de pagamento hoje. Se o cliente abrir um link antigo e vir "Código inválido", ele contrata em **Configurações** → **Assinatura**.
+Se o cliente abrir um link antigo e vir "Código inválido", ele contrata em **Configurações** → **Assinatura**.
 
 ## Variações
 
