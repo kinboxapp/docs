@@ -44,7 +44,7 @@ Detalhes de referência sobre a conexão **Clássica**, complementares à págin
 
 - A janela **Por favor, confirme** mostra o texto: `"Tem certeza que deseja recriar esse canal? Esse processo demora até 10 minutos, seu canal ficará indisponível durante esse tempo e você deverá ler o QRCode novamente no final do processo."`
 - Só em canais **Clássica** com **Versão** = **Multidevice** a janela traz o seletor **Tipo de conexão** (**Express** marcado por padrão, **Clássica** como opção). Canal com **Versão antiga** não vê o seletor: não dá para passar para a **Express** pelo **Recriar**; orientar a falar com o suporte.
-  - **Migrando para Express**: converte o mesmo registro do canal (mesmo ID, conversas e configurações). O ambiente antigo só é desligado depois que a **Express** foi criada. Se a criação falhar, o canal pode ficar como estava ou com o status cru `pending_review`: conferir o status e, se aparecer `pending_review` ou `error`, falar com o suporte com o ID do canal. Em seguida, o canal fica **Desconectado** até pedir o novo QR Code.
+  - **Migrando para Express**: converte o mesmo registro do canal (mesmo ID, conversas e configurações). O ambiente antigo só é desligado depois que a **Express** foi criada. Se a criação falhar, o canal pode ficar como estava ou com o status cru `pending_review`: conferir o status e, se aparecer `pending_review`, falar com o suporte com o ID do canal. Se o selo **v5** não aparecer e a **Versão** continuar **Multidevice**, a troca não aconteceu: tentar de novo ou falar com o suporte. Em seguida, o canal fica **Desconectado** até pedir o novo QR Code.
   - **Recriando como Clássica**: o canal entra em **Criando...** (até 10 minutos) e pede leitura de QR Code novamente.
 - Na troca para **Express**, o número salvo no canal precisa ter de 10 a 15 dígitos (com DDI); senão, a troca falha com `"Número inválido"` e o canal continua **Clássica**. Orientar a falar com o suporte.
 - Canal **Clássica** sem data de **Última vez recriado** também cai nas verificações por data: mostra **Recomendado recriar canal** e não pode ser usado em campanhas até ser recriado.
@@ -60,8 +60,8 @@ Detalhes de referência sobre a conexão **Clássica**, complementares à págin
 
 ## Campanhas com Clássica antiga
 
-- Canais **Clássica** criados ou recriados pela última vez até 27/01/2024 (data de **Última vez recriado**) não podem ser usados em campanhas; a tela exibe `"Necessário recriar esse canal para usar as campanhas."`
-- Campanhas com vários canais de QR Code exigem que todos sejam do mesmo tipo (todos **Express** ou todos **Clássica**).
+- Canais **Clássica** com **Versão** **Multidevice** criados ou recriados pela última vez até 27/01/2024 (data de **Última vez recriado**), ou sem essa data, não podem ser usados em campanhas; a tela exibe `"Necessário recriar esse canal para usar as campanhas."`
+- Campanhas com vários canais de QR Code exigem que todos sejam do mesmo tipo (todos **Express** ou todos **Clássica** com **Versão** **Multidevice**).
 
 ## Voltar da Express para a Clássica
 

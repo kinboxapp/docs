@@ -65,8 +65,7 @@
   {
     "pergunta": "O que eu faço para o WhatsApp não banir meu número?",
     "esperado": [
-      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp",
-      "llm/faq/whatsapp-aquecer-numero"
+      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
     ],
     "tipo": "guia"
   },
@@ -85,6 +84,40 @@
       "llm/canais/whatsapp/whatsapp-app/o-que-funciona"
     ],
     "tipo": "referencia"
+  },
+  {
+    "pergunta": "Acabei de comprar um chip novo, já posso ligar ele na Kinbox e começar a mandar mensagem?",
+    "esperado": [
+      "llm/faq/whatsapp-aquecer-numero",
+      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "As mensagens dos grupos do meu WhatsApp aparecem na Kinbox?",
+    "esperado": [
+      "llm/faq/whatsapp-grupos",
+      "docs/canais/whatsapp/whatsapp-app/configuracoes",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Conectei o WhatsApp pelo QR Code e as conversas antigas não apareceram",
+    "esperado": [
+      "llm/faq/whatsapp-qr-historico",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quantos números de WhatsApp posso conectar no meu plano?",
+    "esperado": [
+      "llm/faq/canais-limite-do-plano",
+      "docs/canais/visao-geral",
+      "llm/canais/visao-geral"
+    ],
+    "tipo": "faq"
   },
   {
     "pergunta": "Como faço backup das conversas do WhatsApp no Google Drive do meu celular?",

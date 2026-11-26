@@ -70,7 +70,7 @@ Os limites de 16 MB e 100 MB são do motor do WhatsApp por QR Code no envio. Nã
 
 - **Confirmação de entrega e leitura (tiques)**: funciona em conversas individuais; conversas de grupo ficam sem tiques.
 - **Grupos**: ignorados por padrão até serem marcados em **Permitir Grupos de WhatsApp** (a lista vem vazia se o canal estiver desconectado). O contato da conversa é o grupo (sem telefone) e quem escreveu aparece na mensagem.
-- **Menções em grupo**: quando o WhatsApp oculta o número de um participante, a Kinbox exibe `"Participante (final do identificador)"`.
+- **Menções em grupo**: quando o WhatsApp oculta o número de um participante, a mensagem mostra só "Participante". Na lista para mencionar, se houver mais de um participante sem número, cada um aparece como "Participante (últimos 4 dígitos do identificador)".
 - **Auto-leitura desligada**: a Kinbox não marca automaticamente as mensagens como lidas no celular.
 - **Mensagens enviadas pelo celular**: entram na conversa da Kinbox, exceto em conversas em que o WhatsApp informa apenas o identificador de privacidade do contato (sem número), que são descartadas.
 - **Notificações no celular**: na conexão **Express**, a Kinbox mantém o número online no WhatsApp para mostrar se o contato está online; por esse motivo, o celular costuma parar de receber notificações do WhatsApp.
