@@ -302,6 +302,119 @@ async function garantirFunil(api: Api, contatoIds: Record<string, string>, tagId
   log(`funil: "${PIPELINE.name}" com ${NEGOCIOS.length} negócios`)
 }
 
+/**
+ * CRM (prints da seção `funis`): produtos, responsáveis fictícios nos negócios do funil Vendas (para o print não mostrar a
+ * foto do dono do workspace, que é uma conta real), produtos num negócio, um negócio ganho e um perdido, e um funil
+ * operacional com dois tickets.
+ */
+const PRODUTOS = [
+  { name: 'Café especial 250 g', description: 'Grãos torrados na semana', price: 45, isActive: true },
+  { name: 'Kit presente', description: 'Caixa com dois cafés e uma caneca', price: 160, isActive: true },
+  { name: 'Assinatura mensal de café', description: 'Um pacote por mês, com entrega', price: 99.9, isActive: true },
+  { name: 'Caneca edição de inverno', description: 'Fora de linha', price: 39, isActive: false },
+]
+
+const RESPONSAVEIS: Record<string, string> = {
+  'Kit presente — Ana Souza': 'Bruno Carvalho',
+  'Kits corporativos — Carlos Pereira': 'Carla Mendes',
+  'Assinatura de café — Rafael Martins': 'Bruno Carvalho',
+  'Cesta de café da manhã — Beatriz Alves': 'Diego Santos',
+  'Reposição de estoque — Lucas Ferreira': 'Carla Mendes',
+  'Presente de aniversário — Fernanda Costa': 'Diego Santos',
+}
+
+const FUNIL_OPERACIONAL = {
+  name: 'Pós-venda',
+  stages: [
+    { id: 'recebido', name: 'Recebido', color: '#64748b' },
+    { id: 'analise', name: 'Em análise', color: '#0ea5e9' },
+    { id: 'aguardando', name: 'Aguardando cliente', color: '#f59e0b' },
+  ],
+  lostReasons: ['Sem retorno do cliente', 'Fora da política de troca'],
+  tickets: [
+    { name: 'Troca de produto — Beatriz Alves', contato: 'Beatriz Alves', stageId: 'analise', responsavel: 'Diego Santos' },
+    { name: 'Entrega atrasada — Carlos Pereira', contato: 'Carlos Pereira', stageId: 'recebido', responsavel: 'Bruno Carvalho' },
+  ],
+}
+
+async function garantirCrm(api: Api, contatoIds: Record<string, string>) {
+  // Produtos
+  const produtos = lista(await api.v3('GET', '/products?limit=100'))
+  for (const p of PRODUTOS) {
+    if (!produtos.some((x) => x.name === p.name)) produtos.push(await api.v3('POST', '/products', p))
+  }
+  const produto = (nome: string) => produtos.find((x) => x.name === nome)
+
+  // Responsáveis fictícios (membros convidados)
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  // Sem o membro, o negócio ficaria com o dono real da conta (nome e foto no print): falha em vez de seguir
+  const opId = (nome: string) => {
+    const membro = MEMBROS.find((m) => m.name === nome)
+    const op = operadores.find((o) => o.email === membro?.email)
+    if (!op) throw new Error(`membro "${nome}" não encontrado: rode antes a etapa "membros" (bun seed.ts --so membros,crm)`)
+    return Number(op.operatorId || op.id)
+  }
+
+  const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  if (vendas) {
+    const negocios = lista(await api.v3('GET', `/deals?pipelineId=${String(vendas.id || vendas._id)}&limit=100`))
+    for (const negocio of negocios) {
+      const responsavel = RESPONSAVEIS[negocio.name]
+      const operatorId = responsavel ? opId(responsavel) : undefined
+      const patch: Record<string, unknown> = {}
+      if (operatorId && negocio.operatorId !== operatorId) patch.operatorId = operatorId
+      if (negocio.name === 'Kit presente — Ana Souza' && !negocio.products?.length) {
+        const kit = produto('Kit presente')
+        const cafe = produto('Café especial 250 g')
+        if (kit && cafe) {
+          patch.products = [
+            { id: String(kit.id || kit._id), name: kit.name, price: kit.price, quantity: 2, discount: 0, discountType: 'percentage', total: 320 },
+            { id: String(cafe.id || cafe._id), name: cafe.name, price: cafe.price, quantity: 1, discount: 0, discountType: 'percentage', total: 45 },
+          ]
+          patch.value = 365
+        }
+      }
+      // Um negócio ganho e um perdido, para o quadro mostrar as três situações do cartão
+      if (negocio.name === 'Presente de aniversário — Fernanda Costa' && negocio.status !== 'won') {
+        Object.assign(patch, { status: 'won', wonLostDate: new Date().toISOString() })
+      }
+      if (negocio.name === 'Cesta de café da manhã — Beatriz Alves' && negocio.status !== 'lost') {
+        Object.assign(patch, { status: 'lost', lostReason: ['Preço'], wonLostDate: new Date().toISOString() })
+      }
+      if (Object.keys(patch).length) await api.v3('PATCH', `/deals/${negocio.id || negocio._id}`, patch)
+    }
+  }
+
+  // Funil operacional
+  let pos = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === FUNIL_OPERACIONAL.name)
+  if (!pos) {
+    pos = await api.v3('POST', '/pipelines', {
+      name: FUNIL_OPERACIONAL.name,
+      kind: 'operational',
+      stages: FUNIL_OPERACIONAL.stages.map((s) => ({ ...s, requireds: [] })),
+      lostReasons: FUNIL_OPERACIONAL.lostReasons,
+      requiredCustomFieldIds: [],
+      privacy: { type: 'public' },
+      cadence: [],
+      rules: [],
+    })
+  }
+  const posId = String(pos.id || pos._id)
+  const tickets = lista(await api.v3('GET', `/deals?pipelineId=${posId}&limit=100`))
+  for (const t of FUNIL_OPERACIONAL.tickets) {
+    if (tickets.some((d) => d.name === t.name)) continue
+    await api.v3('POST', '/deals', {
+      name: t.name,
+      value: 0,
+      pipelineId: posId,
+      stageId: t.stageId,
+      contactId: Number(contatoIds[t.contato]),
+      operatorId: opId(t.responsavel),
+    })
+  }
+  log(`crm: ${PRODUTOS.length} produtos, responsáveis nos negócios de "${PIPELINE.name}", funil operacional "${FUNIL_OPERACIONAL.name}"`)
+}
+
 async function garantirMembros(api: Api) {
   const cargos = lista(await api.v0('GET', '/roles'))
   const operadores = lista(await api.v0('GET', '/operators?limit=100'))
@@ -593,10 +706,11 @@ async function garantirClientes(api: Api, contatoIds: Record<string, string>) {
  * Cenários de exemplo (prints da seção `cenarios`), todos desligados: nenhum roda nem chama endereço externo.
  * - "Lead do site": Webhook recebido → Buscar contato → Atualizar contato ou Criar contato.
  * - "Pedidos do dia para o ERP": Agendamento cíclico → Buscar negócio (todos do funil) → Loop → Requisição HTTP
- *   para exemplo.com.
+ *   para example.com (domínio reservado para exemplos).
  * - "Bot na nova sessão": Nova Sessão (chat do site) → Executar bot.
  * O endereço do webhook é fictício (example.com): o cenário fica desligado e os prints levam tarja nesse campo.
- * Cenário que já existe desligado é atualizado (passos e posições), mantendo o gatilho gravado.
+ * Cenário que já existe desligado é atualizado (passos e posições), mantendo o gatilho gravado. Se algum cenário de
+ * exemplo estiver ligado, a etapa falha sem mexer em nada. Depende das etapas `funil` e `bot`.
  */
 function montarCenarios(dados: { canal: string; botId: string; pipelineId: string }) {
   const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: { x, y }, data: { action } })
@@ -626,7 +740,7 @@ function montarCenarios(dados: { canal: string; botId: string; pipelineId: strin
       gatilho({ 'schedule:cyclic': { active: true, periodicity: 'daily', hour: 18, minute: 0 } }),
       no('1', 'deal:find', 600, 300, { deal: { findMode: 'all_by_pipeline', pipelineId: dados.pipelineId, limit: 500 } }),
       no('2', 'loop', 900, 300, { loop: { items: v('deal:json', '$.data', '1'), maxIterations: 500, batchSize: 50 } }),
-      no('3', 'make_request', 1200, 560, { request: { method: 'POST', url: 'https://exemplo.com/api/pedidos', headers: {},
+      no('3', 'make_request', 1200, 560, { request: { method: 'POST', url: 'https://example.com/api/pedidos', headers: {},
         body: `{\n\n  "negocio": "${v('loop:item', '$.name', '2')}",\n\n  "valor": ${v('loop:item', '$.value', '2')}\n\n}` } }),
     ], [aresta('trigger', 'default', '1'), aresta('1', 'default', '2'), aresta('2', 'default', '3')]),
     montar('Bot na nova sessão', 1, [
@@ -639,8 +753,12 @@ function montarCenarios(dados: { canal: string; botId: string; pipelineId: strin
 async function garantirCenarios(api: Api, canal: string) {
   const bot = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Atendimento inicial')
   const funil = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
-  if (!bot || !funil) throw new Error('bot "Atendimento inicial" ou funil "Vendas" não encontrado')
+  if (!bot || !funil) throw new Error('bot "Atendimento inicial" ou funil "Vendas" não encontrado: rode `--so funil,bot,cenarios`')
+  // GET /workflows devolve todos os cenários do workspace numa resposta só (sem paginação)
   const existentes = lista(await api.v3('GET', '/workflows'))
+  const nomes = ['Lead do site', 'Pedidos do dia para o ERP', 'Bot na nova sessão']
+  const ligados = existentes.filter((w) => nomes.includes(w.name) && w.active).map((w) => w.name)
+  if (ligados.length) throw new Error(`cenário de exemplo ligado (${ligados.join(', ')}): desligue na tela e rode de novo; nada foi alterado`)
   const criados: string[] = []
   const atualizados: string[] = []
   for (const cenario of montarCenarios({ canal, botId: String(bot.id), pipelineId: String(funil.id ?? funil._id) })) {
@@ -650,9 +768,9 @@ async function garantirCenarios(api: Api, canal: string) {
       criados.push(cenario.name)
       continue
     }
-    // Ligado por alguém: não mexe. Desligado: atualiza passos e posições, mantendo o gatilho gravado (e o endereço do webhook)
+    // Desligado (conferido acima e de novo aqui): atualiza passos e posições, mantendo o gatilho gravado (e o endereço do webhook)
     const completo = await api.v3('GET', `/workflows/${atual.id}`)
-    if (completo?.active) continue
+    if (completo?.active) throw new Error(`cenário de exemplo ligado (${cenario.name}): desligue na tela e rode de novo`)
     const gatilhoAtual = (completo?.elements || []).find((e: any) => e.id === 'trigger')
     if (gatilhoAtual) {
       cenario.elements = cenario.elements.map((e: any) => (e.id === 'trigger' ? gatilhoAtual : e))
@@ -664,18 +782,8 @@ async function garantirCenarios(api: Api, canal: string) {
   log(`cenários: criados [${criados.join(', ')}], atualizados [${atualizados.join(', ')}] (todos desligados)`)
 }
 
-/** `--so <etapa>` roda só uma etapa da lista abaixo (mais a base idempotente de canal, tags e contatos). */
-const so = process.argv.includes('--so') ? process.argv[process.argv.indexOf('--so') + 1] : undefined
-
-const workspace = await garantirWorkspace()
-const api = client(workspace.token)
-if (!so) await pularOnboarding(api)
-const canal = await garantirWidget(api)
-const tagIds = await garantirTags(api)
-if (!so) await garantirConversas(api, canal, tagIds)
-const contatoIds = await garantirContatos(api)
-
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
+// (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
 const falhas: Record<string, string> = {}
 const etapas: [string, () => Promise<unknown>][] = [
   ['funil', () => garantirFunil(api, contatoIds, tagIds)],
@@ -687,9 +795,34 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['organização do atendimento', () => garantirOrganizacao(api)],
   ['widget de exemplo', () => garantirWidgetExemplo(api)],
   ['clientes', () => garantirClientes(api, contatoIds)],
+  ['crm', () => garantirCrm(api, contatoIds)],
   ['cenarios', () => garantirCenarios(api, canal)],
 ]
-for (const [nome, etapa] of etapas.filter(([nome]) => !so || nome === so)) {
+// `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
+// `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.
+// `cenarios` depende de `funil` (o funil "Vendas") e de `bot` (o bot "Atendimento inicial"): rode `--so funil,bot,cenarios`.
+const nomesEtapas = etapas.map(([nome]) => nome)
+const soArg = process.argv.indexOf('--so')
+let so: string[] | undefined
+if (soArg > -1) {
+  const valor = process.argv[soArg + 1]
+  if (!valor || valor.startsWith('--')) throw new Error(`--so precisa da lista de etapas, separadas por vírgula: ${nomesEtapas.join(', ')}`)
+  const pedidas = valor.split(',').map((nome) => nome.trim())
+  const desconhecidas = pedidas.filter((nome) => !nomesEtapas.includes(nome))
+  if (desconhecidas.length) throw new Error(`--so: etapa desconhecida (${desconhecidas.join(', ')}). Use: ${nomesEtapas.join(', ')}`)
+  so = pedidas
+}
+
+const workspace = await garantirWorkspace()
+const api = client(workspace.token)
+await pularOnboarding(api)
+const canal = await garantirWidget(api)
+const tagIds = await garantirTags(api)
+await garantirConversas(api, canal, tagIds)
+const contatoIds = await garantirContatos(api)
+
+for (const [nome, etapa] of etapas) {
+  if (so && !so.includes(nome)) continue
   try {
     await etapa()
   } catch (e) {
