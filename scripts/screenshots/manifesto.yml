@@ -370,3 +370,82 @@
   arquivo: images/ajuda/conceitos/caixa-de-entrada.webp
   paginas:
     - docs/conceitos/visao-geral
+
+# Seção membros-e-permissoes
+
+# Lista de membros do workspace de documentação: 3 convidados fictícios (@example.com) com os papéis padrão e o
+# proprietário. A linha do proprietário (conta real) leva tarja na coluna do nome, da foto e do e-mail; o selo
+# "Proprietário" fica à mostra.
+- id: membros-lista
+  url: /settings/members
+  passos:
+    - esperar: 'text=Diego Santos'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Convidar membro")'
+    - 'tr:has(a[href="/settings/members/5"])'
+  mascarar:
+    - 'tr:has(a[href="/settings/members/5"]) td:first-child'
+  arquivo: images/ajuda/membros-e-permissoes/membros-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+
+# Painel Convidar membro vazio: Nome, foto, E-mail, Permissão e o botão Convidar.
+- id: membros-convidar
+  url: /settings/members/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Convidar membro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Convidar")'
+  arquivo: images/ajuda/membros-e-permissoes/convidar-membro.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+
+# Painel Editar membro de um convidado fictício (Diego Santos): Permissão, Disponível, Ativo e Grupos.
+- id: membros-editar
+  url: /settings/members/222
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar membro'
+    - esperar: 'text=Disponível'
+    - pausa: 800
+  # "Folga fixa da semana" só existe no staging (ainda não está no master do web): some do print.
+  esconder:
+    - '.ant-drawer .ant-form-item:has-text("Folga fixa da semana")'
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Salvar")'
+  arquivo: images/ajuda/membros-e-permissoes/editar-membro.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+    - docs/administracao/licencas-e-propriedade
+
+# Lista de papéis (Permissões) com os três padrões e as iniciais dos membros fictícios.
+- id: permissoes-lista
+  url: /settings/roles
+  passos:
+    - esperar: 'text=Administrador'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Nova permissão")'
+    - 'tr:has-text("Administrador")'
+  arquivo: images/ajuda/membros-e-permissoes/permissoes-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios
+
+# Painel Criar permissão com Home recolhida e Acesso as Conversas aberto (as 6 opções).
+- id: permissoes-acesso-as-conversas
+  url: /settings/roles/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar permissão'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Home")'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Acesso as Conversas")'
+    - esperar: '.ant-drawer >> text=Por Grupo Limitado'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer label:has-text("Restrito")'
+  arquivo: images/ajuda/membros-e-permissoes/acesso-as-conversas.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios
