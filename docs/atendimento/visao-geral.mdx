@@ -1,0 +1,85 @@
+---
+title: Organizar a equipe de atendimento
+description: Como grupos, atribuição automática, horários, tags e avaliação trabalham juntos para organizar quem atende cada conversa na Kinbox e quando.
+keywords: [organizar atendimento, dividir atendimento, setores, equipes, departamentos, distribuir conversas, fila de atendimento, horário de atendimento, tags, etiquetas, pesquisa de satisfação, grupos de atendimento]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/groups/index.tsx
+  - web:src/pages/settings/assignmentRules/index.tsx
+  - web:src/pages/settings/businesshours/index.tsx
+  - web:src/pages/settings/tags/index.tsx
+  - api-v0:server/services/AssignmentService.js
+codigo:
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/groups/**
+  - web:src/pages/settings/assignmentRules/**
+  - web:src/pages/settings/businesshours/**
+  - web:src/pages/settings/tags/**
+  - api-v0:server/services/AssignmentService.js
+verificado_em: 2026-11-26
+---
+
+Organizar o atendimento na Kinbox significa definir **quem atende o quê e quando**: grupos dividem a equipe, a atribuição automática distribui as conversas novas, os horários dizem quando a empresa atende, as tags classificam as conversas e a avaliação mede como foi o atendimento.
+
+<Note>
+  Quem pode: cada tela abaixo tem a sua própria opção na seção **Gerenciamento do Ambiente** do papel (na tela, **Permissão**) — **Grupos**, **Atribuição automática**, **Horários**, **Tags**, **Automações** e **Workspace**. O proprietário do workspace (na tela, **ambiente**) vê todas as telas; se alguma delas não aparecer em **Configurações**, peça ao proprietário ou a quem administra o workspace para liberar a opção correspondente (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+</Note>
+
+## As peças
+
+| Peça | O que faz | Onde |
+| --- | --- | --- |
+| [Grupos](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos) | Divide a equipe em grupos de membros (como Vendas e Suporte; não são grupos de WhatsApp). Uma conversa pode estar em um grupo, com um membro responsável, ou os dois. | **Configurações** (engrenagem do menu lateral) → **Ambiente** → **Grupos** |
+| [Atribuição automática](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas) | Regras que escolhem o membro ou o grupo de cada sessão nova aberta por mensagem do contato (veja as [estratégias](/docs/atendimento/estrategias-de-atribuicao)). | **Configurações** → **Automação** → **Atribuição automática** |
+| [Horários](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) | Define os dias e faixas de hora em que a empresa atende; entra nos relatórios, no bot, nas campanhas, nas permissões, no chat do site, no Kinbox Agenda e nas mensagens automáticas. | **Configurações** → **Ambiente** → **Horários** |
+| [Tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags) | Etiquetas que classificam a sessão da conversa e as negociações, ajudando a filtrar conversas e agrupar relatórios. | **Configurações** → **Ambiente** → **Tags** |
+| [Avaliação](/docs/atendimento/pesquisa-de-satisfacao) | Pergunta de satisfação enviada ao contato por uma automação quando a conversa é resolvida, com as notas em **Relatórios** → **Avaliação**. | **Configurações** → **Automação** → **Automações** |
+
+## Como as peças se ligam
+
+Em uma loja fictícia, essas peças trabalham juntas assim:
+
+- A loja cria os grupos **Vendas** e **Suporte** para separar as equipes.
+- Uma regra de atribuição automática distribui as conversas novas entre os membros disponíveis de **Vendas**.
+- O papel dos atendentes usa **Acesso as Conversas** em **Por Grupo** para que cada membro veja apenas as conversas dos próprios grupos e as atribuídas a ele (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)).
+- O horário **Atendimento da loja** fica escolhido como **Horário comercial** do workspace para os relatórios e para a mensagem de fora do horário.
+- A tag **Orçamento** marca as sessões de pedido de preço para facilitar a busca e os [filtros de conversa](/docs/conversas/criar-filtros-de-conversa).
+
+## Quem recebe as conversas novas
+
+Na distribuição automática, vale diferenciar dois estados do membro: **Disponível** é o membro **Ativo** com o interruptor **Disponível** ligado; **online** é o membro disponível que também está com a Kinbox aberta e conectada no navegador ou no aplicativo.
+
+- **Atribuição automática:** só uma regra ligada é usada em cada sessão nova aberta por mensagem do contato. As regras de rodízio entre membros e as de "menos atendimentos" só escolhem membros disponíveis. As de último membro só exigem isso com **Membro precisa estar disponível** marcado. As opções "online" exigem membro online. Mesmo indisponível, o membro continua recebendo atribuição manual e pode receber conversas pelas regras que atribuem a um membro fixo ou ao último membro sem a exigência de disponibilidade. Veja como ligar ou desligar o status em [Ficar disponível ou indisponível](/docs/conta/disponibilidade).
+- **Resposta e atribuição manual:** quem responde uma conversa sem responsável vira o responsável por ela. Com **Sempre atribuir ao membro que responder** ligado em **Configurações** → **Ambiente** → **Geral**, quem responde assume a conversa mesmo se ela já tiver outro responsável. Para passar ou mover conversas manualmente, veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir).
+
+## Mensagens automáticas
+
+As mensagens automáticas ligadas a horário e disponibilidade ficam em **Configurações** → **Ambiente** → **Geral**, nas configurações gerais do workspace: **Mensagem quando fora do horário comercial** e **Mensagem quando membro indisponível**. A mensagem de fora do horário só é enviada se houver um **Horário comercial** escolhido em **Geral** e só em conversas que já têm um membro responsável.
+
+## Próximos passos
+
+<CardGroup cols={2}>
+  <Card title="Criar grupos de atendimento" href="/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos">
+    Monte equipes de membros e veja onde os grupos são usados.
+  </Card>
+  <Card title="Distribuir as conversas automaticamente" href="/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas">
+    Crie e ligue regras de atribuição automática para sessões novas.
+  </Card>
+  <Card title="Estratégias de atribuição automática" href="/docs/atendimento/estrategias-de-atribuicao">
+    Consulte todas as opções de Atribuir para, seus campos e exigências.
+  </Card>
+  <Card title="Definir os horários de atendimento" href="/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios">
+    Cadastre dias e faixas de hora e escolha o horário comercial do workspace.
+  </Card>
+  <Card title="Criar e usar tags" href="/docs/configuracoes-no-workspace/criar-e-gerenciar-tags">
+    Crie tags, defina quem pode vê-las e categorize conversas.
+  </Card>
+  <Card title="Pedir avaliação no fim do atendimento" href="/docs/atendimento/pesquisa-de-satisfacao">
+    Configure a automação de pesquisa de satisfação e edite a pergunta.
+  </Card>
+  <Card title="As conversas não chegam para mim ou para a equipe" href="/docs/atendimento/problemas-comuns">
+    Resolva problemas comuns de atribuição automática e de fora do horário.
+  </Card>
+</CardGroup>

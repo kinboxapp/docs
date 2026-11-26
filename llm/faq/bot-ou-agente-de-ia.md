@@ -37,7 +37,7 @@ Quando usar cada ferramenta (todas ficam em **Configurações** → **Automaçã
 - **Automações**: quando você quer reagir a eventos e tempos na Kinbox (como tempo sem resposta, ao resolver uma conversa ou ao adicionar tag; os gatilhos por tempo podem atrasar até 3 minutos) para executar ações nos bastidores, como atribuir, enviar mensagem ou executar bot. Não geram débito no saldo sozinhas, mas podem executar um bot que usa recursos de IA, e esse bot gasta saldo.
 - **Cenários**: quando você quer integrar outro sistema — começar por webhook, campanha, nova sessão ou agendamento cíclico e executar passos sobre contatos, conversas, negócios e produtos, com requisições HTTP e loops. Também não geram débito no saldo sozinhos.
 
-Você pode combinar bot e IA usando o bloco **Agente de IA** dentro de um fluxo de bot (com opção de **Base de conhecimento**). Existe ainda o **Copiloto**, que ajuda o membro a responder, resumir, transcrever e analisar (não atende o contato sozinho e gasta saldo), e a **Atribuição automática**, que distribui conversas entre os membros disponíveis.
+Você pode combinar bot e IA usando o bloco **Agente de IA** dentro de um fluxo de bot (com opção de **Base de conhecimento**). Existe ainda o **Copiloto**, que ajuda o membro a responder, resumir, transcrever e analisar (não atende o contato sozinho e gasta saldo), e a **Atribuição automática**, que distribui as conversas novas entre membros ou grupos (veja [Distribuir as conversas automaticamente](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas)).
 
 Veja a comparação completa em [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia).
 

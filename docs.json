@@ -109,6 +109,19 @@
                   "docs/conversas/criar-frases-rapidas-para-suas-conversas",
                   "docs/conversas/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Organizar o atendimento",
+                "pages": [
+                  "docs/atendimento/visao-geral",
+                  "docs/configuracoes-no-workspace/criar-e-gerenciar-grupos",
+                  "docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
+                  "docs/atendimento/estrategias-de-atribuicao",
+                  "docs/configuracoes-no-workspace/criar-e-gerenciar-horarios",
+                  "docs/configuracoes-no-workspace/criar-e-gerenciar-tags",
+                  "docs/atendimento/pesquisa-de-satisfacao",
+                  "docs/atendimento/problemas-comuns"
+                ]
               }
             ]
           },
@@ -769,22 +782,6 @@
     },
     {
       "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-tags",
       "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
     },
     {
