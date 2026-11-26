@@ -3305,10 +3305,8 @@
     - clicar: 'text=Consultoria de estilo'
     - esperar: '.ant-drawer-content >> text=Duração padrão (minutos)'
     - pausa: 1500
-  # Criar e editar horário ficam na página Horários: os atalhos dentro do serviço não entram no print
   esconder:
-    - '.ant-drawer-content button:has-text("Criar novo horário")'
-    - '.ant-drawer-content button:has-text("Editar horário")'
+    - '.ant-drawer-content .ant-form-item:has(label:text-is("Horário")) ~ div.mb-6.flex'
   alvo:
     - '.ant-drawer-header'
     - '.ant-drawer-content .ant-form-item:has(label:text-is("Status"))'
