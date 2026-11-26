@@ -1,0 +1,86 @@
+---
+title: "Atribuir, mover para um grupo ou transferir uma conversa"
+description: Como passar uma conversa para outro membro, mover para um grupo, aceitar uma conversa e transferir para outro número de WhatsApp na Kinbox.
+keywords: [atribuir conversa, transferir conversa, passar conversa, mover para grupo, trocar atendente, aceitar conversa, não atribuído, transferir para outro canal, outro número de whatsapp]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/inbox/ChatHeader/index.tsx
+  - web:src/components-old/inbox/TransferChannelModal/index.tsx
+  - web:src/lib/helper.tsx
+  - api-v0:server/controllers/CallController.js
+codigo:
+  - web:src/pages/inbox/ChatHeader/index.tsx
+  - web:src/pages/inbox/Chat/index.tsx
+  - web:src/components-old/inbox/TransferChannelModal/**
+  - api-v0:server/controllers/CallController.js
+  - api-v0:server/modules/chat/auxiliary/DEFAULT_MESSAGES.js
+verificado_em: 2026-11-26
+---
+
+Direcione uma conversa para o membro responsável, organize o atendimento por grupo ou leve o contato para outro número de WhatsApp conectado ao workspace.
+
+<Note>
+  Quem pode: permissão **Atribuir** para escolher o responsável, **Mover para grupo** para trocar o grupo e **Transferir conversa** para transferir para outro número de WhatsApp.
+</Note>
+
+## Atribuir a um membro
+
+<Steps>
+  <Step title="Abra o seletor de responsável">
+    No cabeçalho da conversa, clique no botão **Atribuir** (ele exibe a foto e o primeiro nome de quem atende, ou **Não atribuído**).
+  </Step>
+  <Step title="Escolha o membro">
+    Use a busca para encontrar um membro ativo e clique no nome dele, ou escolha **Não atribuído** para deixar a conversa sem responsável.
+  </Step>
+</Steps>
+
+<Info>
+  - Se o membro escolhido não faz parte do grupo atual da conversa, a conversa sai do grupo.
+  - Atribuir a conversa ou movê-la para um grupo desliga o bot que estiver ativo nela e registra uma mensagem de sistema no histórico.
+</Info>
+
+Se o seu papel tiver a restrição **Somente pode atribuir para quem pertence ao grupo do membro**, a lista exibe apenas quem compartilha algum grupo com você.
+
+Para distribuir conversas novas entre os membros de forma automática, use a atribuição automática nas configurações do workspace.
+
+## Aceitar uma conversa
+
+Quando o seu papel tem a restrição **Esconder mensagens se não atribuído, com botão de aceitar.**, as mensagens de conversas atribuídas a outras pessoas ou sem responsável ficam ocultas e aparece o botão **Aceitar conversa**.
+
+Clique em **Aceitar conversa** para atribuir a conversa a você e liberar o histórico. Se outra pessoa já estiver atendendo o contato, aparece o aviso "Já existe um membro atendendo esse contato.".
+
+## Mover para um grupo
+
+<Steps>
+  <Step title="Abra a lista de grupos">
+    No cabeçalho da conversa, clique em **Mover para grupo** (ícone de pasta).
+  </Step>
+  <Step title="Selecione o grupo">
+    Busque e clique no grupo desejado, ou escolha **Sem grupo** para remover o grupo atual.
+  </Step>
+</Steps>
+
+Se o membro que estava atendendo a conversa não fizer parte do novo grupo, a conversa perde a atribuição e fica sem responsável (e o bot é desligado). Com a restrição **Somente pode mover para grupo que pertence**, só aparecem os grupos dos quais você participa.
+
+## Transferir para outro número de WhatsApp
+
+Esta opção vale apenas entre canais de WhatsApp conectados ao workspace.
+
+<Steps>
+  <Step title="Abra a janela de transferência">
+    No cabeçalho da conversa, clique em **Mais ações** (três pontos) → **Transferir para outro canal**.
+  </Step>
+  <Step title="Escolha o destino e as opções">
+    Confira o **Canal atual** e selecione o número de WhatsApp de destino. Ajuste se quer manter marcada **Resolver essa conversa ao transferir** (marcada por padrão) e se quer marcar **Redirecionar para a nova conversa** (desmarcada por padrão). A Kinbox lembra sua última escolha neste navegador.
+  </Step>
+  <Step title="Confirme a transferência">
+    Clique em **Transferir**. Aparece a confirmação "Transferido com sucesso.".
+  </Step>
+</Steps>
+
+A conversa continua no número de destino com uma mensagem de sistema informando a transferência. O histórico anterior não é copiado como novas mensagens: ele aparece em um bloco dentro da conversa nova, e as mensagens seguintes saem pelo novo canal.
+
+Para levar todas as conversas de um canal de WhatsApp para outro de uma vez, use [Migrar conversas](/docs/canais/visao-geral#migrar-conversas) nas configurações do canal.
+
+Para atribuir ou mover várias conversas de uma vez, use as ações em lote em [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar). Se algum botão estiver bloqueado ou desativado, consulte [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).

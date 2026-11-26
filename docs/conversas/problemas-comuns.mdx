@@ -1,0 +1,101 @@
+---
+title: Não consigo responder ou ver uma conversa
+description: O que fazer quando a Kinbox não deixa enviar mensagem, esconde as mensagens, fecha a conversa ou não mostra uma conversa na Caixa de entrada.
+keywords: [não consigo responder, não consigo enviar mensagem, sem permissão, mensagens escondidas, aceitar conversa, conversa sumiu, não vejo a conversa, janela de 24 horas encerrada, mensagem com erro, reabrir conversa]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/inbox/ChatTextEditorPure.tsx
+  - web:src/pages/inbox/Chat/index.tsx
+  - web:src/pages/inbox/index.tsx
+  - web:src/lib/inboxUtils.ts
+codigo:
+  - web:src/pages/inbox/ChatTextEditorPure.tsx
+  - web:src/pages/inbox/Chat/index.tsx
+  - web:src/pages/inbox/ChatHeader/index.tsx
+  - web:src/pages/inbox/index.tsx
+  - web:src/lib/inboxUtils.ts
+  - web:src/components/feedback/PartnerConversationsBlocked.tsx
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+Você tenta responder uma conversa e o campo de mensagem não aparece, mostra um aviso de erro ou a mensagem enviada fica marcada com falha. Em outros casos, as mensagens aparecem escondidas, a conversa fecha sozinha ao abrir ou não aparece na sua [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox).
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title='O editor sumiu e aparece "Essa conversa foi encerrada."'>
+    **Causa:** a conversa já foi resolvida e está em **Arquivados**.
+
+    **Como confirmar e resolver:** verifique se aparece a faixa "Essa conversa foi encerrada." e o botão **Reabrir conversa** no rodapé. Clique em **Reabrir conversa** (ou **Reabrir** no cabeçalho) para voltar a responder. Se aparecer "Você não tem permissão para reabrir conversas.", peça a permissão **Reabrir** ao administrador do workspace. Veja [Atender uma conversa](/docs/conversas/gerenciar-conversas).
+  </Accordion>
+
+  <Accordion title='Aparece "Você não possui permissão para enviar essa mensagem." ou "...para enviar notas."'>
+    **Causa:** o seu papel não tem a permissão **Responder** (ou **Enviar notas privadas**, no caso de notas) ou possui a restrição **Responder apenas conversas dele** numa conversa que está sem atribuição ou com outra pessoa.
+
+    **Como confirmar e resolver:** confira no cabeçalho se a conversa está atribuída a você. Se estiver com outro membro ou sem responsável, peça para atribuírem a conversa a você (veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir)). Caso contrário, peça ao administrador do workspace para liberar a permissão no seu papel.
+  </Accordion>
+
+  <Accordion title='Aparece "Você não pode enviar mensagens para esse canal" ou "...esse horário"'>
+    **Causa:** o seu papel tem a restrição **Limitar canais que pode responder** (e o canal atual está fora da lista) ou **Limitar horário que pode responder** (e você está fora do horário configurado).
+
+    **Como confirmar e resolver:** aguarde o horário permitido ou peça ao administrador do workspace para incluir o canal ou ajustar o horário no seu papel.
+  </Accordion>
+
+  <Accordion title='Aparece "Você não pode enviar palavras proibidas: ..."'>
+    **Causa:** o seu papel tem a restrição **Impedir envio de palavras proibidas** e o texto contém uma palavra bloqueada.
+
+    **Como confirmar e resolver:** o próprio aviso mostra qual termo bloqueou o envio. Reescreva a mensagem sem essa palavra e envie novamente.
+  </Accordion>
+
+  <Accordion title='As mensagens estão escondidas com "Necessário ser atribuído à conversa para visualizar as mensagens"'>
+    **Causa:** o seu papel tem a restrição **Esconder mensagens se não atribuído.** ou **Esconder mensagens se não atribuído, com botão de aceitar.**.
+
+    **Como confirmar e resolver:** se o botão **Aceitar conversa** aparecer e ninguém estiver atendendo o contato, clique nele para assumir a conversa e ver o histórico. Se aparecer "Já existe um membro atendendo esse contato." ou se não houver botão, peça a quem tem a permissão **Atribuir** para passar a conversa para você.
+  </Accordion>
+
+  <Accordion title='Aparece "Você não tem acesso ao canal desta conversa"'>
+    **Causa:** o canal tem a opção **Restringir visibilidade** ligada e você não faz parte dos grupos liberados nele.
+
+    **Como confirmar e resolver:** a mensagem aparece no lugar do histórico da conversa. Peça ao administrador do workspace para incluir você em um dos grupos autorizados nas configurações desse canal.
+  </Accordion>
+
+  <Accordion title='A conversa fecha com "Você não tem permissão para ver essa conversa" ou não acho a conversa'>
+    **Causa:** a conversa está em outra visão (como **Arquivados**, se já foi resolvida), fora do filtro aberto ou fora do **Acesso as Conversas** do seu papel. No caso de contas parceiras, o cliente pode ter bloqueado o acesso às conversas ("Conversas restritas pelo cliente").
+
+    **Como confirmar e resolver:** procure o contato na pesquisa geral (`Ctrl+K` / `⌘K`) ou verifique em **Arquivados**. Se a conversa fechar com o aviso de permissão, peça para atribuírem a conversa a você ou peça ao administrador do workspace para ajustar o **Acesso as Conversas** do seu papel. Para parceiros bloqueados, peça ao cliente para ativar **Permitir que o parceiro veja as conversas** em **Configurações** → **Ambiente** → **Geral**.
+  </Accordion>
+
+  <Accordion title='No WhatsApp oficial aparece "A janela de tempo para respostas foi encerrada."'>
+    **Causa:** passaram mais de 24 horas desde a última mensagem enviada pelo contato no WhatsApp oficial.
+
+    **Como confirmar e resolver:** no lugar do editor aparecem apenas **Enviar template** e **Enviar nota de time**. Para voltar a falar com o contato, clique em **Enviar template** e envie um modelo de mensagem aprovado pela Meta (você continua podendo registrar notas internas em **Enviar nota de time**).
+  </Accordion>
+
+  <Accordion title='Aparece a faixa "Telefone desconectado" ou a mensagem fica marcada com erro'>
+    **Causa:** um canal de WhatsApp por QR Code desconectou ou o canal recusou o envio da mensagem.
+
+    **Como confirmar e resolver:** se a faixa **Telefone desconectado** aparecer no topo da lista, quem gerencia canais precisa abrir as configurações do canal e reconectar o aparelho (veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte)). Quando uma mensagem fica marcada com erro, passe o mouse sobre ela para ver o motivo (ou abra o menu da mensagem → **Copiar erro**). A Kinbox tenta reenviar automaticamente até 4 vezes; se continuar falhando, corrija o problema indicado pelo canal.
+  </Accordion>
+
+  <Accordion title="O contato está bloqueado ou faltam botões como Resolver e Enviar mensagem">
+    **Causa:** a conversa foi bloqueada naquele canal (ícone **Bloqueado** no cabeçalho), ou o seu papel não tem a permissão correspondente (**Resolver**, **Iniciar chat ativo** ou as permissões dos itens de **Mais ações**) ou possui uma restrição ativa.
+
+    **Como confirmar e resolver:** para voltar a receber mensagens de um contato bloqueado, abra **Mais ações** → **Desbloquear**. Para botões ausentes ou desativados, peça ao administrador do workspace para revisar as permissões do seu papel.
+  </Accordion>
+
+  <Accordion title="Não consigo resolver a conversa">
+    **Causa:** existe uma pendência exigida antes de encerrar a conversa.
+
+    **Como confirmar e resolver:** confira o aviso exibido ao clicar em **Resolver**:
+    - **"Campo obrigatório ... não foi setado."**: preencha o campo personalizado destacado no painel lateral e clique em **Resolver** novamente.
+    - **"Você só pode resolver essa conversa se for o atendente responsável."**: seu papel tem a restrição **Esconder mensagens se não atribuído.**; peça a atribuição da conversa antes de encerrar.
+    - **"Encerre a ligação antes de resolver a conversa"**: finalize a ligação de WhatsApp em andamento e tente novamente.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Se o problema continuar, fale com o suporte informando o nome do contato, o canal, a mensagem exata que apareceu na tela e o horário do ocorrido.

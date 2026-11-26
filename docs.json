@@ -38,6 +38,26 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Atendimento",
+            "icon": "inbox",
+            "pages": [
+              {
+                "group": "Caixa de entrada",
+                "pages": [
+                  "docs/conversas/caixa-de-entrada-do-kinbox",
+                  "docs/conversas/gerenciar-conversas",
+                  "docs/conversas/atribuir-e-transferir",
+                  "docs/conversas/iniciar-conversa",
+                  "docs/conversas/agendar-mensagem",
+                  "docs/conversas/acoes-em-lote-e-exportar",
+                  "docs/conversas/criar-filtros-de-conversa",
+                  "docs/conversas/criar-frases-rapidas-para-suas-conversas",
+                  "docs/conversas/problemas-comuns"
+                ]
+              }
+            ]
           }
         ]
       },
@@ -545,6 +565,10 @@
     {
       "source": "/docs/canais/widget",
       "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/conversas/clientes-contatos-e-organizacoes",
+      "destination": "/docs/conversas/caixa-de-entrada-do-kinbox"
     }
   ]
 }
