@@ -34,7 +34,7 @@ Enquanto a Meta avalia o modelo, o template aparece com status **Pendente** (ou 
 
 A Kinbox atualiza o status automaticamente assim que a Meta responde, reconsulta a cada 15 minutos os templates em análise enviados nos últimos 30 dias e envia uma notificação no sino (**Template aprovado:** ou **Template recusado:**). Você também pode forçar a atualização usando **Sincronizar Meta** no menu de três pontos acima da tabela.
 
-Mais detalhes nas páginas "Criar um template e enviar para aprovação" e "Meu template foi rejeitado, pausado ou desativado".
+Mais detalhes em [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox) e [Meu template foi rejeitado, pausado ou desativado](/docs/canais/whatsapp/whatsapp-templates/template-rejeitado).
 
 ## Variações
 - quanto tempo demora a aprovação de um modelo de mensagem

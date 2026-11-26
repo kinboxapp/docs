@@ -39,11 +39,11 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência técnica complementar às páginas humanas "Criar um template e enviar para aprovação", "Criar um carrossel" e "Meu template foi rejeitado, pausado ou desativado".
+Regras e mensagens dos templates e carrosséis do WhatsApp oficial. Os passos estão em [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox), [Criar um carrossel](/docs/canais/criar-carrossel-dentro-do-kinbox) e [Meu template foi rejeitado, pausado ou desativado](/docs/canais/whatsapp/whatsapp-templates/template-rejeitado).
 
 ## Tabela completa de status do template
 
-A coluna **Status** exibe o status informado pela Meta quando ele existe; caso contrário, exibe o status local da Kinbox. Internamente, templates pausados e desativados são tratados como recusados, mas a tela mostra os rótulos **Pausado** e **Desativado** vindos da Meta.
+A coluna **Status** exibe o status informado pela Meta quando ele existe; caso contrário, exibe o status local da Kinbox.
 
 | Status na tela | Significado | Bloqueia edição? |
 | --- | --- | --- |

@@ -30,7 +30,7 @@ Existem quatro causas comuns para não conseguir criar ou editar templates em **
 3. **Falta a permissão Gerenciar Canais**: sem essa permissão (ou sem ser o proprietário do workspace), o menu **WhatsApp API** não aparece e abrir o endereço diretamente mostra `"Você não tem permissão para acessar essa página"`.
 4. **O template já existe e está em análise pela Meta**: enquanto estiver em análise, ele fica bloqueado para edição até receber um status final.
 
-Mais detalhes na página "Templates, Flows e carrossel: o que é cada um".
+Mais detalhes em [Templates, Flows e carrossel: o que é cada um](/docs/canais/whatsapp/whatsapp-templates/visao-geral).
 
 ## Variações
 - não aparece a opção de criar template na kinbox

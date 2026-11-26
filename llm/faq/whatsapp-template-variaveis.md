@@ -37,12 +37,12 @@ Você cria o template usando variáveis numéricas (`{{1}}`, `{{2}}`...) com amo
 - No **Corpo da mensagem**, as variáveis não podem ficar no início nem no fim do texto; no cabeçalho de texto, há no máximo uma variável.
 
 **Ao enviar o template:**
-- Ao selecionar o modelo, a Kinbox mostra um campo para cada variável (**Cabeçalho {{n}}**, **Corpo {{n}}** e URL do botão). Preencha todos os campos para evitar recusa da Meta.
+- Ao selecionar o modelo, a Kinbox mostra um campo para cada variável (**Cabeçalho** `{{n}}`, **Corpo** `{{n}}` e URL do botão). Preencha todos os campos para evitar recusa da Meta.
 - **Na conversa, no Agendar mensagem, nas automações e no bloco Notificar do bot**: você pode digitar texto fixo ou uma chave do contato (`{{first_name}}`, `{{name}}`, `{{email}}`, `{{phone}}`, `{{protocol}}`, `{{operator}}` ou campo personalizado). As chaves do contato são trocadas apenas no **Corpo** e na **URL** do botão — não no **Cabeçalho**. A **Pré-visualização** não substitui chaves do contato.
 - **Na campanha**: chaves do contato não funcionam. Digite `{{2}}`, `{{3}}` e assim por diante para usar a 2ª, 3ª e demais colunas do arquivo de destinatários (`{{1}}` é o número).
 - **Nos cenários**: use as variáveis do próprio cenário em qualquer campo.
 
-Mais detalhes nas páginas "Criar um template e enviar para aprovação" e "Enviar um template na conversa, na campanha e na automação".
+Mais detalhes em [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox) e [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template).
 
 ## Variações
 - como colocar o nome do cliente no template do whatsapp

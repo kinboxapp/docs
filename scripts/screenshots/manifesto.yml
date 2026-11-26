@@ -423,6 +423,7 @@
 
 - id: whatsapp-templates-conteudo
   workspace: Kinbox
+  altura: 1300
   url: /settings/whatsapp-api/templates/new?kind=standard
   passos:
     - esperar: 'text=Informações básicas'
@@ -455,15 +456,24 @@
 # O selo "Stag" do canto inferior esquerdo fica fora do recorte.
 - id: whatsapp-templates-flow-editor
   workspace: Kinbox
+  largura: 1120
   url: /settings/whatsapp-api/flows/6ae33a5f867e51f3160c5358
   passos:
     - esperar: '.react-flow__node-wa-screen'
+    # Corrige o acento do nome só na tela (renomear não grava sem Salvar; o print não salva)
+    - clicar: 'h2:has-text("Formulario")'
+    - esperar: '.ant-modal-content input'
+    - digitar:
+        seletor: '.ant-modal-content input'
+        texto: Formulário
+    - clicar: '.ant-modal-content button:has-text("Salvar")'
+    - esperar: 'h2:has-text("Formulário")'
     - pausa: 1200
   alvo:
     - '.react-flow__node-start'
     - '.react-flow__node-wa-screen'
     - '.pointer-events-auto:has(> button:has-text("Salvar"))'
-    - '.pointer-events-auto:has-text("Formulario")'
+    - '.pointer-events-auto:has-text("Formulário")'
   mascarar:
     - 'button:has-text("Ask")'
   arquivo: images/ajuda/whatsapp-templates/flow-editor.webp
@@ -500,6 +510,7 @@
 # template aprovado de teste "status_com_imagem" ({{1}} e {{2}} no corpo). Não clica em Enviar. Número e canal sob tarja.
 - id: whatsapp-templates-enviar-mensagem
   workspace: Kinbox
+  altura: 1300
   url: /inbox/all/3418
   passos:
     - esperar: 'button:has-text("Enviar template")'

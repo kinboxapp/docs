@@ -60,7 +60,7 @@ Para criar um template com Flow ou carrossel, veja [Criar WhatsApp Flows (formul
     - **Canal**: o canal oficial ao qual o template pertence. Se o workspace tiver apenas um canal oficial, o campo vem preenchido e travado.
     - **Nome do template**: obrigatório. Enquanto você digita, a Kinbox converte o texto para minúsculas sem acento e troca espaços e símbolos por `_` (por exemplo, `confirmacao_de_pedido` ou `boas_vindas`).
     - **Idioma**: **Português (Brasil)**, **English (US)** ou **Español**.
-    - **Categoria**: **Marketing**, **Utility** (utilidade) ou **Authentication** (autenticação). A categoria final é decisão da Meta.
+    - **Categoria**: **Marketing**, **Utility** (utilidade) ou **Authentication** (autenticação). A categoria final é decisão da Meta. Na lista de templates, **Authentication** aparece como **Autenticação**.
 
     <Frame caption="Painel Informações básicas preenchido com nome, idioma e categoria">
       <img src="/images/ajuda/whatsapp-templates/novo-template-informacoes.webp" alt="Painel Informações básicas com Canal, Nome do template confirmacao_de_pedido, Idioma Português (Brasil) e Categoria Marketing" />
@@ -70,13 +70,16 @@ Para criar um template com Flow ou carrossel, veja [Criar WhatsApp Flows (formul
     No painel **Conteúdo**, configure a mensagem:
 
     - **Tipo de variável**: aceita apenas **Número** (`{{1}}`, `{{2}}`).
-    - **Amostra de mídia** (opcional): escolha **Nenhum**, **Imagem**, **Vídeo** ou **Documento**. Com **Nenhum**, aparece **Cabeçalho** (opcional) para texto (com no máximo uma variável). Com mídia selecionada, aparece **Mídia do cabeçalho** para enviar o arquivo de exemplo que a Meta analisa: a tela mostra "Opcional", mas sem esse arquivo não dá para pedir a aprovação. Cabeçalho de texto e cabeçalho de mídia não convivem.
+    - **Amostra de mídia**: escolha **Nenhum**, **Imagem**, **Vídeo** ou **Documento**.
+      - Com **Nenhum**, aparece o campo **Cabeçalho**, opcional, para uma linha de texto (com no máximo uma variável).
+      - Com **Imagem**, **Vídeo** ou **Documento**, aparece **Mídia do cabeçalho** para enviar um arquivo de exemplo. O rótulo diz "Opcional", mas a Kinbox só deixa pedir a aprovação depois que você envia esse arquivo.
+      - Um template tem cabeçalho de texto ou de mídia, nunca os dois.
     - **Corpo da mensagem**: texto obrigatório da mensagem. A barra oferece formatação (negrito, itálico, tachado e monoespaçado), emoji, Copiloto e **Adicionar variável**.
     - **Amostras de variáveis**: sempre que você insere uma variável, aparece um campo de amostra abaixo. Preencha uma amostra para cada variável para ajudar a Meta a analisar o modelo.
     - **Rodapé (opcional)**: texto curto exibido abaixo do corpo.
 
     <Frame caption="Painel Conteúdo com tipo de variável, amostra de mídia, cabeçalho e corpo da mensagem">
-      <img src="/images/ajuda/whatsapp-templates/novo-template-conteudo.webp" alt="Painel Conteúdo com Tipo de variável Número, Amostra de mídia Nenhum, Cabeçalho, Corpo da mensagem e barra de formatação" />
+      <img src="/images/ajuda/whatsapp-templates/novo-template-conteudo.webp" alt="Painel Conteúdo com Tipo de variável Número, Amostra de mídia Nenhum, Cabeçalho, Corpo da mensagem com a barra de formatação e Rodapé" />
     </Frame>
   </Step>
   <Step title="Adicione botões em Estrutura de botões (opcional)">
@@ -106,7 +109,7 @@ Na tela **Como você quer criar seu template?**, escolher **Criar com Copiloto**
 
 A decisão e o prazo de análise são da Meta. Você acompanha o resultado na coluna **Status**, que atualiza automaticamente e envia uma notificação no sino do cabeçalho. Para forçar a atualização a qualquer momento, clique em **Sincronizar Meta** no menu de três pontos acima da tabela.
 
-Só templates com status **Aprovado** podem ser enviados — veja [Enviar um template na conversa, na campanha e na automação](/docs/canais/whatsapp/whatsapp-templates/enviar-template). Se a Meta recusar, pausar, desativar ou mudar a categoria do modelo, veja [Meu template foi rejeitado, pausado ou desativado](/docs/canais/whatsapp/whatsapp-templates/template-rejeitado).
+Só templates com status **Aprovado** podem ser enviados — veja [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template). Se a Meta recusar, pausar, desativar ou mudar a categoria do modelo, veja [Meu template foi rejeitado, pausado ou desativado](/docs/canais/whatsapp/whatsapp-templates/template-rejeitado).
 
 ## Editar um template
 

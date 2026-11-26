@@ -29,7 +29,7 @@ No editor da Kinbox você escolhe entre **Marketing**, **Utility** e **Authentic
 
 A Kinbox não tem ação para pedir a categoria anterior de volta e não cobra pelo envio de templates. Se a nova categoria não atender ao seu uso, edite o conteúdo do template, salve e clique em **Enviar atualização para a Meta**, ou crie um novo template.
 
-Mais detalhes na página "Meu template foi rejeitado, pausado ou desativado".
+Mais detalhes em [Meu template foi rejeitado, pausado ou desativado](/docs/canais/whatsapp/whatsapp-templates/template-rejeitado).
 
 ## Variações
 - a meta trocou meu template de utilidade para marketing

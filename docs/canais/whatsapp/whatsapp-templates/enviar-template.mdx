@@ -1,6 +1,6 @@
 ---
-title: Enviar um template na conversa, na campanha e na automação
-description: Onde e como enviar um template aprovado do WhatsApp oficial na Kinbox, como preencher as variáveis e o que acontece depois do envio.
+title: Enviar um template aprovado
+description: Onde dá para enviar um template aprovado do WhatsApp oficial na Kinbox (conversa, agendamento, campanhas, automações, bot, cenários e agentes de IA) e como enviar pela conversa.
 keywords: [enviar template, mandar template, modelo de mensagem, enviar mensagem, retomar conversa, janela de 24 horas, campanha whatsapp oficial, agendar mensagem template, automação template, bot notificar, variável do template, anexo do cabeçalho]
 publico: humano
 tipo: guia
@@ -27,110 +27,68 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Envie templates com status **Aprovado** para iniciar conversas ou retomar atendimentos fora da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas). O envio de templates existe apenas no **WhatsApp oficial** — no WhatsApp por QR Code esse recurso não existe (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
+Envie templates com status **Aprovado** para iniciar conversas ou retomar atendimentos fora da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas). O envio de templates existe apenas no **WhatsApp oficial**: no WhatsApp por QR Code esse recurso não existe (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
 
-Se ainda não criou o modelo, veja [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox).
+<Note>Quem pode: depende do lugar do envio. Começar uma conversa nova pede a permissão **Iniciar chat ativo**, e **Agendar mensagem** pede a permissão **Agendar mensagem**. Campanhas, automações, bot e cenários pedem a permissão de cada uma dessas telas. Em todos os casos, o canal precisa ser um WhatsApp oficial e o template precisa estar **Aprovado**.</Note>
+
+Se ainda não criou o template, veja [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox).
 
 ## Quais templates aparecem
 
-Todas as telas de envio listam apenas os templates **Aprovado** da conta do WhatsApp oficial do canal selecionado. Templates pendentes, rejeitados, pausados ou desativados não aparecem.
-
-A lista é ordenada pelo nome, permite buscar pelo nome e não filtra por idioma nem por categoria. Um template recém-aprovado pela Meta pode levar alguns minutos para aparecer na lista.
+As telas de envio listam só os templates **Aprovado** do canal oficial escolhido, pelo nome e com busca. Templates pendentes, rejeitados, pausados ou desativados não aparecem. Um template recém-aprovado pode levar alguns minutos para aparecer na lista.
 
 ## Onde dá para enviar
 
-| Lugar | Como abrir ou configurar | Uso do template |
+| Lugar | Onde fica | Regra do template nesse lugar |
 | --- | --- | --- |
-| Conversa com janela fechada | Botão **Enviar template** → janela **Enviar mensagem** | Necessário para retomar o contato ([Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)). |
-| Nova conversa (lista de conversas, contato ou CRM) | Botão **Enviar mensagem** → janela **Enviar mensagem** | Aparece ao escolher um canal oficial. |
-| Agendar na conversa | Menu da conversa → **Agendar mensagem** | Aparece quando a data escolhida cai fora da janela de 24 horas. |
-| Campanhas | **Criar Campanha** → seção **Conteúdo** | Obrigatório no canal oficial. |
-| Automações | Ações **Agendar mensagem template** e **Iniciar conversa** | Disponível ao selecionar um canal oficial. |
-| Bot | Bloco **Notificar** | Aparece ao escolher um canal oficial em **Do canal**. |
-| Cenários | Ação **Enviar mensagem** (conversa) | Obrigatório no canal oficial. |
-| Agentes de IA | Ação **Enviar template WhatsApp** ou opção **Usar template caso conversa expirada** | Envio direto ou plano B quando a janela expirou. |
+| Conversa com a janela fechada | Botão **Enviar template** → janela **Enviar mensagem** | Única forma de falar com o contato até ele responder. |
+| Conversa nova | Botão **Enviar mensagem** (lista de conversas, contato ou CRM) | Com um canal oficial escolhido, a mensagem é sempre um template. |
+| Agendar na conversa | Menu da conversa → **Agendar mensagem** | Template obrigatório quando a data cai fora da janela de 24 horas. |
+| Campanhas | **Criar Campanha** → seção **Conteúdo** | Template obrigatório; um canal oficial por campanha; variáveis pelas colunas do arquivo. |
+| Automações | Ações **Agendar mensagem template** e **Iniciar conversa** | Use template sem mídia no cabeçalho: o anexo escolhido nessas ações não é enviado. |
+| Bot | Bloco **Notificar** | O template aparece ao escolher um canal oficial em **Do canal**. |
+| Cenários | Ação **Enviar mensagem** (conversa) | Template obrigatório no canal oficial; mídia do cabeçalho por link (**URL da mídia**). |
+| Agentes de IA | Ação **Enviar template WhatsApp** ou opção **Usar template caso conversa expirada** | Envio direto ou plano B quando a janela já expirou. |
+
+Para escolher entre bot, automações, cenários e agentes de IA, veja [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia). Para agendar na conversa, veja [Agendar uma mensagem](/docs/conversas/agendar-mensagem).
 
 ## Enviar pela conversa
 
 <Steps>
   <Step title="Abra a janela Enviar mensagem">
-    Em uma conversa com a janela fechada, clique em **Enviar template**: a janela já abre com o canal e o número da conversa preenchidos. Para iniciar uma conversa nova pela lista de conversas (ou pela tela do contato / CRM), clique em **Enviar mensagem** (o botão precisa da permissão **Iniciar chat ativo**).
+    Numa conversa com a janela fechada, clique em **Enviar template**: a janela já abre com o canal e o número da conversa. Para começar uma conversa nova, clique em **Enviar mensagem** na lista de conversas (ou na tela do contato); veja também [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa).
   </Step>
-  <Step title="Selecione o canal e o destinatário">
-    Escolha o canal oficial em **Canal** (canais marcados como **Apenas Receptivo** não aparecem). Se não houver contato selecionado, digite o **Número** com o código do país (por exemplo, `+55 11 90000-0001`).
+  <Step title="Confira o canal e o destinatário">
+    Escolha o canal oficial em **Canal** (canais marcados como **Apenas Receptivo** não aparecem). Numa conversa nova, sem contato escolhido, digite o **Número** com o código do país (por exemplo, `+55 11 90000-0001`).
   </Step>
   <Step title="Escolha o template">
     No campo **Modelo de mensagem**, busque e selecione o template aprovado.
   </Step>
   <Step title="Preencha as variáveis">
-    Para cada variável do template aparece um campo correspondente (por exemplo, **Cabeçalho** `{{1}}` e **Corpo** `{{1}}`, e em **Botões** o campo da URL do botão, quando houver). Preencha todas as variáveis para evitar recusa da Meta.
+    Aparece um campo para cada variável do template (por exemplo, **Corpo** `{{1}}` e **Corpo** `{{2}}`). Preencha todos: a Meta pode recusar o envio com campo vazio.
 
-    <Frame caption="Janela Enviar mensagem com template selecionado, campos de variáveis, anexo e pré-visualização">
-      <img src="/images/ajuda/whatsapp-templates/enviar-mensagem-template.webp" alt="Janela Enviar mensagem com Canal, Número, Modelo de mensagem selecionado, campos Corpo {{1}} e Corpo {{2}}, botão Anexar, Pré-visualização e botão Enviar" />
+    <Frame caption="Janela Enviar mensagem com o template escolhido, os campos das variáveis e a pré-visualização">
+      <img src="/images/ajuda/whatsapp-templates/enviar-mensagem-template.webp" alt="Janela Enviar mensagem com Canal, Número, Modelo de mensagem selecionado, campos Corpo {{1}} e Corpo {{2}} preenchidos, botão Anexar, Pré-visualização e botão Enviar" />
     </Frame>
   </Step>
   <Step title="Anexe a mídia do cabeçalho, se houver">
-    Quando o cabeçalho do template usa imagem, vídeo ou documento, clique em **Anexar** no campo **Anexo** e envie um arquivo do mesmo tipo configurado no template. Templates com Flow ou carrossel não pedem campo extra: a Kinbox envia a estrutura cadastrada no template.
+    Se o cabeçalho do template é imagem, vídeo ou documento, clique em **Anexar** e envie um arquivo do mesmo tipo. Templates com Flow ou carrossel não pedem campo extra.
   </Step>
   <Step title="Confira a pré-visualização e envie">
     Revise o balão em **Pré-visualização** e clique em **Enviar**.
   </Step>
 </Steps>
 
-Se a conversa daquele contato no canal estiver resolvida, o envio abre uma conversa nova atribuída a você; se já estiver aberta, o template entra na mesma conversa (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)).
+O template entra na conversa do contato naquele canal. Se havia uma sessão aberta, ele entra nela; se a última sessão estava resolvida, começa uma sessão nova, atribuída a você (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)).
 
-## Como aparece na conversa
-
-- **Template comum**: o balão exibe o anexo do cabeçalho (se houver) e o texto do corpo com as variáveis preenchidas.
-- **Template + Flow**: aparece como um cartão com o texto e o botão do Flow; clicar no botão abre a pré-visualização do Flow.
-- **Template + Carrossel**: exibe os cartões lado a lado.
-- **Erro na Meta**: o balão fica com o ícone de erro; passe o mouse sobre ele para ler o motivo (veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns)).
-
-<Note>O aviso "Mensagem enviada" aparece mesmo quando a Meta recusa a entrega. Confira o balão na conversa para confirmar se o envio foi concluído.</Note>
+<Note>O aviso "Mensagem enviada" aparece mesmo quando a Meta recusa a entrega. Confira o balão na conversa: se houver erro, passe o mouse no ícone para ler o motivo (veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns)).</Note>
 
 ## Variáveis no envio
 
-A forma de preencher cada variável muda conforme o lugar do envio:
+- **Conversa, agendamento, automações e bot**: digite o valor ou uma chave do contato, como `{{first_name}}`. A chave é trocada pelos dados do contato no corpo e na URL do botão, mas não no cabeçalho.
+- **Campanha**: digite `{{2}}`, `{{3}}` e assim por diante para usar as colunas do arquivo (`{{1}}` é o número). Chaves do contato não funcionam na campanha.
+- **Cenários**: use as variáveis do próprio cenário.
 
-| Onde envia | Como preencher | O que é trocado no envio |
-| --- | --- | --- |
-| Conversa (**Enviar mensagem**), **Agendar mensagem**, automações e bloco **Notificar** do bot | Digite um texto fixo ou uma chave do contato (por exemplo, `{{first_name}}`, `{{name}}`, `{{email}}`, `{{phone}}` ou um campo personalizado). | As chaves do contato são trocadas apenas no **Corpo** e na **URL** do botão — não no **Cabeçalho**. |
-| Campanha | Digite um texto fixo ou `{{2}}`, `{{3}}` e assim por diante para usar as colunas do arquivo (`{{1}}` é o número). | Apenas `{{2}}`, `{{3}}`... das colunas são trocados (em cabeçalho, corpo e URL). Chaves do contato não funcionam na campanha. |
-| Cenários | Insira as variáveis do cenário nos campos. | O cenário substitui as variáveis em todos os campos, incluindo cabeçalho, corpo, botões e URL da mídia. |
-| Agentes de IA | Valor fixo ou preenchimento gerado pela IA. | Preenchido conforme a configuração da ação do agente. |
+## Depois do envio
 
-Nos campos de template da conversa, agendamento, automação e bot, não há seletor de chaves: digite a chave manualmente. A **Pré-visualização** não substitui chaves do contato — apenas na campanha ela mostra os dados da primeira linha do arquivo.
-
-## Agendar mensagem
-
-No menu da conversa, **Agendar mensagem** (exige a permissão **Agendar mensagem**) muda para o bloco de template quando a data escolhida cai fora da janela de 24 horas ou quando a janela já está fechada. Os campos de **Modelo de mensagem**, variáveis e **Anexar** funcionam da mesma forma que no envio imediato. A opção **Repetir mensalmente** também funciona com templates.
-
-## Campanhas
-
-Em **Criar Campanha**, o WhatsApp oficial permite escolher apenas um canal em **Canais de disparo**. Na seção **Conteúdo**, o envio usa obrigatoriamente um template aprovado, sem texto livre. Para personalizar cada mensagem, use `{{2}}`, `{{3}}` e assim por diante conforme as colunas do arquivo; se o cabeçalho for de mídia, o mesmo anexo é enviado para todos os contatos. Quando o contato responde ao disparo, a conversa é criada com o balão do template enviado, e eventuais falhas aparecem na coluna **Detalhes** dos destinatários da campanha.
-
-## Automações
-
-Em **Configurações** → **Automação** → **Automações**, os templates podem ser configurados em duas ações:
-
-- **Agendar mensagem template**: define **Para quando?**, **Canal** e o template.
-- **Iniciar conversa** (no gatilho **Tempo sem conversa ao criar contato**): ao escolher um canal oficial em **Canal**, permite selecionar o template e, se quiser, rodar um bot junto.
-
-<Note>Nas automações, use apenas templates sem mídia no cabeçalho.</Note>
-
-## Bot
-
-No bloco **Notificar**, escolher um canal oficial em **Do canal** substitui o texto livre pelo seletor de template. Se o campo **Para celular** ficar em branco, o template é enviado para o contato que o bot estiver atendendo.
-
-## Cenários e agentes de IA
-
-- **Cenários**: na ação **Enviar mensagem** de conversa, canais oficiais usam sempre template, aceitam as variáveis do cenário em todos os campos e pedem a **URL da mídia** (e **Nome do arquivo** para documento) em vez de upload quando o cabeçalho usa mídia.
-- **Agentes de IA**: você pode configurar a ação **Enviar template WhatsApp** (envia o template dentro ou fora da janela, com campos fixos ou gerados pela IA) ou ativar **Usar template caso conversa expirada** em **Enviar mensagem** e nos follow-ups.
-
-Para entender quando usar cada ferramenta, veja [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia).
-
-## Janela de 24 horas e cobrança
-
-Enviar um template não reabre a janela de 24 horas: ela continua fechada até o contato responder ([Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
-
-A Kinbox não cobra pelo envio de templates; a cobrança é feita pela Meta na conta do WhatsApp ([Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial)).
+Enviar um template não reabre a janela de 24 horas: ela continua fechada até o contato responder (veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)). A Kinbox não cobra pelo envio de templates; a cobrança é da Meta, na conta do WhatsApp (veja [Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial)).

@@ -28,7 +28,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência técnica complementar à página humana "Enviar um template na conversa, na campanha e na automação".
+Detalhes do envio de templates aprovados do WhatsApp oficial. O passo a passo está em [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template).
 
 ## Origem da lista de templates aprovados
 
@@ -53,7 +53,23 @@ Referência técnica complementar à página humana "Enviar um template na conve
 - **Campos em branco**: a tela não bloqueia campos de variável vazios, mas a Meta pode recusar o envio.
 - **Variáveis nomeadas** (por exemplo `{{nome_cliente}}` criadas direto na Meta): não ganham campo de preenchimento na tela de envio.
 
-## Erros exatos na janela Enviar mensagem e no servidor
+## Como o template aparece na conversa
+
+- **Template comum**: o balão mostra o anexo do cabeçalho (se houver) e o texto do corpo com as variáveis preenchidas. Cabeçalho de texto, rodapé e botões não aparecem no balão.
+- **Template + Flow**: cartão com o texto e o botão do Flow; clicar no botão abre a pré-visualização do Flow.
+- **Template + Carrossel**: cartões lado a lado.
+- **Erro na Meta**: o balão fica com o ícone de erro; o motivo aparece ao passar o mouse.
+- O template entra na conversa do contato naquele canal: na sessão aberta, se houver; se a última sessão estava resolvida, começa uma sessão nova atribuída a quem enviou.
+
+## Bot, cenários e agentes de IA
+
+- **Bot (bloco Notificar)**: escolher um canal oficial em **Do canal** troca o texto livre pelo seletor de template. **Para celular** é opcional ("Incluir código do país e ddd"); em branco, o template vai para o contato que o bot está atendendo. Número inválido: "Digite um celular válido".
+- **Cenários (ação Enviar mensagem de conversa)**: com canal oficial é sempre template. Campos: **Modelo de mensagem** (obrigatório), **Cabeçalho** `{{n}}`, **Corpo** `{{n}}`, botões e, para cabeçalho de mídia, **URL da mídia** (obrigatório) e **Nome do arquivo** (documento). A mídia é um link, não um upload. O canal usado é o da conversa referenciada, quando ela tem um. A ação de criar conversa dos Cenários não tem seletor de template.
+- **Agentes de IA**: ação **Enviar template WhatsApp** ("O template aprovado é enviado sempre — dentro ou fora da janela de 24h do WhatsApp."), com campos de cabeçalho e corpo fixos ou gerados pela IA; e a opção **Usar template caso conversa expirada** em **Enviar mensagem** e nos follow-ups.
+- **Automação Iniciar conversa**: só existe no gatilho **Tempo sem conversa ao criar contato**; com canal oficial em **Canal**, o template aparece no lugar de **Texto** e pode rodar um bot junto.
+- **Automação Agendar mensagem template**: **Para quando?** (próximo horário comercial, depois de um tempo, próximo dia da semana e horário), **Canal** (só oficiais) e o template.
+
+## Erros exatos ao enviar
 
 Na janela **Enviar mensagem**, erros por número aparecem sob `"Os seguintes números tiveram erros ao enviar. Verifique se os números estão corretos:"` no formato `"{número} - {erro}"`:
 
@@ -95,7 +111,7 @@ Vários números separados por vírgula na janela **Enviar mensagem**: o limite 
 - **Campanhas**: usa um único canal oficial por campanha. Quando a Meta recusa o disparo de um destinatário, a coluna **Detalhes** exibe o motivo retornado pela Meta ou `"Falha interna ao enviar a mensagem"`. A conversa só é criada quando o contato responde, já trazendo o balão do template disparado.
 - **Automações**: nas ações **Agendar mensagem template** e **Iniciar conversa**, use templates sem mídia no cabeçalho. Validações de configuração: `"Informe o template"` e `"Informe a mensagem (ou o template no canal oficial)"`.
 - **Bot (bloco Notificar)**: com carrossel exige canal e template (`"Template e canal são obrigatórios para notificação de carrossel"`). O envio registra a nota `"Template [nome] enviado"` na conversa.
-- **Canal Apenas Receptivo**: não aparece na lista de canais de **Enviar mensagem** e o servidor recusa o envio com `"Esse canal não tem permissão para chat ativo"`. Em uma conversa desse canal com a janela de 24 horas fechada, não é possível enviar template.
+- **Canal Apenas Receptivo**: não aparece na lista de canais de **Enviar mensagem** e o envio é recusado com `"Esse canal não tem permissão para chat ativo"`. Em uma conversa desse canal com a janela de 24 horas fechada, não é possível enviar template.
 - **Onde não existe seletor de template**: ações de automação **Enviar mensagem** e **Agendar mensagem** (texto) e ação de criar conversa nos Cenários.
 
 ## API pública

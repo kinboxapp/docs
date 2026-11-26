@@ -29,7 +29,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência técnica complementar à página humana "Criar WhatsApp Flows (formulários no WhatsApp)".
+Regras, limites e mensagens dos WhatsApp Flows. Os passos estão em [Criar WhatsApp Flows (formulários no WhatsApp)](/docs/canais/criar-flows-dentro-do-kinbox).
 
 ## Estados (Status × Publicação Meta)
 
@@ -40,13 +40,27 @@ Referência técnica complementar à página humana "Criar WhatsApp Flows (formu
 - **Descontinuado**: bloqueia edição, publicação e ativação (`"Flow descontinuado não pode ser editado, publicado ou ativado novamente."`). Restam apenas **Clonar** e **Exportar JSON**.
 - **Excluir vs. Descontinuar**: apenas Flows não publicados podem ser excluídos (também apaga eventual rascunho na Meta e requisições salvas). Flows publicados precisam ser descontinuados (`"Flows publicados ou descontinuados não podem ser excluídos. Descontinue Flows publicados e mantenha o histórico sincronizado com a Meta."`); descontinuar rascunho pela API retorna `"Apenas Flows publicados na Meta podem ser descontinuados. Rascunhos devem ser excluídos."`.
 
+## Componentes por grupo
+
+| Grupo | Componentes e opções |
+| --- | --- |
+| **Enviar mensagem** | **Título grande**, **Título pequeno** (sem negrito ou itálico, aceitam emoji), **Legenda**, **Corpo** (negrito, itálico, tachado e emoji) e **Resposta da integração** (mostra um **Dado da integração** vindo de uma requisição da tela anterior). |
+| **Mídia** | **Imagem**: **Enviar imagem** (JPG ou PNG até 1 MB) e **Altura** (padrão 180). |
+| **Resposta em texto** | **Resposta curta**: **Formato** (Texto, Número, E-mail, Telefone, Senha, Código/senha curta), **Validação rápida**, **Mín. caracteres**/**Máx. caracteres** (menos em E-mail), **Regex** (Texto, Número, Senha, Código) e **Texto de ajuda**. **Parágrafo**: só **Texto de ajuda**. **Seletor de data**: **Data mínima**, **Data máxima**, **Texto de ajuda** e **Atualizar ao selecionar**. |
+| **Seleção** | **Escolha única**, **Múltipla escolha**, **Lista suspensa**, **Aceitar** e **Chips**. **Origem das opções**: **Opções estáticas** (ID, Título, Descrição), **Dado da integração** ou **Faixa numérica** (não existe em Múltipla escolha). **Valor inicial fixo** e **Preencher com dado da integração**. **Mín. itens**/**Máx. itens** em Múltipla escolha e Chips. |
+| **Uploads** | **Foto** (Origem: Câmera e galeria, Câmera ou Galeria; Tamanho máx. (KB); Mín./Máx. fotos) e **Documento** (Tamanho máx. (KB); Mín./Máx. docs; tipos de arquivo permitidos, ex. `application/pdf,image/png`). |
+| **Avançado** | **Texto rico** (negrito, itálico, listas e links), **Link** (texto até 25; **Abrir URL** ou **Navegar** para outra tela) e **Lista de navegação**. |
+
+- Campos que o contato preenche pedem **Nome técnico** e **Rótulo**; **Obrigatório** vem ligado. O **Nome técnico** é o que aparece em cada linha da **Resposta do Flow** na conversa.
+- **Condições** em quase todos os componentes: **Visível quando** e **Habilitado quando**, com campo, operador (Igual, Diferente, Maior que, Menor que, Maior ou igual, Menor ou igual, Vazio, Preenchido, Contém, Quantidade igual/maior que/menor que) e valor.
+
 ## Limites do editor e da validação
 
 | Item | Limite / regra |
 | --- | --- |
 | JSON do Flow | Até 10 MB |
 | Componentes por tela | Até 50 |
-| Botão de rodapé por tela | 1 (texto do botão até 35 caracteres; checado pela API) |
+| Botão de rodapé por tela | 1 (texto do botão até 35 caracteres; o campo deixa digitar mais, mas a publicação recusa) |
 | Imagens por tela | Até 3 (JPG ou PNG até 1 MB; acima de 300 KB gera aviso de recomendação da Meta) |
 | Links por tela | Até 2 (texto do link até 25 caracteres) |
 | Componentes **Aceitar** por tela | Até 5 (rótulo até 120 caracteres) |
@@ -83,7 +97,7 @@ Quando um texto contém variável dinâmica, a validação conta apenas o texto 
 - **Sem canal oficial**: `"Nenhum canal oficial disponível para publicar o Flow."`
 - **Pendente credenciais**: quando o canal oficial não tem acesso válido à Meta para publicar, o Flow fica salvo com o status **Pendente credenciais**; o aviso da tela pode mostrar o código `missing_credentials` em vez do texto "Flow salvo, mas aguardando credenciais Meta para publicar.".
 - **Categoria inválida**: `"Categoria de Flow inválida: {{category}}"`
-- **Requisição na publicação**: Flows com requisição externa exigem que a URL pública HTTPS da Kinbox usada pela Meta esteja configurada corretamente (mensagens possíveis: `"Flow usa data_exchange, mas não possui endpoint configurado."`, `"Flow usa data_exchange e a Meta exige endpoint público HTTPS para publicar."`, `"Flow usa data_exchange, mas o endpoint configurado não é público."`).
+- **Requisição na publicação**: se a publicação de um Flow com **Requisição** falhar com uma mensagem sobre endpoint, fale com o suporte.
 - **Flow publicado não recebe alterações posteriores**: depois de publicado, **Publicar** desaparece do menu e novas edições salvas no editor não são enviadas à Meta. Para alterar um Flow publicado, clique em **Clonar** (o clone nasce sem canal e inativo), abra **Editar** para associar o canal, faça as alterações e publique o clone para usá-lo no template.
 - **Trocar canal em Editar**: trocar o canal de um Flow que já tinha canal cria uma cópia associada ao novo canal (`"Flow duplicado e associado ao canal."`). Em um Flow sem canal, apenas associa (`"Flow associado ao canal."`).
 - **Sincronizar Meta**: `"Sync de flows concluído."` ou `"Sync de flows parcial: {{synced}} flow(s) sincronizado(s), {{failed}} com erro."`. Flows criados direto na Meta e sincronizados têm as telas reconstruídas no editor a partir do JSON.
@@ -94,8 +108,8 @@ Quando um texto contém variável dinâmica, a validação conta apenas o texto 
 - **URL**: obrigatória (`"Informe a URL"`); aceita variáveis de dados e precisa estar acessível pela internet. URL inválida retorna `"URL externa de Data Exchange inválida."`.
 - **Autenticação**: Nenhuma, Bearer, Basic ou Headers customizados. Novos cabeçalhos nascem marcados como **Segredo** (assim como Bearer e Basic), ficam cifrados e são exibidos como `********`.
 - **Timeout (ms)**: de **1000** a **30000** ms (padrão **8000** ms; valores fora da faixa são ajustados para os limites).
-- **Teste obrigatório**: é obrigatório clicar em **Testar** antes de salvar, e qualquer alteração exige um novo teste (`"Teste a chamada antes de salvar esta configuração."` / `"Teste a chamada para poder salvar."`). Sucesso: `"Chamada de teste executada."`; falha: `"Falha ao testar Data Exchange."`. Outros erros: `"Payload de teste precisa ser um JSON válido."`, `"Revise os campos obrigatórios antes de testar."`, `"JSON customizado inválido."`, `"Não foi possível identificar a integração. Feche e reabra a configuração."`, `"Salve o Flow antes de testar o Data Exchange."`.
-- **Saídas e falha**: ao escolher o primeiro campo da resposta, a Kinbox cria automaticamente as telas **Sucesso** e **Erro**. Se a chamada falhar (resposta diferente de 2xx, timeout ou URL inválida), o fluxo segue pela saída de erro com a mensagem retornada pelo sistema externo ou `"Falha ao executar Data Exchange."`. Sem tela ligada na saída, o simulador avisa `"Nenhuma tela conectada para essa saída."`.
+- **Teste obrigatório**: **Testar** só funciona com o Flow já salvo (`"Salve o Flow antes de testar o Data Exchange."`). É obrigatório testar antes de salvar a configuração, e qualquer alteração exige um novo teste (`"Teste a chamada antes de salvar esta configuração."` / `"Teste a chamada para poder salvar."`). Sucesso: `"Chamada de teste executada."`; falha: `"Falha ao testar Data Exchange."`. Outros erros: `"Payload de teste precisa ser um JSON válido."`, `"Revise os campos obrigatórios antes de testar."`, `"JSON customizado inválido."`, `"Não foi possível identificar a integração. Feche e reabra a configuração."`, `"Salve o Flow antes de testar o Data Exchange."`.
+- **Saídas e falha**: na requisição do **Botão** da tela (ação **Requisição**), ao escolher o primeiro campo da resposta a Kinbox liga a tela a uma tela de **Sucesso** e a uma de **Erro**: cria as que faltam e aproveita a tela que já estiver ligada nessas saídas. A tela de erro criada assim já mostra a mensagem de erro. Se a chamada falhar (resposta diferente de 2xx, tempo esgotado ou URL inválida), o Flow segue pela saída de erro com a mensagem do sistema externo ou `"Falha ao executar Data Exchange."`. Sem tela ligada na saída, o simulador avisa `"Nenhuma tela conectada para essa saída."`.
 - **Atualizar ao selecionar**: disponível em campos de seleção (exceto **Aceitar**) e **Seletor de data**; envia todos os campos da tela (modo automático) ou campos customizados e atualiza a mesma tela sem criar saída no canvas. Sem requisição na tela, exibe `"Nenhuma integração criada nesta tela."`.
 
 ## Navegação e botão (casos de borda)
@@ -121,7 +135,7 @@ Quando um texto contém variável dinâmica, a validação conta apenas o texto 
 
 ## Mensagens de erro e sucesso
 
-- **Imagem**: arquivo acima de 5 MB exibe `"Imagem deve ter no máximo 5 MB."`; entre 1 MB e 5 MB exibe `"Imagem de Flow deve ter no máximo 1 MB."`. Pela API: `"{{path}}: tipo de imagem não suportado. Use JPEG ou PNG."`, `"{{path}}: imagem excede o limite: {{actual}}/{{limit}} bytes."`, `"{{path}}: imagem com {{bytes}} bytes; a Meta recomenda até 300 KB para Flow Image."`.
+- **Imagem**: arquivo acima de 5 MB exibe `"Imagem deve ter no máximo 5 MB."`; entre 1 MB e 5 MB exibe `"Imagem de Flow deve ter no máximo 1 MB."`. Na publicação: `"{{path}}: tipo de imagem não suportado. Use JPEG ou PNG."`, `"{{path}}: imagem excede o limite: {{actual}}/{{limit}} bytes."`, `"{{path}}: imagem com {{bytes}} bytes; a Meta recomenda até 300 KB para Flow Image."`.
 - **Validação de campos no editor**: `"Configure nome e rótulo"`, `"Configure a seleção"`, `"Configure a lista"`, `"Configure os chips"`, `"Configure o link"`, `"Informe o texto"`, `"{{label}} deve ser um número inteiro maior ou igual a 0."`, `"Máx. caracteres deve ser maior ou igual ao mínimo."`, `"{{label}} deve ser um número inteiro entre {{min}} e {{max}}."`, `"Máx. docs deve ser maior ou igual ao Mín. docs."`, `"Informe o mínimo de documentos"`, `"Informe o máximo de documentos"`, `"{{label}} excede o limite: {{actual}}/{{limit}} caracteres."`.
-- **Validação da API na publicação** (`"Flow inválido: ..."`): `"{{path}} excede o limite: {{actual}}/{{limit}} itens."`, `"{{path}} precisa ter pelo menos {{limit}} itens; atual: {{actual}}."`, `"{{screenId}} é terminal e precisa de um Footer."`, `"Pelo menos uma tela precisa ser terminal."`, `"{{label}} precisa de name e label."`, `"{{label}}.data-source precisa ter opções ou ${data.campo}."`, `"{{label}}.on-click-action.next.name é obrigatório."`.
+- **Erros na publicação** (`"Flow inválido: ..."`): `"{{path}} excede o limite: {{actual}}/{{limit}} itens."`, `"{{path}} precisa ter pelo menos {{limit}} itens; atual: {{actual}}."`, `"{{screenId}} é terminal e precisa de um Footer."`, `"Pelo menos uma tela precisa ser terminal."`, `"{{label}} precisa de name e label."`, `"{{label}}.data-source precisa ter opções ou ${data.campo}."`, `"{{label}}.on-click-action.next.name é obrigatório."`.
 - **Ações da lista e do editor**: `"Flow salvo."`, `"Flow atualizado."`, `"Flow clonado."`, `"Flow excluído."`, `"Flow descontinuado."`, `"Flow publicado."`, `"Nenhuma alteração para salvar."`, `"Não foi possível publicar o Flow."`, `"Não foi possível alterar o status do flow."`, `"Não foi possível descontinuar o Flow na Meta."`, `"A Meta não confirmou a descontinuação do Flow."`, `"Não foi possível deletar o Flow na Meta."`, `"A Meta não confirmou a exclusão do Flow."`, `"A API não confirmou a exclusão do Flow."`, `"A API não confirmou a descontinuação do Flow."`, `"Flow não encontrado"`.
