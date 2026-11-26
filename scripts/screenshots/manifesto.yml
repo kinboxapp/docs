@@ -1392,6 +1392,129 @@
   paginas:
     - docs/canais/instagram/configuracoes
 
+# Seção desenvolvedores (Integrações e API › Desenvolvedores)
+#
+# Tokens de API: antes de capturar a lista, crie um token temporário "Integração ERP (exemplo)" (Ler e Alterar) no
+# workspace de documentação e revogue logo depois. O prefixo do token (coluna Token) leva tarja. Nunca capture a janela
+# "Token criado com sucesso".
+
+- id: dev-api-tokens-lista
+  url: /settings/api
+  passos:
+    - esperar: 'tr:has-text("Integração ERP")'
+    - pausa: 600
+  alvo:
+    - 'h3:has-text("Tokens de API Publica")'
+    - 'button:has-text("Criar token")'
+    - '.ant-table'
+    - 'button:has-text("Mostrar tokens legados")'
+  mascarar:
+    - 'td code'
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/desenvolvedores/api-tokens-lista.webp
+  paginas:
+    - docs/desenvolvedor/tokens-de-api
+
+# Janela Criar token de API (antes de clicar em Criar: nenhum token é criado).
+- id: dev-api-criar-token
+  url: /settings/api
+  passos:
+    - esperar: 'button:has-text("Criar token")'
+    - clicar: 'button:has-text("Criar token")'
+    - esperar: '.ant-modal-title:has-text("Criar token de API")'
+    - digitar: { seletor: '.ant-modal-content #name', texto: 'Integração ERP' }
+    - pausa: 600
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/desenvolvedores/criar-token.webp
+  paginas:
+    - docs/desenvolvedor/tokens-de-api
+
+# Tela MCP: cartão de apresentação, Como conectar (abas e Instalar conector) e Conexões ativas.
+- id: dev-mcp-tela
+  url: /settings/mcp
+  passos:
+    - esperar: 'button:has-text("Instalar conector")'
+    - pausa: 1200
+  alvo:
+    - '.card-bordered:has-text("Conecte agentes de IA")'
+    - '.card-bordered:has-text("Conexões ativas")'
+  mascarar: []
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/desenvolvedores/mcp-tela.webp
+  paginas:
+    - docs/desenvolvedor/mcp
+
+# Tela Autorizar acesso. Precisa de um pedido de autorização pendente (vale 15 min), criado ao conectar um aplicativo
+# de teste pela tela MCP; troque PEDIDO_PENDENTE pelo pedido. A conta de teste vê uma opção interna que o cliente não vê:
+# ela fica escondida no print. O "Conectado como" leva tarja.
+- id: dev-mcp-autorizar
+  url: /oauth/consent?request=PEDIDO_PENDENTE
+  passos:
+    - esperar: 'h1:has-text("quer acessar")'
+    - pausa: 800
+  alvo: 'div:has(> h1:has-text("quer acessar"))'
+  mascarar:
+    - 'p:has-text("Conectado como")'
+  esconder:
+    - 'div:has(> h1:has-text("quer acessar")) .rounded-xl > label:nth-of-type(n+4)'
+  arquivo: images/ajuda/desenvolvedores/mcp-autorizar.webp
+  paginas:
+    - docs/desenvolvedor/mcp
+
+# Painel Criar plugin preenchido com dados fictícios (não salva). O valor gerado do Auth Secret leva tarja e a ajuda
+# do campo some do print (a página não ensina a usar o campo).
+- id: dev-plugin-novo
+  url: /settings/plugins/new
+  passos:
+    - esperar: '#endpoint'
+    - digitar: { seletor: '#name', texto: 'Ficha do cliente' }
+    - digitar: { seletor: '#endpoint', texto: 'https://exemplo.com/ficha-do-cliente' }
+    - pausa: 600
+  alvo:
+    - '.ant-drawer-content:has-text("Criar plugin") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Criar plugin") button:has-text("Salvar")'
+  mascarar:
+    - '#authSecret'
+  esconder:
+    - '#authSecret_help'
+  arquivo: images/ajuda/desenvolvedores/criar-plugin.webp
+  paginas:
+    - docs/desenvolvedor/criando-plugin-integracao
+
+# Painel Conectar Canal Customizado (não conecta). O recorte vai de Descrição até o último campo. O endereço de
+# recebimento traz um identificador gerado na hora: leva tarja (a página mostra o formato do endereço).
+- id: dev-canal-customizado
+  url: /settings/channels/new
+  passos:
+    - clicar: 'text=Customizado'
+    - esperar: '#hashIdentifier'
+    - digitar: { seletor: '#description', texto: 'App da loja' }
+    - digitar: { seletor: '#hashIdentifier', texto: 'https://exemplo.com/kinbox/webhook' }
+    - pausa: 600
+  alvo:
+    - '.ant-form-item:has(#description)'
+    - '#hashIdentifier'
+  mascarar:
+    - '.ant-form-item:has(input[disabled]) input'
+  arquivo: images/ajuda/desenvolvedores/canal-customizado.webp
+  paginas:
+    - docs/desenvolvedor/criando-canal-customizado
+
+# Link de conversa em um clique com um número que não tem conversa: abre Enviar mensagem com nome, número e texto do link.
+- id: dev-link-enviar-mensagem
+  url: /send?phones=5511900000099&name=Contato%20Teste&text=Ol%C3%A1%2C%20tenho%20interesse
+  passos:
+    - esperar: '.ant-modal-content:has-text("Enviar mensagem")'
+    - pausa: 1000
+  alvo: '.ant-modal-content:has-text("Enviar mensagem")'
+  mascarar: []
+  arquivo: images/ajuda/desenvolvedores/link-enviar-mensagem.webp
+  paginas:
+    - docs/usando-o-kinbox/conversa-em-um-clique
+
 # --- Seção atendimento (lote 5) ---
 
 # Tela Grupos: Novo grupo, busca, filtro Tudo e os grupos fictícios Suporte, Vendas e Atendimento com descrição e iniciais dos membros.

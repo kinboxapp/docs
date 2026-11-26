@@ -207,6 +207,25 @@
             ]
           },
           {
+            "group": "Integrações e API",
+            "icon": "puzzle-piece",
+            "pages": [
+              {
+                "group": "Desenvolvedores",
+                "pages": [
+                  "docs/desenvolvedor/visao-geral",
+                  "docs/desenvolvedor/tokens-de-api",
+                  "docs/desenvolvedor/mcp",
+                  "docs/desenvolvedor/criando-plugin-integracao",
+                  "docs/desenvolvedor/criando-canal-customizado",
+                  "docs/desenvolvedor/webhook-continuar-bot",
+                  "docs/desenvolvedor/redirecionador-via-whatsapp",
+                  "docs/usando-o-kinbox/conversa-em-um-clique"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Administração",
             "icon": "gear",
             "pages": [
@@ -806,6 +825,106 @@
     {
       "source": "/docs/relatorios/saldo",
       "destination": "/docs/relatorios/como-funcionam"
+    },
+    {
+      "source": "/api-shorturl",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-shorturl/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v0",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v0/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v1",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v1/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v2",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v2/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api/contacts/list",
+      "destination": "/api-reference/contacts/list-all-contacts"
+    },
+    {
+      "source": "/docs/api/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/api/custom-fields",
+      "destination": "/api-reference/custom-fields"
+    },
+    {
+      "source": "/docs/api/quickstart",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/desenvolvedor/criando-plugin-de-integracao",
+      "destination": "/docs/desenvolvedor/criando-plugin-integracao"
+    },
+    {
+      "source": "/docs/desenvolvedor/criando-pluguin-atualizado",
+      "destination": "/docs/desenvolvedor/criando-plugin-integracao"
+    },
+    {
+      "source": "/docs/desenvolvedor/redirecionador-de-whatsapp",
+      "destination": "/docs/desenvolvedor/redirecionador-via-whatsapp"
+    },
+    {
+      "source": "/docs/desenvolvedor/redirecionador-whatsapp",
+      "destination": "/docs/desenvolvedor/redirecionador-via-whatsapp"
+    },
+    {
+      "source": "/docs/desenvolvedor/webhook-para-continuar-bot",
+      "destination": "/docs/desenvolvedor/webhook-continuar-bot"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/pesquisar-por-campo-personalizado",
+      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
+    },
+    {
+      "source": "/api-v0/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v1/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v2/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-shorturl/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/pesquisar-customfield",
+      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
     }
   ]
 }
