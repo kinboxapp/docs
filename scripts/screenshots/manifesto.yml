@@ -3171,7 +3171,9 @@
   paginas:
     - docs/relatorios/exportar-e-permissoes
 
-# Tarefas e metas (seção `tarefas-e-metas`). Dados da etapa `tarefas` e `metas` do seed (responsáveis fictícios).
+# Tarefas e metas (seção `tarefas-e-metas`). Dados das etapas `tarefas` e `metas` do seed (responsáveis fictícios), que só
+# rodam com `bun seed.ts --so tarefas,metas`. Essas etapas mudam também `contatos-perfil`, `funis-quadro` e o cartão
+# Tarefas do dashboard: recapture-os se precisar.
 # A foto do dono real da conta aparece no chip "Você" e entre os inscritos: leva tarja.
 - id: tarefas-lista
   url: /crm/tasks
@@ -3181,6 +3183,7 @@
   alvo:
     - 'input[placeholder="Pesquisar nome..."]'
     - 'button:has-text("Nova tarefa")'
+    - '.ant-card-extra button.common_dropdown'
     - 'tr:has-text("Retornar mensagem da Mariana")'
   mascarar: []
   arquivo: images/ajuda/tarefas/lista-de-tarefas.webp
@@ -3250,9 +3253,9 @@
   passos:
     - esperar: 'text=Que tipo de meta você quer criar?'
     - pausa: 600
-  # "Divisão de lucro" só aparece para contas internas (ids fixos): o cliente não vê
+  # Opção que o cliente não vê: o print mostra só os dois cartões públicos
   esconder:
-    - '#type > div.size-full:has-text("Divisão de lucro")'
+    - '#type > div.size-full:not(:has-text("Valor do negócio")):not(:has-text("Quantidade de produto"))'
   alvo:
     - '.g_settings_simple_page .ant-card-head'
     - '#type'
@@ -3286,7 +3289,9 @@
     - clicar: 'button:has-text("Ver Analítico")'
     - esperar: '.ant-drawer-content >> text=Ticket médio'
     - pausa: 1500
-  alvo: '.ant-drawer-content'
+  alvo:
+    - '.ant-drawer-content .ant-drawer-header'
+    - '.ant-drawer-content tr:has-text("Presente de aniversário")'
   mascarar: []
   arquivo: images/ajuda/metas/analitico.webp
   paginas:

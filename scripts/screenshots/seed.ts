@@ -943,7 +943,8 @@ async function garantirDashboard(api: Api) {
 /**
  * Tarefas de exemplo (seção `tarefas-e-metas`): cinco tarefas com responsáveis fictícios, vínculos com negócios
  * e contatos do seed, prioridades e prazos relativos a hoje, e uma tarefa com subtarefas. Nenhuma é do tipo
- * "Iniciar bot". Depende de `funil`, `membros` e `crm` (responsáveis). Só cria as que faltam, pelo nome.
+ * "Iniciar bot". Depende de `funil`, `membros` e `crm` (responsáveis). Cria as que faltam (busca pelo nome) e, a cada
+ * execução, reaplica os prazos relativos a hoje, para o print não envelhecer.
  */
 async function garantirTarefas(api: Api, contatoIds: Record<string, string>) {
   const operadores = lista(await api.v0('GET', '/operators?limit=100'))
@@ -978,14 +979,18 @@ async function garantirTarefas(api: Api, contatoIds: Record<string, string>) {
     { name: 'Reunião de alinhamento da equipe', type: 'meeting', responsavel: 'Diego Santos', priority: 'low', ...prazo(7, '14:00') },
     { name: 'Retornar mensagem da Mariana', type: 'call', responsavel: 'Bruno Carvalho', ...prazo(3, '11:30'), contact: contato('Mariana Lima') },
   ]
-  const existentes = lista(await api.v3('GET', '/tasks?limit=100&status=all'))
   let criadas = 0
   for (const { responsavel, subtarefas, ...t } of TAREFAS as any[]) {
-    let tarefa = existentes.find((x) => x.name === t.name)
+    const achadas = lista(await api.v3('GET', `/tasks?name=${encodeURIComponent(t.name)}&status=all&limit=20`))
+    let tarefa = achadas.find((x) => x.name === t.name && !x.parentId)
     if (!tarefa) {
       const corpo = Object.fromEntries(Object.entries({ ...t, operatorId: opId(responsavel) }).filter(([, v]) => v !== undefined))
       tarefa = await api.v3('POST', '/tasks', corpo)
       criadas++
+    } else {
+      // Prazo relativo a hoje: o PATCH recalcula o prazo a partir do dia e do horário
+      const { fromDate, fromTime, minutesDuration, executionDateType } = t
+      await api.v3('PATCH', `/tasks/${String(tarefa.id || tarefa._id)}`, { fromDate, fromTime, minutesDuration, executionDateType })
     }
     if (subtarefas?.length) {
       const id = String(tarefa.id || tarefa._id)
@@ -996,13 +1001,15 @@ async function garantirTarefas(api: Api, contatoIds: Record<string, string>) {
       }
     }
   }
-  log(`tarefas: ${criadas} criadas (${TAREFAS.length} no total)`)
+  log(`tarefas: ${criadas} criadas, prazos reaplicados (${TAREFAS.length} no total)`)
 }
 
 /**
  * Meta de exemplo (seção `tarefas-e-metas`): "Vendas do mês", valor do negócio, mês atual, com os três membros
  * fictícios como participantes (o dono real da conta fica fora do ranking) e um milestone global. Conta os
- * negócios ganhos do seed. Depende de `membros`. Cria se não existir; se existir, reaplica os participantes.
+ * negócios ganhos do seed. Depende de `membros` e `crm` (o negócio ganho). Cria se não existir; se existir, reaplica
+ * o período (mês atual) e os participantes. Garante uma venda fictícia dentro do período: se o negócio ganho do seed
+ * tiver data de ganho fora do mês, marca de novo como ganho (a API grava a data de agora).
  */
 async function garantirMetas(api: Api) {
   const operadores = lista(await api.v0('GET', '/operators?limit=100'))
@@ -1011,14 +1018,33 @@ async function garantirMetas(api: Api) {
     if (!op) throw new Error(`membro "${m.name}" não encontrado: rode antes a etapa "membros"`)
     return String(op.operatorId || op.id)
   })
-  const meta = lista(await api.v3('GET', '/goals?limit=100')).find((m) => m.name === 'Vendas do mês')
-  if (meta) {
-    await api.v3('PATCH', `/goals/${String(meta.id || meta._id)}`, { selectBy: 'operator', operatorIds: participantes, groupIds: [] })
-    return log('metas: "Vendas do mês" já existe (participantes reaplicados)')
-  }
   const agora = new Date()
   const inicio = new Date(agora.getFullYear(), agora.getMonth(), 1, 0, 0, 0, 0)
   const fim = new Date(agora.getFullYear(), agora.getMonth() + 1, 0, 23, 59, 59, 999)
+
+  // Venda fictícia dentro do período
+  const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  if (!vendas) throw new Error(`funil "${PIPELINE.name}" não encontrado: rode antes as etapas "funil" e "crm"`)
+  const ganho = lista(await api.v3('GET', `/deals?pipelineId=${String(vendas.id || vendas._id)}&limit=100`)).find(
+    (d) => d.name === 'Presente de aniversário — Fernanda Costa',
+  )
+  if (!ganho) throw new Error('negócio "Presente de aniversário — Fernanda Costa" não encontrado: rode antes a etapa "crm"')
+  const dataGanho = ganho.wonLostDate ? new Date(ganho.wonLostDate) : undefined
+  if (ganho.status !== 'won' || !dataGanho || dataGanho < inicio || dataGanho > fim) {
+    await api.v3('PATCH', `/deals/${String(ganho.id || ganho._id)}`, { status: 'won' })
+  }
+
+  const meta = lista(await api.v3('GET', `/goals?name=${encodeURIComponent('Vendas do mês')}&limit=20`)).find((m) => m.name === 'Vendas do mês')
+  if (meta) {
+    await api.v3('PATCH', `/goals/${String(meta.id || meta._id)}`, {
+      from: inicio.toISOString(),
+      to: fim.toISOString(),
+      selectBy: 'operator',
+      operatorIds: participantes,
+      groupIds: [],
+    })
+    return log('metas: "Vendas do mês" já existe (período e participantes reaplicados)')
+  }
   await api.v3('POST', '/goals', {
     name: 'Vendas do mês',
     description: 'Meta de vendas da loja no mês. Quem passar de R$ 500 em vendas ganha um vale-presente.',
@@ -1059,6 +1085,10 @@ const etapas: [string, () => Promise<unknown>][] = [
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
 // `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.
 // `cenarios` depende de `funil` (o funil "Vendas") e de `bot` (o bot "Atendimento inicial"): rode `--so funil,bot,cenarios`.
+// `tarefas` e `metas` ficam fora da execução padrão (só rodam com `--so`) porque mudam prints de outras seções
+// (`contatos-perfil`, `funis-quadro` e o cartão Tarefas do dashboard). Dependem de `funil`, `membros` e `crm`
+// (`metas` também remarca como ganho o negócio "Presente de aniversário"): rode `--so funil,membros,crm,tarefas,metas`.
+const SO_COM_SO = ['tarefas', 'metas']
 const nomesEtapas = etapas.map(([nome]) => nome)
 const soArg = process.argv.indexOf('--so')
 let so: string[] | undefined
@@ -1080,7 +1110,7 @@ await garantirConversas(api, canal, tagIds)
 const contatoIds = await garantirContatos(api)
 
 for (const [nome, etapa] of etapas) {
-  if (so && !so.includes(nome)) continue
+  if (so ? !so.includes(nome) : SO_COM_SO.includes(nome)) continue
   try {
     await etapa()
   } catch (e) {

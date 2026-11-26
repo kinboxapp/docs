@@ -28,7 +28,7 @@ verificado_em: 2026-11-26
 Use **Tarefas** para organizar o que a equipe precisa fazer — como ligações, reuniões, prazos e follow-ups — com responsável, prazo, prioridade, vínculos com negociação, conversa ou contato, subtarefas, anexos, comentários e inscritos.
 
 <Note>
-  Quem pode: todos os membros têm acesso ao menu **Tarefas**. O que você vê e faz depende das opções da seção **Tarefas** do seu papel (em **Configurações** → **Ambiente** → **Permissões**): sem **Pode ver tarefas atribuídas a outros.**, você só vê as tarefas em que é o responsável; a seção **Tarefas** na conversa exige **Pode gerenciar as tarefas da conversa.**; **Executar ação...** exige **Transferir tarefas em massa**; e membros com a restrição **Proibir excluir tarefas** não podem excluir tarefas (o proprietário sempre pode). Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes).
+  Quem pode: todos os membros acessam **Tarefas**. Algumas opções dependem do seu papel, e cada passo abaixo diz qual permissão pede. Veja [Referência de permissões](/docs/administracao/referencia-de-permissoes).
 </Note>
 
 ## Onde ficam as tarefas
@@ -41,10 +41,10 @@ As situações disponíveis são **Concluída**, **Pendente** (tarefas não conc
 
 Cada linha exibe a caixinha para concluir, o nome, a descrição (ou `↳` com o nome da tarefa principal, quando for uma subtarefa — subtarefas aparecem na lista como linhas próprias), o prazo, o tipo, a negociação ou conversa vinculada, o avatar do responsável e o menu **⋯** (**Visualizar** e **Excluir**). Prazos vencidos aparecem em vermelho.
 
-Quando o **Kinbox Agenda** está liberado no workspace e o seu papel permite gerenciar agendamentos, os agendamentos também aparecem nessa lista com o selo **Kinbox Agenda** (com a caixinha desativada e apenas a opção **Visualizar**).
+Se o seu papel tem a permissão **Gerenciar agendamentos**, os agendamentos do **Kinbox Agenda** também aparecem nessa lista, com o selo **Kinbox Agenda**.
 
-<Frame caption="Lista de tarefas com busca, seletor de situação Pendente, Filtros, botão Nova tarefa, subtarefas e tarefa atrasada em vermelho">
-  <img src="/images/ajuda/tarefas/lista-de-tarefas.webp" alt="Lista de tarefas mostrando o campo Pesquisar nome..., o seletor Pendente, Filtros, o botão Nova tarefa e seis linhas com caixinhas de conclusão, subtarefas sem prazo, tarefa atrasada Ontem em vermelho e menu de três pontos" />
+<Frame caption="Lista de tarefas com busca, seletor de situação Pendente, Filtros, botão Nova tarefa, menu ⋯, subtarefas e tarefa atrasada em vermelho">
+  <img src="/images/ajuda/tarefas/lista-de-tarefas.webp" alt="Lista de tarefas mostrando o campo Pesquisar nome..., o seletor Pendente, Filtros, o botão Nova tarefa, o menu de três pontos no canto superior direito e seis linhas com caixinhas de conclusão, subtarefas Sem prazo, tarefa atrasada Ontem em vermelho, prazos Amanhã, Nov 28 e Nov 29 e menu de três pontos em cada linha" />
 </Frame>
 
 ## Criar uma tarefa
@@ -58,12 +58,12 @@ Quando o **Kinbox Agenda** está liberado no workspace e o seu papel permite ger
     Digite o nome em **O que precisa ser feito?** (por exemplo, `Ligar para confirmar o endereço de entrega`), ajuste o tipo no canto superior esquerdo se precisar e defina o responsável (começa em **Você**), o prazo, a **Prioridade**, os vínculos em **Vincular a negócio, conversa ou contato** e a descrição em **Adicionar descrição…**.
 
     <Frame caption="Janela de nova tarefa com nome, responsável, prazo, prioridade, vínculos e botão Criar tarefa">
-      <img src="/images/ajuda/tarefas/nova-tarefa.webp" alt="Janela de nova tarefa exibindo o tipo Tarefa, o nome Ligar para confirmar o pedido, os chips Você, Hoje 12:30 e Prioridade, o botão Vincular a negócio, conversa ou contato, o campo Adicionar descrição... e os botões Cancelar e Criar tarefa" />
+      <img src="/images/ajuda/tarefas/nova-tarefa.webp" alt="Janela de nova tarefa exibindo o tipo Tarefa, o nome Ligar para confirmar o pedido, os botões Você, Hoje, 12:30 e Prioridade, o botão Vincular a negócio, conversa ou contato, o campo Adicionar descrição... e os botões Cancelar e Criar tarefa" />
     </Frame>
   </Step>
 
   <Step title="Salve a tarefa">
-    Clique em **Criar tarefa** (ou pressione `Enter` no campo de nome ou `Ctrl + Enter`, `⌘ + Enter` no Mac). O botão **Criar tarefa** fica desativado enquanto o nome estiver vazio. A Kinbox confirma com "Tarefa criada", e as abas de subtarefas, anexos, comentários e histórico passam a ficar disponíveis.
+    Clique em **Criar tarefa** (ou pressione `Enter` no campo de nome). O botão **Criar tarefa** fica desativado enquanto o nome estiver vazio. A Kinbox confirma com "Tarefa criada", e as abas de subtarefas, anexos, comentários e histórico passam a ficar disponíveis.
   </Step>
 </Steps>
 
@@ -71,7 +71,7 @@ Se você fechar um rascunho com `Esc` ou **✕**, o que foi preenchido é descar
 
 ### Outros lugares para criar
 
-Todas as tarefas criadas em outras telas também aparecem na lista de **Tarefas**:
+Você também pode encontrar essas tarefas na lista de **Tarefas**, conforme os filtros e o seu papel:
 
 - **Na conversa:** no painel **Detalhes** da conversa na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), abra a seção **Tarefas** e clique em **+**. A tarefa já nasce vinculada à conversa e ao contato, atribuída ao responsável da conversa (ou a você). Se a seção **Tarefas** não aparecer na conversa, falta a permissão **Pode gerenciar as tarefas da conversa.**.
 - **Na negociação:** clique no botão **Tarefa** abaixo da caixa de comentário. A tarefa nasce vinculada à negociação, ao contato e à conversa associada, com o responsável da negociação — veja [Trabalhar com negociações no funil](/docs/crm/gerenciando-funil-de-vendas).
@@ -84,14 +84,14 @@ Todas as tarefas criadas em outras telas também aparecem na lista de **Tarefas*
 Depois que a tarefa é criada, cada alteração é salva na hora (nome e descrição salvam assim que você sai do campo).
 
 <Frame caption="Tarefa aberta com status, responsável, prazo, prioridade, vínculos e abas de subtarefas, anexos, comentários e histórico">
-  <img src="/images/ajuda/tarefas/tarefa-aberta.webp" alt="Janela da tarefa Separar pedido de reposição exibindo os chips Em andamento, Carla, sáb 28 nov e Média, vínculos com negociação e contato, descrição e a aba Subtarefas com 1 de 3 concluída" />
+  <img src="/images/ajuda/tarefas/tarefa-aberta.webp" alt="Janela da tarefa Separar pedido de reposição exibindo os botões Em andamento, Carla, sáb, 28 nov e Média, vínculos com negociação e contato, descrição e a aba Subtarefas com 1 de 3 concluída" />
 </Frame>
 
 - **Tipo:** clique no tipo no canto superior esquerdo para escolher entre **Tarefa** (padrão), **Ligar**, **Reunião**, **Deadline**, **Almoço**, **E-mail**, **Agendamento** e **Iniciar bot**.
   - O tipo **E-mail** apenas identifica a tarefa e não envia nenhum e-mail.
-  - **Agendamento** só aparece numa tarefa nova e com o **Kinbox Agenda** liberado — escolhê-lo troca a janela para o formulário de agendamento.
+  - **Agendamento** só aparece numa tarefa nova e se o seu papel tem a permissão **Gerenciar agendamentos** — escolhê-lo troca a janela para o formulário de agendamento do **Kinbox Agenda**.
   - **Iniciar bot** só aparece com a tarefa vinculada a uma conversa. Ele permite escolher o **Bot** (veja [Bot: visão geral](/docs/bot/visao-geral)) e ligar **Auto executar** para iniciar o bot na conversa no horário do prazo e concluir a tarefa automaticamente.
-- **Responsável:** clique no chip do responsável (que mostra **Você** ou o primeiro nome do membro, como **Carla**) para buscar e escolher outro membro. O novo responsável passa a seguir a tarefa e recebe um aviso na Kinbox.
+- **Responsável:** clique no botão do responsável (que mostra **Você** ou o primeiro nome do membro, como **Carla**) para buscar e escolher outro membro. O novo responsável passa a seguir a tarefa e recebe um aviso na Kinbox.
 - **Prioridade:** clique em **Prioridade** para escolher **Urgente**, **Alta**, **Média**, **Baixa** ou **Sem prioridade**.
 - **Vínculos:** clique em **Vincular a negócio, conversa ou contato** (ou em **+**) para associar a tarefa a uma negociação ("Buscar negócio"), a uma conversa (informe o protocolo ou número, como `30041687`) ou a um contato ("Buscar contato"). Passando o mouse sobre o vínculo, aparecem **Abrir negócio**, **Ver conversa**, **Abrir contato** e **Desvincular**.
 - **Campos personalizados:** se o workspace tiver campos personalizados de tarefa, eles aparecem entre os vínculos e a descrição. Clique no valor para editar e confirme em **Salvar** — veja [Criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox).
@@ -99,7 +99,7 @@ Depois que a tarefa é criada, cada alteração é salva na hora (nome e descri�
 
 ## Prazo e lembrete
 
-Clique no chip do prazo para abrir o seletor de data, horário, duração e lembrete. Enquanto a tarefa não está concluída nem cancelada, o topo do quadro traz os atalhos de **Adiar para** (**Em 1 hora**, **Em 3 horas**, **Amanhã de manhã** e **Próxima semana**), com opção de **Desfazer** no aviso exibido logo após o adiamento.
+Clique no botão do prazo para abrir o seletor de data, horário, duração e lembrete. Enquanto a tarefa não está concluída nem cancelada, o topo do quadro traz os atalhos de **Adiar para** (**Em 1 hora**, **Em 3 horas**, **Amanhã de manhã** e **Próxima semana**), com opção de **Desfazer** no aviso exibido logo após o adiamento.
 
 <Frame caption="Quadro do prazo com atalhos de Adiar para, calendário, Horário, Duração e Lembrete">
   <img src="/images/ajuda/tarefas/prazo-e-lembrete.webp" alt="Quadro de prazo exibindo os botões de Adiar para, calendário mensal com o dia 26 selecionado e os campos Horário 12:30, Duração 5 min até 12:35 e Lembrete 5 min antes" />
@@ -120,7 +120,7 @@ Como o lembrete funciona:
 
 ## Status e concluir
 
-Na janela da tarefa, clique no chip de status para alternar entre **Pendente**, **Em andamento**, **Concluída** e **Cancelada**, ou clique no círculo ao lado do nome para concluir.
+Na janela da tarefa, clique no botão de status para alternar entre **Pendente**, **Em andamento**, **Concluída** e **Cancelada**, ou clique no círculo ao lado do nome para concluir.
 
 Se você concluir pela janela uma tarefa que ainda tem subtarefas abertas (não concluídas e não canceladas), a Kinbox avisa quantas subtarefas faltam e pergunta se você quer clicar em **Concluir tudo** (conclui a tarefa e as subtarefas juntas) ou **Cancelar**. Pela caixinha da lista de **Tarefas**, apenas a tarefa clicada é concluída, sem alterar as subtarefas.
 
@@ -133,21 +133,19 @@ A subtarefa nasce com o mesmo responsável da tarefa principal, sem prazo e sem 
 ## Anexos e comentários
 
 - **Anexos:** na aba **Anexos**, clique em **Anexar arquivo** ou arraste o arquivo para a janela da tarefa. Para remover, clique em **Remover anexo** e confirme.
-- **Comentários:** na aba **Comentários**, escreva uma observação e use `@` para mencionar membros. Quem comenta e quem é mencionado passam a seguir a tarefa automaticamente. Você pode reagir a comentários com 👍, 🎉, 👀 e 🙏, e editar ou excluir os seus próprios comentários.
+- **Comentários:** na aba **Comentários**, escreva uma observação e use `@` para mencionar membros. Quem comenta e quem é mencionado passam a seguir a tarefa automaticamente. Você pode reagir a comentários e editar ou excluir os seus próprios comentários.
 
 ## Histórico
 
-A aba **Histórico** registra, da alteração mais recente para a mais antiga, a criação da tarefa e mudanças de status, responsável, prioridade, prazo, anexos adicionados, inscritos e subtarefas adicionadas ou concluídas.
+A aba **Histórico** mostra as principais mudanças da tarefa, da mais recente para a mais antiga.
 
 ## Quem acompanha a tarefa
 
-Clique no ícone de sino no topo da janela para abrir **Inscritos**. Use **Seguir** ou **Seguindo** para entrar ou sair, ou **Adicionar pessoa** para incluir outro membro. Entram automaticamente quem criou a tarefa, o responsável (e o novo, ao trocar), quem comenta e quem é mencionado.
-
-Os inscritos recebem aviso no sino e na tela quando a tarefa é **concluída** ou recebe um **comentário** (exceto quem fez a ação). Quem é **mencionado** com `@` recebe aviso da menção, e na **atribuição** ou reatribuição apenas o novo responsável recebe o aviso.
+Clique no ícone de sino no topo da janela para abrir **Inscritos** e usar **Seguir** ou **Adicionar pessoa**. Os inscritos recebem aviso na Kinbox quando a tarefa é concluída ou comentada.
 
 ## Encontrar e organizar
 
-- **Filtros:** clique em **Filtros** para combinar **Tipo**, **Membro** (disponível para quem tem **Pode ver tarefas atribuídas a outros.**) e **Período** do prazo (com atalhos como **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**) e clique em **Filtrar**. Com o **Kinbox Agenda** liberado e **Tipo** igual a **Agendamento**, aparecem também **Serviço**, **Local** e **Status do agendamento**.
+- **Filtros:** clique em **Filtros** para combinar **Tipo**, **Membro** (disponível para quem tem **Pode ver tarefas atribuídas a outros.**) e **Período** do prazo (com atalhos como **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**) e clique em **Filtrar**.
 - **Ações em lote:** no menu **⋯** do canto superior direito da lista, clique em **Executar ação...** para abrir **Executar ação em lote**, escolher **Atribuir todas as tarefas para um membro** ou **Resolver todas as tarefas** (concluir) e clicar em **Executar**. Se **Executar ação...** não aparecer, falta a permissão **Transferir tarefas em massa**. Agendamentos do Kinbox Agenda não entram nas ações em lote.
 
 <Warning>

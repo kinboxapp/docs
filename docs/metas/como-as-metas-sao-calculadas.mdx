@@ -54,11 +54,11 @@ Considere a meta **Vendas do mês**: tipo **Valor do negócio**, valor alvo de `
 | Indicador | Como é calculado |
 | --- | --- |
 | **Total acumulado** | Soma do valor das negociações (em **Valor do negócio**) ou da quantidade dos produtos escolhidos (em **Quantidade de produto**). |
-| **Percentual** | Total dividido pelo valor alvo, arredondado para baixo em pontos inteiros. Pode passar de `100%`; o preenchimento da barra para em `100%`. |
+| **Percentual** | Total dividido pelo valor alvo, em pontos inteiros (aproximado). Pode passar de `100%`; o preenchimento da barra para em `100%`. Como **Meta atingida** usa o total exato, pode aparecer `100%` com "Meta não atingida" quando o total fica um pouco abaixo do alvo. |
 | **Progresso esperado** | Marca na barra que mostra quanto já deveria ter sido atingido seguindo uma progressão linear ao longo do período (proporcional ao tempo passado). |
 | **Encerrado** | Ao terminar o período, exibe "Encerrado" com "Meta atingida" (total maior ou igual ao valor alvo) ou "Meta não atingida". A meta continua aberta para consulta. |
 | **Estatísticas** | **Total de negócios ganhos no período**: quantas negociações contaram. **Ticket médio**: média do valor das que contaram (na meta de produto, aparece **Média de produtos por negócio**). **Tempo médio para ganhar cada negócio**: média do tempo entre a criação e o ganho de cada negociação que contou. |
-| **Período anterior** | Quando há dados para comparar, pode aparecer ao lado do total a variação "em relação ao período anterior" (o período de mesma duração imediatamente anterior ao início da meta). |
+| **Período anterior** | Quando há dados para comparar, pode aparecer ao lado do total a variação "em relação ao período anterior": a comparação usa o mesmo número de dias já decorridos da meta, contados no período imediatamente anterior ao início dela. |
 
 ## Ranking e grupos
 
@@ -73,16 +73,16 @@ Considere a meta **Vendas do mês**: tipo **Valor do negócio**, valor alvo de `
 
 ## Analítico
 
-Clique em **Ver Analítico** para abrir a gaveta **Analítico**, que reúne:
+Clique em **Ver Analítico** para abrir a gaveta **Analítico**, que reúne gráfico, indicadores e uma lista de negociações:
 
 - gráfico do valor (ou quantidade) ganho por dia;
 - cartões **Total**, **Ticket médio** (ou **Média de produtos por negócio**), **Tempo médio** e **Negócios**;
 - tabela ordenável **Negócios** com **Produtos** (na meta de produto), **Valor**, **Criado**, **Ganho** e **Responsável**;
 - botão **Atualizar** para recalcular os dados.
 
-A lista mostra as negociações que você pode ver.
+Clicar num participante na aba **Ranking** ou num grupo na aba **Grupos** abre a mesma gaveta filtrada, com o título **Negócios de** e o nome.
 
-<Frame caption="Gaveta Analítico com gráfico por dia, cartões de resumo e lista de negociações ganhas">
+<Frame caption="Gaveta Analítico com gráfico por dia, cartões de resumo e lista de negociações">
   <img src="/images/ajuda/metas/analitico.webp" alt="Gaveta Analítico exibindo botão de atualizar, gráfico de barras por dia de 01/11 a 29/11, cartões Total R$ 190,00, Ticket médio R$ 190,00, Tempo médio 7h 55m e Negócios 1, e tabela com a negociação Presente de aniversário — Fernanda Costa atribuída a Diego Santos" />
 </Frame>
 

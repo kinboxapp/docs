@@ -24,14 +24,14 @@ verificado_em: 2026-11-26
 Use **Metas** para definir quanto a equipe precisa vender em um período — um valor em negociações ganhas ou uma quantidade de produtos vendidos — com participantes, milestones (marcos), condições e ranking.
 
 <Note>
-  Quem pode: membros com a permissão **Metas** (na seção **Gerenciamento do Ambiente**, em **Configurações** → **Ambiente** → **Permissões**) ou o proprietário. Se **Metas** não aparecer no menu lateral, peça a permissão **Metas**; sem ela, você só acompanha as metas em andamento de que participa pelo ícone **Meta atual** no topo da tela. Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes).
+  Quem pode: membros com a permissão **Metas** (na seção **Gerenciamento do Ambiente**, em **Configurações** → **Ambiente** → **Permissões**) ou o proprietário. Se **Metas** não aparecer no menu lateral, falta essa permissão. Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes).
 </Note>
 
 ## Onde ficam as metas
 
 Clique no ícone **Metas** no menu lateral (o nome aparece ao passar o mouse). A lista mostra o campo **Pesquisar**, o botão **Nova meta** e as colunas **Nome**, **Status** (quantos dias faltam; quando faltam menos de 24 horas ou a meta já terminou, aparece um ✓ verde), **Valor alvo** (valor monetário ou quantidade de produtos) e o menu **⋯** (**Visualizar** e **Excluir**).
 
-Quem participa de uma meta em andamento também vê o ícone **Meta atual** no topo da tela, que abre a meta em uma gaveta (com opção de alternar entre metas quando há mais de uma).
+Enquanto uma meta está em andamento, o ícone **Meta atual** aparece no topo da tela para os participantes e para quem criou a meta (numa meta de **Membros específicos** sem nenhum membro escolhido, para todos). Ele abre a meta em uma gaveta, com opção de alternar entre metas quando há mais de uma.
 
 <Frame caption="Lista de metas com busca, botão Nova meta, status e valor alvo">
   <img src="/images/ajuda/metas/lista-de-metas.webp" alt="Lista de metas mostrando o campo Pesquisar, o botão Nova meta e a tabela com Nome, Status 4 dias restantes, Valor alvo R$ 1.000,00 para a meta Vendas do mês e menu de três pontos" />
@@ -89,8 +89,8 @@ Clique na meta na lista (ou em **⋯** → **Visualizar**) para abrir o acompanh
 
 - **Quadro de progresso:** mostra o total acumulado, o valor alvo, o percentual atingido, a contagem regressiva do período e a barra com os milestones **Global** e a marca de **Progresso esperado** (projeção linear pelo tempo decorrido). Quando o período termina, exibe "Encerrado" com "Meta atingida" ou "Meta não atingida".
 - **Painéis laterais:** à esquerda ficam **Meta** (**Período** e **Criado há**), **Estatísticas** ("Total de negócios ganhos no período", **Ticket médio** — ou "Média de produtos por negócio" na meta de produto — e "Tempo médio para ganhar cada negócio") e **Descrição**.
-- **Ranking e Grupos:** a aba **Ranking** ordena os participantes do maior para o menor, com número de negociações, percentual em relação à meta, valor, troféu no 1º lugar com valor e **Mostrar Mais** a cada 10 participantes; a aba **Grupos** mostra a soma por grupo. Veja os detalhes de cálculo em [Como as metas são calculadas](/docs/metas/como-as-metas-sao-calculadas).
-- **Ver Analítico:** abre a gaveta **Analítico** com gráfico por dia, cartões de resumo e a lista das negociações que contaram — veja [Como as metas são calculadas](/docs/metas/como-as-metas-sao-calculadas).
+- **Ranking e Grupos:** a aba **Ranking** ordena os participantes do maior para o menor, com número de negociações, percentual em relação à meta, valor, troféu no 1º lugar com valor e **Mostrar Mais** a cada 10 participantes; a aba **Grupos** mostra a soma por grupo. Clique num participante ou num grupo para abrir o **Analítico** filtrado. Veja os detalhes de cálculo em [Como as metas são calculadas](/docs/metas/como-as-metas-sao-calculadas).
+- **Ver Analítico:** abre a gaveta **Analítico**, que reúne gráfico, indicadores e uma lista de negociações — veja [Como as metas são calculadas](/docs/metas/como-as-metas-sao-calculadas).
 - **Dashboard:** para acompanhar a meta ao lado de outros indicadores, use o modelo **Meta x Realizado** num dashboard (veja [Criar dashboards](/docs/relatorios/dashboard)).
 - **Modo tela cheia:** no menu **⋯** do topo, clique em **Modo tela cheia** para exibir a meta em TV ou reunião (clique de novo ou pressione `Esc` para sair).
 - **Atualização e comemoração:** com a aba aberta, a tela atualiza sozinha a cada 5 minutos e, quando entra uma nova negociação ganha, comemora com confete, som e o aviso "Nova negociação ganha!" (ou o total de novos negócios ganhos).
@@ -98,7 +98,7 @@ Clique na meta na lista (ou em **⋯** → **Visualizar**) para abrir o acompanh
 ## Editar ou excluir
 
 - **Editar:** dentro da meta, clique em **⋯** → **Editar** para abrir a gaveta **Editar Meta** com o mesmo assistente. Você pode alterar todos os campos, inclusive tipo, participantes, condições e período (no passo do período aparecem os campos **De** e **Até**; ao editar, confira **De** e **Até** antes de salvar). Como o resultado é calculado na hora em que a meta é aberta, editar período, participantes, produtos ou condições muda o resultado imediatamente, inclusive para trás.
-- **Excluir:** na lista de **Metas**, clique em **⋯** na linha da meta e escolha **Excluir**.
+- **Excluir:** na lista de **Metas**, clique em **⋯** na linha da meta, escolha **Excluir** e confirme em **Excluir**.
 
 <Warning>
   Excluir uma meta não tem volta ("Essa operação não poderá ser desfeita."). As negociações do funil não são apagadas.
@@ -106,8 +106,8 @@ Clique na meta na lista (ou em **⋯** → **Visualizar**) para abrir o acompanh
 
 ## Problemas comuns
 
-- **Não vejo Metas no menu lateral.** Falta a permissão **Metas** no seu papel. Peça ao proprietário ou a quem gerencia papéis; você ainda vê as metas em andamento de que participa pelo ícone **Meta atual** no topo.
+- **Não vejo Metas no menu lateral.** Falta a permissão **Metas** no seu papel. Peça ao proprietário ou a quem gerencia papéis.
 - **A meta está zerada ou uma venda não contou.** Só contam negociações **ganhas** com **data de ganho dentro do período**, cujo **responsável atual** participa da meta e que passam nas condições. Veja [Como as metas são calculadas](/docs/metas/como-as-metas-sao-calculadas) e confira o **Analítico**.
 - **Um membro não aparece no ranking.** Ele não está entre os participantes da meta. Abra a meta, clique em **⋯** → **Editar** e ajuste os participantes.
 - **Meta por produto está sem resultado.** As negociações ganhas no período não têm nenhum dos produtos selecionados. Confira os produtos da meta e os produtos adicionados às negociações (veja [Trabalhar com negociações no funil](/docs/crm/gerenciando-funil-de-vendas)).
-- **Não consigo excluir pela tela da meta.** Se o seu papel tiver a restrição **Não pode excluir negociação**, exclua a meta pelo menu **⋯** na lista de **Metas**.
+- **Não sei onde excluir a meta.** Exclua pela lista: em **Metas**, clique em **⋯** na linha da meta, escolha **Excluir** e confirme.

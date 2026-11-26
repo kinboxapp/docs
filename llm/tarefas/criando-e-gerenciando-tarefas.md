@@ -1,7 +1,7 @@
 ---
-title: "Tarefas: subtarefas, seguir, excluir com motivo e agendamentos na lista"
+title: "Tarefas: regras, permissões, lembretes e ações em lote"
 description: Regras detalhadas das tarefas da Kinbox — permissões, situações e filtros da lista, ações em lote, exportação, valores padrão, prazo, duração e lembrete, subtarefas, comentários, histórico, inscritos e avisos, Iniciar bot e exclusão.
-keywords: [tarefas regras, situação pendente atrasado concluída, filtros de tarefas, executar ação em lote, atribuir todas as tarefas, resolver todas as tarefas, exportar tarefas colunas, lembrete não chegou, quem recebe aviso da tarefa, inscritos, seguir tarefa, subtarefa sem prazo, concluir tudo, histórico da tarefa, iniciar bot auto executar, criar conversa, excluir tarefa motivo, proibir excluir tarefas, ver tarefas de outros, agendamentos na lista de tarefas]
+keywords: [tarefas regras, situação pendente atrasado concluída, filtros de tarefas, executar ação em lote, atribuir todas as tarefas, resolver todas as tarefas, exportar tarefas colunas, lembrete não chegou, quem recebe aviso da tarefa, inscritos, seguir tarefa, subtarefa sem prazo, concluir tudo, histórico da tarefa, iniciar bot auto executar, excluir tarefa motivo, proibir excluir tarefas, ver tarefas de outros, agendamentos na lista de tarefas]
 publico: llm
 tipo: referencia
 fontes:
@@ -33,19 +33,19 @@ O item **Tarefas** no menu lateral é aberto a todos os membros (não existe per
 | Opção | Tipo | Efeito |
 | --- | --- | --- |
 | **Pode gerenciar as tarefas da conversa.** | libera | Exibe a seção **Tarefas** no painel **Detalhes** da conversa. |
-| **Pode ver tarefas atribuídas a outros.** | libera | Exibe tarefas atribuídas a outros membros na lista de **Tarefas**, libera o filtro **Membro** e permite abrir tarefas de outros membros no perfil do contato. Sem ela, a lista abre apenas com tarefas em que você é o responsável, o filtro **Membro** não aparece e abrir tarefa de outro membro no perfil do contato exibe `"Você não tem permissão para editar essa tarefa"`. |
+| **Pode ver tarefas atribuídas a outros.** | libera | Exibe na lista de **Tarefas** as tarefas atribuídas a outros membros e o filtro **Membro**. Sem ela, você só vê as tarefas em que é o responsável e o filtro **Membro** não aparece. |
 | **Transferir tarefas em massa** | libera | Exibe **Executar ação...** no menu **⋯** do topo da lista, liberando as duas ações em lote (**Atribuir todas as tarefas para um membro** e **Resolver todas as tarefas**). |
 | **Proibir excluir tarefas** | restringe | Remove **Excluir** da lista, da janela da tarefa e das subtarefas e impede a exclusão (`"Você não tem permissão para excluir tarefas."`). Nunca se aplica ao proprietário do workspace e não impede excluir comentários ou anexos. |
 
-Os recursos ligados ao **Kinbox Agenda** (tipo **Agendamento**, agendamentos na lista e filtros **Serviço**, **Local** e **Status do agendamento**) aparecem apenas quando o Kinbox Agenda está liberado no workspace e o papel permite gerenciar agendamentos.
+Os recursos ligados ao **Kinbox Agenda** (tipo **Agendamento**, agendamentos na lista e filtros **Serviço**, **Local** e **Status do agendamento**) aparecem apenas para quem tem a permissão **Gerenciar agendamentos** (seção **Agendas** do papel) ou é o proprietário.
 
 ## Status, prioridades e tipos
 
 - **Status:** **Pendente**, **Em andamento**, **Concluída**, **Cancelada**.
-- **Prioridades:** **Urgente**, **Alta**, **Média**, **Baixa**, **Sem prioridade** (padrão; o chip exibe **Prioridade** quando está sem valor).
+- **Prioridades:** **Urgente**, **Alta**, **Média**, **Baixa**, **Sem prioridade** (padrão; o botão de prioridade exibe **Prioridade** quando está sem valor).
 - **Tipos:** **Ligar**, **Reunião**, **Agendamento**, **Tarefa** (padrão), **Deadline**, **Almoço**, **E-mail**, **Iniciar bot**.
   - **E-mail** apenas registra o tipo da tarefa e não envia e-mail.
-  - **Agendamento** aparece apenas numa tarefa nova e com o **Kinbox Agenda** liberado; selecioná-lo troca a janela para o formulário de agendamento.
+  - **Agendamento** aparece apenas numa tarefa nova e com a permissão **Gerenciar agendamentos**; selecioná-lo troca a janela para o formulário de agendamento do **Kinbox Agenda**.
   - **Iniciar bot** aparece apenas quando a tarefa está vinculada a uma conversa.
 
 ## Situações da lista
@@ -66,7 +66,7 @@ Na ordem exibida pelo seletor (que abre em **Pendente**):
   - **Tipo** (sempre disponível);
   - **Membro** (disponível com **Pode ver tarefas atribuídas a outros.**);
   - **Período:** intervalo de datas e horas do prazo, com os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**;
-  - **Serviço**, **Local** e **Status do agendamento** (**Confirmado**, **Cancelado**, **Concluído**): aparecem quando o **Kinbox Agenda** está liberado e **Tipo** é **Agendamento**.
+  - **Serviço**, **Local** e **Status do agendamento** (**Confirmado**, **Cancelado**, **Concluído**): aparecem com a permissão **Gerenciar agendamentos** e **Tipo** igual a **Agendamento**.
 
 ## Lista, cores, ordem e agendamentos
 
@@ -79,7 +79,7 @@ Na ordem exibida pelo seletor (que abre em **Pendente**):
   - **Cor principal:** **Amanhã** e datas futuras;
   - **Cinza, riscada:** tarefa concluída;
   - **`"Sem prazo"`:** subtarefa sem prazo.
-  - Na janela da tarefa, o chip de prazo de hoje aparece em laranja.
+  - Na janela da tarefa, o botão do prazo de hoje aparece em laranja.
 - **Agendamentos do Kinbox Agenda na lista:** exibem o selo **Kinbox Agenda**, contato e status; a caixinha de conclusão fica desativada e o menu **⋯** oferece apenas **Visualizar**. Na situação **Pendente**, agendamentos concluídos, cancelados e reembolsados ficam de fora, a menos que um **Status do agendamento** seja escolhido nos filtros.
 - **Lista vazia:** exibe `"Parece que você ainda não criou nenhuma tarefa..."` e o botão **Criar nova tarefa**.
 
@@ -96,7 +96,10 @@ Disponível no menu **⋯** do topo da lista → **Executar ação...** (exige *
 
 No menu **⋯** do topo da lista → **Exportar** → **CSV** ou planilha do Excel. Exporta todas as tarefas da lista com a situação e os filtros aplicados.
 
-Colunas exportadas: `Tarefa`, `Feito`, `Tipo`, `Responsável`, `Negócio`, `Conversa`, `Contato`, `Criado em`, `Início`, `Fim`, `Origem`, `Serviço`, `Recurso`, `Pessoas`, `Localização`, `Status`, `E-mail`, `Telefone`, `Valor do agendamento`.
+Colunas exportadas:
+
+- **Padrão:** `Tarefa`, `Feito`, `Tipo`, `Responsável`, `Negócio`, `Conversa`, `Contato`, `Criado em`, `Início`, `Fim`, `Origem`, `Serviço`, `Recurso`, `Pessoas`, `Localização`, `Status`, `E-mail`, `Telefone`, `Valor do agendamento`.
+- **Com o filtro Tipo = Agendamento:** `Tarefa`, `Feito`, `Contato`, `Data`, `Horário de início`, `Horário de fim`, `Serviço`, `Recurso`, `Pessoas`, `Localização`, `Status`, `E-mail`, `Telefone`.
 
 ## Tarefa nova e salvamento
 
@@ -116,7 +119,9 @@ Colunas exportadas: `Tarefa`, `Feito`, `Tipo`, `Responsável`, `Negócio`, `Conv
 - **Lembrete (opções):** **Na hora**, **5 min antes** (padrão), **15 min antes**, **30 min antes**, **1 hora antes**, **1 dia antes**.
 - **Regras do lembrete:**
   - Só existe com **horário** no prazo.
-  - Só dispara se o momento do aviso (prazo menos o tempo do lembrete) estiver no **futuro** quando a tarefa é criada ou quando o prazo ou o lembrete é alterado. Alterar o prazo ou o lembrete remarca o aviso.
+  - Tarefa criada por um membro (na tela): só dispara se o momento do aviso (prazo menos o tempo do lembrete) estiver no **futuro** na criação.
+  - Tarefa criada automaticamente (por cadência, por agente de IA ou pela API) para um responsável diferente de quem consta como autor: se o momento do aviso já passou, o lembrete chega na hora.
+  - Ao alterar o prazo ou o lembrete de qualquer tarefa, o aviso é remarcado e só dispara se o novo momento estiver no **futuro**.
   - Como a tarefa nova vem com prazo no próximo horário de 5 em 5 minutos e lembrete de **5 min antes**, o momento do aviso já passou e não há lembrete sem escolher um horário mais à frente ou um lembrete que caia no futuro.
   - Vai **apenas para o responsável atual** no momento do aviso; não vai se a tarefa estiver concluída, cancelada ou sem responsável. Inscritos não recebem lembrete.
   - Chega **dentro da Kinbox**: no sino de notificações (`"Tarefa próxima:"` com atalhos `"Ver conversa"` e `"Ver negociação"`) e, com a Kinbox aberta, como aviso `"Tarefa próxima!"` com som (segue a opção **Quando receber mensagem de time** em [Receber notificações no navegador e no celular](/docs/conta/notificacoes)).
@@ -158,9 +163,7 @@ No sino do topo da janela (**Inscritos**): botões **Seguir**/**Seguindo**, **Ad
 O tipo **Iniciar bot** aparece apenas quando a tarefa está vinculada a uma conversa (veja [Bot: visão geral](/docs/bot/visao-geral)):
 
 - **Bot** (`"Buscar bot"`): bot a executar.
-- **Auto executar:** no horário do prazo, a Kinbox inicia o bot na conversa e marca a tarefa como concluída. Se a tarefa for concluída antes do prazo, o bot não roda.
-- **Criar conversa** (aparece com **Auto executar**): cria nova conversa e executa o bot se a conversa não existir.
-- **Canal** (aparece com **Criar conversa**): lista apenas canais de WhatsApp e SMS dos grupos do membro.
+- **Auto executar:** no horário do prazo, a Kinbox inicia o bot na conversa vinculada e marca a tarefa como concluída. Se a tarefa for concluída antes do prazo, o bot não roda.
 
 ## Onde criar
 
@@ -186,8 +189,7 @@ A exclusão não tem volta e apaga junto subtarefas, comentários e histórico. 
 | `"Uma subtarefa não pode ter subtarefas"` | Tentativa de criar subtarefa dentro de outra subtarefa (apenas um nível é permitido). |
 | `"Motivo da exclusão é obrigatório."` | Tentativa de excluir a tarefa sem preencher **Motivo da exclusão...**. |
 | `"Você não tem permissão para excluir tarefas."` | Seu papel tem a restrição **Proibir excluir tarefas**. |
-| `"Você não tem permissão para editar essa tarefa"` | Tentativa de abrir tarefa atribuída a outro membro pelo perfil do contato sem **Pode ver tarefas atribuídas a outros.**. |
+| `"Você não tem permissão para editar essa tarefa"` | Seu papel não tem **Pode ver tarefas atribuídas a outros.** e a tarefa é de outro membro. |
 | `"Você tem tarefas obrigatórias pendentes, não é possível mudar estágio."` | Existe tarefa obrigatória de cadência pendente na negociação; conclua ou cancele para mudar de etapa. |
 | `"Valor inválido"` | Valor incompatível com o tipo de um campo personalizado da tarefa. |
-| `"Nenhum canal de WhatsApp ou SMS"` | Não há canal de WhatsApp ou SMS disponível nos seus grupos ao configurar **Criar conversa** em **Iniciar bot**. |
 | `"Ocorreu um erro ao exportar os dados"` | Falha ao exportar a lista de tarefas. |
