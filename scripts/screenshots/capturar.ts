@@ -53,7 +53,12 @@ const CSS_ESTAVEL = `
   #kinbox-widget, .Toastify, .ant-message, .ant-notification { display: none !important; }
   /* Sem animação, os modais do antd ficariam presos no estado inicial da entrada (invisíveis) */
   .ant-zoom-appear, .ant-zoom-appear-prepare, .ant-zoom-enter, .ant-zoom-enter-prepare,
-  .ant-fade-appear, .ant-fade-appear-prepare, .ant-fade-enter, .ant-fade-enter-prepare { opacity: 1 !important; transform: none !important; }
+  .ant-fade-appear, .ant-fade-appear-prepare, .ant-fade-enter, .ant-fade-enter-prepare,
+  /* Menus (dropdown) e listas de seleção entram com slide */
+  .ant-slide-up-appear, .ant-slide-up-appear-prepare, .ant-slide-up-enter, .ant-slide-up-enter-prepare,
+  .ant-slide-down-appear, .ant-slide-down-appear-prepare, .ant-slide-down-enter, .ant-slide-down-enter-prepare { opacity: 1 !important; transform: none !important; }
+  /* ...e, sem animação, também não terminam de sair: some com eles na saída */
+  .ant-slide-up-leave, .ant-slide-down-leave { display: none !important; }
   /* Fundo branco atrás de modais: os cantos arredondados do recorte não mostram a tela de trás */
   .ant-modal-mask { background: #fff !important; }
 `

@@ -64,6 +64,26 @@
             ]
           },
           {
+            "group": "Atendimento",
+            "icon": "inbox",
+            "pages": [
+              {
+                "group": "Caixa de entrada",
+                "pages": [
+                  "docs/conversas/caixa-de-entrada-do-kinbox",
+                  "docs/conversas/gerenciar-conversas",
+                  "docs/conversas/atribuir-e-transferir",
+                  "docs/conversas/iniciar-conversa",
+                  "docs/conversas/agendar-mensagem",
+                  "docs/conversas/acoes-em-lote-e-exportar",
+                  "docs/conversas/criar-filtros-de-conversa",
+                  "docs/conversas/criar-frases-rapidas-para-suas-conversas",
+                  "docs/conversas/problemas-comuns"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Administração",
             "icon": "gear",
             "pages": [
@@ -603,6 +623,10 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
       "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    },
+    {
+      "source": "/docs/conversas/clientes-contatos-e-organizacoes",
+      "destination": "/docs/conceitos/contatos-e-negocios"
     }
   ]
 }
