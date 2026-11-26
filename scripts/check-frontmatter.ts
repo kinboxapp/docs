@@ -3,7 +3,7 @@
 import { encerrar, ler, listarArquivos, separarFrontmatter, type Falha } from './lib'
 
 const TIPOS = ['guia', 'conceito', 'referencia', 'solucao-de-problema', 'faq']
-const PREFIXOS = ['web', 'api', 'api-v0', 'api-v1', 'mobile', 'widget', 'integrations', 'wabox']
+const PREFIXOS = ['web', 'api', 'api-v0', 'api-v1', 'mobile', 'widget', 'integrations', 'motor-qr']
 
 // Formatos aceitos em `fontes`: card do Linear, PR, lacuna ou arquivo de código com prefixo
 const FONTE_CARD = /^KIN-\d+$/

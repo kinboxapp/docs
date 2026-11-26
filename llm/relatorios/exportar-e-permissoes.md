@@ -47,7 +47,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 | --- | --- |
 | **Restringir relatórios ao membro** | Em relatórios de sessões como [**Visão geral**](/docs/relatorios/visao-geral), [**Produtividade**](/docs/relatorios/produtividade) e [**Copiloto**](/docs/relatorios/copiloto), e nas listas **Ver sessões**: mostra as sessões em que o membro é o responsável (na [**Avaliação**](/docs/relatorios/avaliacao), as avaliações registradas para ele). Na [**Presença**](/docs/relatorios/presenca): mostra a presença do próprio membro. |
 | **Restringir relatórios aos grupos do membro** | Em relatórios de sessões como **Visão geral**, **Produtividade** e **Copiloto**, e nas listas **Ver sessões**: mostra as sessões dos grupos do membro (na [**Atribuição**](/docs/relatorios/atribuicao), as sessões que estão ou já estiveram nos grupos dele; no **Copiloto**, oculta as linhas **Sem atribuição** e **Sem grupo**). Se o membro não pertencer a nenhum grupo, ao abrir esses relatórios aparece um aviso de que ele não pertence a nenhum grupo e a Kinbox volta para a tela inicial. |
-| **Não pode exportar relatórios** | Na lista **Ver sessões**, o botão **Exportar** fica desativado. |
+| **Não pode exportar relatórios** | Impede exportar a lista de sessões dos relatórios. |
 | **Não pode criar ou excluir Dashboard** | Ao tentar criar, clonar, editar (inclusive cartões e organização) ou excluir um dashboard, aparece um aviso de que não tem permissão. |
 
 - **Exclusividade mútua:** **Restringir relatórios ao membro** e **Restringir relatórios aos grupos do membro** não podem ficar marcadas ao mesmo tempo (marcar uma desmarca a outra; as duas podem ficar desmarcadas).

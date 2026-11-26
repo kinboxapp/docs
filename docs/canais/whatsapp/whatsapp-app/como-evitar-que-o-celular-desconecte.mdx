@@ -8,16 +8,16 @@ fontes:
   - web:src/pages/settings/channels/index.tsx
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
   - web:src/pages/inbox/Conversations/index.tsx
-  - api-v0:server/modules/wabox/WaboxStatus.js
-  - wabox:apps/docs/webhooks/instance-status.mdx
+  - api-v0:server/modules
+  - motor-qr:apps/docs/webhooks/instance-status.mdx
 codigo:
   - web:src/pages/settings/channels/whatsapp/**
-  - api-v0:server/controllers/WaboxController.js
-  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/**
+  - api-v0:server/modules/**
   - api-v0:server/controllers/IntegrationsController.js
   - web:src/pages/settings/channels/index.tsx
   - web:src/pages/inbox/Conversations/index.tsx
-  - wabox:apps/docs/webhooks/instance-status.mdx
+  - motor-qr:apps/docs/webhooks/instance-status.mdx
 verificado_em: 2026-11-26
 ---
 

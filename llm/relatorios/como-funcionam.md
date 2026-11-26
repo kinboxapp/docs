@@ -38,10 +38,10 @@ Referência técnica complementar de [Como os relatórios contam sessões e temp
   - **Restringir relatórios ao membro:** limita os relatórios às sessões em que o membro é o responsável atual (na **Avaliação**, às avaliações registradas para ele; na **Presença**, só a presença dele) e limita os filtros ao próprio membro.
   - **Restringir relatórios aos grupos do membro:** limita os relatórios de sessões aos grupos do membro (na **Atribuição**, sessões que estão ou já estiveram nos grupos dele) e limita os filtros aos grupos dele e aos colegas desses grupos. Se o membro não pertence a nenhum grupo, o relatório não abre e aparece um aviso de que ele não pertence a nenhum grupo.
   - **Restringir relatórios ao membro** e **Restringir relatórios aos grupos do membro** se excluem mutuamente (marcar uma desmarca a outra; ambas podem ficar desmarcadas).
-  - **Não pode exportar relatórios:** desativa o botão **Exportar** dentro da lista de sessões (**Ver sessões**).
+  - **Não pode exportar relatórios:** impede exportar a lista de sessões dos relatórios.
   - **Não pode criar ou excluir Dashboard:** impede criar, clonar, editar e excluir dashboards ([Criar dashboards](/docs/relatorios/dashboard)).
 - **Canais restritos a grupos:** canais com visibilidade restrita a grupos não aparecem nos filtros de relatórios para membros fora desses grupos (exceto o proprietário e quem tem acesso **Global**).
-- **Atendimento ao vivo:** o mapa e a fila não usam as restrições de relatório; seguem o **Acesso as Conversas** do papel, igual à [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Com a restrição **Esconder telefone**, o telefone dos contatos não é exibido. Os indicadores do dia no conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) vêm da **Produtividade** de hoje e seguem as restrições de relatórios.
+- **Atendimento ao vivo:** o mapa e a fila mostram as conversas que o **Acesso as Conversas** do papel deixa ver, igual à [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Com a restrição **Esconder telefone**, o telefone dos contatos não é exibido. Os indicadores do dia no conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) vêm da **Produtividade** de hoje e seguem as restrições de relatórios.
 
 ## Sessão e primeira resposta
 

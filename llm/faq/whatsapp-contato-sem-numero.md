@@ -5,11 +5,11 @@ keywords: [contato sem número, sem telefone, identificador de privacidade, lid,
 publico: llm
 tipo: faq
 fontes:
-  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules
   - web:src/lib/groupMentions.ts
   - api-v0:server/controllers/WbaCloudController.js
 codigo:
-  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules/**
   - web:src/lib/groupMentions.ts
   - api-v0:server/controllers/WbaCloudController.js
 verificado_em: 2026-11-26

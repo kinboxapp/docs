@@ -28,7 +28,7 @@ codigo:
   - api:src/modules/reports/session-summary/session-summary.consumer.ts
   - api-v0:server/controllers/CampaignController.js
   - api-v0:server/controllers/**
-  - api-v0:server/modules/wabox/WaboxSender.js
+  - api-v0:server/modules/**
 verificado_em: 2026-11-26
 ---
 

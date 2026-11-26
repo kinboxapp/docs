@@ -56,7 +56,7 @@ verificado_em: 2026-11-26
 
 ### Restrição de salas e salvamento
 
-- Membros com a restrição **Não pode acessar as salas** no papel não acessam as salas e não recebem push das salas no app (a restrição não vale para o proprietário).
+- Membros com a restrição **Não pode acessar as salas** no papel não acessam as salas nem recebem push das salas no app. O proprietário sempre tem acesso às salas.
 - Ao mudar qualquer opção em **Configurações** → **Notificações**, aparecem **Cancelar** e **Salvar mudanças**. Ao salvar, aparece "Suas notificações foram atualizadas." Ao sair sem salvar, aparece "Você tem mudanças não salvas, tem certeza que deseja sair?"
 
 ## Sons

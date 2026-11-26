@@ -5,12 +5,10 @@ keywords: [botões whatsapp, listas whatsapp, template qr code, localização wh
 publico: llm
 tipo: faq
 fontes:
-  - api-v0:server/modules/wabox/WaboxSender.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules
   - api-v0:server/modules/chat/botFlowV2.js
 codigo:
-  - api-v0:server/modules/wabox/WaboxSender.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules/**
   - api-v0:server/modules/chat/botFlowV2.js
 verificado_em: 2026-11-26
 ---

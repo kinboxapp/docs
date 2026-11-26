@@ -1835,6 +1835,8 @@
   url: /crm/contacts/people/new
   passos:
     - esperar: '.ant-drawer-content >> text=Contato privado'
+    # O texto de exemplo do e-mail usa um domínio real: troca por um domínio reservado
+    - trocarTexto: { seletor: '.ant-drawer-content input[placeholder*="@"]', texto: 'nome@example.com' }
     - pausa: 800
   alvo:
     - '.ant-drawer-content'

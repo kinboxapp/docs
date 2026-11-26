@@ -35,7 +35,7 @@ O menu lateral **Clientes** aparece para quem tem **Gerenciar Contatos** ou **Ge
 | **Alterar propriedades do contato** | Contatos | "Pode alterar as informações dos contatos." Sem ela, o botão **Salvar** do formulário fica desativado (inclusive ao criar) e os campos do perfil ficam somente leitura. |
 | **Ver telefone de contatos privados** | Contatos | "Pode ver telefone de contatos marcados como privado." Libera a chave **Contato privado** no formulário e a exibição de telefone e e-mail de contatos privados. |
 | **Não pode exportar contatos** *(restrição)* | Contatos | Desativa as opções de exportar contatos em **Contatos** e oculta o menu **⋯** de exportação em **Organizações**. |
-| **Esconder telefone** *(restrição)* | Contatos | "Esconde o telefone do contato do membro". Esconde o telefone nestas telas: lista, perfil (`*******`) e formulário de contatos, contato na negociação, lista de conversas e painel da conversa. |
+| **Esconder telefone** *(restrição)* | Contatos | "Esconde o telefone do contato do membro". Oculta o telefone do contato nas telas de atendimento, contatos e negociações. |
 | **Proibir alterar celular** *(restrição)* | Contatos | "Membro fica proibido de alterar o celular do contato". Bloqueia a edição do campo **Celular** no formulário e no perfil. |
 | **Campos** | Gerenciamento do Ambiente | "Ver, adicionar, editar e excluir campos customizados." Libera **Configurações** → **Ambiente** → **Campos personalizados**. Sem ela, abrir o endereço exibe "Você não tem permissão para acessar essa página". |
 

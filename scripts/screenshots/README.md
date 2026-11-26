@@ -11,7 +11,12 @@ Ferramentas para tirar os prints da central de ajuda no staging, sempre no works
 
 ## Antes de tudo
 
-As credenciais do staging ficam fora do repositório. Os scripts leem `KINBOX_STAGING_EMAIL` e `KINBOX_STAGING_PASSWORD` do ambiente ou, se elas não estiverem definidas, do arquivo `~/.config/kinbox/staging.env`. Nunca escreva o e-mail ou a senha num comando.
+Os endereços e as credenciais do staging ficam fora do repositório:
+
+- **Endereços:** `KINBOX_STAGING_API_V0`, `KINBOX_STAGING_API_V3`, `KINBOX_STAGING_WEB` e `KINBOX_STAGING_WIDGET`. Os scripts leem do ambiente ou, se faltar alguma, do arquivo `~/.config/kinbox/docs-staging.env` (uma linha `CHAVE=valor` por endereço, com permissão `600`). Sem valor padrão: se faltar um endereço, o script para e diz qual.
+- **Credenciais:** `KINBOX_STAGING_EMAIL` e `KINBOX_STAGING_PASSWORD`, do ambiente ou do arquivo `~/.config/kinbox/staging.env`. Nunca escreva o e-mail ou a senha num comando.
+
+Não escreva endereço de staging em arquivo do repositório: o `check-sensivel.ts` barra em qualquer pasta.
 
 ```bash
 cd scripts/screenshots
