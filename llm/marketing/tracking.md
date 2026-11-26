@@ -5,10 +5,7 @@ keywords: [tracking eventos, kbq push, consentimento granted denied, form_submit
 publico: llm
 tipo: referencia
 fontes:
-  - api:src/modules/marketing/tracking/kinbox-tracking.sdk.ts
-  - api:src/modules/marketing/tracking/kinbox-tracking.service.ts
-  - api:src/modules/marketing/tracking/kinbox-tracking.types.ts
-  - api:src/modules/marketing/tracking/kinbox-tracking-event.schema.ts
+  - api:src/modules/marketing/tracking/**
   - web:src/pages/reports/Marketing/TrackingSites/index.tsx
   - web:src/pages/reports/Marketing/Tracking/TrackingHeatmap.tsx
 codigo:
@@ -64,6 +61,7 @@ Condições gerais:
 ## Origem: UTMs e IDs de clique
 
 - Parâmetros lidos da URL: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, `gclid`, `gbraid`, `wbraid` e `ctwa_clid`. Outros parâmetros são descartados; valores são cortados em 500 caracteres.
+- **Orientação da tela para campanhas:** "Nas campanhas, use utm_campaign=<campaignId> e utm_content=<adId>; apenas UTMs padronizadas e click IDs são armazenados." Exemplo de link: `utm_source=instagram&utm_medium=paid_social&utm_campaign=black-friday`.
 - **Primeira e última origem:** a primeira origem é gravada uma vez e nunca substituída; a última origem só muda quando chega uma nova origem não direta e diferente (tráfego direto não apaga a última origem).
 - **Herança de origem:** eventos disparados em páginas internas sem UTM na URL herdam a última origem guardada do visitante, por isso entram na tabela **Campanhas** do relatório.
 - **Referrer e página:** guarda apenas a origem (host) do referrer e o caminho da página (sem parâmetros de query).
@@ -86,7 +84,8 @@ A identidade anônima é gerada no navegador somente depois de `consent granted`
 - **Chaves:** começam com `kb_live_`, são exclusivas do Tracking e não autenticam a API pública da Kinbox. Uma chave pode ser usada por vários sites; a mesma origem vinculada duas vezes à mesma chave é recusada.
 - **Edição:** alterar o domínio ou a chave de um site volta o status para **Aguardando instalação** e limpa o último sinal e o último teste.
 - **Status Com erro:** só aparece quando uma sessão de teste falha antes de o site ficar **Ativo**; um site já **Ativo** não é rebaixado por falha de teste.
-- **Revogar chave:** ação definitiva; os sites vinculados deixam de enviar eventos e continuam listados. Para substituir uma chave: crie outra em **Configurações**, edite o site para selecionar a nova em **Chave existente**, publique o novo snippet e revogue a antiga.
+- **Revogar chave:** ação definitiva; os sites vinculados deixam de enviar eventos e continuam listados. Para substituir uma chave: crie outra em **Configurações**, edite cada site que usa a chave antiga para selecionar a nova em **Chave existente**, publique e teste o novo snippet em **todos** esses sites e só então revogue a antiga.
+- **Copiar snippet em chave antiga:** se a chave do site foi criada antes de o snippet poder ser recuperado, **Copiar snippet** abre "Regenerar chave de Tracking?" ("Esta chave foi criada antes do snippet poder ser recuperado. A chave anterior deixará de funcionar e uma nova será gerada para este site."). Ao clicar em **Regenerar e abrir snippet**, a chave anterior deixa de funcionar e o snippet novo é copiado; todos os sites que usavam a chave anterior precisam do snippet novo.
 - **Excluir site:** apaga permanentemente eventos, mapa de calor e testes do site; a chave não é apagada.
 
 ## Mapa de calor
@@ -131,13 +130,12 @@ A identidade anônima é gerada no navegador somente depois de `consent granted`
 | `Informe uma origem completa, por exemplo https://www.exemplo.com.br.` | Domínio inválido ou informado com caminho (ex.: `/contato`). | Informe apenas protocolo e domínio, sem caminho. |
 | `A URL aberta não corresponde ao domínio configurado.` | A página aberta no teste tem origem diferente da cadastrada. | Abra a URL de teste gerada para o domínio exato do site. |
 | `A chave instalada não corresponde ao domínio configurado.` | O site publicado usa uma chave diferente da associada ao domínio. | Atualize o snippet no site com **Copiar snippet**. |
-| `O navegador não informou a origem do site.` | O navegador não informou de qual site veio a página. | Abra a URL de teste em um navegador comum, na janela normal. |
 | `A sessão expirou após 15 minutos. Inicie um novo teste.` / `Sessão de teste expirada. Inicie um novo teste no Kinbox.` | Passaram-se mais de 15 minutos desde **Iniciar teste**. | Clique em **Iniciar novo teste**. |
 | `O evento foi rejeitado porque o consentimento de analytics não foi concedido.` / `Consentimento é obrigatório para registrar eventos de Tracking.` | Evento enviado antes de `window.kbq.push(["consent", "granted"])`. | Aceite o consentimento na página e confirme o disparo no gerenciador de cookies. |
 | `Limite diário de fotos de heatmap atingido para este site.` | O site atingiu 200 fotos novas de mapa de calor em 24 horas. | Aguarde a janela de 24 horas; cliques, scroll e atenção continuam sendo gravados. |
 
 ## O que o Tracking não faz
 
-- Não identifica o contato, não possui comando de identificação de usuário e não liga visitas do site a conversas nem a negociações. Para levar a campanha do site até a conversa, use o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget).
+- Não identifica o contato, não possui comando de identificação de usuário e não liga visitas do site a conversas nem a negociações. Para levar a campanha do site até a conversa, use o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget/configuracoes).
 - Não captura formulários, abertura de widget, cliques no WhatsApp nem pedidos de conversa automaticamente: cada interação precisa ser enviada pelo site via `window.kbq.push(["track", ...])`.
 - Não impõe limite diário de consultas nem exige botão **Atualizar**.

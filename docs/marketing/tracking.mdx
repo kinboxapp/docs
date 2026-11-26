@@ -1,15 +1,13 @@
 ---
 title: "Instalar o Tracking no site"
 description: Como ativar o Tracking, cadastrar o site, instalar o snippet direto ou pelo Google Tag Manager, ligar o consentimento, testar a instalação e cuidar das chaves.
-keywords: [tracking, rastreamento do site, snippet, instalar script no site, google tag manager, gtm, consentimento, cookies, utm, mapa de calor, chave de tracking, testar instalação]
+keywords: [tracking, rastreamento do site, heatmap, pixel, snippet, instalar script no site, google tag manager, gtm, consentimento, cookies, utm, mapa de calor, chave de tracking, testar instalação]
 publico: humano
 tipo: guia
 fontes:
   - web:src/pages/reports/Marketing/TrackingSites/index.tsx
   - web:src/features/marketing-apps/NativeMarketingInstallModal.tsx
-  - api:src/modules/marketing/tracking/kinbox-tracking.service.ts
-  - api:src/modules/marketing/tracking/kinbox-tracking.sdk.ts
-  - api:src/modules/marketing/tracking/kinbox-tracking.controller.ts
+  - api:src/modules/marketing/tracking/**
 codigo:
   - web:src/pages/reports/Marketing/TrackingSites/**
   - web:src/pages/reports/Marketing/Tracking/**
@@ -87,8 +85,8 @@ O Tracking só conta visitantes que deram consentimento de analytics no site e m
 
     A sessão de teste vale por 15 minutos ("A sessão expirou após 15 minutos. Inicie um novo teste."). Os eventos do teste não entram no relatório.
 
-    <Frame caption="Etapa Teste a instalação com URL de teste e lista de Eventos em tempo real">
-      <img src="/images/ajuda/marketing/tracking-teste.webp" alt="Tela Teste a instalação com URL de teste de example.com, botões Copiar URL de teste e Abrir URL de teste e aviso Aguardando o snippet ser detectado" />
+    <Frame caption="Etapa Teste a instalação (a URL de teste aparece com tarja neste print)">
+      <img src="/images/ajuda/marketing/tracking-teste.webp" alt="Tela Teste a instalação com a URL de teste com tarja, botões Copiar URL de teste e Abrir URL de teste e aviso Aguardando o snippet ser detectado" />
     </Frame>
   </Step>
   <Step title="Revise e conclua">
@@ -106,29 +104,25 @@ O Tracking só conta visitantes que deram consentimento de analytics no site e m
   window.kbq.push(["track", { event: "form_submitted", properties: { form_id: "contato" } }]);
   ```
 
-- **Campanhas (UTMs):** adicione UTMs aos links dos seus anúncios (por exemplo, `utm_source=instagram&utm_medium=paid_social&utm_campaign=black-friday`). Como orienta a tela, nas campanhas use `utm_campaign=<campaignId>` e `utm_content=<adId>`; apenas UTMs padronizadas e identificadores de clique são armazenados. Como o Tracking não identifica o contato, para levar a campanha do site até a conversa use o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget).
+- **Campanhas (UTMs):** adicione UTMs aos links dos seus anúncios (por exemplo, `utm_source=instagram&utm_medium=paid_social&utm_campaign=black-friday`). Como o Tracking não identifica o contato, para levar a campanha do site até a conversa use o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget/configuracoes).
 - **Mapa de calor:** começa sozinho depois do consentimento, sem configuração extra. Para esconder uma área do site (como dados de cliente) da foto e dos cliques, marque o elemento HTML com `data-kbq-private`.
 
 Veja como ler os números e o mapa de calor em [Ler os relatórios de marketing](/docs/marketing/relatorios-de-marketing) ou volte para [Medir anúncios e o site com a Kinbox](/docs/marketing/visao-geral).
 
 ## Chaves
 
-Na lista de sites, clique em **Configurações** para abrir **Configurações do Tracking**. As chaves do Tracking (que começam com `kb_live_`) são exclusivas do Tracking e não autenticam a API pública da Kinbox. Uma mesma chave pode servir vários sites.
+Na lista de sites, clique em **Configurações** para ver e criar chaves (**Criar chave**). As chaves do Tracking são exclusivas do Tracking, e uma mesma chave pode servir vários sites. Para pegar o snippet de novo, use **Copiar snippet** no menu da linha do site.
 
-Clique em **Criar chave** para criar uma nova; a tabela mostra **Nome**, **Chave** (só o começo), **Criação**, **Último uso** e **Revogar**. Copie a chave ao criar; se precisar do snippet depois, use **Copiar snippet** no menu da linha do site.
-
-Para trocar a chave de um site: crie uma nova chave, edite o site para selecioná-la em **Chave existente**, instale o snippet novo no site e só então revogue a chave antiga.
+Para trocar de chave: crie a nova, selecione-a em **Chave existente** em cada site, instale e teste o snippet novo em **todos** os sites que usavam a chave antiga e só então clique em **Revogar** na chave antiga.
 
 <Warning>
-  **Revogar** uma chave é definitivo. Os sites que usam a chave revogada deixam de enviar eventos, mesmo continuando na lista.
+  **Revogar** uma chave é definitivo: os sites que ainda usam essa chave deixam de enviar eventos.
 </Warning>
 
 ## Excluir um site
 
-Para remover um site, abra o menu da linha na lista, clique em **Excluir** e confirme.
-
 <Warning>
-  **Excluir** um site apaga todos os dados coletados daquele site (visitas, mapa de calor e testes), sem possibilidade de desfazer. A chave de Tracking não é apagada.
+  No menu da linha, **Excluir** apaga o site e todos os dados coletados dele (visitas, mapa de calor e testes), sem como desfazer. A chave não é apagada.
 </Warning>
 
 ## Problemas comuns
@@ -136,6 +130,4 @@ Para remover um site, abra o menu da linha na lista, clique em **Excluir** e con
 - **Teste parado em "Aguardando o snippet ser detectado."** Confira se o snippet está publicado na página aberta, se a URL aberta corresponde ao domínio cadastrado e se não há bloqueador de anúncios ou falha de rede impedindo o envio ("Falhas de rede, CORS ou bloqueadores não chegam ao Kinbox.").
 - **"A URL aberta não corresponde ao domínio configurado." ou "O domínio não está autorizado para esta chave."** Cadastre o endereço exato que o visitante acessa, incluindo `www.` ou sem `www.` e o protocolo (`http` ou `https`).
 - **"O evento foi rejeitado porque o consentimento de analytics não foi concedido." ou teste parado em "Snippet detectado. Aguarde o consentimento de analytics para receber o pageview."** O site ainda não executou `window.kbq.push(["consent", "granted"]);` após o aceite do visitante.
-- **"A sessão expirou após 15 minutos. Inicie um novo teste." ou erro durante o teste.** Um erro encerra a sessão de teste; clique em **Iniciar novo teste** para validar novamente.
 - **Site como Ativo, mas relatório zerado.** Confira se os visitantes estão aceitando o consentimento de analytics, se a chave usada no site não foi revogada e se o período escolhido está dentro dos últimos 90 dias.
-- **Números menores que os de outras ferramentas.** O Tracking só registra visitantes que aceitaram o consentimento de analytics.

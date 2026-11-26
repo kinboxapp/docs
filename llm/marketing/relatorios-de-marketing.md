@@ -25,7 +25,7 @@ Condições gerais:
 - Ver os relatórios em **Relatórios** → **Marketing** exige a permissão **Gerenciar relatórios**; ativar os apps em **Configurações** → **Integrações** → **Apps**, conectar, desconectar e definir a conta padrão exigem a permissão **Integrações** (o proprietário pode tudo).
 - Se algum app não aparecer em **Configurações** → **Integrações** → **Apps**, ele ainda não foi liberado para o workspace: fale com o suporte.
 - Limites diários de consultas por workspace: **Meta Ads** = 10 consultas/dia; **Google Ads** = 3 consultas/dia; **Tracking** = sem limite (e só conta visitantes com consentimento de analytics, sem identificar o contato).
-- O relatório **Google Ads** não tem funil, leads, CPL nem negociações.
+- O relatório **Google Ads** não tem leads, CPL nem métricas de funil e pipeline; as negociações aparecem só como tipo **Negócio** na aba **Atribuição no Kinbox**.
 
 ## Consultas e foto salva
 
@@ -89,8 +89,8 @@ Condições gerais:
 ## Meta Ads: de onde vêm as negociações
 
 - Cliques, leads, gasto, alcance, **Faturamento (Meta)** e **ROAS** vêm da Meta. Da Kinbox vêm **Negócios**, **Ganhos**, **Perdidos**, **Valor em negociação**, **Negócios em aberto** e **Tempo médio no funil**.
-- **Atribuição na criação da negociação:** ao criar uma negociação, a Kinbox procura a sessão mais recente do contato com origem nos últimos 90 dias. Entra como Meta Ads quando a sessão tem ID do anúncio (`source_id`), `ctwa_clid` ou `fbclid` (UTM sozinha não atribui ao Meta Ads). Negociações importadas e de funil operacional não recebem origem.
-- **Regras do bloco Conversão e Pipeline - Meta Ads:** conta negociações criadas no período (no fuso da conta de anúncios) cujo anúncio pertence à conta/campanha (considerando anúncios que rodaram até 90 dias antes do início do período). O status em **Status dos negócios** (**Em andamento**, **Ganhos**, **Perdidos**) é o status atual; **Tempo médio no funil** é a média de dias desde a criação das negociações ainda abertas.
+- **Origem da negociação:** ao criar uma negociação, a Kinbox procura a sessão mais recente do contato com origem nos últimos 90 dias. Ao ligar uma negociação existente sem origem a uma conversa, a Kinbox busca a origem nas sessões dessa conversa. A origem é Meta Ads quando a sessão tem ID do anúncio (`source_id`), `ctwa_clid` ou `fbclid` (UTM sozinha não atribui ao Meta Ads); essa origem vale para o filtro **Criado por Meta Ads**. Negociações importadas e de funil operacional não recebem origem.
+- **Regras do bloco Conversão e Pipeline - Meta Ads:** conta só negociações com o ID do anúncio (`source_id`, que vem de anúncios de clique para o WhatsApp) de um anúncio da conta/campanha selecionada (considerando anúncios que rodaram até 90 dias antes do início do período), criadas no período (no fuso da conta de anúncios). Negociações com origem Meta Ads só por `fbclid` ou `ctwa_clid` não entram no bloco. O status em **Status dos negócios** (**Em andamento**, **Ganhos**, **Perdidos**) é o status atual; **Tempo médio no funil** é a média de dias desde a criação das negociações ainda abertas.
 - **Funil de Vendas e Conversão:** **Cliques** → **Leads** → **Negócios** → **Ganhos**, com cada percentual calculado sobre a etapa imediatamente anterior.
 
 ## Meta Ads: conexão e mensagens
@@ -111,7 +111,7 @@ Condições gerais:
 
 ## Google Ads: métricas e sugestões
 
-- **Métricas (todas do Google; sem funil, leads, CPL nem negociações):** **Investimento**, **Conversões** (pode ter até 2 casas decimais), **Custo por conversão** (também exibido como **CPA** nos cartões de destaque e **Custo/conv.** na tabela), **Valor de conversão**, **ROAS** (valor de conversão ÷ investimento), **Impressões**, **Cliques**, **CTR** (cliques ÷ impressões × 100), **CPC médio** (custo ÷ cliques) e **CPM médio** (custo ÷ impressões × 1.000).
+- **Métricas (todas do Google; sem leads, CPL nem métricas de funil e pipeline):** **Investimento**, **Conversões** (pode ter até 2 casas decimais), **Custo por conversão** (também exibido como **CPA** nos cartões de destaque e **Custo/conv.** na tabela), **Valor de conversão**, **ROAS** (valor de conversão ÷ investimento), **Impressões**, **Cliques**, **CTR** (cliques ÷ impressões × 100), **CPC médio** (custo ÷ cliques) e **CPM médio** (custo ÷ impressões × 1.000).
 - **Filtro de campanha:** filtra todos os blocos do relatório (na aba **Atribuição no Kinbox**, filtra linhas com campanha identificada).
 - **Agrupamentos e limites:**
   - **Conversões por tipo:** **Rede de Pesquisa**, **Performance Max** (inclui Shopping) e **Display** (inclui Vídeo, Geração de demanda e Discovery).
@@ -136,12 +136,12 @@ Condições gerais:
 
 ## Google Ads: Atribuição no Kinbox
 
-- **Vínculo determinístico:** lê o identificador de clique (`gclid`, `gbraid` ou `wbraid`, nessa ordem) gravado na sessão (por [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp), origem registrada no contato pela API ou captura do [widget](/docs/canais/widget)). `utm_campaign` sozinho não atribui ao Google Ads.
+- **Vínculo determinístico:** lê o identificador de clique (`gclid`, `gbraid` ou `wbraid`, nessa ordem) gravado na sessão (por [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp), origem registrada no contato pela API ou captura do [widget](/docs/canais/widget/configuracoes)). `utm_campaign` sozinho não atribui ao Google Ads.
 - **Colunas:** **Click ID** (mascarado: 7 primeiros + `••••` + 4 últimos e tipo), **Campanha** (com grupo e palavra-chave), **Entidade Kinbox** (**Conversa** ou **Negócio**), **Motivo do vínculo**, **Confiança** (`Alta`), **Status** (`Vinculado`) e **Registrado em**.
 - **Limites:** lê até 1.000 sessões mais recentes do workspace no período e exibe até 200 linhas.
 - **Confirmação no Google Ads:** para `gclid`, consulta até 32 dias distintos mais recentes por carregamento (o Google mantém 90 dias de histórico de cliques); `gbraid` e `wbraid` não são confirmados no Google. Quando não confirma, a linha continua com a campanha por `utm_campaign` ou `—`. Quando o Google confirma que o clique pertence a outra conta do workspace e não há UTM compatível, a linha sai da lista.
 - **Frequência:** a atribuição é recalculada no máximo 1 vez por dia por foto salva (clicar em **Atualizar** no mesmo dia mantém as linhas).
-- **Negociações:** ao criar a negociação, herda a origem da sessão mais recente do contato nos últimos 90 dias (negociações importadas ou de funil operacional não recebem origem).
+- **Conversas e negociações:** a aba lista as conversas do período com `gclid`, `gbraid` ou `wbraid`, mesmo sem negociação (tipo **Conversa**); quando uma negociação recebeu a origem daquela sessão, a linha aparece como **Negócio**. A negociação recebe a origem Google Ads ao ser criada (sessão mais recente do contato nos últimos 90 dias) ou ao ser ligada a uma conversa, se ainda não tiver origem; negociações importadas ou de funil operacional não recebem origem.
 
 ## Google Ads: conexão e mensagens
 

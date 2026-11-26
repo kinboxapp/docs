@@ -29,14 +29,13 @@ Os três relatórios de marketing ficam em **Relatórios** → **Marketing**: **
 
 O seletor de datas usa o formato `DD/MM/AAAA`, com os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**. O período vale assim que você fecha o calendário. Por padrão, **Meta Ads** e **Google Ads** abrem nos últimos 30 dias até ontem; o **Tracking** abre nos últimos 30 dias até hoje. No **Meta Ads**, cada bloco tem seu próprio seletor de datas.
 
-Nos relatórios **Meta Ads** e **Google Ads**, a Kinbox exibe uma foto salva dos dados ("Atualizado em DD/MM HH:mm"). Toda busca nova na plataforma consome 1 **consulta** da cota diária do workspace (separada por app):
+Nos relatórios **Meta Ads** e **Google Ads**, a Kinbox exibe os dados salvos da última busca ("Atualizado em DD/MM HH:mm"). Toda busca nova na plataforma consome 1 **consulta** da cota diária do workspace (separada por app):
 
-- Primeira abertura de uma conta ou período;
-- Período que ainda não foi consultado;
-- Foto salva com mais de 48 horas;
-- Clique no botão **Atualizar**.
+- Abrir uma conta ou um período ainda não consultado;
+- Abrir dados salvos há mais de 48 horas;
+- Clicar no botão **Atualizar**.
 
-Escolher um período dentro de uma foto já consultada não gasta consulta. A cota vira à meia-noite (horário de Brasília), e passar o mouse sobre **Atualizar** mostra quantas consultas restam hoje.
+Escolher um período dentro de um período já consultado não gasta consulta. A cota vira à meia-noite (horário de Brasília), e passar o mouse sobre **Atualizar** mostra quantas consultas restam hoje.
 
 | Relatório | Consultas por dia (por workspace) | Intervalo mínimo entre dois Atualizar |
 | --- | --- | --- |
@@ -75,7 +74,7 @@ Abaixo dos cartões, o gráfico mostra **Leads**, **Investimento** ou **Faturame
 
 ### Conversão e Pipeline - Meta Ads
 
-Este bloco acompanha as negociações da Kinbox criadas no período a partir de conversas que vieram de anúncios desta conta (veja [Visão geral do CRM](/docs/crm/visao-geral)).
+Este bloco acompanha as negociações da Kinbox criadas no período a partir de conversas que vieram de anúncios de clique para o WhatsApp desta conta (só entram as negociações com o ID do anúncio; `fbclid` sozinho não basta) (veja [Visão geral do CRM](/docs/crm/visao-geral)).
 
 - **Funil de Vendas e Conversão:** mostra **Cliques** → **Leads** → **Negócios** → **Ganhos**, com cada percentual calculado sobre a etapa anterior. **Cliques** e **Leads** vêm da Meta; **Negócios** e **Ganhos** vêm da Kinbox.
 - **Resumo do Pipeline:** traz **Valor em negociação**, **Negócios em aberto** e **Tempo médio no funil**.
@@ -88,17 +87,15 @@ Este bloco acompanha as negociações da Kinbox criadas no período a partir de 
 - **Distribuição por Regiões:** mostra o mapa do Brasil por leads (ou por alcance, quando a Meta não informa leads por região).
 - **Dados Demográficos:** exibe a distribuição por idade e gênero do público alcançado.
 
-Diferenças em relação ao Gerenciador de Anúncios da Meta costumam vir de fuso horário, período selecionado, foto salva antiga (clique em **Atualizar**) ou do fato de **Leads Gerados** seguir o objetivo de cada campanha.
+Diferenças em relação ao Gerenciador de Anúncios da Meta costumam vir de fuso horário, período selecionado, dados salvos antigos (clique em **Atualizar**) ou do fato de **Leads Gerados** seguir o objetivo de cada campanha.
 
 ## Relatório Google Ads
 
-Antes de abrir o relatório, conecte a conta em [Conectar o Google Ads](/docs/marketing/google-ads). Este relatório não tem funil, leads, CPL nem negociações: todas as métricas de mídia vêm do Google.
-
-Os blocos aparecem nesta ordem: 5 cartões principais, gráfico **Conversões por dia** / **Investimento por dia**, **Conversões por tipo**, **Valor por campanha**, **Indicadores de mídia**, **Detalhamento das melhores campanhas**, **Palavras-chave e custo**, **De onde vêm seus cliques**, **Sugestões em Destaque**, tabela **Campanhas** e **Mídia e atribuição** (com as abas **Palavras-chave**, **Anúncios**, **Termos de busca** e **Atribuição no Kinbox**).
+Antes de abrir o relatório, conecte a conta em [Conectar o Google Ads](/docs/marketing/google-ads). Este relatório não tem leads, CPL nem métricas de funil e pipeline: todas as métricas de mídia vêm do Google. Além dos cartões, ele traz gráficos por dia, campanhas, palavras-chave, cidades dos cliques, sugestões e a seção **Mídia e atribuição** (com as abas **Palavras-chave**, **Anúncios**, **Termos de busca** e **Atribuição no Kinbox**).
 
 Escolher uma campanha no filtro do topo filtra o relatório inteiro. Quando o período selecionado inclui o dia de hoje, a tela avisa "Os dados de hoje ainda são parciais."
 
-### Métricas principais e de mídia
+### Cartões principais
 
 | Métrica | O que mostra |
 | --- | --- |
@@ -107,21 +104,16 @@ Escolher uma campanha no filtro do topo filtra o relatório inteiro. Quando o pe
 | **Custo por conversão** | Investimento dividido pelas conversões. |
 | **Valor de conversão** | Soma do valor de conversão informado pelo Google Ads. |
 | **ROAS** | Valor de conversão dividido pelo investimento. |
-| **Impressões** | Quantas vezes seus anúncios foram exibidos. |
-| **Cliques** | Quantos cliques seus anúncios receberam. |
-| **CTR** | Taxa de cliques (cliques divididos por impressões). |
-| **CPC médio** | Custo médio por clique. |
-| **CPM médio** | Custo médio por mil impressões. |
+
+O bloco **Indicadores de mídia** traz **Impressões**, **Cliques**, **CTR** (taxa de cliques), **CPC médio** e **CPM médio**.
 
 ### Sugestões em Destaque
 
-O bloco **Sugestões em Destaque** compara o desempenho das campanhas, palavras-chave e termos de busca ao custo por conversão médio da conta no período, agrupando os avisos em **Desperdício**, **Oportunidade**, **Atenção** e **Configuração**.
-
-Entre os alertas mostrados estão "Revise ou pause a campanha", "Aumente o orçamento", "Negative o termo …", "Pause a palavra-chave …", "Revise a página de destino", "O custo por clique subiu", "Configure o acompanhamento de conversões" e "Configure o valor das conversões". A Kinbox apenas sugere: nenhuma alteração é feita na sua conta do Google Ads.
+O bloco **Sugestões em Destaque** compara campanhas, palavras-chave e termos de busca ao custo por conversão médio da conta no período e agrupa os avisos em **Desperdício**, **Oportunidade**, **Atenção** e **Configuração**. A Kinbox apenas sugere: nenhuma alteração é feita na sua conta do Google Ads.
 
 ### Atribuição no Kinbox
 
-Na seção **Mídia e atribuição**, a aba **Atribuição no Kinbox** lista cada clique do Google que chegou numa conversa ou virou negociação do workspace, com o identificador do clique mascarado, a campanha, o tipo (**Conversa** ou **Negócio**) e o motivo do vínculo.
+Na seção **Mídia e atribuição**, a aba **Atribuição no Kinbox** lista as conversas do período que chegaram com um identificador de clique do Google (`gclid`, `gbraid` ou `wbraid`), mesmo sem negociação, com o identificador mascarado, a campanha e o motivo do vínculo. Quando há negociação ligada, a linha aparece como **Negócio**; senão, como **Conversa**.
 
 Se a aba aparecer vazia, confira se o identificador do clique (`gclid`) está chegando até a conversa (veja a dica em [Conectar o Google Ads](/docs/marketing/google-ads)). Você também pode filtrar conversas vindas do Google Ads usando [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa).
 
@@ -131,7 +123,7 @@ O relatório **Tracking** exibe os dados do script instalado no seu site (veja [
 
 No topo, use o seletor **Site:** para ver um site específico ou **Todos os sites**, e alterne entre as abas **Visão geral** e **Mapa de calor**.
 
-<Frame caption="Relatório Tracking com seletor de período, seletor de site e abas Visão geral e Mapa de calor">
+<Frame caption="Relatório Tracking antes das primeiras visitas, com seletor de período, seletor de site e abas Visão geral e Mapa de calor">
   <img src="/images/ajuda/marketing/tracking-relatorio.webp" alt="Cabeçalho Visão do Gestor do relatório Tracking com filtro de datas, Site: Todos os sites, abas Visão geral e Mapa de calor e os quatro cartões de métricas" />
 </Frame>
 

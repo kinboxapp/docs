@@ -16,7 +16,7 @@ codigo:
   - web:src/pages/reports/index.tsx
   - web:src/features/marketing-apps/**
   - web:src/pages/settings/index.tsx
-  - api:src/modules/marketing/marketing-permission.guard.ts
+  - api:src/modules/marketing/**
   - api:src/modules/apps/marketing-apps.constants.ts
 verificado_em: 2026-11-26
 ---
@@ -28,12 +28,12 @@ Os apps de marketing da Kinbox reúnem em um só lugar o resultado dos seus anú
 | App | O que você acompanha | Limites e observações |
 | --- | --- | --- |
 | **Meta Ads** | Investimento, leads, CPL (custo por lead), ROAS (retorno sobre o investimento em anúncios) e faturamento informados pela Meta; criativos, regiões e públicos; e o funil do clique no anúncio até a negociação ganha na Kinbox. | 10 consultas por dia por workspace. |
-| **Google Ads** | Investimento, conversões, custo por conversão, valor de conversão e ROAS informados pelo Google; campanhas, palavras-chave e termos de busca; sugestões do que revisar; e a aba **Atribuição no Kinbox** com os cliques do Google que chegaram como conversa ou negociação. | 3 consultas por dia por workspace. Este relatório não tem funil, leads, CPL nem negociações. |
+| **Google Ads** | Investimento, conversões, custo por conversão, valor de conversão e ROAS informados pelo Google; campanhas, palavras-chave e termos de busca; sugestões do que revisar; e a aba **Atribuição no Kinbox** com os cliques do Google que chegaram como conversa ou negociação. | 3 consultas por dia por workspace. Este relatório não tem leads, CPL nem métricas de funil e pipeline. |
 | **Tracking** | Visitas, visitantes únicos, sessões, páginas vistas, origem das visitas e campanhas por UTM (parâmetros de rastreamento no endereço do link), interações enviadas pelo site e mapa de calor. | Sem limite de consultas. Só conta visitantes que deram consentimento de analytics e mede visitantes anônimos, sem identificar o contato. |
 
 ## De onde vêm os números
 
-No **Meta Ads** e no **Google Ads**, quase todos os números vêm direto da plataforma de anúncios. Da Kinbox entram apenas as negociações ligadas aos anúncios (no Meta Ads) e os cliques ligados a conversas ou negociações (no Google Ads).
+No **Meta Ads** e no **Google Ads**, quase todos os números vêm direto da plataforma de anúncios. Da Kinbox entram apenas as negociações ligadas aos anúncios de clique para o WhatsApp (no Meta Ads) e as conversas com clique do Google, com a negociação quando houver (no Google Ads).
 
 No **Tracking**, todos os dados vêm do script instalado no seu site.
 
@@ -53,11 +53,11 @@ No **Tracking**, todos os dados vêm do script instalado no seu site.
 
 ## Como a Kinbox sabe de onde veio o contato
 
-Quando um contato inicia conversa a partir de um anúncio de clique para o WhatsApp (no [WhatsApp](/docs/canais/whatsapp/visao-geral) oficial ou por QR Code) ou por um link com parâmetros de campanha — usando o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget) —, a sessão guarda a origem e o contato acumula essas origens no painel **Anúncios** do perfil (veja [Clientes, contatos e organizações](/docs/conversas/clientes-contatos-e-organizacoes)).
+Quando um contato inicia conversa a partir de um anúncio de clique para o WhatsApp (no [WhatsApp](/docs/canais/whatsapp/visao-geral) oficial ou por QR Code) ou por um link com parâmetros de campanha — usando o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget/configuracoes) —, a sessão guarda a origem e o contato acumula essas origens no painel **Anúncios** do perfil (veja [Clientes, contatos e organizações](/docs/conversas/clientes-contatos-e-organizacoes)).
 
-Na conversa, a origem aparece no painel **Detalhes** da sessão como **Meta Ads**, **Google Ads** ou **Campanha**, e você pode filtrar as conversas por **Criado por Meta Ads** e **Criado por Google Ads** (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)). Ao criar uma negociação (veja [Contatos e negócios](/docs/conceitos/contatos-e-negocios)), a Kinbox busca a origem nas sessões do contato dos últimos 90 dias (negociações importadas ou de funil operacional não recebem essa origem). Só chega à negociação a origem com identificação do anúncio da Meta (como o `fbclid`) ou do clique do Google (como o `gclid`); parâmetros de UTM sozinhos não bastam.
+Na conversa, a origem aparece no painel **Detalhes** da sessão como **Meta Ads**, **Google Ads** ou **Campanha**, e você pode filtrar as conversas por **Criado por Meta Ads** e **Criado por Google Ads** (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)). Ao criar uma negociação (veja [Contatos e negócios](/docs/conceitos/contatos-e-negocios)), ou ao ligá-la a uma conversa se ela ainda não tiver origem, a Kinbox busca a origem nas sessões dos últimos 90 dias (negociações importadas ou de funil operacional não recebem essa origem). Só chega à negociação a origem com identificação do anúncio da Meta (como o ID do anúncio de clique para o WhatsApp) ou do clique do Google (como o `gclid`); parâmetros de UTM sozinhos não bastam.
 
-O **Tracking** do site mede visitantes anônimos e não identifica o contato nem liga uma visita a uma conversa ou negociação. Para levar a campanha do site até a conversa, use o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget).
+O **Tracking** do site mede visitantes anônimos e não identifica o contato nem liga uma visita a uma conversa ou negociação. Para levar a campanha do site até a conversa, use o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget/configuracoes).
 
 ## Próximos passos
 

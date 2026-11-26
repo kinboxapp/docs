@@ -3189,6 +3189,7 @@
   arquivo: images/ajuda/marketing/divulgacao.webp
   paginas:
     - docs/marketing/visao-geral
+    - docs/marketing/google-ads
 
 - id: marketing-meta-ads-app
   url: /settings/apps/meta_ads
@@ -3273,7 +3274,8 @@
     - esperar: 'text=Aguardando o snippet ser detectado.'
     - pausa: 1500
   alvo: 'xpath=//h1[contains(., "Teste a instalação")]/../..'
-  mascarar: []
+  mascarar:
+    - 'a.font-mono'
   arquivo: images/ajuda/marketing/tracking-teste.webp
   paginas:
     - docs/marketing/tracking

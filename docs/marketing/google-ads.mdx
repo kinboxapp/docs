@@ -20,7 +20,7 @@ verificado_em: 2026-11-26
 
 Conecte a conta Google que administra seus anúncios para acompanhar investimento, conversões, ROAS (retorno sobre o investimento em anúncios), palavras-chave, termos de busca e sugestões em **Relatórios** → **Marketing** → **Google Ads** (título **Visão do Gestor** na tela).
 
-A Kinbox só lê os dados do Google Ads: não altera campanhas, não gasta verba e as sugestões do relatório são apenas recomendações. O relatório Google Ads não mostra leads, CPL (custo por lead) nem negociações — ele exibe métricas do Google e a aba **Atribuição no Kinbox** com os cliques ligados a conversas ou negociações.
+A Kinbox só lê os dados do Google Ads: não altera campanhas, não gasta verba e as sugestões do relatório são apenas recomendações. O relatório Google Ads não mostra leads, CPL (custo por lead) nem métricas de funil e pipeline — ele exibe métricas do Google e a aba **Atribuição no Kinbox** com as conversas que chegaram por clique do Google (e a negociação, quando houver).
 
 <Note>
   Quem pode: ativar o app, conectar, escolher contas, definir a padrão, trocar de conta e desconectar exigem a permissão **Integrações**; abrir o relatório exige a permissão **Gerenciar relatórios**. O proprietário do workspace pode fazer tudo. Veja [Referência de permissões](/docs/administracao/referencia-de-permissoes).
@@ -32,7 +32,7 @@ A Kinbox só lê os dados do Google Ads: não altera campanhas, não gasta verba
 - Você precisa de uma conta Google com acesso à conta do Google Ads da empresa.
 
 <Tip>
-  Para que a aba **Atribuição no Kinbox** liste os cliques que chegaram como conversa ou negociação, o identificador de clique do Google (`gclid`) precisa chegar na conversa — por exemplo, usando o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget). Mantenha a marcação automática ligada no Google Ads para que o Google adicione o `gclid` ao endereço dos anúncios.
+  Para que a aba **Atribuição no Kinbox** liste as conversas que chegaram por clique do Google, o identificador de clique do Google (`gclid`) precisa chegar na conversa — por exemplo, usando o [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp) ou a captura de campanha do [widget](/docs/canais/widget/configuracoes). Mantenha a marcação automática ligada no Google Ads para que o Google adicione o `gclid` ao endereço dos anúncios.
 </Tip>
 
 ## Passo a passo
@@ -54,14 +54,14 @@ A Kinbox só lê os dados do Google Ads: não altera campanhas, não gasta verba
     Enquanto a janela estiver aberta, a tela mostra "Aguardando autorização" com o botão **Abrir login novamente**. Se o navegador bloquear a janela, aparece "Não foi possível abrir a janela do Google. Habilite pop-ups e tente novamente."
   </Step>
   <Step title="Escolha as contas de anúncios e defina a padrão">
-    Em **Escolha as contas do workspace**, marque uma ou mais contas de cliente e clique em **Salvar contas selecionadas**. Depois, clique em **Definir padrão** na conta que o relatório deve abrir primeiro (ela recebe a etiqueta **Padrão**).
+    Em **Escolha as contas do workspace**, marque uma ou mais contas de cliente e clique em **Salvar contas selecionadas**. Se ainda não houver conta padrão (ou se a padrão foi desmarcada), a Kinbox já define uma das contas marcadas como padrão. Confira a etiqueta **Padrão** e, só se quiser trocar, clique em **Definir padrão** na conta que o relatório deve abrir primeiro.
 
     Contas de administrador — MCC (conta gerenciadora) — aparecem apenas como título do grupo e não podem ser marcadas.
   </Step>
   <Step title="Abra o relatório">
     Clique em **Abrir dashboard**, se o botão aparecer. Ele só aparece quando há uma conta padrão definida e você tem a permissão **Gerenciar relatórios**.
 
-    Se o botão não aparecer, salve as contas selecionadas e defina uma conta padrão primeiro, ou peça a permissão **Gerenciar relatórios** ao administrador. Você também pode abrir o relatório pelo menu **Relatórios** → **Marketing** → **Google Ads**.
+    Se o botão não aparecer, salve as contas selecionadas primeiro (confira a etiqueta **Padrão**), ou peça a permissão **Gerenciar relatórios** ao administrador. Você também pode abrir o relatório pelo menu **Relatórios** → **Marketing** → **Google Ads**.
   </Step>
 </Steps>
 
@@ -77,7 +77,7 @@ A primeira abertura do relatório consome 1 das **3 consultas por dia** disponí
 
 - **Trocar de conta:** abra **Configurações** → **Integrações** → **Apps** → **Google Ads** e clique em **Trocar de conta**, se o botão aparecer (ele aparece quando há uma conta conectada ou expirada; se não aparecer, clique em **Conectar com Google**). Se você autorizar outra conta Google, as contas escolhidas e os dados salvos do relatório são apagados.
 - **Desconectar:** na mesma gaveta, clique em **Desconectar** e confirme em "Desconectar Google Ads?".
-- **Desligar o app:** desligar **Habilitar integração** e clicar em **Salvar** apenas esconde o relatório e volta à tela de apresentação, sem desconectar nem revogar o acesso no Google. Para encerrar o acesso, use **Desconectar**.
+- **Desligar o app:** desligar **Habilitar integração** e clicar em **Salvar** mostra a tela de apresentação no lugar do relatório; a conta continua conectada e os dados salvos ficam guardados. Para encerrar o acesso, use **Desconectar**.
 
 <Warning>
   **Desconectar** revoga o acesso na conta Google e apaga as contas escolhidas e os dados salvos do relatório neste workspace. O relatório deixa de receber dados até alguém conectar novamente.
@@ -89,6 +89,3 @@ A primeira abertura do relatório consome 1 das **3 consultas por dia** disponí
 - **"A autorização Google Ads foi cancelada ou não concedeu acesso." ou "A permissão do Google Ads não foi concedida."** Inicie a conexão novamente e aceite o acesso ao Google Ads na janela do Google.
 - **"A conta Google foi autorizada, mas nenhuma conta Google Ads foi identificada ainda…"** Clique em **Tentar carregar contas** ou use **Trocar de conta** escolhendo uma conta Google que tenha acesso ao Google Ads.
 - **"Reconecte o Google Ads" ou "A autorização do Google expirou. Reconecte a conta."** Clique em **Trocar de conta** na gaveta do app e autorize novamente; usando a mesma conta Google, as contas escolhidas são mantidas.
-- **"Algumas contas Google Ads não puderam ser consultadas e podem não aparecer na lista."** Clique em **Tentar carregar contas** para consultar novamente.
-- **"Conecte uma conta Google Ads" com o aviso "A conexão real ficará disponível…".** O Google Ads ainda não está disponível para o seu workspace: fale com o suporte.
-- **"Peça a alguém com permissão para gerenciar integrações que conecte a conta do Google Ads."** Seu papel não tem a permissão **Integrações**. Peça a um membro com essa permissão ou ao proprietário que faça a conexão.
