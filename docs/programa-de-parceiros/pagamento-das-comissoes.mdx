@@ -1,0 +1,62 @@
+---
+title: Pagamento das comissões
+description: Onde acompanhar as comissões no painel de parceiro, o que significa cada status, quando os recebimentos costumam sair e como baixar o recibo.
+keywords: [comissão, comissões, pagamento de comissão, quando recebo, a receber, total recebido, recibo, status da comissão, pendente, recebido, extrato de comissões, exportar comissões]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/partner/PartnerComissions/index.tsx
+  - web:src/pages/partner/PartnerComissions/EditPartnerComission.tsx
+  - api:src/modules/commissions/**
+codigo:
+  - web:src/pages/partner/PartnerComissions/**
+  - web:src/models/partnerCommissions.ts
+  - api:src/modules/commissions/**
+verificado_em: 2026-11-26
+---
+
+Acompanhe as comissões recebidas e a receber, confira os status e baixe os recibos diretamente no painel **Parceria**.
+
+<Note>
+  Quem pode: qualquer membro com acesso ao painel **Parceria** (permissão **Pode acessar painel de parceria** ou proprietário do workspace).
+</Note>
+
+## Onde ficam
+
+Vá em **Parceria** → **Comissões**. No topo da tela ficam dois cartões de resumo:
+
+- **A receber**: soma das comissões com status **Pendente**. A dica da tela informa: "Os recebimentos são efetuados normalmente no dia 5 de cada mês.".
+- **Total recebido**: soma das comissões com status **Recebido**.
+
+## Como ler a lista
+
+Cada linha mostra uma comissão com **Período** (mês e ano de referência), **Valor**, **N° Faturas** e **Status**. A comissão de um mês reúne as faturas pagas pelos workspaces dos seus clientes (na tela, **ambientes**) naquele período e é lançada no mês seguinte.
+
+| Status | Significado |
+| --- | --- |
+| **Pendente** | Comissão lançada e aguardando pagamento. |
+| **Recebido** | Comissão paga pela Kinbox. |
+| **Cancelado** | Comissão cancelada. |
+
+## Detalhe de uma comissão
+
+Clique na linha de uma comissão para ver os detalhes. No topo aparecem os cartões **Período**, **Valor**, **Status** e **Recibo** (com **Baixar recibo**, quando houver recibo).
+
+Na seção **Faturas**, cada linha corresponde a um cliente incluído no período. Ao passar o mouse sobre a linha, aparecem **Comissão (%)**, **Valor faturado**, **Pago em** e **Link de pagamento** (veja também [Percentual de comissão e níveis do programa](/docs/programa-de-parceiros/niveis-do-programa-de-comissionamento)).
+
+## Recibo e exportação
+
+Quando a Kinbox paga a comissão, o status muda para **Recebido** e o recibo fica disponível em **Ver recibo** (no menu **⋯** da linha; a opção fica desabilitada enquanto não houver recibo) ou em **Baixar recibo** no detalhe da comissão.
+
+Para exportar os dados:
+
+- No menu **⋯** de uma comissão, **Exportar** baixa a planilha com as faturas daquele período.
+- No menu **⋯** no canto superior direito da tela **Comissões**, **Exportar CSV** e **Exportar XLSX** baixam a listagem de comissões.
+
+## Prev. de Comissão × Comissões
+
+O cartão **Prev. de Comissão** na tela **Clientes** é apenas uma estimativa; o valor que vale é o lançado em **Comissões** (veja [Painel do parceiro: visão geral](/docs/programa-de-parceiros/visao-geral)).
+
+## Forma de recebimento
+
+O painel não tem cadastro de dados bancários: para combinar ou mudar a forma de recebimento, fale com a Kinbox.

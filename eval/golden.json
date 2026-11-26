@@ -1571,5 +1571,53 @@
     "pergunta": "Como faço o Google Agenda do meu celular tocar um alarme antes de cada compromisso pessoal?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Indiquei uma empresa para usar a Kinbox e quero que a conta dela caia na minha carteira de parceiro. Como faço?",
+    "esperado": [
+      "docs/programa-de-parceiros/convidar-clientes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Sou parceiro e preciso entrar no ambiente de um cliente meu para arrumar umas configurações. Onde faço isso?",
+    "esperado": [
+      "docs/programa-de-parceiros/inspecionar-cliente"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Configurei tags, funis e bot num ambiente modelo. Tem como copiar tudo isso para os clientes novos que eu trouxer?",
+    "esperado": [
+      "docs/programa-de-parceiros/templates"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Em que dia do mês a Kinbox paga a comissão de parceiro?",
+    "esperado": [
+      "llm/faq/parceiro-quando-recebo",
+      "docs/programa-de-parceiros/pagamento-das-comissoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quero mandar para o meu cliente um link para ele pagar a assinatura. O painel de parceiro gera isso?",
+    "esperado": [
+      "llm/faq/parceiro-link-de-checkout"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O item Parceria não aparece no meu menu lateral. Por quê?",
+    "esperado": [
+      "docs/programa-de-parceiros/visao-geral"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como vejo quanto rende o programa de afiliados do Mercado Livre?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
