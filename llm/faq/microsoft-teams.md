@@ -19,7 +19,7 @@ Posso atender pelo Microsoft Teams?
 
 A Kinbox não tem canal nem integração com o Microsoft Teams.
 
-Para conversar com a própria equipe dentro da Kinbox, existe **Salas** (o chat interno do time). Para atender clientes que usam outra plataforma de mensagens que ofereça integração por API, uma equipe técnica pode conectá-la pelo canal customizado: veja [Criar um canal customizado](/docs/canais/canal-customizado).
+Para conversar com a própria equipe dentro da Kinbox, existe **Salas**, o chat interno da equipe: veja [Salas: o chat interno da equipe](/docs/salas/visao-geral). Para atender clientes que usam outra plataforma de mensagens que ofereça integração por API, uma equipe técnica pode conectá-la pelo canal customizado: veja [Criar um canal customizado](/docs/canais/canal-customizado).
 
 ## Variações
 
