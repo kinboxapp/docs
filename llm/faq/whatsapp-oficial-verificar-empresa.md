@@ -25,7 +25,7 @@ Preciso verificar a empresa na Meta?
 
 A Kinbox não pede nem confere se a empresa está verificada na Meta para conectar o WhatsApp oficial.
 
-Durante a conexão, qualquer exigência da Meta aparece na própria janela da Meta. A Kinbox também não mostra na tela o status da verificação da empresa. Veja mais em "Antes de conectar o WhatsApp oficial".
+Durante a conexão, qualquer exigência da Meta aparece na própria janela da Meta. Se a Meta recusar, a Kinbox mostra "Erro ao conectar canal de WhatsApp." junto com o motivo (veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns)). A Kinbox também não mostra na tela o status da verificação da empresa. Veja mais em [Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial).
 
 ## Variações
 

@@ -9,14 +9,10 @@ fontes:
   - api-v0:server/modules/chat/auxiliary/parser.js
   - web:src/pages/inbox/MessageContent.tsx
 codigo:
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/modules/chat/auxiliary/parser.js
+  - web:src/pages/inbox/MessageContent.tsx
   - web:src/pages/inbox/Chat/index.tsx
-  - web:src/pages/inbox/ChatHeader/index.tsx
-  - web:src/components-old/inbox/ScheduleMessageModal/**
-  - web:src/components-old/inbox/NewMessageModal/**
-  - web:src/components-old/forms/ConditionsInput/index.tsx
-  - api-v0:server/modules/chat/auxiliary/sendMessageByClient.js
-  - api-v0:server/modules/conditionProcessor.js
-  - api-v0:server/controllers/CallController.js
 verificado_em: 2026-11-26
 ---
 
@@ -28,7 +24,7 @@ Conversas que vêm de anúncio no WhatsApp são gratuitas?
 
 A Kinbox não mostra se uma conversa vinda de anúncio foi gratuita ou cobrada pela Meta, porque a cobrança e os preços das mensagens ficam na Meta e não aparecem na Kinbox.
 
-Quando um contato inicia conversa a partir de um anúncio no WhatsApp, a Kinbox exibe na conversa um cartão com o anúncio de origem (título, imagem e link). A janela de 24 horas vale normalmente para essas conversas. Veja mais em "Janela de 24 horas: quando é preciso usar um template".
+Quando um contato inicia conversa a partir de um anúncio no WhatsApp, a Kinbox exibe na conversa um cartão com o anúncio de origem (título, imagem e link). A janela de 24 horas vale normalmente para essas conversas. Veja mais em [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas).
 
 ## Variações
 

@@ -24,7 +24,7 @@ Como troco o nome, a foto ou a descrição do número oficial?
 
 A Kinbox não permite alterar o nome de exibição, a foto nem a descrição do perfil do seu número no WhatsApp oficial.
 
-O campo **Descrição** nas configurações do canal serve apenas como o nome interno do canal dentro da Kinbox: ele nasce preenchido com o nome verificado na Meta, mas editá-lo não muda nada no WhatsApp. Para trocar nome, foto ou descrição vistos pelos contatos, faça a alteração diretamente na Meta. Veja mais em "Configurações do WhatsApp oficial".
+O campo **Descrição** nas configurações do canal serve apenas como o nome interno do canal dentro da Kinbox: ele nasce preenchido com o nome verificado na Meta, mas editá-lo não muda nada no WhatsApp. Para trocar nome, foto ou descrição vistos pelos contatos, faça a alteração diretamente na Meta. Veja mais em [Configurações do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/configuracoes).
 
 ## Variações
 

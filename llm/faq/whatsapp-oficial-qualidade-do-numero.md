@@ -10,14 +10,11 @@ fontes:
   - api:src/modules/whatsapp-api/clients/whatsapp-api-meta.client.ts
   - web:src/pages/settings/whatsappApi/services/whatsappApi.service.ts
 codigo:
-  - web:src/pages/settings/channels/whatsapp/embed/**
-  - web:src/pages/settings/channels/whatsappCloud/**
-  - web:src/pages/settings/channels/index.tsx
-  - web:src/pages/inbox/Message.tsx
-  - web:src/pages/inbox/ChatHeader/index.tsx
   - api-v0:server/controllers/WbaCloudController.js
-  - api-v0:server/controllers/IntegrationsController.js
-  - api-v0:server/modules/meta/CloudApiClient.js
+  - api:src/modules/whatsapp-api/services/core/whatsapp-api-status-monitor.service.ts
+  - api:src/modules/whatsapp-api/clients/whatsapp-api-meta.client.ts
+  - web:src/pages/settings/whatsappApi/services/whatsappApi.service.ts
+  - web:src/pages/settings/channels/whatsappCloud/**
 verificado_em: 2026-11-26
 ---
 
@@ -29,7 +26,7 @@ Onde vejo a qualidade do meu número do WhatsApp oficial?
 
 A Kinbox não tem uma tela que mostre a qualidade do seu número do WhatsApp oficial.
 
-O status **Conectado** na lista de canais também não reflete a qualidade nem eventuais alertas do número na Meta. Na **Central WhatsApp API**, a Kinbox exibe apenas a qualidade dos templates, não a do número. Para consultar a qualidade do número, acesse diretamente a Meta. Veja mais em "Problemas ao conectar ou enviar pelo WhatsApp oficial".
+O status **Conectado** na lista de canais também não reflete a qualidade nem eventuais alertas do número na Meta. Na tela **WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**), a Kinbox exibe apenas a qualidade dos templates, não a do número. Para consultar a qualidade do número, acesse diretamente a Meta. Veja mais em [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
 
 ## Variações
 

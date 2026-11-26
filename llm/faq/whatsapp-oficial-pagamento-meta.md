@@ -26,7 +26,7 @@ Pago as mensagens da Meta pela Kinbox?
 
 Não. A Kinbox não intermedia nem cobra o pagamento das mensagens do WhatsApp oficial: a cobrança é feita pela Meta, direto na sua conta do WhatsApp.
 
-A forma de pagamento das mensagens precisa ser cadastrada diretamente na Meta. Na Kinbox, não existe cobrança de mensagens nem de templates do WhatsApp oficial. Veja mais em "Antes de conectar o WhatsApp oficial".
+A forma de pagamento das mensagens precisa ser cadastrada diretamente na Meta. Na Kinbox, não existe cobrança de mensagens nem de templates do WhatsApp oficial. Veja mais em [Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial).
 
 ## Variações
 

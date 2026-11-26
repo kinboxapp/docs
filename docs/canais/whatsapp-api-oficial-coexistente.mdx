@@ -19,9 +19,9 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Na coexistência, o número continua funcionando no app WhatsApp Business do celular e também entra na Kinbox pelo WhatsApp oficial ao mesmo tempo ("O número está em coexistência: usa o app WhatsApp Business no celular e a API oficial ao mesmo tempo."). Diferente do WhatsApp por QR Code, esse é um canal oficial, com as regras da API da Meta (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
+Na coexistência, o número continua funcionando no app WhatsApp Business do celular e também entra na Kinbox pelo WhatsApp oficial ao mesmo tempo. Diferente do WhatsApp por QR Code, esse é um canal oficial, com as regras da API da Meta (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
 
-<Note>Quem pode: o dono do workspace e membros com a permissão **Gerenciar Canais**, sem a restrição **Somente pode dar manutenção simples em canais**. O plano precisa ter uma linha de WhatsApp livre — todos os canais de WhatsApp ativos entram na mesma contagem (veja [Canais](/docs/canais/visao-geral)).</Note>
+<Note>Quem pode: o proprietário do workspace e membros com a permissão **Gerenciar Canais**, sem a restrição **Somente pode dar manutenção simples em canais**. O plano precisa ter um canal de WhatsApp livre — todos os canais de WhatsApp ativos entram na mesma contagem (veja [Canais](/docs/canais/visao-geral)).</Note>
 
 ## Antes de começar
 
@@ -54,6 +54,13 @@ Na coexistência, o número continua funcionando no app WhatsApp Business do cel
 | Ligações pelo WhatsApp | Ficam só no app do celular e não chegam à Kinbox (a seção **Ligações** é um recurso em teste e pode não aparecer no seu workspace). |
 | Janela de 24 horas | Vale para o que você envia pela Kinbox. Veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas). |
 | Configurações, templates e avisos | Funcionam da mesma forma que no canal oficial padrão. Veja [Configurações do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/configuracoes). |
+
+## Problemas comuns
+
+- **As ligações não chegam na Kinbox:** em coexistência, a Meta não oferece ligações pela API; elas ficam só no app do celular.
+- **Atualizar registro deu erro:** não use essa ação em canais de coexistência. Fale com o suporte.
+
+Outros avisos e erros estão em [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
 
 ## Cuidados
 

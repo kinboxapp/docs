@@ -1,7 +1,7 @@
 ---
 title: Conectar o WhatsApp oficial
 description: Passo a passo para conectar um número à Kinbox pelo WhatsApp oficial, na janela da Meta, usando o número só na Kinbox.
-keywords: [conectar whatsapp oficial, api oficial, conectar whatsapp, meta, facebook, cadastro, novo canal whatsapp, whatsapp business api, cloud api]
+keywords: [conectar whatsapp oficial, waba, bm, business manager, gerenciador de negócios, api oficial, conectar whatsapp, meta, facebook, cadastro, novo canal whatsapp, whatsapp business api, cloud api]
 publico: humano
 tipo: guia
 fontes:
@@ -23,7 +23,7 @@ verificado_em: 2026-11-26
 
 Conecte um número de telefone à Kinbox pelo WhatsApp oficial para usar esse número só na Kinbox. A conexão acontece em uma janela da Meta aberta dentro da própria Kinbox.
 
-<Note>Quem pode: o dono do workspace e membros com a permissão **Gerenciar Canais**, sem a restrição **Somente pode dar manutenção simples em canais**. O plano precisa ter uma linha de WhatsApp livre — todos os canais de WhatsApp ativos entram na mesma contagem (veja [Canais](/docs/canais/visao-geral)).</Note>
+<Note>Quem pode: o proprietário do workspace e membros com a permissão **Gerenciar Canais**, sem a restrição **Somente pode dar manutenção simples em canais**. O plano precisa ter um canal de WhatsApp livre — todos os canais de WhatsApp ativos entram na mesma contagem (veja [Canais](/docs/canais/visao-geral)).</Note>
 
 ## Antes de começar
 
@@ -60,7 +60,7 @@ Conecte um número de telefone à Kinbox pelo WhatsApp oficial para usar esse n�
 
 - O canal aparece na lista com o status **Conectado**, o ícone "WhatsApp Oficial" e o nome verificado do número na Meta no campo **Descrição**. Você pode editar a **Descrição** na Kinbox sem mudar o nome exibido no WhatsApp.
 - Faça um teste: envie uma mensagem de outro celular para o número conectado e responda pela **Caixa de entrada**.
-- Próximos passos: revise as opções em [Configurações do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/configuracoes), entenda a [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas) e crie seus templates na **Central WhatsApp API**.
+- Próximos passos: revise as opções em [Configurações do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/configuracoes), entenda a [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas) e crie seus templates na tela **WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**).
 
 ## Problemas comuns
 
@@ -68,6 +68,6 @@ Conecte um número de telefone à Kinbox pelo WhatsApp oficial para usar esse n�
 - **Você fechou a janela da Meta antes do fim:** nenhum canal é criado e nenhum aviso aparece na Kinbox. Clique em **Conectar WhatsApp** de novo.
 - **Apareceu "Erro ao conectar canal de WhatsApp.":** leia a mensagem que aparece junto para ver o motivo devolvido pela Meta ou pela Kinbox.
 - **Apareceu "Você precisa remover canais de Whatsapp para prosseguir com a contratação":** o plano chegou ao limite de canais de WhatsApp ativos.
-- **Você conectou de novo um número que o workspace já teve:** a Kinbox reaproveita o canal antigo, com o mesmo ID e as conversas, mesmo que ele tenha sido excluído. Se o canal ainda está ativo e o plano está no limite, a conexão é recusada: exclua o canal antes e conecte de novo.
+- **Você conectou de novo um número que o workspace já teve:** a Kinbox reaproveita o canal antigo, com o mesmo ID e as conversas, mesmo que ele tenha sido excluído. Se o plano estiver no limite, veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
 
 Para outros avisos e erros, veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).

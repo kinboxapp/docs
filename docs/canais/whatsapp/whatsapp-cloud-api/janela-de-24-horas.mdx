@@ -46,6 +46,10 @@ Quando falta menos de 1 hora para o fim da janela, o contador fica vermelho.
 
 Quando a janela encerra em uma conversa aberta, o campo de texto some. No topo aparece "A janela de tempo para respostas foi encerrada." e, no rodapé, os botões **Enviar template** e **Enviar nota de time**.
 
+<Frame caption="Aviso no topo da conversa quando a janela de 24 horas fecha">
+  <img src="/images/ajuda/whatsapp-oficial/janela-encerrada-aviso.webp" alt="Topo de uma conversa do WhatsApp oficial, com o cabeçalho borrado e o aviso com relógio vermelho: A janela de tempo para respostas foi encerrada." />
+</Frame>
+
 <Frame caption="Rodapé de uma conversa aberta com a janela de 24 horas fechada">
   <img src="/images/ajuda/whatsapp-oficial/janela-encerrada.webp" alt="Rodapé de uma conversa com a janela encerrada mostrando o botão azul Enviar template e o botão Enviar nota de time" />
 </Frame>
@@ -58,12 +62,12 @@ O botão **Enviar nota de time** cria uma anotação interna, que não vai para 
 
 Clique em **Enviar template** para abrir a janela **Enviar mensagem** e escolher um template aprovado.
 
-Enviar o template não libera o editor de texto na hora: o campo de mensagem só volta a abrir quando o contato responder, porque a janela conta sempre a partir da última mensagem do contato. Os templates são criados e enviados para aprovação na **Central WhatsApp API**.
+Enviar o template não libera o editor de texto na hora: o campo de mensagem só volta a abrir quando o contato responder, porque a janela conta sempre a partir da última mensagem do contato. Os templates são criados e enviados para aprovação na tela **WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**).
 
 Se uma mensagem livre for disparada fora da janela por outro caminho (como API ou automação), a Meta recusa o envio e a mensagem fica com erro. Veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
 
 ## Onde mais a janela vale
 
-- **Agendar mensagem:** se a data escolhida passar do fim da janela (ou se a janela já estiver fechada), o agendamento exige um template. Quando uma sugestão de retorno cai fora da janela, aparece o aviso "Nenhum modelo aprovado combina com este retorno. Fora da janela de 24h do WhatsApp, escolha um modelo para enviar."
+- **Agendar mensagem:** se a data escolhida passar do fim da janela (ou se a janela já estiver fechada), o agendamento exige um template.
 - **Bot:** você pode usar a condição **Janela de resposta** com os valores **Aberto** ou **Fechado** para definir o caminho do fluxo no bot.
 - **Transferir conversa para outro canal ou Migrar conversas:** quando a conversa passa para um canal oficial de destino, a contagem da última mensagem do contato é zerada e a conversa começa com a janela fechada no novo canal.

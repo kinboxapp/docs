@@ -9,14 +9,10 @@ fontes:
   - api:src/modules/whatsapp-api/services/core/whatsapp-api-status-monitor.service.ts
   - web:src/pages/inbox/Message.tsx
 codigo:
-  - web:src/pages/settings/channels/whatsapp/embed/**
-  - web:src/pages/settings/channels/whatsappCloud/**
-  - web:src/pages/settings/channels/index.tsx
-  - web:src/pages/inbox/Message.tsx
-  - web:src/pages/inbox/ChatHeader/index.tsx
   - api-v0:server/controllers/WbaCloudController.js
-  - api-v0:server/controllers/IntegrationsController.js
-  - api-v0:server/modules/meta/CloudApiClient.js
+  - api:src/modules/whatsapp-api/services/core/whatsapp-api-status-monitor.service.ts
+  - web:src/pages/inbox/Message.tsx
+  - web:src/pages/settings/channels/whatsappCloud/**
 verificado_em: 2026-11-26
 ---
 
@@ -28,7 +24,7 @@ Minha conta foi restringida pela Meta. A Kinbox pede revisão?
 
 Não. A Kinbox não tem como pedir revisão à Meta nem mostra avisos de restrição da conta na tela.
 
-No WhatsApp oficial, o status **Conectado** na lista de canais não acompanha bloqueios ou restrições na Meta. Os sinais que aparecem na Kinbox são mensagens com ícone de erro, exibindo o motivo devolvido pela Meta ao passar o mouse sobre o aviso. O pedido de revisão precisa ser feito pela própria empresa diretamente na Meta; o suporte da Kinbox pode ajudar a entender os erros exibidos na Kinbox. Veja mais em "Problemas ao conectar ou enviar pelo WhatsApp oficial".
+No WhatsApp oficial, o status **Conectado** na lista de canais não acompanha bloqueios ou restrições na Meta. Os sinais que aparecem na Kinbox são mensagens com ícone de erro, exibindo o motivo devolvido pela Meta ao passar o mouse sobre o aviso. O pedido de revisão precisa ser feito pela própria empresa diretamente na Meta; o suporte da Kinbox pode ajudar a entender os erros exibidos na Kinbox. Veja mais em [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
 
 ## Variações
 

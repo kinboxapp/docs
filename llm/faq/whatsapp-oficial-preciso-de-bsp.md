@@ -26,7 +26,7 @@ Preciso contratar um provedor (BSP) para usar o WhatsApp oficial?
 
 Não. A conexão do WhatsApp oficial é feita diretamente na Kinbox, pela janela da Meta, sem outro provedor no meio.
 
-Ao concluir a janela da Meta, a Kinbox recebe acesso direto à sua conta do WhatsApp Business. Para conectar, você precisa de uma conta do Facebook com acesso à empresa na Meta, da permissão **Gerenciar Canais** na Kinbox e de uma linha de WhatsApp livre no plano. Veja mais em "Antes de conectar o WhatsApp oficial".
+Ao concluir a janela da Meta, a Kinbox recebe acesso direto à sua conta do WhatsApp Business. Para conectar, você precisa de uma conta do Facebook com acesso à empresa na Meta, da permissão **Gerenciar Canais** na Kinbox e de um canal de WhatsApp livre no plano. Veja mais em [Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial).
 
 ## Variações
 

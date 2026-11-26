@@ -26,7 +26,7 @@ Como consigo o selo verde de conta verificada?
 
 A Kinbox não solicita nem exibe o selo verde de conta verificada da Meta, e conectar um número pelo WhatsApp oficial não concede esse selo.
 
-O ícone "WhatsApp Oficial" que aparece na lista de canais da Kinbox existe apenas para identificar o tipo do canal dentro da Kinbox. Para pedir o selo de conta verificada, é preciso fazer a solicitação diretamente à Meta. Veja mais em "Antes de conectar o WhatsApp oficial".
+O ícone "WhatsApp Oficial" que aparece na lista de canais da Kinbox existe apenas para identificar o tipo do canal dentro da Kinbox. Para pedir o selo de conta verificada, é preciso fazer a solicitação diretamente à Meta. Veja mais em [Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial).
 
 ## Variações
 

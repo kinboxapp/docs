@@ -143,7 +143,6 @@
   arquivo: images/ajuda/whatsapp-oficial/conectar-api-oficial.webp
   paginas:
     - docs/canais/whatsapp-api-oficial-padrao
-    - docs/canais/whatsapp-api-oficial-coexistente
 
 # Aviso amarelo da verificação na Meta num canal oficial de teste do workspace de testes (id 1).
 # Só o aviso entra no recorte; título, número, IDs e token do canal ficam borrados e fora do recorte.
@@ -176,7 +175,7 @@
     - pausa: 1000
   alvo: '.chat-actions-box'
   mascarar:
-    - '.chat-actions-box .ant-avatar-group'
+    - '.message-box'
   arquivo: images/ajuda/whatsapp-oficial/janela-aberta-contador.webp
   paginas:
     - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas
@@ -191,7 +190,24 @@
     - pausa: 1000
   alvo: '.finished-chat-footer:visible'
   mascarar:
-    - '.finished-chat-footer .ant-avatar-group'
+    - '.message-box'
   arquivo: images/ajuda/whatsapp-oficial/janela-encerrada.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas
+
+# Topo da mesma conversa: cabeçalho borrado (nome e foto do contato, canal) e o aviso
+# "A janela de tempo para respostas foi encerrada.".
+- id: whatsapp-oficial-janela-encerrada-aviso
+  workspace: Kinbox
+  url: /inbox/all/3418
+  passos:
+    - esperar: '.closed-conversation-banner'
+    - pausa: 1000
+  alvo:
+    - '.g_chat_header_inner'
+    - '.closed-conversation-banner'
+  mascarar:
+    - '.g_chat_header_inner'
+  arquivo: images/ajuda/whatsapp-oficial/janela-encerrada-aviso.webp
   paginas:
     - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas

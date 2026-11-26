@@ -34,7 +34,7 @@ Alguns pontos importantes ao trazer um número de outra plataforma:
 - Se a Meta recusar o registro do número durante a conexão, a Kinbox exibe o erro na tela; nesse caso, fale com o suporte.
 - Conversas antigas mantidas no outro provedor não vêm para a Kinbox.
 
-Veja mais em "Conectar o WhatsApp oficial" e "Problemas ao conectar ou enviar pelo WhatsApp oficial".
+Veja mais em [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao) e [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
 
 ## Variações
 

@@ -8,11 +8,8 @@ fontes:
   - web:src/pages/inbox/Message.tsx
   - web:src/pages/inbox/Chat/index.tsx
 codigo:
-  - web:src/pages/settings/channels/whatsappCloud/**
-  - web:src/pages/settings/channels/index.tsx
-  - web:src/pages/settings/channels/whatsapp/ForwardZapModal.tsx
-  - api-v0:server/controllers/WbaCloudController.js
-  - api-v0:server/controllers/IntegrationsController.js
+  - web:src/pages/inbox/Message.tsx
+  - web:src/pages/inbox/Chat/index.tsx
 verificado_em: 2026-11-26
 ---
 
@@ -24,7 +21,7 @@ Posso apagar uma mensagem enviada pelo WhatsApp oficial?
 
 Não. Em um canal de WhatsApp oficial, a opção de apagar uma mensagem já enviada não aparece na Kinbox.
 
-Como contorno, envie uma nova mensagem corrigindo o que foi enviado. Se precisar deixar um registro interno sobre o ocorrido apenas para a equipe, use **Enviar nota de time**. Veja mais em "Configurações do WhatsApp oficial".
+Como contorno, envie uma nova mensagem corrigindo o que foi enviado. Se precisar deixar um registro interno sobre o ocorrido apenas para a equipe, use **Enviar nota de time**. Veja mais em [Configurações do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/configuracoes).
 
 ## Variações
 

@@ -22,7 +22,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência complementar à página humana "Conectar o WhatsApp oficial".
+Referência complementar à página humana [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao).
 
 ## Etapas executadas pela Kinbox após a janela da Meta
 
@@ -59,5 +59,6 @@ A janela da Meta solicita três permissões para a Kinbox:
 ## Regras de borda do cadastro
 
 - **Fechar a janela da Meta antes do fim:** nenhum canal é criado e nenhum aviso aparece na Kinbox. É preciso clicar em **Conectar WhatsApp** novamente.
-- **Reconectar um número que o workspace já teve:** a Kinbox encontra e reaproveita o canal anterior (mantendo o mesmo ID e as conversas), inclusive se o canal foi excluído antes. A checagem de limite do plano continua sendo aplicada: se o plano já estiver no limite, tentar reconectar um número cujo canal ainda está ativo é recusado. Contorno: excluir o canal (ele deixa de contar no limite) e conectar o número de novo; o mesmo canal volta, reativado, com o mesmo ID e as conversas.
+- **Reconectar um número que o workspace já teve:** a Kinbox encontra e reaproveita o canal anterior (mantendo o mesmo ID e as conversas), inclusive se o canal foi excluído antes. A checagem de limite do plano continua sendo aplicada: se o plano já estiver no limite, tentar reconectar um número cujo canal ainda está ativo é recusado. O que orientar: liberar um canal de WhatsApp no plano (ou ampliar o limite) ou falar com o suporte. Excluir o canal para liberar o limite funciona (o canal volta reativado, com o mesmo ID e as conversas), mas a exclusão desliga o recebimento de mensagens da conta do WhatsApp Business inteira: antes, conferir se a mesma conta tem outros números conectados na Kinbox. Não sugerir excluir como caminho padrão.
 - **Canais antigos cadastrados à mão:** canais conectados pela janela da Meta não exibem campos técnicos no painel. Apenas canais antigos cadastrados manualmente mostram os campos **ID da conta comercial do WhatsApp**, **Identificação do número de telefone**, **Token** e **Webhook** na aba **Geral**.
+- **Painel do canal:** se houver erro de preenchimento numa aba que não está aberta, o painel volta sozinho para a aba **Geral**.
