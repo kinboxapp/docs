@@ -796,48 +796,54 @@
     "tipo": "negativo"
   },
   {
-    "pergunta": "Quero criar o negócio no HubSpot sem sair da conversa com o cliente, como configuro?",
+    "pergunta": "Onde eu gero a chave para chamar a API da Kinbox a partir do meu ERP?",
     "esperado": [
-      "docs/integracoes/hubspot",
-      "llm/integracoes/hubspot"
+      "docs/desenvolvedor/tokens-de-api",
+      "llm/desenvolvedor/tokens-de-api",
+      "llm/faq/api-referencia"
     ],
     "tipo": "guia"
   },
   {
-    "pergunta": "Onde coloco o token do Pipedrive de cada vendedor?",
+    "pergunta": "Quero usar o Claude para ler as conversas do meu atendimento, como conecto?",
     "esperado": [
-      "docs/integracoes/pipedrive",
-      "llm/integracoes/pipedrive"
+      "docs/desenvolvedor/mcp",
+      "llm/desenvolvedor/mcp",
+      "llm/faq/mcp-o-que-da-para-fazer"
     ],
     "tipo": "guia"
   },
   {
-    "pergunta": "Autorizei o RD Station Marketing e a tela ficou carregando sem terminar",
+    "pergunta": "Como faço uma página do meu sistema aparecer do lado da conversa?",
     "esperado": [
-      "docs/integracoes/rdstation-marketing",
-      "llm/integracoes/rdstation-marketing"
-    ],
-    "tipo": "solucao-de-problema"
-  },
-  {
-    "pergunta": "Como faço os leads que convertem no RD Station virarem contatos na Kinbox?",
-    "esperado": [
-      "docs/integracoes/rdstation-marketing-webhook",
-      "llm/integracoes/visao-geral"
+      "docs/desenvolvedor/criando-plugin-integracao",
+      "llm/desenvolvedor/criando-plugin-integracao"
     ],
     "tipo": "guia"
   },
   {
-    "pergunta": "Quais CRMs dá para integrar com a Kinbox?",
+    "pergunta": "Meu bot tem que esperar meu sistema aprovar o pedido antes de seguir, dá para fazer?",
     "esperado": [
-      "docs/integracoes/visao-geral",
-      "llm/integracoes/visao-geral",
-      "llm/faq/integracao-nao-listada"
+      "docs/desenvolvedor/webhook-continuar-bot"
     ],
-    "tipo": "conceito"
+    "tipo": "guia"
   },
   {
-    "pergunta": "A Kinbox importa automaticamente todo o histórico de negócios do Salesforce para os Funis?",
+    "pergunta": "Quero pôr no meu CRM um link que abre a conversa do cliente pelo telefone",
+    "esperado": [
+      "docs/usando-o-kinbox/conversa-em-um-clique"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como integro o chat do meu próprio aplicativo à Caixa de entrada da Kinbox?",
+    "esperado": [
+      "docs/desenvolvedor/criando-canal-customizado"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Kinbox tem um SDK oficial em Python para a API?",
     "esperado": [],
     "tipo": "negativo"
   }
