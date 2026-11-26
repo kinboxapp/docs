@@ -901,5 +901,73 @@
     "pergunta": "Consigo fazer chamada de vídeo com o cliente pela Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero criar o negócio no HubSpot sem sair da conversa com o cliente, como configuro?",
+    "esperado": [
+      "docs/integracoes/hubspot",
+      "llm/integracoes/hubspot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como faço os leads convertidos no RD Station Marketing virarem contato na Kinbox?",
+    "esperado": [
+      "docs/integracoes/rdstation-marketing-webhook",
+      "llm/integracoes/rdstation-marketing-webhook"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O botão para criar lead no Bitrix24 aparece cinza na conversa, o que falta?",
+    "esperado": [
+      "docs/integracoes/bitrix24",
+      "llm/integracoes/bitrix24"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Cliquei em Obter token no Zoho e o refresh token não apareceu",
+    "esperado": [
+      "docs/integracoes/zoho",
+      "llm/integracoes/zoho"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como ligo o NectarCRM para os atendentes cadastrarem contatos pela conversa?",
+    "esperado": [
+      "docs/integracoes/nectarcrm",
+      "llm/integracoes/nectarcrm"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que cada vez que crio oportunidade no RD Station CRM aparece uma empresa repetida?",
+    "esperado": [
+      "docs/integracoes/rdstation-crm",
+      "llm/integracoes/rdstation-crm"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Sumiu a integração com o Followize, onde ela foi parar?",
+    "esperado": [
+      "llm/faq/integracao-followize"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A Kinbox tem integração pronta com o Salesforce?",
+    "esperado": [
+      "llm/faq/integracao-nao-listada",
+      "docs/integracoes/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O quadro do CRM na conversa mostra o programa de fidelidade e os pontos acumulados do cliente?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
