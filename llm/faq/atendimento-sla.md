@@ -21,9 +21,9 @@ A Kinbox controla SLA de atendimento?
 
 ## Resposta
 
-Não. A Kinbox não tem SLA de conversa (prazo máximo de resposta com alerta ou estouro). Existe apenas "Prazo de SLA" em negociações nos funis. Também não há limite máximo de conversas por membro nem fila com tempo máximo na atribuição automática (veja [Distribuir as conversas automaticamente](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas)).
+Não. A Kinbox não tem uma meta de SLA de resposta por conversa (prazo máximo de resposta com alerta ou estouro). Existe apenas "Prazo de SLA" em negociações nos funis. Também não há limite máximo de conversas por membro nem fila com tempo máximo na atribuição automática (veja [Distribuir as conversas automaticamente](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas)).
 
-Como contorno para acompanhar demora na resposta:
+Para acompanhar e reagir à demora na resposta:
 
 - **Automação com gatilho de tempo:** use o gatilho **Tempo sem nenhuma resposta do membro na sessão nova** (campo **Minutos sem resposta**; pode haver atraso de até 3 minutos) para avisar, transferir ou executar outra ação. As automações também têm os gatilhos **Tempo sem nova mensagem** e **Tempo pendente**.
 - **Indicação dinâmica de conversa pendente:** em **Configurações** → **Ambiente** → **Geral** (nas configurações gerais do workspace, chamado na tela de **ambiente**), muda a cor do círculo azul quando a conversa passa o tempo configurado em horas sem resposta do membro.

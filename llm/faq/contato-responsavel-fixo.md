@@ -27,8 +27,8 @@ Pontos para observar ao usar essa regra:
 
 - Ela precisa estar ligada em **Configurações** → **Automação** → **Atribuição automática** (toda regra nova nasce desligada) e ser a regra ativa usada nas sessões novas (apenas uma regra ligada é aplicada em cada sessão nova).
 - A busca olha as conversas do contato em todos os canais, menos os escolhidos em **Excluir canais**.
-- Com **Membro precisa estar disponível** marcado, se o último membro estiver indisponível, a conversa fica sem responsável; com a opção desmarcada, vai para ele mesmo indisponível. Um membro inativo nunca recebe por essa regra.
-- Na primeira conversa do contato ainda não há último membro registrado, então a conversa fica sem responsável — atribua manualmente ou use outra regra.
+- Com **Membro precisa estar disponível** marcado, se o último membro estiver indisponível, a regra não atribui e mostra `{regra}: Nenhum operador ou grupo disponível [1]`; se a sessão ainda não tinha responsável, continua sem; com a opção desmarcada, vai para ele mesmo indisponível. Um membro inativo nunca recebe por essa regra (também nesse caso, a regra não atribui e mostra `{regra}: Nenhum operador ou grupo disponível [1]`; se a sessão ainda não tinha responsável, continua sem).
+- Na primeira conversa do contato ainda não há último membro registrado, então a regra não atribui e mostra `{regra}: Nenhum operador ou grupo disponível [1]`; se a sessão ainda não tinha responsável, continua sem — atribua manualmente ou use outra regra.
 
 Veja mais em [Estratégias de atribuição automática](/docs/atendimento/estrategias-de-atribuicao) e [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir).
 

@@ -26,7 +26,7 @@ Referência das 20 opções do campo **Atribuir para** em **Configurações** �
 - **Online:** membro disponível que também está com a Kinbox aberta e conectada (navegador ou aplicativo).
 - **Atendimentos** (nas opções de "menos atendimentos"): número de sessões abertas em que o membro é o responsável, contado na hora.
 
-As regras que escolhem um membro entre vários (as de rodízio e as de "menos atendimentos"; as de último membro só exigem **Disponível** com **Membro precisa estar disponível** marcado) só escolhem membros disponíveis; as opções "online" e as de transbordo exigem membro online. Na Kinbox, um **grupo** é uma equipe de membros (não um grupo de WhatsApp).
+As regras de rodízio entre membros e as de "menos atendimentos" só escolhem membros disponíveis. As de último membro só exigem isso com **Membro precisa estar disponível** marcado. As opções "online" exigem membro online, e as de transbordo só escolhem grupo com pelo menos um membro ativo, disponível e online. Na Kinbox, um **grupo** é uma equipe de membros (não um grupo de WhatsApp).
 
 ## Opções de Atribuir para
 
@@ -61,9 +61,9 @@ A regra grava só o grupo e não escolhe responsável: o responsável atual cont
 | **Atribuir ciclicamente para um grupo** | Faz rodízio pela ordem da lista de grupos (só grupo), sem olhar membros. | **Grupos participantes** (vazio = todos os grupos) | Nada |
 | **Atribuir para o último grupo que atendeu a conversa** | Atribui ao grupo da sessão mais recente desta conversa que teve grupo (só grupo). | Nenhum | **Regra** em **Contato existente no canal** |
 | **Atribuir para grupo mais próximo do CEP** | Escolhe o grupo com o CEP mais próximo do CEP do contato, dentro da distância máxima (só grupo). | **Grupos participantes** (vazio = todos), **Distância máxima em km** (obrigatório) | CEP no contato e nos grupos |
-| **Atribui ao grupo com mesmo DDD que o cliente** | Faz rodízio entre os grupos com o mesmo DDD do telefone do contato, sem olhar membros (só grupo). | **Grupos participantes** (vazio, quando o campo mostra "Todos os grupos" = todos, incluindo grupos sem DDD, que servem para qualquer contato, inclusive de canais sem telefone) | Telefone com DDD no contato |
-| **Atribui ao grupo com mesmo DDD que o cliente com transbordo** | Escolhe um grupo do mesmo DDD do contato com membro online, priorizando o que recebeu menos conversas desta regra num período de 24 horas (contador que começa na primeira conversa e expira 24 horas depois), com transbordo se nenhum servir (só grupo). | **Grupos participantes** (vazio, quando o campo mostra "Todos os grupos" = todos, incluindo grupos sem DDD, que servem para qualquer contato, inclusive de canais sem telefone), **Grupos de transbordo** | Telefone com DDD e membro online |
-| **Atribui ao grupo com mesmo estado que o cliente com transbordo** *(na lista: Atribui ao grupo do mesmo estado que o cliente com transbordo)* | Escolhe um grupo cujo DDD é do mesmo estado (UF) do telefone do contato, com membro online e transbordo (só grupo). | **Grupos participantes** (vazio, quando o campo mostra "Todos os grupos" = todos, incluindo grupos sem DDD, que servem para qualquer contato, inclusive de canais sem telefone), **Grupos de transbordo** | Telefone com DDD e membro online |
+| **Atribui ao grupo com mesmo DDD que o cliente** | Faz rodízio entre os grupos com o mesmo DDD do telefone do contato, sem olhar membros (só grupo). | **Grupos participantes** (vazio = todos os grupos; veja abaixo) | Telefone com DDD no contato (ou grupo sem DDD, com a lista vazia) |
+| **Atribui ao grupo com mesmo DDD que o cliente com transbordo** | Escolhe um grupo do mesmo DDD do contato com membro online, priorizando o que recebeu menos conversas desta regra num período de 24 horas, com transbordo se nenhum servir (só grupo). | **Grupos participantes** (vazio = todos os grupos; veja abaixo), **Grupos de transbordo** | Telefone com DDD no contato (ou grupo sem DDD, com a lista vazia) e membro ativo, disponível e online no grupo |
+| **Atribui ao grupo com mesmo estado que o cliente com transbordo** *(na lista: Atribui ao grupo do mesmo estado que o cliente com transbordo)* | Escolhe um grupo cujo DDD é do mesmo estado (UF) do telefone do contato, com membro online e transbordo (só grupo). | **Grupos participantes** (vazio = todos os grupos; veja abaixo), **Grupos de transbordo** | Telefone com DDD no contato (ou grupo sem DDD, com a lista vazia) e membro ativo, disponível e online no grupo |
 | **Distribuição cíclica entre grupos com transbordo** | Escolhe entre os grupos da lista com membro online quem recebeu menos conversas desta regra num período de 24 horas, com transbordo quando os principais acabam (só grupo). | **Grupos participantes** (vazio = todos), **Grupos de transbordo** | Membro online |
 
 ## Depois de escolher
@@ -75,6 +75,7 @@ A regra grava só o grupo e não escolhe responsável: o responsável atual cont
 ## Regras por DDD, estado e CEP
 
 - O DDD e o estado (UF) do contato vêm do número de telefone da conversa (considerando o código do país `55` seguido do DDD). Em canais sem telefone (como Instagram e e-mail), essas regras não encontram o DDD correto.
+- Nas três regras de DDD e estado, com **Grupos participantes** vazio (o campo mostra "Todos os grupos"), entram todos os grupos, inclusive os grupos sem DDD, que servem para qualquer contato, inclusive de canais sem telefone. Com grupos escolhidos na lista, só entram os da lista com o DDD ou o estado do contato.
 - O CEP do contato vem de um campo personalizado de contato com a chave `cep`.
 - O DDD e o CEP do grupo são cadastrados no grupo; se os campos não aparecerem na tela de [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos), fale com o suporte.
 
@@ -86,7 +87,7 @@ A regra grava só o grupo e não escolhe responsável: o responsável atual cont
 
 ## Último membro
 
-- **Atribuir para o último membro que atendeu a conversa** olha apenas a conversa atual (aquele contato naquele canal) e exige **Regra** em **Contato existente no canal**. **Atribuir para último membro que atendeu ao contato** olha todas as conversas do contato em qualquer canal, exceto os escolhidos em **Excluir canais**. Em ambas, "atender" significa ter sido responsável pela sessão.
+- **Atribuir para o último membro que atendeu a conversa** olha apenas a conversa atual (aquele contato naquele canal) e exige **Regra** em **Contato existente no canal**. **Atribuir para último membro que atendeu ao contato** olha todas as conversas do contato em qualquer canal, exceto os escolhidos em **Excluir canais** (vazio, quando o campo mostra "Todos os canais", não exclui nenhum canal). Em ambas, "atender" significa ter sido responsável pela sessão.
 - Com **Membro precisa estar disponível** marcado, se o último membro estiver indisponível ou inativo, a regra não atribui ninguém (se a sessão ainda não tem responsável, continua sem). Com a caixa desmarcada, a conversa vai para ele mesmo indisponível — exceto em **Atribuir para último membro que atendeu ao contato**, onde um membro inativo nunca recebe a conversa.
 
 Se a distribuição não acontecer como esperado, veja [As conversas não chegam para mim ou para a equipe](/docs/atendimento/problemas-comuns).
