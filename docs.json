@@ -116,6 +116,24 @@
             ]
           },
           {
+            "group": "Campanhas e marketing",
+            "icon": "bullhorn",
+            "pages": [
+              {
+                "group": "Campanhas",
+                "pages": [
+                  "docs/campanhas/visao-geral",
+                  "docs/campanhas/campanhas-no-kinbox",
+                  "docs/campanhas/campanha-de-sms",
+                  "docs/campanhas/acompanhar-resultados",
+                  "docs/campanhas/boas-praticas",
+                  "docs/campanhas/velocidade-e-horario",
+                  "docs/campanhas/problemas-comuns"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Administração",
             "icon": "gear",
             "pages": [
