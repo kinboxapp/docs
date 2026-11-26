@@ -38,6 +38,8 @@ type Item = {
   paginas?: string[]
   /** Largura da janela (px) só para este item, para telas largas demais. Padrão: 1440. Abaixo de 768 o app usa o layout antigo. */
   largura?: number
+  /** Altura da janela (px) só para este item, para modais altos que passam da tela. Padrão: 900. */
+  altura?: number
   /** Workspace onde o print é tirado. Padrão: o workspace de documentação. Outro workspace só para telas que ele não tem (ex.: WhatsApp), sempre com `mascarar`. */
   workspace?: string
 }
@@ -58,7 +60,7 @@ const CSS_ESTAVEL = `
   .ant-slide-up-appear, .ant-slide-up-appear-prepare, .ant-slide-up-enter, .ant-slide-up-enter-prepare,
   .ant-slide-down-appear, .ant-slide-down-appear-prepare, .ant-slide-down-enter, .ant-slide-down-enter-prepare { opacity: 1 !important; transform: none !important; }
   /* ...e, sem animação, também não terminam de sair: some com eles na saída */
-  .ant-slide-up-leave, .ant-slide-down-leave { display: none !important; }
+  .ant-slide-up-leave, .ant-slide-down-leave, .ant-select-dropdown-hidden { display: none !important; }
   /* Fundo branco atrás de modais: os cantos arredondados do recorte não mostram a tela de trás */
   .ant-modal-mask { background: #fff !important; }
 `
@@ -177,7 +179,7 @@ async function recorte(page: Page, alvo: string | string[]) {
   const x = Math.max(0, Math.min(...caixas.map((c) => c.x)))
   const y = Math.max(0, Math.min(...caixas.map((c) => c.y)))
   const direita = Math.min(page.viewportSize()?.width || VIEWPORT.width, Math.max(...caixas.map((c) => c.x + c.width)))
-  const baixo = Math.min(VIEWPORT.height, Math.max(...caixas.map((c) => c.y + c.height)))
+  const baixo = Math.min(page.viewportSize()?.height || VIEWPORT.height, Math.max(...caixas.map((c) => c.y + c.height)))
   return { x, y, width: direita - x, height: baixo - y }
 }
 
@@ -191,7 +193,7 @@ async function garantirWorkspace(page: Page, nome: string) {
 
 async function capturar(page: Page, conversor: Page, item: Item) {
   await garantirWorkspace(page, item.workspace || DOCS_WORKSPACE_NAME)
-  await page.setViewportSize({ width: item.largura || VIEWPORT.width, height: VIEWPORT.height })
+  await page.setViewportSize({ width: item.largura || VIEWPORT.width, height: item.altura || VIEWPORT.height })
   await page.goto(WEB_URL + item.url, { waitUntil: 'domcontentloaded' })
   await page.waitForLoadState('networkidle').catch(() => {})
   await page.addStyleTag({ content: CSS_ESTAVEL })
