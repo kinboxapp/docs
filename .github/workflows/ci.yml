@@ -1,0 +1,63 @@
+# Checagens de todo PR para a main e para a revisao-inicial. Elas substituem a revisão humana:
+# a proteção da branch exige este job verde para o merge.
+# As mesmas checagens rodam localmente antes de cada push (bun scripts/checar.ts), porque o repositório é público.
+name: CI
+
+on:
+  pull_request:
+    branches: [main, revisao-inicial]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  checagens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.0
+
+      - name: Instala a CLI do Mintlify
+        run: npm i -g mint@4.2.410
+
+      - name: 1. mint validate
+        run: mint validate
+
+      - name: 2. mint broken-links
+        run: mint broken-links --check-anchors
+
+      - name: 3. Frontmatter
+        run: bun scripts/check-frontmatter.ts
+
+      # Depois da virada, os PRs para a main passam a conferir todas as rotas antigas (--completo)
+      - name: 4. Navegação e rotas antigas
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ "$BASE_REF" = "main" ] && [ -d docs ]; then
+            bun scripts/check-navegacao.ts --completo
+          else
+            bun scripts/check-navegacao.ts
+          fi
+
+      - name: 5. Imagens
+        run: bun scripts/check-imagens.ts
+
+      - name: 6. Dados sensíveis
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: bun scripts/check-sensivel.ts --base "origin/$BASE_REF"

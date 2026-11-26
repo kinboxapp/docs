@@ -1,0 +1,106 @@
+# Publica a documentação dos cards que foram para produção, no mesmo disparo das 21h que leva o código.
+# Quem dispara é o cron da Vercel do kinbox-web (api/deploy-producao.js), depois de disparar o código.
+#
+# O cron lê o HEAD do PR `aguarda-deploy` (branch docs/deploy-pendente) ANTES de disparar o código e manda em `pr_head`:
+# - um SHA: faz o merge só se o PR ainda estiver nesse commit (--match-head-commit) e com o CI verde;
+# - `nenhum`: não havia PR no corte; não faz merge, mesmo que um PR tenha aparecido depois;
+# - `erro`: a consulta do cron falhou; não faz merge.
+# Disparo manual (Actions → Deploy de produção → Run workflow) com `pr_head` vazio: usa o HEAD atual do PR.
+name: Deploy de produção
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_head:
+        description: 'SHA do PR aguarda-deploy no corte, "nenhum" ou "erro". Vazio = HEAD atual do PR (disparo manual).'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: deploy-producao
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      PR_HEAD: ${{ inputs.pr_head }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          sparse-checkout: .github/scripts
+
+      - name: Guarda o SHA atual da main
+        id: antes
+        run: echo "sha=$(gh api "repos/$REPO/commits/main" -q .sha)" >> "$GITHUB_OUTPUT"
+
+      - name: Faz o merge do PR aguarda-deploy
+        id: merge
+        run: |
+          # Só o PR da branch docs/deploy-pendente do próprio repositório, nunca de fork
+          PR=$(gh pr list -R "$REPO" --state open --label aguarda-deploy --head docs/deploy-pendente \
+            --json number,headRefOid,isCrossRepository \
+            -q '[.[] | select(.isCrossRepository | not)][0] | "\(.number) \(.headRefOid)"')
+          NUMERO=${PR%% *}
+          HEAD_ATUAL=${PR##* }
+
+          if [ -z "$PR_HEAD" ]; then
+            PR_HEAD=${HEAD_ATUAL:-nenhum}
+            echo "Disparo manual: usando o HEAD atual do PR ($PR_HEAD)"
+          fi
+
+          case "$PR_HEAD" in
+            nenhum)
+              echo "Nenhum PR aguarda-deploy no corte. Nada para publicar."
+              exit 0 ;;
+            erro)
+              echo "::warning::O cron não conseguiu ler o PR aguarda-deploy. Nada publicado; fica para o próximo disparo."
+              exit 0 ;;
+          esac
+
+          if ! [[ "$PR_HEAD" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::pr_head inválido: $PR_HEAD"
+            exit 1
+          fi
+
+          if [ -z "$NUMERO" ]; then
+            echo "::warning::O corte trouxe $PR_HEAD, mas não há PR aguarda-deploy aberto agora."
+            exit 0
+          fi
+
+          if gh pr merge "$NUMERO" -R "$REPO" --merge --match-head-commit "$PR_HEAD" 2> erro.txt; then
+            echo "PR #$NUMERO publicado ($PR_HEAD)."
+            exit 0
+          fi
+
+          MOTIVO=$(head -c 1500 erro.txt)
+          if [ "$HEAD_ATUAL" != "$PR_HEAD" ]; then
+            MOTIVO="O PR mudou depois do corte das 21h (corte: $PR_HEAD, agora: $HEAD_ATUAL). $MOTIVO"
+          fi
+          URL="${GITHUB_SERVER_URL}/${REPO}/actions/runs/${GITHUB_RUN_ID}"
+          printf 'O deploy das 21h não publicou este PR. Fica para o próximo disparo.\n\nMotivo: %s\n\nExecução: %s\n' "$MOTIVO" "$URL" > comentario.md
+          gh pr comment "$NUMERO" -R "$REPO" --body-file comentario.md
+          echo "::error::Merge do PR #$NUMERO recusado: $MOTIVO"
+          exit 1
+
+      # Um push feito com o token do Actions não dispara outros workflows, então o indexar.yml não roda sozinho aqui
+      - name: Pede a indexação para a api-v2
+        if: always() && steps.merge.outcome == 'success'
+        env:
+          ANTES: ${{ steps.antes.outputs.sha }}
+          HELP_INDEX_TOKEN: ${{ secrets.HELP_INDEX_TOKEN }}
+          HELP_API_URL: ${{ vars.HELP_API_URL || 'https://api4.kinbox.com.br' }}
+        run: |
+          DEPOIS=$(gh api "repos/$REPO/commits/main" -q .sha)
+          if [ "$DEPOIS" = "$ANTES" ]; then
+            echo "A main não mudou. Nada para indexar."
+            exit 0
+          fi
+          bash .github/scripts/indexar.sh "$DEPOIS"
