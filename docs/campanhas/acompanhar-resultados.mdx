@@ -35,7 +35,7 @@ Cada linha exibe:
 
 - **Progresso:** barra que calcula enviadas mais falhas sobre o total da lista, colorida conforme o status (azul enviando, amarelo pausada ou aguardando, vermelho falhou e verde concluída).
 - **Status:** situação atual da campanha (veja a tabela abaixo).
-- **Selo Canal desconectado:** aparece quando o canal principal da campanha está desconectado **neste momento** — por isso, pode aparecer inclusive em campanhas já concluídas se o canal estiver desconectado hoje.
+- **Selo Canal desconectado:** em campanhas em **Enviando mensagens** ou já concluídas, aparece **no lugar do status** quando o canal principal da campanha está desconectado **neste momento**. Por isso, uma campanha concluída pode mostrar o selo em vez do ✓ verde se o canal estiver desconectado hoje.
 - **Ícone de informação (ⓘ):** passe o mouse para ver **Progresso**, **Início**, **Prev. Término**, **Prev. Duração**, **Autor**, **Leads**, **Enviadas**, **Recebidas**, **Falhas**, **Lidas** e **Respondidas**.
 
 | Status | O que significa |
@@ -56,8 +56,8 @@ Para entender os status de espera e a fila por canal, veja [Velocidade de envio 
 
 Clique na linha da campanha (ou no menu **...** → **Visualizar**) para abrir o painel de resultados. No topo ficam o nome, o status e o menu de ações.
 
-<Frame caption="Cartões de resumo no painel de resultados da campanha">
-  <img src="/images/ajuda/campanhas/resultados-da-campanha.webp" alt="Cartões de resumo da campanha exibindo Enviados 4 (100%), Recebidos -, Lidos -, Falhas 4 em vermelho e Respondido -" />
+<Frame caption="Exemplo de campanha com uma mensagem enviada, recebida e lida">
+  <img src="/images/ajuda/campanhas/resultados-da-campanha.webp" alt="Cartões de resumo da campanha exibindo Enviados 1 (100%), Recebidos 1, Lidos 1, Falhas - e Respondido -" />
 </Frame>
 
 | Cartão | O que contabiliza |
@@ -74,7 +74,9 @@ Na seção **Detalhes**, você consulta a prévia da mensagem (preenchida com a 
 
 ## Ver quem recebeu, falhou ou respondeu
 
-- **Contatos da lista:** clique nos cartões **Enviados**, **Recebidos**, **Lidos** ou **Falhas** para abrir a lista correspondente. Ela traz busca e as colunas **Número**, **Status**, **Data de envio**, **Detalhes** (com o motivo da falha), **Canal** (o canal que enviou) e as colunas do arquivo.
+- **Lista completa:** clique no cartão **Enviados** para abrir todos os contatos da lista, com o status de cada um.
+- **Listas filtradas:** clique em **Recebidos** (recebidos, lidos e respondidos), **Lidos** (lidos e respondidos) ou **Falhas** para abrir só esses contatos.
+- **Colunas das listas:** busca e as colunas **Número**, **Status**, **Data de envio**, **Detalhes** (com o motivo da falha), **Canal** (o canal que enviou) e as colunas do arquivo.
   - As colunas extras do arquivo aparecem a partir da segunda coluna: **Coluna 1** na tela corresponde à segunda coluna da sua planilha (porque a primeira está em **Número**).
   - Clique em **Exportar** para baixar a lista em CSV ou planilha do Excel.
 - **Respostas:** clicar no cartão **Respondido** abre as **sessões** de conversa ligadas à campanha (em vez da lista de contatos). A Kinbox contabiliza em **Respondido** as respostas que abrem uma **sessão nova** pelo **canal principal** da campanha em até **96 horas** após o início do lote daquele contato.

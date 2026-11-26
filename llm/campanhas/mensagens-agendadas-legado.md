@@ -20,7 +20,7 @@ verificado_em: 2026-11-26
 
 ## Quando aparece o layout antigo
 
-No layout antigo da Kinbox — exibido em telas de celular (largura menor que 768 px), em ambientes de templates e em marcas brancas —, o caminho **CRM** → **Campanhas** abre uma tela com quatro abas:
+No layout antigo da Kinbox — exibido em telas de celular (largura menor que 768 px) e em algumas versões de marca branca —, o caminho **CRM** → **Campanhas** abre uma tela com quatro abas:
 
 - **Campanhas:** tela atual de campanhas em massa (veja [Campanhas: visão geral](/docs/campanhas/visao-geral)).
 - **Individual:** lista de mensagens agendadas individualmente (tela **Agendamentos**).

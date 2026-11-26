@@ -31,8 +31,8 @@ Crie uma campanha por SMS para disparar mensagens curtas de texto para uma lista
 
 ## Antes de começar
 
-- **Canal de SMS configurado:** criado em **Configurações** → **Canais**.
-- **Créditos de SMS disponíveis:** cada disparo de SMS consome **1 crédito de SMS** (esses créditos são separados do saldo da carteira; veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)). Você acompanha **Créditos disponíveis** e adquire mais em **Comprar créditos** na tela do canal de SMS.
+- **Canal de SMS configurado:** criado em **Configurações** → **Chat** → **Canais**.
+- **Créditos de SMS disponíveis:** nos canais de SMS da Kinbox, cada disparo de SMS consome **1 crédito de SMS** (esses créditos são separados do saldo da carteira; veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)). Você acompanha **Créditos disponíveis** e adquire mais em **Comprar créditos** na tela do canal de SMS.
 
 ## O que muda no SMS
 
@@ -47,7 +47,7 @@ Crie uma campanha por SMS para disparar mensagens curtas de texto para uma lista
     No SMS, o campo **Mensagem** tem limite de **160 caracteres** (com o contador exibido no rótulo e no rodapé) e mostra a **Pré-visualização** em um balão roxo.
 
     - **Sem emoji e sem anexo:** os botões de emoji e de anexo não ficam disponíveis no SMS. **Frases rápidas**, **Chaves reservadas** (colunas `{{2}}`, `{{3}}`...) e **Frase aleatória** funcionam normalmente.
-    - **Acentos no contador:** letras fora do alfabeto básico do SMS (como `ã`, `õ`, `ç`, `á`, `í`, `ó`, `ú`, `ê`) fazem o contador do rótulo trocar de 160 para 70 (ou 67) e ficar vermelho quando o texto ultrapassa essa marca. Ainda assim, a Kinbox só bloqueia o envio acima de 160 caracteres — prefira textos curtos.
+    - **Acentos no contador:** com letras acentuadas, o contador ao lado de **Mensagem** pode ficar vermelho antes de 160 caracteres. A Kinbox só bloqueia acima de 160; prefira textos curtos.
     - **Folga para variáveis:** se a mensagem passar de 160 caracteres depois que a Kinbox substituir as variáveis, o texto é cortado em 160 caracteres no envio. Deixe folga para nomes ou dados mais longos.
 
     <Frame caption="Seção Conteúdo no SMS com limite de 160 caracteres e pré-visualização no balão roxo">
@@ -72,7 +72,7 @@ Crie uma campanha por SMS para disparar mensagens curtas de texto para uma lista
 
 ## Durante o envio
 
-- Cada SMS enviado desconta **1 crédito de SMS** no momento do envio.
+- Nos canais de SMS da Kinbox, cada SMS enviado desconta **1 crédito de SMS** no momento do envio.
 - Se os créditos acabarem no meio da campanha, as mensagens seguintes ficam com status **Falha** (com o motivo `"Sem créditos disponíveis"` na coluna **Detalhes**) e a campanha segue até o fim da lista sem pausar. As mensagens que falharam não são reenviadas; garanta créditos suficientes antes de iniciar.
 - Qualquer texto que ultrapassar 160 caracteres após a substituição das variáveis é cortado em 160 caracteres.
 

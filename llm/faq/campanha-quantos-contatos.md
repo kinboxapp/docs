@@ -23,11 +23,11 @@ Para quantos contatos posso mandar numa campanha?
 
 A Kinbox não limita a quantidade de contatos de uma campanha; no envio por **Upload**, o limite técnico é o tamanho do arquivo, que vai até **100 MB**.
 
-Linhas com número inválido não recebem a campanha e números repetidos entram uma única vez. Apenas uma campanha envia por vez em cada canal principal.
+Linhas com número inválido não recebem a campanha e números repetidos escritos da mesma forma entram uma única vez. Apenas uma campanha envia por vez em cada canal principal.
 
 Os limites práticos dependem do canal escolhido:
 
-- **SMS:** cada SMS enviado consome **1 crédito de SMS** (veja [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms)).
+- **SMS:** nos canais de SMS da Kinbox, cada SMS enviado consome **1 crédito de SMS** (veja [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms)).
 - **WhatsApp por QR Code:** disparar para muitos contatos aumenta o risco de o WhatsApp bloquear o número (veja [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas)).
 - **WhatsApp oficial:** os limites de envio são definidos pela Meta, e a Kinbox não exibe esses limites na tela.
 

@@ -35,15 +35,23 @@ Referência dos campos da seção **Controle de tempo** em [Criar uma campanha](
 
 ### WhatsApp (QR Code e oficial)
 
-Os intervalos de **Lento**, **Moderado** e **Rápido** para WhatsApp estão na tabela de [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas). Os mesmos tempos valem para o **WhatsApp oficial**.
+Os mesmos tempos valem para o WhatsApp por QR Code (**Express** e **Clássica**) e para o WhatsApp oficial. **Moderado** vem marcado por padrão.
 
-A tela exibe a mesma orientação para os dois tipos de WhatsApp: diminuir os tempos executa a campanha mais rápido, mas pode aumentar a probabilidade de bloqueio automático do número; tempos muito altos dão mais tempo para os contatos denunciarem o número como spam.
+| Opção | Como envia (WhatsApp) |
+| --- | --- |
+| **Lento** | Envia 1 mensagem a cada 60 segundos. Lote de 30 mensagens. Pausa de 30 minutos a cada lote enviado. |
+| **Moderado** (padrão) | Envia 1 mensagem a cada 20 segundos. Lote de 100 mensagens. Pausa de 15 minutos a cada lote enviado. |
+| **Rápido** | Envia 1 mensagem a cada 8 segundos. Lote de 200 mensagens. Pausa de 10 minutos a cada lote enviado. |
+
+Os segundos entre mensagens são um intervalo base: na conexão **Express**, no WhatsApp oficial e no SMS, a Kinbox varia cada intervalo (veja [Como os lotes funcionam](#como-os-lotes-funcionam)).
+
+A dica da tela vale para os dois tipos de WhatsApp: diminuir os tempos executa a campanha mais rápido, mas pode aumentar a probabilidade de bloqueio automático do número; tempos muito altos dão mais tempo para os contatos denunciarem o número como spam. No WhatsApp por QR Code, veja como reduzir esse risco em [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas).
 
 ### SMS
 
 No SMS, os tempos controlam apenas a velocidade de envio (não há risco de banimento como no WhatsApp). Veja as demais regras do canal em [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms).
 
-| Opção | Como envia (só no SMS) |
+| Opção | Como envia (só no SMS; segundos entre mensagens como intervalo base) |
 | --- | --- |
 | **Lento** | Envia 1 SMS a cada 10 segundos. Lote de 100 mensagens. Pausa de 5 minutos a cada lote enviado. |
 | **Moderado** (padrão) | Envia 1 SMS a cada 3 segundos. Lote de 250 mensagens. Pausa de 2 minutos a cada lote enviado. |

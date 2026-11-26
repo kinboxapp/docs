@@ -29,14 +29,14 @@ verificado_em: 2026-11-26
 Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização por variáveis, para uma lista de contatos por WhatsApp (QR Code ou oficial) ou SMS.
 
 <Note>
-  Quem pode: membros com a permissão **Campanhas**. Com a restrição **Proibir criar campanha de WhatsApp**, é possível criar apenas campanhas de SMS (essa restrição não vale para o **proprietário** do workspace).
+  Quem pode: membros com a permissão **Campanhas**. Com a restrição **Proibir criar campanha de WhatsApp**, é possível criar apenas campanhas de SMS (essa restrição não vale para o proprietário do workspace).
 </Note>
 
 ## Antes de começar
 
 - **Canal pronto:** um canal de WhatsApp (QR Code ou oficial) com status **Conectado**, ou um canal de SMS (o SMS não precisa estar conectado para criar a campanha). Canais marcados como **Apenas Receptivo** não aparecem.
 - **Só no WhatsApp oficial:** um template de mensagem aprovado pela Meta.
-- **Só no SMS:** **Créditos de SMS** disponíveis (cada SMS consome 1 crédito; veja [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms)).
+- **Só no SMS:** **Créditos de SMS** disponíveis (nos canais de SMS da Kinbox, cada SMS desconta 1 crédito; veja [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms)).
 - **Lista de contatos:** uma planilha `.csv`, `.xls` ou `.xlsx` (até 100 MB) ou contatos filtrados das sessões de conversa da Kinbox.
 
 ## Passo a passo
@@ -65,21 +65,18 @@ Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização p
   <Step title="Defina o Público alvo">
     Em **Fonte dos leads**, escolha como montar a lista:
 
-    - **Upload** (padrão): arraste um arquivo `.csv`, `.xls` ou `.xlsx` (até 100 MB) para a área de envio ou clique em **browse**. Planilhas `.xls` e `.xlsx` são convertidas para CSV automaticamente.
-      - Coloque os números na **primeira coluna**, sem linha de título (toda linha vira um contato, e uma linha de cabeçalho conta como erro).
-      - Separe as colunas com **vírgula**. As colunas seguintes funcionam como variáveis (`{{2}}`, `{{3}}` e assim por diante; `{{1}}` é o próprio número).
-      - Para números de fora do Brasil, comece sempre com `+` e o DDI do país.
+    - **Upload** (padrão): arraste um arquivo `.csv`, `.xls` ou `.xlsx` (até 100 MB) para a área de envio ou clique em **browse**. Coloque os números na **primeira coluna**, sem linha de título, e separe as colunas com **vírgula**. As colunas seguintes viram variáveis (`{{2}}`, `{{3}}`...; `{{1}}` é o próprio número). Escreva todos os números do mesmo jeito, por exemplo:
 
       ```csv
-      5511900000001,Maria,Loja Exemplo
-      5511900000003,Ana,Loja Exemplo
+      +55 11 90000-0001,Maria,Loja Exemplo
+      +55 11 90000-0003,Ana,Loja Exemplo
       ```
 
-      Após ler o arquivo, a tela mostra **Erros**, **Duplicados**, **Sucesso** e **Total**. Clique nos números para abrir a lista **Leads** e conferir linhas marcadas como **Formatação incorreta** ou **Duplicado**. Linhas com erro não recebem a campanha, e números repetidos recebem uma única vez.
+      Depois de ler o arquivo, a tela mostra **Erros**, **Duplicados**, **Sucesso** e **Total**. Clique nos números para abrir a lista **Leads** e revisar as linhas com **Formatação incorreta** ou **Duplicado**: linhas com erro não recebem a campanha.
 
-    - **Contatos**: clique em **Buscar sessões** para abrir **Selecionar Sessões**. Aplique os filtros em **Filtrar** (ou limpe em **Limpar filtros**; veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)) e clique em **Selecionar**. A Kinbox reúne todas as sessões do filtro, remove contatos repetidos (cada contato recebe uma vez só) e descarta contatos sem celular válido.
+    - **Contatos**: clique em **Buscar sessões** para abrir **Selecionar Sessões**, filtre em **Filtrar** (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)) e clique em **Selecionar**. A Kinbox junta todas as sessões do filtro, tira contatos repetidos (cada contato entra uma vez) e deixa de fora contatos sem celular válido.
 
-    Mantenha **Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável** marcada para completar números brasileiros sem DDI ou nono dígito (números que começam com `+` não são alterados). Desmarque se a lista já estiver formatada ou contiver números fixos.
+    A caixa **Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável** vem marcada: ela completa números brasileiros sem DDI ou sem o nono dígito, e não mexe em números que começam com `+`. Números de outro país precisam começar com `+`. Desmarque a caixa se a lista já estiver completa ou tiver números fixos. A Kinbox tira números repetidos escritos da mesma forma; o mesmo número escrito de formas diferentes (por exemplo, com e sem `+`) pode receber a campanha mais de uma vez, por isso padronize a lista antes de enviar.
 
     <Frame caption="Seção Público alvo com Upload selecionado e opção de normalização marcada">
       <img src="/images/ajuda/campanhas/publico-alvo.webp" alt="Seção Público alvo mostrando Fonte dos leads com Upload selecionado e Contatos ao lado, área Arraste e solte seu arquivo .csv aqui ou browse e a caixa Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável marcada" />
@@ -90,13 +87,14 @@ Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização p
     O editor muda conforme o canal escolhido:
 
     - **WhatsApp por QR Code e SMS:** escreva no campo **Mensagem** (até 4096 caracteres no WhatsApp por QR Code; até 160 caracteres no SMS) e confira a **Pré-visualização**, que mostra como a mensagem fica usando a primeira linha do arquivo. No editor, use:
+      - **Copiloto** (ícone de estrelas, se aparecer): ações de IA para reescrever o texto; aparece quando os comandos do copiloto estão ligados no workspace e usa o saldo da carteira (veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)).
       - **Frases rápidas:** insere uma frase cadastrada (veja [Criar frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas)).
       - **Emojis:** disponível só no WhatsApp por QR Code (não existe no SMS).
       - **Anexar:** disponível só no WhatsApp por QR Code (permite enviar um anexo com a mensagem).
       - **Chaves reservadas** (ícone `{ }`): lista **Coluna 1** a **Coluna 5** (`{{1}}` a `{{5}}`). Você também pode digitar números acima de 5 à mão (como `{{6}}`).
-      - **Frase aleatória** (ícone de dado): abre **Adicionar frase aleatória**. Cadastre variações em **Frase** e clique em **Adicionar** para inserir opções no formato `{{opção 1|opção 2}}`. A Kinbox sorteia uma opção diferente a cada envio.
+      - **Frase aleatória** (ícone de dado): abre **Adicionar frase aleatória**. Cadastre variações em **Frase** e clique em **Adicionar** para inserir opções no formato `{{opção 1|opção 2}}`. A Kinbox sorteia uma das opções a cada envio (a mesma opção pode sair para mais de um contato).
 
-    - **WhatsApp oficial:** em vez do campo de texto livre, aparece o bloco de template (**Modelo de mensagem**, variáveis, **Anexo** e **Pré-visualização**). Escolha um template aprovado pela Meta, preencha as variáveis usando as colunas da lista (`{{2}}`, `{{3}}`...) e, se o template tiver mídia no cabeçalho, selecione o arquivo. Os detalhes do envio de templates ficam na página dedicada a templates do WhatsApp oficial.
+    - **WhatsApp oficial:** em vez do campo de texto livre, aparece o bloco de template (**Modelo de mensagem**, variáveis, **Anexo** e **Pré-visualização**). Escolha um template aprovado pela Meta, preencha as variáveis usando as colunas da lista (`{{2}}`, `{{3}}`...) e, se o template tiver mídia no cabeçalho, selecione o arquivo. Veja os detalhes em [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template).
 
     <Tip>
       Não deixe células vazias nas colunas usadas na mensagem: no WhatsApp por QR Code e no SMS, uma célula vazia sai como o próprio número da coluna (por exemplo, `Olá 2`). Além disso, chaves de contato como `{{first_name}}` ou `{{email}}` não funcionam em campanhas — use sempre o número da coluna (`{{2}}`, `{{3}}`...).
@@ -114,31 +112,13 @@ Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização p
     - **Horário comercial:** selecione um horário cadastrado no workspace para enviar apenas dentro dele.
     - **Envio das mensagens:** vem marcado como **Moderado** por padrão.
 
-    Os tempos de **Lento**, **Moderado** e **Rápido** do WhatsApp (válidos tanto para WhatsApp por QR Code quanto para WhatsApp oficial) estão em [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas). Para ver os tempos do SMS, a opção **Personalizado** e como os lotes funcionam, consulte [Velocidade de envio e horário comercial](/docs/campanhas/velocidade-e-horario).
+    Os tempos de cada opção (WhatsApp e SMS), a opção **Personalizado** e como os lotes funcionam estão em [Velocidade de envio e horário comercial](/docs/campanhas/velocidade-e-horario). No WhatsApp por QR Code, veja também como o ritmo afeta o risco de bloqueio em [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas).
   </Step>
 
   <Step title="Clique em Criar">
     O botão **Criar** no topo fica ativo depois que **Nome da campanha**, **Canais de disparo**, **Público alvo** e **Conteúdo** estão preenchidos. Ao clicar, a Kinbox abre o painel da campanha com o status **Processando** enquanto prepara os lotes.
 
-    Se a Kinbox bloquear a criação com um aviso, verifique a mensagem:
-
-    <AccordionGroup>
-      <Accordion title='"O canal de disparo escolhido está desconectado." (só no WhatsApp)'>
-        O canal principal de WhatsApp (QR Code ou oficial) não está **Conectado**. Reconecte o canal e clique em **Criar** novamente.
-      </Accordion>
-      <Accordion title='"Necessário recriar esse canal para usar as campanhas." (só na Clássica)'>
-        Aparece em canais de WhatsApp por QR Code na conexão **Clássica** criados ou recriados até 27/01/2024. Recrie o canal antes de disparar — veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
-      </Accordion>
-      <Accordion title='"Você não tem permissão para criar campanhas de WhatsApp."'>
-        O seu papel tem a restrição **Proibir criar campanha de WhatsApp**. Campanhas por SMS continuam liberadas.
-      </Accordion>
-      <Accordion title='"Mensagem de SMS não pode conter mais de 160 caracteres." ou "Mensagem não pode conter emojis." (só no SMS)'>
-        Reduza o texto do SMS para até 160 caracteres ou remova os emojis colados no campo.
-      </Accordion>
-      <Accordion title='"Necessário escolher um anexo" (só no WhatsApp oficial)'>
-        O template escolhido tem mídia no cabeçalho. Selecione o arquivo antes de clicar em **Criar**.
-      </Accordion>
-    </AccordionGroup>
+    Se a Kinbox mostrar um aviso e não criar a campanha (canal desconectado, canal a recriar, falta de permissão, limite do SMS ou anexo do template), veja o que cada aviso quer dizer em [Minha campanha não envia ou parou](/docs/campanhas/problemas-comuns).
   </Step>
 </Steps>
 
@@ -150,8 +130,7 @@ Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização p
 
 ## Problemas comuns
 
-- **A campanha ficou parada em Aguardando outra campanha ou Aguardando horário.** Outra campanha está em andamento no mesmo canal principal ou o envio está fora do **Horário comercial** selecionado.
-- **O arquivo mostrou muitos Erros em Público alvo.** Remova a linha de título, use vírgula para separar as colunas e coloque `+` antes de números de outros países.
-- **A mensagem saiu com número ou nome de campo no lugar da variável.** Evite células vazias nas colunas usadas e substitua chaves como `{{first_name}}` pelo número da coluna (`{{2}}`, `{{3}}`...).
+- **A campanha ficou em Aguardando outra campanha.** Outra campanha já está enviando pelo mesmo canal principal; a sua começa sozinha quando ela terminar.
+- **O arquivo mostrou muitos Erros em Público alvo.** Tire a linha de título, separe as colunas com vírgula e comece números de outro país com `+`.
 
 Para outros diagnósticos, consulte [Minha campanha não envia ou parou](/docs/campanhas/problemas-comuns).

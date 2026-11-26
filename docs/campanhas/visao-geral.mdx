@@ -33,17 +33,17 @@ As campanhas funcionam apenas em canais de **WhatsApp** (por QR Code ou oficial)
 | Conteúdo | Texto livre (até 4096 caracteres), emojis, um anexo, **Frase aleatória** e variáveis (`{{2}}`, `{{3}}`...) | Somente template aprovado pela Meta | Texto até 160 caracteres, sem emoji, sem anexo, **Frase aleatória** e variáveis (`{{2}}`, `{{3}}`...) |
 | Vários canais na mesma campanha | Sim, todos do mesmo tipo (todos **Express** ou todos **Clássica**) | Não (um canal por campanha) | Não (um canal por campanha) |
 | Exige canal **Conectado** ao criar | Sim | Sim | Não |
-| Consome créditos na Kinbox | Não | Não (a cobrança das mensagens é feita pela Meta) | 1 crédito de SMS por mensagem enviada |
+| Consome créditos na Kinbox | Não | Não (a cobrança das mensagens é feita pela Meta) | Nos canais de SMS da Kinbox, 1 crédito de SMS por mensagem enviada |
 
-Se ainda está decidindo entre WhatsApp por QR Code e WhatsApp oficial, consulte [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral). Para entender a diferença entre **Créditos de SMS** e o saldo da carteira, veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos).
+No WhatsApp oficial, a campanha usa um template aprovado: veja [Templates, Flows e carrossel: o que é cada um](/docs/canais/whatsapp/whatsapp-templates/visao-geral). Se ainda está decidindo entre WhatsApp por QR Code e WhatsApp oficial, consulte [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral). Para entender a diferença entre **Créditos de SMS** e o saldo da carteira, veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos).
 
 ## Onde fica e quem pode usar
 
 A tela de campanhas fica no item **Campanhas** do menu lateral.
 
 - **Permissão necessária:** o membro precisa ter a permissão **Campanhas** (localizada no grupo **Gerenciamento do Ambiente** do editor de permissões). Sem ela, o item não aparece no menu e a tela não abre. Veja como papéis funcionam em [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
-- **Restrição para WhatsApp:** a opção **Proibir criar campanha de WhatsApp** impede o membro de criar campanhas por WhatsApp (QR Code ou oficial), mas mantém liberadas as campanhas por SMS. Essa restrição não se aplica ao **proprietário** do workspace (na tela, **ambiente**).
-- **Canais restritos a grupos:** se um canal tem acesso restrito a grupos dos quais você não faz parte, ele não aparece ao criar campanhas. Na lista, campanhas desse canal aparecem com o nome mascarado como `*****`, sem menu de ações, e não podem ser abertas. O **proprietário** vê todas as campanhas.
+- **Restrição para WhatsApp:** a opção **Proibir criar campanha de WhatsApp** impede o membro de criar campanhas por WhatsApp (QR Code ou oficial), mas mantém liberadas as campanhas por SMS. Essa restrição não se aplica ao proprietário do workspace (na tela, **ambiente**).
+- **Canais restritos a grupos:** se um canal tem acesso restrito a grupos dos quais você não faz parte, ele não aparece ao criar campanhas. Na lista, campanhas desse canal aparecem com o nome mascarado como `*****`, sem menu de ações, e não podem ser abertas. O proprietário vê todas as campanhas.
 
 ## Como uma campanha funciona
 
@@ -56,7 +56,7 @@ Algumas regras se aplicam a toda campanha:
 
 - **Uma por canal de cada vez:** se outra campanha já estiver em andamento no mesmo canal principal, a nova fica em **Aguardando outra campanha** até o canal ficar livre.
 - **Sem edição depois de criada:** não é possível editar uma campanha pronta. Para mudar texto, lista ou canal, exclua a campanha e crie outra.
-- **Respostas:** quando um contato da lista responde, a contagem aparece em **Respondido** e a conversa recebe o cartão **Campanha**.
+- **Respostas:** quando a resposta de um contato da lista abre uma sessão nova pelo canal principal da campanha (o primeiro escolhido) em até 96 horas depois de o lote dele começar, ela entra em **Respondido** e a conversa recebe o cartão **Campanha**. Veja [Acompanhar os resultados da campanha](/docs/campanhas/acompanhar-resultados).
 
 ## De onde vem a lista de contatos
 

@@ -54,7 +54,7 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 - **Formatos e tamanho:** um arquivo `.csv`, `.xls` ou `.xlsx` de até **100 MB** (arquivos maiores são recusados). Planilhas do Excel são convertidas para CSV automaticamente.
 - **Quantidade de contatos:** a Kinbox não limita a quantidade de contatos da lista.
 - **Separador e estrutura:** não coloque linha de título (toda linha vira um contato e cabeçalho conta como erro). Separe as colunas com **vírgula**: com outro separador (como ponto e vírgula), os contadores **Erros**/**Sucesso** da tela e a **Pré-visualização** podem não bater com o que é enviado. Aspas são removidas apenas do início e do fim da célula, sem suporte a vírgula dentro de célula.
-- **Validação e duplicados:** após remover caracteres não numéricos, um número válido tem de **10 a 13 dígitos**. Linhas com erro não recebem a campanha; números repetidos após a normalização recebem uma única vez (na tela, o repetido aparece em **Duplicados** e também em **Sucesso**). Se nenhum número do arquivo for válido, a campanha fica em **Falhou**.
+- **Validação e duplicados:** após remover caracteres não numéricos, um número válido tem de **10 a 13 dígitos**. Linhas com erro não recebem a campanha; números repetidos escritos da mesma forma recebem uma única vez (na tela, o repetido aparece em **Duplicados** e também em **Sucesso**). O mesmo número escrito de formas diferentes (por exemplo, `+5511900000001` e `5511900000001`, ou com e sem espaços depois do `+`) pode receber a campanha mais de uma vez: padronize a coluna de números antes do upload. Se nenhum número do arquivo for válido, a campanha fica em **Falhou**.
 - **Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável** (marcada por padrão):
   - Números iniciados com `+` não são alterados. Números de fora do Brasil precisam sempre começar com `+`; sem `+`, são tratados como brasileiros e ficam incorretos.
   - Número sem `+` com menos de 12 dígitos que não começa com `55` ganha o DDI `55` (exemplo: `11900000001` → `5511900000001`).
@@ -83,7 +83,8 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 
 ## Regras específicas do SMS
 
-- Cada SMS enviado consome **1 crédito de SMS** no momento do envio.
+- Nos canais de SMS da Kinbox, cada SMS enviado desconta **1 crédito de SMS** no momento do envio.
+- Contador de acentos: letras fora do alfabeto básico do SMS (como `ã`, `õ`, `ç`, `á`, `í`, `ó`, `ú`, `ê`) fazem o contador ao lado de **Mensagem** trocar o limite exibido de 160 para 70 caracteres (67 por parte em textos maiores) e ficar vermelho ao passar disso. A Kinbox só bloqueia a criação acima de 160 caracteres.
 - Se a mensagem ultrapassar 160 caracteres após a substituição das variáveis, a Kinbox corta o texto em **160 caracteres**.
 - Se os créditos acabarem durante o envio, as mensagens seguintes ficam em **Falha** com `"Sem créditos disponíveis"` em **Detalhes** e a campanha continua até o fim da lista sem pausar; falhas não são reenviadas.
 - Outros erros por contato no SMS: `"Mensagem inválida, número inválido ou você não tem permissão para enviar SMS para este número"` e `"Você atingiu o limite de envio de SMS por minuto"`.
@@ -103,7 +104,7 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 | **Pausado** | "Campanha pausada pelo membro" |
 | **Falhou** | Nenhum número válido na lista ou erro ao ler o arquivo. |
 | ✓ verde | "Campanha concluída" |
-| Selo **Canal desconectado** | Canal principal desconectado no momento atual (na lista aparece em campanhas em **Enviando mensagens** ou concluídas; no painel da campanha aparece sempre que o canal principal está desconectado). |
+| Selo **Canal desconectado** | Canal principal desconectado no momento atual (na lista aparece no lugar do status em campanhas em **Enviando mensagens** ou concluídas; no painel da campanha aparece sempre que o canal principal está desconectado). |
 
 ### Status dos contatos da lista
 
@@ -117,7 +118,7 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 | **Lido** | Leitura confirmada. |
 | **Respondido** | Contato respondeu dentro da regra de rastreamento. |
 | **Falha** | Falha no envio (motivo em **Detalhes**). |
-| **Duplicado** | Número repetido na lista (descartado para evitar envio duplo). |
+| **Duplicado** | Número repetido na lista, escrito da mesma forma (recebe uma vez só). |
 | **Formatação incorreta** | Número inválido na validação da lista. |
 
 ## Regra do Respondido
@@ -133,7 +134,7 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 | --- | --- |
 | `"O canal de disparo escolhido está desconectado."` | Ao criar com canal principal de WhatsApp (QR Code ou oficial) fora do status **Conectado**. |
 | `"Necessário recriar esse canal para usar as campanhas."` | Ao criar com canal de WhatsApp por QR Code na conexão **Clássica** criado ou recriado até 27/01/2024. |
-| `"Você não tem permissão para criar campanhas de WhatsApp."` | Ao criar campanha de WhatsApp com a restrição **Proibir criar campanha de WhatsApp** ativa no papel (não se aplica ao **proprietário**). |
+| `"Você não tem permissão para criar campanhas de WhatsApp."` | Ao criar campanha de WhatsApp com a restrição **Proibir criar campanha de WhatsApp** ativa no papel (não se aplica ao proprietário). |
 | `"Mensagem de SMS não pode conter mais de 160 caracteres."` | Ao criar campanha de SMS com texto acima de 160 caracteres. |
 | `"Mensagem não pode conter emojis."` | Ao criar campanha de SMS contendo emojis. |
 | `"Necessário escolher um anexo"` | Ao criar campanha de WhatsApp oficial com template de mídia no cabeçalho sem arquivo selecionado. |
