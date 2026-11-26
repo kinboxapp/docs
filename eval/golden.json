@@ -305,5 +305,47 @@
     "pergunta": "Como peço para o Google aprovar meu anúncio de pesquisa mais rápido?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quantos dias dura o período de teste da Kinbox antes de eu ter que pagar?",
+    "esperado": [
+      "docs/assinatura/visao-geral",
+      "llm/faq/assinatura-precos"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Preciso de mais duas pessoas na equipe, como aumento as licenças do meu plano?",
+    "esperado": [
+      "docs/assinatura/assinar-ou-mudar-plano"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde pego a segunda via do boleto da mensalidade?",
+    "esperado": [
+      "docs/assinatura/faturas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como coloco dinheiro na carteira para a IA continuar funcionando?",
+    "esperado": [
+      "docs/assinatura/adicionar-saldo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Minha mensalidade venceu e sumiu o campo de escrever nas conversas, o que faço?",
+    "esperado": [
+      "docs/assinatura/assinatura-vencida",
+      "llm/faq/assinatura-o-que-acontece-se-atrasar"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como faço para declarar o imposto de renda da minha empresa?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
