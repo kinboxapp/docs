@@ -39,7 +39,7 @@ Crie um token de API (`kb_live_...`) em **Configurações** → **Integrações*
     | **Alterar dados (contatos, negócios, tags, campanhas)** | Cria, edita e altera dados do workspace. |
     | **Enviar mensagens ao cliente final** | Envia mensagens ao contato e dispara ou retoma campanhas. |
 
-    Em workspaces de parceiro (revenda ou multinível), quem tem **Pode inspecionar clientes (Básico)** ou **(Avançado)** no papel também vê a opção **Acessar os ambientes clientes do parceiro pelo MCP (com as permissões acima)**, que tem efeito apenas no MCP.
+    Em workspaces de parceiro, quem pode inspecionar clientes também vê a opção **Acessar os ambientes clientes do parceiro pelo MCP (com as permissões acima)**, que só vale no MCP.
 
     A janela avisa: "O token também respeita o papel de quem o criou. Enviar mensagens inclui disparar e retomar campanhas."
 
@@ -65,10 +65,10 @@ Crie um token de API (`kb_live_...`) em **Configurações** → **Integrações*
 
 ## Acompanhar a lista de tokens
 
-Em **Tokens de API Publica**, a tabela exibe os tokens ativos do workspace do mais novo para o mais antigo, com as colunas **Nome**, **Token** (apenas os 16 primeiros caracteres seguidos de `...`), **Permissões** (**Ler**, **Alterar**, **Enviar** e **Parceiro**), **Criado em**, **Ultimo uso** (data ou **Nunca**) e o botão **Revogar**. Quando ainda não há tokens, a tela exibe "Nenhum token criado ainda. Crie um token para comecar a usar a API."
+Em **Tokens de API Publica**, a tabela mostra os tokens ativos de todo o workspace, do mais novo para o mais antigo. A coluna **Token** traz só o começo do token, e **Ultimo uso** mostra **Nunca** enquanto ele não for usado.
 
 <Frame caption="Lista Tokens de API Publica com um token ativo e o botão Mostrar tokens legados">
-  <img src="/images/ajuda/desenvolvedores/api-tokens-lista.webp" alt="Tela Tokens de API Publica com o botão Criar token, tabela listando Integração ERP com permissões Ler e Alterar, Criado em, Ultimo uso Nunca, botão Revogar e o botão Mostrar tokens legados na parte inferior" />
+  <img src="/images/ajuda/desenvolvedores/api-tokens-lista.webp" alt="Tela Tokens de API Publica com o botão Criar token, tabela listando Integração ERP (exemplo) com permissões Ler e Alterar, Criado em, Ultimo uso Nunca, botão Revogar e o botão Mostrar tokens legados na parte inferior" />
 </Frame>
 
 ## Revogar um token
@@ -85,4 +85,11 @@ Tokens antigos, criados antes de existir a permissão **Enviar**, podem exibir a
 
 ## Tokens legados
 
-Clique em **Mostrar tokens legados** no fim da página para ver e copiar o **Token v0** (um por workspace, sem botão de troca ou revogação na tela). Ele não serve para a API pública atual, mas é o token usado em [Integrar seu sistema como canal customizado (API)](/docs/desenvolvedor/criando-canal-customizado) e em [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot).
+Clique em **Mostrar tokens legados**, no fim da página **API Tokens**, para ver e copiar o **Token v0** do workspace (botão de copiar ao lado do campo). Ele não serve para a API pública atual; é o token usado em [Integrar seu sistema como canal customizado (API)](/docs/desenvolvedor/criando-canal-customizado) e em [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot).
+
+## Problemas comuns
+
+- **A API responde `Invalid API token format`.** O token enviado não começa com `kb_live_` (por exemplo, o **Token v0**). Use um token criado em **Criar token**.
+- **A API responde `This API token lacks the "..." scope`.** O token não tem a permissão que a chamada exige (por exemplo, **Enviar mensagens ao cliente final**). Crie outro token com essa permissão.
+- **O token parou de funcionar.** Quem criou o token saiu do workspace ou foi desativado, ou o token foi revogado. Crie um novo token.
+- **A API responde HTTP 429.** Você passou do limite de chamadas da rota. Espere alguns segundos e tente de novo.

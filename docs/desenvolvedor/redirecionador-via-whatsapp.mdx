@@ -26,13 +26,13 @@ O redirecionador de WhatsApp é um link da Kinbox para o botão de WhatsApp do s
 | --- | --- |
 | **Pelo Widget da Kinbox** | Você já usa o balão de WhatsApp do Widget no seu site. |
 | **Com link próprio** | Você tem seu próprio botão ou link de WhatsApp no site. |
-| **Pela API de contatos** | Seu sistema já captura os parâmetros da campanha antes do contato chamar no WhatsApp. |
+| **Registrar a origem pela API** | Seu sistema já captura os parâmetros da campanha antes do contato chamar no WhatsApp. |
 
 ## Opção 1: pelo Widget
 
-1. Nas configurações do Widget, abra a aba **Ajustes**.
-2. Ligue **Habilitar balão de WhatsApp**, preencha **Número** e **Texto padrão** e marque **Usar somente WhatsApp** e **Capturar informações de campanha**.
-3. Com **Capturar informações de campanha** marcada, aparece a opção **Enviar código de rastreio na mensagem**: marque-a e salve as alterações.
+1. Abra o widget em **Configurações** → **Chat** → **Canais** e vá ao cartão **Ajustes**.
+2. Ligue **Habilitar balão de WhatsApp**, preencha **Número** e **Texto padrão** e marque **Capturar informações de campanha**. **Usar somente WhatsApp** é opcional: ele só decide se o botão do chat continua aparecendo.
+3. Com **Capturar informações de campanha** marcada, aparece a opção **Enviar código de rastreio na mensagem**: marque-a e clique em **Salvar mudanças**.
 
 Com **Capturar informações de campanha** e **Enviar código de rastreio na mensagem** marcadas, o balão passa pelo redirecionador com código **apenas quando a página do site tem parâmetros de campanha no endereço**. Sem parâmetros de campanha na página, o botão abre o WhatsApp diretamente, sem código.
 
@@ -52,13 +52,17 @@ https://api4.kinbox.com.br/v3/tracking/whatsapp/<número>?text=<mensagem>&origin
 | `tracking_code` | Opcional. Envie `1` (ou `true`) para incluir o código de rastreio na mensagem pronta. |
 | `<parâmetros da campanha>` | Qualquer outro parâmetro de campanha (como `utm_source`, `utm_campaign`, `gclid`), até 40 parâmetros (`text`, `phone` e `tracking_code` não entram nessa contagem). |
 
-O código de rastreio só é acrescentado quando o link tem **pelo menos um parâmetro de campanha**. Sem nenhum parâmetro de campanha, o link abre o WhatsApp apenas com a mensagem, sem código. O link aceita até 30 cliques por minuto por visitante (acima disso retorna erro).
+O código de rastreio só é acrescentado quando o link tem **pelo menos um parâmetro de campanha**. `origin` sozinho não conta: sem nenhum parâmetro de campanha, o link abre o WhatsApp apenas com a mensagem, sem código. O link aceita até 30 cliques por minuto por visitante (acima disso retorna erro).
 
-Exemplo em JavaScript para montar o link aproveitando os parâmetros de campanha da página atual:
+Exemplo em JavaScript para montar o link com os parâmetros de campanha da página atual (só os que você escolher):
 
 ```js
 const numero = "5511900000001";
-const params = new URLSearchParams(window.location.search);
+const daPagina = new URLSearchParams(window.location.search);
+const params = new URLSearchParams();
+for (const chave of ["utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
+  if (daPagina.get(chave)) params.set(chave, daPagina.get(chave));
+}
 params.set("text", "Olá, quero saber mais.");
 params.set("origin", "https://www.exemplo.com.br");
 params.set("tracking_code", "1");

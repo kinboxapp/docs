@@ -70,12 +70,14 @@ Um plugin é uma página sua (em um endereço HTTPS) que abre dentro da Kinbox, 
 | **Modal** | Em uma janela no meio da tela, com o nome do plugin no título e a altura configurada. |
 | **Painel lateral** | Em um painel à direita com título, na largura configurada. |
 | **Página lateral** | Em um painel à direita sem título, na largura configurada. |
-| **Nova página** | Em uma nova aba do navegador. |
-| **Popup** | Em uma janela separada do navegador. |
+| **Nova página** | Em uma nova aba do navegador, só com o endereço (sem a biblioteca da Kinbox funcionar). |
+| **Popup** | Em uma janela separada do navegador, só com o endereço (sem a biblioteca da Kinbox funcionar). |
 | **Tela inteira** | Cobre a tela inteira, sem botão de fechar da Kinbox. |
 
+Nos modos **Nova página** e **Popup**, a Kinbox só abre o endereço: a página não recebe os dados da conversa e as funções `Kinbox.*` não têm efeito. Use esses modos para abrir um sistema seu; para mostrar dados da conversa ou agir nela, use os outros modos.
+
 <Warning>
-  O modo **Tela inteira** cobre a tela inteira e não tem botão de fechar na interface da Kinbox. Garanta que a sua própria página tenha uma forma de fechar o plugin.
+  O modo **Tela inteira** cobre a tela inteira e não tem botão de fechar na interface da Kinbox. Para fechar, a sua página precisa enviar a mensagem `{ event: "close" }` para a Kinbox com `window.parent.postMessage({ event: "close" }, "*")`. Se não quiser programar isso, prefira **Modal** ou **Painel lateral**.
 </Warning>
 
 ## Campos do contato no endereço
@@ -105,25 +107,15 @@ Para conversar com a Kinbox, carregue a biblioteca `kinboxjs.js` no `<head>` da 
 </html>
 ```
 
-## O que o plugin recebe
+## O que o plugin recebe e pode fazer
 
-- **No endereço (query string):** `dark_mode` (`true` ou `false`, conforme o tema do membro) e `operator_id` (ID do membro logado).
-- **No evento `conversation`:** os objetos `contact` (nome, e-mail, telefone, foto e `customFields`), `conversation` (ID, canal, responsável, grupo, tags e link), `session` (ID e `customFields`) e `user` (dados do membro logado). O evento chega de novo sempre que o membro troca de conversa.
-- **Sem conversa aberta:** o plugin recebe o evento `no_conversation` com `user`.
+Nos modos **Normal**, **Modal**, **Painel lateral**, **Página lateral** e **Tela inteira**:
 
-## O que o plugin pode fazer
+- O endereço chega com `dark_mode` (`true` ou `false`, conforme o tema do membro) e `operator_id` (ID do membro logado).
+- O evento `conversation` traz o contato, a conversa, a sessão e o membro logado, e chega de novo quando o membro troca de conversa. Sem conversa aberta, chega `no_conversation`.
+- Pela biblioteca, o plugin pode mostrar avisos, carregamento e confirmações, gravar campos personalizados do contato ou da sessão, atribuir a conversa, mover para um grupo, pôr ou tirar tags, abrir um formulário da Kinbox e ler os membros, grupos, tags, campos e canais do workspace.
 
-| Quero... | Use |
-| --- | --- |
-| Mostrar ou esconder o carregamento | `Kinbox.loading(true)` / `Kinbox.loading(false)` (chame `false` ao terminar, inclusive em erro) |
-| Exibir um aviso na Kinbox | `Kinbox.toast(tipo, texto)` (`success`, `error`, `info` ou `warning`) |
-| Pedir confirmação ao membro | `Kinbox.dialog("confirm", { title, description, okText, cancelText }, callback)` |
-| Gravar campos personalizados do contato ou da sessão | `Kinbox.setProperty({ key, type, contactId, fields })` (ou `sessionId` no lugar de `contactId`) (retorno no evento `callback`) |
-| Atribuir a conversa a um membro | `Kinbox.assignTo(idDoMembro)` |
-| Mover a conversa para um grupo | `Kinbox.moveToGroup(idDoGrupo)` |
-| Adicionar ou remover uma tag na conversa | `Kinbox.addTag(idDaTag)` / `Kinbox.removeTag(idDaTag)` |
-| Abrir um formulário da Kinbox (modal ou gaveta) | `Kinbox.sendForm({ items, type, title }, callback)` (campos como `text`, `select`, `number` e `date`) |
-| Ler canais, campos, membros, tags, grupos e papéis do workspace | `Kinbox.getWorkspaceInfo(callback)` |
+Nos modos **Nova página** e **Popup**, nada disso acontece: a página abre só com o endereço.
 
 ## Editar ou excluir um plugin
 
@@ -135,4 +127,5 @@ Em **Configurações** → **Integrações** → **Plugins** (com busca **Pesqui
 - **O plugin não aparece na conversa.** Confira se a opção **Visível para** inclui você ou um dos seus grupos.
 - **O plugin abre em branco.** Teste o endereço em uma aba do navegador: a página precisa estar acessível na internet, usar `https://` e permitir ser aberta dentro de outra página.
 - **`{{chave}}` no Endpoint não é trocado.** A troca de campos personalizados no endereço só funciona nos modos **Nova página** e **Popup**.
+- **O plugin não recebe a conversa ou as funções não fazem nada.** Confira o modo: em **Nova página** e **Popup**, a página abre sem a biblioteca da Kinbox funcionar.
 - **O plugin fica preso no carregando.** Confira se o seu código chama `Kinbox.loading(false)` ao terminar, inclusive quando ocorre um erro.

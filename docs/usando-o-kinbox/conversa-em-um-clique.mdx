@@ -1,7 +1,7 @@
 ---
 title: Abrir uma conversa por link (conversa em um clique)
-description: Como montar um link que abre a Kinbox direto na conversa de um contato pelo telefone, ou na janela de nova mensagem com nome, texto e campos já preenchidos.
-keywords: [conversa em um clique, link para conversa, abrir conversa pelo telefone, send phones, link do crm, link da planilha, mensagem pronta, base64, trocar de workspace pelo link]
+description: Como montar um link que abre a Kinbox direto na conversa de um contato pelo telefone, ou na janela de nova mensagem com nome, texto e campos já preenchidos, e o que faz hoje o link de busca por campo personalizado.
+keywords: [conversa em um clique, pesquisar por campo personalizado, cfPlaceHolder, buscar por cpf no link, link para conversa, abrir conversa pelo telefone, send phones, link do crm, link da planilha, mensagem pronta, base64, trocar de workspace pelo link]
 publico: humano
 tipo: guia
 fontes:
@@ -12,6 +12,7 @@ fontes:
 codigo:
   - web:src/routes/inbox.routes.ts
   - web:src/pages/inbox/SearchByPhones/**
+  - web:src/pages/inbox/SearchByCustomfield/**
   - web:src/components-old/header/SearchHeader/**
   - web:src/pages/inbox/Conversations/index.tsx
 verificado_em: 2026-11-26
@@ -73,4 +74,18 @@ Ao abrir o link no navegador, a Kinbox exibe a janela **Pesquisar conversas** bu
 
 Quando há mais de um número em `phones`, apenas o primeiro é usado na janela **Enviar mensagem**. As permissões, canais disponíveis e regras de modelos do WhatsApp oficial dessa janela são os mesmos descritos em [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa).
 
-Veja também [Abrir conversas por campo personalizado no link](/docs/usando-o-kinbox/pesquisar-customfield) e [Para desenvolvedores: API, plugins, MCP e links](/docs/desenvolvedor/visao-geral).
+## Link de busca por campo personalizado
+
+Também existe um link de busca pela chave e pelo valor de um campo personalizado do contato:
+
+```text
+https://app.kinbox.com.br/search?cfPlaceHolder=<chave_do_campo>&cfValue=<valor>
+```
+
+Ele aceita `base64` e `workspaceId` como o link acima.
+
+<Note>
+  **Hoje**, o link `/search?cfPlaceHolder=...&cfValue=...` abre a janela **Pesquisar conversas** sem aplicar o filtro pelo campo personalizado. Para achar conversas por um campo, use na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) o filtro **Campo personalizado** (escolha o campo, digite o valor na janela "Filtrar por ..." e clique em **Filtrar**) ou o campo **Pesquisar** no topo da tela.
+</Note>
+
+Veja também [Para desenvolvedores: API, plugins, MCP e links](/docs/desenvolvedor/visao-geral).

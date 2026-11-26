@@ -737,14 +737,14 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Tem algum app oficial da Kinbox no Zapier?",
+    "pergunta": "Como integro o chat do meu próprio aplicativo à Caixa de entrada da Kinbox?",
     "esperado": [
-      "llm/faq/zapier-make-n8n"
+      "docs/desenvolvedor/criando-canal-customizado"
     ],
-    "tipo": "faq"
+    "tipo": "guia"
   },
   {
-    "pergunta": "Como instalo o Python no Windows para rodar meus scripts de integração?",
+    "pergunta": "A Kinbox tem um SDK oficial em Python para a API?",
     "esperado": [],
     "tipo": "negativo"
   }

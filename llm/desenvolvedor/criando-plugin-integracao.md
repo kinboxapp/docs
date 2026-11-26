@@ -40,9 +40,9 @@ Referência técnica dos plugins da Kinbox, complementando [Criar um plugin para
 | **Modal** | Abre em janela centralizada com o nome do plugin no título. | **Altura em pixels** (200–800) |
 | **Painel lateral** | Abre em painel à direita com título. | **Largura em pixels** (200–1600) |
 | **Página lateral** | Abre em painel à direita sem título. | **Largura em pixels** (200–1600) |
-| **Nova página** | Abre em nova aba do navegador. | Não usa |
-| **Popup** | Abre em janela separada do navegador. | Não usa |
-| **Tela inteira** | Cobre a tela inteira sem botão de fechar da Kinbox. O app aceita a mensagem `close` vinda da página, mas a biblioteca `kinboxjs.js` não expõe função para fechar. | Não usa |
+| **Nova página** | Abre em nova aba do navegador só com o endereço (com `{{chave}}` trocados): sem parâmetros da Kinbox, sem eventos e sem efeito das funções `Kinbox.*`. | Não usa |
+| **Popup** | Abre em janela separada do navegador só com o endereço (com `{{chave}}` trocados): sem parâmetros da Kinbox, sem eventos e sem efeito das funções `Kinbox.*`. | Não usa |
+| **Tela inteira** | Cobre a tela inteira sem botão de fechar da Kinbox. Para fechar, a página envia `window.parent.postMessage({ event: "close" }, "*")` (a biblioteca `kinboxjs.js` não tem função para isso); a Kinbox só aceita a mensagem vinda da própria página do plugin. | Não usa |
 
 ## Troca de campos personalizados no Endpoint
 
@@ -52,7 +52,7 @@ Referência técnica dos plugins da Kinbox, complementando [Criar um plugin para
 
 ## Parâmetros no endereço e verificação de origem
 
-- **Query string acrescentada pela Kinbox:** `dark_mode` (`true` ou `false`), `app_plugin_type` (`inbox`), `operator_id` (ID do membro logado) e, no modo **Tela inteira**, `display_mode=fullscreen`.
+- **Query string acrescentada pela Kinbox** (só nos modos que abrem dentro da Kinbox; em **Nova página** e **Popup** não há parâmetros): `dark_mode` (`true` ou `false`), `app_plugin_type` (`inbox`), `operator_id` (ID do membro logado) e, no modo **Tela inteira**, `display_mode=fullscreen`.
 - **Mesma origem:** a Kinbox só aceita mensagens vindas da mesma origem do **Endpoint** cadastrado; mensagens de outra origem são ignoradas. Se o plugin redirecionar para outro domínio, as funções da biblioteca param de responder.
 
 ## Biblioteca `kinboxjs.js`
@@ -95,5 +95,5 @@ Script: `https://andrody.github.io/kinbox-lib/kinboxjs.js` (carregado no `<head>
 | Plugin não aparece no painel **Detalhes** da conversa | **Visível para** não inclui o membro ou seus grupos, ou o membro está no modo de treino da Academia (plugins ficam ocultos durante o treino). |
 | Plugin abre em branco | Endereço inacessível na internet, fora de `https://` ou bloqueado para carregamento em iframe. |
 | `{{chave}}` não é substituído no **Endpoint** | O modo de exibição não é **Nova página** nem **Popup**. |
-| Funções do `Kinbox` não respondem | A página redirecionou para um domínio diferente da origem do **Endpoint**. |
+| Funções do `Kinbox` não respondem | O modo é **Nova página** ou **Popup** (a página abre só com o endereço), ou a página redirecionou para um domínio diferente da origem do **Endpoint**. |
 | Plugin fica preso no carregando | Faltou chamar `Kinbox.loading(false)` ao final da operação ou no tratamento de erro. |

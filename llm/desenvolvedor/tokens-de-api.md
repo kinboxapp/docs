@@ -25,7 +25,7 @@ Referência técnica dos tokens de API da Kinbox, complementando [Criar um token
 
 - **Acesso à tela:** **Configurações** → **Integrações** → **API Tokens** exige a permissão **Integrações** ou ser o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). A tabela lista todos os tokens ativos do workspace inteiro, do mais novo para o mais antigo.
 - **Formato:** todo token de API começa com `kb_live_`. O valor completo só é exibido uma única vez, na criação; na lista aparecem apenas os 16 primeiros caracteres seguidos de `...`.
-- **Ultimo uso:** a coluna **Ultimo uso** mostra quando o token foi usado pela última vez, ou **Nunca**.
+- **Ultimo uso:** a coluna **Ultimo uso** mostra o último uso registrado do token, ou **Nunca**.
 - **Uso:** enviado no cabeçalho `Authorization: Bearer <token>`. Também funciona no MCP em aplicativos sem OAuth (aba **Outros**, veja [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp)).
 
 ## Permissões do token × métodos HTTP
@@ -55,6 +55,7 @@ Se um membro sem a permissão de inspeção tentar criar token com escopo de par
 | `This API token lacks the "<escopo>" scope. Create a token with it in Settings › API.` | Falta a permissão (`read`, `write` ou `send`) no token. |
 | `The role of the user who created this API token lacks permission: <permissões>` | O papel de quem criou o token não tem a permissão exigida pela rota. |
 | `The role of the user who created this API token has the restriction <restrição>, which blocks this route.` | O papel de quem criou o token tem uma restrição que bloqueia a rota. |
+| `The role of the user who created this API token restricts which conversations and messages it can read (<restrições>), and this route does not apply that restriction yet.` | O papel de quem criou o token limita quais conversas e mensagens ele vê, e a rota chamada ainda não aplica essa limitação. Use um token criado por um membro sem essas restrições. |
 | `ThrottlerException: Too Many Requests` (HTTP 429) | Limite de chamadas excedido. |
 
 ## Limite de chamadas
@@ -71,6 +72,6 @@ Ao clicar na etiqueta, surge a confirmação `'O token "<nome>" deixa de enviar 
 
 ## Token v0 (tokens legados)
 
-O **Token v0** aparece ao clicar em **Mostrar tokens legados** na tela **API Tokens** (exige a permissão **Integrações** ou ser proprietário), com a descrição `"Token legado para acesso a API."`. Há um único **Token v0** por workspace, e a tela permite apenas visualizar e copiar.
+O **Token v0** aparece ao clicar em **Mostrar tokens legados** na tela **API Tokens** (exige a permissão **Integrações** ou ser proprietário), com a descrição `"Token legado para acesso a API."`. Há um único **Token v0** por workspace; na tela, você vê e copia o valor.
 
 Ele não funciona na API pública atual (retorna `Invalid API token format`), mas é a credencial usada em [Integrar seu sistema como canal customizado (API)](/docs/desenvolvedor/criando-canal-customizado) (cabeçalho `x-api-token`) e em [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot) (campo `token`).

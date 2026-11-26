@@ -28,12 +28,8 @@ Referência técnica do MCP da Kinbox, complementando [Conectar o Claude, o Chat
 
 - **URL única do servidor MCP:** `https://mcp.kinbox.com.br/mcp`.
 - **Acesso à tela MCP:** **Configurações** → **Integrações** → **MCP** exige a permissão **Integrações** ou ser proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
-- **Aplicativos exibidos em Como conectar:**
-  - **Claude:** **Configurações › Conectores** → **Adicionar conector personalizado** com a URL `https://mcp.kinbox.com.br/mcp` (OAuth). No terminal (Claude Code): `claude mcp add --transport http kinbox https://mcp.kinbox.com.br/mcp`.
-  - **ChatGPT:** **Configurações › Conectores** → **Criar conector** com a URL e autenticação em OAuth.
-  - **Codex:** **Configurações › Plugins › MCPs** → **Add**, tipo **Streamable HTTP**, URL do servidor e token em branco (OAuth).
-  - **Cursor:** **Settings › MCP** → **Add new global MCP server** com JSON `{"mcpServers":{"kinbox":{"url":"https://mcp.kinbox.com.br/mcp"}}}` (OAuth).
-  - **Outros:** aceita o mesmo JSON via OAuth ou, para aplicativos sem OAuth, um token de API (`kb_live_...`, veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api)) em `"headers": {"Authorization": "Bearer kb_live_<seu_token>"}`.
+- **Aplicativos com passo a passo na tela:** **Claude** (inclui o comando do Claude Code), **ChatGPT**, **Codex** e **Cursor**, todos por OAuth; a aba **Outros** traz a configuração JSON para qualquer aplicativo com servidor MCP, por OAuth ou, sem OAuth, com um token de API no cabeçalho `Authorization: Bearer kb_live_<seu_token>` (veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api)). Passos em [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp).
+- **Rótulo da permissão de parceiro:** em **Conexões ativas**, a permissão de parceiro aparece com o rótulo `partner` (sem tradução).
 - **OAuth × token de API:** conexões OAuth valem para o **workspace aberto no navegador** na hora de autorizar e aparecem em **Conexões ativas** (a lista mostra todas as conexões OAuth do workspace). Conexões feitas por token de API não aparecem em **Conexões ativas** — para encerrá-las, revogue o token em **API Tokens**.
 - **Papel de quem autoriza:** a IA age sempre com o papel de quem autorizou a conexão (ou de quem criou o token de API).
 
@@ -53,8 +49,8 @@ A IA só enxerga as ferramentas das permissões concedidas. Os nomes abaixo são
 | Permissão | Ferramentas e ações |
 | --- | --- |
 | **Ver** (`read`) | `conversations_read` (buscar, abrir, ler mensagens, status de envio e agendadas), `reports_read` (visão geral, produtividade, atribuição, avaliação e sessões; até 92 dias por pedido), `contacts_read` (contatos e organizações), `deals_read` (negociações, funis e produtos), `tasks_read`, `campaigns_read` (campanhas e resultados), `channels_read` (canais e status), `catalog_read` (membros, grupos, tags, campos personalizados, frases rápidas, templates, bots e horários), `team_read` (membros, papéis e regras de atribuição), `automations_read` (listar, abrir e validar bots, agentes, cenários e automações), `billing_read` (plano, faturas, créditos de SMS e saldo; exige **Assinatura** no papel), `get_guide`, `help_read` (busca na central de ajuda) e `list_partner_workspaces` (com permissão de parceiro). |
-| **Alterar** (`write`) | `conversations_write` (resolver, reabrir, atribuir, mover de grupo, tags, nota interna, pendência, lida/não lida, seguir, campos, iniciar/parar bot, agendar mensagem, fixar nota, bloquear contato), `contacts_write` (criar, editar e excluir contatos e organizações), `deals_write` (criar, editar, mover etapa, excluir, ligar negociação à conversa, produtos e funis), `tasks_write`, `campaigns_write` (criar, editar, pausar, retomar e excluir), `settings_write` (tags, frases rápidas, campos personalizados, grupos e horários), `team_write` (convidar, editar, desativar e remover membros, papéis e regras de atribuição), `channels_write` (criar canal de WhatsApp por QR Code) e `automations_write` (criar e configurar bots, agentes, cenários e automações). |
-| **Enviar** (`send`) | `messages_send` (responder texto e mídia, iniciar conversa por telefone via WhatsApp ou SMS, reagir, encaminhar e apagar mensagem). Ligar um bot, agente, cenário ou automação que pode rodar (`automations_write`) também exige **Enviar**. |
+| **Alterar** (`write`) | `conversations_write` (resolver, reabrir, atribuir, mover de grupo, tags, nota interna, pendência, lida/não lida, seguir, campos, parar bot, cancelar agendamento, fixar nota, bloquear contato), `contacts_write` (criar, editar e excluir contatos e organizações), `deals_write` (criar, editar, mover etapa, excluir, ligar negociação à conversa, produtos e funis), `tasks_write`, `campaigns_write` (renomear, pausar e excluir), `settings_write` (tags, frases rápidas, campos personalizados, grupos e horários), `team_write` (convidar, editar, desativar e remover membros, papéis e regras de atribuição), `channels_write` (criar canal de WhatsApp por QR Code) e `automations_write` (criar e configurar bots, agentes, cenários e automações). |
+| **Enviar** (`send`) | `messages_send` (responder texto e mídia, iniciar conversa por telefone via WhatsApp ou SMS, reagir, encaminhar e apagar mensagem). Algumas ações de ferramentas de escrita também exigem **Enviar** e contam no limite de envio: em `conversations_write`, `start_bot` (iniciar bot), `schedule` (agendar mensagem) e `edit_schedule` (editar agendamento); em `campaigns_write`, `create` (criar campanha), `edit_message` (editar a mensagem) e `resume` (retomar). Ligar um bot, agente, cenário ou automação que pode rodar (`automations_write`) também exige **Enviar**. |
 
 ## Confirmação e o que a IA não faz
 
@@ -65,16 +61,16 @@ A IA só enxerga as ferramentas das permissões concedidas. Os nomes abaixo são
 
 ## Limites de uso
 
-Os valores configurados abaixo podem mudar:
+Limites configurados hoje (podem mudar):
 
 - **Chamadas gerais:** 120 por minuto.
-- **Envio de mensagens:** 10 por minuto e 500 por dia.
-- **Novas conversas por telefone:** 5 por minuto e 100 por dia.
+- **Envio de mensagens e ações que exigem Enviar:** 10 por minuto. Em conexões por token de API, também 500 por dia por token.
+- **Novas conversas por telefone:** 5 por minuto. Em conexões por token de API, também 100 por dia por token.
 - **Concorrência:** até 3 chamadas ao mesmo tempo; chamadas extras aguardam até 30 segundos na fila e, se não liberarem, falham com `"Too many concurrent calls..."`.
 - **Consultas longas:** interrompidas em cerca de 55 segundos com `"A consulta demorou demais e foi interrompida. Reduza o período (from/to) ou use filtros mais específicos."`.
 - **Período de relatórios e buscas:** até 92 dias por pedido.
 
-Ao ultrapassar limites de taxa, a ferramenta retorna `RATE_LIMITED` com o tempo de espera.
+Ao ultrapassar um limite, a ferramenta retorna `RATE_LIMITED` com o tempo de espera em segundos: espere esse tempo antes de repetir a chamada.
 
 ## Travas por papel
 
@@ -102,7 +98,7 @@ Restrições que ativam essa trava (rótulos de **Configurações** → **Ambien
 
 - **Na tela Autorizar acesso** (pedido válido por 15 minutos): título `"Autorização indisponível"` com `"Pedido de autorização inválido."`, `"Pedido de autorização não encontrado ou expirado."`, `"Pedido de autorização expirou"`, `"Pedido de autorização já foi respondido"` ou `"Não foi possível concluir a autorização."`.
 - **Na autenticação (HTTP 401):** `Invalid, expired or revoked access token`, `Invalid or revoked API token`, `Unsupported token type`.
-- **Nas ferramentas:** `PERMISSION_DENIED` (`"Seu papel não permite..."`), `SCOPE_REQUIRED`, `PROVISIONAL_LOCK`, `CONFIRMATION_REQUIRED`, `NOT_FOUND`, `RATE_LIMITED`, `TIMEOUT`, `VALIDATION_FAILED`, `LIMIT_REACHED`, `PARTNER_ACCESS_DENIED`, `PARTNER_CONVERSATIONS_BLOCKED` e `TOOL_ERROR`.
+- **Nas ferramentas:** `FORBIDDEN`, `PERMISSION_DENIED` (`"Seu papel não permite..."`), `SCOPE_REQUIRED`, `PROVISIONAL_LOCK`, `CONFIRMATION_REQUIRED`, `NOT_FOUND`, `RATE_LIMITED`, `TIMEOUT`, `VALIDATION_FAILED`, `LIMIT_REACHED`, `PARTNER_ACCESS_DENIED`, `PARTNER_CONVERSATIONS_BLOCKED` e `TOOL_ERROR`.
 
 ## Duração, renovação e revogação
 
@@ -112,7 +108,7 @@ Restrições que ativam essa trava (rótulos de **Configurações** → **Ambien
 
 ## Parceiros
 
-Com a permissão de parceiro (OAuth ou token de API com **Parceiro**, exigindo workspace de parceiro e **Pode inspecionar clientes (Básico)** ou **(Avançado)**), a IA lista os workspaces clientes via `list_partner_workspaces` e age neles dentro da restrição de ambientes do papel do parceiro.
+Com a permissão de parceiro (OAuth ou token de API com **Parceiro**, exigindo workspace de parceiro e **Pode inspecionar clientes (Básico)** ou **(Avançado)**), a IA lista os workspaces clientes via `list_partner_workspaces` e age neles dentro da restrição de ambientes do papel do parceiro. Num workspace cliente, a IA age com o papel de proprietário daquele cliente, mas continua sujeita às permissões de parceiro do seu papel (sem elas, `PERMISSION_DENIED`) e à opção **Permitir que o parceiro veja as conversas** do cliente.
 
 Se o workspace cliente desativar **Permitir que o parceiro veja as conversas** (**Configurações** → **Ambiente** → **Geral**), o acesso a conversas e mensagens pelo parceiro retorna `PARTNER_CONVERSATIONS_BLOCKED`.
 

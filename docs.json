@@ -188,8 +188,7 @@
                   "docs/desenvolvedor/criando-canal-customizado",
                   "docs/desenvolvedor/webhook-continuar-bot",
                   "docs/desenvolvedor/redirecionador-via-whatsapp",
-                  "docs/usando-o-kinbox/conversa-em-um-clique",
-                  "docs/usando-o-kinbox/pesquisar-customfield"
+                  "docs/usando-o-kinbox/conversa-em-um-clique"
                 ]
               }
             ]
@@ -893,7 +892,7 @@
     },
     {
       "source": "/docs/usando-o-kinbox/pesquisar-por-campo-personalizado",
-      "destination": "/docs/usando-o-kinbox/pesquisar-customfield"
+      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
     },
     {
       "source": "/api-v0/:slug*",
@@ -914,6 +913,10 @@
     {
       "source": "/api/:slug*",
       "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/pesquisar-customfield",
+      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
     }
   ]
 }

@@ -27,15 +27,15 @@ Pelo MCP, o Claude ou o ChatGPT podem consultar dados da Kinbox e, conforme as p
 O que fica liberado depende das permissões escolhidas na conexão:
 
 - **Ver conversas, contatos e negócios** (obrigatória): ler conversas, mensagens, relatórios (até 92 dias por pedido), contatos, organizações, negociações, funis, produtos, tarefas, campanhas, canais, equipe, bots, agentes, cenários, automações, assinatura (exige a permissão **Assinatura** no papel) e a central de ajuda.
-- **Alterar conversas, contatos e negócios:** organizar conversas (resolver, reabrir, atribuir, mover de grupo, tags, notas internas, pendências, campos, iniciar/parar bot, agendar mensagem, bloquear contato), gerenciar contatos, negociações, tarefas, campanhas, configurações (tags, frases rápidas, campos, grupos, horários), equipe (membros, papéis e atribuição automática), criar canal de WhatsApp por QR Code e configurar bots, agentes, cenários e automações.
-- **Enviar mensagens aos seus clientes:** responder com texto e mídia, iniciar conversas por WhatsApp ou SMS, reagir, encaminhar e apagar mensagens, além de ligar bots, agentes, cenários ou automações que podem rodar.
+- **Alterar conversas, contatos e negócios:** organizar conversas (resolver, reabrir, atribuir, mover de grupo, tags, notas internas, pendências, campos, parar bot, cancelar agendamento, bloquear contato), gerenciar contatos, negociações e tarefas, renomear, pausar ou excluir campanhas, configurações (tags, frases rápidas, campos, grupos, horários), equipe (membros, papéis e atribuição automática), criar canal de WhatsApp por QR Code e configurar bots, agentes, cenários e automações.
+- **Enviar mensagens aos seus clientes:** responder com texto e mídia, iniciar conversas por WhatsApp ou SMS, reagir, encaminhar e apagar mensagens, iniciar bot numa conversa, agendar ou editar mensagens agendadas, criar campanhas, editar a mensagem ou retomar campanhas, além de ligar bots, agentes, cenários ou automações que podem rodar.
 
 Regras e limites importantes:
 
 - A IA usa o papel de quem conectou (e para abrir a tela **MCP** e gerenciar conexões, é preciso ter a permissão **Integrações** ou ser proprietário do workspace).
 - Ações sem volta (como excluir contato, negociação, campanha, tarefa, tag, grupo ou papel, remover ou desativar membro ou apagar mensagem) exigem sua confirmação antes de rodar.
 - A IA não cancela nem troca plano de assinatura, não envia mensagens em conversas resolvidas há mais de 30 dias e, no WhatsApp oficial fora da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas), só envia templates aprovados.
-- Há limites de uso (valores configurados podem mudar), como 120 chamadas por minuto, 10 envios de mensagem por minuto e 500 por dia, e 5 novas conversas por minuto e 100 por dia.
+- Há limites de uso (valores configurados podem mudar), como 120 chamadas por minuto, 10 envios por minuto e 5 novas conversas por minuto. Ao passar de um limite, a IA recebe o tempo de espera antes de tentar de novo.
 
 Veja como conectar em [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp).
 

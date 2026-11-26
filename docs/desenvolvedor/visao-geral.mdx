@@ -26,7 +26,7 @@ A Kinbox oferece recursos para integrar o seu sistema, conectar assistentes de I
 
 ### API pública
 
-Leia e altere dados do seu workspace a partir de outro sistema (contatos, organizações, campos personalizados, tags, produtos, negócios, funis, tarefas, campanhas, sessões, conversas, execuções de ferramentas, mensagens, canais, usuários, funções, grupos, atribuição automática, horários de atendimento e frases rápidas). Crie o token em **Configurações** → **Integrações** → **API Tokens** (exige a permissão **Integrações** ou ser proprietário do workspace).
+Leia e altere dados do seu workspace a partir de outro sistema, como contatos, conversas, mensagens, negociações, campanhas, membros e papéis (lista completa na [referência da API](/api-reference/authentication)). Crie o token em **Configurações** → **Integrações** → **API Tokens** (exige a permissão **Integrações** ou ser proprietário do workspace).
 
 Veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api) e a referência em [Autenticação](/api-reference/authentication).
 
@@ -62,8 +62,8 @@ Veja [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/a
 ### Links diretos e rastreio de campanhas
 
 - **Conversa em um clique:** link `/send?phones=` que abre a conversa de um contato pelo telefone (ou a janela de nova mensagem), para qualquer membro logado. Veja [Abrir uma conversa por link (conversa em um clique)](/docs/usando-o-kinbox/conversa-em-um-clique).
-- **Busca por campo personalizado no link:** link `/search?cfPlaceHolder=` para buscar conversas por um campo personalizado (para membros logados; hoje abre a busca sem aplicar o filtro pelo campo). Veja [Abrir conversas por campo personalizado no link](/docs/usando-o-kinbox/pesquisar-customfield).
-- **Redirecionador de WhatsApp:** link para o botão de WhatsApp do seu site (ou pelo Widget) para identificar a campanha de origem quando há parâmetros de campanha, inclusive no celular com código de rastreio. Veja [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp).
+- **Busca por campo personalizado no link:** link `/search?cfPlaceHolder=` (para membros logados); hoje ele abre a busca sem aplicar o filtro pelo campo. Veja [Abrir uma conversa por link (conversa em um clique)](/docs/usando-o-kinbox/conversa-em-um-clique).
+- **Redirecionador de WhatsApp:** link para o botão de WhatsApp do seu site (ou opção do Widget) que registra de qual campanha veio o cliente. Com o código de rastreio, funciona também quando ele abre o WhatsApp no celular. Veja [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp).
 
 Para detalhes sobre o que cada permissão libera, consulte a [Referência de permissões](/docs/administracao/referencia-de-permissoes).
 

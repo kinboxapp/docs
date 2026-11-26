@@ -1447,25 +1447,9 @@
   paginas:
     - docs/desenvolvedor/mcp
 
-# Janela "Conector do Claude · Passo a passo". O endereço mostrado no staging não é o de produção: os blocos de código
-# levam tarja (o texto da página traz o endereço certo).
-- id: dev-mcp-passo-a-passo
-  url: /settings/mcp
-  passos:
-    - esperar: 'button:has-text("Instalar conector")'
-    - clicar: 'button:has-text("Instalar conector")'
-    - esperar: '.ant-modal-content:has-text("Passo a passo")'
-    - pausa: 800
-  alvo: '.ant-modal-content'
-  mascarar:
-    - '.ant-modal-content pre'
-  arquivo: images/ajuda/desenvolvedores/mcp-passo-a-passo-claude.webp
-  paginas:
-    - docs/desenvolvedor/mcp
-
-# Tela Autorizar acesso. Precisa de um pedido de autorização pendente (vale 15 min): registre um cliente "Claude" com
-# redirect http://localhost e chame /oauth/authorize na api-v2 do staging; troque PEDIDO_PENDENTE pelo request devolvido. A conta de teste é
-# admin do sistema: a opção "Administrar a plataforma Kinbox" some (o cliente não vê) e o "Conectado como" leva tarja.
+# Tela Autorizar acesso. Precisa de um pedido de autorização pendente (vale 15 min), criado ao conectar um aplicativo
+# de teste pela tela MCP; troque PEDIDO_PENDENTE pelo pedido. A conta de teste vê uma opção interna que o cliente não vê:
+# ela fica escondida no print. O "Conectado como" leva tarja.
 - id: dev-mcp-autorizar
   url: /oauth/consent?request=PEDIDO_PENDENTE
   passos:
@@ -1475,7 +1459,7 @@
   mascarar:
     - 'p:has-text("Conectado como")'
   esconder:
-    - 'label:has-text("Administrar a plataforma Kinbox")'
+    - 'div:has(> h1:has-text("quer acessar")) .rounded-xl > label:nth-of-type(n+4)'
   arquivo: images/ajuda/desenvolvedores/mcp-autorizar.webp
   paginas:
     - docs/desenvolvedor/mcp
@@ -1500,8 +1484,7 @@
   paginas:
     - docs/desenvolvedor/criando-plugin-integracao
 
-# Painel Conectar Canal Customizado (não conecta). O recorte começa em Descrição: o aviso do topo e a ajuda do último
-# campo dizem "Aldeia" no layout novo (divergência registrada).
+# Painel Conectar Canal Customizado (não conecta). O recorte vai de Descrição até o último campo.
 - id: dev-canal-customizado
   url: /settings/channels/new
   passos:

@@ -28,7 +28,7 @@ Não, a Kinbox não tem app pronto para Zapier, Make, n8n ou Pluga.
 
 Como alternativa, você pode ligar a Kinbox a essas ferramentas de duas formas:
 
-- **Da ferramenta para a Kinbox:** use o módulo de requisição HTTP do Zapier, Make, n8n ou Pluga para chamar a API pública da Kinbox com um token de API (`Authorization: Bearer <token>`), criado em **Configurações** → **Integrações** → **API Tokens** (exige a permissão **Integrações** ou ser proprietário do workspace).
+- **Da ferramenta para a Kinbox:** nas ferramentas que tiverem um módulo de requisição HTTP (como Zapier, Make e n8n), use esse módulo para chamar a API pública da Kinbox com um token de API (`Authorization: Bearer <token>`), criado em **Configurações** → **Integrações** → **API Tokens** (exige a permissão **Integrações** ou ser proprietário do workspace).
 - **Da Kinbox para a ferramenta (e vice-versa):** use **Cenários** (**Configurações** → **Automação** → **Cenários**), com o gatilho **Webhook recebido** para receber chamadas e passos de **Requisição HTTP** para enviar dados para fora.
 
 Veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api), [Autenticação](/api-reference/authentication) e [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia).
