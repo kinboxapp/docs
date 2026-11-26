@@ -262,6 +262,51 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Onde eu crio um modelo de mensagem para mandar pelo WhatsApp oficial e pedir a aprovação da Meta?",
+    "esperado": [
+      "docs/canais/criar-templates-dentro-do-kinbox",
+      "docs/canais/whatsapp/whatsapp-templates/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Meta recusou meu template e trocou outro de utilidade para marketing. O que eu faço?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-templates/template-rejeitado",
+      "llm/faq/whatsapp-template-categoria"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Coloquei {{first_name}} na variável do template da campanha e chegou o texto cru. Por quê?",
+    "esperado": [
+      "llm/faq/whatsapp-template-variaveis",
+      "docs/canais/whatsapp/whatsapp-templates/enviar-template",
+      "llm/canais/whatsapp/whatsapp-templates/enviar-template"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para mandar um formulário que o cliente preenche dentro do próprio WhatsApp?",
+    "esperado": [
+      "docs/canais/criar-flows-dentro-do-kinbox",
+      "docs/canais/whatsapp/whatsapp-templates/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como envio vários produtos com foto lado a lado numa mensagem só do WhatsApp oficial?",
+    "esperado": [
+      "docs/canais/criar-carrossel-dentro-do-kinbox"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como peço para o Google aprovar meu anúncio de pesquisa mais rápido?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Quantos dias dura o período de teste da Kinbox antes de eu ter que pagar?",
     "esperado": [
       "docs/assinatura/visao-geral",
