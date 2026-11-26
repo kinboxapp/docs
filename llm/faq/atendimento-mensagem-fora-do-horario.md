@@ -31,7 +31,7 @@ Existem três caminhos para avisar o contato:
 
 No mesmo cartão **Caixa de Entrada**, existe ainda **Mensagem quando membro indisponível** (também só em conversa com responsável e a cada mensagem); quando as duas condições acontecem juntas, **Mensagem quando fora do horário comercial** tem prioridade.
 
-Veja mais em [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios), [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot) e [Blocos do bot](/docs/bot/blocos-do-bot).
+Veja mais em [Mensagens automáticas e regras da caixa de entrada](/docs/administracao/mensagens-automaticas), [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios), [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot) e [Blocos do bot](/docs/bot/blocos-do-bot).
 
 ## Variações
 

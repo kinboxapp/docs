@@ -214,6 +214,19 @@
                   "docs/clientes/tipos-de-campo",
                   "docs/clientes/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Funis e negociações",
+                "pages": [
+                  "docs/crm/visao-geral",
+                  "docs/crm/gerenciando-funil-de-vendas",
+                  "docs/crm/criar-funil-de-vendas",
+                  "docs/crm/cadencias",
+                  "docs/crm/importar-negociacoes",
+                  "docs/crm/acoes-em-lote",
+                  "docs/crm/criar-e-gerenciar-produtos",
+                  "docs/crm/motivos-de-perda-e-regras"
+                ]
               }
             ]
           },
@@ -299,6 +312,16 @@
                   "docs/administracao/licencas-e-propriedade",
                   "docs/administracao/referencia-de-permissoes",
                   "docs/administracao/problemas-com-membros"
+                ]
+              },
+              {
+                "group": "Workspace",
+                "pages": [
+                  "docs/configuracoes-no-workspace/configuracoes-gerais",
+                  "docs/administracao/mensagens-automaticas",
+                  "docs/administracao/auditoria",
+                  "docs/administracao/acesso-do-parceiro",
+                  "docs/administracao/excluir-workspace"
                 ]
               },
               {
@@ -847,10 +870,6 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-templates/criando-templates-no-360dialog",
       "destination": "/docs/canais/criar-templates-dentro-do-kinbox"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
     },
     {
       "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",
