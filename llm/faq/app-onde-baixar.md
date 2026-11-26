@@ -27,7 +27,7 @@ Busque "Kinbox" na App Store (iPhone) ou no Google Play (celular Android), ou ab
 
 Na Kinbox no navegador, no computador, você também pode abrir o menu da sua foto, no canto superior direito, e clicar em **Baixar app para celular** — ou usar o comando **Baixar app para celular** na busca do topo (**Pesquisar**). A tela de entrada do navegador também pode mostrar o botão **Baixar o app para celular**. Ao abrir a Kinbox pelo navegador do celular (iPhone ou celular Android), pode aparecer o aviso "O Kinbox tem app para iPhone" (ou "O Kinbox tem app para Android") com **Usar o app** e **Continuar no navegador**; depois de qualquer escolha, ele some por 30 dias. Se a opção, o botão ou o aviso não aparecerem (por exemplo, se a sua empresa usa a Kinbox com outra marca), procure o app nas lojas ou fale com quem administra o workspace.
 
-O app é grátis e feito para quem já tem conta na Kinbox: depois de instalar, entre com o mesmo e-mail e senha do navegador ou com **Continuar com Google**. **Continuar com Apple** (só no iPhone) funciona depois que você vincula a Conta Apple em **Você** → **Privacidade**. O app é feito para celular e não tem layout para tablet.
+O app é grátis e feito para quem já tem conta na Kinbox: depois de instalar, entre com o mesmo e-mail e senha do navegador ou com **Continuar com Google**. No iPhone, você também pode tocar em **Continuar com Apple**; se o app pedir, entre de outro jeito e vincule a Conta Apple em **Você** → **Privacidade**. O app é feito para celular e não tem layout para tablet.
 
 Veja [App da Kinbox para celular: o que dá para fazer](/docs/app/visao-geral).
 

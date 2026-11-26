@@ -98,7 +98,7 @@ Toque no nome do contato no topo da conversa para abrir **Dados do contato**. Al
 - **Pesquisar:** busca em todo o histórico do contato.
 - **Agendamentos:** lista as mensagens agendadas da conversa.
 - **Mídia, links e docs:** reúne os arquivos e links trocados.
-- **Negócios** e **Tarefas**, se a opção aparecer: mostram e permitem adicionar as negociações e as tarefas do contato (veja [Criar e acompanhar tarefas](/docs/tarefas/criando-e-gerenciando-tarefas)).
+- **Negócios** e **Tarefas**, se a opção aparecer: mostram as negociações e as tarefas do contato. Ver a lista não garante que você possa adicionar itens: se o botão **Adicionar negócio** ou **Adicionar tarefa** não aparecer, peça acesso a quem administra o workspace (veja [Criar e acompanhar tarefas](/docs/tarefas/criando-e-gerenciando-tarefas)).
 - **Sessão**, **Contato** e **Notas do contato:** mostram e permitem editar os dados da sessão, do contato e as notas, conforme o seu papel.
 - **Mais:** reúne seguir, marcar como lida ou não lida, marcar pendência e **Bloquear** / **Desbloquear**, além destas opções, se aparecerem:
   - **Agendar mensagem**, **Executar bot** e **Exportar CSV** (não aparecem no Mercado Livre).
@@ -106,7 +106,12 @@ Toque no nome do contato no topo da conversa para abrir **Dados do contato**. Al
 
 ## Agendar uma mensagem
 
-Em **Dados do contato** → **Mais**, toque em **Agendar mensagem**, se a opção aparecer (ela não existe no Mercado Livre; se não aparecer, peça a permissão a quem administra o workspace). Escolha data e hora, escreva o texto, marque **Repetir mensalmente** se quiser e toque em **Agendar mensagem**. Só no WhatsApp oficial, quando o horário exigir, o app pede a escolha de um modelo aprovado.
+Em **Dados do contato** → **Mais**, toque em **Agendar mensagem**, se a opção aparecer (ela não existe no Mercado Livre; se não aparecer, peça a permissão a quem administra o workspace). Escolha data e hora, escreva o texto, marque **Repetir mensalmente** se quiser e toque em **Agendar mensagem**.
+
+Só no WhatsApp oficial, o campo de texto dá lugar à escolha de um modelo aprovado em dois casos:
+
+- **Fora da janela de 24 horas:** o horário escolhido cai depois de 24 horas da última mensagem do contato, ou o contato ainda não enviou nenhuma mensagem.
+- **Com Repetir mensalmente ligado:** mesmo dentro da janela.
 
 A tela **Agendamentos** apenas lista os envios: para editar ou cancelar uma mensagem agendada, use a Kinbox no navegador (veja [Agendar uma mensagem](/docs/conversas/agendar-mensagem)).
 
@@ -119,10 +124,10 @@ Você pode iniciar conversas pelo app nos canais de WhatsApp, e-mail e SMS liber
     No topo da lista de conversas, toque em **+** (**Enviar nova mensagem**).
   </Step>
   <Step title="Escolha o contato">
-    Em **Nova mensagem**, toque em **Nova conversa** para um contato novo (abre **Novo contato**). Para um contato já cadastrado, escolha-o em **Contatos recentes** ou na busca, ou toque em **Contato do celular** para escolher um contato da agenda do aparelho com telefone salvo (abre **Enviar mensagem**, com os dados vindos do cadastro).
+    Em **Nova mensagem**, toque em **Nova conversa** para um contato novo (abre **Novo contato**). Para um contato já cadastrado, escolha-o em **Contatos recentes** ou na busca, ou toque em **Contato do celular** para escolher um contato da agenda do aparelho com telefone salvo (se ele ainda não estiver na Kinbox, o app o cadastra). Abre **Conversas do contato**: toque numa conversa da lista para continuar nela ou, para começar outra, toque em **Enviar mensagem** (se o contato ainda não tem conversas) ou em **Enviar mensagem por outro canal**. Esses botões só aparecem se o contato tiver telefone ou e-mail cadastrado.
   </Step>
   <Step title="Escolha o canal e preencha o contato">
-    Escolha o canal em **Enviar por**. Em **Novo contato**, preencha o nome e o telefone com código do país e DDD (por exemplo, `+55 11 90000-0001`) — ou o e-mail e o assunto, no canal de e-mail.
+    Escolha o canal em **Enviar por**. Em **Novo contato**, preencha o nome e o telefone com código do país e DDD (por exemplo, `+55 11 90000-0001`) — ou o e-mail, no canal de e-mail. No canal de e-mail, o **Assunto** é obrigatório também para contato já cadastrado.
   </Step>
   <Step title="Escreva a mensagem ou escolha o modelo">
     Nos canais com texto livre, escreva a primeira mensagem. No WhatsApp oficial não há texto livre: escolha um **Modelo aprovado**, preencha todas as variáveis e envie o anexo do cabeçalho quando o modelo exigir (veja [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)). Se o modelo aparecer como "Formato ainda não suportado", faça o envio pela Kinbox no navegador.
