@@ -1175,6 +1175,60 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Quero saber quem apagou uma tag da minha conta semana passada, onde eu vejo isso?",
+    "esperado": [
+      "docs/administracao/auditoria",
+      "llm/faq/auditoria-quem-apagou",
+      "llm/configuracoes-no-workspace/configuracoes-gerais"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O cliente manda mensagem de madrugada e a mensagem de ausência não chega pra ele, por quê?",
+    "esperado": [
+      "docs/administracao/mensagens-automaticas",
+      "llm/configuracoes-no-workspace/configuracoes-gerais",
+      "llm/faq/atendimento-mensagem-fora-do-horario"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A mensagem de ausência está disparando na hora errada, umas três horas fora do nosso expediente. O que eu confiro?",
+    "esperado": [
+      "llm/faq/workspace-mudar-fuso",
+      "docs/configuracoes-no-workspace/configuracoes-gerais",
+      "docs/administracao/mensagens-automaticas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A agência que cuida da nossa conta consegue ler as conversas dos nossos clientes? Dá para bloquear?",
+    "esperado": [
+      "docs/administracao/acesso-do-parceiro",
+      "llm/faq/workspace-parceiro-ve-conversas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como faço para encerrar e apagar o ambiente da minha empresa na Kinbox?",
+    "esperado": [
+      "docs/administracao/excluir-workspace"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde eu troco o logo e o nome da empresa que aparecem na Kinbox?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configuracoes-gerais"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Consigo baixar o histórico da Auditoria em uma planilha?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Meu formulário do site precisa mandar os leads direto para a Kinbox e criar o contato. Como faço?",
     "esperado": [
       "docs/cenarios/integrar-via-webhook-com-cenarios"
