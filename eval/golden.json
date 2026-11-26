@@ -743,5 +743,56 @@
     "pergunta": "Consigo fazer chamada de vídeo com o visitante pelo chat do site?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para as conversas novas serem divididas entre os vendedores em rodízio?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
+      "docs/atendimento/estrategias-de-atribuicao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Criei uma regra de distribuição e nenhuma conversa está caindo para a equipe, o que pode ser?",
+    "esperado": [
+      "docs/atendimento/problemas-comuns",
+      "llm/atendimento/estrategias-de-atribuicao"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para colocar o horário de almoço no horário de atendimento da empresa?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-e-gerenciar-horarios"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como mando uma pesquisa de satisfação quando termino o atendimento?",
+    "esperado": [
+      "docs/atendimento/pesquisa-de-satisfacao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que recebi uma conversa nova mesmo estando indisponível?",
+    "esperado": [
+      "docs/atendimento/problemas-comuns",
+      "docs/atendimento/estrategias-de-atribuicao",
+      "docs/conta/disponibilidade"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como separo a equipe em setores, tipo vendas e suporte?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-e-gerenciar-grupos"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Kinbox calcula e paga bônus para os atendentes de acordo com a nota das avaliações?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
