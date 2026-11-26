@@ -1890,13 +1890,13 @@
     - esperar: '.ant-drawer-body #isEnabled'
     - digitar:
         seletor: '.ant-drawer-body #data_token_url'
-        texto: 'https://sua-empresa.bitrix24.com.br/rest/1/xxxxxxxxxx/'
+        texto: 'seu-webhook-de-leads-aqui'
     - digitar:
         seletor: '.ant-drawer-body #data_token_url_users'
-        texto: 'https://sua-empresa.bitrix24.com.br/rest/1/yyyyyyyyyy/'
+        texto: 'seu-webhook-de-usuarios-aqui'
     - digitar:
         seletor: '.ant-drawer-body #data_webhookUrl'
-        texto: 'https://sua-empresa.bitrix24.com.br/rest/1/zzzzzzzzzz/'
+        texto: 'seu-webhook-do-bot-aqui'
     - pausa: 800
   alvo:
     - '.ant-drawer-header'
@@ -1913,7 +1913,7 @@
     - esperar: '.ant-drawer-body #isEnabled'
     - digitar:
         seletor: '.ant-drawer-body #data_org_id'
-        texto: '000000000'
+        texto: 'org000000000'
     - digitar:
         seletor: '.ant-drawer-body #data_client_id'
         texto: '1000.XXXXXXXXXXXXXXXX'

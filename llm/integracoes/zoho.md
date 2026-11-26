@@ -13,7 +13,6 @@ fontes:
 codigo:
   - web:src/pages/settings/integrations/zoho/**
   - web:src/components-old/chat/side/integrationApps/ZohoApp/**
-  - web:src/hooks/useSocketV2.ts
 verificado_em: 2026-11-26
 ---
 

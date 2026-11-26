@@ -20,7 +20,7 @@ verificado_em: 2026-11-26
 A integração liga cada membro da Kinbox à conta dele no Pipedrive. Na conversa, o quadro **Pipedrive** cria a pessoa no Pipedrive a partir do contato, mostra quantas oportunidades e atividades abertas ela tem, cria oportunidades, atualiza os dados da pessoa e salva a conversa como nota. Tudo acontece quando o membro aciona o quadro, sem sincronização automática.
 
 <Note>
-  Quem pode configurar: proprietário do workspace ou membros com a permissão **Integrações** (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). **Cada membro** que vai usar o quadro na conversa precisa ter o próprio token de API do Pipedrive preenchido na linha dele; sem token, o botão **Add contato** fica desativado.
+  Quem pode configurar: proprietário do workspace ou membros com a permissão **Integrações** (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Na configuração atual, **cada membro** que vai usar o quadro na conversa precisa ter o próprio token de API do Pipedrive preenchido na linha dele; sem ele, o botão **Add contato** fica desativado.
 </Note>
 
 ## Antes de começar
@@ -51,7 +51,7 @@ A integração liga cada membro da Kinbox à conta dele no Pipedrive. Na convers
 
 Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **Pipedrive** no painel **Detalhes** (veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O quadro não aparece para membros com a restrição **Esconder informações de integração** nem no modo de treino da Academia.
 
-- **Contato ainda não ligado:** clique em **Add contato**. O botão fica desativado se o seu membro não tiver token salvo no painel.
+- **Contato ainda não ligado:** clique em **Add contato**. Na configuração atual, o botão fica desativado se o seu membro não tiver token salvo no painel.
   - A Kinbox cria a pessoa no Pipedrive com nome, e-mail e telefone do contato e liga o contato a ela.
   - Também vão os campos personalizados preenchidos que tenham o mesmo nome de um campo de pessoa no Pipedrive (de texto, número, e-mail ou telefone).
   - Ao concluir, aparece "Contato criado no pipedrive.".
@@ -64,7 +64,13 @@ Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **P
 
 ## No bot
 
-No bloco **Integração** do bot (grupo **Outros**), há três ações prontas do Pipedrive: **Sincroniza contato, lead, deal, activity e notas no Pipedrive**, **Cria ou atualiza a deal no Pipedrive** e **Cria ou atualiza atividade de agenda no Pipedrive**. Elas usam o token do membro responsável pela conversa ou, se ele não tiver token, outro token salvo no painel. Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot).
+No bloco **Integração** do bot (grupo **Outros**), há três ações prontas do Pipedrive (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)):
+
+- **Sincroniza contato, lead, deal, activity e notas no Pipedrive**
+- **Cria ou atualiza a deal no Pipedrive**
+- **Cria ou atualiza atividade de agenda no Pipedrive**
+
+O bot pode usar outro token configurado no painel, não necessariamente o do membro que está atendendo.
 
 ## Desligar a integração
 
@@ -72,7 +78,7 @@ Para desligar, abra **Pipedrive** em **Apps**, desligue **Habilitar integração
 
 ## Problemas comuns
 
-- **Botão Add contato desativado.** Falta preencher o token do seu membro no painel **Pipedrive**. Peça a quem tem a permissão **Integrações** para cadastrar o seu token.
+- **Botão Add contato desativado.** Na configuração atual, falta preencher o token do seu membro no painel **Pipedrive**. Peça a quem tem a permissão **Integrações** para cadastrar o seu token.
 - **Aviso de erro do Pipedrive ao abrir a conversa.** O token salvo na linha do seu membro está vazio ou inválido. Gere ou copie o token novamente no Pipedrive e salve no painel.
 - **Um campo personalizado não foi enviado ao Pipedrive.** Confira se o campo está preenchido no contato, se o nome dele na Kinbox é igual ao nome do campo de pessoa no Pipedrive (sem diferenciar maiúsculas) e se o campo no Pipedrive é de texto, número, e-mail ou telefone.
 - **O quadro Pipedrive não aparece na conversa.** Confira se **Habilitar integração** está ligado, se o seu papel não tem a restrição **Esconder informações de integração** e se você não está no modo de treino da Academia.

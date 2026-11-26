@@ -11,7 +11,6 @@ fontes:
 codigo:
   - web:src/pages/settings/integrations/zoho/**
   - web:src/components-old/chat/side/integrationApps/ZohoApp/**
-  - web:src/hooks/useSocketV2.ts
 verificado_em: 2026-11-26
 ---
 
@@ -84,5 +83,5 @@ Para desligar, abra **Zoho CRM** em **Apps**, desligue **Habilitar integração*
 - **Refresh Token não aparece depois de clicar em Obter token.** O código gerado expirou ou já foi usado, ou **Client ID** / **Client Secret** estão incorretos. Gere um novo código no Zoho e tente novamente.
 - **O quadro mostra "Erro ao buscar informações de contato do Zoho."** O token expirou e não pôde ser renovado. Clique em **Recarregar**; se o erro continuar, gere um novo código no Zoho e clique em **Obter token** e **Salvar**.
 - **Adicionar Lead abre sem campos.** Falta escolher o **Layout dos Leads** em **Configurações**, clicar em **Salvar** nos ajustes e clicar em **Salvar** no painel **Zoho**.
-- **Aviso "Zoho: …" ao cadastrar.** Algum campo obrigatório no Zoho não aparece no formulário do quadro (por exemplo, um campo de data, que o formulário não exibe). Se o campo não estiver em **Campos de Negócios**, inclua-o; se for de data ou de pesquisa, faça o cadastro direto no Zoho CRM.
+- **Aviso "Zoho: …" ao cadastrar.** Algum campo obrigatório no Zoho não aparece no formulário do quadro (por exemplo, um campo de data, que o formulário não exibe). Se for um campo que o formulário exibe, inclua-o em **Campos de Negócios**. Se for um campo obrigatório de data ou de pesquisa, faça o cadastro direto no Zoho CRM.
 - **O quadro não encontra um lead que já existe no Zoho.** A busca usa apenas o telefone: confira se o número salvo no Zoho corresponde ao telefone do contato na Kinbox.

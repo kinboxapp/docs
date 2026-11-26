@@ -11,7 +11,6 @@ fontes:
 codigo:
   - web:src/pages/settings/integrations/EditNectarCRM.tsx
   - web:src/components-old/chat/side/integrationApps/NectarCRMApp/**
-  - api:src/modules/proxy/**
 verificado_em: 2026-11-26
 ---
 
@@ -49,7 +48,7 @@ A integração liga cada membro da Kinbox à conta dele no NectarCRM. Na convers
 
 Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **NectarCRM** no painel **Detalhes** (veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O quadro não aparece para membros com a restrição **Esconder informações de integração** nem no modo de treino da Academia.
 
-- **Contato ainda não ligado:** o quadro mostra o botão **Add contato** (desativado se o seu membro não tiver token salvo no painel). Clicar cria um contato no NectarCRM com nome, telefone e e-mail (quando preenchidos) — e também envia Segmento e Origem se o contato da Kinbox tiver campos personalizados com as chaves `segmento` e `origem`. Ao concluir, aparece "Contato criado no NectarCRM.".
+- **Contato ainda não ligado:** o quadro mostra o botão **Add contato** (desativado se o seu membro não tiver token salvo no painel). Clicar cria um contato no NectarCRM com nome, telefone e e-mail (quando preenchidos) — e também envia Segmento e Origem se o contato da Kinbox tiver os campos personalizados `segmento` e `origem`. Ao concluir, aparece "Contato criado no NectarCRM.".
 - **Contato já ligado:** o quadro mostra **Responsável**, **Segmento** e **Origem** (quando têm valor), além das contagens de **Oportunidades** e **Tarefas**, e o menu **Ações** (três pontos):
   - **Salvar dados:** envia nome, telefone, e-mail e origem (do campo personalizado `origem`) do contato para o NectarCRM e exibe "Contato atualizado".
 

@@ -13,7 +13,6 @@ codigo:
   - web:src/pages/settings/integrations/EditRdStation.tsx
   - web:src/pages/settings/integrations/rdstation/**
   - web:src/components-old/chat/side/integrationApps/RDStationApp/**
-  - api:src/modules/proxy/**
 verificado_em: 2026-11-26
 ---
 

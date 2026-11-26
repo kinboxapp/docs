@@ -35,8 +35,7 @@ Complemento técnico de [Integrar com o RD Station Marketing](/docs/integracoes/
 
 - **E-mail como chave:** o quadro busca o contato no RD exclusivamente pelo e-mail do contato na Kinbox. Alterar o e-mail do contato na Kinbox faz o quadro buscar o novo e-mail no RD. **Atualizar contato** envia nome, celular, bio e tags, e não altera o e-mail no RD.
 - **Mensagens de erro do quadro:** ao criar um contato, um erro de e-mail mostra o texto devolvido pelo RD; outros erros aparecem como `"Erro ao criar contato - "` seguido do detalhe do RD. **Atualizar contato** com erro mostra `"Erro ao atualizar contato"`.
-- **País:** no quadro, o campo **País** hoje repete o valor de **Estado**.
-- **Campos exibidos no quadro (somente leitura):** mostra apenas campos preenchidos no RD — **Contato**, **Cargo**, **Telefone pessoal**, **Celular**, **Bio**, **Website**, **Cidade**, **Estado**, **Twitter**, **Facebook**, **Linkedin**, **Tags** e campos personalizados do RD (os de prefixo `cf_`, exibidos sem o prefixo).
+- **Campos exibidos no quadro (somente leitura):** mostra apenas campos preenchidos no RD — **Contato**, **Cargo**, **Telefone pessoal**, **Celular**, **Bio**, **Website**, **Cidade**, **Estado**, **País** (repete o valor de **Estado**), **Twitter**, **Facebook**, **Linkedin**, **Tags** e campos personalizados do RD (os de prefixo `cf_`, exibidos sem o prefixo).
 - **Criar contato como conversão:** gravado apenas ao clicar em **Salvar** no painel. Quando ligado, registra uma conversão no RD após criar ou atualizar o contato com os seguintes identificadores:
   - **No quadro da conversa:** `chat_kinbox`.
   - **Na ação do bot:** `"Contato criado via Kinbox"` ou `"Contato atualizado via Kinbox"`.

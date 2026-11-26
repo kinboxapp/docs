@@ -856,10 +856,10 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Onde coloco o token do Pipedrive de cada vendedor?",
+    "pergunta": "Como faço os leads convertidos no RD Station Marketing virarem contato na Kinbox?",
     "esperado": [
-      "docs/integracoes/pipedrive",
-      "llm/integracoes/pipedrive"
+      "docs/integracoes/rdstation-marketing-webhook",
+      "llm/integracoes/rdstation-marketing-webhook"
     ],
     "tipo": "guia"
   },
@@ -898,8 +898,7 @@
   {
     "pergunta": "Sumiu a integração com o Followize, onde ela foi parar?",
     "esperado": [
-      "llm/faq/integracao-followize",
-      "docs/integracoes/visao-geral"
+      "llm/faq/integracao-followize"
     ],
     "tipo": "faq"
   },

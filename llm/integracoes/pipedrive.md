@@ -43,7 +43,7 @@ Complemento técnico de [Integrar com o Pipedrive](/docs/integracoes/pipedrive).
 Disponíveis no bloco **Integração**, grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot); puladas na simulação):
 
 - **Ações listadas:** `Sincroniza contato, lead, deal, activity e notas no Pipedrive`, `Cria ou atualiza a deal no Pipedrive` e `Cria ou atualiza atividade de agenda no Pipedrive`. A gaveta do bloco não exibe campos próprios de configuração.
-- **Qual token o bot usa (diferente do quadro):** o bot procura primeiro o token de um membro ligado à conversa (o membro responsável, o membro definido na ação ou o responsável do contato no Pipedrive) e as configurações padrão da integração; só depois usa o primeiro token preenchido do painel. Sem nenhum token, registra erro como mensagem de sistema na conversa.
+- **Qual token o bot usa (diferente do quadro):** o bot pode usar outro token configurado no painel, não necessariamente o do membro que está atendendo. Sem nenhum token, registra erro como mensagem de sistema na conversa.
 - **Vínculo separado do quadro:** o bot guarda uma ligação própria com a pessoa do Pipedrive e, quando não existe, busca a pessoa pelo telefone. Ele não lê o campo `pipedriveid` usado pelo quadro; por isso, um contato vinculado pelo quadro pode não ser encontrado pelo bot se o telefone não coincidir.
 
 ## Casos de borda

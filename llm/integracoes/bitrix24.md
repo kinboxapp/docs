@@ -41,8 +41,8 @@ Complemento técnico de [Integrar com o Bitrix24](/docs/integracoes/bitrix24).
 | **Webhook Url** | Ações prontas do Bitrix24 no bot (contatos, negócios, funis e usuários) e listas da gaveta do bot quando o primeiro campo está vazio. | Acesso ao CRM (contatos, negócios e funis) e a usuários. |
 
 - **Preenchimento parcial:**
-  - Só **Webhook Url** preenchido: o bot funciona, mas o botão **Add lead** do quadro na conversa fica desativado.
-  - Só o primeiro webhook preenchido: o quadro funciona, mas as ações prontas do bot não executam nada.
+  - Só **Webhook Url** preenchido: o bot funciona; o painel só salva com **Habilitar integração** desligado, então o quadro não aparece nas conversas.
+  - Só o primeiro webhook preenchido: o quadro funciona se **Habilitar integração** estiver ligado, mas as ações prontas do bot não executam nada.
 
 ## Regras do quadro da conversa
 

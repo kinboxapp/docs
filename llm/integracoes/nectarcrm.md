@@ -10,7 +10,6 @@ fontes:
 codigo:
   - web:src/pages/settings/integrations/EditNectarCRM.tsx
   - web:src/components-old/chat/side/integrationApps/NectarCRMApp/**
-  - api:src/modules/proxy/**
 verificado_em: 2026-11-26
 ---
 

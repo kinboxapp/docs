@@ -32,10 +32,9 @@ Essa conexão é diferente do app **HubSpot** usado pelo agente de IA, que tem l
 
 ## Antes de começar
 
-- Crie um app privado no HubSpot com acesso de leitura e escrita a contatos e negócios, e leitura de usuários (responsáveis), funis e produtos, e tenha em mãos o **token de acesso** dele.
+- Crie um app privado no HubSpot com acesso de leitura e escrita a contatos e negócios, e leitura de usuários (responsáveis), funis e produtos, e tenha em mãos o **token de acesso** dele. Tudo o que a integração faz no HubSpot funciona com esse token, preenchido no campo **Token**.
 - Separe o **ID do portal** da sua conta no HubSpot. Ele é exigido no painel e usado nos links que abrem o contato e o negócio no HubSpot.
 
-Tudo o que a integração faz no HubSpot funciona com o **Token**.
 
 ## Passo a passo
 
@@ -80,7 +79,7 @@ Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **H
 
 No modo padrão (**Celular**), o quadro abre o contato do HubSpot já vinculado ao contato da Kinbox. Se ainda não houver vínculo, procura pelo telefone e guarda o vínculo encontrado.
 
-- **Contato não encontrado:** clique em **Criar Contato**, confira **Nome**, **Sobrenome** e os campos configurados na janela **Adicionar Contato** e clique em **Cadastrar Contato**. O botão fica desativado se o contato não tiver telefone. O quadro só cria contatos novos; não edita contatos já existentes.
+- **Contato não encontrado:** clique em **Criar Contato**, confira **Nome**, **Sobrenome** e os campos configurados na janela **Adicionar Contato** e clique em **Cadastrar Contato**. Nos modos **Celular** e **Campo personalizado**, o botão fica desativado se o contato não tiver telefone. O quadro só cria contatos novos; não edita contatos já existentes.
 - **Contato encontrado:** o cabeçalho mostra nome, telefone (ou e-mail), o botão **Abrir no HubSpot** (quando o **ID do portal** está preenchido) e, no modo **Celular**, o botão **Trocar contato vinculado**, que abre uma busca para vincular outro contato do HubSpot.
 - **Negócios:** a lista mostra o nome e a etapa de cada negócio do contato. Passe o mouse sobre um negócio para ver mais detalhes.
 
@@ -94,7 +93,7 @@ No modo padrão (**Celular**), o quadro abre o contato do HubSpot já vinculado 
     Na gaveta **Adicionar Negócio** / **Editar Negócio**, preencha **Nome**, **Funil de vendas**, **Etapa do funil** e **Responsável** (ao criar, vem sugerido o usuário do HubSpot com o mesmo e-mail do membro logado), além do **Valor** e dos campos configurados.
   </Step>
   <Step title="Adicione produtos (opcional)">
-    Em **Itens de linha**, clique em **Produto** e informe **Produto**, **Preço** e **Quantidade**. Nos itens já salvos, **Preço** e **Quantidade** ficam desativados: para trocar um item, exclua-o (a exclusão vale na hora e não tem volta) e adicione outro.
+    Em **Itens de linha**, clique em **Produto** e informe **Produto**, **Preço** e **Quantidade**. Nos itens já salvos, **Produto**, **Preço** e **Quantidade** ficam desativados: para trocar um item, exclua-o (a exclusão vale na hora e não tem volta) e adicione outro.
   </Step>
   <Step title="Salve">
     Clique em **Cadastrar Negócio** ou **Salvar**. O quadro recarrega alguns segundos depois. Ao editar um negócio, use **Ver no Hubspot** para abri-lo no HubSpot.
@@ -120,7 +119,7 @@ Para esconder o quadro nas conversas, abra **Hubspot** em **Apps**, desligue **H
 
 - **Ajustes do Hubspot fecha sozinho ao abrir.** O **Token** está vazio, inválido ou sem permissão no HubSpot. Confira o token e abra **Configurações** de novo.
 - **O quadro mostra "Erro ao buscar informações de contato do Hubspot."** O token está inválido, expirou ou o HubSpot bloqueou por excesso de chamadas. Clique em **Recarregar**; se continuar, gere outro token e atualize no painel.
-- **O botão Criar Contato está desativado.** O contato da conversa não tem telefone cadastrado.
+- **O botão Criar Contato está desativado.** O contato da conversa não tem telefone cadastrado (nos modos **Celular** e **Campo personalizado** do **Identificador do contato**).
 - **O quadro mostra o contato errado.** Existem contatos duplicados no HubSpot com o mesmo telefone. No modo **Celular**, clique em **Trocar contato vinculado** e escolha o contato certo.
 - **Instalei pelo botão Instalar App no Hubspot e nada aparece na conversa.** O botão não configura o token. Preencha **ID do portal** e **Token**, ligue **Habilitar integração** e clique em **Salvar**.
 - **O formulário de negócio exige um campo.** A etapa selecionada tem regra em **Configurações** → **Obrigatoriedade**.
