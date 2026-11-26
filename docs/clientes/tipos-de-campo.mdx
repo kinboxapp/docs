@@ -1,0 +1,96 @@
+---
+title: Tipos de campo e validações
+description: Referência dos tipos de campo personalizado da Kinbox, das entidades onde cada campo aparece, das opções por entidade e das validações de celular, e-mail, CPF, máscara e expressão regular.
+keywords: [tipos de campo, tipo de campo, texto, seleção, seleção múltipla, booleano, número, decimal, data, data e hora, json, entidade, validação, validar cpf, máscara, expressão regular, regex, formato do campo]
+publico: humano
+tipo: referencia
+fontes:
+  - web:src/pages/settings/customFields/EditCustomField.tsx
+  - web:src/lib/helper.tsx
+  - web:src/lib/constants.tsx
+codigo:
+  - web:src/pages/settings/customFields/EditCustomField.tsx
+  - web:src/lib/constants.tsx
+  - web:src/lib/formatInputValue.ts
+  - web:src/pages/crm/contacts/EditEntityCustomFields.tsx
+  - web:src/components-old/chat/side/EditInputModal/index.tsx
+  - api-v0:server/models/Workspace/CustomField.js
+verificado_em: 2026-11-26
+---
+
+Referência dos tipos, entidades, opções e regras de validação disponíveis ao [criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox).
+
+## Tipos
+
+Todos os tipos podem ser usados em qualquer entidade.
+
+| Tipo no formulário | Na lista (coluna **Tipo**) | Para quê | Como a pessoa preenche |
+| --- | --- | --- | --- |
+| **Texto** | Texto | Texto curto (código, documento) | Caixa de texto |
+| **Texto em área** | Área | Texto longo | Caixa de 6 linhas |
+| **Seleção** | Seleção | Uma opção da lista | Lista com busca |
+| **Seleção Multipla** | Multiseleção | Várias opções | Lista com busca; exibido separado por vírgula |
+| **Booleano** | Booleano | Sim ou não | **Sim** ou **Não** |
+| **Número** | Número | Número inteiro | Campo numérico |
+| **Decimal** | Decimal | Número com casas decimais (de 0 para cima) | Campo com 2 casas decimais |
+| **Data** | Data | Data | `DD/MM/AAAA` |
+| **Data e hora** | Data e hora | Data e hora | `DD/MM/AAAA HH:mm` |
+| **Json** | Json | Dados estruturados (bot e integrações) | Editor de código |
+
+- No formulário de criar ou editar contato, **Texto em área** e **Json** ficam fora da lista recolhida dos demais campos.
+- Campos do tipo **Json** não aparecem em automações, condições nem filtros de relatório. Para usar no bot, veja [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
+
+## Entidades
+
+A entidade não pode ser alterada depois que o campo é criado.
+
+| Entidade no formulário | Na lista e no filtro | Onde o campo aparece |
+| --- | --- | --- |
+| **Contato** | Contato | Formulário e perfil do contato, painel **Contato** da conversa, importação e exportação de contatos, [formulário do widget](/docs/canais/widget/personalizar) |
+| **Sessão de conversa** | Sessão | Painel da [sessão](/docs/conceitos/conversas-e-sessoes) na conversa (vale só para aquele atendimento), filtros de relatório, exportação **Por conversa**, formulário do widget |
+| **Membro** | Membro | Cadastro do membro |
+| **Grupo** | Grupo | Cadastro do grupo |
+| **Canal** | Canal | Configurações do canal |
+| **Produto** | Produto | Cadastro do produto |
+| **Organização** | Organização | Formulário e perfil da organização, importação e exportação de organizações |
+| **Negociação** | Negociação | Negociação |
+| **Tarefa** | Tarefa | Tarefa |
+
+## Opções por entidade
+
+| Opção | **Contato** | **Sessão de conversa** | Outras entidades |
+| --- | --- | --- | --- |
+| **Sempre mostrar** | Sim | Não | Não |
+| **Esconder** | Sim | Sim | Não |
+| **Obrigatório** | Sim | Sim | Não |
+| **Vincular obrigatoriedade** | Sim | Sim | Não |
+| **Validar** | Sim | Sim | Sim |
+
+- **Esconder** tira o campo dos painéis laterais da conversa. Não combine **Esconder** com **Obrigatório**, pois o campo continua bloqueando o botão **Resolver** sem aparecer para ser preenchido (veja [Atender uma conversa: responder, notas, resolver e reabrir](/docs/conversas/gerenciar-conversas)).
+- Em campos de **Contato** que só viram obrigatórios por **Vincular obrigatoriedade**, ligue também **Sempre mostrar** para que apareçam no painel enquanto estiverem vazios.
+
+## Validações
+
+Ative **Validar** e escolha o **Tipo de validação**:
+
+| Tipo de validação | O que aceita |
+| --- | --- |
+| **Celular** | De 10 a 13 dígitos (espaços e pontuação são ignorados) |
+| **Email** | Texto no formato de e-mail (como `nome@example.com`), de 6 a 99 caracteres |
+| **CPF** | Um CPF válido com dígitos verificadores corretos (recusa todos os dígitos iguais) |
+| **Máscara** | Formato exato definido no campo **Máscara** (exemplo da tela: `99/99/9999`): `9` = número, `A` = letra (sem acento), `*` = letra ou número; os demais caracteres precisam ser iguais e o tamanho precisa ser exato |
+| **Expressão regular** | Texto que corresponde ao padrão informado em **Expressão regular** (exemplo da tela: `^\d+$`) |
+
+Exemplos de uso:
+
+- **CPF:** tipo **Texto** com **Validar** → **CPF**.
+- **CEP:** tipo **Texto** com **Validar** → **Máscara** `99999-999`.
+- **Placa de carro:** tipo **Texto** com **Validar** → **Máscara** `AAA9*99` (as letras não podem ter acento).
+
+Regras gerais:
+
+- Campo vazio não é validado — a regra só é aplicada quando há algum valor digitado.
+- Quando o valor não atende à regra, a Kinbox avisa que o valor é inválido e não salva.
+- No bot, a validação do campo vale quando o bloco de pergunta usa validação (veja [Blocos do bot](/docs/bot/blocos-do-bot)).
+- A [importação de contatos de uma planilha](/docs/clientes/importar-contatos) não aplica tipo nem validação.
+- Limites dos campos de configuração: nome e chave reservada até 128 caracteres; descrição até 1024 caracteres; máscara ou expressão regular até 64 caracteres.

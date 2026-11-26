@@ -846,5 +846,46 @@
     "pergunta": "A Kinbox tem um SDK oficial em Python para a API?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Tenho uma planilha do Excel com meus clientes, como coloco todos na Kinbox de uma vez?",
+    "esperado": [
+      "docs/clientes/importar-contatos"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O mesmo cliente aparece duas vezes com o número do WhatsApp com e sem o 9, como junto os dois?",
+    "esperado": [
+      "docs/clientes/mesclar-contatos"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que a conversa só possa ser finalizada se o atendente preencher o CPF do cliente",
+    "esperado": [
+      "docs/configuracoes-no-workspace/campos-personalizados-no-kinbox"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Apaguei um contato e o histórico de mensagens dele sumiu, dá para recuperar?",
+    "esperado": [
+      "docs/conversas/clientes-contatos-e-organizacoes",
+      "llm/faq/contato-excluir-apaga-conversas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como cadastro a empresa do cliente e ligo vários contatos a ela com o cargo de cada um?",
+    "esperado": [
+      "docs/clientes/organizacoes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Kinbox sincroniza os contatos com o Google Contatos automaticamente?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

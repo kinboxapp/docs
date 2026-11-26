@@ -160,6 +160,24 @@
             ]
           },
           {
+            "group": "CRM e vendas",
+            "icon": "handshake",
+            "pages": [
+              {
+                "group": "Contatos e campos personalizados",
+                "pages": [
+                  "docs/conversas/clientes-contatos-e-organizacoes",
+                  "docs/clientes/importar-contatos",
+                  "docs/clientes/exportar-contatos",
+                  "docs/clientes/mesclar-contatos",
+                  "docs/clientes/organizacoes",
+                  "docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
+                  "docs/clientes/tipos-de-campo"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Campanhas e marketing",
             "icon": "bullhorn",
             "pages": [
@@ -771,14 +789,6 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
       "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
-    },
-    {
-      "source": "/docs/conversas/clientes-contatos-e-organizacoes",
-      "destination": "/docs/conceitos/contatos-e-negocios"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
     },
     {
       "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",

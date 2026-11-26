@@ -1,0 +1,78 @@
+---
+title: Exportar contatos
+description: Como exportar a lista de contatos ou de organizações da Kinbox em CSV ou Excel, com os filtros da tela, e a diferença entre exportar por contato e por conversa.
+keywords: [exportar contatos, baixar contatos, planilha de contatos, csv, excel, xlsx, backup de contatos, exportar por conversa, exportar organizações, relatorio de contatos, não consigo exportar, exportação desativada]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/crm/contacts/shared/exportContacts.ts
+  - web:src/pages/crm/contacts/people/PeopleList.tsx
+  - web:src/pages/crm/organizations/exportOrganizations.ts
+  - web:src/pages/crm/organizations/OrganizationsList.tsx
+codigo:
+  - web:src/pages/crm/contacts/shared/exportContacts.ts
+  - web:src/pages/crm/contacts/people/PeopleList.tsx
+  - web:src/pages/crm/contacts/people/ContactsPeopleTable.tsx
+  - web:src/pages/crm/organizations/exportOrganizations.ts
+  - web:src/pages/crm/organizations/OrganizationsList.tsx
+  - api:src/modules/contacts/contacts.service.ts
+  - api:src/modules/reports/contacts-by-conversation/**
+verificado_em: 2026-11-26
+---
+
+Exporte sua base de contatos ou de organizações em arquivo CSV ou Excel (`.xlsx`), levando a busca e os filtros aplicados na tela.
+
+<Note>
+  Quem pode: membros que acessam a lista (**Gerenciar Contatos** para contatos; **Gerenciar Organizações** para organizações) e **não** têm a restrição **Não pode exportar contatos**. O proprietário do workspace sempre pode exportar. Se o item **Clientes** não aparecer no menu lateral, peça ao proprietário para dar a permissão correspondente ao seu papel.
+</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Filtre a lista de contatos">
+    Vá em **Clientes** → **Contatos** e aplique a busca, os filtros (como **Organização** ou **Criado entre**) e a ordenação que quiser levar para o arquivo.
+  </Step>
+
+  <Step title="Escolha o formato e o modo">
+    Clique no menu **⋯** no topo da lista, escolha **Exportar (CSV)** ou **Exportar (XLSX)** e clique em **Contatos** ou **Por conversa**.
+  </Step>
+
+  <Step title="Aguarde o download">
+    Espere o aviso "Exportando... (Total: ...)" terminar. O arquivo (`relatorio_contatos` ou `relatorio_conversas`, em `.csv` ou `.xlsx`) é baixado diretamente pelo navegador (o CSV abre com acentos corretos no Excel).
+  </Step>
+</Steps>
+
+## Contatos × Por conversa
+
+Use **Contatos** para ter os dados completos de cada contato e **Por conversa** para ter os dados de atendimento.
+
+| Modo | Como as linhas vêm | Colunas incluídas |
+| --- | --- | --- |
+| **Contatos** | Uma linha por contato, seguindo a busca, os filtros e a ordem da tela. | **ID**, **Nome**, **Criado em**, **Criado por**, **E-mail**, **Celular**, **Organização** (a principal), campos personalizados de contato (se algum tiver o mesmo nome de uma coluna fixa, ganha " (campo)" no fim), **Facebook**, **Instagram**, **Telegram**, **ID Externo** e **Notas**. |
+| **Por conversa** | Uma linha por conversa (o mesmo contato pode aparecer em várias linhas), da conversa mais recente para a mais antiga. | Dados do contato, **Grupo**, **Chat Ativo** (Sim/Não), **E-mail do membro**, **Protocolo**, **Resolvida em**, primeira e última mensagem do membro e do contato na sessão, **Sessão criada em** e campos personalizados de sessão. |
+
+Se o seu papel tiver a restrição **Restringir relatórios aos grupos do membro**, a exportação inclui apenas os contatos visíveis na sua lista.
+
+## Contatos privados
+
+Se o seu papel não tiver a permissão **Ver telefone de contatos privados**, o e-mail e o celular dos contatos marcados como privados saem em branco no arquivo (veja [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes)).
+
+## Exportar organizações
+
+Em **Clientes** → **Organizações**, aplique a busca ou os filtros (**Segmento** e **Responsável**), clique no menu **⋯** e escolha **Exportar CSV** ou **Exportar XLSX**. A exportação baixa o arquivo `relatorio_organizacoes.csv` ou `.xlsx` apenas com as organizações não excluídas. Se o seu papel tiver **Não pode exportar contatos**, o botão **⋯** não aparece. Veja mais em [Agrupar contatos em organizações](/docs/clientes/organizacoes).
+
+Colunas incluídas:
+
+- **ID**, **Nome**, **Razão social**, **CNPJ**, **Site**, **Domínio**;
+- **Telefone**, **E-mail**, **Segmento**, **Responsável**, **Endereço**, **Descrição**;
+- **Pessoas** (quantidade de contatos vinculados), **Criada em** e os campos personalizados de organização.
+
+## Se as opções estiverem apagadas
+
+Se as opções de exportar estiverem apagadas e não houver outra exportação em andamento, seu papel tem a restrição **Não pode exportar contatos**. Peça ao proprietário ou a quem gerencia papéis para remover essa restrição em **Configurações** → **Ambiente** → **Permissões** (o workspace aparece na tela como **ambiente**; veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+
+## Outras exportações
+
+- Para exportar conversas direto da Caixa de entrada, veja [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar).
+- Para exportar dados de sessões nos relatórios, veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
+- Para trazer contatos de uma planilha, veja [Importar contatos de uma planilha](/docs/clientes/importar-contatos).
