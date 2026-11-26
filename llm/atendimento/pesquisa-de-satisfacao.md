@@ -1,7 +1,7 @@
 ---
 title: "Pesquisa de satisfação: texto padrão, notas, quando não é enviada e a quem a nota conta"
 description: Referência da avaliação de atendimento da Kinbox com o bot de avaliação único do workspace, o texto padrão, a faixa de notas, as condições que impedem o envio e a quem a nota é creditada.
-keywords: [avaliação não enviada, pesquisa não chegou, nota de 0 a 5, avaliação conta para quem, bot de avaliação, avaliação atualizada, resposta da avaliação não registrada, avaliar atendimento automação, uma avaliação por sessão]
+keywords: [avaliação não enviada, pesquisa não chegou, nota de 0 a 5, avaliação conta para quem, bot de avaliação, avaliação atualizada, resposta da avaliação não registrada, avaliar atendimento automação, uma avaliação por sessão, nps, escala de 0 a 10, promotores e detratores]
 publico: llm
 tipo: referencia
 fontes:

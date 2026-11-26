@@ -1,7 +1,7 @@
 ---
 title: "Relatórios em detalhe: restrições, exportação, dashboards, saldo, ligações e copiloto"
 description: Regras exatas de acesso e exportação dos relatórios da Kinbox, snapshots e cartões de dashboard, categorias e registros do relatório Saldo, status do relatório Ligações e regras do relatório do Copiloto.
-keywords: [permissões de relatórios, gerenciar relatórios, restringir relatórios ao membro, restringir relatórios aos grupos do membro, não pode exportar relatórios, não pode criar ou excluir dashboard, exportar csv, exportar excel, snapshot, obter dados atualizados, atualizar dados, dashboard compartilhado, visível para, limite de cards, 100 relatórios, carrossel, saldo, categorias do saldo, voip em outros, usos e registros, ligações, status das ligações, não atendeu, relatório do copiloto, faixas de nota, recuperadas, pioraram, período máximo de 1 ano]
+keywords: [permissões de relatórios, gerenciar relatórios, restringir relatórios ao membro, restringir relatórios aos grupos do membro, não pode exportar relatórios, não pode criar ou excluir dashboard, exportar csv, exportar excel, snapshot, obter dados atualizados, atualizar dados, dashboard compartilhado, visível para, limite de cards, 100 relatórios, carrossel, saldo, categorias do saldo, voip em outros, usos e registros, ligações, status das ligações, não atendeu, relatório do copiloto, faixas de nota, recuperadas, pioraram, período máximo de 1 ano, dashboard em pdf, exportar dashboard, envio agendado do dashboard]
 publico: llm
 tipo: referencia
 fontes:

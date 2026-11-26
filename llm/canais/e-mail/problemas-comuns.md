@@ -1,6 +1,6 @@
 ---
 title: "E-mail: erros de IMAP/SMTP e Outlook, atraso da leitura e conta em outro workspace"
-description: Regras do canal de e-mail na Kinbox, com as mensagens de erro ao conectar, como e quando cada tipo de conexão lê a caixa, o que entra e como as respostas saem, limites do plano e conta em outro workspace.
+description: Regras do canal de e-mail na Kinbox, com as mensagens de erro ao conectar, como e quando cada tipo de conexão lê a caixa, o que entra e como as respostas saem, limites do plano, conta em outro workspace e o que não existe, como a conexão por POP3.
 keywords: [erro ao testar conexão com o imap/smtp, description é obrigatório, essa conta já foi adicionada em outro ambiente, seu plano atual não permite adicionar o novo canal, sua assinatura expirou, pop3, tls/ssl, 2 minutos, 50 e-mails, 20 e-mails, 10 mb, "re:", notificação kinbox, via kinbox, senha do smtp]
 publico: llm
 tipo: solucao-de-problema
