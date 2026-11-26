@@ -1530,5 +1530,46 @@
     "pergunta": "Consigo acompanhar os resultados dos meus anúncios do TikTok dentro da Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quem vê o ícone Meta atual no topo da tela? Um vendedor que não participa da meta também vê?",
+    "esperado": [
+      "llm/metas/criando-metas-no-kinbox"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Coloquei lembrete na tarefa e não apareceu aviso nenhum, nem no celular. Por que não fui avisado?",
+    "esperado": [
+      "llm/faq/tarefas-lembrete",
+      "docs/tarefas/criando-e-gerenciando-tarefas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quando exporto a lista de tarefas, quais colunas vêm na planilha?",
+    "esperado": [
+      "llm/tarefas/criando-e-gerenciando-tarefas"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Quero um objetivo de R$ 50 mil em vendas para o time comercial em dezembro, com um marco na metade. Como monto isso?",
+    "esperado": [
+      "docs/metas/criando-metas-no-kinbox"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Fechei uma venda de um negócio antigo, mas ela não somou no resultado do mês. O que pode ter acontecido?",
+    "esperado": [
+      "docs/metas/como-as-metas-sao-calculadas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como faço o Google Agenda do meu celular tocar um alarme antes de cada compromisso pessoal?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

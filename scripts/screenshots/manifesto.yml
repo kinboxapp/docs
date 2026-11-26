@@ -3279,3 +3279,129 @@
   arquivo: images/ajuda/marketing/tracking-teste.webp
   paginas:
     - docs/marketing/tracking
+
+# Tarefas e metas (seção `tarefas-e-metas`). Dados das etapas `tarefas` e `metas` do seed (responsáveis fictícios), que só
+# rodam com `bun seed.ts --so tarefas,metas`. Essas etapas mudam também `contatos-perfil`, `funis-quadro` e o cartão
+# Tarefas do dashboard: recapture-os se precisar.
+# A foto do dono real da conta aparece no chip "Você" e entre os inscritos: leva tarja.
+- id: tarefas-lista
+  url: /crm/tasks
+  passos:
+    - esperar: 'text=Retornar mensagem da Mariana'
+    - pausa: 800
+  alvo:
+    - 'input[placeholder="Pesquisar nome..."]'
+    - 'button:has-text("Nova tarefa")'
+    - '.ant-card-extra button.common_dropdown'
+    - 'tr:has-text("Retornar mensagem da Mariana")'
+  mascarar: []
+  arquivo: images/ajuda/tarefas/lista-de-tarefas.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: tarefas-nova
+  url: /crm/tasks/new
+  passos:
+    - esperar: 'footer:has-text("Criar tarefa")'
+    - digitar: { seletor: 'textarea[placeholder="O que precisa ser feito?"]', texto: 'Ligar para confirmar o pedido' }
+    - pausa: 500
+  alvo:
+    - 'header:has-text("Nova tarefa")'
+    - 'footer:has-text("Criar tarefa")'
+  mascarar:
+    - 'button:has-text("Você") img[alt="avatar"]'
+  arquivo: images/ajuda/tarefas/nova-tarefa.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: tarefas-prazo
+  url: /crm/tasks/new
+  passos:
+    - esperar: 'footer:has-text("Criar tarefa")'
+    - clicar: 'button:has-text("Hoje,")'
+    - esperar: 'text=Lembrete'
+    - pausa: 600
+  alvo: '.ant-popover-inner'
+  mascarar: []
+  arquivo: images/ajuda/tarefas/prazo-e-lembrete.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: tarefas-aberta
+  url: /crm/tasks
+  passos:
+    - clicar: 'tr:has-text("Conferir o estoque e separar") >> text=Separar pedido de reposição'
+    - esperar: 'input[placeholder="Adicionar subtarefa"]'
+    - pausa: 800
+  alvo:
+    - 'header.shrink-0'
+    - 'input[placeholder="Adicionar subtarefa"]'
+  mascarar:
+    - 'header.shrink-0 img[alt="avatar"]'
+  arquivo: images/ajuda/tarefas/tarefa-aberta.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: metas-lista
+  url: /crm/goals
+  passos:
+    - esperar: 'tr:has-text("Vendas do mês")'
+    - pausa: 600
+  alvo:
+    - 'span.ant-input-affix-wrapper:has(#search-input)'
+    - 'button:has-text("Nova meta")'
+    - 'thead'
+    - 'tr:has-text("Vendas do mês")'
+  mascarar: []
+  arquivo: images/ajuda/metas/lista-de-metas.webp
+  paginas:
+    - docs/metas/criando-metas-no-kinbox
+
+- id: metas-tipo
+  url: /crm/goals/new
+  passos:
+    - esperar: 'text=Que tipo de meta você quer criar?'
+    - pausa: 600
+  # Opção que o cliente não vê: o print mostra só os dois cartões públicos
+  esconder:
+    - '#type > div.size-full:not(:has-text("Valor do negócio")):not(:has-text("Quantidade de produto"))'
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '#type'
+  mascarar: []
+  arquivo: images/ajuda/metas/tipo-de-meta.webp
+  paginas:
+    - docs/metas/criando-metas-no-kinbox
+
+- id: metas-acompanhar
+  url: /crm/goals
+  passos:
+    - clicar: 'tr:has-text("Vendas do mês")'
+    - esperar: 'text=acumulados da meta de'
+    - pausa: 1500
+  alvo:
+    - 'button:has-text("Metas")'
+    - 'button:has-text("Ver Analítico")'
+    - 'text=Descrição'
+    - 'li:has-text("Carla Mendes")'
+  mascarar: []
+  arquivo: images/ajuda/metas/acompanhar-meta.webp
+  paginas:
+    - docs/metas/criando-metas-no-kinbox
+    - docs/metas/como-as-metas-sao-calculadas
+
+- id: metas-analitico
+  url: /crm/goals
+  passos:
+    - clicar: 'tr:has-text("Vendas do mês")'
+    - esperar: 'text=acumulados da meta de'
+    - clicar: 'button:has-text("Ver Analítico")'
+    - esperar: '.ant-drawer-content >> text=Ticket médio'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-content .ant-drawer-header'
+    - '.ant-drawer-content tr:has-text("Presente de aniversário")'
+  mascarar: []
+  arquivo: images/ajuda/metas/analitico.webp
+  paginas:
+    - docs/metas/como-as-metas-sao-calculadas

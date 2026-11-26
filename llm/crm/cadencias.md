@@ -21,7 +21,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Detalhes de referência de [Cadências: tarefas automáticas por etapa](/docs/crm/cadencias). Veja também [Criar um funil e as etapas](/docs/crm/criar-funil-de-vendas) e [Motivos de perda, campos obrigatórios e regras do funil](/docs/crm/motivos-de-perda-e-regras).
+Detalhes de referência de [Cadências: tarefas automáticas por etapa](/docs/crm/cadencias). Veja também [Criar um funil e as etapas](/docs/crm/criar-funil-de-vendas) e [Motivos de perda, campos obrigatórios e regras do funil](/docs/crm/motivos-de-perda-e-regras). Para a tarefa em si (prazo, lembrete, subtarefas, concluir e excluir), veja [Criar e acompanhar tarefas](/docs/tarefas/criando-e-gerenciando-tarefas).
 
 ## Permissões, salvamento e atalhos
 
