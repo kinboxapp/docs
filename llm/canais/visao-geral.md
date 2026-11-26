@@ -41,7 +41,7 @@ Criar canais de WhatsApp, Instagram, Facebook, Telegram e e-mail passa pela chec
   - `"Você precisa remover canais de Instagram para prosseguir com a contratação"` (todas as unidades em uso)
 - **SMS**: máximo de 1 por workspace (o cartão fica desativado quando o workspace já possui um).
 - **Facebook, Telegram e E-mail**: sem limite de quantidade na assinatura paga atual. A partir do quarto dia depois do vencimento da assinatura (ou sem assinatura ativa), a conexão é recusada com `"Sua assinatura expirou"`. No teste grátis, o workspace pode ter até 1 página do Facebook, 1 canal de Telegram e 3 canais de e-mail ativos; acima disso, `"Seu plano atual não permite adicionar o novo canal"`. Na assinatura antiga paga: até 50 páginas do Facebook, 10 canais de Telegram e 10 de e-mail. Veja [Conectar o Facebook Messenger](/docs/canais/facebook/conectar).
-- **Widget e Customizado**: não passam pela checagem de quantidade do plano. O cartão **Widget** não aparece para membros com a restrição `"Não pode gerenciar widget."`
+- **Widget e Customizado**: não passam pela checagem de quantidade do plano (sem limite de widgets em nenhum plano). O cartão **Widget** não aparece para membros com a restrição `"Não pode gerenciar widget."` Veja [Instalar o chat no seu site](/docs/canais/widget).
 
 ## Todos os status da lista de canais
 
@@ -101,4 +101,4 @@ No layout novo, os textos aparecem com Inicial Maiúscula em cada palavra por CS
 | **Somente pode dar manutenção simples em canais** | "Membro pode apenas desconectar, reiniciar, sincronizar histórico e recriar o canal." Some o **Novo canal** e o **Excluir**; **Migrar**/**Migrar conversas** fica desativado nos canais por QR Code (no oficial, **Migrar conversas** continua liberado); as opções do canal ficam desativadas; salvar mostra "Você não tem permissão para editar o canal". |
 | **Somente pode ver canais na lista se estiver no grupo do canal** | O membro só vê os canais com **Restringir visibilidade** ligado para um grupo de membros dele. **Migrar** e **Salvar** ficam desativados. |
 | **Não pode ver notificações de canal** | Esconde a faixa **Telefone desconectado** da lista de conversas. |
-| **Não pode gerenciar widget.** | Esconde os canais de widget e o cartão **Widget**. |
+| **Não pode gerenciar widget.** | Esconde os canais de widget, o cartão **Widget** e a tela do widget. Veja [Instalar o chat no seu site](/docs/canais/widget). |

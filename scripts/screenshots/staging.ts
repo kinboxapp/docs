@@ -13,6 +13,8 @@ export const API_V0 = process.env.KINBOX_STAGING_API_V0 || 'https://staging-api.
 export const API_V3 = process.env.KINBOX_STAGING_API_V3 || 'https://api4-staging.kinbox.com.br/v3'
 /** front do staging */
 export const WEB_URL = process.env.KINBOX_STAGING_WEB || 'https://staging.kinbox.com.br'
+/** script do chat do site (widget) no staging, o mesmo que o código de instalação do staging carrega */
+export const WIDGET_URL = process.env.KINBOX_STAGING_WIDGET || 'https://kinbox-widget-staging.vercel.app'
 
 /** Nome do workspace de documentação. O seed e a captura o encontram por este nome. */
 export const DOCS_WORKSPACE_NAME = process.env.DOCS_WORKSPACE_NAME || 'Loja Exemplo'

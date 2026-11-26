@@ -439,6 +439,58 @@ async function garantirBotIntegracao(api: Api) {
   log(`bot: "Consulta de pedido" (desligado, sem canal) e campo Json "pedido"${existente ? ' (reaproveitado)' : ''}`)
 }
 
+/** Widget de exemplo da seção "Chat do site": já configurado, para os prints da tela e do chat no site de teste. */
+const WIDGET_EXEMPLO = 'Site da loja'
+const WIDGET_EXEMPLO_CONFIG = {
+  branding: { colors: { bubble: '#16a085', text: '#ffffff' }, companyName: EMPRESA },
+  position: { alignment: 'right', sideSpacing: 20, bottomSpacing: 20 },
+  texts: {
+    introMessages: [{ text: '👋 Olá! Como podemos te ajudar?' }],
+    teamDescription: 'Tire suas dúvidas sobre pedidos, entregas e trocas.',
+    awayText: 'Vamos te responder assim que possível',
+  },
+  preChatForm: {
+    description: 'Bem-vindo! Por favor preencha o formulário abaixo antes de iniciar o chat.',
+    fields: [
+      { name: 'name', type: 'text', label: 'Nome', required: true, options: [] },
+      { name: 'email', type: 'text', label: 'E-mail', required: true, options: [] },
+      { name: 'phone', type: 'text', label: 'Celular', required: false, options: [] },
+    ],
+    autoMessage: { enabled: true, text: 'Olá! Acabei de preencher o formulário.' },
+  },
+  tweaks: {
+    enableSound: true,
+    showAgentsAvatar: true,
+    showOnMobile: true,
+    enableCustomAvatar: false,
+    hideWidgetButton: false,
+    popupBalloon: { enable: true, text: 'Oi, está precisando de ajuda?', delay: 5 },
+    enableDomains: true,
+    whatsapp: { enabledWhatsApp: true, phone: '+5511900000001', text: 'Oi, quero saber mais sobre os produtos.', onlyWhatsapp: false, captureCampaign: false },
+    businessHours: { enableBusinessHours: false },
+  },
+  // Domínio reservado para exemplos: o HTML do site de teste é servido localmente pela captura nesse endereço;
+  // o script e as configurações do chat vêm do staging
+  domains: ['https://www.example.com'],
+}
+
+async function garantirWidgetExemplo(api: Api) {
+  const canais = lista(await api.v0('GET', '/integrations/channel'))
+  let canal = canais.find((c) => String(c.channelId) === '10' && c.description === WIDGET_EXEMPLO)
+  let widget = canal ? lista(await api.v3('GET', '/widget')).find((w) => String(w.channelId) === String(canal.id)) : undefined
+  if (canal && !widget) {
+    // Canal sem configurações de widget (criação interrompida): desativa para não deixar um canal órfão na lista
+    await api.v3('DELETE', `/widget/channel/${canal.id}`)
+    log(`widget de exemplo: canal órfão ${canal.id} desativado`)
+  }
+  if (!widget) {
+    widget = await api.v3('POST', '/widget', { name: WIDGET_EXEMPLO, companyName: EMPRESA })
+    canal = { id: widget.channelId }
+  }
+  await api.v3('PATCH', `/widget/settings/${widget.id}`, WIDGET_EXEMPLO_CONFIG)
+  log(`widget de exemplo: "${WIDGET_EXEMPLO}" (canal ${canal.id}), configurado`)
+}
+
 const workspace = await garantirWorkspace()
 const api = client(workspace.token)
 await pularOnboarding(api)
@@ -456,6 +508,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['agente', () => garantirAgente(api)],
   ['bot', () => garantirBot(api, canal)],
   ['bot de integração', () => garantirBotIntegracao(api)],
+  ['widget de exemplo', () => garantirWidgetExemplo(api)],
 ]
 for (const [nome, etapa] of etapas) {
   try {
