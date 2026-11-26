@@ -1,0 +1,64 @@
+---
+title: Usar o mesmo número no app WhatsApp Business e na Kinbox (coexistência)
+description: Como conectar à Kinbox, pelo WhatsApp oficial, um número que continua no app WhatsApp Business do celular, e o que muda nesse modo.
+keywords: [coexistência, coexistente, híbrido, app whatsapp business, mesmo número, celular e kinbox, whatsapp business no celular, api oficial]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/channels/whatsapp/embed/AddWhatsappEmbedded.tsx
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - api-v0:server/controllers/WbaCloudController.js
+  - api:src/modules/whatsapp-calling/whatsapp-call-permission.service.ts
+codigo:
+  - web:src/pages/settings/channels/whatsapp/embed/**
+  - web:src/pages/settings/channels/whatsappCloud/**
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/modules/meta/CloudApiClient.js
+  - api:src/modules/whatsapp-calling/whatsapp-call-permission.service.ts
+  - api:src/modules/whatsapp-api/services/core/whatsapp-api-status-monitor.service.ts
+verificado_em: 2026-11-26
+---
+
+Na coexistência, o número continua funcionando no app WhatsApp Business do celular e também entra na Kinbox pelo WhatsApp oficial ao mesmo tempo. Diferente do WhatsApp por QR Code, esse é um canal oficial, com as regras da API da Meta (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
+
+<Note>Quem pode: o proprietário do workspace e membros com a permissão **Gerenciar Canais**, sem a restrição **Somente pode dar manutenção simples em canais**. O plano precisa ter um canal de WhatsApp livre — todos os canais de WhatsApp ativos entram na mesma contagem (veja [Canais](/docs/canais/visao-geral)).</Note>
+
+## Antes de começar
+
+- Confira os pré-requisitos gerais em [Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial).
+- Não apague a conta do número no app WhatsApp Business do celular: a coexistência usa o app.
+- Libere pop-ups do navegador para a Kinbox, porque a conexão abre uma janela da Meta.
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a tela da API Oficial">
+    Siga o início de [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao): vá em **Configurações** → **Chat** → **Canais** → **Novo canal** → **WhatsApp** → **API Oficial** e clique em **Conectar WhatsApp**.
+  </Step>
+  <Step title="Escolha o número do app WhatsApp Business na janela da Meta">
+    Na janela da Meta, entre com sua conta do Facebook, escolha a opção de conectar o número que já está no app WhatsApp Business e autorize o acesso da Kinbox.
+
+    As telas e exigências dessa etapa são da Meta e podem mudar.
+  </Step>
+  <Step title="Aguarde a conclusão na Kinbox">
+    Não feche a aba da Kinbox enquanto a conexão termina. A tela mostra "Conectando canal de WhatsApp..." e depois "Canal de WhatsApp conectado.", voltando para a lista de canais.
+  </Step>
+</Steps>
+
+## O que muda nesse modo
+
+| Comportamento | Na coexistência |
+| --- | --- |
+| Mensagens enviadas pelo celular | Aparecem na conversa na Kinbox como mensagens enviadas pela empresa. |
+| Conversas antigas do app | Não são trazidas para a Kinbox. |
+| Ligações pelo WhatsApp | Ficam só no app do celular e não chegam à Kinbox (a seção **Ligações** é um recurso em teste e pode não aparecer no seu workspace). |
+| Janela de 24 horas | Vale para o que você envia pela Kinbox. Veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas). |
+| Configurações, templates e avisos | Funcionam da mesma forma que no canal oficial padrão. Veja [Configurações do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/configuracoes). |
+| **Atualizar registro** | Não use essa ação em canais de coexistência. |
+
+## Problemas comuns
+
+- **As ligações não chegam na Kinbox:** em coexistência, a Meta não oferece ligações pela API; elas ficam só no app do celular (veja [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp)).
+- **Atualizar registro deu erro:** essa ação não deve ser usada em coexistência. Fale com o suporte.
+
+Outros avisos e erros estão em [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).

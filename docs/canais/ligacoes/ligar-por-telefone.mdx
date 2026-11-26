@@ -1,0 +1,74 @@
+---
+title: Ligar para um contato por telefone (VoIP)
+description: Como ligar do navegador para o telefone fixo ou celular de um contato a partir da conversa na Kinbox, usando o saldo da carteira.
+keywords: [voip, ligar por telefone, ligação telefônica, ligar para fixo, ligar para celular, chamada voip, botão ligar, pode ligar para o contato, saldo voip, ligação de voz, "0800", ura]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/components/whatsappCall/CallContactButton.tsx
+  - web:src/components-old/chat/side/DetailsTitle.tsx
+  - web:src/pages/settings/channels/voip/VoipCall.tsx
+  - web:src/pages/settings/channels/voip/CallModal.tsx
+  - web:src/pages/settings/channels/voip/VoipCallDetailsDrawer.tsx
+  - api:src/modules/voip/voip.service.ts
+codigo:
+  - web:src/components/whatsappCall/CallContactButton.tsx
+  - web:src/components-old/chat/side/DetailsTitle.tsx
+  - web:src/pages/settings/channels/voip/**
+  - web:src/pages/inbox/MessageVoipCall.tsx
+  - api:src/modules/voip/**
+verificado_em: 2026-11-26
+---
+
+Com o VoIP da Kinbox, você liga do navegador para o telefone fixo ou celular de um contato a partir de qualquer conversa na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox). O VoIP apenas **faz** ligações — não é possível receber ligações telefônicas na Kinbox (para receber ligações, veja [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/ligacoes/visao-geral)).
+
+<Note>
+Quem pode: proprietário do workspace ou membro com a permissão **Pode ligar para o contato** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Custo: gasta [saldo da carteira](/docs/conceitos/saldo-e-creditos) por minuto de ligação atendida e não exige plano de ligações.
+</Note>
+
+## Antes de começar
+
+- Tenha a permissão **Pode ligar para o contato** (o proprietário do workspace já tem).
+- Garanta que o contato tenha um número de telefone cadastrado (funciona em conversas de qualquer canal).
+- Tenha saldo disponível na carteira (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
+- Libere o acesso ao microfone no navegador.
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a conversa do contato">
+    Acesse a conversa do contato na **Caixa de entrada**.
+  </Step>
+  <Step title="Clique no botão de telefone">
+    No painel do contato, à direita, clique no botão de telefone (com a dica **Ligar**).
+
+    Se o menu aparecer (conversas de WhatsApp oficial com as ligações pelo WhatsApp liberadas), escolha **Ligar por telefone (VoIP)**. Essa opção depende do telefone no cadastro do contato e da permissão **Pode ligar para o contato**. Nas outras conversas, a ligação começa direto.
+  </Step>
+  <Step title="Permita o microfone">
+    Na primeira vez, o navegador pede acesso ao microfone: clique para permitir.
+  </Step>
+  <Step title="Converse pela janela da ligação">
+    A janela da ligação abre em tela cheia, a menos que você a tenha deixado no modo flutuante, mostrando "Chamando…" com o número do contato e, depois que ele atende, o tempo da ligação. Ela traz os botões de silenciar o microfone e desligar. Só no modo flutuante dá para arrastar a janela pela tela.
+  </Step>
+  <Step title="Encerre a ligação">
+    Quando terminar, clique no botão vermelho de desligar. A janela mostra "Ligação encerrada".
+  </Step>
+</Steps>
+
+## Durante e depois
+
+- **Cobrança:** a cobrança começa quando o contato atende. Ligações não atendidas não são cobradas.
+- **Saldo acabou no meio:** se o saldo da carteira acabar durante a ligação, aparece "Seu saldo acabou. A chamada será encerrada." e a ligação é encerrada.
+- **Uma ligação por vez:** não é possível iniciar uma nova ligação enquanto outra estiver aberta ("Encerre a ligação atual antes de iniciar outra").
+- **Registro na conversa:** a ligação fica registrada na conversa como a mensagem **Ligação de voz** (que não é enviada ao contato), com a situação ("Chamando...", "Em andamento", duração, "Não atendeu" ou "Ligação falhou").
+- **Gravação e transcrição:** clique na mensagem **Ligação de voz** para abrir o painel da ligação. Se a gravação estava ativa, você pode ouvir o áudio, clicar em **Baixar áudio** e clicar em **Transcrever** para gerar a **Transcrição** e o **Resumo** (a transcrição e o resumo gastam saldo; veja como ligar a gravação em [Configurações de VoIP: gravação, resumo por IA e SIP reserva](/docs/canais/ligacoes/configuracoes-voip)). Sem gravação, o painel mostra "Não há gravação disponível".
+- **Relatório:** quem tem a permissão **Gerenciar relatórios** vê as ligações em **Relatórios** → **Ligações**, no filtro "Telefone (VoIP)".
+
+## Problemas comuns
+
+- **"Você não tem permissão para fazer chamadas voip." ou botão desativado ("Você não tem permissão para fazer chamadas de voz."):** seu papel não tem a permissão **Pode ligar para o contato**. Peça ao proprietário ou a quem administra as permissões para ativá-la.
+- **"Você precisa ter mais saldo na carteira para fazer chamadas." ou "Seu saldo acabou. A chamada será encerrada.":** o saldo está abaixo do mínimo para iniciar ou acabou durante a ligação. Coloque saldo em [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
+- **O botão de telefone não aparece na conversa:** o contato não tem telefone cadastrado (e a conversa não é de WhatsApp oficial com ligações). Cadastre o telefone do contato para o botão aparecer.
+- **A janela da ligação fecha sozinha sem aviso:** o microfone foi bloqueado no navegador. Libere o acesso ao microfone para a Kinbox e tente ligar de novo.
+
+Veja todas as causas e soluções em [Não consigo ligar ou a ligação caiu](/docs/canais/ligacoes/problemas-comuns).

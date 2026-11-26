@@ -1,0 +1,86 @@
+---
+title: Mesclar contatos duplicados
+description: Como juntar dois contatos com o mesmo número de WhatsApp pela seção Contato duplicado da conversa, o que passa para o contato que fica e o que se perde.
+keywords: [mesclar contatos, juntar contatos, unir contatos, contato duplicado, contato repetido, contatos duplicados, mesmo número, nono dígito, merge de contatos, duplicidade]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/components-old/chat/side/MergeContactPlugin/index.tsx
+  - web:src/components-old/chat/side/ContactDetails/index.tsx
+  - api-v0:server/controllers/CustomerController.js
+  - api-v0:server/services/CustomerPlatformService.js
+codigo:
+  - web:src/components-old/chat/side/MergeContactPlugin/**
+  - web:src/components-old/chat/side/ContactDetails/index.tsx
+  - api-v0:server/controllers/CustomerController.js
+  - api-v0:server/services/CustomerPlatformService.js
+  - api-v0:server/services/CustomerService.js
+  - api-v0:server/auxiliary/Utils.js
+verificado_em: 2026-11-26
+---
+
+Junte dois contatos que têm o mesmo número de WhatsApp pela seção **Contato duplicado** da conversa. Depois de mesclar, fica um só contato, com as conversas dos dois.
+
+<Note>
+  Onde fica: no painel lateral de uma conversa de WhatsApp, na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox).
+</Note>
+
+## Quando a seção aparece
+
+A Kinbox normalmente reaproveita o contato pelo telefone na primeira mensagem (veja [Contatos, organizações e negociações](/docs/conceitos/contatos-e-negocios)). Mesmo assim, pode existir um cadastro duplicado quando o mesmo número foi registrado de formas diferentes (como com e sem o 9).
+
+A seção vermelha **Contato duplicado** aparece no painel lateral apenas quando:
+
+- a conversa aberta é de **WhatsApp** ([oficial ou por QR Code](/docs/canais/whatsapp/visao-geral));
+- existe **outro contato** no workspace com o mesmo número de WhatsApp (com ou sem o 9 depois do DDD);
+- esse outro contato tem **pelo menos uma conversa**.
+
+Se **Contato duplicado** não aparecer, a Kinbox não encontrou outro contato com o mesmo número de WhatsApp e com conversa. E-mail, nome e outros canais não são comparados, então ainda pode existir um cadastro repetido: confira na lista de contatos. Veja também [Problemas com contatos, importação e campos personalizados](/docs/clientes/problemas-comuns).
+
+<Warning>
+  Mesclar não pode ser desfeito. Fica o contato da conversa que está aberta, e o duplicado é apagado. As notas, as tarefas e outros dados do duplicado não passam para o contato que fica (lista em "O que não passa", abaixo). Antes de mesclar, copie para o contato que fica o que quiser manter.
+</Warning>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a conversa do contato que vai ficar">
+    Na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), abra a conversa de WhatsApp do contato que você quer **manter**. O contato da conversa aberta é o que fica.
+  </Step>
+
+  <Step title="Abra a seção Contato duplicado">
+    No painel lateral direito da conversa, clique na seção vermelha **Contato duplicado**.
+  </Step>
+
+  <Step title="Confira qual é o cadastro duplicado">
+    Passe o mouse sobre o contato listado e clique em **Ver contato** ou **Ver conversa** para ter certeza de que é a mesma pessoa e de que você está na conversa do cadastro certo. Se o cadastro que deve ficar for o outro, abra a conversa dele e comece de novo.
+  </Step>
+
+  <Step title="Clique em Mesclar">
+    Clique em **Mesclar** ao lado do contato duplicado. A janela **Mesclar contatos** mostra "Esse contato duplicado será mesclado com o contato atual. Todas as conversas passarão para o contato atual." e pergunta "Esse processo é irreversível, quer proceder?".
+  </Step>
+
+  <Step title="Confirme em Proceder">
+    Clique em **Proceder**. Aparece o aviso "Contatos mesclados com sucesso" e o painel recarrega. Se houver mais de um contato duplicado, mescle um de cada vez.
+  </Step>
+</Steps>
+
+## O que passa para o contato que fica
+
+- **Todas as conversas** do contato duplicado, de todos os canais (com as sessões e as tags).
+- **Vínculos com organizações** (se o contato que fica já tem uma organização principal, ela continua principal).
+- **Negociações** do duplicado (veja [Funis e negociações: visão geral](/docs/crm/visao-geral)), que passam a ser do contato que fica logo depois, em segundo plano.
+- **Nome, foto, e-mail e campos personalizados:** só onde o contato que fica estiver vazio. O que já está preenchido não muda.
+
+## O que não passa
+
+Estes dados do contato duplicado se perdem:
+
+- **Notas**;
+- **Telefone** e os identificadores de **Instagram**, **Facebook** e **Telegram**;
+- **ID Externo** e a marca de **Contato privado**;
+- **Tarefas** (veja [Criar e acompanhar tarefas](/docs/tarefas/criando-e-gerenciando-tarefas)) e o histórico de alterações.
+
+## Contatos repetidos em outros canais
+
+Não existe mesclar contatos de outros canais (como o Instagram e o WhatsApp da mesma pessoa) nem pela lista de contatos. Se você decidir apagar um cadastro repetido, lembre que [excluir um contato](/docs/conversas/clientes-contatos-e-organizacoes) apaga todas as conversas dele e não pode ser desfeito.

@@ -1,0 +1,103 @@
+---
+title: As conversas não chegam para mim ou para a equipe
+description: O que fazer quando a atribuição automática não distribui as conversas, um membro recebe tudo ou nada, a conversa fica sem responsável ou a mensagem de fora do horário não sai.
+keywords: [conversas não chegam, não recebo conversas, atribuição automática não funciona, distribuição não funciona, conversa sem responsável, recebi conversa indisponível, um atendente recebe tudo, mensagem fora do horário não envia, regra de atribuição desligada]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - api-v0:server/services/AssignmentService.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageByClient.js
+  - api-v0:server/controllers/EventsController.js
+  - web:src/pages/settings/assignmentRules/EditAssignmentRule.tsx
+codigo:
+  - api-v0:server/services/AssignmentService.js
+  - api-v0:server/controllers/AssignmentController.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageByClient.js
+  - api-v0:server/controllers/EventsController.js
+  - web:src/pages/settings/assignmentRules/**
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+As conversas novas ficam sem responsável, a atribuição automática não distribui como esperado, um membro recebe tudo enquanto outro não recebe nada, ou alguém recebe conversa mesmo estando indisponível. Também acontece de a mensagem de fora do horário comercial não ser enviada.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="Regra desligada ou várias regras ligadas para o mesmo caso">
+    **Como confirmar:** vá em **Configurações** (engrenagem no menu lateral) → **Automação** → **Atribuição automática** (disponível para o proprietário ou quem tem **Atribuição automática** na seção **Gerenciamento do Ambiente** do papel, chamado na tela de **Permissão**) e filtre por **Ativos**. Toda regra nova (ou clonada) nasce desligada. Além disso, só uma regra ligada é usada em cada sessão nova, sem ordem garantida quando mais de uma cobre a mesma situação.
+
+    **O que fazer:** ligue o interruptor da regra desejada e deixe ligada apenas uma regra para cada situação (**Todos** vale tanto para o primeiro contato quanto para o contato existente) (veja [Distribuir as conversas automaticamente](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas)).
+  </Accordion>
+
+  <Accordion title="A regra não vale para essa conversa (reaberta, iniciada pela equipe ou campo Regra)">
+    **Como confirmar:** veja se a conversa tem a faixa **Nova sessão** — uma regra ligada só roda em sessão nova aberta por mensagem do contato (não roda ao reabrir nem em conversas iniciadas por um membro). Abra também a regra e confira o campo **Regra**: **Primeiro contato no canal** só vale para conversa que nunca foi resolvida; **Contato existente no canal**, só para conversa já resolvida pelo menos uma vez.
+
+    **O que fazer:** em sessões reabertas ou iniciadas pela equipe, atribua à mão em [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir). Para cobrir todos os casos em sessões novas, use **Regra** em **Todos** ou crie outra regra para o segundo caso.
+  </Accordion>
+
+  <Accordion title="Ninguém disponível ou online (ou membro ficando indisponível sozinho)">
+    **Como confirmar:** na distribuição, **Disponível** é o membro **Ativo** com o interruptor **Disponível** ligado, e **online** é o membro disponível que também está com a Kinbox aberta e conectada (navegador ou app). As regras de rodízio entre membros e as de "menos atendimentos" só escolhem membros disponíveis. As de último membro só exigem isso com **Membro precisa estar disponível** marcado. As opções com "online" exigem membro online (confira a ajuda abaixo de **Atribuir para**). Confira:
+
+    - a bolinha na foto de cada membro (verde = disponível);
+    - se o membro participa do grupo da regra (grupos são equipes de membros, não grupos de WhatsApp);
+    - a opção **Tornar indisponível se inativo.** em **Configurações** → **Ambiente** → **Geral** (no workspace, chamado na tela de **ambiente**; veja [Configurações gerais do workspace](/docs/configuracoes-no-workspace/configuracoes-gerais));
+    - a restrição **Limitar horário que pode ficar disponível** no papel.
+
+    **O que fazer:** ligue **Disponível** no menu da foto ou em [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros), confira os participantes em [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos), escolha uma estratégia sem "online" ou ajuste o tempo de inatividade e o horário do papel (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)).
+  </Accordion>
+
+  <Accordion title="A estratégia só escolhe grupo (e a conversa fica sem membro)">
+    **Como confirmar:** a conversa mostra o selo do grupo, mas está sem responsável — ou tinha um responsável que não participa do grupo escolhido pela regra e ficou sem responsável.
+
+    **O que fazer:** para atribuir também um membro, use uma estratégia que escolha membro, como **Atribuir ciclicamente para um membro de um grupo** (veja [Estratégias de atribuição automática](/docs/atendimento/estrategias-de-atribuicao)).
+  </Accordion>
+
+  <Accordion title="Recebi conversa estando indisponível ou um membro recebe tudo">
+    **Como confirmar:** confira **Atribuir para** na regra ativa. **Atribuir para um membro** e as de último membro com **Membro precisa estar disponível** desmarcado atribuem mesmo para membro indisponível. As regras que escolhem só grupo não escolhem responsável: o responsável atual continua se faz parte do grupo escolhido (mesmo indisponível) e sai se não faz. Um membro também recebe tudo quando a regra é fixa (**Atribuir para um membro**) ou quando só ele está disponível ou online.
+
+    Membros convidados que ainda não entraram também podem receber conversas nas regras sem "online": desligue **Disponível** deles até entrarem.
+
+    **O que fazer:** troque para uma estratégia cíclica ou de "menos atendimentos" com mais membros disponíveis, marque **Membro precisa estar disponível** nas regras de último membro ou desligue **Disponível** em [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros) para quem não está atendendo.
+  </Accordion>
+
+  <Accordion title="Regras por DDD, estado ou CEP não atribuem">
+    **Como confirmar:** veja se a conversa chegou por um canal sem telefone com DDD (como Instagram ou e-mail), se o contato está sem o campo personalizado `cep` preenchido ou se os grupos estão sem DDD ou CEP cadastrados. Com **Grupos participantes** vazio (o campo mostra "Todos os grupos"), os grupos sem DDD também entram e podem receber conversas de qualquer contato, inclusive de canais sem telefone.
+
+    **O que fazer:** use outra estratégia nos canais sem telefone e consulte os requisitos em [Estratégias de atribuição automática](/docs/atendimento/estrategias-de-atribuicao). Se os campos de DDD e CEP não aparecerem na tela do grupo, fale com o suporte.
+  </Accordion>
+
+  <Accordion title="O bot ou o agente de IA mudou a atribuição">
+    **Como confirmar:** a regra ativa de atribuição roda mesmo com o bot ativo na conversa, mas um bloco **Atendimento** do bot ou a ação **Transferir** do agente de IA podem executar outra regra de atribuição (inclusive uma regra desligada na lista).
+
+    **O que fazer:** confira o bloco **Atendimento** em [Blocos do bot](/docs/bot/blocos-do-bot) ou a ação **Transferir** em [Ações do fluxograma](/docs/agente-de-ia/acoes-do-fluxograma).
+  </Accordion>
+
+  <Accordion title="A conversa chegou, mas o membro não consegue ver">
+    **Como confirmar:** a conversa pode ser atribuída a um membro que não a enxerga. Verifique **Acesso as Conversas** no papel e **Restringir visibilidade** no canal.
+
+    **O que fazer:** consulte [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns) e [O convite não chegou ou o membro não consegue entrar](/docs/administracao/problemas-com-membros).
+  </Accordion>
+
+  <Accordion title="A mensagem de fora do horário (ou de membro indisponível) não sai">
+    **Como confirmar:** em **Configurações** → **Ambiente** → **Geral**, confirme se a mensagem está ligada e salva. As duas só são enviadas em conversas que já têm um membro responsável. A **Mensagem quando fora do horário comercial** precisa de um **Horário comercial** escolhido em **Preferências**; a **Mensagem quando membro indisponível** só sai quando o responsável pela conversa está indisponível (veja [Mensagens automáticas e regras da caixa de entrada](/docs/administracao/mensagens-automaticas)).
+
+    **O que fazer:**
+
+    - **Fora do horário:** escolha o **Horário comercial** em **Geral** e clique em **Salvar mudanças** (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)).
+    - **Membro indisponível:** confira se a conversa tem um responsável, se ele está mesmo indisponível (bolinha na foto) e se **Mensagem quando membro indisponível** foi salva ligada em **Geral**.
+
+    Para responder também conversas sem responsável fora do horário, use um bot, que começa sozinho quando o contato abre uma sessão nova. O bot só começa **dentro** dos horários escolhidos no campo **Horários**: cadastre um horário cujas faixas cubram o período **fora** do expediente e escolha esse horário no bot (não vale com **Atende todos os canais**). Outra opção é um bot que possa começar nesse período e use o bloco **Decisão** com a condição **Horário** → **está fora de** (veja [Blocos do bot](/docs/bot/blocos-do-bot)).
+  </Accordion>
+
+  <Accordion title="As conversas chegam, mas não recebo o aviso">
+    **Como confirmar:** as notificações push do navegador e do celular não dependem do interruptor **Disponível** (ficar indisponível silencia apenas os sons na **Caixa de entrada**).
+
+    **O que fazer:** confira as configurações em [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte pelo menu da sua foto → **Ajuda e documentação** → **Falar com o suporte no WhatsApp**, informando o nome da regra de atribuição, o canal e o horário em que a conversa chegou.

@@ -1,0 +1,107 @@
+---
+title: Ações do fluxograma
+description: Lista das ações que você pode usar no fluxograma do agente de IA, o que cada uma faz e quais dependem de canal ou integração.
+keywords: [ações do fluxograma, blocos do agente, subagente, coletar dados, enviar mensagem, enviar template whatsapp, transferir, requisição http, buscar conhecimento, follow-up, delay, aguardar mensagem, kinbox agenda, google calendar]
+publico: humano
+tipo: referencia
+fontes:
+  - web:src/pages/agents/flow/useFlow.tsx
+  - web:src/pages/agents/flow/actions/select-action/SelectAction.form.tsx
+  - api:src/modules/agents/flow/actions/meta.registry.ts
+codigo:
+  - web:src/pages/agents/flow/useFlow.tsx
+  - web:src/pages/agents/flow/actions/**
+  - api:src/modules/agents/flow/actions/**
+verificado_em: 2026-11-26
+---
+
+Lista das ações disponíveis no editor de [Fluxograma](/docs/agente-de-ia/fluxograma-e-etapas) do **agente de texto**.
+
+Na tela, clicar em um bloco **Ação** abre a janela **Selecione uma ação** com busca e três abas: **Top** (todas as ações), **Apps** (integrações: **Google Calendar** e **Kinbox Agenda**) e **Core** (as demais ações da Kinbox). **Subagente**, **Coletar dados** e **Anotação** também ficam no botão **+** da barra inferior. As tabelas abaixo agrupam as ações por assunto apenas para facilitar a leitura — esses grupos não são abas da tela.
+
+<Frame caption="Janela Selecione uma ação na aba Top">
+  <img src="/images/ajuda/agente-de-ia/selecionar-acao.webp" alt="Janela Selecione uma ação com a busca, as abas Top, Apps e Core e a lista de ações começando por Definir campos, Definir tags e Enviar mensagem" />
+</Frame>
+
+## Conversa com IA
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Subagente** | Abre uma fase de conversa com instruções, conhecimento, ferramentas e follow-ups próprios; permanece no bloco até uma condição de saída acontecer. | — |
+| **Coletar dados** | Pergunta e guarda informações do contato, da sessão ou variáveis temporárias; só sai quando todos os dados obrigatórios são coletados. | — |
+
+## Mensagens
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Enviar mensagem** | Envia uma mensagem (com opção de anexos e plano B com template) ao contato e segue o fluxo. | Template reserva exige WhatsApp oficial |
+| **Enviar template WhatsApp** | Envia sempre um template aprovado do WhatsApp oficial. | WhatsApp oficial |
+| **Enviar nota de time** | Escreve uma nota interna na conversa, visível apenas para a equipe. | — |
+
+## Conversa e atendimento
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Transferir** | Atribui a conversa a um membro, grupo, atribuição automática, distribuição cíclica, cíclica com fila ou último membro que atendeu. | — |
+| **Resolver conversa** | Resolve a conversa, com motivo opcional. | — |
+| **Executar bot** | Inicia um bot na conversa, passando o atendimento para ele. | — |
+| **Encerrar agente** | Para o agente nessa conversa sem enviar resposta; a próxima sessão começa do **Início**. | — |
+
+## Dados da conversa e do contato
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Definir campos** | Grava valores em campos padrão ou personalizados do contato ou da sessão. | — |
+| **Definir tags** | Adiciona ou remove tags da conversa conforme condições configuradas. | — |
+| **Setar variáveis** | Cria variáveis temporárias válidas durante a execução atual da conversa. | — |
+| **Adicionar no contexto** | Acrescenta um texto ao contexto que o agente lê nos blocos seguintes desta execução. | — |
+| **Limpar contexto** | Apaga o contexto temporário, podendo deixar um resumo opcional. | — |
+
+## CRM e tarefas
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Criar negócio** | Cria uma [negociação](/docs/conceitos/contatos-e-negocios) em um [funil](/docs/crm/visao-geral) e etapa definidos. | — |
+| **Atualizar negócio** | Atualiza negociações existentes do contato. | — |
+| **Criar tarefa** | Cria uma tarefa vinculada ao contato e à conversa, com opção de execução automática de bot. | — |
+| **Buscar produtos** | Procura produtos cadastrados por termo de busca e faixa de preço. | — |
+
+## Integrações e leitura
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Requisição HTTP** | Chama uma API externa (método, URL, headers e corpo JSON) e disponibiliza a resposta para os próximos blocos. | — |
+| **Buscar conhecimento** | Busca trechos nas bases de [conhecimento](/docs/agente-de-ia/conhecimento) e entrega o resultado aos blocos seguintes. | — |
+| **OCR** | Lê uma foto, PDF ou documento enviado pelo contato (ou por URL `https`) e extrai texto ou campos estruturados. | — |
+| **Executar outro agente** | Executa o fluxograma de outro agente e volta para a próxima ação quando ele termina. | — |
+
+## Controle do fluxo e espera
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Aguardar mensagem do cliente** | Pausa o fluxograma até a próxima mensagem do contato, sem chamar a IA nem enviar mensagem, com follow-ups opcionais. | — |
+| **Delay** | Aguarda o tempo configurado antes de seguir para o próximo bloco, com opção de **Considerar horários**. | — |
+| **Setar follow-ups** | Define uma lista compartilhada de follow-ups que vale para os blocos de espera seguintes. | — |
+| **Limpar follow-ups** | Desliga a lista criada por **Setar follow-ups**. | — |
+| **Pular para ação** | Redireciona o fluxo diretamente para outro bloco, sem precisar ligar com seta. | — |
+| **Erro não tratado** | Recebe erros de blocos que não possuem uma seta **Erro** própria (máximo de um por fluxograma). | — |
+| **Anotação** | Adiciona um lembrete visual no desenho, sem efeito na conversa (adicionada pelo **+** ou botão direito). | — |
+
+## Apps: Google Calendar
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Criar evento** | Cria um evento no Google Calendar com título, início, duração, descrição, local e convidados. | Conta Google conectada |
+| **Criar evento rápido** | Cria um evento no Google Calendar a partir de texto em linguagem natural. | Conta Google conectada |
+
+## Apps: Kinbox Agenda
+
+Ações que usam o [Kinbox Agenda](/docs/agenda/kinbox-agenda) do workspace.
+
+| Ação | O que faz | Requer |
+| --- | --- | --- |
+| **Consultar horários** | Consulta os horários livres de um serviço em determinada data. | Kinbox Agenda ativo no workspace |
+| **Criar agendamento** | Cria um agendamento para o contato da conversa. Exige nome, telefone, e-mail e data de nascimento: o que não estiver no contato o agente tira da conversa (o agente não lê o campo de data de nascimento do contato e sempre obtém essa data na conversa). | Kinbox Agenda ativo no workspace |
+| **Listar agendamentos** | Lista os agendamentos do contato da conversa. | Kinbox Agenda ativo no workspace |
+| **Reagendar** | Muda o horário de um agendamento existente do contato. | Kinbox Agenda ativo no workspace |
+| **Cancelar agendamento** | Cancela um agendamento existente do contato. | Kinbox Agenda ativo no workspace |

@@ -1,0 +1,72 @@
+---
+title: Controlar o que o parceiro vê no seu workspace
+description: Se o seu workspace na Kinbox é acompanhado por um parceiro, veja o que ele pode acessar, o que muda na tela dele quando você desliga a opção de conversas e onde conferir o que ele fez.
+keywords: [parceiro, parceria, revenda, consultor, agência, permitir que o parceiro veja as conversas, esconder conversas do parceiro, privacidade, inspecionar ambiente, conversas restritas pelo cliente, acesso do parceiro]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/workspace/index.tsx
+  - web:src/layouts/BaseLayout.tsx
+  - web:src/pages/settings/audit/Audit.tsx
+codigo:
+  - web:src/pages/settings/workspace/index.tsx
+  - web:src/layouts/BaseLayout.tsx
+  - web:src/pages/settings/audit/**
+verificado_em: 2026-11-26
+---
+
+Na Kinbox, um **parceiro** é uma empresa do programa de parceiros da Kinbox ligada ao seu workspace (na tela, **ambiente**) — por exemplo, a empresa que convidou você ou acompanha a sua conta. Esta página vale apenas se o seu workspace for ligado a um parceiro que pode inspecioná-lo.
+
+<Note>
+  O cartão **Parceria** só aparece se o seu workspace for ligado a um parceiro que pode inspecioná-lo. Para alterar essa opção, você precisa da permissão **Workspace** no papel (na tela, **Permissão**) ou ser o proprietário do workspace (veja [Configurações gerais do workspace](/docs/configuracoes-no-workspace/configuracoes-gerais)).
+</Note>
+
+## O que o parceiro pode acessar
+
+Um parceiro que pode inspecionar o seu workspace consegue abrir o workspace para ajudar em configurações e suporte — ver ou alterar a tela **Assinatura** depende do nível de acesso configurado para ele — e pode realizar ações pelo [MCP](/docs/desenvolvedor/mcp).
+
+Por padrão, a opção **Permitir que o parceiro veja as conversas** vem ligada. Você pode desligá-la quando quiser; veja abaixo o que muda na tela do parceiro.
+
+## Desligar a opção de conversas do parceiro
+
+<Steps>
+  <Step title="Abra as configurações gerais">
+    Vá em **Configurações** (ícone de engrenagem no menu lateral) → **Ambiente** → **Geral**.
+  </Step>
+  <Step title="Encontre o cartão Parceria">
+    Role a tela até o cartão **Parceria**.
+  </Step>
+  <Step title="Desligue Permitir que o parceiro veja as conversas">
+    Desative a chave **Permitir que o parceiro veja as conversas**.
+  </Step>
+  <Step title="Salve as mudanças">
+    Clique em **Salvar mudanças** na barra que aparece na tela.
+  </Step>
+</Steps>
+
+## O que muda para o parceiro
+
+Com **Permitir que o parceiro veja as conversas** desligada, o item **Caixa de entrada** some do menu do parceiro e, ao tentar abrir uma conversa, ele vê a mensagem "Conversas restritas pelo cliente" ("O cliente não permite que o parceiro veja as conversas deste ambiente. Relatórios e configurações continuam disponíveis.").
+
+## Voltar a mostrar as conversas
+
+Para religar a opção, volte em **Configurações** → **Ambiente** → **Geral**, ligue **Permitir que o parceiro veja as conversas** no cartão **Parceria** e clique em **Salvar mudanças**.
+
+## Conferir o que o parceiro fez pelo MCP
+
+As chamadas feitas pelo parceiro pelo MCP ficam registradas em **Configurações** → **Auditoria** (precisa da permissão **Auditoria** no papel ou ser o proprietário). Abra **Filtros**, escolha **Parceiro via MCP** em **Ação** e clique em **Filtrar** (veja [Ver o histórico de alterações (Auditoria)](/docs/administracao/auditoria)).
+
+## Se o cartão Parceria não aparece
+
+O cartão **Parceria** só aparece se o seu workspace for ligado a um parceiro que pode inspecioná-lo. Se ele não aparece em **Geral**, o seu workspace não tem vínculo com um parceiro com acesso de inspeção. O parceiro não vê o cartão **Parceria** enquanto inspeciona o seu workspace.
+
+## Desfazer o vínculo com o parceiro
+
+O workspace não exibe qual parceiro está vinculado nem tem opção para remover o vínculo na tela. Para confirmar o vínculo ou pedir para desfazê-lo, fale com o suporte da Kinbox.
+
+## Veja também
+
+- [Painel do parceiro: visão geral](/docs/programa-de-parceiros/visao-geral) (o lado do parceiro)
+- [Inspecionar o workspace de um cliente](/docs/programa-de-parceiros/inspecionar-cliente)
+- [Ver o histórico de alterações (Auditoria)](/docs/administracao/auditoria)
+- [Configurações gerais do workspace](/docs/configuracoes-no-workspace/configuracoes-gerais)

@@ -11,6 +11,473 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Central de ajuda",
+        "pages": [
+          "docs/inicio",
+          {
+            "group": "Primeiros passos",
+            "icon": "rocket",
+            "pages": [
+              "docs/primeiros-passos/criar-seu-workspace-no-kinbox",
+              "docs/primeiros-passos/configurar-com-o-kin",
+              "docs/primeiros-passos/convidar-sua-equipe",
+              "docs/primeiros-passos/conectar-o-primeiro-canal",
+              "docs/primeiros-passos/atender-a-primeira-conversa",
+              "docs/primeiros-passos/videos-para-comecar"
+            ]
+          },
+          {
+            "group": "Conceitos",
+            "icon": "lightbulb",
+            "pages": [
+              "docs/conceitos/visao-geral",
+              "docs/conceitos/workspace-membros-e-papeis",
+              "docs/conceitos/conversas-e-sessoes",
+              "docs/conceitos/contatos-e-negocios",
+              "docs/conceitos/automacao-e-ia",
+              "docs/conceitos/saldo-e-creditos",
+              "docs/conceitos/glossario"
+            ]
+          },
+          {
+            "group": "Canais",
+            "icon": "tower-broadcast",
+            "pages": [
+              "docs/canais/visao-geral",
+              {
+                "group": "WhatsApp",
+                "pages": [
+                  "docs/canais/whatsapp/visao-geral",
+                  {
+                    "group": "Por QR Code",
+                    "pages": [
+                      "docs/canais/conectar-whatsapp-app",
+                      "docs/canais/whatsapp/whatsapp-app/o-que-funciona",
+                      "docs/canais/whatsapp/whatsapp-app/configuracoes",
+                      "docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo",
+                      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp",
+                      "docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas",
+                      "docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte",
+                      "docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado"
+                    ]
+                  },
+                  {
+                    "group": "WhatsApp oficial",
+                    "pages": [
+                      "docs/canais/requisitos-para-se-ter-uma-api-oficial",
+                      "docs/canais/whatsapp-api-oficial-padrao",
+                      "docs/canais/whatsapp-api-oficial-coexistente",
+                      "docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas",
+                      "docs/canais/whatsapp/whatsapp-cloud-api/configuracoes",
+                      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+                    ]
+                  },
+                  {
+                    "group": "Templates, Flows e carrossel",
+                    "pages": [
+                      "docs/canais/whatsapp/whatsapp-templates/visao-geral",
+                      "docs/canais/criar-templates-dentro-do-kinbox",
+                      "docs/canais/whatsapp/whatsapp-templates/enviar-template",
+                      "docs/canais/criar-flows-dentro-do-kinbox",
+                      "docs/canais/criar-carrossel-dentro-do-kinbox",
+                      "docs/canais/whatsapp/whatsapp-templates/template-rejeitado"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Ligações",
+                "pages": [
+                  "docs/canais/ligacoes/visao-geral",
+                  "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+                  "docs/canais/ligacoes/ligar-por-telefone",
+                  "docs/canais/ligacoes/configuracoes-voip",
+                  "docs/canais/ligacoes/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Instagram e Facebook",
+                "pages": [
+                  "docs/canais/instagram",
+                  "docs/canais/facebook/conectar",
+                  "docs/canais/instagram/configuracoes",
+                  "docs/canais/instagram/problemas-comuns"
+                ]
+              },
+              {
+                "group": "E-mail",
+                "pages": [
+                  "docs/canais/e-mail/visao-geral",
+                  "docs/canais/e-mail/por-encaminhamento",
+                  "docs/canais/e-mail/por-imap",
+                  "docs/canais/e-mail/outlook",
+                  "docs/canais/e-mail/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Chat do site (widget)",
+                "pages": [
+                  "docs/canais/widget",
+                  "docs/canais/widget/personalizar",
+                  "docs/canais/widget/configuracoes",
+                  "docs/canais/widget/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Telegram, SMS e canal customizado",
+                "pages": [
+                  "docs/canais/telegram",
+                  "docs/canais/sms",
+                  "docs/canais/canal-customizado"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Atendimento",
+            "icon": "inbox",
+            "pages": [
+              {
+                "group": "Caixa de entrada",
+                "pages": [
+                  "docs/conversas/caixa-de-entrada-do-kinbox",
+                  "docs/conversas/gerenciar-conversas",
+                  "docs/conversas/atribuir-e-transferir",
+                  "docs/conversas/iniciar-conversa",
+                  "docs/conversas/agendar-mensagem",
+                  "docs/conversas/acoes-em-lote-e-exportar",
+                  "docs/conversas/criar-filtros-de-conversa",
+                  "docs/conversas/criar-frases-rapidas-para-suas-conversas",
+                  "docs/conversas/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Organizar o atendimento",
+                "pages": [
+                  "docs/atendimento/visao-geral",
+                  "docs/configuracoes-no-workspace/criar-e-gerenciar-grupos",
+                  "docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
+                  "docs/atendimento/estrategias-de-atribuicao",
+                  "docs/configuracoes-no-workspace/criar-e-gerenciar-horarios",
+                  "docs/configuracoes-no-workspace/criar-e-gerenciar-tags",
+                  "docs/atendimento/pesquisa-de-satisfacao",
+                  "docs/atendimento/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Salas",
+                "pages": [
+                  "docs/salas/visao-geral",
+                  "docs/salas/usar-salas",
+                  "docs/salas/auditar-mensagens-diretas"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Automação e IA",
+            "icon": "robot",
+            "pages": [
+              {
+                "group": "Agentes de IA",
+                "pages": [
+                  "docs/agente-de-ia/visao-geral",
+                  "docs/agente-de-ia/criando-seu-agente-de-ia",
+                  "docs/agente-de-ia/conhecimento",
+                  "docs/agente-de-ia/ferramentas",
+                  "docs/agente-de-ia/fluxograma-e-etapas",
+                  "docs/agente-de-ia/acoes-do-fluxograma",
+                  "docs/agente-de-ia/testar",
+                  "docs/agente-de-ia/conectar-canais",
+                  "docs/agente-de-ia/agente-de-voz",
+                  "docs/agente-de-ia/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Bot",
+                "pages": [
+                  "docs/bot/visao-geral",
+                  "docs/bot/aprender-a-usar-o-bot",
+                  "docs/bot/blocos-do-bot",
+                  "docs/bot/versoes-e-bloqueio",
+                  "docs/bot/integracoes-do-bot",
+                  "docs/bot/usando-integracao-execucao-codigo",
+                  "docs/bot/usar-campo-personalizado-em-json",
+                  "docs/bot/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Automações",
+                "pages": [
+                  "docs/automacao/visao-geral",
+                  "docs/automacao/configurando-automacoes",
+                  "docs/automacao/exemplos",
+                  "docs/automacao/gatilhos-e-acoes",
+                  "docs/automacao/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Cenários",
+                "pages": [
+                  "docs/cenarios/visao-geral",
+                  "docs/cenarios/criar-um-cenario",
+                  "docs/cenarios/integrar-via-webhook-com-cenarios",
+                  "docs/cenarios/execucoes",
+                  "docs/cenarios/gatilhos-e-acoes",
+                  "docs/cenarios/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Copiloto",
+                "pages": [
+                  "docs/copiloto/copiloto-atualizado",
+                  "docs/copiloto/usar-o-copiloto-de-ia",
+                  "docs/copiloto/comandos-personalizados",
+                  "docs/copiloto/analises-de-ia",
+                  "docs/copiloto/base-de-conhecimento",
+                  "docs/copiloto/configuracoes-de-copiloto"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "CRM e vendas",
+            "icon": "handshake",
+            "pages": [
+              {
+                "group": "Contatos, organizações e campos personalizados",
+                "pages": [
+                  "docs/conversas/clientes-contatos-e-organizacoes",
+                  "docs/clientes/organizacoes",
+                  "docs/clientes/importar-contatos",
+                  "docs/clientes/exportar-contatos",
+                  "docs/clientes/mesclar-contatos",
+                  "docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
+                  "docs/clientes/tipos-de-campo",
+                  "docs/clientes/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Funis e negociações",
+                "pages": [
+                  "docs/crm/visao-geral",
+                  "docs/crm/gerenciando-funil-de-vendas",
+                  "docs/crm/criar-funil-de-vendas",
+                  "docs/crm/cadencias",
+                  "docs/crm/importar-negociacoes",
+                  "docs/crm/acoes-em-lote",
+                  "docs/crm/criar-e-gerenciar-produtos",
+                  "docs/crm/motivos-de-perda-e-regras"
+                ]
+              },
+              {
+                "group": "Tarefas e metas",
+                "pages": [
+                  "docs/tarefas/criando-e-gerenciando-tarefas",
+                  "docs/metas/criando-metas-no-kinbox",
+                  "docs/metas/como-as-metas-sao-calculadas"
+                ]
+              },
+              {
+                "group": "Kinbox Agenda",
+                "pages": [
+                  "docs/agenda/kinbox-agenda",
+                  "docs/agenda/servicos-e-locais",
+                  "docs/agenda/agendamentos"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Campanhas e marketing",
+            "icon": "bullhorn",
+            "pages": [
+              {
+                "group": "Campanhas",
+                "pages": [
+                  "docs/campanhas/visao-geral",
+                  "docs/campanhas/campanhas-no-kinbox",
+                  "docs/campanhas/campanha-de-sms",
+                  "docs/campanhas/acompanhar-resultados",
+                  "docs/campanhas/boas-praticas",
+                  "docs/campanhas/velocidade-e-horario",
+                  "docs/campanhas/problemas-comuns"
+                ]
+              },
+              {
+                "group": "Anúncios e Tracking",
+                "pages": [
+                  "docs/marketing/visao-geral",
+                  "docs/marketing/meta-ads",
+                  "docs/marketing/google-ads",
+                  "docs/marketing/tracking",
+                  "docs/marketing/relatorios-de-marketing"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Relatórios",
+            "icon": "chart-line",
+            "pages": [
+              {
+                "group": "Relatórios de atendimento",
+                "pages": [
+                  "docs/relatorios/como-funcionam",
+                  "docs/relatorios/visao-geral",
+                  "docs/relatorios/ao-vivo",
+                  "docs/relatorios/produtividade",
+                  "docs/relatorios/atribuicao",
+                  "docs/relatorios/interacao",
+                  "docs/relatorios/presenca",
+                  "docs/relatorios/avaliacao"
+                ]
+              },
+              {
+                "group": "Dashboards e outros relatórios",
+                "pages": [
+                  "docs/relatorios/dashboard",
+                  "docs/relatorios/saldo",
+                  "docs/relatorios/ligacoes",
+                  "docs/relatorios/copiloto",
+                  "docs/relatorios/exportar-e-permissoes"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Integrações e API",
+            "icon": "puzzle-piece",
+            "pages": [
+              "docs/integracoes/visao-geral",
+              {
+                "group": "Apps e CRMs",
+                "pages": [
+                  "docs/integracoes/hubspot",
+                  "docs/integracoes/pipedrive",
+                  "docs/integracoes/rdstation-crm",
+                  "docs/integracoes/rdstation-marketing",
+                  "docs/integracoes/rdstation-marketing-webhook",
+                  "docs/integracoes/bitrix24",
+                  "docs/integracoes/zoho",
+                  "docs/integracoes/nectarcrm",
+                  "docs/integracoes/dom360"
+                ]
+              },
+              {
+                "group": "Pagamentos, ERP e gestão",
+                "pages": [
+                  "docs/integracoes/banco-inter",
+                  "docs/integracoes/asaas",
+                  "docs/integracoes/hinova",
+                  "docs/integracoes/anycar",
+                  "docs/integracoes/tiny-erp",
+                  "docs/integracoes/sensedata",
+                  "docs/integracoes/smarters",
+                  "docs/integracoes/gestor-premium"
+                ]
+              },
+              {
+                "group": "Desenvolvedores",
+                "pages": [
+                  "docs/desenvolvedor/visao-geral",
+                  "docs/desenvolvedor/tokens-de-api",
+                  "docs/desenvolvedor/mcp",
+                  "docs/desenvolvedor/criando-plugin-integracao",
+                  "docs/desenvolvedor/criando-canal-customizado",
+                  "docs/desenvolvedor/webhook-continuar-bot",
+                  "docs/desenvolvedor/redirecionador-via-whatsapp",
+                  "docs/usando-o-kinbox/conversa-em-um-clique"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Administração",
+            "icon": "gear",
+            "pages": [
+              {
+                "group": "Membros e permissões",
+                "pages": [
+                  "docs/configuracoes-no-workspace/gerenciar-membros",
+                  "docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios",
+                  "docs/administracao/licencas-e-propriedade",
+                  "docs/administracao/referencia-de-permissoes",
+                  "docs/administracao/problemas-com-membros"
+                ]
+              },
+              {
+                "group": "Workspace",
+                "pages": [
+                  "docs/configuracoes-no-workspace/configuracoes-gerais",
+                  "docs/administracao/mensagens-automaticas",
+                  "docs/administracao/auditoria",
+                  "docs/administracao/acesso-do-parceiro",
+                  "docs/administracao/excluir-workspace"
+                ]
+              },
+              {
+                "group": "Assinatura e cobrança",
+                "pages": [
+                  "docs/assinatura/visao-geral",
+                  "docs/assinatura/assinar-ou-mudar-plano",
+                  "docs/assinatura/adicionar-saldo",
+                  "docs/assinatura/alerta-de-saldo",
+                  "docs/assinatura/faturas",
+                  "docs/assinatura/cancelar",
+                  "docs/assinatura/assinatura-vencida"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Sua conta e app",
+            "icon": "user",
+            "pages": [
+              {
+                "group": "Sua conta",
+                "pages": [
+                  "docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario",
+                  "docs/conta/disponibilidade",
+                  "docs/conta/notificacoes",
+                  "docs/conta/verificacao-em-duas-etapas",
+                  "docs/conta/senha-e-sessoes",
+                  "docs/conta/trocar-de-workspace",
+                  "docs/conta/problemas-de-acesso"
+                ]
+              },
+              {
+                "group": "App para celular",
+                "pages": [
+                  "docs/app/visao-geral",
+                  "docs/app/atender-pelo-celular",
+                  "docs/app/notificacoes-no-app",
+                  "docs/app/excluir-conta"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Parceiros",
+            "icon": "handshake-angle",
+            "pages": [
+              "docs/programa-de-parceiros/visao-geral",
+              "docs/programa-de-parceiros/convidar-clientes",
+              "docs/programa-de-parceiros/templates",
+              "docs/programa-de-parceiros/inspecionar-cliente",
+              "docs/programa-de-parceiros/niveis-do-programa-de-comissionamento",
+              "docs/programa-de-parceiros/pagamento-das-comissoes"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Novidades",
+        "pages": [
+          "novidades"
+        ]
+      },
+      {
         "tab": "API reference",
         "groups": [
           {
@@ -340,6 +807,310 @@
     {
       "source": "/api-reference/auto/v1tags/:slug*",
       "destination": "/api-reference/tags/:slug*"
+    },
+    {
+      "source": "/changelog",
+      "destination": "/novidades"
+    },
+    {
+      "source": "/api",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/api",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/assistente",
+      "destination": "/docs/inicio"
+    },
+    {
+      "source": "/docs/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/bot",
+      "destination": "/docs/bot/visao-geral"
+    },
+    {
+      "source": "/docs/bot-e-copiloto",
+      "destination": "/docs/conceitos/automacao-e-ia"
+    },
+    {
+      "source": "/docs/canais",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/e-mail",
+      "destination": "/docs/canais/e-mail/visao-geral"
+    },
+    {
+      "source": "/docs/canais/instagram-direct",
+      "destination": "/docs/canais/instagram"
+    },
+    {
+      "source": "/docs/canais/telegram-1",
+      "destination": "/docs/canais/telegram"
+    },
+    {
+      "source": "/docs/canais/whatsapp",
+      "destination": "/docs/canais/whatsapp/visao-geral"
+    },
+    {
+      "source": "/docs/canais/whatsapp/adicionando-canal-whatsapp-app",
+      "destination": "/docs/canais/conectar-whatsapp-app"
+    },
+    {
+      "source": "/docs/canais/whatsapp/como-evitar-que-o-celular-desconecte",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/adicionando-canal-de-whatsapp-app",
+      "destination": "/docs/canais/conectar-whatsapp-app"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconcete",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-nas-campanhas",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/como-nao-ter-o-numero-bloqueado-pelo-whatsapp",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/limitacoes-do-whatsapp-api",
+      "destination": "/docs/canais/whatsapp/visao-geral"
+    },
+    {
+      "source": "/docs/copiloto",
+      "destination": "/docs/copiloto/copiloto-atualizado"
+    },
+    {
+      "source": "/docs/copiloto/aprendendo-a-usar-o-assistente-kin",
+      "destination": "/docs/copiloto/usar-o-copiloto-de-ia"
+    },
+    {
+      "source": "/docs/desenvolvedor",
+      "destination": "/docs/desenvolvedor/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/followize",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/primeiros-passos",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/programa-de-parceiros",
+      "destination": "/docs/programa-de-parceiros/visao-geral"
+    },
+    {
+      "source": "/docs/quickstart",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/shorturl",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/usando-o-kinbox",
+      "destination": "/docs/inicio"
+    },
+    {
+      "source": "/docs/v0",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/v1",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/v2",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/changelog",
+      "destination": "/novidades"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/inscricao-para-uma-conta-comercial-oficial",
+      "destination": "/docs/canais/whatsapp-api-oficial-padrao"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/solicite-acesso-a-api-whatsapp-por-meio-de-nosso-parceiro-de-negocios",
+      "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/status-do-meu-canal-whatsapp-business",
+      "destination": "/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/usando-um-numero-existente-para-whatsapp-business",
+      "destination": "/docs/canais/whatsapp-api-oficial-coexistente"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/verifique-sua-conta-do-facebook-business-para-obter-acesso-a-mensagens-ilimitadas-do-whatsapp",
+      "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-cloud-api/instalacao",
+      "destination": "/docs/canais/whatsapp-api-oficial-padrao"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-templates/condicoes-para-templates",
+      "destination": "/docs/canais/whatsapp/whatsapp-templates/template-rejeitado"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-templates/criando-templates-no-360dialog",
+      "destination": "/docs/canais/criar-templates-dentro-do-kinbox"
+    },
+    {
+      "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",
+      "destination": "/docs/agente-de-ia/visao-geral"
+    },
+    {
+      "source": "/docs/bot/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
+    },
+    {
+      "source": "/docs/bot/usando-campo-personalizado-json",
+      "destination": "/docs/bot/usar-campo-personalizado-em-json"
+    },
+    {
+      "source": "/docs/bot/usando-integracao-por-execucao-de-codigo",
+      "destination": "/docs/bot/usando-integracao-execucao-codigo"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
+    },
+    {
+      "source": "/api-shorturl",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-shorturl/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v0",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v0/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v1",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v1/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v2",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v2/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api/contacts/list",
+      "destination": "/api-reference/contacts/list-all-contacts"
+    },
+    {
+      "source": "/docs/api/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/api/custom-fields",
+      "destination": "/api-reference/custom-fields"
+    },
+    {
+      "source": "/docs/api/quickstart",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/desenvolvedor/criando-plugin-de-integracao",
+      "destination": "/docs/desenvolvedor/criando-plugin-integracao"
+    },
+    {
+      "source": "/docs/desenvolvedor/criando-pluguin-atualizado",
+      "destination": "/docs/desenvolvedor/criando-plugin-integracao"
+    },
+    {
+      "source": "/docs/desenvolvedor/redirecionador-de-whatsapp",
+      "destination": "/docs/desenvolvedor/redirecionador-via-whatsapp"
+    },
+    {
+      "source": "/docs/desenvolvedor/redirecionador-whatsapp",
+      "destination": "/docs/desenvolvedor/redirecionador-via-whatsapp"
+    },
+    {
+      "source": "/docs/desenvolvedor/webhook-para-continuar-bot",
+      "destination": "/docs/desenvolvedor/webhook-continuar-bot"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/pesquisar-por-campo-personalizado",
+      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
+    },
+    {
+      "source": "/api-v0/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v1/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-v2/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api-shorturl/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/api/:slug*",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/pesquisar-customfield",
+      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/inicio"
+    },
+    {
+      "source": "/docs/primeiros-passos/adicionando-canais-a-sua-caixa-de-entrada",
+      "destination": "/docs/primeiros-passos/conectar-o-primeiro-canal"
+    },
+    {
+      "source": "/docs/primeiros-passos/convidando-sua-equipe",
+      "destination": "/docs/primeiros-passos/convidar-sua-equipe"
+    },
+    {
+      "source": "/docs/primeiros-passos/criando-uma-conta-trial",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/primeiros-passos/videos-tutoriais",
+      "destination": "/docs/primeiros-passos/videos-para-comecar"
     }
   ]
 }

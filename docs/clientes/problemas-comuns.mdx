@@ -1,0 +1,89 @@
+---
+title: Problemas com contatos, importação e campos personalizados
+description: O que fazer quando a tela de contatos não aparece, o contato não salva, a importação dá erro, a exportação está desativada, o campo obrigatório não aparece ou a seção Contato duplicado não surge.
+keywords: [clientes não aparece, não consigo salvar contato, botão salvar desativado, já existe um contato cadastrado com esse telefone, erro na importação, telefone em notação científica, linha sem telefone ou e-mail, telefone inválido, exportar desativado, não consigo exportar contatos, campo obrigatório não foi setado, campo obrigatório não aparece, contato duplicado não aparece, problemas contatos]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/layouts/BaseLayout.tsx
+  - web:src/pages/crm/contacts/EditContact.tsx
+  - web:src/pages/crm/contacts/shared/exportContacts.ts
+  - api:src/modules/contact-spreadsheet-imports/contact-spreadsheet-imports.consumer.ts
+  - api-v0:server/controllers/CustomerController.js
+  - web:src/components-old/chat/side/ContactInfoPlugin/index.tsx
+codigo:
+  - web:src/layouts/BaseLayout.tsx
+  - web:src/pages/crm/contacts/**
+  - web:src/pages/settings/customFields/**
+  - web:src/components-old/chat/side/ContactInfoPlugin/index.tsx
+  - web:src/components-old/chat/side/MergeContactPlugin/**
+  - api:src/modules/contact-spreadsheet-imports/**
+  - api-v0:server/controllers/CustomerController.js
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+Você não encontra a tela de contatos, não consegue salvar ou exportar, a importação mostra erros, um campo obrigatório impede resolver a conversa ou a seção **Contato duplicado** não aparece.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="O item Clientes não aparece no menu lateral">
+    **Como confirmar:** o menu lateral não tem o ícone **Clientes** (passe o mouse sobre os ícones para ver os nomes).
+
+    **Como resolver:** o item aparece para quem tem **Gerenciar Contatos** ou **Gerenciar Organizações** no papel, e sempre para o proprietário. Peça ao proprietário para dar a permissão ao seu papel. Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+  </Accordion>
+
+  <Accordion title="O botão Salvar do contato está desativado">
+    **Como confirmar:** o painel **Criar contato** ou o formulário de edição abre, mas **Salvar** não responde.
+
+    **Como resolver:** falta **Alterar propriedades do contato** no seu papel. Ela vale também para criar contatos. Peça ao proprietário para liberar.
+  </Accordion>
+
+  <Accordion title='Aparece "Já existe um contato cadastrado com esse telefone"'>
+    **Como confirmar:** o aviso aparece ao salvar um contato novo.
+
+    **Como resolver:** já existe um contato com exatamente esse telefone. Busque o número na lista de [contatos](/docs/conversas/clientes-contatos-e-organizacoes) e edite o cadastro que já existe.
+  </Accordion>
+
+  <Accordion title="A importação terminou com erros">
+    **Como confirmar:** a janela de progresso mostra **Erros** maior que zero. Abra **Histórico**, clique na importação e veja a aba **Erros**.
+
+    **Como resolver**, conforme o erro:
+
+    - **Telefone ou CNPJ em notação científica:** recupere os dígitos na fonte original dos dados. Formatar a célula como texto ou salvar em `.xlsx` não recupera o que o Excel já perdeu. Depois, deixe a coluna como texto antes de colar os números e exporte de novo.
+    - **Telefone inválido:** confira o código do país (número de outro país começa com `+`), o DDD e se o número tem ao menos 8 dígitos.
+    - **Linha sem telefone ou e-mail:** preencha ao menos um dos dois.
+
+    Depois, importe um arquivo só com as linhas corrigidas. Veja [Importar contatos de uma planilha](/docs/clientes/importar-contatos).
+  </Accordion>
+
+  <Accordion title="A importação não mostra os campos de organização">
+    **Como confirmar:** no passo **Mapeie as colunas** não existe o grupo **Organização**, e a planilha modelo não traz **Organização**, **CNPJ** e **Cargo**.
+
+    **Como resolver:** falta **Gerenciar Organizações** no seu papel. Sem ela, os contatos são importados sem organização.
+  </Accordion>
+
+  <Accordion title="As opções de exportar estão apagadas">
+    **Como confirmar:** em **Clientes** → **Contatos** → **⋯**, os itens de **Exportar (CSV)** e **Exportar (XLSX)** estão desativados, ou o **⋯** não aparece em **Organizações**.
+
+    **Como resolver:** se não há outra exportação em andamento, seu papel tem a restrição **Não pode exportar contatos**. Peça ao proprietário para tirá-la. Veja [Exportar contatos](/docs/clientes/exportar-contatos).
+  </Accordion>
+
+  <Accordion title='Aparece "Campo obrigatório ... não foi setado." e o campo não está no painel'>
+    **Como confirmar:** ao clicar em **Resolver**, a conversa não é resolvida, mas o campo citado não aparece no painel lateral.
+
+    **Como resolver:** o campo está com **Esconder** ligado, ou é de contato, fica obrigatório por **Vincular obrigatoriedade** e não tem **Sempre mostrar**. Quem tem a permissão **Campos** deve desligar **Esconder** desse campo ou ligar **Sempre mostrar**. Veja [Criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox).
+  </Accordion>
+
+  <Accordion title="A seção Contato duplicado não aparece">
+    **Como confirmar:** você sabe que existem dois cadastros da mesma pessoa, mas a conversa não mostra **Contato duplicado**.
+
+    **Como resolver:** a seção só aparece em conversa de WhatsApp, quando o outro contato tem o mesmo número (com ou sem o 9) e pelo menos uma conversa. E-mail, nome e outros canais não são comparados, e não existe mesclar pela lista de contatos. Confira os dois cadastros na lista de contatos e não exclua um deles sem ver o histórico: excluir apaga as conversas do contato. Veja [Mesclar contatos duplicados](/docs/clientes/mesclar-contatos).
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte dizendo o que você tentou fazer, a mensagem exata que apareceu e, para importação, o nome do arquivo e o número da linha com erro.

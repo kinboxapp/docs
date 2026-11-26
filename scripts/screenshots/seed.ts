@@ -2,7 +2,7 @@
  * Cria (ou completa) o workspace de documentação no staging, com dados fictícios estáveis para os prints
  * da central de ajuda.
  *
- * Uso: `bun scripts/screenshots/seed.ts`
+ * Uso: `bun scripts/screenshots/seed.ts` (ou `--so <etapa>` para rodar só uma etapa, ex.: `--so cenarios`)
  *
  * É idempotente: cada item é procurado pelo nome (ou e-mail) antes de ser criado, e as conversas continuam
  * do passo em que pararam. Rodar de novo não duplica nada.
@@ -302,6 +302,119 @@ async function garantirFunil(api: Api, contatoIds: Record<string, string>, tagId
   log(`funil: "${PIPELINE.name}" com ${NEGOCIOS.length} negócios`)
 }
 
+/**
+ * CRM (prints da seção `funis`): produtos, responsáveis fictícios nos negócios do funil Vendas (para o print não mostrar a
+ * foto do dono do workspace, que é uma conta real), produtos num negócio, um negócio ganho e um perdido, e um funil
+ * operacional com dois tickets.
+ */
+const PRODUTOS = [
+  { name: 'Café especial 250 g', description: 'Grãos torrados na semana', price: 45, isActive: true },
+  { name: 'Kit presente', description: 'Caixa com dois cafés e uma caneca', price: 160, isActive: true },
+  { name: 'Assinatura mensal de café', description: 'Um pacote por mês, com entrega', price: 99.9, isActive: true },
+  { name: 'Caneca edição de inverno', description: 'Fora de linha', price: 39, isActive: false },
+]
+
+const RESPONSAVEIS: Record<string, string> = {
+  'Kit presente — Ana Souza': 'Bruno Carvalho',
+  'Kits corporativos — Carlos Pereira': 'Carla Mendes',
+  'Assinatura de café — Rafael Martins': 'Bruno Carvalho',
+  'Cesta de café da manhã — Beatriz Alves': 'Diego Santos',
+  'Reposição de estoque — Lucas Ferreira': 'Carla Mendes',
+  'Presente de aniversário — Fernanda Costa': 'Diego Santos',
+}
+
+const FUNIL_OPERACIONAL = {
+  name: 'Pós-venda',
+  stages: [
+    { id: 'recebido', name: 'Recebido', color: '#64748b' },
+    { id: 'analise', name: 'Em análise', color: '#0ea5e9' },
+    { id: 'aguardando', name: 'Aguardando cliente', color: '#f59e0b' },
+  ],
+  lostReasons: ['Sem retorno do cliente', 'Fora da política de troca'],
+  tickets: [
+    { name: 'Troca de produto — Beatriz Alves', contato: 'Beatriz Alves', stageId: 'analise', responsavel: 'Diego Santos' },
+    { name: 'Entrega atrasada — Carlos Pereira', contato: 'Carlos Pereira', stageId: 'recebido', responsavel: 'Bruno Carvalho' },
+  ],
+}
+
+async function garantirCrm(api: Api, contatoIds: Record<string, string>) {
+  // Produtos
+  const produtos = lista(await api.v3('GET', '/products?limit=100'))
+  for (const p of PRODUTOS) {
+    if (!produtos.some((x) => x.name === p.name)) produtos.push(await api.v3('POST', '/products', p))
+  }
+  const produto = (nome: string) => produtos.find((x) => x.name === nome)
+
+  // Responsáveis fictícios (membros convidados)
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  // Sem o membro, o negócio ficaria com o dono real da conta (nome e foto no print): falha em vez de seguir
+  const opId = (nome: string) => {
+    const membro = MEMBROS.find((m) => m.name === nome)
+    const op = operadores.find((o) => o.email === membro?.email)
+    if (!op) throw new Error(`membro "${nome}" não encontrado: rode antes a etapa "membros" (bun seed.ts --so membros,crm)`)
+    return Number(op.operatorId || op.id)
+  }
+
+  const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  if (vendas) {
+    const negocios = lista(await api.v3('GET', `/deals?pipelineId=${String(vendas.id || vendas._id)}&limit=100`))
+    for (const negocio of negocios) {
+      const responsavel = RESPONSAVEIS[negocio.name]
+      const operatorId = responsavel ? opId(responsavel) : undefined
+      const patch: Record<string, unknown> = {}
+      if (operatorId && negocio.operatorId !== operatorId) patch.operatorId = operatorId
+      if (negocio.name === 'Kit presente — Ana Souza' && !negocio.products?.length) {
+        const kit = produto('Kit presente')
+        const cafe = produto('Café especial 250 g')
+        if (kit && cafe) {
+          patch.products = [
+            { id: String(kit.id || kit._id), name: kit.name, price: kit.price, quantity: 2, discount: 0, discountType: 'percentage', total: 320 },
+            { id: String(cafe.id || cafe._id), name: cafe.name, price: cafe.price, quantity: 1, discount: 0, discountType: 'percentage', total: 45 },
+          ]
+          patch.value = 365
+        }
+      }
+      // Um negócio ganho e um perdido, para o quadro mostrar as três situações do cartão
+      if (negocio.name === 'Presente de aniversário — Fernanda Costa' && negocio.status !== 'won') {
+        Object.assign(patch, { status: 'won', wonLostDate: new Date().toISOString() })
+      }
+      if (negocio.name === 'Cesta de café da manhã — Beatriz Alves' && negocio.status !== 'lost') {
+        Object.assign(patch, { status: 'lost', lostReason: ['Preço'], wonLostDate: new Date().toISOString() })
+      }
+      if (Object.keys(patch).length) await api.v3('PATCH', `/deals/${negocio.id || negocio._id}`, patch)
+    }
+  }
+
+  // Funil operacional
+  let pos = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === FUNIL_OPERACIONAL.name)
+  if (!pos) {
+    pos = await api.v3('POST', '/pipelines', {
+      name: FUNIL_OPERACIONAL.name,
+      kind: 'operational',
+      stages: FUNIL_OPERACIONAL.stages.map((s) => ({ ...s, requireds: [] })),
+      lostReasons: FUNIL_OPERACIONAL.lostReasons,
+      requiredCustomFieldIds: [],
+      privacy: { type: 'public' },
+      cadence: [],
+      rules: [],
+    })
+  }
+  const posId = String(pos.id || pos._id)
+  const tickets = lista(await api.v3('GET', `/deals?pipelineId=${posId}&limit=100`))
+  for (const t of FUNIL_OPERACIONAL.tickets) {
+    if (tickets.some((d) => d.name === t.name)) continue
+    await api.v3('POST', '/deals', {
+      name: t.name,
+      value: 0,
+      pipelineId: posId,
+      stageId: t.stageId,
+      contactId: Number(contatoIds[t.contato]),
+      operatorId: opId(t.responsavel),
+    })
+  }
+  log(`crm: ${PRODUTOS.length} produtos, responsáveis nos negócios de "${PIPELINE.name}", funil operacional "${FUNIL_OPERACIONAL.name}"`)
+}
+
 async function garantirMembros(api: Api) {
   const cargos = lista(await api.v0('GET', '/roles'))
   const operadores = lista(await api.v0('GET', '/operators?limit=100'))
@@ -333,11 +446,681 @@ async function garantirRespostasRapidas(api: Api) {
   log(`respostas rápidas: ${RESPOSTAS_RAPIDAS.length}`)
 }
 
+/**
+ * Salas (prints da seção salas): a sala pública "Avisos" com mensagens internas fictícias da equipe,
+ * uma fixada, uma com reação e uma resposta em thread, e a sala privada "Gerência". As mensagens
+ * saem em nome da conta de teste (dona do workspace): os prints mascaram nome e foto do autor.
+ * Salas são só da equipe: nada é enviado a contato. Cada sala é achada pelo nome e pela privacidade,
+ * e cada mensagem, fixação, reação e resposta só é criada se ainda faltar (rodar de novo não duplica).
+ */
+async function garantirSalas(api: Api) {
+  const salas = lista(await api.v0('GET', '/rooms'))
+  const acharSala = (name: string, privacy: string) => salas.find((r) => r.name === name && r.type !== 'dm' && (r.privacy || 'public') === privacy)
+  const eu = lista(await api.v0('GET', '/operators?limit=100')).find((o) => o.isOwner)
+  let avisos = acharSala('Avisos', 'public')
+  if (!avisos) {
+    avisos = await api.v0('POST', '/rooms', { name: 'Avisos', description: 'Comunicados para toda a equipe', privacy: 'public', color: '#3498db', memberIds: [] })
+  }
+  if (!acharSala('Gerência', 'private')) {
+    await api.v0('POST', '/rooms', { name: 'Gerência', description: 'Metas e escalas da semana', privacy: 'private', color: '#8e44ad', memberIds: eu ? [eu.id] : [] })
+  }
+  const avisosId = String(avisos.id || avisos._id)
+  const textos = [
+    'Bom dia, equipe! A partir de segunda, o atendimento de sábado vai até as 14h.',
+    'Lembrete: antes de encerrar o dia, confiram se ficou alguma conversa sem responsável.',
+    'A nova coleção de cafés especiais chega na quinta. As fotos já estão na pasta de produtos.',
+  ]
+  const resposta = 'Combinado. Vou atualizar as frases rápidas com os novos sabores.'
+  // Pagina o histórico (mais recentes primeiro) até achar todas as mensagens de exemplo ou chegar ao fim
+  const porPagina = 200
+  const acharExemplos = async () => {
+    const achadas = new Map<string, any>()
+    for (let offset = 0; ; offset += porPagina) {
+      const pagina = lista(await api.v3('GET', `/rooms/${avisosId}/messages?limit=${porPagina}&offset=${offset}`))
+      for (const m of pagina) if (!m.threadId && textos.includes(m.text) && !achadas.has(m.text)) achadas.set(m.text, m)
+      if (achadas.size === textos.length || pagina.length < porPagina) return achadas
+    }
+  }
+  let mensagens = await acharExemplos()
+  for (const text of textos) {
+    if (!mensagens.has(text)) await api.v0('POST', `/rooms/${avisosId}/messages`, { text, type: 'text' })
+  }
+  mensagens = await acharExemplos()
+  const [primeira, , terceira] = textos.map((text) => mensagens.get(text))
+  const idDe = (m: any) => String(m._id || m.id)
+  if (!primeira.pinnedAt) await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(primeira)}/pin`, {})
+  const meuId = String(eu?.id ?? '')
+  const joinha = (primeira.reactions || []).find((r: any) => r.emoji === '👍')
+  // A rota de reação alterna: só reage se a conta ainda não reagiu com 👍
+  if (!joinha || (meuId && !(joinha.operatorIds || []).map(String).includes(meuId))) {
+    await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(primeira)}/reactions`, { emoji: '👍' })
+  }
+  const thread = await api.v3('GET', `/rooms/${avisosId}/messages/${idDe(terceira)}/thread`)
+  if (!lista(thread?.replies ?? thread).some((m) => m.text === resposta)) {
+    await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(terceira)}/thread`, { text: resposta, type: 'text' })
+  }
+  log(`salas: "Avisos" (pública, ${textos.length} mensagens, fixada, reação e resposta) e "Gerência" (privada)`)
+}
+
 /** Agente de IA criado pelo mesmo caminho do onboarding. Nasce desligado e sem canal. */
 async function garantirAgente(api: Api) {
   const existente = lista(await api.v3('GET', '/agents')).find((a) => a.name === AGENTE.name)
   if (!existente) await api.v3('POST', '/onboarding/agent', AGENTE)
   log(`agente de IA: "${AGENTE.name}"${existente ? ' (reaproveitado)' : ''}`)
+}
+
+/**
+ * Bot de exemplo "Atendimento inicial" (prints da seção bot): Início → Mensagem → Menu → Mensagem/Atendimento → Fim.
+ * Nasce e fica DESLIGADO, com o widget fictício em "Canais que atende".
+ */
+function montarBotExemplo(grupoId: string, canalId: string) {
+  const pos = (x: number, y: number) => ({ x, y })
+  const cores: Record<string, string> = { message: '#686de0', menu: '#0984e3', assign: '#38ada9', integration: '#000' }
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { backgroundColor: cores[type], action } })
+  const aresta = (source: string, sourceHandle: string, target: string) => ({
+    id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
+    type: 'removable_edge', animated: true, arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
+  })
+  const nos = [
+    { id: '1', type: 'start', position: pos(-60, 200), data: { label: 'Início' }, sourcePosition: 'right' },
+    no('boas-vindas', 'message', 260, 180, { text: 'Olá, {{first_name}}! Bem-vindo à Loja Exemplo.' }),
+    no('menu', 'menu', 560, 150, {
+      text: 'Como podemos ajudar? Digite o número da opção:',
+      menu_options: [{ value: '1', name: 'Acompanhar meu pedido' }, { value: '2', name: 'Trocas e devoluções' }, { value: '3', name: 'Falar com a equipe' }],
+      menu_validate_text: 'Resposta inválida. Digite 1, 2 ou 3.', similarity_rate: 20,
+      menu_response_timeout_value: 10, menu_response_timeout_unit: 'seconds',
+    }),
+    no('pedido', 'message', 940, -120, { text: 'Para acompanhar o pedido, acesse Minha conta > Pedidos no site.' }),
+    no('trocas', 'message', 940, 170, { text: 'Você pode trocar qualquer produto em até 30 dias após o recebimento, com a nota fiscal.' }),
+    no('equipe', 'assign', 940, 480, { assign_type: 'group', assign_to_group_id: grupoId }),
+    { id: 'end', type: 'end', position: pos(1320, 200), data: { label: 'Fim', action: {} }, sourcePosition: 'left' },
+  ]
+  const arestas = [
+    aresta('1', 'start', 'boas-vindas'), aresta('boas-vindas', 'a', 'menu'),
+    aresta('menu', '1', 'pedido'), aresta('menu', '2', 'trocas'), aresta('menu', '3', 'equipe'),
+    aresta('pedido', 'a', 'end'), aresta('trocas', 'a', 'end'), aresta('equipe', 'a', 'end'),
+  ]
+  const elements = [...nos, ...arestas]
+  const actions = nos.map((n: any) => ({
+    id: n.id, type: n.type,
+    targets: arestas.filter((e) => e.source === n.id).map((e) => ({ sourceHandle: e.sourceHandle, target: e.target })),
+    ...(n.data?.action || {}),
+  }))
+  return {
+    name: 'Atendimento inicial', color: '#6c5ce7', isActive: false, channels: [canalId], businessHours: [],
+    isEnabledForAllChannels: false, expirable: false, settings: {}, actions, elements,
+  }
+}
+
+async function garantirBot(api: Api, canal: string) {
+  const existente = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Atendimento inicial')
+  if (!existente) {
+    const grupo = lista(await api.v0('GET', '/group')).find((g) => g.name === EQUIPE.name)
+    if (!grupo) throw new Error(`Equipe "${EQUIPE.name}" não encontrada`)
+    await api.v0('POST', '/bot', montarBotExemplo(String(grupo.id), canal))
+  }
+  log(`bot: "Atendimento inicial" (desligado)${existente ? ' (reaproveitado)' : ''}`)
+}
+
+/**
+ * Segundo bot de exemplo "Consulta de pedido" (prints de integração): Chamar endpoint grava o pedido no campo Json
+ * `pedido` (sessão) e Executar código marca o cliente; endereços em example.com. Desligado e sem canal.
+ */
+function montarBotIntegracao() {
+  const pos = (x: number, y: number) => ({ x, y })
+  const cores: Record<string, string> = { message: '#686de0', menu: '#0984e3', assign: '#38ada9', integration: '#000' }
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { backgroundColor: cores[type], action } })
+  const aresta = (source: string, sourceHandle: string, target: string) => ({
+    id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
+    type: 'removable_edge', animated: true, arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
+  })
+  const json = JSON.stringify({
+    url: 'https://example.com/api/pedidos?email={{email}}',
+    method: 'GET',
+    headers: { Authorization: 'Bearer SEU_TOKEN' },
+    mapReturnToCustomField: { pedido: 'data' },
+  }, null, 2)
+  const codigo = `async function run(kinbox) {\n  const { contact } = kinbox\n\n  // Consulta um sistema externo (endereço fictício)\n  const url = "https://example.com/api/clientes"\n  const { data } = await axios.get(url, {\n    params: { email: contact.email },\n  })\n\n  if (data.vip) {\n    await kinbox.addTag("vip")\n  }\n\n  return data\n}`
+  const nos = [
+    { id: '1', type: 'start', position: pos(-60, 200), data: { label: 'Início' }, sourcePosition: 'right' },
+    no('consulta', 'integration', 260, 170, { code: 'custom', integration_description: 'Consultar pedido', script: json }),
+    no('codigo', 'integration', 600, 170, { code: 'run_code', integration_description: 'Marcar cliente VIP', scriptCode: codigo }),
+    no('resposta', 'message', 940, 170, { text: 'Seu pedido {{json:pedido.numero}} está: {{json:pedido.status}}.' }),
+    { id: 'end', type: 'end', position: pos(1300, 200), data: { label: 'Fim', action: {} }, sourcePosition: 'left' },
+  ]
+  const arestas = [aresta('1', 'start', 'consulta'), aresta('consulta', 'a', 'codigo'), aresta('codigo', 'a', 'resposta'), aresta('resposta', 'a', 'end')]
+  const elements = [...nos, ...arestas]
+  const actions = nos.map((n: any) => ({
+    id: n.id, type: n.type,
+    targets: arestas.filter((e) => e.source === n.id).map((e) => ({ sourceHandle: e.sourceHandle, target: e.target })),
+    ...(n.data?.action || {}),
+  }))
+  return { name: 'Consulta de pedido', color: '#00b894', isActive: false, channels: [], businessHours: [], isEnabledForAllChannels: false, expirable: false, settings: {}, actions, elements }
+}
+
+async function garantirBotIntegracao(api: Api) {
+  const campos = lista(await api.v0('GET', '/custom-fields'))
+  if (!campos.some((c) => c.placeholder === 'pedido')) {
+    await api.v0('POST', '/custom-fields', { name: 'Pedido', placeholder: 'pedido', type: 'json', entity: 'session', description: 'Dados do pedido consultado pelo bot' })
+  }
+  const existente = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Consulta de pedido')
+  if (!existente) await api.v0('POST', '/bot', montarBotIntegracao())
+  else await api.v0('PUT', `/bot/${existente.id}`, { id: existente.id, ...montarBotIntegracao() })
+  log(`bot: "Consulta de pedido" (desligado, sem canal) e campo Json "pedido"${existente ? ' (reaproveitado)' : ''}`)
+}
+
+/**
+ * Organização do atendimento (prints da seção `atendimento`): grupos Vendas e Suporte, um horário com intervalo,
+ * uma regra de atribuição (nasce inativa), a tag Orçamento visível só para Vendas e a automação de avaliação, desligada.
+ */
+async function garantirOrganizacao(api: Api) {
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  const idDe = (nome: string) => String(operadores.find((o) => o.name === nome)?.id || '')
+  const grupos = lista(await api.v0('GET', '/group'))
+  const novos = [
+    { name: 'Vendas', description: 'Orçamentos e novos pedidos', icon: '#22c55e', membros: ['Bruno Carvalho', 'Carla Mendes'] },
+    { name: 'Suporte', description: 'Trocas, entregas e dúvidas de uso', icon: '#0ea5e9', membros: ['Carla Mendes', 'Diego Santos'] },
+  ]
+  for (const g of novos) {
+    if (!grupos.some((x) => x.name === g.name)) {
+      await api.v0('POST', '/group', { name: g.name, description: g.description, icon: g.icon, members: g.membros.map(idDe).filter(Boolean) })
+    }
+  }
+  const vendas = lista(await api.v0('GET', '/group')).find((g) => g.name === 'Vendas')
+
+  const horarios = lista(await api.v0('GET', '/business-hours'))
+  if (!horarios.some((h) => h.name === 'Atendimento da loja')) {
+    const util = { active: true, hours: [['09:00', '12:00'], ['13:00', '18:00']] }
+    await api.v0('POST', '/business-hours', {
+      name: 'Atendimento da loja', mon: util, tue: util, wed: util, thu: util, fri: util,
+      sat: { active: true, hours: [['09:00', '13:00']] }, sun: { active: false, hours: [] },
+    })
+  }
+
+  const regras = lista(await api.v0('GET', '/inbox/assignment'))
+  if (vendas && !regras.some((r) => r.name === 'Distribuir entre Vendas')) {
+    await api.v0('POST', '/inbox/assignment', { name: 'Distribuir entre Vendas', rule: 'all', assignTo: 'round_robin_agent_group', groupId: vendas.id })
+  }
+
+  const orcamento = lista(await api.v3('GET', '/tags')).find((t) => t.name === 'Orçamento')
+  // Cor da paleta da tela (sky): com o hex do seed, o campo Cor da edição mostra o código em vez do nome
+  if (vendas && orcamento && (orcamento.privacy?.type !== 'group' || orcamento.color !== '#e0f2fe')) {
+    await api.v3('PATCH', `/tags/${orcamento.id}`, { color: '#e0f2fe', privacy: { type: 'group', groupIds: [String(vendas.id)] } })
+  }
+
+  const automacoes = lista(await api.v0('GET', '/automations'))
+  if (!automacoes.some((a) => a.name === 'Pedir avaliação')) {
+    await api.v0('POST', '/automations', {
+      name: 'Pedir avaliação', active: false, trigger: 'trigger:conversation:resolved',
+      conditions_active: false, actions: [{ type: 'action:conversation:rate' }],
+    })
+  }
+  log('organização: grupos Vendas e Suporte, horário "Atendimento da loja", regra "Distribuir entre Vendas" (inativa), automação "Pedir avaliação" (desligada)')
+}
+
+/**
+ * Automações de exemplo (prints da seção `automacao`), todas desligadas: nenhuma envia mensagem nem muda conversa.
+ * Usa o grupo Vendas, a tag Orçamento e o horário "Atendimento da loja" da etapa "organização do atendimento".
+ */
+async function garantirAutomacoes(api: Api) {
+  const vendas = lista(await api.v0('GET', '/group')).find((g) => g.name === 'Vendas')
+  const orcamento = lista(await api.v3('GET', '/tags')).find((t) => t.name === 'Orçamento')
+  const horario = lista(await api.v0('GET', '/business-hours')).find((h) => h.name === 'Atendimento da loja')
+  if (!vendas || !orcamento || !horario) throw new Error('rode antes a etapa "organização do atendimento" (grupo Vendas, tag Orçamento, horário)')
+  const exemplos = [
+    {
+      name: 'Encerrar conversas paradas',
+      trigger: 'trigger:conversation:time-without-reply',
+      minutes: 1440,
+      conditions_active: false,
+      actions: [
+        { type: 'action:conversation:send-message', value: 'Como não tivemos retorno, vamos encerrar este atendimento. Se precisar, é só mandar uma nova mensagem.' },
+        { type: 'action:conversation:resolve' },
+      ],
+    },
+    {
+      name: 'Lembrete de orçamento',
+      trigger: 'trigger:conversation:time-without-reply',
+      minutes: 120,
+      conditions_active: true,
+      conditions: { all: [{ field: 'chat:tags', operator: 'contains', value: String(orcamento.id) }], any: null },
+      actions: [{ type: 'action:conversation:send-message', value: 'Oi! Conseguiu ver o orçamento que enviamos? Se tiver alguma dúvida, estamos por aqui.' }],
+    },
+    {
+      name: 'Aviso fora do horário',
+      trigger: 'trigger:conversation:new-conversation',
+      conditions_active: true,
+      conditions: { all: [{ field: 'chat:business-hours', operator: 'is_not_in', value: horario.id }], any: null },
+      actions: [{ type: 'action:conversation:send-message', value: 'Recebemos sua mensagem! Nosso horário é de segunda a sexta, das 9h às 18h, e aos sábados, das 9h às 13h. Respondemos assim que voltarmos.' }],
+    },
+    {
+      name: 'Orçamento para Vendas',
+      trigger: 'trigger:conversation:tagged',
+      conditions_active: true,
+      // Condição Tag (grupo Contexto, só no gatilho Ao adicionar tag): confere a tag recém-adicionada
+      conditions: { all: [{ field: 'context:chat-tag', operator: 'is', value: String(orcamento.id) }], any: null },
+      actions: [{ type: 'action:conversation:move-to-group', value: 'group', groupId: vendas.id }],
+    },
+  ]
+  const existentes = lista(await api.v0('GET', '/automations'))
+  // Exemplo ligado (ou sem o campo `active`, que a tela mostra como ligado) dispararia em conversas reais: avisa e para sem alterar nada
+  const ligados = existentes.filter((x) => exemplos.some((a) => a.name === x.name) && x.active !== false)
+  if (ligados.length) throw new Error(`automações de exemplo ligadas: ${ligados.map((x) => `"${x.name}"`).join(', ')}; desligue na tela e rode de novo`)
+  for (const a of exemplos) {
+    const atual = existentes.find((x) => x.name === a.name)
+    if (!atual) await api.v0('POST', '/automations', { ...a, active: false })
+    else if (JSON.stringify(atual.conditions ?? null) !== JSON.stringify(a.conditions ?? null) || !!atual.conditions_active !== a.conditions_active) {
+      await api.v0('PATCH', `/automations/${atual._id || atual.id}`, { conditions_active: a.conditions_active, conditions: a.conditions ?? null, active: false })
+    }
+  }
+  log(`automações: ${exemplos.map((a) => `"${a.name}"`).join(', ')} (desligadas)`)
+}
+
+/** Widget de exemplo da seção "Chat do site": já configurado, para os prints da tela e do chat no site de teste. */
+const WIDGET_EXEMPLO = 'Site da loja'
+const WIDGET_EXEMPLO_CONFIG = {
+  branding: { colors: { bubble: '#16a085', text: '#ffffff' }, companyName: EMPRESA },
+  position: { alignment: 'right', sideSpacing: 20, bottomSpacing: 20 },
+  texts: {
+    introMessages: [{ text: '👋 Olá! Como podemos te ajudar?' }],
+    teamDescription: 'Tire suas dúvidas sobre pedidos, entregas e trocas.',
+    awayText: 'Vamos te responder assim que possível',
+  },
+  preChatForm: {
+    description: 'Bem-vindo! Por favor preencha o formulário abaixo antes de iniciar o chat.',
+    fields: [
+      { name: 'name', type: 'text', label: 'Nome', required: true, options: [] },
+      { name: 'email', type: 'text', label: 'E-mail', required: true, options: [] },
+      { name: 'phone', type: 'text', label: 'Celular', required: false, options: [] },
+    ],
+    autoMessage: { enabled: true, text: 'Olá! Acabei de preencher o formulário.' },
+  },
+  tweaks: {
+    enableSound: true,
+    showAgentsAvatar: true,
+    showOnMobile: true,
+    enableCustomAvatar: false,
+    hideWidgetButton: false,
+    popupBalloon: { enable: true, text: 'Oi, está precisando de ajuda?', delay: 5 },
+    enableDomains: true,
+    whatsapp: { enabledWhatsApp: true, phone: '+5511900000001', text: 'Oi, quero saber mais sobre os produtos.', onlyWhatsapp: false, captureCampaign: false },
+    businessHours: { enableBusinessHours: false },
+  },
+  // Domínio reservado para exemplos: o HTML do site de teste é servido localmente pela captura nesse endereço;
+  // o script e as configurações do chat vêm do staging
+  domains: ['https://www.example.com'],
+}
+
+async function garantirWidgetExemplo(api: Api) {
+  const canais = lista(await api.v0('GET', '/integrations/channel'))
+  let canal = canais.find((c) => String(c.channelId) === '10' && c.description === WIDGET_EXEMPLO)
+  let widget = canal ? lista(await api.v3('GET', '/widget')).find((w) => String(w.channelId) === String(canal.id)) : undefined
+  if (canal && !widget) {
+    // Canal sem configurações de widget (criação interrompida): desativa para não deixar um canal órfão na lista
+    await api.v3('DELETE', `/widget/channel/${canal.id}`)
+    log(`widget de exemplo: canal órfão ${canal.id} desativado`)
+  }
+  if (!widget) {
+    widget = await api.v3('POST', '/widget', { name: WIDGET_EXEMPLO, companyName: EMPRESA })
+    canal = { id: widget.channelId }
+  }
+  await api.v3('PATCH', `/widget/settings/${widget.id}`, WIDGET_EXEMPLO_CONFIG)
+  log(`widget de exemplo: "${WIDGET_EXEMPLO}" (canal ${canal.id}), configurado`)
+}
+
+/** Campos personalizados de contato e organizações com contatos vinculados (prints da seção Contatos). */
+const CAMPOS_CONTATO = [
+  {
+    name: 'Tipo de cliente',
+    placeholder: 'tipo_de_cliente',
+    type: 'select',
+    entity: 'contact',
+    description: 'Como o cliente costuma comprar na loja',
+    options: ['Pessoa física', 'Empresa', 'Revenda'].map((value) => ({ value, label: value })),
+  },
+  { name: 'Data de aniversário', placeholder: 'data_de_aniversario', type: 'day', entity: 'contact', description: 'Para mandar parabéns e cupons' },
+]
+const VALORES_CONTATO: Record<string, { tipo_de_cliente?: string; notes?: string }> = {
+  'Ana Souza': { tipo_de_cliente: 'Pessoa física', notes: 'Prefere receber mensagens à tarde.' },
+  'Carlos Pereira': { tipo_de_cliente: 'Empresa' },
+  'Lucas Ferreira': { tipo_de_cliente: 'Revenda' },
+}
+const ORGANIZACOES = [
+  { name: 'Escritório Exemplo', segment: 'Serviços', website: 'https://www.example.com', contatos: [{ nome: 'Carlos Pereira', role: 'Compras' }] },
+  { name: 'Padaria Exemplo', segment: 'Alimentação', contatos: [{ nome: 'Lucas Ferreira', role: 'Gerente' }, { nome: 'Juliana Rocha', role: 'Financeiro' }] },
+]
+
+async function garantirClientes(api: Api, contatoIds: Record<string, string>) {
+  const campos = lista(await api.v0('GET', '/custom-fields'))
+  for (const campo of CAMPOS_CONTATO) {
+    if (!campos.some((c) => c.placeholder === campo.placeholder)) await api.v0('POST', '/custom-fields', campo)
+  }
+  for (const [nome, valores] of Object.entries(VALORES_CONTATO)) {
+    const id = contatoIds[nome]
+    if (!id) continue
+    await api.v3('PATCH', `/contacts/${id}`, {
+      ...(valores.notes ? { notes: valores.notes } : {}),
+      ...(valores.tipo_de_cliente ? { customFields: { tipo_de_cliente: { value: valores.tipo_de_cliente, type: 'select' } } } : {}),
+    })
+  }
+  const existentes = lista(await api.v3('GET', '/organizations?limit=100'))
+  for (const org of ORGANIZACOES) {
+    const { contatos, ...dados } = org
+    let o = existentes.find((x) => x.name === org.name)
+    if (!o) o = await api.v3('POST', '/organizations', dados)
+    const vinculados = lista(await api.v3('GET', `/organizations/${o.id}/contacts`)).map((l: any) => String(l.contactId ?? l.contact?.id))
+    for (const contato of contatos) {
+      const contactId = contatoIds[contato.nome]
+      if (contactId && !vinculados.includes(contactId)) await api.v3('POST', `/organizations/${o.id}/contacts`, { contactId, role: contato.role })
+    }
+  }
+  log(`clientes: ${CAMPOS_CONTATO.length} campos de contato e ${ORGANIZACOES.length} organizações`)
+}
+
+/**
+ * Cenários de exemplo (prints da seção `cenarios`), todos desligados: nenhum roda nem chama endereço externo.
+ * - "Lead do site": Webhook recebido → Buscar contato → Atualizar contato ou Criar contato.
+ * - "Pedidos do dia para o ERP": Agendamento cíclico → Buscar negócio (todos do funil) → Loop → Requisição HTTP
+ *   para example.com (domínio reservado para exemplos).
+ * - "Bot na nova sessão": Nova Sessão (chat do site) → Executar bot.
+ * O endereço do webhook é fictício (example.com): o cenário fica desligado e os prints levam tarja nesse campo.
+ * Cenário que já existe desligado é atualizado (passos e posições), mantendo o gatilho gravado. Se algum cenário de
+ * exemplo estiver ligado, a etapa falha sem mexer em nada. Depende das etapas `funil` e `bot`.
+ */
+function montarCenarios(dados: { canal: string; botId: string; pipelineId: string }) {
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: { x, y }, data: { action } })
+  const aresta = (source: string, sourceHandle: string, target: string) => ({
+    id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
+    type: 'removable_edge', arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
+  })
+  const gatilho = (triggers: any) => ({ id: 'trigger', type: 'trigger', position: { x: 300, y: 300 }, sourcePosition: 'right', data: { label: '', action: { triggers } } })
+  const v = (type: string, jsonPath = '', reference = '') => `{${type}|${jsonPath}|${reference}|}`
+  const montar = (name: string, lastNodeId: number, nos: any[], arestas: any[]) => {
+    const actions = Object.fromEntries(nos.map((n) => [n.id, {
+      id: n.id, type: n.type, data: n.data?.action,
+      targets: Object.fromEntries(arestas.filter((e) => e.source === n.id).map((e) => [e.sourceHandle, e.target])),
+    }]))
+    return { name, active: false, lastNodeId, elements: [...nos, ...arestas], actions }
+  }
+  const idWebhook = 'docsExemplo' + Math.random().toString(36).slice(2, 8)
+  return [
+    montar('Lead do site', 3, [
+      gatilho({ webhook_inbound: { active: true, webhookUrl: `https://example.com/inbound/${idWebhook}`,
+        schema: { body: { nome: 'Cliente Exemplo', telefone: '5511900000001', email: 'cliente@example.com', origem: 'site' }, query: {} } } }),
+      no('1', 'contact:find', 680, 300, { contact: { phone: v('webhook:body', '$.telefone', 'trigger') } }),
+      no('2', 'contact:update', 1060, 180, { contact: { contactReference: '1', name: v('webhook:body', '$.nome', 'trigger'), email: v('webhook:body', '$.email', 'trigger') } }),
+      no('3', 'contact:create', 1060, 480, { contact: { name: v('webhook:body', '$.nome', 'trigger'), phone: v('webhook:body', '$.telefone', 'trigger'), email: v('webhook:body', '$.email', 'trigger') } }),
+    ], [aresta('trigger', 'default', '1'), aresta('1', 'default', '2'), aresta('1', 'not_found', '3')]),
+    montar('Pedidos do dia para o ERP', 3, [
+      gatilho({ 'schedule:cyclic': { active: true, periodicity: 'daily', hour: 18, minute: 0 } }),
+      no('1', 'deal:find', 600, 300, { deal: { findMode: 'all_by_pipeline', pipelineId: dados.pipelineId, limit: 500 } }),
+      no('2', 'loop', 900, 300, { loop: { items: v('deal:json', '$.data', '1'), maxIterations: 500, batchSize: 50 } }),
+      no('3', 'make_request', 1200, 560, { request: { method: 'POST', url: 'https://example.com/api/pedidos', headers: {},
+        body: `{\n\n  "negocio": "${v('loop:item', '$.name', '2')}",\n\n  "valor": ${v('loop:item', '$.value', '2')}\n\n}` } }),
+    ], [aresta('trigger', 'default', '1'), aresta('1', 'default', '2'), aresta('2', 'default', '3')]),
+    montar('Bot na nova sessão', 1, [
+      gatilho({ 'conversation:new_session': { active: true, channelId: [dados.canal], triggerFilterValue: JSON.stringify([dados.canal]) } }),
+      no('1', 'conversation:run-bot', 680, 300, { runBot: { conversationReference: 'trigger', botId: dados.botId } }),
+    ], [aresta('trigger', 'default', '1')]),
+  ]
+}
+
+async function garantirCenarios(api: Api, canal: string) {
+  const bot = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Atendimento inicial')
+  const funil = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  if (!bot || !funil) throw new Error('bot "Atendimento inicial" ou funil "Vendas" não encontrado: rode `--so funil,bot,cenarios`')
+  // GET /workflows devolve todos os cenários do workspace numa resposta só (sem paginação)
+  const existentes = lista(await api.v3('GET', '/workflows'))
+  const nomes = ['Lead do site', 'Pedidos do dia para o ERP', 'Bot na nova sessão']
+  const ligados = existentes.filter((w) => nomes.includes(w.name) && w.active).map((w) => w.name)
+  if (ligados.length) throw new Error(`cenário de exemplo ligado (${ligados.join(', ')}): desligue na tela e rode de novo; nenhum cenário foi alterado`)
+  const criados: string[] = []
+  const atualizados: string[] = []
+  for (const cenario of montarCenarios({ canal, botId: String(bot.id), pipelineId: String(funil.id ?? funil._id) })) {
+    const atual = existentes.find((w) => w.name === cenario.name)
+    if (!atual) {
+      await api.v3('POST', '/workflows', cenario)
+      criados.push(cenario.name)
+      continue
+    }
+    // Desligado (conferido acima e de novo aqui): atualiza passos e posições, mantendo o gatilho gravado (e o endereço do webhook)
+    const completo = await api.v3('GET', `/workflows/${atual.id}`)
+    if (completo?.active) throw new Error(`cenário de exemplo ligado (${cenario.name}): desligue na tela e rode de novo`)
+    const gatilhoAtual = (completo?.elements || []).find((e: any) => e.id === 'trigger')
+    if (gatilhoAtual) {
+      cenario.elements = cenario.elements.map((e: any) => (e.id === 'trigger' ? gatilhoAtual : e))
+      cenario.actions.trigger.data = gatilhoAtual.data?.action
+    }
+    await api.v3('PATCH', `/workflows/${atual.id}`, { elements: cenario.elements, actions: cenario.actions, lastNodeId: cenario.lastNodeId })
+    atualizados.push(cenario.name)
+  }
+  log(`cenários: criados [${criados.join(', ')}], atualizados [${atualizados.join(', ')}] (todos desligados)`)
+}
+
+/**
+ * Dashboard de exemplo "Atendimento da loja" (prints da seção dashboards), criado a partir do modelo
+ * Pipeline Atendimento: um cartão com os indicadores Não atribuído, Em espera, Em atendimento, Pendente e Atribuído.
+ * Sem snapshot os cartões ficam em esqueleto: se o dashboard ainda não tem nenhum, gere um pela tela
+ * (Obter dados atualizados → Atualizar dados) e espere concluir antes de capturar.
+ */
+const DASHBOARD_EXEMPLO = 'Atendimento da loja'
+// Os números do dashboard vêm do snapshot: a descrição não pode prometer "tempo real"
+const DASHBOARD_DESCRICAO = 'Sessões da loja por estado de atendimento.'
+async function garantirDashboard(api: Api) {
+  let existente = lista(await api.v3('GET', '/dashboards')).find((d) => d.name === DASHBOARD_EXEMPLO)
+  const reaproveitado = !!existente
+  if (!existente) {
+    existente = await api.v3('POST', '/dashboards', {
+      preset: 'pipeline_atendimento',
+      name: DASHBOARD_EXEMPLO,
+      description: DASHBOARD_DESCRICAO,
+    })
+  }
+  const id = existente?._id || existente?.id
+  if (existente?.description !== DASHBOARD_DESCRICAO) {
+    await api.v3('PATCH', `/dashboards/${id}`, { description: DASHBOARD_DESCRICAO })
+  }
+  // O preset da API cria 5 itens soltos na grade; pela tela (Adicionar relatório → Pipeline Atendimento) eles
+  // ficam num cartão só, com 5 indicadores. Agrupa do mesmo jeito (mesmos ids: o snapshot existente continua valendo).
+  const cartoes: Record<string, any> = existente?.dashboardCards || {}
+  const ids = Object.keys(cartoes).filter((c) => cartoes[c]?.template === 'pipeline_atendimento')
+  const principal = ids.includes('pipeline_atendimento_unassigned') ? 'pipeline_atendimento_unassigned' : ids[0]
+  const layout: any[] = existente?.layout || []
+  const agrupado = ids.every((c) => cartoes[c].metricContainerId === principal) && layout.length === 1 && layout[0]?.i === principal
+  if (principal && !agrupado) {
+    await api.v3('PATCH', `/dashboards/${id}`, {
+      dashboardCards: Object.fromEntries(Object.entries(cartoes).map(([c, v]) => [c, ids.includes(c) ? { ...v, metricContainerId: principal } : v])),
+      layout: [{ i: principal, x: 0, y: 0, w: 4, h: 2, minW: 4, minH: 2, maxW: 4, maxH: 2 }],
+    })
+    log(`dashboard: ${ids.length} indicadores do Pipeline Atendimento agrupados num cartão`)
+  }
+  const snapshots = lista(await api.v3('GET', `/dashboards/${id}/snapshots`))
+  if (!snapshots.length) {
+    log(`dashboard: "${DASHBOARD_EXEMPLO}" sem snapshot — gere um pela tela (Obter dados atualizados) antes de capturar`)
+  }
+  log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length} snapshot(s)`)
+}
+
+// Seção marketing: cadastra o site fictício "Site da loja" (https://www.example.com) com a chave "Chave do site".
+// Os apps Meta Ads e Tracking são ligados pela tela (Configurações → Integrações → Apps → Habilitar integração → Salvar);
+// o Google Ads fica desligado, para o print da divulgação. Nada é conectado à Meta: o site é fictício e o seed não
+// instala o snippet. Só roda com `--so marketing` (fora da execução padrão).
+async function garantirMarketing(api: Api) {
+  const integracoes = lista(await api.v0('GET', '/integrations'))
+  const desligados = ['meta_ads', 'tracking'].filter((type) => !integracoes.find((i) => i.type === type)?.isEnabled)
+  if (desligados.length) log(`marketing: ligue pela tela os apps ${desligados.join(', ')} antes de capturar`)
+  if (desligados.includes('tracking')) return
+  const origem = 'https://www.example.com'
+  const visao = await api.v3('GET', '/tracking/overview')
+  if ((visao?.domains || []).some((d: any) => d.origin === origem)) return log('marketing: site de Tracking já existe')
+  const chaves = lista(await api.v3('GET', '/tracking/site-keys'))
+  const chave = chaves.find((k: any) => k.name === 'Chave do site' && k.isActive && k.siteKey)
+  const siteKey = chave?.siteKey || (await api.v3('POST', '/tracking/site-keys', { name: 'Chave do site' })).plainToken
+  await api.v3('POST', '/tracking/domains', { name: 'Site da loja', origin: origem, siteKey })
+  log('marketing: site "Site da loja" criado')
+}
+
+/**
+ * Tarefas de exemplo (seção `tarefas-e-metas`): cinco tarefas com responsáveis fictícios, vínculos com negócios
+ * e contatos do seed, prioridades e prazos relativos a hoje, e uma tarefa com subtarefas. Nenhuma é do tipo
+ * "Iniciar bot". Depende de `funil`, `membros` e `crm` (responsáveis). Cria as que faltam (busca pelo nome) e, a cada
+ * execução, reaplica os prazos relativos a hoje, para o print não envelhecer.
+ */
+async function garantirTarefas(api: Api, contatoIds: Record<string, string>) {
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  const opId = (nome: string) => {
+    const membro = MEMBROS.find((m) => m.name === nome)
+    const op = operadores.find((o) => o.email === membro?.email)
+    if (!op) throw new Error(`membro "${nome}" não encontrado: rode antes a etapa "membros"`)
+    return Number(op.operatorId || op.id)
+  }
+  const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  const negocios = vendas ? lista(await api.v3('GET', `/deals?pipelineId=${String(vendas.id || vendas._id)}&limit=100`)) : []
+  const negocio = (nome: string) => {
+    const d = negocios.find((x) => x.name === nome)
+    return d ? { id: String(d.id || d._id), name: d.name, pipelineId: String(vendas.id || vendas._id) } : undefined
+  }
+  const contato = (nome: string) => (contatoIds[nome] ? { id: Number(contatoIds[nome]), name: nome } : undefined)
+  // Prazo como a tela manda: o dia (meio-dia) e o horário em separado
+  const prazo = (dias: number, hora: string) => {
+    const d = new Date()
+    d.setDate(d.getDate() + dias)
+    d.setHours(12, 0, 0, 0)
+    return { fromDate: d.toISOString(), fromTime: hora, minutesDuration: 30, notifyMinutesBefore: 15, executionDateType: 'hour' }
+  }
+  const TAREFAS = [
+    { name: 'Ligar para confirmar o endereço de entrega', type: 'call', responsavel: 'Bruno Carvalho', priority: 'high', ...prazo(1, '10:00'),
+      description: 'Confirmar o endereço e o melhor horário para a entrega do kit.', deal: negocio('Kit presente — Ana Souza'), contact: contato('Ana Souza') },
+    { name: 'Enviar proposta de kits corporativos', type: 'mail', responsavel: 'Carla Mendes', priority: 'urgent', ...prazo(-1, '17:00'),
+      description: 'Proposta com 3 opções de kit e prazo de produção.', deal: negocio('Kits corporativos — Carlos Pereira'), contact: contato('Carlos Pereira') },
+    { name: 'Separar pedido de reposição', type: 'task', responsavel: 'Carla Mendes', priority: 'medium', inProgress: true, ...prazo(2, '09:00'),
+      description: 'Conferir o estoque e separar os itens do pedido.', deal: negocio('Reposição de estoque — Lucas Ferreira'), contact: contato('Lucas Ferreira'),
+      subtarefas: [{ name: 'Conferir o estoque de café', done: true }, { name: 'Embalar os itens' }, { name: 'Emitir a nota' }] },
+    { name: 'Reunião de alinhamento da equipe', type: 'meeting', responsavel: 'Diego Santos', priority: 'low', ...prazo(7, '14:00') },
+    { name: 'Retornar mensagem da Mariana', type: 'call', responsavel: 'Bruno Carvalho', ...prazo(3, '11:30'), contact: contato('Mariana Lima') },
+  ]
+  let criadas = 0
+  for (const { responsavel, subtarefas, ...t } of TAREFAS as any[]) {
+    const achadas = lista(await api.v3('GET', `/tasks?name=${encodeURIComponent(t.name)}&status=all&limit=20`))
+    let tarefa = achadas.find((x) => x.name === t.name && !x.parentId)
+    if (!tarefa) {
+      const corpo = Object.fromEntries(Object.entries({ ...t, operatorId: opId(responsavel) }).filter(([, v]) => v !== undefined))
+      tarefa = await api.v3('POST', '/tasks', corpo)
+      criadas++
+    } else {
+      // Prazo relativo a hoje: o PATCH recalcula o prazo a partir do dia e do horário
+      const { fromDate, fromTime, minutesDuration, executionDateType } = t
+      await api.v3('PATCH', `/tasks/${String(tarefa.id || tarefa._id)}`, { fromDate, fromTime, minutesDuration, executionDateType })
+    }
+    if (subtarefas?.length) {
+      const id = String(tarefa.id || tarefa._id)
+      const filhas = lista(await api.v3('GET', `/tasks?parentId=${id}&limit=100&status=all`))
+      for (const sub of subtarefas) {
+        if (filhas.some((x) => x.name === sub.name)) continue
+        await api.v3('POST', '/tasks', { name: sub.name, type: 'task', parentId: id, operatorId: opId(responsavel), done: !!sub.done })
+      }
+    }
+  }
+  log(`tarefas: ${criadas} criadas, prazos reaplicados (${TAREFAS.length} no total)`)
+}
+
+/**
+ * Meta de exemplo (seção `tarefas-e-metas`): "Vendas do mês", valor do negócio, mês atual, com os três membros
+ * fictícios como participantes (o dono real da conta fica fora do ranking) e um milestone global. Conta os
+ * negócios ganhos do seed. Depende de `membros` e `crm` (o negócio ganho). Cria se não existir; se existir, reaplica
+ * o período (mês atual) e os participantes. Garante uma venda fictícia dentro do período: se o negócio ganho do seed
+ * tiver data de ganho fora do mês, marca de novo como ganho (a API grava a data de agora).
+ */
+async function garantirMetas(api: Api) {
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  const participantes = MEMBROS.map((m) => {
+    const op = operadores.find((o) => o.email === m.email)
+    if (!op) throw new Error(`membro "${m.name}" não encontrado: rode antes a etapa "membros"`)
+    return String(op.operatorId || op.id)
+  })
+  const agora = new Date()
+  const inicio = new Date(agora.getFullYear(), agora.getMonth(), 1, 0, 0, 0, 0)
+  const fim = new Date(agora.getFullYear(), agora.getMonth() + 1, 0, 23, 59, 59, 999)
+
+  // Venda fictícia dentro do período
+  const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  if (!vendas) throw new Error(`funil "${PIPELINE.name}" não encontrado: rode antes as etapas "funil" e "crm"`)
+  const ganho = lista(await api.v3('GET', `/deals?pipelineId=${String(vendas.id || vendas._id)}&limit=100`)).find(
+    (d) => d.name === 'Presente de aniversário — Fernanda Costa',
+  )
+  if (!ganho) throw new Error('negócio "Presente de aniversário — Fernanda Costa" não encontrado: rode antes a etapa "crm"')
+  const dataGanho = ganho.wonLostDate ? new Date(ganho.wonLostDate) : undefined
+  if (ganho.status !== 'won' || !dataGanho || dataGanho < inicio || dataGanho > fim) {
+    await api.v3('PATCH', `/deals/${String(ganho.id || ganho._id)}`, { status: 'won' })
+  }
+
+  const meta = lista(await api.v3('GET', `/goals?name=${encodeURIComponent('Vendas do mês')}&limit=20`)).find((m) => m.name === 'Vendas do mês')
+  if (meta) {
+    await api.v3('PATCH', `/goals/${String(meta.id || meta._id)}`, {
+      from: inicio.toISOString(),
+      to: fim.toISOString(),
+      selectBy: 'operator',
+      operatorIds: participantes,
+      groupIds: [],
+    })
+    return log('metas: "Vendas do mês" já existe (período e participantes reaplicados)')
+  }
+  await api.v3('POST', '/goals', {
+    name: 'Vendas do mês',
+    description: 'Meta de vendas da loja no mês. Quem passar de R$ 500 em vendas ganha um vale-presente.',
+    type: 'deal-value',
+    targetValue: 1000,
+    from: inicio.toISOString(),
+    to: fim.toISOString(),
+    selectBy: 'operator',
+    operatorIds: participantes,
+    groupIds: [],
+    productIds: [],
+    milestones: [{ name: 'Metade da meta', targetValue: 500, type: 'global' }],
+  })
+  log('metas: "Vendas do mês" criada')
+}
+
+// As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
+// (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
+const falhas: Record<string, string> = {}
+const etapas: [string, () => Promise<unknown>][] = [
+  ['funil', () => garantirFunil(api, contatoIds, tagIds)],
+  ['membros', () => garantirMembros(api)],
+  ['respostas rápidas', () => garantirRespostasRapidas(api)],
+  ['agente', () => garantirAgente(api)],
+  ['bot', () => garantirBot(api, canal)],
+  ['bot de integração', () => garantirBotIntegracao(api)],
+  ['organização do atendimento', () => garantirOrganizacao(api)],
+  ['automacoes', () => garantirAutomacoes(api)],
+  ['widget de exemplo', () => garantirWidgetExemplo(api)],
+  ['clientes', () => garantirClientes(api, contatoIds)],
+  ['crm', () => garantirCrm(api, contatoIds)],
+  ['salas', () => garantirSalas(api)],
+  ['cenarios', () => garantirCenarios(api, canal)],
+  ['dashboard', () => garantirDashboard(api)],
+  ['marketing', () => garantirMarketing(api)],
+  ['tarefas', () => garantirTarefas(api, contatoIds)],
+  ['metas', () => garantirMetas(api)],
+]
+// `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
+// `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.
+// `cenarios` depende de `funil` (o funil "Vendas") e de `bot` (o bot "Atendimento inicial"): rode `--so funil,bot,cenarios`.
+// `tarefas` e `metas` ficam fora da execução padrão (só rodam com `--so`) porque mudam prints de outras seções
+// (`contatos-perfil`, `funis-quadro` e o cartão Tarefas do dashboard). Dependem de `funil`, `membros` e `crm`
+// (`metas` também remarca como ganho o negócio "Presente de aniversário"): rode `--so funil,membros,crm,tarefas,metas`.
+const nomesEtapas = etapas.map(([nome]) => nome)
+/** Etapas que só rodam quando pedidas em `--so` (ficam fora da execução padrão). */
+const SO_SOB_PEDIDO = ['marketing', 'tarefas', 'metas']
+const soArg = process.argv.indexOf('--so')
+let so: string[] | undefined
+if (soArg > -1) {
+  const valor = process.argv[soArg + 1]
+  if (!valor || valor.startsWith('--')) throw new Error(`--so precisa da lista de etapas, separadas por vírgula: ${nomesEtapas.join(', ')}`)
+  const pedidas = valor.split(',').map((nome) => nome.trim())
+  const desconhecidas = pedidas.filter((nome) => !nomesEtapas.includes(nome))
+  if (desconhecidas.length) throw new Error(`--so: etapa desconhecida (${desconhecidas.join(', ')}). Use: ${nomesEtapas.join(', ')}`)
+  so = pedidas
 }
 
 const workspace = await garantirWorkspace()
@@ -348,15 +1131,8 @@ const tagIds = await garantirTags(api)
 await garantirConversas(api, canal, tagIds)
 const contatoIds = await garantirContatos(api)
 
-// As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
-const falhas: Record<string, string> = {}
-const etapas: [string, () => Promise<unknown>][] = [
-  ['funil', () => garantirFunil(api, contatoIds, tagIds)],
-  ['membros', () => garantirMembros(api)],
-  ['respostas rápidas', () => garantirRespostasRapidas(api)],
-  ['agente', () => garantirAgente(api)],
-]
 for (const [nome, etapa] of etapas) {
+  if (so ? !so.includes(nome) : SO_SOB_PEDIDO.includes(nome)) continue
   try {
     await etapa()
   } catch (e) {

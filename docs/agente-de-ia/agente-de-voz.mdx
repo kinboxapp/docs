@@ -1,0 +1,95 @@
+---
+title: Agente de voz para as ligações do WhatsApp (Beta)
+description: Como criar um agente de voz que atende as ligações do WhatsApp oficial na Kinbox, o que é preciso para usar e como testar por voz.
+keywords: [agente de voz, ia que atende ligação, ligação whatsapp, atender ligações com ia, whatsapp oficial ligações, testar por voz, coexistência, beta]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/agents/voice/VoiceConnectionsBlock.tsx
+  - web:src/pages/agents/voice/AgentVoiceTestCall.tsx
+  - web:src/pages/agents/voice/useVoiceCallingSettings.ts
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingAiSettings.tsx
+  - api:src/modules/whatsapp-calling/whatsapp-call-ai.service.ts
+codigo:
+  - web:src/pages/agents/voice/**
+  - web:src/lib/agentVoice.ts
+  - web:src/lib/whatsappCall.ts
+  - web:src/components/whatsappCall/VoicePlanRequiredModal.tsx
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingAiSettings.tsx
+  - api:src/modules/whatsapp-calling/**
+verificado_em: 2026-11-26
+---
+
+Configure um agente de voz para atender, em tempo real, as ligações que os contatos fazem pelo WhatsApp para o seu número do [WhatsApp oficial](/docs/canais/whatsapp/visao-geral). Para ativar as ligações no canal, gravar e entender o plano, veja [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp).
+
+<Note>
+O agente de voz é um recurso em teste (**Beta**) e pode não aparecer no seu workspace. Quem pode: a permissão **Agentes de IA** permite criar e editar o agente de voz. Para conectar, trocar ou desconectar o WhatsApp oficial do agente (inclusive pelo cartão do editor) e ajustar a aba **Ligações** do canal, o membro também precisa de **Gerenciar Canais**. O proprietário do workspace tem as duas.
+</Note>
+
+## O que o agente de voz faz
+
+O agente de voz usa apenas **Instruções**, **Conhecimento**, **Idioma** e os canais de WhatsApp oficial conectados — ele não tem fluxograma, etapas nem ferramentas.
+
+Durante uma ligação recebida, ele conversa usando as instruções e a saudação do canal, consulta o [conhecimento](/docs/agente-de-ia/conhecimento) cadastrado, pode chamar um membro da equipe quando o contato pedir para falar com uma pessoa e pode encerrar a ligação. Um agente de texto não pode atender ligações.
+
+## O que é preciso
+
+| Requisito | Detalhe |
+| --- | --- |
+| Recurso em teste liberado | Sem a liberação no workspace, a opção **Agente de voz** e a aba **Ligações** (**Beta**) não aparecem. |
+| Canal de **WhatsApp oficial** sem coexistência | Apenas canais oficiais recebem ligações. Números em [coexistência](/docs/canais/whatsapp-api-oficial-coexistente) com o app WhatsApp Business não podem ser escolhidos porque a Meta não oferece ligações nesse modo. |
+| Plano de **Ligações WhatsApp** | O workspace (que a tela chama de **ambiente**) precisa ter um plano de **Ligações WhatsApp** contratado (veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)). |
+| Saldo ou franquia | É preciso ter franquia de minutos de IA no plano ou [saldo na carteira](/docs/conceitos/saldo-e-creditos). |
+
+## Passo a passo
+
+<Steps>
+  <Step title="Crie o agente de voz">
+    Vá em **Configurações** → **Automação** → **Agentes de IA** e clique em **Novo agente de IA**. Em **Que tipo de agente você quer criar?**, escolha **Agente de voz** (o tipo não pode ser trocado depois), preencha **Nome do agente** e clique em **Criar Agente**.
+
+    O agente nasce com um texto inicial de exemplo nas instruções para você adaptar à sua empresa.
+  </Step>
+  <Step title="Ajuste instruções, conhecimento e idioma">
+    Edite o cartão **Instruções** e adicione fontes no cartão **Conhecimento** (veja [Conhecimento](/docs/agente-de-ia/conhecimento)).
+
+    Clique em **Abrir configuração** (engrenagem) e abra o bloco **Idioma** para escolher entre **Detectar automaticamente** (responde no idioma falado pelo contato) ou **Sempre falar em um idioma** (**Idioma da IA**: Português (Brasil), Inglês, Espanhol, Francês, Italiano ou Alemão).
+  </Step>
+  <Step title="Conecte o canal de WhatsApp oficial">
+    No cartão **Canais conectados**, clique para conectar um canal (se já houver um canal conectado e você quiser adicionar outro, clique no selo do topo do painel). Na janela **Conectar WhatsApp Oficial**, selecione o canal desejado.
+
+    - Se o número já estiver ligado a outro agente de voz, confirme em **Trocar** na janela **Trocar o agente que atende**.
+    - Se as ligações estiverem desligadas naquele número, clique em **Ativar ligações e conectar** na janela **Ativar ligações neste WhatsApp?**.
+  </Step>
+  <Step title="Ajuste as opções na aba Ligações do canal">
+    Clique em **Configurar** na linha do canal (ou vá em **Configurações** → **Chat** → **Canais**, abra o canal oficial e acesse a aba **Ligações** → cartão **IA atende as ligações**):
+
+    - **Agente:** escolha o agente de voz.
+    - **Quando a IA atende:**
+      - **Quando a conversa não tem atendente disponível** (padrão): se a conversa tem um responsável que pode atender, a ligação toca apenas para ele e o agente de voz não atende; caso contrário, o agente atende na hora.
+      - **Quando ninguém atende a tempo:** a ligação toca para a equipe e o agente atende se ninguém atender no prazo de **Esperar antes da IA**; se não houver ninguém para tocar, o agente atende na hora.
+      - **Sempre:** o agente atende na hora.
+    - **Voz:** escolha a voz do agente (clique no ícone de áudio para ouvir cada opção).
+    - **Boas-vindas:** escreva a frase inicial de até 500 caracteres que o agente fala ao atender.
+  </Step>
+</Steps>
+
+Para desligar o agente de um número, remova o canal no cartão **Canais conectados** e confirme em **Desconectar**. As ligações do número continuam tocando para a equipe.
+
+## Testar por voz
+
+No topo ou no centro do chat de teste do agente de voz, clique em **Testar por voz** para abrir a **Simulação de ligação**. Permita o acesso ao microfone no navegador e use fones de ouvido para evitar que o agente ouça a própria voz.
+
+- O teste dura até **10 minutos**, não cria ligação real, não cobra e não chama a equipe.
+- Ele usa as instruções, o idioma e o conhecimento do agente, mas toca sempre com a voz padrão e não fala a frase de **Boas-vindas** configurada no canal.
+- Durante a chamada de teste, use **Silenciar microfone** ou **Desligar**. Ao final, a tela exibe a duração e o **Resumo da IA**, com as opções **Voltar ao chat** e **Ligar de novo**.
+
+Você também pode usar o chat de teste por texto no painel da esquerda — veja [Testar o agente antes de ativar](/docs/agente-de-ia/testar).
+
+## O que aparece na conversa
+
+Enquanto o agente de voz está na ligação, a conversa na **Caixa de entrada** mostra o painel **Ligação do WhatsApp com IA**, onde um membro pode **Ouvir**, **Assumir** a chamada ou usar **Enviar para a IA** para orientar o agente sem o contato ouvir. Se o contato pedir uma pessoa, o agente chama a equipe. No fim, o registro da ligação mostra qual agente atendeu, o resumo e a transcrição, quando disponível.
+
+## Quanto custa
+
+Os minutos em que o agente de voz fica na ligação gastam [saldo da carteira](/docs/conceitos/saldo-e-creditos) ou a franquia de minutos de IA do plano de **Ligações WhatsApp**, quando houver. A franquia cobre só a voz padrão; fora dela, a ligação usa o saldo da carteira. Se os dois acabarem durante a ligação, a chamada é encerrada depois de um aviso.
+

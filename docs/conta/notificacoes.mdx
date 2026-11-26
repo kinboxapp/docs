@@ -1,0 +1,95 @@
+---
+title: Receber notificações no navegador e no celular
+description: Como ligar o push no navegador, escolher os avisos de mensagem, menção e atribuição e os sons, e o que vale também para o app da Kinbox no celular.
+keywords: [notificações, notificação, push, aviso, alerta, som, barulho, notificação no navegador, notificação desktop, chrome, não recebo notificação, celular, app, menção, mensagem direta]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/profile/Notifications.tsx
+  - web:src/sw.ts
+  - web:src/hooks/usePushNotification.ts
+  - web:src/hooks/useSocket.tsx
+  - api:src/modules/push-notifications/push-notifications.service.ts
+  - api:src/modules/push-notifications/mobile-push.policy.ts
+codigo:
+  - web:src/pages/settings/profile/Notifications.tsx
+  - web:src/pages/settings/profile/NotificationPushSwitch.tsx
+  - web:src/sw.ts
+  - web:src/hooks/usePushNotification.ts
+  - web:src/hooks/useSocket.tsx
+  - web:src/pages/inbox/index.tsx
+  - api:src/modules/push-notifications/**
+  - api:src/modules/userInfo/**
+  - mobile:src/app/notifications.tsx
+verificado_em: 2026-11-26
+---
+
+A Kinbox tem dois tipos de aviso: **Push** (notificações do sistema; no navegador, quando a Kinbox não está visível na tela) e **Som** (alertas sonoros que tocam só com a Kinbox aberta). As opções de **Push** valem só para o workspace aberto, e os três tipos de aviso são os mesmos do app para celular. Os **Sons** valem para a conta toda, em todos os workspaces.
+
+<Note>
+  Quem pode: todo membro pode configurar as próprias notificações em **Configurações** → **Notificações**.
+</Note>
+
+## Ligar o push no navegador
+
+<Steps>
+  <Step title="Abra a tela de Notificações">
+    No menu lateral, vá em **Configurações** → **Notificações**.
+  </Step>
+  <Step title="Ative o push no navegador">
+    No cartão **Push**, ligue **Habilitar notificações de desktop**.
+
+    <Frame caption="Opção Habilitar notificações de desktop no cartão Push">
+      <img src="/images/ajuda/conta/notificacoes-desktop.webp" alt="Cartão Push com o interruptor Habilitar notificações de desktop desligado" />
+    </Frame>
+  </Step>
+  <Step title="Escolha os tipos de aviso">
+    Ligue os tipos de notificação que você quer receber (descritos na tabela abaixo).
+  </Step>
+  <Step title="Salve as alterações">
+    Clique em **Salvar mudanças**. A Kinbox confirma com "Suas notificações foram atualizadas."
+  </Step>
+  <Step title="Confira a permissão do navegador">
+    O pedido de permissão não aparece ao salvar: ele aparece quando você abre a Kinbox ou a **Caixa de entrada**. Se você ainda não permitiu, permita. Se aparecer o aviso de que a permissão foi negada, libere as notificações para a Kinbox nas configurações do navegador e recarregue a página da Kinbox.
+  </Step>
+</Steps>
+
+Tipos de aviso disponíveis no cartão **Push**:
+
+| Opção | Texto na tela | Quem recebe |
+| --- | --- | --- |
+| **Mensagem** | "Quando receber nova mensagem atribuída a você" | Só o responsável pela conversa |
+| **Mensagem de time** | "Quando for mencionado em uma sala ou receber uma mensagem direta." | Quem foi mencionado ou recebeu a mensagem direta |
+| **Atribuído** | "Quando uma conversa for atribuída a você." | O novo responsável pela conversa |
+
+## Quando o push aparece
+
+- O push do navegador só aparece quando nenhuma aba da Kinbox está aberta e visível naquele navegador (é o que a tela chama de "quando não estiver online"). Com a Kinbox visível na tela, valem os sons.
+- **Mensagem** e **Atribuído** avisam apenas conversas sob sua responsabilidade: conversa sem responsável não gera push. **Mensagem de time** avisa quando mencionam você em uma sala ou mandam uma mensagem direta (veja [Conversar nas salas: mensagens diretas, menções e threads](/docs/salas/usar-salas)).
+- O push não depende da sua disponibilidade: ele chega mesmo com você **Indisponível**.
+
+## Sons
+
+Os sons tocam só com a Kinbox aberta e numa aba só (a última que você abriu). Valem para a conta toda, em todos os workspaces. Ative ou desative no cartão **Som** e clique em **Salvar mudanças**:
+
+- **Quando receber nova mensagem:** toca quando o contato manda mensagem na conversa aberta ou numa conversa que você pode ver e que está na visão ou no filtro selecionado da [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox). Não importa se a aba está em foco.
+- **Quando receber nova mensagem atribuída a mim:** com a opção anterior desligada, toca só quando a mensagem é numa conversa em que você é o responsável.
+- **Quando receber nova conversa:** toca quando entra uma conversa nova na visão ou no filtro selecionado, e também quando começa uma sessão nova numa conversa que já existia.
+- **Quando receber mensagem de time:** toca para mensagem de sala, menção, lembrete de tarefa e aviso de template.
+- **Quando ganhar uma negociação:** toca som de caixa registradora e aplausos ao marcar uma negociação como ganha.
+
+Os sons de nova mensagem e de nova conversa só tocam com você **Disponível**, inclusive quando a Kinbox deixa você indisponível sozinha por inatividade ou pelo horário do papel (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)).
+
+Em workspaces com recursos em teste, também podem aparecer opções de som para ligações do WhatsApp; essas duas valem só para o workspace aberto.
+
+## No celular
+
+No celular, as notificações chegam pelo app da Kinbox e são ligadas no próprio app, em **Você** → **Notificações**, sem depender de **Habilitar notificações de desktop**. Os três tipos de aviso (**Mensagem**, **Mensagem de time** e **Atribuído**) são compartilhados com o app, onde aparecem como **Novas mensagens**, **Mensagens diretas e menções** e **Atribuídas a mim**: o que você muda aqui muda lá, e vice-versa. Para ligar o app e escolher quando ele avisa, veja [Notificações no app](/docs/app/notificacoes-no-app).
+
+## Problemas comuns
+
+- **Não chega push no navegador.** Confira se **Habilitar notificações de desktop** e o tipo desejado estão ligados (e salvos em **Salvar mudanças**), se o navegador permite notificações para a Kinbox (depois de liberar, recarregue a página), se a Kinbox não está aberta e visível na tela e, para **Mensagem** e **Atribuído**, se a conversa está atribuída a você.
+- **Não toca som.** Confira se o interruptor está ligado no cartão **Som**, se a Kinbox está aberta, se você está **Disponível** para nova mensagem e nova conversa (a Kinbox também deixa você indisponível sozinha por inatividade ou pelo horário do papel) e se a conversa está aberta ou na visão ou filtro selecionado. Com várias abas abertas, o som toca só em uma delas.
+- **Recebo avisos de um workspace e de outro não.** As opções de **Push** valem só para o workspace aberto. Troque para o outro workspace e ligue o push nele também.
+
+Se o problema for não receber novas conversas pela atribuição automática (e não falta de avisos), veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade).

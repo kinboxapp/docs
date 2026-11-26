@@ -1,0 +1,81 @@
+---
+title: "Para desenvolvedores: API, plugins, MCP e links"
+description: O que a Kinbox oferece para integrar seus sistemas (API pública, MCP, plugins, canal customizado, webhook do bot e links) e qual credencial cada um usa.
+keywords: [api, integração, desenvolvedor, token, webhook, plugin, mcp, canal customizado, link, redirecionador, zapier, n8n, integrar meu sistema]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/api/index.tsx
+  - web:src/pages/settings/mcp/index.tsx
+  - web:src/pages/settings/plugins/index.tsx
+  - api:src/modules/api-tokens/api-tokens.service.ts
+codigo:
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/api/**
+  - web:src/pages/settings/mcp/**
+  - web:src/pages/settings/plugins/**
+  - web:src/pages/settings/channels/custom/**
+  - web:src/routes/inbox.routes.ts
+verificado_em: 2026-11-26
+---
+
+A Kinbox oferece recursos para integrar o seu sistema, conectar assistentes de IA, abrir telas próprias na conversa e montar links diretos para o atendimento.
+
+## Recursos disponíveis
+
+### API pública
+
+Leia e altere dados do seu workspace a partir de outro sistema, como contatos, conversas, mensagens, negociações, campanhas, membros e papéis (lista completa na [referência da API](/api-reference/authentication)). Crie o token em **Configurações** → **Integrações** → **API Tokens** (exige a permissão **Integrações** ou ser proprietário do workspace).
+
+Veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api).
+
+### MCP
+
+Ligue o Claude, o ChatGPT, o Codex, o Cursor ou outro assistente de IA de fora ao seu workspace para consultar dados, organizar o atendimento e enviar mensagens. A tela fica em **Configurações** → **Integrações** → **MCP** (exige a permissão **Integrações** ou ser proprietário). A IA age em nome de quem autorizou, com o papel dessa pessoa.
+
+Veja [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp).
+
+### Plugins
+
+Abra uma página sua dentro da conversa, no painel **Detalhes**, para mostrar dados do seu sistema ou executar ações no atendimento. O cadastro fica em **Configurações** → **Integrações** → **Plugins** (exige a permissão **Integrações** ou ser proprietário).
+
+Veja [Criar um plugin para o painel da conversa](/docs/desenvolvedor/criando-plugin-integracao). Para integrações prontas com outros sistemas (como CRMs e ERPs), use **Configurações** → **Integrações** → **Apps** (veja [Apps e integrações: instalar e usar](/docs/integracoes/visao-geral)).
+
+### Canal customizado
+
+Conecte um chat próprio (app, site ou sistema) à [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) pela API, enviando mensagens dos clientes e recebendo as respostas dos membros. O cadastro fica em **Configurações** → **Chat** → **Canais** → **Novo canal** → **Customizado** (exige a permissão **Gerenciar Canais** ou ser proprietário).
+
+Veja [Integrar seu sistema como canal customizado (API)](/docs/desenvolvedor/criando-canal-customizado).
+
+### Bot integrado ao seu sistema
+
+- **Webhook para continuar o bot:** pausa o fluxo no bloco **Esperar um tempo** (**Recebimento de webhook**, com **Tempo máximo de espera** desligado) até o seu sistema enviar uma chamada para retomar a execução (editar o bot exige a permissão **Bot** ou ser proprietário). Veja [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot).
+- **Chamar endpoint e Executar código:** permite que o bot consulte ou envie dados para o seu sistema no meio da conversa, pelo bloco **Integração** (exige a permissão **Bot** ou ser proprietário). Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot) e [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo).
+
+### Cenários
+
+Monte fluxos fora de uma conversa para receber dados por webhook, chamar APIs por requisições HTTP ou executar ações em horário fixo. Fica em **Configurações** → **Automação** → **Cenários** (exige a permissão **Cenários** ou ser proprietário).
+
+Veja [Cenários: visão geral](/docs/cenarios/visao-geral), [Receber dados de outro sistema por webhook](/docs/cenarios/integrar-via-webhook-com-cenarios) e [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia).
+
+### Links diretos e rastreio de campanhas
+
+- **Conversa em um clique:** link `/send?phones=` que abre a conversa de um contato pelo telefone (ou a janela de nova mensagem), para qualquer membro logado. Veja [Abrir uma conversa por link (conversa em um clique)](/docs/usando-o-kinbox/conversa-em-um-clique).
+- **Busca por campo personalizado no link:** link `/search?cfPlaceHolder=` (para membros logados); hoje ele abre a busca sem aplicar o filtro pelo campo. Veja [Abrir uma conversa por link (conversa em um clique)](/docs/usando-o-kinbox/conversa-em-um-clique).
+- **Redirecionador de WhatsApp:** link para o botão de WhatsApp do seu site (ou opção do Widget) que registra de qual campanha veio o cliente. Com o código de rastreio, funciona também quando ele abre o WhatsApp no celular. Veja [Redirecionador de WhatsApp](/docs/desenvolvedor/redirecionador-via-whatsapp).
+
+Para detalhes sobre o que cada permissão libera, consulte a [Referência de permissões](/docs/administracao/referencia-de-permissoes).
+
+## Qual credencial usar
+
+| Credencial | Onde conseguir | Onde usar |
+| --- | --- | --- |
+| Token de API (`kb_live_...`) | **Configurações** → **Integrações** → **API Tokens** (permissão **Integrações** ou proprietário) | API pública e MCP em aplicativos sem OAuth (aba **Outros**) |
+| **Token v0** | **Configurações** → **Integrações** → **API Tokens** → **Mostrar tokens legados** (permissão **Integrações** ou proprietário) | Canal customizado e webhook para continuar o bot |
+| Conexão OAuth (sem token para copiar) | Tela **Autorizar acesso**, ao conectar o aplicativo na tela **MCP** | MCP em aplicativos com OAuth (Claude, ChatGPT, Codex e Cursor) |
+
+## O que não existe
+
+- **Integração nativa com Zapier, Make, n8n ou Pluga:** a Kinbox não tem aplicativo pronto nessas ferramentas; faça requisições HTTP para a API pública usando um [token de API](/docs/desenvolvedor/tokens-de-api) ou use **Cenários** para receber webhooks e enviar chamadas HTTP ([Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia)).
+- **Lista de IPs fixos de saída:** a Kinbox não publica uma lista de IPs para liberar no firewall; proteja o seu endereço exigindo um cabeçalho de autenticação próprio nas chamadas feitas pelo bot ([Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)) ou por **Cenários**.

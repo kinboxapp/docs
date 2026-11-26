@@ -1,0 +1,88 @@
+---
+title: O agente não responde ou responde errado
+description: Causas mais comuns de um agente de IA que não responde, para de responder ou responde errado, e como resolver cada uma.
+keywords: [agente não responde, agente parou de responder, ia não responde, agente responde errado, agente inventa, saldo insuficiente, sem canais, pausado, agente em uso, não consigo excluir agente, conhecimento com erro]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/agents/components/AgentStatusTag.tsx
+  - web:src/pages/agents/components/connections/ConnectionPicker.tsx
+  - web:src/pages/agents/useRemoveAgent.tsx
+  - api:src/modules/agents/agent.runner.ts
+  - api-v0:server/modules/chat/chatBotHandler.js
+codigo:
+  - web:src/pages/agents/components/AgentStatusTag.tsx
+  - web:src/pages/agents/components/connections/**
+  - web:src/pages/agents/useRemoveAgent.tsx
+  - api:src/modules/agents/agent.runner.ts
+  - api:src/modules/agents/agents.service.ts
+  - api:src/modules/agents/agent-bot.service.ts
+  - api-v0:server/modules/chat/chatBotHandler.js
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+O agente de IA não responde ninguém nos canais, parou de responder no meio da conversa, não responde em grupos, demora para responder, inventa informações, não deixa excluir ou não exibe o fluxograma.
+
+## O agente não responde
+
+<AccordionGroup>
+  <Accordion title="O agente está sem canal conectado">
+    Na lista de **Agentes de IA**, o status aparece como **Sem canais** e o cartão **Canais conectados** está vazio. Conecte pelo menos um canal seguindo [Ligar o agente aos canais](/docs/agente-de-ia/conectar-canais).
+  </Accordion>
+  <Accordion title="O agente está pausado">
+    Na lista, o status aparece como **Pausado** e o interruptor no topo do editor está desligado. Ligue o interruptor **Atendendo nos canais conectados**.
+  </Accordion>
+  <Accordion title="O saldo da carteira está insuficiente">
+    Com o [saldo da carteira](/docs/conceitos/saldo-e-creditos) em R$ 1,00 ou menos, o agente para de responder (no chat de teste aparece o aviso **Saldo Insuficiente**). Confira em **Configurações** → **Assinatura**, na seção **Carteira** (precisa da permissão **Assinatura**; sem ela, peça ao proprietário do workspace), e faça uma recarga (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)). Para ser avisado antes do saldo acabar, [configure o alerta de saldo](/docs/assinatura/alerta-de-saldo). Em agente **Gerenciado pelo parceiro**, os gastos podem sair da carteira do parceiro: nesse caso, fale com o parceiro.
+  </Accordion>
+  <Accordion title="O canal passou para outro agente">
+    Cada canal tem um único agente de texto para as mensagens (no WhatsApp oficial com ligações, um agente de voz à parte atende as ligações). Se o canal sumiu do cartão **Canais conectados**, abra **Conectar canal** para ver se ele aparece em uso por outro agente e escolha qual agente deve ficar com o canal.
+  </Accordion>
+  <Accordion title="Outro bot está antes na lista de bots">
+    No seletor **Conectar canal**, o canal pode mostrar que também é atendido por outro bot. Na lista de **Bot**, se outro bot ativo para o mesmo canal estiver acima do bot com a etiqueta **Agente de IA**, esse outro bot atende primeiro. Mude a ordem na lista de bots ou desative o outro bot (veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
+  </Accordion>
+  <Accordion title="A sessão já estava aberta">
+    O agente entra apenas quando o contato abre uma [sessão nova](/docs/conceitos/conversas-e-sessoes). Se a conversa já estava aberta antes de conectar o agente — ou se o contato apenas continuou uma sessão em andamento —, a mensagem de início do agente não aparece. Ele entrará na próxima sessão aberta pelo contato.
+  </Accordion>
+  <Accordion title="A conversa é em um grupo de WhatsApp">
+    O agente de IA não atende grupos de WhatsApp; ele responde apenas em conversas individuais.
+  </Accordion>
+  <Accordion title="Um membro já respondeu ou o agente transferiu a conversa">
+    Quando um membro envia uma mensagem comum para o contato (nota pro time não conta), ou quando o agente usa **Transferir para humano**, **Mover para grupo** ou **Transferir** (para membro ou grupo), o agente para de responder naquela sessão. Ele só volta numa sessão nova.
+  </Accordion>
+</AccordionGroup>
+
+## O agente responde errado ou demora
+
+<AccordionGroup>
+  <Accordion title="Modo silencioso está ligado">
+    Se a etiqueta **Silencioso** aparece no topo do chat de teste, o agente apenas executa ferramentas e condições, sem enviar mensagens ao contato. Desligue **Modo silencioso** em **Abrir configuração** → **Comportamento** e clique em **Salvar**.
+  </Accordion>
+  <Accordion title="O agente ignora conversas anteriores do contato">
+    Verifique se **Usar apenas mensagens da sessão atual** está ligado em **Abrir configuração** → **Comportamento**. Desligue a opção se o agente precisar ler sessões anteriores do contato.
+  </Accordion>
+  <Accordion title="O agente demora para responder">
+    Verifique **Agrupar mensagens em sequência** em **Abrir configuração** → **Comportamento**. Valores altos (até 300 segundos) fazem o agente esperar esse tempo de silêncio — e a contagem recomeça a cada nova mensagem do contato. Reduza o valor ou defina `0` para responder imediatamente.
+  </Accordion>
+  <Accordion title="O conhecimento está com erro ou ainda processando">
+    No cartão **Conhecimento**, um ícone girando indica que o item ainda está sendo processado; nome riscado com selo **Error** indica falha. O agente só consulta itens prontos. Veja como corrigir em [Ensinar o agente com conhecimento](/docs/agente-de-ia/conhecimento).
+  </Accordion>
+  <Accordion title="O agente inventa ou erra informações">
+    Clique em **Inspecionar** na resposta (no [chat de teste](/docs/agente-de-ia/testar) ou na mensagem de início do agente na conversa) para conferir se o agente encontrou os trechos certos do conhecimento e qual decisão tomou. Ajuste as **Instruções** e o **Conhecimento** e teste novamente.
+  </Accordion>
+</AccordionGroup>
+
+## Outros problemas
+
+- **Não consigo excluir o agente:** quando outro bot ou outro agente ainda chama esse agente, abre a janela **Agente em uso** listando os fluxos. Tire o agente desses fluxos e tente excluir novamente.
+- **Não vejo o fluxograma nem os cartões de edição:** agentes marcados como **Gerenciado pelo parceiro** mostram apenas o chat de teste — fale com o parceiro responsável. [Agentes de voz](/docs/agente-de-ia/agente-de-voz) também não têm fluxograma nem ferramentas.
+- **Não vejo Agentes de IA no menu:** o seu [papel](/docs/conceitos/workspace-membros-e-papeis) precisa da permissão **Agentes de IA**.
+- **O teste criou um evento ou chamou minha API de verdade:** no chat de teste, **Google Calendar**, **HubSpot** e a **ferramenta HTTP**/**Requisição HTTP** agem de verdade; além disso, **Executar bot** e **Resolver conversa** não rodam na simulação. Veja [Testar o agente antes de ativar](/docs/agente-de-ia/testar).
+- **O botão Inspecionar sumiu da conversa:** os registros de execução ficam disponíveis por 60 dias.
+- **Não aparece a opção de agente de voz:** o [agente de voz](/docs/agente-de-ia/agente-de-voz) é um recurso em teste e pode não estar liberado no seu workspace.
+
+## Ainda não resolveu?
+
+Fale com o suporte da Kinbox informando o nome do agente, o canal, o horário da conversa e se a mensagem de sistema avisando do início do atendimento apareceu.

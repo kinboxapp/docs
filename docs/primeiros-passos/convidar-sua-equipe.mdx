@@ -1,0 +1,64 @@
+---
+title: Convidar sua equipe
+description: Como convidar as pessoas da empresa para o workspace da Kinbox, escolher o papel de cada uma e o que o convidado precisa fazer para entrar.
+keywords: [primeiros passos, por onde começar, trazer a equipe, chamar a equipe, primeiro convite, colocar atendentes, montar o time, qual papel dar, aceitar convite, complete seu cadastro]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/members/index.tsx
+  - web:src/pages/settings/members/EditMember.tsx
+  - web:src/pages/auth/JoinRegister.tsx
+  - api-v0:server/controllers/OperatorController.js
+  - api:src/modules/workspace-defaults/workspace-defaults.constants.ts
+codigo:
+  - web:src/pages/settings/members/**
+  - web:src/pages/auth/JoinRegister.tsx
+  - web:src/pages/onboarding/widgets/team.tsx
+  - api-v0:server/controllers/OperatorController.js
+  - api:src/modules/workspace-defaults/**
+verificado_em: 2026-11-26
+---
+
+Convide as pessoas da empresa para o workspace (na tela, **ambiente**) e escolha o papel de cada membro. Cada pessoa recebe um convite por e-mail com o link para entrar.
+
+<Note>
+  Quem pode: o proprietário do workspace ou quem tem a permissão **Membros**. Se **Membros** não aparecer em **Configurações** → **Ambiente**, peça a permissão a quem administra o workspace — veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+</Note>
+
+## Antes de convidar
+
+Decida qual papel (na tela, **Permissão**) cada pessoa vai receber. Todo workspace novo já vem com os papéis **Administrador**, **Supervisor** e **Atendente**. Para outro conjunto de acessos, crie um papel antes em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios). Para dividir as conversas por área, crie grupos em [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos).
+
+## Convidar
+
+<Steps>
+  <Step title="Abra a tela de membros">
+    Vá em **Configurações** → **Ambiente** → **Membros** e clique em **Convidar membro**.
+  </Step>
+  <Step title="Preencha os dados e escolha o papel">
+    Digite **Nome** e **E-mail** (por exemplo, `ana@example.com`) e escolha o papel em **Permissão**.
+  </Step>
+  <Step title="Envie o convite">
+    Clique em **Convidar**. Envie um convite por pessoa.
+  </Step>
+</Steps>
+
+A pessoa aparece na lista como **Convidado** até concluir o cadastro. Para reenviar o convite ou editar o membro depois, veja [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros).
+
+## O que o convidado vê
+
+O convidado recebe um e-mail de convite e entra no workspace pelo link desse e-mail (veja [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros)). Ele não deve usar a tela **Inicie seu teste grátis**, pois isso cria outro workspace em vez de entrar no seu.
+
+## Convidar pelo Kin
+
+No onboarding inicial, que só abre para o proprietário de um workspace novo, a etapa **Seu time** também envia convites (com os papéis **Admin**, **Supervisor** ou **Atendente** e equipes opcionais) — veja [Configurar o workspace com o Kin](/docs/primeiros-passos/configurar-com-o-kin). O nome do convidado nasce com a parte do e-mail antes do `@` e pode ser corrigido depois em [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros).
+
+## Próximos passos
+
+- [Conectar o primeiro canal](/docs/primeiros-passos/conectar-o-primeiro-canal)
+- [Distribuir as conversas automaticamente](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas)
+- [Continuar aprendendo: Academia e vídeos](/docs/primeiros-passos/videos-para-comecar) (para atribuir treinamentos com prazo à equipe)
+
+## Problemas comuns
+
+Se o e-mail de convite não chegou, se não foi possível convidar ou se o membro não encontra alguma tela, veja [O convite não chegou ou o membro não consegue entrar](/docs/administracao/problemas-com-membros).

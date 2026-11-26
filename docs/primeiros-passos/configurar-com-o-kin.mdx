@@ -1,0 +1,87 @@
+---
+title: Configurar o workspace com o Kin
+description: Como funciona o onboarding com o Kin logo depois do cadastro — empresa, convites, agente de IA, canal e primeira conversa —, o que cada etapa cria no workspace e como pular.
+keywords: [kin, onboarding, configuração inicial, assistente de configuração, primeiros passos, configurar workspace, configurar conta, ler o site, agente de ia, respostas rápidas, boas-vindas, conectar canal, pular onboarding, tutorial inicial]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/onboarding/eligibility.ts
+  - web:src/pages/onboarding/script.ts
+  - web:src/pages/onboarding/knowledge.ts
+  - web:src/pages/onboarding/Chat.tsx
+  - web:src/pages/onboarding/widgets/team.tsx
+  - web:src/pages/onboarding/widgets/ai.tsx
+  - web:src/pages/onboarding/widgets/channel.tsx
+  - api:src/modules/onboarding/onboarding.service.ts
+codigo:
+  - web:src/pages/onboarding/**
+  - web:src/hooks/useInit.tsx
+  - api:src/modules/onboarding/**
+verificado_em: 2026-11-26
+---
+
+Logo depois do cadastro, o **Kin** abre em tela cheia para ajudar você a configurar o workspace (na tela, **ambiente**) em cerca de 5 minutos. À esquerda você conversa com o Kin, clicando nas opções ou digitando, e à direita vê uma prévia da **Caixa de entrada** se montar conforme você responde.
+
+<Note>
+  Quem vê: apenas o proprietário de um workspace novo, logo após criar a conta. O onboarding não abre para membros convidados, workspaces ligados a um parceiro ou criados por modelo, nem depois de concluído ou pulado. Se ele não abriu para você, siga direto para [Convidar sua equipe](/docs/primeiros-passos/convidar-sua-equipe), [Conectar o primeiro canal](/docs/primeiros-passos/conectar-o-primeiro-canal) e [Atender a primeira conversa](/docs/primeiros-passos/atender-a-primeira-conversa).
+</Note>
+
+## Como funciona
+
+O fluxo tem seis etapas, mostradas no topo de **01 / 06** a **06 / 06**. Você pode clicar nos botões ou digitar suas respostas no campo da conversa.
+
+1. **Olá**: apresentação rápida com os botões **Bora começar** e **Quanto tempo leva?** (não cria nada no workspace).
+2. **Você e a empresa**
+3. **Seu time**
+4. **Um cérebro pro atendimento**
+5. **Canal e primeira conversa**
+6. **Tudo pronto**
+
+As etapas 2 a 6 estão explicadas abaixo.
+
+## O que cada etapa faz
+
+### Você e a empresa
+
+O Kin pergunta seu papel na empresa, quantas pessoas vão atender, o ramo e o que você quer resolver. Você pode clicar nas opções ou responder tudo em uma frase.
+
+- **O que fica criado:** 4 tags do seu ramo, só as que ainda não existem (veja [Criar e usar tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags)). Se você marcou **Vendas** ou **CRM**, também um funil com etapas prontas para o seu ramo (veja [Funis e negociações: visão geral](/docs/crm/visao-geral)).
+
+### Seu time
+
+O Kin pede os e-mails da equipe e o papel de cada pessoa (o padrão é **Atendente**). Você pode enviar os convites ou clicar em **Pular por agora**.
+
+- **O que fica criado:** os convites, que saem por e-mail na hora. Cada convite já ocupa uma licença do plano (no teste grátis são até 10, contando você). Se você escolheu equipes, os grupos também são criados (veja [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos)).
+
+### Um cérebro pro atendimento
+
+O Kin lê o site da empresa. Se você não tiver site, ou se o site bloquear a leitura, digite um texto curto sobre o atendimento. Depois, revise o horário, o idioma, a moeda, o fuso, a mensagem de boas-vindas e até 5 frases rápidas (no Kin, **Respostas**). A mensagem de boas-vindas é usada quando você cria o agente de IA, que é opcional.
+
+- **O que fica criado:** as frases rápidas marcadas (veja [Criar frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas)), o horário comercial, se veio do site ou foi editado (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)), e o idioma, a moeda e o fuso (veja [Configurações gerais do workspace](/docs/configuracoes-no-workspace/configuracoes-gerais)).
+- **Agente de IA:** com **Criar a [Nome]**, o Kin cria o agente com a base de conhecimento do que leu. Depois, você pode editar o nome da agente no cartão dela. Com **Agora não**, nenhum agente é criado.
+
+### Canal e primeira conversa
+
+**WhatsApp**, **Instagram**, **Messenger** e **Chat no site** conectam nessa etapa. **Telegram**, **E-mail** e **SMS** ficam para depois, em **Configurações** → **Chat** → **Canais**. O Instagram não pode ser conectado durante o teste grátis. Para o WhatsApp, veja [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app) ou [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao).
+
+- **O que fica criado:** o canal que você conectou e um canal de chat do site ("Chat do site · [empresa]"). O chat do site é criado sempre, mesmo se você escolher outro canal ou **Conectar depois**. Para colocá-lo no seu site, veja [Instalar o chat no seu site](/docs/canais/widget).
+- **Primeira conversa:** com um canal conectado, o Kin pede um "oi" do seu celular. Se você clicar em **Pular o teste**, ou se não conectou canal, o Kin faz o papel de um cliente pelo chat do site. Se apareceu uma conversa de teste na **Caixa de entrada**, use-a; se não, envie uma mensagem pelo canal. A resposta do agente de IA só aparece quando ele está ligado ao canal testado.
+
+### Tudo pronto
+
+Exibe o cartão "Seu Kinbox está no ar." com o resumo do que foi criado (Empresa, Canal, Time, Agente, Respostas e Inbox) e o botão **Ir para o inbox**, que conclui o onboarding e abre a **Caixa de entrada**.
+
+## Pular ou voltar
+
+- **Pular o onboarding:** clique em **Pular onboarding** no topo de qualquer etapa (no celular, **Pular**) e clique de novo em **Confirmar**. O que já foi criado (tags, funil, convites, canal, agente e frases rápidas) permanece no workspace — nada é desfeito. Depois de pular ou concluir, o onboarding não reabre; todas as configurações continuam disponíveis nas telas normais da Kinbox.
+- **Voltar para revisar:** clique nos traços de **Etapas** no topo ou na seta **Voltar à etapa anterior** para retornar a uma etapa já feita. Voltar não duplica o que já foi criado.
+- **Fechar o navegador no meio:** ao entrar de novo, o onboarding retoma do início da etapa em que você parou.
+
+## Depois do Kin
+
+Continue a configuração ou faça depois o que você pulou no onboarding:
+
+- [Convidar sua equipe](/docs/primeiros-passos/convidar-sua-equipe)
+- [Conectar o primeiro canal](/docs/primeiros-passos/conectar-o-primeiro-canal)
+- [Atender a primeira conversa](/docs/primeiros-passos/atender-a-primeira-conversa)
+- [Agentes de IA: visão geral](/docs/agente-de-ia/visao-geral) e [Ligar o agente aos canais e passar para um humano](/docs/agente-de-ia/conectar-canais)

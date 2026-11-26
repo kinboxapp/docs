@@ -1,0 +1,117 @@
+---
+title: Criar campos personalizados
+description: Como criar, editar, clonar, reordenar e excluir campos personalizados na Kinbox, escolher a entidade, usar a chave reservada nas mensagens e tornar um campo obrigatório para resolver a conversa.
+keywords: [campos personalizados, campo personalizado, criar campo, campo extra, cpf, novo campo, entidade, chave reservada, variável, campo obrigatório, obrigatório para resolver, vincular obrigatoriedade, esconder campo, sempre mostrar, validar campo, clonar campo, excluir campo, reordenar campos, obrigatório para finalizar, só finalizar com o campo preenchido, exigir cpf para resolver]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/customFields/index.tsx
+  - web:src/pages/settings/customFields/EditCustomField.tsx
+  - web:src/pages/inbox/Chat/index.tsx
+  - api-v0:server/controllers/CustomFieldController.js
+codigo:
+  - web:src/pages/settings/customFields/**
+  - web:src/models/customFields.ts
+  - web:src/pages/inbox/Chat/chatUtils.ts
+  - web:src/components-old/chat/side/ContactInfoPlugin/index.tsx
+  - web:src/components-old/chat/side/SessionInfoPlugin/index.tsx
+  - web:src/components-old/ui/PlaceholderDropSearch/index.tsx
+  - api:src/modules/custom-fields/**
+  - api-v0:server/routes/CustomFieldApiRoutes.js
+  - api-v0:server/controllers/CustomFieldController.js
+verificado_em: 2026-11-26
+---
+
+Crie campos personalizados para registrar informações que os campos padrão da Kinbox não cobrem, como CPF, número do pedido, tipo de cliente ou forma de pagamento.
+
+<Note>
+  Quem pode: membros com a permissão **Campos** (seção **Gerenciamento do Ambiente**) ou o proprietário do workspace (na tela, **ambiente**). Nos papéis prontos, **Supervisor** e **Administrador** têm essa permissão e **Atendente** não. Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+</Note>
+
+<Frame caption="Lista de Campos personalizados em Configurações → Ambiente → Campos personalizados">
+  <img src="/images/ajuda/contatos/campos-personalizados.webp" alt="Tela Campos personalizados mostrando o botão Novo campo, busca Pesquisar por nome, filtro de entidade em Tudo e quatro campos personalizados listados com tipo e entidade" />
+</Frame>
+
+Nessa lista, o nome de cada campo aparece com iniciais maiúsculas e sem acento. Nas outras telas, ele aparece como foi cadastrado.
+
+## Criar um campo
+
+<Steps>
+  <Step title="Abra Campos personalizados">
+    Vá em **Configurações** → **Ambiente** → **Campos personalizados** e clique em **Novo campo** para abrir o painel **Criar campo personalizado**.
+  </Step>
+
+  <Step title="Configure nome, tipo, entidade e opções">
+    Preencha as informações do campo:
+
+    - **Nome do campo** (obrigatório, até 128 caracteres): use letras, números e espaços.
+    - **Descrição** (opcional): explica o uso do campo para o time.
+    - **Tipo de campo:** escolha o formato (**Texto**, **Texto em área**, **Seleção**, **Seleção Multipla**, **Booleano**, **Número**, **Decimal**, **Data**, **Data e hora** ou **Json**). Veja o que cada um faz em [Tipos de campo e validações](/docs/clientes/tipos-de-campo).
+    - **Entidade:** escolha onde o campo aparece (**Contato**, **Sessão de conversa**, **Membro**, **Grupo**, **Canal**, **Produto**, **Organização**, **Negociação** ou **Tarefa**; campos de negociação podem ser exigidos nos funis, veja [Motivos de perda, campos obrigatórios e regras do funil](/docs/crm/motivos-de-perda-e-regras)). **A entidade não pode ser trocada depois de criar.**
+    - **Valores do campo** (aparece em **Seleção** e **Seleção Multipla**): clique em **Opção** para adicionar cada alternativa, reordene pelas setas ou remova pelo X. Quem preenche escolhe apenas entre as opções cadastradas.
+    - **Opções extras:** ative **Sempre mostrar**, **Esconder**, **Obrigatório**, **Vincular obrigatoriedade** ou **Validar**, conforme disponíveis para a entidade escolhida.
+
+    <Frame caption="Painel Criar campo personalizado preenchido com tipo Seleção, entidade Contato e chave reservada">
+      <img src="/images/ajuda/contatos/novo-campo.webp" alt="Painel Criar campo personalizado preenchido com Nome do campo Forma de pagamento, Tipo de campo Seleção, Entidade Contato, Chave reservada forma_de_pagamento, opções Pix e Cartão, chaves de exibição e validação e botões Pré-visualizar e Salvar" />
+    </Frame>
+  </Step>
+
+  <Step title="Pré-visualize e salve">
+    Se quiser conferir a aparência do campo antes de gravar, clique em **Pré-visualizar**. Depois, clique em **Salvar** (aparece o aviso "Campo Personalizado criado.").
+  </Step>
+</Steps>
+
+<Note>
+  Você pode alterar o **Tipo de campo** depois de criar, mas os valores já gravados não são convertidos. Troque o tipo apenas antes de começar a usar o campo.
+</Note>
+
+## A chave reservada
+
+Ao criar o campo, a Kinbox gera automaticamente a **Chave reservada** a partir do nome — em minúsculas, sem acentos e com `_` no lugar de espaços e pontos, entre chaves (por exemplo, `Forma de pagamento` vira `{{forma_de_pagamento}}`).
+
+- A chave é única no workspace inteiro (se já existir outra igual, aparece "Já existe um campo personalizado com esse chave reservada.") e **não muda** se você renomear o campo depois.
+- A chave de um campo de **Contato** pode ser usada nas mensagens da conversa, em [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas) e no [bot](/docs/bot/blocos-do-bot) (para campos **Json**, veja [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json)).
+- Campos de **Sessão de conversa** não são substituídos em mensagens enviadas manualmente pelo membro, e [campanhas](/docs/campanhas/campanhas-no-kinbox) não usam chaves de campos personalizados.
+
+## Campo obrigatório para resolver a conversa
+
+Nas entidades **Contato** e **Sessão de conversa**, você pode ativar **Obrigatório** ("Requerido para conseguir resolver uma conversa"):
+
+- **Obrigatório sempre:** ative **Obrigatório**.
+- **Obrigatório só em uma condição:** ligue **Vincular obrigatoriedade** e escolha outro **Campo** (de contato ou de sessão). O campo passa a ser obrigatório quando o outro campo estiver preenchido com qualquer valor — por exemplo, exigir "Motivo da troca" somente quando "Número do pedido" estiver preenchido.
+
+Se um campo obrigatório estiver vazio quando o membro clicar em **Resolver** numa conversa, ela não é resolvida: o painel lateral abre com o campo destacado e aparece "Campo obrigatório ... não foi setado.". Ao resolver em lote, a Kinbox pula as conversas com campo obrigatório vazio e informa no fim quantas foram resolvidas. Veja [Atender uma conversa: responder, notas, resolver e reabrir](/docs/conversas/gerenciar-conversas), [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar) e [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
+
+A obrigatoriedade vale apenas para resolver a conversa e **não** impede salvar um contato em **Clientes** → **Contatos**.
+
+Não combine **Obrigatório** com **Esconder**, pois o campo bloqueia a resolução sem aparecer no painel para ser preenchido. Nos campos de **Contato** com **Vincular obrigatoriedade**, ative também **Sempre mostrar** para que fiquem visíveis enquanto estiverem vazios.
+
+Se um campo obrigatório bloquear a resolução sem aparecer no painel, veja [Problemas com contatos, importação e campos personalizados](/docs/clientes/problemas-comuns).
+
+## Mostrar ou esconder nos painéis
+
+- **Sempre mostrar** (somente **Contato**): mantém o campo visível no painel **Contato** da conversa mesmo sem valor preenchido.
+- **Esconder** (**Contato** e **Sessão de conversa**): oculta o campo nos painéis laterais da conversa.
+
+As duas não ficam ligadas juntas: ligar uma desliga a outra.
+
+## Editar, clonar, reordenar e excluir
+
+Na tela **Campos personalizados**, use "Pesquisar por nome" e o filtro de entidade (**Tudo**, **Contato**, **Sessão**, **Membro**, **Grupo**, **Canal**, **Organização**, **Produto**, **Tarefa** ou **Negociação**) para localizar um campo.
+
+- **Reordenar:** no computador, deixe o filtro em **Tudo** e a busca vazia, e arraste cada linha pela alça (`⋮⋮`). A ordem vale nos painéis da conversa e no perfil do contato.
+- **Editar:** no menu **⋯** da linha, clique em **Editar** para mudar nome, descrição, tipo, opções e chaves (**Entidade** e **Chave reservada** não podem ser alteradas).
+- **Clonar:** no menu **⋯**, clique em **Clonar** para abrir o formulário preenchido (inclusive permitindo escolher outra entidade). **Troque o nome antes de salvar** para gerar uma nova chave reservada.
+- **Excluir:** no menu **⋯**, clique em **Excluir** e confirme em "Tem certeza que deseja excluir esse campo?".
+
+<Warning>
+  Excluir um campo personalizado apaga os valores dele nos contatos e não pode ser desfeito. Antes de excluir, confira se o campo é usado no bot, em [automações](/docs/automacao/gatilhos-e-acoes), em frases rápidas ou em integrações.
+</Warning>
+
+## Campos de integrações
+
+Campos criados por [integrações](/docs/integracoes/visao-geral) aparecem com um ícone de "Integrado com outro sistema" e não podem ser editados nem excluídos ("Esse campo é usado por uma integração e não pode ser editado."). Campos do Kinbox Agenda permitem editar apenas a **Descrição** e não podem ser clonados nem excluídos.
+
+## Onde os campos aparecem
+
+Cada entidade mostra os campos num lugar: o contato no formulário, no perfil e no painel da conversa; a sessão no painel da conversa; os demais nos cadastros de cada um. A lista completa, com importação, exportação, [formulário do widget](/docs/canais/widget/personalizar), bot, [agentes de IA](/docs/agente-de-ia/ferramentas) e [links para desenvolvedores](/docs/desenvolvedor/visao-geral), está em [Tipos de campo e validações](/docs/clientes/tipos-de-campo).

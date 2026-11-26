@@ -1,0 +1,99 @@
+---
+title: O convite não chegou ou o membro não consegue entrar
+description: O que fazer quando o convite de membro não chega, a Kinbox não deixa convidar mais ninguém, o membro não consegue entrar no workspace ou não vê uma tela ou conversa.
+keywords: [convite não chegou, não recebi o convite, membro não consegue entrar, nenhum ambiente ativo, não consigo convidar, limite de licenças, membro não vê conversas, membro não vê configurações, fora do horário de acesso, deslogado por um gestor, resetar senha não funciona]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/members/index.tsx
+  - web:src/pages/auth/SelectWorkspace.tsx
+  - web:src/hooks/useInit.tsx
+  - web:src/hooks/useSocket.tsx
+  - web:src/components/feedback/BusinessHoursAccessLocked.tsx
+  - api-v0:server/controllers/OperatorController.js
+codigo:
+  - web:src/pages/settings/members/**
+  - web:src/pages/auth/SelectWorkspace.tsx
+  - web:src/pages/auth/JoinRegister.tsx
+  - web:src/hooks/useInit.tsx
+  - web:src/hooks/useSocket.tsx
+  - web:src/hooks/useBusinessHoursAccessLock.ts
+  - web:src/components/feedback/BusinessHoursAccessLocked.tsx
+  - api-v0:server/controllers/OperatorController.js
+  - api-v0:server/controllers/NewPaymentController.js
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+Você enviou um convite para o workspace (na tela, **ambiente**) e a pessoa diz que não recebeu o e-mail, ou a Kinbox não deixa convidar mais membros. Também pode acontecer de o membro não conseguir entrar, sair de repente da conta ou entrar sem ver determinadas telas e conversas.
+
+Nesta central, **papel** é o conjunto de permissões dado a um membro (na tela, **Permissão**). Para problemas de acesso da própria conta — como esquecer a própria senha ou problemas na verificação em duas etapas (2FA) — o ajuste é feito pela própria pessoa: veja [Não consigo entrar na Kinbox](/docs/conta/problemas-de-acesso).
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="O convite não chegou ou a pessoa não recebeu o link de cadastro">
+    **Como confirmar:** vá em **Configurações** → **Ambiente** → **Membros** e veja se a pessoa aparece como **Convidado**, conferindo o e-mail logo abaixo do nome. Se ela **não** aparece como **Convidado**, o acesso já está liberado: ou ela já concluiu o cadastro, ou já participava de outro workspace na Kinbox e entrou direto.
+
+    **O que fazer:**
+    - Se estiver como **Convidado**: peça para a pessoa procurar no spam o e-mail com o assunto "Convite para se juntar ao workspace [nome do workspace]", enviado pela Kinbox. Você pode abrir os três pontos da linha e clicar em **Reenviar convite** (a opção só aparece para quem ainda não aceitou, e o link não expira). Se o e-mail foi digitado errado, exclua o membro convidado e envie um novo convite, pois o e-mail não muda na edição.
+    - Se não estiver como **Convidado**: pergunte se a pessoa já concluiu o cadastro ou se já usa a Kinbox em outro workspace (nesse caso ela entra direto e recebe só um aviso por e-mail, sem link de cadastro). Nos dois casos, peça para entrar com o e-mail e a senha dela e selecionar o workspace em **Escolha um ambiente** ou no botão do ambiente no topo da tela.
+  </Accordion>
+
+  <Accordion title="Não consigo convidar um novo membro">
+    **Como confirmar e o que fazer:**
+    - **Limite de licenças atingido:** aparece um aviso de que o limite foi atingido. Cada membro ativo ocupa uma licença do plano — inclusive o proprietário e os convidados que ainda não aceitaram; membros **Inativo** não contam. Confira em **Configurações** → **Assinatura** quantas licenças o plano tem e compare com os membros ativos e convidados na lista. Desative quem não usa mais o workspace ou aumente as licenças em **Configurações** → **Assinatura** → **Mudar plano** (veja [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade)). Em teste grátis ou com a assinatura cancelada, o botão é **Assinar um plano**. Quando o plano é gerenciado por um parceiro, nenhum dos dois botões aparece: fale com o parceiro. Veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
+    - **O e-mail já foi convidado:** aparece um aviso de que o e-mail já está no workspace. Pesquise o endereço em **Membros** usando o filtro **Tudo**. Se o membro estiver **Inativo**, clique em **Reativar**; se estiver **Convidado**, clique em **Reenviar convite**.
+    - **Assinatura vencida:** quando a assinatura está vencida há mais de 3 dias, a Kinbox bloqueia novos convites e reativações com um aviso de assinatura vencida. Regularize a assinatura do workspace para liberar novos convites (veja [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida)).
+  </Accordion>
+
+  <Accordion title='O membro vê "Nenhum ambiente ativo" ao entrar'>
+    **Como confirmar:** em **Configurações** → **Ambiente** → **Membros** (com o filtro **Tudo**), procure o membro e verifique se ele está marcado como **Inativo** ou se não aparece mais na lista.
+
+    **O que fazer:** se estiver **Inativo**, abra os três pontos da linha e clique em **Reativar** (o membro volta a ocupar uma licença). Se tiver sido excluído do workspace, clique em **Convidar membro** e envie um novo convite. Se o membro estiver **Ativo**, a causa pode ser o próprio workspace ter sido desativado: veja [Não consigo entrar na Kinbox](/docs/conta/problemas-de-acesso).
+  </Accordion>
+
+  <Accordion title='O membro saiu com "Você foi deslogado por um gestor...", ou precisou entrar de novo'>
+    **Como confirmar e o que fazer:**
+    - **"Você foi deslogado por um gestor...":** alguém clicou em **Desconectar** na linha do membro. Ele pode entrar novamente normalmente.
+    - **Saiu após uma mudança no workspace:** ao editar um papel, a sessão dos membros com esse papel termina na próxima vez que abrirem ou atualizarem a página; transferir a propriedade também desconecta o antigo e o novo proprietário. Peça para entrar de novo para que as novas permissões passem a valer.
+    - **Encerrar na hora o acesso de um membro desativado:** a mensagem "Você não tem permissão para acessar este workspace." aparece quando ele abre ou atualiza a página. Para encerrar a sessão dele na hora, abra os três pontos e clique em **Desconectar**.
+  </Accordion>
+
+  <Accordion title="O membro vê a tela Fora do horário de acesso">
+    **Como confirmar:** abra o papel do membro em **Configurações** → **Ambiente** → **Permissões** e confira a opção **Limitar horário de acesso ao ambiente** no quadro **Restrições** da seção **Outros**.
+
+    **O que fazer:** aguarde o horário configurado (o horário vale pelo fuso horário do workspace) ou ajuste o horário ou o papel do membro para liberar o acesso.
+  </Accordion>
+
+  <Accordion title="O membro entra, mas não vê uma tela de Configurações ou um item do menu">
+    **Como confirmar:** consulte a [Referência de permissões](/docs/administracao/referencia-de-permissoes) para ver qual opção libera o item (principalmente em **Gerenciamento do Ambiente**, além de **Canais**, **Relatórios**, **Negociações**, **Contatos** e **Agendas**).
+
+    **O que fazer:** marque a opção no papel do membro em **Configurações** → **Ambiente** → **Permissões** e clique em **Salvar**. O membro precisará entrar de novo na Kinbox para o item aparecer.
+  </Accordion>
+
+  <Accordion title="O membro não vê conversas que deveria ver">
+    **Como confirmar e o que fazer:** confira a opção escolhida em **Acesso as Conversas** no papel do membro (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)), os grupos em que ele está em **Configurações** → **Ambiente** → **Grupos** (veja [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos)) e o grupo ou responsável atual da conversa. Para o diagnóstico completo de conversas e respostas na **Caixa de entrada**, veja [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
+  </Accordion>
+
+  <Accordion title="O membro não recebe conversas da atribuição automática nem os sons de nova mensagem e de nova conversa">
+    **Como confirmar:** em **Configurações** → **Ambiente** → **Membros**, abra **Editar membro** e verifique se o interruptor **Disponível** está desligado.
+
+    **O que fazer:** ligue **Disponível** e clique em **Salvar**. As regras de rodízio entre membros e as de "menos atendimentos" da [atribuição automática](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas) só escolhem membros disponíveis (veja [Estratégias de atribuição automática](/docs/atendimento/estrategias-de-atribuicao)). Só membros disponíveis ouvem os sons de nova mensagem e de nova conversa. O push não depende da disponibilidade: se o problema for falta de push, confira as opções de [Notificações](/docs/conta/notificacoes) do próprio membro.
+  </Accordion>
+
+  <Accordion title="Resetar senha dá erro ou o membro não sabe a nova senha">
+    **Como confirmar:** a opção **Resetar senha** só aparece para o proprietário ou para quem tem a permissão **Pode resetar senha de membros** (marcada apenas pelo proprietário), e só funciona quando quatro condições são atendidas ao mesmo tempo: o membro está **ativo** (não **Inativo**), participa **somente deste workspace**, **já aceitou o convite** e **não é o proprietário**.
+
+    **O que fazer:**
+    - Se der erro porque o membro participa de outros workspaces ou é o proprietário, a própria pessoa deve redefinir a senha (veja [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes)). Se ainda não aceitou o convite, use **Reenviar convite**. Se está **Inativo**, reative antes de resetar.
+    - Se o reset deu certo mas o membro não sabe a senha: a Kinbox cria uma senha nova e envia para o e-mail dele com o assunto "[Kinbox] - Redefinição de senha" (o campo **Nova senha** da janela não é usado). Peça para conferir o e-mail, entrar com essa senha e depois alterá-la no perfil.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte informando o e-mail do membro, a situação dele na lista (**Convidado**, **Inativo** ou **Online**), o papel atribuído e a mensagem exata que aparece na tela.
+
+Veja também [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros), [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios), [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade) e [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).

@@ -4,9 +4,18 @@
 # url       caminho no app (staging web), já dentro do workspace de documentação
 # passos    ações antes do print: esperar, clicar, digitar {seletor, texto}, tecla, pausa (ms)
 # alvo      seletor do recorte; uma lista recorta o retângulo que cobre todos
-# mascarar  seletores borrados antes do print (dados que não podem aparecer)
+# mascarar  seletores cobertos por uma tarja sólida antes do print (dados que não podem aparecer); seletor que não acha
+#           nenhum elemento faz o item falhar
+# esconder  (opcional) seletores escondidos antes do print: o que o cliente nunca vê (menu Admin da conta de teste,
+#           selo de staging)
 # arquivo   saída em images/ajuda/<secao>/<nome>.webp
 # paginas   páginas da central que usam o print
+# largura  (opcional) largura da janela em px só para o item (padrão 1440; abaixo de 768 o app troca de layout)
+# manterFoco (opcional) true para não tirar o foco antes do print (lista suspensa aberta, que fecha ao perder o foco)
+# workspace (opcional) workspace do print; padrão: o de documentação. Outro workspace só para telas
+#           que o de documentação não tem (ex.: canal de WhatsApp) e sempre com `mascarar`
+# preparar  (opcional) preparo de `preparos.ts` que monta pela API um estado temporário que o item precisa (copiloto
+#           configurado, token, pedido do MCP...) e o desfaz depois do print; pode trocar marcadores da `url`
 
 - id: tags-lista
   url: /settings/tags
@@ -18,3 +27,3728 @@
   mascarar: []
   arquivo: images/ajuda/tags/lista-de-tags.webp
   paginas: []
+
+# Seção whatsapp (Canais › WhatsApp › QR Code)
+#
+# O workspace de documentação (Loja Exemplo) não tem canal de WhatsApp: criar um canal Express cria uma conexão real
+# na conta do motor (compartilhada com produção) e um QR Code publicado poderia ser lido por qualquer pessoa. Por isso
+# as telas de canal de WhatsApp vêm do workspace de testes (id 1, "Kinbox"), com tarja sólida sobre nome do canal e
+# número, e recorte só do bloco que a página usa. Nunca capture QR Code nem código de conexão gerado.
+
+- id: canais-lista
+  url: /settings/channels
+  largura: 900
+  passos:
+    - esperar: 'tbody tr[data-index="0"]'
+  alvo:
+    - 'button:has-text("Novo canal")'
+    - 'tbody tr[data-index="0"]'
+  mascarar: []
+  arquivo: images/ajuda/whatsapp/lista-de-canais.webp
+  paginas:
+    - docs/canais/visao-geral
+
+- id: whatsapp-qr-conectar
+  url: /settings/channels/new/whatsapp/web
+  passos:
+    - esperar: '.ant-drawer-content >> text=Opções avançadas'
+    - clicar: '.ant-drawer-content >> text=Opções avançadas'
+    - esperar: '.ant-drawer-content >> text=Modo antigo'
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Conectar canal")'
+  mascarar: []
+  arquivo: images/ajuda/whatsapp/conectar-whatsapp-qr-code.webp
+  paginas:
+    - docs/canais/conectar-whatsapp-app
+
+# Canal Express conectado do workspace de testes (id 1). Tarja sobre o nome do canal e o número; o recorte
+# termina em "Restringir visibilidade", antes do Aquecedor (beta) e dos campos personalizados.
+- id: whatsapp-qr-canal-express
+  workspace: Kinbox
+  url: /settings/channels/245
+  passos:
+    - esperar: '.ant-drawer-content #isPrivate'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body #isPrivate'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+    - '.ant-drawer-body #description'
+    - '.ant-drawer-body #phone'
+  arquivo: images/ajuda/whatsapp/canal-express.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/configuracoes
+
+# Só o bloco Ações do mesmo canal Express (página de desconexão). A tarja no título só satisfaz a regra de mascarar:
+# o título fica fora do recorte.
+- id: whatsapp-qr-acoes
+  workspace: Kinbox
+  url: /settings/channels/245
+  passos:
+    - esperar: '.ant-drawer-body a:has(.fa-power-off)'
+    - pausa: 1000
+  alvo: '.ant-drawer-body .ant-form-item:has(.fa-power-off)'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+  arquivo: images/ajuda/whatsapp/acoes-do-canal.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte
+
+# Confirmação de "Recriar" num canal Clássica do workspace de testes (id 1). Só o modal entra no recorte;
+# o nome e o número do canal ficam fora do recorte. A tarja (por cima de tudo, inclusive do modal) fica só no título,
+# que também está fora do recorte: tarja em campo atrás do modal apareceria na borda do print. Não confirme: o print só abre o modal.
+- id: whatsapp-classica-recriar
+  workspace: Kinbox
+  url: /settings/channels/254
+  passos:
+    - esperar: '.ant-drawer-body a:has(.fa-power-off)'
+    - clicar: '.ant-drawer-body a:has(.fa-power-off)'
+    - esperar: '.ant-modal-confirm >> text=Tipo de conexão'
+    - pausa: 800
+  alvo: '.ant-modal-confirm .ant-modal-content'
+  mascarar:
+    - '.ant-drawer-title'
+  arquivo: images/ajuda/whatsapp/recriar-classica-para-express.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo
+
+# Painel do código de conexão (Express) ANTES de gerar o código: só campo, botão e link, sem código na tela.
+# Precisa de um canal Express do workspace de testes no status "Necessário ler QR-Code" (canal 251, de QA, com número
+# fictício). Se ele não estiver aguardando leitura, o preparo `canal-aguardando-qr` reinicia o canal e espera o
+# status. Nunca capture QR Code nem código.
+- id: whatsapp-qr-codigo-de-conexao
+  workspace: Kinbox
+  preparar: canal-aguardando-qr
+  url: /settings/channels/251
+  passos:
+    - esperar: '.ant-drawer-body button:has-text("Conectar com número de telefone")'
+    - clicar: '.ant-drawer-body button:has-text("Conectar com número de telefone")'
+    - esperar: '.ant-drawer-body button:has-text("Gerar código")'
+    - pausa: 800
+  alvo: '.ant-drawer-body .ant-form-item:has(label[title="Conectar com número de telefone"])'
+  mascarar:
+    - '.ant-drawer-body input[placeholder="Número do WhatsApp"]'
+  arquivo: images/ajuda/whatsapp/conectar-com-numero-de-telefone.webp
+  paginas:
+    - docs/canais/conectar-whatsapp-app
+# Seção conversas — filtros e frases rápidas
+
+# Caixa de entrada → "Adicionar filtro": painel Gerenciar Filtros com Padrões e Personalizados (workspace sem filtros personalizados).
+- id: conversas-filtros-gerenciar
+  url: /inbox/all
+  passos:
+    - esperar: 'button[aria-label="Adicionar filtro"]'
+    - clicar: 'button[aria-label="Adicionar filtro"]'
+    - esperar: '.ant-drawer-title >> text=Gerenciar Filtros'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Gerenciar Filtros") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Gerenciar Filtros") .ant-drawer-body :text("Parece que você ainda não possui")'
+  mascarar: []
+  arquivo: images/ajuda/conversas/gerenciar-filtros.webp
+  paginas:
+    - docs/conversas/criar-filtros-de-conversa
+
+# "Novo filtro" dentro de Gerenciar Filtros: painel Criar filtro vazio, do título até o estado Resolvido (Nome, Descrição, Quem tem acesso?, Cor ou emoji, Condições, Estados com Aberto marcado).
+- id: conversas-filtros-novo
+  url: /inbox/all
+  passos:
+    - esperar: 'button[aria-label="Adicionar filtro"]'
+    - clicar: 'button[aria-label="Adicionar filtro"]'
+    - esperar: 'button[aria-label="Novo filtro"]'
+    - clicar: 'button[aria-label="Novo filtro"]'
+    - esperar: '.ant-drawer-title >> text=Criar filtro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Criar filtro") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Criar filtro") label:has-text("Resolvido")'
+  mascarar: []
+  arquivo: images/ajuda/conversas/novo-filtro.webp
+  paginas:
+    - docs/conversas/criar-filtros-de-conversa
+
+# Configurações → Ambiente → Frases rápidas → Nova frase: painel Criar frase rápida vazio.
+- id: conversas-frases-nova
+  url: /settings/quick-phrases/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar frase rápida'
+    - pausa: 800
+  alvo: '.ant-drawer-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/nova-frase-rapida.webp
+  paginas:
+    - docs/conversas/criar-frases-rapidas-para-suas-conversas
+
+# Seção conversas — caixa de entrada, iniciar, agendar e ações em lote
+
+# Caixa de entrada (layout novo) sem conversa aberta: menu "Chat" (Abertos, Meus, Seguindo, Arquivados, Filtros) e a lista.
+# A foto do membro atribuído é da conta dona (real): coberta com tarja. O selo "Stag" do staging fica fora ou coberto.
+- id: conversas-caixa-de-entrada
+  url: /inbox/all
+  passos:
+    - esperar: '.conversations-list >> text=Mariana Lima'
+    - pausa: 1000
+  alvo:
+    - '.inbox_side_item'
+    - '.conversations-header'
+    - 'a.message-item:has-text("Mariana Lima")'
+  mascarar:
+    - 'img[alt="avatar"]'
+    - '.request-inspector'
+  arquivo: images/ajuda/conversas/caixa-de-entrada.webp
+  paginas:
+    - docs/conversas/caixa-de-entrada-do-kinbox
+
+# Botão "Enviar mensagem" (lápis) da lista: janela vazia com Canal, Contato, Número (+55) e Texto.
+- id: conversas-enviar-mensagem
+  url: /inbox/all
+  passos:
+    - esperar: '[aria-label="Enviar mensagem"]'
+    - clicar: '[aria-label="Enviar mensagem"]'
+    - esperar: '.ant-modal-content >> text=Número'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/enviar-mensagem.webp
+  paginas:
+    - docs/conversas/iniciar-conversa
+
+# "Mais ações" (três pontos) da conversa → "Agendar mensagem": janela com Data, Texto e Repetir mensalmente. Não salva.
+- id: conversas-agendar-mensagem
+  url: /inbox/all/4393
+  passos:
+    - esperar: '[aria-label="Mais ações"]'
+    - clicar: '[aria-label="Mais ações"]'
+    - esperar: '.ant-dropdown-menu-item >> text=Agendar mensagem'
+    - clicar: '.ant-dropdown-menu-item >> text=Agendar mensagem'
+    - esperar: '.ant-modal-content >> text=Repetir mensalmente'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/agendar-mensagem.webp
+  paginas:
+    - docs/conversas/agendar-mensagem
+
+# Lista → "Mais opções" → "Executar ação..." → Ação = "Exportar conversas": Período e o resumo do arquivo. Não executa.
+- id: conversas-exportar-conversas
+  url: /inbox/all
+  passos:
+    - esperar: '[aria-label="Mais opções"]'
+    - clicar: '[aria-label="Mais opções"]'
+    - esperar: '.ant-dropdown-menu-item >> text=Executar ação...'
+    - clicar: '.ant-dropdown-menu-item >> text=Executar ação...'
+    - esperar: '.ant-modal-content >> text=Executar ação em lote'
+    - clicar: '.ant-modal-content .ant-select-selector'
+    - esperar: '.ant-select-item-option >> text=Exportar conversas'
+    - clicar: '.ant-select-item-option >> text=Exportar conversas'
+    - esperar: '.ant-modal-content >> text=Ver colunas'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/exportar-conversas.webp
+  paginas:
+    - docs/conversas/acoes-em-lote-e-exportar
+
+# Cabeçalho de uma conversa do seed SEM responsável (Rafael Martins): Resolver, Atribuir (ícone de pessoa),
+# Mover para grupo e Mais ações. Sem responsável, o botão Atribuir não mostra a foto da conta dona. Janela de 1920 px
+# para o cabeçalho passar de 520 px e mostrar os rótulos Resolver e Atribuir.
+- id: conversas-cabecalho
+  largura: 1920
+  url: /inbox/all/4395
+  passos:
+    - esperar: '.g_chat_header_inner [aria-label="Mais ações"]'
+    - esperar: '.g_chat_header_inner >> text=Rafael Martins'
+    - pausa: 1000
+  alvo: '.g_chat_header_inner'
+  mascarar: []
+  arquivo: images/ajuda/conversas/cabecalho-da-conversa.webp
+  paginas:
+    - docs/conversas/gerenciar-conversas
+    - docs/conversas/atribuir-e-transferir
+
+# Editor da mesma conversa: campo de texto e os botões Áudio, Nota pro time, Frases rápidas, Emojis, Anexar e Enviar.
+- id: conversas-editor
+  url: /inbox/all/4392
+  passos:
+    - esperar: '.chat-actions-box textarea'
+    - pausa: 1000
+  alvo: '.chat-actions-box'
+  mascarar: []
+  arquivo: images/ajuda/conversas/editor-da-conversa.webp
+  paginas:
+    - docs/conversas/gerenciar-conversas
+
+# Seção whatsapp-oficial (Canais › WhatsApp › WhatsApp oficial)
+
+# Tela "API Oficial" antes de abrir a janela da Meta, no workspace de documentação. Não clica no botão:
+# a janela da Meta é de terceiros e criaria um canal real.
+- id: whatsapp-oficial-conectar
+  url: /settings/channels/new/whatsapp/embedded
+  passos:
+    - esperar: '.g_settings_simple_page button:has-text("Conectar WhatsApp")'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/whatsapp-oficial/conectar-api-oficial.webp
+  paginas:
+    - docs/canais/whatsapp-api-oficial-padrao
+
+# Aviso amarelo da verificação na Meta num canal oficial de teste do workspace de testes (id 1).
+# Só o aviso entra no recorte; título, número, IDs e token do canal ficam borrados e fora do recorte.
+- id: whatsapp-oficial-aviso-canal
+  workspace: Kinbox
+  url: /settings/channels/2
+  passos:
+    - esperar: '.ant-drawer-body .ant-alert'
+    - pausa: 1000
+  alvo: '.ant-drawer-body .ant-alert'
+  mascarar:
+    - '.ant-drawer-title'
+    - '.ant-drawer-body #description'
+    - '.ant-drawer-body #phone'
+    - '.ant-drawer-body #waba_id'
+    - '.ant-drawer-body #identifier'
+    - '.ant-drawer-body #hashIdentifier'
+  arquivo: images/ajuda/whatsapp-oficial/aviso-mais-de-um-app.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns
+
+# Editor de uma conversa do canal oficial de teste (workspace 1) com a janela aberta: contador no canto.
+# Só o editor entra no recorte (sem nome, número nem mensagens do contato). A janela de cada conversa fecha sozinha
+# 24 h depois da última mensagem do contato: o preparo `conversa-janela-aberta` escolhe na hora uma conversa aberta do
+# canal oficial com a janela aberta e troca CONVERSA_JANELA_ABERTA pelo id dela.
+- id: whatsapp-oficial-janela-aberta
+  workspace: Kinbox
+  preparar: conversa-janela-aberta
+  url: /inbox/all/CONVERSA_JANELA_ABERTA
+  passos:
+    - esperar: '.g_chat_countdown'
+    - pausa: 1000
+  alvo: '.chat-actions-box'
+  mascarar:
+    - '.message-box'
+  arquivo: images/ajuda/whatsapp-oficial/janela-aberta-contador.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas
+
+# Conversa do canal oficial de teste (workspace 1) com a janela de 24 h encerrada e poucas mensagens:
+# aviso do topo, área vazia e o rodapé com os dois botões. A única mensagem e o nome do membro que enviou
+# ficam cobertos; o cabeçalho com o nome do contato fica fora do recorte.
+- id: whatsapp-oficial-janela-encerrada
+  workspace: Kinbox
+  url: /inbox/all/4248
+  passos:
+    - esperar: '.finished-chat-footer:visible >> text=Enviar nota de time'
+    - esperar: '.closed-conversation-banner'
+    - pausa: 1000
+  alvo:
+    - '.closed-conversation-banner'
+    - '.finished-chat-footer:visible'
+  mascarar:
+    - '.message:not(.system)'
+    - '.message .user-name'
+    - '.g_chat_header_inner'
+  arquivo: images/ajuda/whatsapp-oficial/janela-encerrada.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas
+
+# Seção conceitos
+
+# Tela inteira no workspace de documentação, para mostrar as peças: cabeçalho com o botão do ambiente ("Loja Exemplo"),
+# menu lateral inteiro (só ícones), painel Chat e a lista de conversas. O item "Admin" (só da conta de teste) e o selo
+# de staging somem do print; a foto do membro no cabeçalho e as fotos na lista levam tarja.
+- id: conceitos-caixa-de-entrada
+  url: /inbox/all
+  passos:
+    - esperar: 'a[href="/inbox/archived"]'
+    - esperar: 'text=Cliente Novo'
+    - pausa: 1000
+  alvo: body
+  esconder:
+    - 'a[href="/admin"]'
+    - '.react-draggable:has(.fa-vial)'
+  mascarar:
+    - '.g_user_avatar'
+    - 'img[alt="avatar"]'
+  arquivo: images/ajuda/conceitos/caixa-de-entrada.webp
+  paginas:
+    - docs/conceitos/visao-geral
+
+# Seção bot — o bot de exemplo "Atendimento inicial" fica DESLIGADO no workspace de documentação (só o widget fictício
+# "Chat do site" em Canais que atende). Criado por garantirBot no seed.ts.
+
+# Configurações → Automação → Bot: título Bots, Novo Bot, busca, filtros Status e Tipo e a linha do bot (desligado).
+- id: bot-lista
+  url: /settings/bots
+  passos:
+    - esperar: 'tr:has-text("Atendimento inicial")'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Novo Bot")'
+    - 'input[placeholder="Pesquisar por nome"]'
+    - 'tr:has-text("Atendimento inicial")'
+  mascarar: []
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/bot/lista-de-bots.webp
+  paginas:
+    - docs/bot/visao-geral
+    - docs/bot/aprender-a-usar-o-bot
+
+# Editor do bot com o fluxo inteiro (botão de ajustar à tela): barra de cima (voltar, nome, interruptor, desfazer/refazer,
+# Publicar, Simular, Configurações, Histórico, Pesquisar), painel de blocos à esquerda e o fluxo Início → Mensagem → Menu
+# → Mensagem/Atendimento → Fim.
+- id: bot-editor
+  url: /settings/bots/1186
+  altura: 1120
+  passos:
+    - esperar: '.react-flow__node-menu'
+    - clicar: 'button:has(.fa-expand)'
+    - pausa: 1200
+  alvo: '.react-flow'
+  mascarar: []
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/bot/editor-do-bot.webp
+  paginas:
+    - docs/bot/aprender-a-usar-o-bot
+
+# Botão Configurações (ícone de controles) do editor: painel Configurações do bot (Nome, Cor, Horários, Canais que
+# atende, Atende todos os canais, Atende grupos do WhatsApp, Expirar Sessão, Reabrir conversa, Salvar).
+- id: bot-configuracoes
+  url: /settings/bots/1186
+  passos:
+    - esperar: '.react-flow__node-menu'
+    - clicar: 'button:has(.fa-sliders)'
+    - esperar: '.ant-drawer-title >> text=Configurações do bot'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Configurações do bot") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Configurações do bot") button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/bot/configuracoes-do-bot.webp
+  paginas:
+    - docs/bot/aprender-a-usar-o-bot
+
+# Bot de exemplo "Consulta de pedido" (desligado, sem canal; criado por garantirBot no seed.ts): gaveta Integração do bloco
+# "Consultar pedido" com Tipo de integração = Chamar endpoint e o Json fictício (example.com, mapReturnToCustomField → pedido).
+- id: bot-integracao-endpoint
+  url: /settings/bots/1187
+  passos:
+    - esperar: '.react-flow__node:has-text("Consultar pedido")'
+    - clicar: '.react-flow__node:has-text("Consultar pedido")'
+    - clicar: '.react-flow__node:has-text("Consultar pedido") button:has(.fa-edit)'
+    - esperar: '.ant-drawer-content:has-text("Tipo de integração")'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-content:has-text("Tipo de integração") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Tipo de integração") .ace_editor'
+    - '.ant-drawer-content:has-text("Tipo de integração") button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/bot/integracao-chamar-endpoint.webp
+  paginas:
+    - docs/bot/integracoes-do-bot
+
+# Mesmo bot: gaveta Integração do bloco "Marcar cliente VIP" com Executar código e a função run(kinbox) de exemplo.
+- id: bot-integracao-codigo
+  url: /settings/bots/1187
+  passos:
+    - esperar: '.react-flow__node:has-text("Marcar cliente VIP")'
+    - clicar: '.react-flow__node:has-text("Marcar cliente VIP")'
+    - clicar: '.react-flow__node:has-text("Marcar cliente VIP") button:has(.fa-edit)'
+    - esperar: '.ant-drawer-content:has-text("Tipo de integração")'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-content:has-text("Tipo de integração") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Tipo de integração") .ace_editor'
+    - '.ant-drawer-content:has-text("Tipo de integração") button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/bot/integracao-executar-codigo.webp
+  paginas:
+    - docs/bot/usando-integracao-execucao-codigo
+
+# Bot "Atendimento inicial": gaveta do bloco Menu (texto, três opções e os demais campos do bloco).
+- id: bot-bloco-menu
+  url: /settings/bots/1186
+  passos:
+    - esperar: '.react-flow__node-menu'
+    - clicar: '.react-flow__node-menu'
+    - clicar: '.react-flow__node-menu button:has(.fa-edit)'
+    - esperar: '.ant-drawer-content:has-text("Opções")'
+    - pausa: 1500
+  alvo: '.ant-drawer-content:has-text("Opções")'
+  mascarar: []
+  arquivo: images/ajuda/bot/bloco-menu.webp
+  paginas:
+    - docs/bot/blocos-do-bot
+
+# Seção agente-de-ia (Automação e IA › Agentes de IA)
+#
+# Agente "Lia" do seed (sem canal e sem agente de voz, que é recurso em teste e não está ligado no workspace de
+# documentação). Nunca confirmar a conexão de um canal: os prints de "Conectar canal" param na janela aberta.
+
+- id: agente-lista
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/lista-de-agentes.webp
+  paginas:
+    - docs/agente-de-ia/visao-geral
+
+- id: agente-novo
+  url: /settings/agents/new
+  passos:
+    - esperar: 'text=Configuração manual'
+    - pausa: 800
+  alvo:
+    - 'h1:has-text("Como você quer criar seu agente?")'
+    - '#method'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/novo-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-editor
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - pausa: 1000
+  alvo:
+    - '#preview-panel'
+    - '#side-panel'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/editor-do-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-configuracoes
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
+    - esperar: '.ant-drawer-content >> text=Comportamento'
+    - clicar: '.ant-drawer-content >> text=0 responde imediatamente'
+    - pausa: 800
+  alvo: '.ant-drawer-body .rounded-app.mb-4:has-text("Configure como o agente deve se comportar")'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/configuracoes-do-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-configuracoes-perfil
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
+    - esperar: '.ant-drawer-content >> text=Informações básicas do agente'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .rounded-app.mb-4:has-text("Informações básicas do agente")'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/configuracoes-perfil.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-conectar-canal
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: 'button.group\/stack'
+    - esperar: '.ant-modal-content >> text=Gerenciar canais'
+    - pausa: 800
+  alvo:
+    - '.ant-modal-header'
+    - '.ant-modal-content >> text=Chat Do Site >> xpath=../..'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/conectar-canal.webp
+  paginas:
+    - docs/agente-de-ia/conectar-canais
+
+# Fluxograma de exemplo montado na hora (Início → Coletar dados → Subagente → Transferir), sem publicar: puxar a
+# seta do bloco e soltar no vazio cria o bloco ligado e abre "Selecione uma ação". Os blocos novos recebem os ids
+# 1, 2 e 3; no fim, "Enquadrar" (último botão da barra inferior) mostra o desenho inteiro.
+- id: agente-fluxograma
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
+    - esperar: '#side-panel .react-flow__node-start'
+    - pausa: 1000
+    - arrastar:
+        de: '#side-panel .react-flow__node-start .react-flow__handle.source'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 330
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Coletar dados'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Coletar dados")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - arrastar:
+        de: '#side-panel .react-flow__handle.source[data-nodeid="1"]'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 560
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Subagente'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Subagente")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - arrastar:
+        de: '#side-panel .react-flow__handle.source[data-nodeid="2"]'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 560
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Transferir'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Transferir")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - clicar: '#side-panel [class*="_board_bottom_center"] button >> nth=-1'
+    - pausa: 1500
+  alvo:
+    - '#side-panel .react-flow__node-start'
+    - '#side-panel .react-flow__node[data-id="1"]'
+    - '#side-panel .react-flow__node[data-id="2"]'
+    - '#side-panel .react-flow__node[data-id="3"]'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/fluxograma.webp
+  paginas:
+    - docs/agente-de-ia/fluxograma-e-etapas
+
+# Janela "Selecione uma ação", aberta ao puxar a seta do Início e soltar no vazio (nada é publicado).
+- id: agente-selecionar-acao
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
+    - esperar: '#side-panel .react-flow__node-start'
+    - pausa: 1000
+    - arrastar:
+        de: '#side-panel .react-flow__node-start .react-flow__handle.source'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 330
+    - esperar: '.ant-modal-content >> text=Selecione uma ação'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/selecionar-acao.webp
+  paginas:
+    - docs/agente-de-ia/acoes-do-fluxograma
+
+- id: agente-adicionar-conhecimento
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#side-panel header:has-text("Conhecimento") a:has-text("Adicionar")'
+    - esperar: '.ant-modal-content >> text=Cole texto'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/adicionar-conhecimento.webp
+  paginas:
+    - docs/agente-de-ia/conhecimento
+
+- id: agente-selecionar-ferramenta
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#side-panel header:has-text("Ferramentas") a:has-text("Adicionar")'
+    - esperar: '.ant-modal-content >> text=Selecione uma ferramenta'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/selecionar-ferramenta.webp
+  paginas:
+    - docs/agente-de-ia/ferramentas
+
+# Chat de teste com uma pergunta (a resposta é gerada na hora e gasta saldo de cortesia do staging). O histórico do
+# teste fica no navegador da captura (perfil fora do repositório).
+- id: agente-testar
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
+    - esperar: '#preview-panel textarea'
+    - digitar:
+        seletor: '#preview-panel textarea'
+        texto: 'Até que horas vocês atendem no sábado?'
+    - tecla: Enter
+    - pausa: 25000
+  alvo: '#preview-panel'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/testar-agente.webp
+  paginas:
+    - docs/agente-de-ia/testar
+
+# Seção assinatura (Administração › Assinatura e cobrança)
+#
+# Só telas que não disparam cobrança: nenhum item clica em Continuar, Alterar Plano, Contratar, Salvar nem confirma
+# o cancelamento. Só os preços do plano saem com tarja (o guia não publica preços).
+
+- id: assinatura-seu-plano
+  url: /settings/billing
+  passos:
+    - esperar: 'text=Mudar plano'
+    - pausa: 1000
+  alvo: '.card-bordered:has(h1:has-text("PRO"))'
+  mascarar:
+    - 'span:has-text("por R$")'
+    - 'div.text-lg.font-semibold:has-text("R$")'
+  arquivo: images/ajuda/assinatura/seu-plano.webp
+  paginas:
+    - docs/assinatura/visao-geral
+
+- id: assinatura-alterar-plano
+  url: /settings/billing/subscription
+  passos:
+    - esperar: '.billing-space .right >> text=Resumo da fatura'
+    - esperar: '.billing-total-value'
+    - pausa: 1500
+  alvo:
+    - '.billing-space .left .billing-box'
+    - '.billing-space .left .billing-box >> nth=1'
+    - '.billing-space .right .billing-box'
+  mascarar:
+    - '.billing-total-per-user'
+    - '.billing-item-value'
+    - '.billing-total-value'
+  arquivo: images/ajuda/assinatura/alterar-plano.webp
+  paginas:
+    - docs/assinatura/assinar-ou-mudar-plano
+
+- id: assinatura-carteira
+  url: /settings/billing
+  passos:
+    - esperar: 'text=Adicionar crédito'
+    - clicar: 'h3:has-text("Faturas")'
+    - pausa: 800
+  alvo:
+    - 'h3:has-text("Carteira")'
+    - 'a:has-text("Adicionar crédito")'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/carteira.webp
+  paginas:
+    - docs/assinatura/adicionar-saldo
+
+- id: assinatura-adicionar-saldo
+  url: /settings/billing
+  passos:
+    - esperar: 'text=Adicionar saldo'
+    - clicar: 'text=Adicionar saldo'
+    - esperar: '.ant-modal-content >> text=Valor a adicionar'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/adicionar-saldo.webp
+  paginas:
+    - docs/assinatura/adicionar-saldo
+
+- id: assinatura-historico-de-recargas
+  url: /settings/billing/recharges-history
+  passos:
+    - esperar: 'button:has-text("Alerta de saldo")'
+    - pausa: 800
+  alvo:
+    - 'text=Histórico de recargas'
+    - 'button:has-text("Adicionar Saldo")'
+    - 'button:has-text("Ver relatório de uso")'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/historico-de-recargas.webp
+  paginas:
+    - docs/assinatura/alerta-de-saldo
+
+- id: assinatura-alerta-de-saldo
+  url: /settings/billing/recharges-history
+  passos:
+    - esperar: 'button:has-text("Alerta de saldo")'
+    - clicar: 'button:has-text("Alerta de saldo")'
+    - esperar: '.ant-modal-content >> text=Avisar quando o saldo ficar abaixo de'
+    - pausa: 800
+  # Recorte até a linha "Saldo atual": a previsão depende do consumo do workspace de documentação e muda.
+  alvo:
+    - '.ant-modal-content .ant-modal-title'
+    - '.ant-modal-content .ant-modal-close'
+    - '.ant-modal-content .bg-base-200 > div:first-child'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/alerta-de-saldo.webp
+  paginas:
+    - docs/assinatura/alerta-de-saldo
+
+# ── Seção whatsapp-templates (Templates, Flows e carrossel) ──────────────────────────────────────────
+# A Central WhatsApp API só abre com um canal oficial: o workspace de documentação não tem, então os prints vêm do
+# workspace de testes (id 1, canal oficial de QA "Oficial Teste"). Nenhum print mostra lista de templates (os nomes
+# de QA não servem de exemplo). O avatar do cabeçalho fica fora de todos os recortes; a tarja nele só cumpre a regra.
+- id: whatsapp-templates-central
+  workspace: Kinbox
+  url: /settings/whatsapp-api
+  passos:
+    - esperar: 'text=Central WhatsApp API'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page >> text=Central WhatsApp API'
+    - '.g_settings_simple_page button:has-text("Carrossel")'
+    - '.g_settings_simple_page button:has-text("Templates")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/central-whatsapp-api.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-templates/visao-geral
+
+- id: whatsapp-templates-tipo
+  workspace: Kinbox
+  url: /settings/whatsapp-api/templates/new
+  passos:
+    - esperar: 'text=Como você quer criar seu template?'
+    - pausa: 800
+  alvo: '.max-w-\[608px\]'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/novo-template-tipo.webp
+  paginas:
+    - docs/canais/criar-templates-dentro-do-kinbox
+
+# Builder do template padrão com "Informações básicas" aberto. O nome do canal fica sob tarja.
+- id: whatsapp-templates-informacoes
+  workspace: Kinbox
+  url: /settings/whatsapp-api/templates/new?kind=standard
+  passos:
+    - esperar: 'text=Informações básicas'
+    - digitar:
+        seletor: '#name'
+        texto: confirmacao_de_pedido
+    - pausa: 800
+  alvo: '.ant-collapse-item-active:has-text("Nome do template")'
+  mascarar:
+    - '.ant-form-item:has(#channelId) .ant-select-selector'
+  arquivo: images/ajuda/whatsapp-templates/novo-template-informacoes.webp
+  paginas:
+    - docs/canais/criar-templates-dentro-do-kinbox
+
+- id: whatsapp-templates-conteudo
+  workspace: Kinbox
+  altura: 1300
+  url: /settings/whatsapp-api/templates/new?kind=standard
+  passos:
+    - esperar: 'text=Informações básicas'
+    - clicar: '.ant-collapse-header:has-text("Conteúdo")'
+    - esperar: 'text=Corpo da mensagem'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active:has-text("Corpo da mensagem")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/novo-template-conteudo.webp
+  paginas:
+    - docs/canais/criar-templates-dentro-do-kinbox
+
+- id: whatsapp-templates-carrossel-cards
+  workspace: Kinbox
+  url: /settings/whatsapp-api/carousel/new
+  passos:
+    - esperar: 'text=Informações básicas'
+    - clicar: '.ant-collapse-header:has-text("Cards")'
+    - esperar: 'text=Adicionar card'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active:has-text("Adicionar card")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/carrossel-cards.webp
+  paginas:
+    - docs/canais/criar-carrossel-dentro-do-kinbox
+
+# Editor de um Flow de teste do workspace 1 ("Formulario", 1 tela). Recorte: barra do nome, barra do Salvar e a tela.
+# O selo "Stag" do canto inferior esquerdo fica fora do recorte.
+- id: whatsapp-templates-flow-editor
+  workspace: Kinbox
+  largura: 1120
+  url: /settings/whatsapp-api/flows
+  passos:
+    - esperar: 'text=Formulario'
+    - clicar: 'text=Formulario'
+    - esperar: '.react-flow__node-wa-screen'
+    # Corrige o acento do nome só na tela (renomear não grava sem Salvar; o print não salva)
+    - clicar: 'h2:has-text("Formulario")'
+    - esperar: '.ant-modal-content input'
+    - digitar:
+        seletor: '.ant-modal-content input'
+        texto: Formulário
+    - clicar: '.ant-modal-content button:has-text("Salvar")'
+    - esperar: 'h2:has-text("Formulário")'
+    - pausa: 1200
+  alvo:
+    - '.react-flow__node-start'
+    - '.react-flow__node-wa-screen'
+    - '.pointer-events-auto:has(> button:has-text("Salvar"))'
+    - '.pointer-events-auto:has-text("Formulário")'
+  mascarar:
+    - 'button:has-text("Ask")'
+  arquivo: images/ajuda/whatsapp-templates/flow-editor.webp
+  paginas:
+    - docs/canais/criar-flows-dentro-do-kinbox
+
+# Criar flow, etapa 3 (ponto de partida). Não clica em "Criar flow": nada é gravado.
+- id: whatsapp-templates-flow-ponto-de-partida
+  workspace: Kinbox
+  url: /settings/whatsapp-api/flows/new
+  passos:
+    - esperar: '#name'
+    - digitar:
+        seletor: '#name'
+        texto: pesquisa_de_satisfacao_doc
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'text=Escolha o canal WhatsApp'
+    - pausa: 800
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'text=Escolha o ponto de partida'
+    - pausa: 800
+  alvo:
+    - 'text=Escolha o ponto de partida'
+    - 'text=Comece com o canvas limpo.'
+    - 'text=Descreva o flow para o Copiloto montar a estrutura.'
+    - 'button[aria-expanded]:has-text("Escolha um template inicial pronto para editar.")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/flow-ponto-de-partida.webp
+  paginas:
+    - docs/canais/criar-flows-dentro-do-kinbox
+
+# Janela "Enviar mensagem" numa conversa do canal oficial de QA (workspace 1, conversa 4248, a mesma de
+# whatsapp-oficial-janela-encerrada: o contato nunca respondeu, então a janela não abre), com o
+# template aprovado de teste "status_com_imagem" ({{1}} e {{2}} no corpo). Não clica em Enviar. Número sob tarja; o canal
+# aparece com o nome de teste "Oficial Teste" (fictício), porque o passo da página aponta para o campo Canal.
+- id: whatsapp-templates-enviar-mensagem
+  workspace: Kinbox
+  altura: 1300
+  url: /inbox/all/4248
+  passos:
+    - esperar: 'button:has-text("Enviar template")'
+    - clicar: 'button:has-text("Enviar template")'
+    - esperar: '.ant-modal-content #template_id'
+    - clicar: '.ant-modal-content .ant-form-item:has(#template_id) .ant-select-selector'
+    - digitar:
+        seletor: '#template_id'
+        texto: status_com_imagem
+    - pausa: 800
+    - tecla: Enter
+    - esperar: '#template_bodyFields_0'
+    - digitar:
+        seletor: '#template_bodyFields_0'
+        texto: '4512'
+    - digitar:
+        seletor: '#template_bodyFields_1'
+        texto: BR123456789
+    - clicar: '.ant-modal-content :text("Enviar mensagem")'
+    - pausa: 1000
+  alvo: '.ant-modal-content'
+  mascarar:
+    - '.ant-modal-content .ant-input-affix-wrapper:has(#phone)'
+  arquivo: images/ajuda/whatsapp-templates/enviar-mensagem-template.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-templates/enviar-template
+
+# Seção membros-e-permissoes
+
+# Lista de membros do workspace de documentação: 3 convidados fictícios (@example.com) com os papéis padrão e o
+# proprietário. A linha do proprietário (conta real) leva tarja na coluna do nome, da foto e do e-mail; o selo
+# "Proprietário" fica à mostra.
+- id: membros-lista
+  url: /settings/members
+  passos:
+    - esperar: 'text=Diego Santos'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Convidar membro")'
+    - 'tr:has(a[href="/settings/members/5"])'
+  mascarar:
+    - 'tr:has(a[href="/settings/members/5"]) td:first-child'
+  arquivo: images/ajuda/membros-e-permissoes/membros-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+
+# Painel Convidar membro vazio: Nome, foto, E-mail, Permissão e o botão Convidar.
+- id: membros-convidar
+  url: /settings/members/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Convidar membro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Convidar")'
+  arquivo: images/ajuda/membros-e-permissoes/convidar-membro.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+
+# Painel Editar membro de um convidado fictício (Diego Santos): Permissão, Disponível, Ativo e Grupos.
+- id: membros-editar
+  url: /settings/members/222
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar membro'
+    - esperar: 'text=Disponível'
+    - pausa: 800
+  # "Folga fixa da semana" só existe no staging (ainda não está no master do web): some do print.
+  esconder:
+    - '.ant-drawer .ant-form-item:has-text("Folga fixa da semana")'
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Salvar")'
+  arquivo: images/ajuda/membros-e-permissoes/editar-membro.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+    - docs/administracao/licencas-e-propriedade
+
+# Lista de papéis (Permissões) com os três padrões e as iniciais dos membros fictícios.
+- id: permissoes-lista
+  url: /settings/roles
+  passos:
+    - esperar: 'text=Administrador'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Nova permissão")'
+    - 'tr:has-text("Administrador")'
+  arquivo: images/ajuda/membros-e-permissoes/permissoes-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios
+
+# Painel Criar permissão com Home recolhida e Acesso as Conversas aberto (as 6 opções).
+- id: permissoes-acesso-as-conversas
+  url: /settings/roles/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar permissão'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Home")'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Acesso as Conversas")'
+    - esperar: '.ant-drawer >> text=Por Grupo Limitado'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer label:has-text("Restrito")'
+  arquivo: images/ajuda/membros-e-permissoes/acesso-as-conversas.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios
+
+# Seção campanhas (Campanhas e marketing › Campanhas)
+#
+# Nenhuma campanha é criada nem enviada: os prints mostram só a tela Criar Campanha antes do botão Criar, o menu de
+# ações da lista e os cartões de resultado de uma campanha de teste já concluída. O workspace de documentação não tem
+# canal de WhatsApp nem de SMS, então as telas de Conteúdo e o detalhe vêm do workspace de testes (Kinbox), recortadas
+# só no bloco usado; o nome do canal escolhido (fora do recorte) leva tarja.
+- id: campanha-criar-secoes
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: 'text=Controle de tempo'
+    - clicar: '.ant-collapse-header:has-text("Controle de tempo")'
+    - esperar: 'text=Envio das mensagens'
+    - pausa: 800
+  alvo:
+    - 'header:has-text("Criar Campanha")'
+    - '.ant-collapse-item-active'
+  mascarar: []
+  arquivo: images/ajuda/campanhas/criar-campanha.webp
+  paginas:
+    - docs/campanhas/campanhas-no-kinbox
+
+- id: campanha-publico-alvo
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: 'text=Público alvo'
+    - clicar: '.ant-collapse-header:has-text("Público alvo")'
+    - esperar: 'text=Arraste e solte seu arquivo .csv aqui'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active'
+  mascarar: []
+  arquivo: images/ajuda/campanhas/publico-alvo.webp
+  paginas:
+    - docs/campanhas/campanhas-no-kinbox
+
+- id: campanha-tempo-personalizado
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: 'text=Controle de tempo'
+    - clicar: '.ant-collapse-header:has-text("Controle de tempo")'
+    - esperar: 'text=Envio das mensagens'
+    - clicar: '.ant-collapse-item-active >> text=Personalizado'
+    - esperar: 'text=Tempo entre mensagens (seg)'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active'
+  mascarar: []
+  arquivo: images/ajuda/campanhas/controle-de-tempo-personalizado.webp
+  paginas:
+    - docs/campanhas/velocidade-e-horario
+
+- id: campanha-conteudo-qr
+  workspace: Kinbox
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: '#channelIds'
+    - clicar: '#channelIds'
+    - clicar: '.ant-select-item-option >> text=[QA] KIN-7637 v5 padrão'
+    - tecla: Escape
+    - clicar: '.ant-collapse-header:has-text("Conteúdo")'
+    - esperar: '.ant-collapse-item-active textarea.text-editor-area'
+    - digitar:
+        seletor: '.ant-collapse-item-active textarea.text-editor-area'
+        texto: '{{Oi!|Olá!}} Nossa promoção de natal começa amanhã. Responda SAIR para não receber mais mensagens.'
+    - pausa: 1000
+  alvo: '.ant-collapse-item-active'
+  mascarar:
+    - '.ant-select-selection-item'
+  arquivo: images/ajuda/campanhas/conteudo-qr-code.webp
+  paginas:
+    - docs/campanhas/campanhas-no-kinbox
+
+- id: campanha-conteudo-sms
+  workspace: Kinbox
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: '#channelIds'
+    - clicar: '#channelIds'
+    - clicar: '.ant-select-item-option >> text=/^SMS$/'
+    - tecla: Escape
+    - clicar: '.ant-collapse-header:has-text("Conteúdo")'
+    - esperar: '.ant-collapse-item-active textarea.text-editor-area'
+    - digitar:
+        seletor: '.ant-collapse-item-active textarea.text-editor-area'
+        texto: 'Loja Exemplo: lembrete da sua consulta de sexta, 10h. Responda SAIR para sair da lista.'
+    - pausa: 1000
+  alvo: '.ant-collapse-item-active'
+  mascarar:
+    - '.ant-select-selection-item'
+  arquivo: images/ajuda/campanhas/conteudo-sms.webp
+  paginas:
+    - docs/campanhas/campanha-de-sms
+
+- id: campanha-menu-acoes
+  workspace: Kinbox
+  url: /crm/campaigns/v2
+  passos:
+    - esperar: 'tbody tr.ant-table-row'
+    - clicar: 'tbody tr.ant-table-row >> nth=0 >> .ant-dropdown-trigger'
+    - esperar: '.ant-dropdown-menu >> text=Visualizar'
+    - pausa: 800
+  alvo: '.ant-dropdown:visible .ant-dropdown-menu'
+  mascarar:
+    - 'tbody tr.ant-table-row >> nth=0 >> td >> nth=0'
+  arquivo: images/ajuda/campanhas/menu-de-acoes.webp
+  paginas:
+    - docs/campanhas/acompanhar-resultados
+
+- id: campanha-resultados
+  workspace: Kinbox
+  url: /crm/campaigns/v2
+  passos:
+    - esperar: 'text=KIN-7809 campanha envi'
+    - clicar: 'text=KIN-7809 campanha envi'
+    - esperar: '.ant-drawer-body .g-total-report-row >> text=Respondido'
+    - pausa: 1500
+  alvo: '.ant-drawer-body .g-total-report-row'
+  mascarar:
+    - '.ant-drawer-title'
+  arquivo: images/ajuda/campanhas/resultados-da-campanha.webp
+  paginas:
+    - docs/campanhas/acompanhar-resultados
+# Seção relatorios (Relatórios › Relatórios de atendimento)
+#
+# O workspace de documentação (Loja Exemplo) tem poucas sessões e nenhuma resposta de membro: TME, TMP e TMA ficam
+# vazios. O print da Produtividade vem do workspace de testes (id 1, "Kinbox") agrupado "Por Dia" (sem nome de pessoa);
+# a tarja no nome do workspace só satisfaz a regra de mascarar e fica fora do recorte. Relatórios com nomes de membros
+# (Atribuição, Interação, Presença, tabela da Visão geral) ficam sem print: o dono do workspace é uma conta real.
+# Na Loja Exemplo o staging mostra no Ao vivo um painel "Setores" e a troca "Escritório / Mapa de calor" que não estão
+# no código de produção: o recorte pega só a barra de indicadores do topo.
+
+- id: relatorios-menu
+  url: /reports/productivity
+  passos:
+    - esperar: 'a[href="/reports/voip"]'
+    - pausa: 1000
+  alvo:
+    - 'a[href="/reports/dashboard"]'
+    - 'a[href="/reports/voip"]'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/menu-de-relatorios.webp
+  paginas:
+    - docs/relatorios/como-funcionam
+
+- id: relatorios-visao-geral-indicadores
+  url: /reports/overview
+  passos:
+    - esperar: '.g-total-report-row >> text=Em atendimento'
+    - pausa: 2000
+  alvo: '.g-total-report-row'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/visao-geral-indicadores.webp
+  paginas:
+    - docs/relatorios/visao-geral
+
+- id: relatorios-produtividade
+  workspace: Kinbox
+  url: /reports/productivity
+  passos:
+    - esperar: '.g-total-report-row >> text=Sessões novas'
+    - pausa: 3000
+  alvo:
+    - '.ant-picker-range'
+    - '.g-total-report-row'
+  mascarar:
+    - '.g_workspace_drop_title'
+  arquivo: images/ajuda/relatorios/produtividade.webp
+  paginas:
+    - docs/relatorios/produtividade
+
+- id: relatorios-ao-vivo-indicadores
+  url: /reports/live/service
+  passos:
+    - esperar: 'text=na fila'
+    - pausa: 3000
+  alvo:
+    - 'button[title="Voltar para os relatórios"]'
+    - 'div[title="Operadores online sobre o total da equipe"]'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/ao-vivo-indicadores.webp
+  paginas:
+    - docs/relatorios/ao-vivo
+
+# Seção conta (Sua conta e app › Sua conta)
+#
+# A conta de teste é a dona do workspace de documentação: nome, e-mail, celular e foto dela aparecem no perfil e no
+# menu do usuário. Os valores do cartão Informações levam tarja; no menu, nome e foto. O staging tem itens que ainda
+# não estão em produção (Passkeys e preferências do proprietário no perfil, "Menção em conversa" no push, "Abrir no
+# Admin" no menu): os recortes param antes deles. O print da verificação em duas etapas abre só a janela de conectar
+# (não confirma código) e cobre o QR Code e a chave com tarja.
+
+- id: conta-perfil-informacoes
+  url: /settings/account/profile
+  passos:
+    - esperar: 'text=Seu nome e sobrenome'
+    - pausa: 1500
+  alvo:
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Imagem de perfil"))'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail"))'
+  mascarar:
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Imagem de perfil")) figure'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Nome")) > .ant-col:last-child .ant-space-item:first-child'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail")) > .ant-col:last-child .ant-space-item:first-child'
+  arquivo: images/ajuda/conta/perfil-informacoes.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario
+
+- id: conta-perfil-seguranca
+  url: /settings/account/profile
+  altura: 1400
+  passos:
+    - esperar: 'text=Peça um código do app autenticador ao entrar.'
+    - pausa: 1000
+  alvo: 'div.ant-row-space-between:has(> .ant-col > div:text-is("Verificação em duas etapas"))'
+  mascarar: []
+  arquivo: images/ajuda/conta/perfil-seguranca.webp
+  paginas:
+    - docs/conta/verificacao-em-duas-etapas
+
+- id: conta-2fa-conectar
+  url: /settings/account/profile
+  altura: 1400
+  passos:
+    - esperar: 'text=Peça um código do app autenticador ao entrar.'
+    - clicar: 'div.ant-row-space-between:has(> .ant-col > div:text-is("Verificação em duas etapas")) button:has-text("Ativar")'
+    - esperar: '.ant-modal-content >> text=Conecte seu app autenticador'
+    - esperar: '.two-factor-connect-qr svg'
+    - pausa: 800
+  alvo:
+    - '.two-factor-connect div.font-medium:has-text("2. Digite o código")'
+    - '.ant-modal-content .ant-modal-footer'
+  mascarar: []
+  arquivo: images/ajuda/conta/2fa-conectar-app.webp
+  paginas:
+    - docs/conta/verificacao-em-duas-etapas
+
+- id: conta-alterar-senha
+  url: /settings/account/profile
+  altura: 1400
+  passos:
+    - esperar: 'text=Peça um código do app autenticador ao entrar.'
+    - clicar: 'div.ant-row-space-between:has(> .ant-col > div:text-is("Senha")) button'
+    - esperar: '.ant-modal-content >> text=Confirme nova senha'
+    - pausa: 500
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conta/alterar-senha.webp
+  paginas:
+    - docs/conta/senha-e-sessoes
+
+- id: conta-menu-disponivel
+  url: /settings/account/profile
+  passos:
+    - esperar: '.g_user_avatar'
+    - clicar: '.g_user_avatar'
+    - esperar: '[class*="user_menu_availability"]'
+    - pausa: 600
+  alvo:
+    - '[class*="user_menu_identity"]'
+    - '.ant-dropdown-menu-item:has-text("Perfil")'
+  mascarar:
+    - '[class*="user_menu_name"]'
+    - '[class*="user_menu_identity"] figure'
+  arquivo: images/ajuda/conta/menu-disponivel.webp
+  paginas:
+    - docs/conta/disponibilidade
+
+- id: conta-notificacoes-desktop
+  url: /settings/account/notifications
+  passos:
+    - esperar: 'text=Habilitar notificações de desktop'
+    - pausa: 1000
+  alvo:
+    - 'div.text-xl:text-is("Push")'
+    - 'div.rounded-xl.bg-selected-lighter'
+  mascarar: []
+  arquivo: images/ajuda/conta/notificacoes-desktop.webp
+  paginas:
+    - docs/conta/notificacoes
+
+# Seção instagram-e-facebook (Canais › Instagram e Facebook)
+#
+# A conexão abre a janela de login da Meta e só funciona com conta real: nada é conectado, desconectado nem excluído.
+# As telas antes da janela da Meta vêm do workspace de documentação. As configurações de um canal conectado vêm do
+# workspace de testes (id 1, "Kinbox"), só para ver: título do canal e nome da página ficam sob tarja, e os campos
+# personalizados do workspace de testes ficam fora do recorte.
+
+- id: instagram-conectar
+  largura: 1000
+  url: /settings/channels/new/instagram
+  passos:
+    - esperar: '.g_settings_simple_page button:has-text("Conectar página do Instagram")'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/instagram-e-facebook/conectar-instagram.webp
+  paginas:
+    - docs/canais/instagram
+
+- id: facebook-conectar
+  largura: 1000
+  url: /settings/channels/new/facebook
+  passos:
+    - esperar: '.g_settings_simple_page button:has-text("Conectar página do Facebook")'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/instagram-e-facebook/conectar-facebook.webp
+  paginas:
+    - docs/canais/facebook/conectar
+
+- id: instagram-configuracoes
+  workspace: Kinbox
+  url: /settings/channels/93
+  passos:
+    - esperar: '.ant-drawer-body #ignore_story_mention'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .ant-form-item:has(#isPrivate)'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+    - '.ant-drawer-body #description'
+  arquivo: images/ajuda/instagram-e-facebook/configuracoes-instagram.webp
+  paginas:
+    - docs/canais/instagram/configuracoes
+
+- id: facebook-configuracoes
+  workspace: Kinbox
+  url: /settings/channels/29
+  passos:
+    - esperar: '.ant-drawer-body #isPrivate'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .ant-form-item:has(#isPrivate)'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+    - '.ant-drawer-body #name'
+  arquivo: images/ajuda/instagram-e-facebook/configuracoes-facebook.webp
+  paginas:
+    - docs/canais/instagram/configuracoes
+
+# Seção desenvolvedores (Integrações e API › Desenvolvedores)
+#
+# Tokens de API: o preparo `token-temporario` cria um token "Integração ERP (exemplo)" (Ler e Alterar) no workspace de
+# documentação antes da lista e o revoga logo depois (o valor do token não é guardado). O prefixo do token (coluna Token) leva tarja. Nunca capture a janela
+# "Token criado com sucesso".
+
+- id: dev-api-tokens-lista
+  preparar: token-temporario
+  url: /settings/api
+  passos:
+    - esperar: 'tr:has-text("Integração ERP")'
+    - pausa: 600
+  alvo:
+    - 'h3:has-text("Tokens de API Publica")'
+    - 'button:has-text("Criar token")'
+    - '.ant-table'
+    - 'button:has-text("Mostrar tokens legados")'
+  mascarar:
+    - 'td code'
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/desenvolvedores/api-tokens-lista.webp
+  paginas:
+    - docs/desenvolvedor/tokens-de-api
+
+# Janela Criar token de API (antes de clicar em Criar: nenhum token é criado).
+- id: dev-api-criar-token
+  url: /settings/api
+  passos:
+    - esperar: 'button:has-text("Criar token")'
+    - clicar: 'button:has-text("Criar token")'
+    - esperar: '.ant-modal-title:has-text("Criar token de API")'
+    - digitar: { seletor: '.ant-modal-content #name', texto: 'Integração ERP' }
+    - pausa: 600
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/desenvolvedores/criar-token.webp
+  paginas:
+    - docs/desenvolvedor/tokens-de-api
+
+# Tela MCP: cartão de apresentação, Como conectar (abas e Instalar conector) e Conexões ativas.
+- id: dev-mcp-tela
+  url: /settings/mcp
+  passos:
+    - esperar: 'button:has-text("Instalar conector")'
+    - pausa: 1200
+  alvo:
+    - '.card-bordered:has-text("Conecte agentes de IA")'
+    - '.card-bordered:has-text("Conexões ativas")'
+  mascarar: []
+  esconder:
+    - '.request-inspector'
+  arquivo: images/ajuda/desenvolvedores/mcp-tela.webp
+  paginas:
+    - docs/desenvolvedor/mcp
+
+# Tela Autorizar acesso. Precisa de um pedido de autorização pendente (vale 15 min): o preparo `pedido-mcp` registra um
+# aplicativo de teste chamado "Claude" (retorno em example.com), abre o pedido, troca PEDIDO_PENDENTE por ele e nega o
+# pedido depois do print. A conta de teste vê uma opção interna que o cliente não vê:
+# ela fica escondida no print. O "Conectado como" leva tarja.
+- id: dev-mcp-autorizar
+  preparar: pedido-mcp
+  url: /oauth/consent?request=PEDIDO_PENDENTE
+  passos:
+    - esperar: 'h1:has-text("quer acessar")'
+    - pausa: 800
+  alvo: 'div:has(> h1:has-text("quer acessar"))'
+  mascarar:
+    - 'p:has-text("Conectado como")'
+  esconder:
+    - 'div:has(> h1:has-text("quer acessar")) .rounded-xl > label:nth-of-type(n+4)'
+  arquivo: images/ajuda/desenvolvedores/mcp-autorizar.webp
+  paginas:
+    - docs/desenvolvedor/mcp
+
+# Painel Criar plugin preenchido com dados fictícios (não salva). O valor gerado do Auth Secret leva tarja e a ajuda
+# do campo some do print (a página não ensina a usar o campo).
+- id: dev-plugin-novo
+  url: /settings/plugins/new
+  passos:
+    - esperar: '#endpoint'
+    - digitar: { seletor: '#name', texto: 'Ficha do cliente' }
+    - digitar: { seletor: '#endpoint', texto: 'https://example.com/ficha-do-cliente' }
+    - pausa: 600
+  alvo:
+    - '.ant-drawer-content:has-text("Criar plugin") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Criar plugin") button:has-text("Salvar")'
+  mascarar:
+    - '#authSecret'
+  esconder:
+    - '#authSecret_help'
+  arquivo: images/ajuda/desenvolvedores/criar-plugin.webp
+  paginas:
+    - docs/desenvolvedor/criando-plugin-integracao
+
+# Painel Conectar Canal Customizado (não conecta). O recorte vai de Descrição até o último campo. O endereço de
+# recebimento traz um identificador gerado na hora: leva tarja (a página mostra o formato do endereço).
+- id: dev-canal-customizado
+  url: /settings/channels/new
+  passos:
+    - clicar: 'text=Customizado'
+    - esperar: '#hashIdentifier'
+    - digitar: { seletor: '#description', texto: 'App da loja' }
+    - digitar: { seletor: '#hashIdentifier', texto: 'https://example.com/kinbox/webhook' }
+    - pausa: 600
+  alvo:
+    - '.ant-form-item:has(#description)'
+    - '#hashIdentifier'
+  mascarar:
+    - '.ant-form-item:has(input[disabled]) input'
+  arquivo: images/ajuda/desenvolvedores/canal-customizado.webp
+  paginas:
+    - docs/canais/canal-customizado
+
+# Link de conversa em um clique com um número que não tem conversa: abre Enviar mensagem com nome, número e texto do link.
+- id: dev-link-enviar-mensagem
+  url: /send?phones=5511900000099&name=Contato%20Teste&text=Ol%C3%A1%2C%20tenho%20interesse
+  passos:
+    - esperar: '.ant-modal-content:has-text("Enviar mensagem")'
+    - pausa: 1000
+  alvo: '.ant-modal-content:has-text("Enviar mensagem")'
+  mascarar: []
+  arquivo: images/ajuda/desenvolvedores/link-enviar-mensagem.webp
+  paginas:
+    - docs/usando-o-kinbox/conversa-em-um-clique
+
+# --- Seção atendimento (lote 5) ---
+
+# Tela Grupos: Novo grupo, busca, filtro Tudo e os grupos fictícios Suporte, Vendas e Atendimento com descrição e iniciais dos membros.
+- id: grupos-lista
+  largura: 1100
+  url: /settings/groups
+  passos:
+    - esperar: 'text=Orçamentos e novos pedidos'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Novo grupo")'
+    - 'tr:has(a[href="/settings/groups/167"])'
+  arquivo: images/ajuda/atendimento/grupos-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-grupos
+
+# Painel Editar grupo do grupo fictício Vendas: Nome do grupo, Descrição, Membros (Bruno Carvalho e Carla Mendes), Cor ou emoji e Salvar.
+- id: grupo-editar
+  url: /settings/groups/168
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar grupo'
+    - esperar: '.ant-drawer >> text=Bruno Carvalho'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Salvar")'
+  arquivo: images/ajuda/atendimento/grupo-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-grupos
+
+# Lista de Atribuição Automática: Nova Regra, busca, filtro Tudo e a regra "Distribuir entre Vendas" com o interruptor desligado (regra nova nasce inativa).
+- id: atribuicao-lista
+  largura: 1100
+  url: /settings/assignment-rules
+  passos:
+    - esperar: 'text=Distribuir entre Vendas'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Nova Regra")'
+    - 'tr:has(a[href="/settings/assignment-rules/94"])'
+  arquivo: images/ajuda/atendimento/atribuicao-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-atribuicoes-automaticas
+
+# Painel Editar atribuição automática: Nome, Regra = Todos, Atribuir para = Atribuir ciclicamente para um membro de um grupo, a ajuda de disponibilidade e Grupo = Vendas.
+- id: atribuicao-editar
+  url: /settings/assignment-rules/94
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar atribuição automática'
+    - esperar: '.ant-drawer >> text=Vendas'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Salvar")'
+  arquivo: images/ajuda/atendimento/atribuicao-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-atribuicoes-automaticas
+
+# Tela Horários: Novo horário e os horários "Atendimento da loja" e "Horário Comercial Relatório" com a marca Horário Padrão.
+- id: horarios-lista
+  largura: 1100
+  url: /settings/business-hours
+  passos:
+    - esperar: 'text=Horário Padrão'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Novo horário")'
+    - 'tr:has(a[href="/settings/business-hours/368"])'
+  arquivo: images/ajuda/atendimento/horarios-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-horarios
+
+# Painel Editar horário "Atendimento da loja": Nome do horário e o cartão Segunda ligado com 09:00 até 12:00, 13:00 até 18:00 e o botão Horário.
+- id: horario-editar
+  url: /settings/business-hours/369
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar horário'
+    - esperar: '.ant-drawer >> text=Segunda'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer .ant-card:has-text("Segunda")'
+  arquivo: images/ajuda/atendimento/horario-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-horarios
+
+# Tela Tags: Nova tag, busca, filtro Tudo e as 5 tags fictícias; Orçamento com a coluna Grupos.
+- id: atendimento-tags-lista
+  largura: 1100
+  url: /settings/tags
+  passos:
+    - esperar: 'text=Orçamento'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Nova tag")'
+    - 'tr:has(a[href="/settings/tags/596"])'
+  arquivo: images/ajuda/atendimento/tags-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-tags
+
+# Janela Editar tag "Orçamento": Nome, Cor, Visível para = Grupos e Grupos = Vendas.
+- id: tag-editar
+  url: /settings/tags/593
+  passos:
+    - esperar: '.ant-modal-content >> text=Visível para'
+    - esperar: '.ant-modal-content >> text=Vendas'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  arquivo: images/ajuda/atendimento/tag-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-tags
+
+# Conversa fictícia (Carlos Pereira): botão de adicionar tag no rodapé aberto, lista Categorizar com busca e as tags, Orçamento marcada. Só o menu.
+- id: tag-na-conversa
+  url: /inbox/all/4393
+  passos:
+    - esperar: '[data-academia="tag-button"]'
+    - clicar: '[data-academia="tag-button"]'
+    - esperar: '.ant-dropdown >> text=Categorizar'
+    - pausa: 800
+  alvo: '.ant-dropdown:has-text("Categorizar")'
+  arquivo: images/ajuda/atendimento/tag-na-conversa.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-tags
+
+# Automação fictícia "Pedir avaliação" (desligada): Ativo desligado, Gatilho = Ao resolver uma conversa, Sem condições e a ação Avaliar atendimento com Configurar.
+- id: avaliacao-automacao
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Pedir avaliação")'
+    - clicar: 'text=Pedir avaliação'
+    - esperar: '.ant-drawer >> text=Avaliar atendimento'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Configurar")'
+  arquivo: images/ajuda/atendimento/avaliacao-automacao.webp
+  paginas:
+    - docs/atendimento/pesquisa-de-satisfacao
+    - docs/automacao/exemplos
+
+# Configurar da ação Avaliar atendimento: painel Configurar Avaliação com Pergunta, Opções (Nota e Texto), Opção, Texto de agradecimento e Salvar (texto do bot de avaliação que o workspace recebe ao ser criado).
+- id: avaliacao-configurar
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Pedir avaliação")'
+    - clicar: 'text=Pedir avaliação'
+    - esperar: '.ant-drawer button:has-text("Configurar")'
+    - clicar: '.ant-drawer button:has-text("Configurar")'
+    - esperar: '.ant-drawer-title >> text=Configurar Avaliação'
+    - esperar: 'text=Texto de agradecimento'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Configurar Avaliação") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Configurar Avaliação") button:has-text("Salvar")'
+  arquivo: images/ajuda/atendimento/avaliacao-configurar.webp
+  paginas:
+    - docs/atendimento/pesquisa-de-satisfacao
+
+# Seção widget (Canais › Chat do site). O widget "Site da loja" é criado e configurado pelo seed (garantirWidgetExemplo)
+# e é aberto pela lista de canais (clique no nome), sem id fixo. O código de instalação do staging traz endereços do
+# staging: antes do print, a caixa recebe o formato de produção (o mesmo de web:src/pages/settings/widget/index.tsx) com
+# identificação fictícia. Os prints do chat abrem o site de teste da captura (`site:`): o HTML da página fictícia em
+# www.example.com é servido pelo próprio Playwright, mas o script e as configurações do chat vêm do staging.
+
+- id: widget-adicionar
+  url: /settings/channels/new
+  passos:
+    - clicar: 'text=Widget'
+    - esperar: '.ant-drawer-body input#name'
+    - digitar: { seletor: '.ant-drawer-body input#name', texto: 'Site da loja' }
+    - pausa: 800
+  altura: 520
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-footer'
+  mascarar: []
+  arquivo: images/ajuda/widget/adicionar-widget.webp
+  paginas:
+    - docs/canais/widget
+
+- id: widget-instalacao
+  url: /settings/channels
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
+    - pausa: 800
+    - trocarTexto: { seletor: '.break-all.rounded-lg', texto: '<script type="text/javascript">;(function(){window.__kb=window.__kb||{},window.__kb.license="000000000000000000000000:000";var e=document.createElement("script");e.type="module",e.async=!0,e.src="https://widget.kinbox.com.br/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>' }
+  alvo:
+    - 'header:has-text("Instalação")'
+    - 'button:has-text("Copiar código")'
+  mascarar: []
+  arquivo: images/ajuda/widget/instalacao.webp
+  paginas:
+    - docs/canais/widget
+
+- id: widget-tela
+  url: /settings/channels
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
+    - pausa: 1000
+    - trocarTexto: { seletor: '.break-all.rounded-lg', texto: '<script type="text/javascript">;(function(){window.__kb=window.__kb||{},window.__kb.license="000000000000000000000000:000";var e=document.createElement("script");e.type="module",e.async=!0,e.src="https://widget.kinbox.com.br/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>' }
+  alvo:
+    - 'text=Site da loja'
+    - 'aside:has-text("Pré-visualização")'
+    - 'div.card-bordered.mb-4:has-text("Ajustes")'
+  mascarar: []
+  arquivo: images/ajuda/widget/tela-do-widget.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+- id: widget-aparencia
+  url: /settings/channels
+  altura: 1400
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
+    - clicar: 'div.card-bordered.mb-4:has-text("Aparência") .ant-collapse-header'
+    - pausa: 1000
+  alvo: 'div.card-bordered.mb-4:has-text("Aparência")'
+  mascarar: []
+  arquivo: images/ajuda/widget/aparencia.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+- id: widget-textos
+  url: /settings/channels
+  altura: 1500
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
+    - clicar: 'div.card-bordered.mb-4:has-text("Textos") .ant-collapse-header'
+    - pausa: 1000
+  alvo: 'div.card-bordered.mb-4:has-text("Textos")'
+  mascarar: []
+  arquivo: images/ajuda/widget/textos.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+- id: widget-formulario
+  url: /settings/channels
+  altura: 1700
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
+    - clicar: 'div.card-bordered.mb-4:has-text("Formulário") .ant-collapse-header'
+    - pausa: 1000
+  alvo: 'div.card-bordered.mb-4:has-text("Formulário")'
+  mascarar: []
+  arquivo: images/ajuda/widget/formulario.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+# Ajustes: recorte só da opção Restringir domínio, a que a página explica com o print (as outras ficam na tabela)
+- id: widget-restringir-dominio
+  url: /settings/channels
+  altura: 2200
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
+    - clicar: 'div.card-bordered.mb-4:has-text("Ajustes") .ant-collapse-header'
+    - pausa: 1000
+  alvo:
+    - 'div.card-bordered.mb-4:has-text("Ajustes") >> text=Restringir domínio'
+    - 'div.card-bordered.mb-4:has-text("Ajustes") .ant-select:has(.ant-select-selection-overflow)'
+  mascarar: []
+  arquivo: images/ajuda/widget/restringir-dominio.webp
+  paginas:
+    - docs/canais/widget/configuracoes
+
+- id: widget-chat-no-site
+  site: { widget: 'Site da loja' }
+  url: /
+  passos:
+    - esperar: 'widget>> #widget-button'
+    - pausa: 1500
+    - clicar: 'widget>> #widget-button'
+    - esperar: 'widget>> form button[type="submit"]'
+    - pausa: 1500
+  alvo: '.kinbox-widget-container'
+  mascarar: []
+  arquivo: images/ajuda/widget/chat-no-site.webp
+  paginas:
+    - docs/canais/widget
+
+- id: widget-balao-no-site
+  site: { widget: 'Site da loja' }
+  url: /
+  passos:
+    - esperar: 'widget>> #widget-button'
+    - pausa: 6500
+    - passar: 'widget>> #widget-button'
+    - pausa: 1200
+  alvo: '.kinbox-widget-container'
+  mascarar: []
+  arquivo: images/ajuda/widget/balao-no-site.webp
+  paginas:
+    - docs/canais/widget/configuracoes
+
+# Seção contatos (CRM e vendas › Contatos, organizações e campos personalizados)
+#
+# Dados do seed (garantirClientes): campos "Tipo de cliente" e "Data de aniversário", organizações "Escritório
+# Exemplo" e "Padaria Exemplo". A planilha dos prints de importação é fictícia (arquivos/contatos-exemplo.csv).
+
+- id: contatos-lista
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'text=Mostrando'
+    - pausa: 1000
+  alvo:
+    - 'h1:has-text("Contatos")'
+    - 'button[aria-label="Mais opções"]'
+    - 'text=Mostrando'
+  mascarar: []
+  arquivo: images/ajuda/contatos/lista-de-contatos.webp
+  paginas:
+    - docs/conversas/clientes-contatos-e-organizacoes
+
+- id: contatos-criar
+  url: /crm/contacts/people/new
+  passos:
+    - esperar: '.ant-drawer-content >> text=Contato privado'
+    # O texto de exemplo do e-mail usa um domínio real: troca por um domínio reservado
+    - trocarTexto: { seletor: '.ant-drawer-content input[placeholder*="@"]', texto: 'nome@example.com' }
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content'
+  mascarar: []
+  arquivo: images/ajuda/contatos/criar-contato.webp
+  paginas:
+    - docs/conversas/clientes-contatos-e-organizacoes
+
+- id: contatos-importar-arquivo
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - pausa: 800
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  altura: 720
+  arquivo: images/ajuda/contatos/importar-arquivo.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-importar-colunas
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - enviar: { seletor: 'input[type=file]', arquivo: arquivos/contatos-exemplo.csv }
+    - pausa: 2000
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Associe as colunas'
+    - pausa: 1000
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/contatos/importar-colunas.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-importar-organizacoes
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - enviar: { seletor: 'input[type=file]', arquivo: arquivos/contatos-exemplo.csv }
+    - pausa: 2000
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Associe as colunas'
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Confira a qual organização'
+    - pausa: 2500
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/contatos/importar-organizacoes.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-importar-confirmar
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - enviar: { seletor: 'input[type=file]', arquivo: arquivos/contatos-exemplo.csv }
+    - pausa: 2000
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Associe as colunas'
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Confira a qual organização'
+    - pausa: 2500
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Total para importar'
+    - pausa: 1000
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  altura: 1150
+  arquivo: images/ajuda/contatos/importar-confirmar.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-perfil
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'text=Ana Souza'
+    - clicar: 'text=Ana Souza'
+    - esperar: 'text=Campos personalizados'
+    - pausa: 2500
+  alvo: 'div[class*="max-w-[1200px]"] >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/contatos/perfil-do-contato.webp
+  paginas:
+    - docs/conversas/clientes-contatos-e-organizacoes
+
+- id: organizacoes-perfil
+  url: /crm/contacts/organizations
+  passos:
+    - esperar: 'text=Padaria Exemplo'
+    - clicar: 'text=Padaria Exemplo'
+    - esperar: 'text=Cliente desde'
+    - pausa: 2500
+  alvo: 'div[class*="max-w-[1200px]"] >> visible=true'
+  mascarar: []
+  altura: 958
+  arquivo: images/ajuda/contatos/perfil-da-organizacao.webp
+  paginas:
+    - docs/clientes/organizacoes
+
+- id: campos-lista
+  url: /settings/custom-fields
+  passos:
+    - esperar: 'text=Tipo de cliente'
+    - pausa: 1000
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/contatos/campos-personalizados.webp
+  paginas:
+    - docs/configuracoes-no-workspace/campos-personalizados-no-kinbox
+
+- id: campos-novo
+  url: /settings/custom-fields
+  passos:
+    - esperar: 'button:has-text("Novo campo")'
+    - clicar: 'button:has-text("Novo campo")'
+    - esperar: '.ant-drawer-content #name'
+    - digitar: { seletor: '.ant-drawer-content #name', texto: 'Forma de pagamento' }
+    - digitar: { seletor: '.ant-drawer-content #description', texto: 'Como o cliente prefere pagar' }
+    - clicar: '.ant-drawer-content .ant-select:has(#type)'
+    - clicar: '.ant-select-item-option[title="Seleção"]'
+    - esperar: '.ant-drawer-content >> text=Valores do campo'
+    - clicar: '.ant-drawer-content button:has-text("Opção")'
+    - digitar: { seletor: '.ant-drawer-content input[placeholder="Valor"] >> nth=0', texto: 'Pix' }
+    - clicar: '.ant-drawer-content button:has-text("Opção")'
+    - digitar: { seletor: '.ant-drawer-content input[placeholder="Valor"] >> nth=1', texto: 'Cartão' }
+    - pausa: 800
+  alvo: '.ant-drawer-content'
+  mascarar: []
+  altura: 1320
+  arquivo: images/ajuda/contatos/novo-campo.webp
+  paginas:
+    - docs/configuracoes-no-workspace/campos-personalizados-no-kinbox
+
+# Seção integracoes (Integrações e API › Apps e CRMs). Só abre os painéis, sem salvar credencial nem autorizar em
+# terceiros. Nos painéis do Bitrix24 e do Zoho os campos recebem valores fictícios digitados (nada é salvo). O botão
+# Novo da tela Apps some do print. Pipedrive e NectarCRM listam os membros do workspace: a linha do dono (conta real)
+# leva tarja.
+
+# Configurações → Integrações → Apps: título, busca, filtro e as primeiras linhas (até RD Station Marketing).
+- id: integracoes-apps-lista
+  url: /settings/apps
+  passos:
+    - esperar: 'tr:has(img[alt="RD Station Marketing"])'
+    - pausa: 800
+  alvo:
+    - '.g_static_page header'
+    - 'tr:has(img[alt="RD Station Marketing"])'
+  esconder:
+    - '.global-add-button-link'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/lista-de-apps.webp
+  paginas:
+    - docs/integracoes/visao-geral
+
+- id: integracoes-hubspot
+  url: /settings/apps/hubspot
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/hubspot.webp
+  paginas:
+    - docs/integracoes/hubspot
+
+- id: integracoes-pipedrive
+  url: /settings/apps/pipedrive
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body .ant-row:has(> .ant-col-14 > #data_tokens_5) > .ant-col-10'
+  arquivo: images/ajuda/integracoes/pipedrive.webp
+  paginas:
+    - docs/integracoes/pipedrive
+
+- id: integracoes-rdstation-crm
+  url: /settings/apps/rdstation
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/rdstation-crm.webp
+  paginas:
+    - docs/integracoes/rdstation-crm
+
+- id: integracoes-rdstation-marketing
+  url: /settings/apps/rdstation-marketing
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/rdstation-marketing.webp
+  paginas:
+    - docs/integracoes/rdstation-marketing
+
+- id: integracoes-bitrix24
+  url: /settings/apps/bitrix24
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - digitar:
+        seletor: '.ant-drawer-body #data_token_url'
+        texto: 'seu-webhook-de-leads-aqui'
+    - digitar:
+        seletor: '.ant-drawer-body #data_token_url_users'
+        texto: 'seu-webhook-de-usuarios-aqui'
+    - digitar:
+        seletor: '.ant-drawer-body #data_webhookUrl'
+        texto: 'seu-webhook-do-bot-aqui'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/bitrix24.webp
+  paginas:
+    - docs/integracoes/bitrix24
+
+# Campos com valores fictícios digitados, sem clicar em Obter token nem em Salvar.
+- id: integracoes-zoho
+  url: /settings/apps/zoho
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - digitar:
+        seletor: '.ant-drawer-body #data_org_id'
+        texto: 'org000000000'
+    - digitar:
+        seletor: '.ant-drawer-body #data_client_id'
+        texto: '1000.XXXXXXXXXXXXXXXX'
+    - digitar:
+        seletor: '.ant-drawer-body #data_client_secret'
+        texto: 'xxxxxxxxxxxxxxxxxxxx'
+    - digitar:
+        seletor: '.ant-drawer-body #data_generatedCode'
+        texto: '1000.xxxxxxxxxxxxxxxx'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/zoho.webp
+  paginas:
+    - docs/integracoes/zoho
+
+- id: integracoes-nectarcrm
+  url: /settings/apps/nectarcrm
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body .ant-row:has(> .ant-col-14 > #data_tokens_5) > .ant-col-10'
+  arquivo: images/ajuda/integracoes/nectarcrm.webp
+  paginas:
+    - docs/integracoes/nectarcrm
+
+# Seção integracoes-gestao (Integrações e API › Pagamentos, ERP e gestão). Só abre o painel de cada app, vazio,
+# sem digitar nem salvar credencial. Nenhum painel lista membros (o Associar Usuário do Dom360 não é aberto). O texto
+# de exemplo do campo Url do Gestor Premium (endereço do serviço) é apagado.
+
+- id: integracoes-gestao-banco-inter
+  url: /settings/apps/banco-inter
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/banco-inter.webp
+  paginas:
+    - docs/integracoes/banco-inter
+
+- id: integracoes-gestao-asaas
+  url: /settings/apps/asaas
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/asaas.webp
+  paginas:
+    - docs/integracoes/asaas
+
+- id: integracoes-gestao-tiny-erp
+  url: /settings/apps/tinyerp
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/tiny-erp.webp
+  paginas:
+    - docs/integracoes/tiny-erp
+
+- id: integracoes-gestao-smarters
+  url: /settings/apps/smarters
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/smarters.webp
+  paginas:
+    - docs/integracoes/smarters
+
+- id: integracoes-gestao-sensedata
+  url: /settings/apps/sensedata
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/sensedata.webp
+  paginas:
+    - docs/integracoes/sensedata
+
+- id: integracoes-gestao-gestor-premium
+  url: /settings/apps/gestor_premium
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - trocarTexto:
+        seletor: '.ant-drawer-body #data_url'
+        texto: ''
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/gestor-premium.webp
+  paginas:
+    - docs/integracoes/gestor-premium
+
+- id: integracoes-gestao-dom360
+  url: /settings/apps/dom360
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/dom360.webp
+  paginas:
+    - docs/integracoes/dom360
+
+- id: integracoes-gestao-hinova
+  url: /settings/apps/hinova
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/hinova.webp
+  paginas:
+    - docs/integracoes/hinova
+
+- id: integracoes-gestao-anycar
+  url: /settings/apps/anycar
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes-gestao/anycar.webp
+  paginas:
+    - docs/integracoes/anycar
+# Seção ligacoes (Canais › Ligações)
+#
+# A tela do VoIP vem do workspace de documentação, só com o cartão Ajustes; a descrição de cobrança de Gravar chamadas
+# leva tarja (a doc não publica preço nem cobrança). A aba Ligações (Beta) do WhatsApp oficial só existe em workspace com o recurso em teste e
+# canal oficial: vem do canal oficial de teste do workspace de testes (id 1), só leitura (o clique só troca de aba). O
+# nome do canal é trocado por um texto genérico, e as descrições de Gravar ligações e Fazer ligações levam tarja porque
+# trazem valores por minuto. Sem print do menu Ligar nem do pedido de permissão: abrir o menu pode iniciar uma ligação
+# real.
+
+- id: ligacoes-voip-ajustes
+  url: /settings/voip
+  passos:
+    - esperar: 'text=Usar SIP reserva'
+    - pausa: 1000
+  alvo: 'div.card-bordered:has-text("Usar SIP reserva")'
+  mascarar:
+    - 'div:text-is("Cobrado por minuto gravado.")'
+  arquivo: images/ajuda/ligacoes/voip-ajustes.webp
+  paginas:
+    - docs/canais/ligacoes/configuracoes-voip
+
+- id: ligacoes-whatsapp-aba
+  workspace: Kinbox
+  url: /settings/channels/2
+  passos:
+    - esperar: '.ant-drawer-body'
+    - clicar: '.ant-drawer button:has-text("Ligações")'
+    - esperar: 'text=IA atende as ligações'
+    - trocarTexto:
+        seletor: '.ant-drawer-title .truncate'
+        texto: 'Canal de WhatsApp oficial'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .flex.flex-col.gap-5'
+  mascarar:
+    - '.ant-drawer-body div.text-secondary:has-text("Grava e transcreve")'
+    - '.ant-drawer-body div.text-secondary:has-text("Atendentes podem ligar")'
+  arquivo: images/ajuda/ligacoes/aba-ligacoes-whatsapp.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp
+
+# Seção e-mail (Canais › E-mail)
+#
+# Só as telas antes de conectar, no workspace de documentação: nenhum canal de e-mail é criado e nenhuma caixa real
+# é conectada (o botão Conectar canal nunca é clicado). Os formulários ficam vazios. Nos painéis de IMAP/SMTP e de
+# Outlook o recorte começa em Descrição, abaixo do aviso superior. No encaminhamento, o texto de exemplo do campo
+# Descrição é trocado por contato@example.com.
+
+- id: email-tipos-de-conexao
+  largura: 1300
+  url: /settings/channels/new/email
+  passos:
+    - esperar: '.g_settings_simple_page a[href="/settings/channels/new/email/outlook"]'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/tipos-de-conexao.webp
+  paginas:
+    - docs/canais/e-mail/visao-geral
+
+- id: email-encaminhamento-formulario
+  url: /settings/channels/new/email/forward
+  passos:
+    - esperar: '.ant-drawer-body #description'
+    - trocarTexto:
+        seletor: '.ant-drawer-body #description'
+        texto: contato@example.com
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Conectar canal")'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/encaminhamento-formulario.webp
+  paginas:
+    - docs/canais/e-mail/por-encaminhamento
+
+- id: email-imap-formulario
+  altura: 1300
+  url: /settings/channels/new/email/imap-smtp
+  passos:
+    - esperar: '.ant-drawer-body #extraData_smtpData_secure'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-body .ant-form-item:has(#description)'
+    - '.ant-drawer-body .ant-form-item:has(#extraData_smtpData_secure)'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/imap-formulario.webp
+  paginas:
+    - docs/canais/e-mail/por-imap
+
+- id: email-outlook-formulario
+  url: /settings/channels/new/email/outlook
+  passos:
+    - esperar: '.ant-drawer-body #extraData_outlookData_graphSender'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-body .ant-form-item:has(#description)'
+    - '.ant-drawer-body .ant-form-item:has(#extraData_outlookData_graphSender)'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/outlook-formulario.webp
+  paginas:
+    - docs/canais/e-mail/outlook
+
+# Seção copiloto. O copiloto do workspace de documentação é configurado só durante o item (preparos `copiloto-*` de
+# `preparos.ts`) e volta a ficar vazio depois. Os itens "galeria", "comandos-personalizados" e "intencao" usam
+# `copiloto-completo`: Sugestões automáticas, Comandos de chat (com 2 comandos personalizados fictícios), Análise de
+# sentimento, Aviso ao resolver, Classificação de intenção e Lead score ligadas; o item "funcoes" usa
+# `copiloto-quatro-funcoes` (4 delas, sem Sugestões automáticas); o item "menu-conversa" usa `copiloto-comandos` (só
+# Comandos de chat, sem sugestões automáticas, para abrir a conversa sem gastar saldo).
+# Tela do Copiloto com 4 funções adicionadas (Comandos de chat, Análise de sentimento, Classificação de intenção e
+# Lead score; sem Sugestões automáticas) e o bloco Adicionar função, sem o cabeçalho do app.
+- id: copiloto-funcoes
+  preparar: copiloto-quatro-funcoes
+  url: /settings/copilot
+  altura: 1500
+  passos:
+    - esperar: 'text=Adicionar função'
+    - pausa: 1500
+  alvo:
+    - 'div.grid.grid-cols-1.gap-4'
+    - 'a:has-text("Adicionar função")'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/funcoes.webp
+  paginas:
+    - docs/copiloto/copiloto-atualizado
+
+# Galeria "Escolha uma função..." aberta pelo bloco Adicionar função.
+- id: copiloto-galeria
+  preparar: copiloto-completo
+  url: /settings/copilot
+  passos:
+    - esperar: 'text=Adicionar função'
+    - clicar: 'text=Adicionar função'
+    - esperar: 'text=Escolha uma função...'
+    - pausa: 1500
+  alvo: '.g_trigger_modal .ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/galeria.webp
+  paginas:
+    - docs/copiloto/configuracoes-de-copiloto
+
+# Janela da função Comandos de chat, rolada até Comandos personalizados (2 comandos fictícios) e Adicionar comando.
+- id: copiloto-comandos-personalizados
+  preparar: copiloto-completo
+  url: /settings/copilot
+  altura: 1800
+  passos:
+    - esperar: 'text=Adicionar função'
+    - clicar: 'div[role=button]:has-text("Comandos de chat")'
+    - esperar: 'button:has-text("Adicionar comando") >> visible=true'
+    - passar: 'button:has-text("Adicionar comando") >> visible=true'
+    - pausa: 1000
+  alvo:
+    - 'text=Comandos personalizados >> visible=true'
+    - 'button:has-text("Adicionar comando") >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/comandos-personalizados.webp
+  paginas:
+    - docs/copiloto/comandos-personalizados
+
+# Janela da função Classificação de intenção com as 5 intenções padrão e Outro.
+- id: copiloto-intencao
+  preparar: copiloto-completo
+  url: /settings/copilot
+  altura: 1800
+  passos:
+    - esperar: 'text=Adicionar função'
+    - clicar: 'div[role=button]:has-text("Classificação de intenção")'
+    - esperar: 'text=Adicionar intenção >> visible=true'
+    - pausa: 1500
+  alvo: '.ant-modal-content >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/intencao.webp
+  paginas:
+    - docs/copiloto/analises-de-ia
+
+# Menu do Copiloto aberto no editor de uma conversa do seed (última mensagem do membro: sem sugestão automática).
+# Recorte só do menu e do botão; os comandos personalizados fictícios aparecem no topo.
+- id: copiloto-menu-conversa
+  preparar: copiloto-comandos
+  url: /inbox/all/4392
+  passos:
+    - esperar: '.chat-actions-box textarea'
+    - clicar: 'button[data-academia="copilot-commands"]'
+    - esperar: '[data-copilot-drop="true"]'
+    - pausa: 1200
+  alvo:
+    - '[data-copilot-drop="true"]'
+    - 'button[data-academia="copilot-commands"]'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/menu-na-conversa.webp
+  paginas:
+    - docs/copiloto/usar-o-copiloto-de-ia
+
+# Painel Criar base de conhecimento (tipo PDF, padrão). Não salva.
+- id: copiloto-base-nova
+  url: /settings/knowledge-bases
+  passos:
+    - clicar: 'button:has-text("Nova base de conhecimento")'
+    - esperar: 'text=Criar base de conhecimento'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/base-nova.webp
+  paginas:
+    - docs/copiloto/base-de-conhecimento
+
+# Botão Sugestões acima do editor numa conversa do seed cuja última mensagem é do contato (Rafael Martins).
+# Captura com o copiloto do workspace vazio: o botão aparece mesmo sem Sugestões automáticas e NÃO é clicado
+# (clicar gera sugestões e gasta saldo). Recorte do botão e do editor, sem a nota do sistema com o nome do dono.
+- id: copiloto-botao-sugestoes
+  url: /inbox/all/4395
+  passos:
+    - esperar: 'button.cps-toggle'
+    - pausa: 1200
+  alvo:
+    - 'button.cps-toggle'
+    - '.chat-actions-box'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/botao-sugestoes.webp
+  paginas:
+    - docs/copiloto/usar-o-copiloto-de-ia
+
+# Lista de bases com uma base fictícia em Aguardando processamento e o menu de três pontos aberto (Editar,
+# Processar, Excluir). O preparo `base-aguardando` cria a base sem processar só para a captura e a apaga depois. Não
+# clica em Processar.
+- id: copiloto-bases-lista
+  preparar: base-aguardando
+  url: /settings/knowledge-bases
+  passos:
+    - esperar: 'text=Políticas de troca e de'
+    - passar: 'text=Políticas de troca e de'
+    - clicar: 'button.ant-dropdown-trigger.ml-auto'
+    - esperar: '.ant-dropdown:visible >> text=Processar'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Tudo")'
+    - 'text=Políticas de troca e de'
+    - '.ant-dropdown:visible'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/bases-lista.webp
+  paginas:
+    - docs/copiloto/base-de-conhecimento
+
+# Seção funis (CRM e vendas › Funis, negociações e produtos). O seed (garantirFunil + garantirCrm) cria o funil comercial
+# "Vendas" (responsáveis fictícios nos negócios, produtos no "Kit presente — Ana Souza"), o funil operacional "Pós-venda" e
+# 4 produtos. A lista de funis abre o último funil usado: os itens clicam no funil pelo nome.
+
+- id: funis-quadro
+  url: /crm/deals
+  largura: 2000
+  altura: 640
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - esperar: 'text=Kit presente — Ana Souza'
+    - pausa: 800
+  alvo: '.crm-side-page'
+  mascarar: []
+  arquivo: images/ajuda/funis/quadro-do-funil.webp
+  paginas:
+    - docs/crm/visao-geral
+    - docs/crm/gerenciando-funil-de-vendas
+
+- id: funis-filtrar
+  url: /crm/deals
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - esperar: 'text=Kit presente — Ana Souza'
+    - clicar: 'button:has-text("Filtrar")'
+    - esperar: '.ant-dropdown:not(.ant-dropdown-hidden) >> text=Motivo de perda'
+    - pausa: 500
+  alvo:
+    - 'button:has-text("Filtrar")'
+    - '.ant-dropdown:not(.ant-dropdown-hidden)'
+  mascarar: []
+  arquivo: images/ajuda/funis/filtrar.webp
+  paginas:
+    - docs/crm/gerenciando-funil-de-vendas
+
+- id: funis-menu-opcoes
+  url: /crm/deals
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - esperar: 'text=Kit presente — Ana Souza'
+    - clicar: 'button:has(i.fa-ellipsis-h)'
+    - esperar: '.ant-dropdown:not(.ant-dropdown-hidden) >> text=Mostrar campos'
+    - pausa: 500
+  alvo:
+    - 'button:has(i.fa-ellipsis-h)'
+    - '.ant-dropdown:not(.ant-dropdown-hidden)'
+  mascarar: []
+  arquivo: images/ajuda/funis/menu-do-funil.webp
+  paginas:
+    - docs/crm/gerenciando-funil-de-vendas
+
+- id: funis-nova-negociacao
+  url: /crm/deals
+  altura: 780
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - esperar: 'text=Kit presente — Ana Souza'
+    - clicar: 'button[aria-label="Adicionar negociação"] >> nth=-1'
+    - esperar: 'text=Relacionamento'
+    - pausa: 800
+  alvo: '.ant-drawer-content'
+  mascarar: []
+  arquivo: images/ajuda/funis/nova-negociacao.webp
+  paginas:
+    - docs/crm/gerenciando-funil-de-vendas
+
+- id: funis-negociacao-cabecalho
+  url: /crm/deals
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - clicar: 'text=Kit presente — Ana Souza'
+    - esperar: '[data-academia="deal-view"] header >> text=Negociação'
+    - pausa: 800
+  alvo: '[data-academia="deal-view"] header'
+  mascarar: []
+  arquivo: images/ajuda/funis/negociacao-cabecalho.webp
+  paginas:
+    - docs/crm/gerenciando-funil-de-vendas
+
+- id: funis-negociacao-painel
+  url: /crm/deals
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - clicar: 'text=Kit presente — Ana Souza'
+    - esperar: '[data-academia="deal-view"] >> text=2 produtos'
+    - pausa: 800
+  alvo: '[data-academia="deal-view"] .ant-collapse >> nth=0'
+  mascarar: []
+  arquivo: images/ajuda/funis/painel-negocio.webp
+  paginas:
+    - docs/crm/gerenciando-funil-de-vendas
+
+- id: funis-perda
+  url: /crm/deals
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - clicar: 'text=Kit presente — Ana Souza'
+    - esperar: 'button[data-academia="deal-won"]'
+    - clicar: 'button[data-academia="deal-lost"]'
+    - esperar: '.ant-modal-content >> text=Perda de negócio'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/funis/perda-de-negocio.webp
+  paginas:
+    - docs/crm/gerenciando-funil-de-vendas
+
+- id: funis-operacional
+  url: /crm/deals
+  altura: 620
+  passos:
+    - clicar: '.g_subside_portal >> text=Pós-venda'
+    - esperar: 'text=Troca de produto — Beatriz Alves'
+    - pausa: 800
+  alvo: '.crm-side-page'
+  mascarar: []
+  arquivo: images/ajuda/funis/funil-operacional.webp
+  paginas:
+    - docs/crm/visao-geral
+
+- id: funis-tipo
+  url: /settings/pipelines/new
+  passos:
+    - esperar: 'text=Funil Operacional'
+    - pausa: 800
+  alvo: '#pipeline-wizard-content > div'
+  mascarar: []
+  arquivo: images/ajuda/funis/tipo-do-funil.webp
+  paginas:
+    - docs/crm/criar-funil-de-vendas
+
+- id: funis-nome-visibilidade
+  # Tela de criação (o padrão marca Valor do negócio); o item digita o nome e não salva o funil
+  url: /settings/pipelines/new
+  passos:
+    - esperar: 'text=Como você quer criar seu funil?'
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'text=Comece com nome e visibilidade'
+    - digitar:
+        seletor: '#name'
+        texto: 'Vendas'
+    - pausa: 800
+  alvo: '#pipeline-wizard-content > div'
+  mascarar: []
+  arquivo: images/ajuda/funis/nome-e-visibilidade.webp
+  paginas:
+    - docs/crm/criar-funil-de-vendas
+
+- id: funis-etapas
+  url: /settings/pipelines
+  passos:
+    - clicar: '.g_table_wrapper >> text=Vendas'
+    - esperar: 'text=Comece com nome e visibilidade'
+    - clicar: 'button:has-text("Continuar")'
+    - pausa: 1200
+  alvo: '#pipeline-wizard-content > div'
+  mascarar: []
+  arquivo: images/ajuda/funis/etapas.webp
+  paginas:
+    - docs/crm/criar-funil-de-vendas
+
+- id: funis-cadencia-modelo
+  url: /settings/pipelines
+  passos:
+    - clicar: '.g_table_wrapper >> text=Vendas'
+    - esperar: 'text=Comece com nome e visibilidade'
+    - clicar: 'button:has-text("Continuar")'
+    - pausa: 800
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'text=Crie tarefas automáticas'
+    - clicar: 'button[aria-label="Adicionar tarefa"] >> nth=1'
+    - esperar: '.ant-modal-content >> text=Modelo de tarefa'
+    - pausa: 1000
+  altura: 1100
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/funis/modelo-de-tarefa.webp
+  paginas:
+    - docs/crm/cadencias
+
+- id: funis-motivos-regras
+  url: /settings/pipelines
+  passos:
+    - clicar: '.g_table_wrapper >> text=Vendas'
+    - esperar: 'text=Comece com nome e visibilidade'
+    - clicar: 'button:has-text("Continuar")'
+    - pausa: 800
+    - clicar: 'button:has-text("Continuar")'
+    - pausa: 800
+    - clicar: 'button:has-text("Continuar")'
+    - pausa: 1200
+  alvo: '#pipeline-wizard-content > div'
+  mascarar: []
+  arquivo: images/ajuda/funis/motivos-e-regras.webp
+  paginas:
+    - docs/crm/motivos-de-perda-e-regras
+
+- id: funis-importar
+  url: /crm/deals
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - esperar: 'text=Kit presente — Ana Souza'
+    - clicar: 'button:has(i.fa-ellipsis-h)'
+    - clicar: '.ant-dropdown:not(.ant-dropdown-hidden) >> text=Importar'
+    - esperar: 'text=Selecione o arquivo'
+    - pausa: 1000
+  altura: 640
+  alvo: '.crm-side-page'
+  mascarar: []
+  arquivo: images/ajuda/funis/importar.webp
+  paginas:
+    - docs/crm/importar-negociacoes
+
+- id: funis-acoes-em-lote
+  url: /crm/deals
+  passos:
+    - clicar: '.g_subside_portal >> text=Vendas'
+    - esperar: 'text=Kit presente — Ana Souza'
+    - clicar: 'button:has(i.fa-ellipsis-h)'
+    - clicar: '.ant-dropdown:not(.ant-dropdown-hidden) >> text=Executar ação'
+    - esperar: '.ant-modal-content >> text=Executar ação em lote'
+    - clicar: '.ant-modal-content .ant-select'
+    - clicar: '.ant-select-item-option >> text=Mover todos os negócios'
+    - pausa: 1000
+  altura: 1000
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/funis/acoes-em-lote.webp
+  paginas:
+    - docs/crm/acoes-em-lote
+
+- id: funis-produtos
+  url: /settings/products
+  passos:
+    - esperar: 'text=Kit Presente'
+    - pausa: 500
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/funis/produtos.webp
+  paginas:
+    - docs/crm/criar-e-gerenciar-produtos
+
+- id: funis-produto-novo
+  url: /settings/products
+  passos:
+    - clicar: 'text=Novo produto'
+    - esperar: '.ant-drawer-content >> text=Vincular ao Kinbox Agenda'
+    - digitar: { seletor: '.ant-drawer-content #name', texto: 'Café em cápsulas (10 unidades)' }
+    - digitar: { seletor: '.ant-drawer-content #description', texto: 'Caixa com 10 cápsulas' }
+    - pausa: 600
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-content button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/funis/novo-produto.webp
+  paginas:
+    - docs/crm/criar-e-gerenciar-produtos
+
+- id: funis-negociacoes-na-conversa
+  url: /inbox
+  passos:
+    - clicar: 'text=Rafael Martins'
+    - esperar: '[data-academia="side-section:deals"]'
+    - clicar: '[data-academia="side-section:deals"]'
+    - esperar: '.group\/pluginDeals >> text=Assinatura de café — Rafael Martins'
+    - passar: '.group\/pluginDeals .ant-collapse-header'
+    - pausa: 1000
+  alvo: '.group\/pluginDeals'
+  mascarar: []
+  arquivo: images/ajuda/funis/negociacoes-na-conversa.webp
+  paginas:
+    - docs/crm/gerenciando-funil-de-vendas
+
+# Seção workspace (Administração › Configurações do workspace e auditoria)
+#
+# Nada é salvo: os itens abrem seletores, ligam chaves e digitam textos de exemplo, mas nunca clicam em
+# "Salvar mudanças" nem confirmam a exclusão. Nome, fuso, idioma e logo do workspace não mudam.
+# Na Auditoria, a coluna Autor mostra o nome da conta de teste (pessoa real): leva tarja.
+
+- id: workspace-geral-preferencias
+  url: /settings/account/workspace
+  altura: 1500
+  passos:
+    - esperar: 'div.text-md:text-is("Fuso horário")'
+    - pausa: 800
+    # O workspace de documentação não tem fuso nem moeda escolhidos: o print mostra a tela como está
+    # (campos vazios) e o texto da página explica que valem Brasília e real.
+  alvo:
+    - 'h3:text-is("Preferências")'
+    - 'div.card-bordered:has(div.text-md:text-is("Fuso horário"))'
+  mascarar: []
+  arquivo: images/ajuda/workspace/geral-preferencias.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configuracoes-gerais
+
+- id: workspace-mensagens-automaticas
+  url: /settings/account/workspace
+  passos:
+    - esperar: 'div.text-md:text-is("Mensagem quando fora do horário comercial")'
+    - clicar: '#settings_sendMessageWhenOutsideOfBusinessHours'
+    - esperar: '#settings_messageOutsideOfBusinessHoursText'
+    - digitar:
+        seletor: '#settings_messageOutsideOfBusinessHoursText'
+        texto: 'Olá! Nosso atendimento funciona de segunda a sexta, das 9h às 18h. Respondemos assim que voltarmos.'
+    - pausa: 800
+  alvo:
+    - 'h3:text-is("Caixa de Entrada")'
+    - 'div.py-6:has(div.text-md:text-is("Mensagem quando membro indisponível"))'
+  mascarar: []
+  arquivo: images/ajuda/workspace/mensagens-automaticas.webp
+  paginas:
+    - docs/administracao/mensagens-automaticas
+
+- id: workspace-excluir-modal
+  url: /settings/account/workspace
+  passos:
+    - esperar: 'div.text-md:text-is("Excluir ambiente")'
+    - clicar: 'button:has-text("Excluir ambiente")'
+    - esperar: '.ant-modal-content'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/workspace/excluir-ambiente.webp
+  paginas:
+    - docs/administracao/excluir-workspace
+
+- id: auditoria-lista
+  url: /settings/audit
+  passos:
+    - esperar: 'tbody.ant-table-tbody tr:nth-child(6)'
+    - pausa: 800
+  # O cabeçalho do cartão vai até a borda direita do cartão: o recorte não corta a tabela seco à direita.
+  alvo:
+    - '.ant-card-head'
+    - 'tbody.ant-table-tbody tr:nth-child(6)'
+  mascarar:
+    - 'tbody.ant-table-tbody tr td:first-child > div'
+  arquivo: images/ajuda/workspace/auditoria-lista.webp
+  paginas:
+    - docs/administracao/auditoria
+# --- Seção outros-canais (lote 8) ---
+#
+# Nada é conectado: os itens param antes de "Conectar canal" e "Criar canal". O campo de token recebe um marcador que não tem formato de token.
+
+# Painel Conectar Telegram com Descrição e um marcador no campo do token, antes de clicar em Conectar canal.
+- id: telegram-conectar
+  url: /settings/channels/new
+  passos:
+    - clicar: 'text=Telegram'
+    - esperar: 'input#identifier'
+    - digitar: { seletor: '#description', texto: 'Atendimento da loja' }
+    - digitar: { seletor: 'input#identifier', texto: '123456:seu-token-aqui' }
+    - pausa: 600
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Conectar canal")'
+  mascarar: []
+  arquivo: images/ajuda/outros-canais/telegram-conectar.webp
+  paginas:
+    - docs/canais/telegram
+
+# Tela Canais > Sms com o texto sobre créditos e o botão Criar canal (o item não clica nele).
+- id: sms-criar-canal
+  url: /settings/channels/new/sms
+  passos:
+    - esperar: 'text=Cada disparo de SMS consome 1 crédito.'
+    - pausa: 600
+  alvo: '.ant-card:has-text("Adicionando canal de SMS")'
+  mascarar: []
+  arquivo: images/ajuda/outros-canais/sms-criar-canal.webp
+  paginas:
+    - docs/canais/sms
+
+# Painel Canal de SMS do canal criado no workspace de documentação.
+# Nenhum crédito é comprado: o item de compra abre o painel e para antes de "Comprar com PIX".
+- id: sms-painel
+  url: /settings/channels/258
+  passos:
+    - esperar: '.ant-drawer-body button:has-text("Comprar créditos")'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Ver histórico")'
+  mascarar: []
+  arquivo: images/ajuda/outros-canais/sms-painel.webp
+  paginas:
+    - docs/canais/sms
+
+# Painel Comprar créditos com o pacote padrão; o Total (preço) fica sob tarja.
+- id: sms-comprar-creditos
+  url: /settings/channels/258
+  passos:
+    - esperar: '.ant-drawer-body button:has-text("Comprar créditos")'
+    - clicar: '.ant-drawer-body button:has-text("Comprar créditos")'
+    - esperar: 'button:has-text("Comprar com PIX")'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-content-wrapper:has(button:has-text("Comprar com PIX")) .ant-drawer-header'
+    - 'button:has-text("Comprar com PIX")'
+  mascarar:
+    - '.ant-form-item:has(label[title="Total"]) .ant-form-item-control-input-content'
+  arquivo: images/ajuda/outros-canais/sms-comprar-creditos.webp
+  paginas:
+    - docs/canais/sms
+
+# Seção salas (Atendimento › Salas)
+#
+# As salas não têm rota: o botão @ do topo abre o painel. Dados do seed (etapa `salas`): sala pública "Avisos" com
+# mensagens fictícias, uma fixada, uma reação e uma resposta em thread, e a privada "Gerência". As mensagens saem em
+# nome da conta de teste (proprietária real): foto e nome do autor sempre com tarja.
+- id: salas-painel
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Avisos'
+    - esperar: '[data-room-message] >> text=A nova coleção'
+    # Sem o painel Membros e com Mensagens diretas recolhida: os membros fictícios do seed não aceitaram o convite
+    - clicar: 'aside.room-panel .h-16 button.room-icon-button'
+    - clicar: '.room-sidebar-scroll button:has-text("Mensagens diretas")'
+    - pausa: 800
+  alvo: '.rooms-drawer .ant-drawer-content'
+  mascarar:
+    - '.rooms-drawer figure'
+    - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
+  arquivo: images/ajuda/salas/painel-das-salas.webp
+  paginas:
+    - docs/salas/visao-geral
+
+- id: salas-nova-sala
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - esperar: '.room-sidebar-scroll >> text=Avisos'
+    - clicar: '.rooms-drawer button.room-icon-button >> nth=0'
+    - esperar: '.ant-modal-content >> text=Criar nova sala'
+    - digitar: { seletor: '.ant-modal-content input[type=text] >> nth=0', texto: 'Vendas' }
+    - digitar: { seletor: '.ant-modal-content textarea', texto: 'Metas, campanhas e dúvidas sobre pedidos' }
+    - clicar: '.ant-modal-content .ant-select:has-text("Pública")'
+    - clicar: '.ant-select-dropdown:not(.ant-select-dropdown-hidden) >> text=Privada'
+    - esperar: '.ant-modal-content >> text=Membros'
+    - pausa: 600
+  alvo: '.ant-modal-content'
+  mascarar:
+    - '.ant-modal-content .ant-select-multiple .ant-select-selection-item'
+  arquivo: images/ajuda/salas/nova-sala.webp
+  paginas:
+    - docs/salas/usar-salas
+
+- id: salas-acoes-mensagem
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Avisos'
+    - esperar: '[data-room-message] >> text=A nova coleção'
+    # Só a barra sobre a mensagem fixada: o menu ⋯ cobriria o texto das outras mensagens
+    - passar: '[data-room-message]:has-text("Bom dia, equipe")'
+    - pausa: 600
+  alvo:
+    - '[data-room-message]:has-text("Bom dia, equipe")'
+    - '[data-room-message]:has-text("Bom dia, equipe") .room-toolbar-button >> nth=0'
+    - '[data-room-message]:has-text("Bom dia, equipe") .room-toolbar-button >> nth=-1'
+  mascarar:
+    - '.rooms-drawer [data-room-message] figure'
+    - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
+  arquivo: images/ajuda/salas/acoes-da-mensagem.webp
+  paginas:
+    - docs/salas/usar-salas
+
+- id: salas-auditoria
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Auditoria'
+    - esperar: '.rooms-drawer >> text=sem marcar nada como lido'
+    - pausa: 600
+  # Recorte: do topo do painel até o aviso do centro, sem o branco abaixo e sem a seção Mensagens diretas
+  alvo:
+    - '.room-sidebar-scroll .room-list-item:has-text("Gerência")'
+    - '.rooms-drawer .ant-select'
+    - '.rooms-drawer >> text=sem marcar nada como lido'
+  mascarar: []
+  arquivo: images/ajuda/salas/auditoria.webp
+  paginas:
+    - docs/salas/auditar-mensagens-diretas
+
+# Seção cenarios (Automação e IA › Cenários)
+#
+# Os três cenários de exemplo vêm do seed (`bun seed.ts --so funil,bot,cenarios`) e ficam sempre desligados: nada roda
+# nem chama endereço externo (o webhook de entrada grava um endereço fictício e a Requisição HTTP aponta para
+# example.com). Os itens abrem o cenário pelo nome na lista, porque o id muda se o seed recriar o cenário. O endereço do
+# webhook de entrada leva tarja em todo print. Sem print da janela de gatilhos nem do fim da lista Nova ação (recorte
+# fixo). Sem print do Analítico: os cenários de exemplo nunca rodam, então a tela fica vazia. A janela "Webhook de
+# Recebimento" mostra a estrutura de exemplo gravada pelo seed (dados fictícios), sem enviar nada ao endereço.
+
+- id: cenarios-lista
+  url: /settings/workflows
+  passos:
+    - esperar: 'text=Lead do site'
+    - pausa: 800
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/lista.webp
+  paginas:
+    - docs/cenarios/visao-geral
+    - docs/cenarios/criar-um-cenario
+
+- id: cenarios-editor
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1500
+  alvo:
+    - '.workflow-fullscreen .fixed.top-2'
+    - '.react-flow__node[data-id="3"]'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/editor.webp
+  paginas:
+    - docs/cenarios/criar-um-cenario
+    - docs/cenarios/integrar-via-webhook-com-cenarios
+
+- id: cenarios-nova-acao
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1000
+    - clicar: '[class*="animated_border"]'
+    - esperar: 'text=Nova ação'
+    - pausa: 800
+  alvo:
+    - '[class*="animated_border"]'
+    - '.ant-dropdown-menu-item:has-text("Buscar contato")'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/nova-acao.webp
+  paginas:
+    - docs/cenarios/criar-um-cenario
+
+- id: cenarios-gatilho-webhook
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node-trigger'
+    - pausa: 1000
+    - clicar: '.react-flow__node-trigger'
+    - esperar: '.base-edit-action >> text=Determinar estrutura'
+    - pausa: 800
+  alvo:
+    - '.base-edit-action .g_base_edit_action'
+    - '.base-edit-action button:has-text("Novo gatilho")'
+  mascarar:
+    - '.base-edit-action .ant-form-item:has-text("Endereço Url") input'
+  arquivo: images/ajuda/cenarios/gatilho-webhook.webp
+  paginas:
+    - docs/cenarios/integrar-via-webhook-com-cenarios
+
+- id: cenarios-determinar-estrutura
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node-trigger'
+    - pausa: 1000
+    - clicar: '.react-flow__node-trigger'
+    - clicar: '.base-edit-action >> text=Determinar estrutura'
+    - esperar: '.ant-modal-content >> text=Webhook de Recebimento'
+    - pausa: 1000
+  alvo: '.ant-modal-content'
+  mascarar:
+    - '.ant-modal-content .ant-form-item:has-text("Endereço Url") input'
+  arquivo: images/ajuda/cenarios/determinar-estrutura.webp
+  paginas:
+    - docs/cenarios/integrar-via-webhook-com-cenarios
+
+- id: cenarios-loop
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Pedidos do dia para o ERP'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1500
+  alvo:
+    - '.workflow-fullscreen .fixed.top-2'
+    - '.react-flow__node[data-id="3"]'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/loop.webp
+  paginas:
+    - docs/cenarios/gatilhos-e-acoes
+
+- id: cenarios-agendamento
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Pedidos do dia para o ERP'
+    - esperar: '.react-flow__node-trigger'
+    - pausa: 1000
+    - clicar: '.react-flow__node-trigger'
+    - esperar: '.base-edit-action >> text=Horário de execução'
+    - pausa: 800
+  alvo:
+    - '.base-edit-action .g_base_edit_action'
+    - '.base-edit-action button:has-text("Novo gatilho")'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/gatilho-agendamento.webp
+  paginas:
+    - docs/cenarios/gatilhos-e-acoes
+
+- id: cenarios-requisicao-http
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Pedidos do dia para o ERP'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1000
+    - clicar: '.react-flow__node[data-id="3"]'
+    - esperar: 'text=Pré-visualização (Exemplo)'
+    - pausa: 1000
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/requisicao-http.webp
+  paginas:
+    - docs/cenarios/gatilhos-e-acoes
+
+# Seção automacao (Automação e IA › Automações). As automações de exemplo são criadas pelo seed (etapa `automacoes`),
+# todas desligadas, e abertas pela lista (clique no nome), sem id fixo.
+
+# Lista Automações: título, Nova automação, busca, filtro Tudo e as linhas com nome, gatilho e interruptor (todas desligadas).
+# Sem print da lista de gatilhos aberta.
+- id: automacoes-lista
+  largura: 1100
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Pedir avaliação")'
+    - pausa: 1000
+  alvo:
+    - 'header:has(h2:has-text("Automações"))'
+    - 'tr:has-text("Pedir avaliação")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacoes-lista.webp
+  paginas:
+    - docs/automacao/visao-geral
+    - docs/automacao/configurando-automacoes
+
+# Painel Editar automação de "Encerrar conversas paradas": Nome, Ativo (desligado), Gatilho Tempo sem nova mensagem,
+# Habilitar para sessões geradas por API ou Integração, Minutos sem resposta = 1440 com a ajuda do atraso, Sem condições
+# e as ações Enviar mensagem (Texto, Canal vazio) e Resolver conversa.
+- id: automacao-editar
+  altura: 1500
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Encerrar conversas paradas")'
+    - clicar: 'text=Encerrar conversas paradas'
+    - esperar: '.ant-drawer >> text=Resolver conversa'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Ação")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacao-editar.webp
+  paginas:
+    - docs/automacao/configurando-automacoes
+    - docs/automacao/exemplos
+
+# Condições de "Lembrete de orçamento": Quando todas as condições são verdadeiras, Tags contém Orçamento, e o bloco qualquer.
+- id: automacao-condicoes
+  altura: 1500
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Lembrete de orçamento")'
+    - clicar: 'text=Lembrete de orçamento'
+    - esperar: '.ant-drawer >> text=Orçamento'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer .ant-form-item:has-text("Condições")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacao-condicoes.webp
+  paginas:
+    - docs/automacao/configurando-automacoes
+    - docs/automacao/exemplos
+    - docs/automacao/gatilhos-e-acoes
+
+# Ações de "Aviso fora do horário": clica em + Ação e abre a lista de ações (sem salvar).
+- id: automacao-acoes
+  altura: 1500
+  manterFoco: true
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Aviso fora do horário")'
+    - clicar: 'text=Aviso fora do horário'
+    - esperar: '.ant-drawer >> text=Enviar mensagem'
+    - clicar: '.ant-drawer button:has-text("Ação")'
+    - pausa: 600
+    - clicar: '.ant-drawer .ant-select:has-text("Selecione uma ação...")'
+    - esperar: '.ant-select-dropdown:not(.ant-select-dropdown-hidden) >> text=Executar bot'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer .ant-select:has-text("Selecione uma ação...")'
+    - '.ant-select-dropdown:has-text("Executar bot")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacao-acoes.webp
+  paginas:
+    - docs/automacao/configurando-automacoes
+
+# Seção dashboards (Relatórios › Dashboards e consumo)
+# Dashboard "Atendimento da loja" (seed, etapa dashboard): cartão do Pipeline Atendimento. Antes de capturar,
+# o dashboard precisa de um snapshot concluído (o seed avisa quando não há); o rótulo do snapshot fica mascarado.
+# Saldo e Ligações: a Loja Exemplo não tem consumo nem ligações; os prints mostram só o topo, os cartões e os menus.
+
+- id: dashboard-topo
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
+    - pausa: 1500
+  alvo:
+    - 'div.flex.justify-between:has([data-academia="dashboard-title"])'
+    - 'button:has-text(" by ")'
+    - '.ant-picker-range'
+  mascarar:
+    - 'button:has-text(" by ") span.font-medium'
+  arquivo: images/ajuda/relatorios/dashboard-topo.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: dashboard-pipeline
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
+    - esperar: '.react-grid-item >> text=Atribuído'
+    - pausa: 1500
+  alvo: '.react-grid-layout'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/dashboard-pipeline.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: dashboard-modelos
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
+    - clicar: '[data-academia="dashboard-add-report"] button'
+    - esperar: 'text=Escolha um template...'
+    - pausa: 1200
+  alvo: '.ant-modal-content:has-text("Escolha um template...")'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/dashboard-modelos.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: saldo-exportar
+  url: /reports/balance-usage
+  passos:
+    - esperar: 'text=Total consumido'
+    - clicar: 'button.common_dropdown'
+    - esperar: '.ant-dropdown-menu >> text=Exportar serviços'
+    - pausa: 800
+  alvo:
+    - '.ant-picker-range'
+    - 'div.rounded-xl:has(> span:has-text("Total consumido"))'
+    - 'div.rounded-xl:has(> span:has-text("Maior gasto"))'
+    - '.ant-dropdown-menu'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/saldo-exportar.webp
+  paginas:
+    - docs/relatorios/saldo
+
+- id: ligacoes-filtro
+  url: /reports/voip
+  manterFoco: true
+  passos:
+    - esperar: 'text=Minutos diários'
+    - clicar: '.ant-select:has-text("Todas as ligações")'
+    - esperar: '.ant-select-dropdown >> text=Telefone (VoIP)'
+    - pausa: 800
+  alvo:
+    - '.g-card-box-space div:text-is("Ligações")'
+    - '.ant-picker-range'
+    - '.ant-select-dropdown:not(.ant-select-dropdown-hidden)'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/ligacoes-filtro.webp
+  paginas:
+    - docs/relatorios/ligacoes
+
+- id: permissoes-relatorios
+  url: /settings/roles/new
+  altura: 1600
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar permissão'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Home")'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Relatórios")'
+    - esperar: '.ant-drawer >> text=Restringir relatórios ao membro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer .ant-collapse-item:has(.ant-collapse-header:has-text("Relatórios"))'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/permissoes-relatorios.webp
+  paginas:
+    - docs/relatorios/exportar-e-permissoes
+
+# Seção marketing (Campanhas e marketing › Anúncios e Tracking)
+#
+# Os apps Meta Ads e Tracking são ligados pela tela (Configurações → Integrações → Apps); o Google Ads fica desligado
+# para o print da divulgação. A etapa `marketing` do seed (`bun seed.ts --so marketing`) cadastra o site fictício
+# "Site da loja" (https://www.example.com, chave "Chave do site") e avisa se algum dos dois apps estiver desligado. Nenhuma conta da Meta ou do Google é conectada (sem print do relatório com dados nem das janelas de
+# autorização). O snippet do Tracking leva tarja: ele traz a chave e o endereço do script do staging. O teste de
+# instalação só cria a sessão de teste (a URL de teste é do example.com e não é aberta).
+
+- id: marketing-divulgacao
+  url: /reports/dashboard/marketing/google-ads
+  passos:
+    - esperar: 'h1:has-text("Acompanhe suas campanhas")'
+    - pausa: 800
+  alvo: 'xpath=//h1[contains(., "Acompanhe suas campanhas")]/..'
+  mascarar: []
+  arquivo: images/ajuda/marketing/divulgacao.webp
+  paginas:
+    - docs/marketing/visao-geral
+    - docs/marketing/google-ads
+
+- id: marketing-meta-ads-app
+  url: /settings/apps/meta_ads
+  passos:
+    - esperar: 'section:has-text("Conexão Meta Ads") >> text=Conecte sua conta'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - 'section:has-text("Conexão Meta Ads")'
+  mascarar: []
+  arquivo: images/ajuda/marketing/meta-ads-conectar.webp
+  paginas:
+    - docs/marketing/meta-ads
+
+- id: marketing-tracking-sites
+  url: /settings/marketing/tracking
+  passos:
+    - esperar: 'text=Site da loja'
+    - pausa: 800
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/marketing/tracking-sites.webp
+  paginas:
+    - docs/marketing/tracking
+
+- id: marketing-tracking-relatorio
+  url: /reports/dashboard/marketing/tracking
+  passos:
+    - esperar: 'text=Interações web'
+    - pausa: 1000
+  alvo:
+    - 'xpath=//h1[contains(., "Visão do Gestor")]/../..'
+    - '.ant-card:has-text("Interações web")'
+  mascarar: []
+  arquivo: images/ajuda/marketing/tracking-relatorio.webp
+  paginas:
+    - docs/marketing/relatorios-de-marketing
+
+- id: marketing-tracking-novo-site
+  url: /settings/marketing/tracking
+  passos:
+    - esperar: 'text=Site da loja'
+    - clicar: 'button:has-text("Novo site")'
+    - esperar: 'h1:has-text("Configure seu site")'
+    - digitar: { seletor: 'input[placeholder="Ex: Site institucional"] >> nth=0', texto: 'Blog da loja' }
+    - digitar: { seletor: 'input[placeholder="seusite.com.br ou www.seusite.com.br"]', texto: 'blog.example.com' }
+    - digitar: { seletor: 'input[placeholder="Ex: Site institucional"] >> nth=1', texto: 'Chave do blog' }
+    - pausa: 800
+  alvo: 'xpath=//h1[contains(., "Configure seu site")]/../..'
+  mascarar: []
+  arquivo: images/ajuda/marketing/tracking-novo-site.webp
+  paginas:
+    - docs/marketing/tracking
+
+- id: marketing-tracking-snippet
+  url: /settings/marketing/tracking
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'h1:has-text("Configure seu site")'
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'h1:has-text("Instale o snippet")'
+    - pausa: 1200
+  alvo: 'xpath=//h1[contains(., "Instale o snippet")]/../..'
+  mascarar:
+    - 'textarea.font-mono'
+  arquivo: images/ajuda/marketing/tracking-snippet.webp
+  paginas:
+    - docs/marketing/tracking
+
+- id: marketing-tracking-teste
+  url: /settings/marketing/tracking
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'h1:has-text("Configure seu site")'
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'h1:has-text("Instale o snippet")'
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'h1:has-text("Teste a instalação")'
+    - clicar: 'button:has-text("Iniciar teste")'
+    - esperar: 'text=Aguardando o snippet ser detectado.'
+    - pausa: 1500
+  alvo: 'xpath=//h1[contains(., "Teste a instalação")]/../..'
+  mascarar:
+    - 'a.font-mono'
+  arquivo: images/ajuda/marketing/tracking-teste.webp
+  paginas:
+    - docs/marketing/tracking
+
+# Tarefas e metas (seção `tarefas-e-metas`). Dados das etapas `tarefas` e `metas` do seed (responsáveis fictícios), que só
+# rodam com `bun seed.ts --so tarefas,metas`. Essas etapas mudam também `contatos-perfil`, `funis-quadro` e o cartão
+# Tarefas do dashboard: recapture-os se precisar.
+# A foto do dono real da conta aparece no chip "Você" e entre os inscritos: leva tarja.
+- id: tarefas-lista
+  url: /crm/tasks
+  passos:
+    - esperar: 'text=Retornar mensagem da Mariana'
+    - pausa: 800
+  alvo:
+    - 'input[placeholder="Pesquisar nome..."]'
+    - 'button:has-text("Nova tarefa")'
+    - '.ant-card-extra button.common_dropdown'
+    - 'tr:has-text("Retornar mensagem da Mariana")'
+  mascarar: []
+  arquivo: images/ajuda/tarefas/lista-de-tarefas.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: tarefas-nova
+  url: /crm/tasks/new
+  passos:
+    - esperar: 'footer:has-text("Criar tarefa")'
+    - digitar: { seletor: 'textarea[placeholder="O que precisa ser feito?"]', texto: 'Ligar para confirmar o pedido' }
+    - pausa: 500
+  alvo:
+    - 'header:has-text("Nova tarefa")'
+    - 'footer:has-text("Criar tarefa")'
+  mascarar:
+    - 'button:has-text("Você") img[alt="avatar"]'
+  arquivo: images/ajuda/tarefas/nova-tarefa.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: tarefas-prazo
+  url: /crm/tasks/new
+  passos:
+    - esperar: 'footer:has-text("Criar tarefa")'
+    - clicar: 'button:has-text("Hoje,")'
+    - esperar: 'text=Lembrete'
+    - pausa: 600
+  alvo: '.ant-popover-inner'
+  mascarar: []
+  arquivo: images/ajuda/tarefas/prazo-e-lembrete.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: tarefas-aberta
+  url: /crm/tasks
+  passos:
+    - clicar: 'tr:has-text("Conferir o estoque e separar") >> text=Separar pedido de reposição'
+    - esperar: 'input[placeholder="Adicionar subtarefa"]'
+    - pausa: 800
+  alvo:
+    - 'header.shrink-0'
+    - 'input[placeholder="Adicionar subtarefa"]'
+  mascarar:
+    - 'header.shrink-0 img[alt="avatar"]'
+  arquivo: images/ajuda/tarefas/tarefa-aberta.webp
+  paginas:
+    - docs/tarefas/criando-e-gerenciando-tarefas
+
+- id: metas-lista
+  url: /crm/goals
+  passos:
+    - esperar: 'tr:has-text("Vendas do mês")'
+    - pausa: 600
+  alvo:
+    - 'span.ant-input-affix-wrapper:has(#search-input)'
+    - 'button:has-text("Nova meta")'
+    - 'thead'
+    - 'tr:has-text("Vendas do mês")'
+  mascarar: []
+  arquivo: images/ajuda/metas/lista-de-metas.webp
+  paginas:
+    - docs/metas/criando-metas-no-kinbox
+
+- id: metas-tipo
+  url: /crm/goals/new
+  passos:
+    - esperar: 'text=Que tipo de meta você quer criar?'
+    - pausa: 600
+  # Opção que o cliente não vê: o print mostra só os dois cartões públicos
+  esconder:
+    - '#type > div.size-full:not(:has-text("Valor do negócio")):not(:has-text("Quantidade de produto"))'
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '#type'
+  mascarar: []
+  arquivo: images/ajuda/metas/tipo-de-meta.webp
+  paginas:
+    - docs/metas/criando-metas-no-kinbox
+
+- id: metas-acompanhar
+  url: /crm/goals
+  passos:
+    - clicar: 'tr:has-text("Vendas do mês")'
+    - esperar: 'text=acumulados da meta de'
+    - pausa: 1500
+  alvo:
+    - 'button:has-text("Metas")'
+    - 'button:has-text("Ver Analítico")'
+    - 'text=Descrição'
+    - 'li:has-text("Carla Mendes")'
+  mascarar: []
+  arquivo: images/ajuda/metas/acompanhar-meta.webp
+  paginas:
+    - docs/metas/criando-metas-no-kinbox
+    - docs/metas/como-as-metas-sao-calculadas
+
+- id: metas-analitico
+  url: /crm/goals
+  passos:
+    - clicar: 'tr:has-text("Vendas do mês")'
+    - esperar: 'text=acumulados da meta de'
+    - clicar: 'button:has-text("Ver Analítico")'
+    - esperar: '.ant-drawer-content >> text=Ticket médio'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-content .ant-drawer-header'
+    - '.ant-drawer-content tr:has-text("Presente de aniversário")'
+  mascarar: []
+  arquivo: images/ajuda/metas/analitico.webp
+  paginas:
+    - docs/metas/como-as-metas-sao-calculadas
+
+# Seção agenda (CRM e vendas › Kinbox Agenda)
+#
+# Serviços, locais e agendamentos de exemplo da Loja Exemplo foram cadastrados pela tela (Configurações → Agenda e
+# formulário de agendamento), com nomes, e-mails example.com e telefones +55 11 90000-00NN fictícios. Só entram telas
+# iguais às de produção; o formulário de agendamento é recortado antes do bloco de contato.
+
+- id: agenda-servicos
+  url: /settings/agendas/service
+  passos:
+    - esperar: 'text=Consultoria de estilo'
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/agenda/servicos.webp
+  paginas: [docs/agenda/servicos-e-locais]
+
+- id: agenda-servico-formulario
+  url: /settings/agendas/service
+  altura: 1250
+  passos:
+    - esperar: 'text=Consultoria de estilo'
+    - clicar: 'text=Consultoria de estilo'
+    - esperar: '.ant-drawer-content >> text=Duração padrão (minutos)'
+    - pausa: 1500
+  esconder:
+    - '.ant-drawer-content .ant-form-item:has(label:text-is("Horário")) ~ div.mb-6.flex'
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-content .ant-form-item:has(label:text-is("Status"))'
+  mascarar: []
+  arquivo: images/ajuda/agenda/servico-formulario.webp
+  paginas: [docs/agenda/servicos-e-locais]
+
+- id: agenda-local-formulario
+  url: /settings/location
+  passos:
+    - esperar: 'text=Provador 1'
+    - clicar: 'text=Provador 1'
+    - esperar: '.ant-drawer-content >> text=Serviços vinculados'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-content .ant-form-item:has(label:text-is("Status"))'
+  mascarar: []
+  arquivo: images/ajuda/agenda/local-formulario.webp
+  paginas: [docs/agenda/servicos-e-locais]
+
+- id: agenda-tipo-da-tarefa
+  url: /crm/tasks/new
+  passos:
+    - clicar: '.ant-modal-content .ant-dropdown-trigger:has-text("Tarefa")'
+    - esperar: '.ant-dropdown-menu >> text=Tipo da tarefa'
+    - pausa: 800
+  manterFoco: true
+  alvo:
+    - '.ant-modal-content'
+    - '.ant-dropdown-menu'
+  mascarar: []
+  arquivo: images/ajuda/agenda/tipo-da-tarefa.webp
+  paginas: [docs/agenda/agendamentos]
+
+- id: agenda-novo-agendamento
+  url: /crm/tasks/new
+  altura: 1100
+  passos:
+    - clicar: '.ant-modal-content .ant-dropdown-trigger:has-text("Tarefa")'
+    - clicar: '.ant-dropdown-menu-item:has-text("Agendamento")'
+    - esperar: '.ant-form-item:has(label[for$="_serviceId"])'
+    - clicar: '.ant-form-item:has(label[for$="_serviceId"]) .ant-select-selector'
+    - clicar: '.ant-select-item-option:has-text("Consultoria de estilo")'
+    - pausa: 1500
+    # Dia de expediente: a terça-feira da segunda semana do mês seguinte (sempre depois de hoje)
+    - clicar: '.ant-form-item:has(> .ant-row > .ant-form-item-label label:text-is("Quando")) .ant-form-item-control-input *:is(button, .ant-dropdown-trigger) >> nth=0'
+    - esperar: '.small-calendar'
+    - clicar: '.small-calendar button:has(.fa-chevron-right)'
+    - pausa: 500
+    - clicar: '.small-calendar tbody tr:nth-child(2) td:nth-child(3)'
+    # Fecha o calendário clicando de novo no campo
+    - clicar: '.ant-form-item:has(> .ant-row > .ant-form-item-label label:text-is("Quando")) .ant-form-item-control-input *:is(button, .ant-dropdown-trigger) >> nth=0'
+    - pausa: 500
+    - pausa: 1500
+    - clicar: '.ant-form-item:has(> .ant-row > .ant-form-item-label label:has-text("Local")) .ant-select-selector'
+    - clicar: '.ant-select-item-option:has-text("Provador 1")'
+    - pausa: 1500
+  # O print vai do topo da janela até Horários: o bloco de contato e o que vem depois dele ficam fora
+  esconder:
+    - '.ant-modal-body form .ant-divider'
+    - '.ant-modal-body form .ant-divider ~ *'
+  alvo: '.ant-modal-body form'
+  mascarar: []
+  arquivo: images/ajuda/agenda/novo-agendamento.webp
+  paginas: [docs/agenda/agendamentos]
+
+# Seção programa-de-parceiros (Parceiros › Programa de parceiros)
+#
+# Telas do painel de parceria no workspace de documentação (Loja Exemplo), sem clientes, comissões nem dados reais.
+# O link de convite do staging é trocado por um endereço example.com com um identificador fictício.
+
+- id: parceiros-painel
+  url: /partner/workspaces
+  passos:
+    - esperar: 'text=Prev. de Comissão'
+    - pausa: 1000
+  alvo:
+    - 'div.group\/section:text-is("Parceria")'
+    - 'a:has-text("Templates")'
+    - '.ant-card:has(> .ant-card-body > div:text-is("Trial"))'
+  mascarar: []
+  arquivo: images/ajuda/programa-de-parceiros/painel.webp
+  paginas:
+    - docs/programa-de-parceiros/visao-geral
+
+- id: parceiros-convite
+  url: /partner/invite
+  passos:
+    - esperar: 'text=Url de convite'
+    - pausa: 1000
+    - trocarTexto: { seletor: '.ant-form-item:has-text("Url de convite") input', texto: 'https://www.example.com/user/register?partnerId=00000' }
+  alvo: '.ant-card:has-text("Convite por URL")'
+  mascarar: []
+  arquivo: images/ajuda/programa-de-parceiros/convidar-cliente.webp
+  paginas:
+    - docs/programa-de-parceiros/convidar-clientes
+
+# Só abre a janela Criar template, sem clicar em Criar (criar um template cria um ambiente novo).
+- id: parceiros-criar-template
+  url: /partner/templates
+  passos:
+    - esperar: 'button:has-text("Novo Template")'
+    - clicar: 'button:has-text("Novo Template")'
+    - esperar: '.ant-modal-content:has-text("Criar template")'
+    - pausa: 800
+  alvo: '.ant-modal-content:has-text("Criar template")'
+  mascarar: []
+  arquivo: images/ajuda/programa-de-parceiros/criar-template.webp
+  paginas:
+    - docs/programa-de-parceiros/templates
+
+# Seção app-mobile (Sua conta e app › App para celular)
+#
+# O app nativo não é capturado (sem simulador com o workspace de documentação). Só o atalho do web para baixar o app.
+
+- id: app-menu-baixar-app
+  url: /settings/account/profile
+  passos:
+    - esperar: '.g_user_avatar'
+    - clicar: '.g_user_avatar'
+    - esperar: '.ant-dropdown-menu-item:has-text("Baixar app para celular")'
+    - pausa: 600
+  esconder:
+    - '.ant-dropdown-menu-item:has-text("Abrir no Admin")'
+  alvo:
+    - '.g_user_avatar'
+    - '.ant-dropdown-menu.ant-dropdown-menu-root'
+  mascarar:
+    - '.g_user_avatar'
+    - '.ant-dropdown-menu-root figure'
+    - '.ant-dropdown-menu-root [class*="_user_menu_name"]'
+    - '.ant-dropdown-menu-root [class*="_user_menu_meta"]'
+  arquivo: images/ajuda/app/menu-baixar-app.webp
+  paginas:
+    - docs/app/visao-geral
+
+# Seção primeiros-passos (Primeiros passos, lote 12)
+#
+# A tela de cadastro é pública: itens com `url` em /auth/ rodam num contexto sem login (o cadastro encerra a sessão ao
+# abrir). Só o primeiro passo (e-mail): os passos seguintes mandariam um código de verdade para um e-mail.
+
+- id: primeiros-passos-cadastro
+  url: /auth/register
+  passos:
+    - esperar: '.auth-card button.auth-submit'
+  esconder:
+    - '.request-inspector'
+  alvo:
+    - '.auth-card'
+  mascarar: []
+  arquivo: images/ajuda/primeiros-passos/cadastro.webp
+  paginas: [docs/primeiros-passos/criar-seu-workspace-no-kinbox]
+
+# A Academia abre com "Boa tarde, <nome do dono da conta>": o recorte começa nas abas, abaixo da saudação.
+- id: primeiros-passos-academia-trilhas
+  url: /academy
+  passos:
+    - esperar: 'button:has-text("Começar lição")'
+  esconder:
+    - '.request-inspector'
+  alvo:
+    - 'nav:has(button:has-text("Trilhas"))'
+    - 'button:has-text("Começar lição") >> nth=1'
+    - 'text=Frases rápidas, Copiloto'
+  mascarar: []
+  arquivo: images/ajuda/primeiros-passos/academia-trilhas.webp
+  paginas: [docs/primeiros-passos/videos-para-comecar]

@@ -1,0 +1,123 @@
+---
+title: Criar WhatsApp Flows (formulários no WhatsApp)
+description: Como criar, testar e publicar um WhatsApp Flow na Kinbox para o contato preencher um formulário dentro do WhatsApp, e como enviá-lo num template.
+keywords: [whatsapp flow, flows, formulário no whatsapp, formulário, criar flow, publicar flow, template + flow, telas, componentes, requisição, integração, resposta do flow, descontinuar flow, clonar flow]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/whatsappApi/sections/FlowsSection.tsx
+  - web:src/pages/settings/whatsappApi/sections/FlowCreateSection.tsx
+  - web:src/pages/settings/whatsappApi/flow/WhatsappFlowEditor.tsx
+  - web:src/pages/settings/whatsappApi/flow/WhatsappNodeForm.tsx
+  - web:src/pages/settings/whatsappApi/flow/WhatsappDataExchangeModal.tsx
+  - web:src/pages/settings/whatsappApi/hooks/domains/useWhatsappFlows.ts
+  - web:src/pages/inbox/MessageContent.tsx
+  - api:src/modules/whatsapp-api/services/flow/whatsapp-flow-publications.service.ts
+  - api-v0:server/controllers/WbaCloudController.js
+codigo:
+  - web:src/pages/settings/whatsappApi/sections/FlowsSection.tsx
+  - web:src/pages/settings/whatsappApi/sections/FlowCreateSection.tsx
+  - web:src/pages/settings/whatsappApi/flow/**
+  - web:src/pages/settings/whatsappApi/hooks/domains/useWhatsappFlows.ts
+  - web:src/pages/settings/whatsappApi/helpers/flows.ts
+  - web:src/pages/settings/whatsappApi/helpers/flowJson.ts
+  - web:src/pages/inbox/MessageContent.tsx
+  - api:src/modules/whatsapp-api/services/flow/**
+  - api:src/modules/whatsapp-api/controllers/flow/**
+verificado_em: 2026-11-26
+---
+
+Um **WhatsApp Flow** é um formulário com uma ou mais telas que o contato preenche dentro do próprio WhatsApp. O Flow não é enviado sozinho: ele chega ao contato pelo botão de um **Template + Flow** aprovado pela Meta.
+
+Flows existem apenas no **WhatsApp oficial** — no WhatsApp por QR Code esse recurso não existe (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
+
+<Note>Quem pode: membros com a permissão **Gerenciar Canais** e o proprietário do workspace. É necessário ter um canal de WhatsApp oficial conectado ([Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao)).</Note>
+
+## Exemplo do começo ao envio
+
+1. Em **Flows**, clique em **Novo Flow**, dê o nome `cadastro_de_cliente`, escolha o canal e o modelo **Formulário simples** em **Templates**.
+2. No editor, ajuste os campos da tela e clique em **Salvar**.
+3. Clique no ícone de play (**Simular flow**) e preencha o formulário como se fosse o contato.
+4. Volte para a lista e use **Publicar** no menu de três pontos do Flow.
+5. Em **Templates**, crie um **Template + Flow** com esse Flow, peça a aprovação e, depois de **Aprovado**, envie para o contato.
+
+## A lista de Flows
+
+Acesse **Configurações** → **Automação** → **WhatsApp API** e clique em **Abrir** no cartão **Flows**. Na tela **Flows**, use **Pesquisar por nome** para achar um Flow e clique na linha para abrir o editor. O menu de três pontos acima da tabela tem **Sincronizar Meta**, que traz os Flows da conta na Meta, inclusive os criados fora da Kinbox.
+
+## Criar o Flow
+
+Clique em **Novo Flow** para abrir o assistente **Criar flow**:
+
+<Steps>
+  <Step title="Comece com nome e categoria">
+    Preencha **Nome do flow** (não pode repetir o nome de outro Flow da mesma conta do WhatsApp oficial) e escolha a **Categoria Meta** (**Cadastro**, **Login**, **Agendamento**, **Captura de lead**, **Contato**, **Atendimento**, **Pesquisa** ou **Outro**). Clique em **Continuar**.
+  </Step>
+  <Step title="Escolha o canal WhatsApp">
+    Selecione o canal oficial em **Canal WhatsApp** e clique em **Continuar**.
+  </Step>
+  <Step title="Escolha o ponto de partida">
+    Selecione uma das três opções e clique em **Criar flow**:
+
+    - **Criar com Copiloto**: cria o Flow em branco e abre o editor com o Copiloto (veja [Copiloto: visão geral](/docs/copiloto/copiloto-atualizado)). Quando você aprova a estrutura sugerida, ela substitui o que havia no canvas — clique em **Salvar** depois.
+    - **Em branco**: abre o editor com o canvas limpo.
+    - **Templates**: abre dois modelos prontos para editar — **Formulário simples** (uma tela com nome, telefone e interesse) e **Atendimento/triagem** (duas telas de perguntas e mensagem final de texto; o Flow não transfere a conversa).
+
+    <Frame caption="Etapa Escolha o ponto de partida na criação de um Flow">
+      <img src="/images/ajuda/whatsapp-templates/flow-ponto-de-partida.webp" alt="Tela Escolha o ponto de partida com as opções Criar com Copiloto, Em branco e Templates" />
+    </Frame>
+  </Step>
+</Steps>
+
+## Montar as telas
+
+O editor começa com o card **Início**. Para criar uma tela, arraste a partir do ponto de saída de **Início** (ou de outra tela) até um espaço vazio, clique com o botão direito no fundo do canvas ou arraste **Tela** pelo menu de nós na barra inferior.
+
+A ligação entre as telas define a ordem do Flow: a primeira tela é a ligada ao **Início**. Clique em uma tela para expandi-la (ou use **Expandir tela** / **Editar tela**). Dê um **Nome da tela** legível (como `Seus dados`), pois é o título que o contato vê no topo da tela no WhatsApp.
+
+<Frame caption="Editor de Flow com o card Início ligado a uma tela e a barra superior com Salvar e simular">
+  <img src="/images/ajuda/whatsapp-templates/flow-editor.webp" alt="Canvas do editor de Flow mostrando o card Início ligado a uma tela com componentes e a barra superior com nome do Flow, desfazer, refazer, Salvar, simular e JSON" />
+</Frame>
+
+Com a tela expandida, arraste itens da barra flutuante **Componentes** para dentro dela. Os componentes ficam em seis grupos: **Enviar mensagem** (títulos e textos), **Mídia** (imagem), **Resposta em texto** (campos para o contato digitar), **Seleção** (opções para escolher), **Uploads** (foto e documento) e **Avançado** (texto rico, link e lista de navegação).
+
+Para cada campo preenchido pelo contato, preencha **Nome técnico** e **Rótulo**. Use nomes técnicos claros e sem espaço (como `nome` ou `telefone`), porque esse nome identifica as respostas na conversa. A maioria dos componentes aceita condições em **Visível quando** e **Habilitado quando**.
+
+Toda tela tem um **Botão** no rodapé com **Texto do botão** e **Ação** (**Finalizar**, **Navegar** ou **Requisição**). A ligação no canvas define o comportamento: uma tela ligada a outra segue para ela, e uma tela sem ligação seguinte encerra o Flow.
+
+<Warning>Sair do editor ou pressionar **Esc** descarta as alterações não salvas sem pedir confirmação. Clique em **Salvar** no topo antes de sair.</Warning>
+
+## Buscar ou enviar dados com uma Requisição
+
+Use a ação **Requisição** no **Botão** de uma tela para consultar ou enviar dados a outro sistema enquanto o contato preenche o Flow. Na janela **Requisição**, informe a **URL**, clique em **Testar** (com o Flow já salvo) e depois em **Salvar configuração**. Para mandar os dados a um cenário da Kinbox, crie o cenário com o gatilho **Webhook recebido** e use o **Endereço Url** que ele mostra como **URL** da requisição.
+
+## Simular
+
+Clique no ícone de play (**Simular flow**) na barra superior (ou em **Simular tela no preview** dentro de uma tela) para testar o preenchimento em uma prévia de celular. Ao chegar ao fim, o simulador exibe **Flow enviado** com os dados preenchidos. Requisições configuradas chamam a URL real durante a simulação.
+
+## Publicar
+
+O editor não tem botão de publicar: clique em **Salvar**, volte para a lista de Flows e selecione **Publicar** no menu de três pontos da linha. Se você abriu a criação do Flow pelo editor de um **Template + Flow** (opção **Criar flow** do campo **Flow**), ao fechar o editor aparece a janela **Publicar flow na Meta?** com o botão **Publicar na Meta**.
+
+A Kinbox valida o Flow e publica na Meta. Depois de publicado, novas edições feitas no editor não vão para a Meta: para alterar um Flow publicado, use **Clonar**, associe o canal em **Editar**, faça as alterações, publique o clone e passe a usá-lo no template.
+
+## Usar o Flow num template
+
+Crie um template do tipo **Template + Flow** seguindo [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox).
+
+No editor do template, o campo **Flow** lista apenas Flows publicados no canal selecionado (se não houver nenhum, aparece a opção **Criar flow**). Preencha o **Texto do botão** que o contato vai tocar para abrir o formulário e envie o template para aprovação. Depois de aprovado, envie seguindo [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template).
+
+## O que o atendente vê na conversa
+
+O template enviado aparece como um cartão com o texto e o botão do Flow. Quando o contato conclui o preenchimento, chega uma mensagem do contato com o botão **Ver resposta**.
+
+Clicar em **Ver resposta** abre a janela **Resposta do Flow**, mostrando a data e uma linha por campo com o **Nome técnico** em cima e o valor preenchido embaixo. As respostas não vão automaticamente para campos do contato, bots ou cenários; para enviar dados a outro sistema durante o preenchimento, use uma **Requisição**.
+
+## Editar, clonar, descontinuar e excluir
+
+- **Editar** (menu da linha): altera **Nome do flow**, **Categoria Meta** e **Canal WhatsApp**, e traz o link **Editar estrutura** para abrir o editor. Trocar o canal de um Flow que já tinha canal cria uma cópia para o novo canal.
+- **Clonar**: cria uma cópia sem canal e inativa. Para publicar o clone, abra **Editar** e escolha um canal oficial.
+- **Excluir**: disponível apenas para Flows não publicados e não descontinuados.
+- **Descontinuar**: disponível apenas para Flows publicados.
+
+<Warning>Descontinuar um Flow é irreversível e também o descontinua na Meta. Depois de descontinuado, ele não pode mais ser usado, editado, publicado ou ativado novamente — apenas clonado ou exportado em JSON. Confira antes os templates que usam esse Flow.</Warning>

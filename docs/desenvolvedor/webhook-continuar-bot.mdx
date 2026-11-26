@@ -1,0 +1,85 @@
+---
+title: Continuar o bot por webhook
+description: Como fazer o bot esperar uma chamada do seu sistema no bloco Esperar um tempo e continuar o fluxo, com o endereço, o corpo da requisição e os campos de sessão que ela pode gravar.
+keywords: [webhook do bot, continuar bot, recebimento de webhook, esperar webhook, bot-hook, customerPlatformId, retomar bot, bot esperar sistema externo, customFieldsList]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/bot/drawers/EditNodeDelayDrawer.tsx
+  - api-v0:server/controllers/CallController.js
+  - api-v0:server/modules/chat/botFlowV2.js
+  - api-v0:server/routes/botHookRoutes.js
+codigo:
+  - web:src/pages/settings/bot/drawers/EditNodeDelayDrawer.tsx
+  - web:src/pages/settings/bot/nodes/DelayNode.tsx
+  - api-v0:server/routes/botHookRoutes.js
+  - api-v0:server/controllers/CallController.js
+  - api-v0:server/modules/chat/botFlowV2.js
+verificado_em: 2026-11-26
+---
+
+Pause um fluxo de bot enquanto o seu sistema processa uma ação fora da Kinbox e faça o bot continuar de onde parou assim que receber um `POST`. A chamada também pode enviar uma mensagem ao contato e gravar até 3 campos personalizados na sessão.
+
+<Note>
+  Quem pode: editar bots exige a permissão **Bot** ou ser proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). A chamada do seu sistema autentica com o **Token v0** (em **Configurações** → **Integrações** → **API Tokens** → **Mostrar tokens legados**, que exige a permissão **Integrações**), e **não** com o token `kb_live_`. Veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api).
+</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Configure o bloco Esperar um tempo">
+    No editor do bot (**Configurações** → **Automação** → **Bot**), adicione o bloco **Esperar um tempo** e defina **Tipo de espera** como **Recebimento de webhook**. A gaveta mostra o **Endereço do webhook** (`https://api.kinbox.com.br/api/bot-hook`) e, no fluxo, o bloco exibe "Até que o webhook seja chamado".
+
+    Deixe **Tempo máximo de espera** desligado: este guia descreve a retomada sem prazo. Os outros campos do bloco estão em [Blocos do bot](/docs/bot/blocos-do-bot).
+  </Step>
+
+  <Step title="Conecte a saída e publique o bot">
+    Ligue a saída do bloco **Esperar um tempo** ao próximo bloco do fluxo, salve e clique em **Publicar**. Quando uma conversa chegar a esse bloco, o bot pausa e aguarda a chamada do seu sistema.
+  </Step>
+
+  <Step title="Obtenha o número da conversa">
+    Para dizer à Kinbox qual conversa deve continuar, o seu sistema precisa do número da conversa (`customerPlatformId`). Você pode capturá-lo de três formas:
+
+    - Em `kinbox.conversation.id` usando [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo) antes do bloco de espera.
+    - No final da URL da conversa na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) (`/inbox/<visão>/<número>`).
+    - Em `conversation.id` no evento recebido por um [plugin](/docs/desenvolvedor/criando-plugin-integracao).
+  </Step>
+
+  <Step title="Chame o endereço do webhook">
+    Quando o seu sistema terminar, envie um `POST` para `https://api.kinbox.com.br/api/bot-hook` com o corpo JSON abaixo:
+
+    | Campo | Obrigatório | O que é |
+    | --- | --- | --- |
+    | `customerPlatformId` | Sim | Número da conversa que está aguardando o webhook. |
+    | `token` | Sim | O **Token v0** do workspace (aceita com ou sem `Bearer ` na frente). Não use o token `kb_live_`. |
+    | `text` | Não | Mensagem de texto que o bot envia ao contato antes de continuar o fluxo. |
+    | `customFieldsList` | Não | Lista de itens `{ "placeholder": "<chave>", "value": "<valor>" }` gravados como campos personalizados **da sessão**. Só os 3 primeiros itens são lidos; os sem `placeholder` ou sem `value` são pulados (valores como `false` e `0` também são ignorados). |
+
+    Exemplo de chamada:
+
+    ```bash
+    curl -X POST "https://api.kinbox.com.br/api/bot-hook" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "customerPlatformId": 12345,
+        "token": "SEU_TOKEN_V0",
+        "text": "Recebemos a confirmação do seu pedido.",
+        "customFieldsList": [
+          { "placeholder": "pedido_status", "value": "aprovado" }
+        ]
+      }'
+    ```
+  </Step>
+</Steps>
+
+## Depois da chamada
+
+O bot continua a execução a partir do bloco ligado logo depois de **Esperar um tempo**. Os campos personalizados da sessão gravados por `customFieldsList` podem ser usados nos blocos seguintes — por exemplo, em um bloco **Decisão** (veja [Blocos do bot](/docs/bot/blocos-do-bot)). Se você gravar um campo do tipo **Json**, veja como ler suas propriedades em [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
+
+Chame o endereço uma única vez para cada vez que o bot chegar ao bloco **Esperar um tempo**: chamar de novo pode repetir esse trecho se a sessão continuar aberta e a espera ainda estiver registrada.
+
+## Quando a chamada não faz nada ou retorna erro
+
+- **Resposta HTTP 200 com `{}`:** essa resposta sozinha não confirma que o bot continuou. A chamada não faz nada se a conversa não tiver sessão aberta, se a sessão for de outro workspace ou se não houver uma espera registrada para essa conversa. Confira na conversa se o bot seguiu.
+- **Token errado (por exemplo, um token `kb_live_`):** a chamada responde com erro e o bot não continua. Use o **Token v0**.
+- **Erro `token is required` ou `customerPlatformId is required`:** um dos dois campos obrigatórios não foi enviado no corpo JSON.

@@ -1,0 +1,79 @@
+---
+title: Enviar campanhas pelo QR Code com menos risco de bloqueio
+description: Como configurar uma campanha no WhatsApp por QR Code para reduzir o risco de bloqueio do número.
+keywords: [campanha pelo qr code, campanha no whatsapp por qr code, bloqueio em campanha, número bloqueado depois da campanha, velocidade de envio, lote, frase aleatória, qr code]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/crm/campaigns/AddCampaign/index.tsx
+  - web:src/pages/crm/campaigns/AddCampaign/CampaingMessageInput.tsx
+  - web:src/pages/inbox/AddSpintaxe/AddSpintaxeModal.tsx
+  - api-v0:server/controllers/CampaignController.js
+  - api-v0:server/modules
+  - motor-qr:apps/docs/guides/best-practices.mdx
+codigo:
+  - web:src/pages/crm/campaigns/AddCampaign/index.tsx
+  - web:src/pages/crm/campaigns/AddCampaign/CampaingMessageInput.tsx
+  - web:src/pages/inbox/AddSpintaxe/**
+  - api-v0:server/controllers/CampaignController.js
+  - api-v0:server/modules/**
+  - motor-qr:apps/docs/guides/best-practices.mdx
+verificado_em: 2026-11-26
+---
+
+Para criar uma campanha, clique em **Campanhas**, no menu lateral, e depois em **Nova campanha**. Esta página mostra, na ordem da tela, as opções que reduzem o risco de o WhatsApp bloquear o número de uma campanha pelo QR Code. O passo a passo completo da campanha está em [Criar uma campanha](/docs/campanhas/campanhas-no-kinbox).
+
+## Antes de disparar
+
+- Mande só para quem deu permissão para receber suas mensagens. Isso vale no QR Code e no WhatsApp oficial.
+- Use um número só para campanhas, já aquecido. As boas práticas estão em [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp).
+
+## Canais de disparo
+
+Em **Canais de disparo**, escolha um ou mais canais. Os envios são divididos entre os canais escolhidos.
+
+- O canal precisa estar **Conectado**. Senão, a Kinbox avisa "O canal de disparo escolhido está desconectado.".
+- Vários canais de QR Code só se todos forem do mesmo tipo: todos **Express** ou todos **Clássica** com **Versão** **Multidevice**.
+- Canais com **Apenas Receptivo** não aparecem.
+- Num canal **Clássica** com **Versão** **Multidevice**, se a Kinbox avisar "Necessário recriar esse canal para usar as campanhas.", recrie o canal antes. Veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
+
+## Conteúdo
+
+Use **Frase aleatória** (ícone de dado no campo da mensagem) para variar o texto:
+
+1. Clique no ícone. Abre **Adicionar frase aleatória**.
+2. Digite uma variação em cada campo (o botão **Frase** acrescenta outro campo) e clique em **Adicionar**.
+
+A Kinbox põe as opções no texto no formato `{{opção 1|opção 2}}` e sorteia uma delas a cada envio (a mesma opção pode sair mais de uma vez). Assim, nem todo contato recebe a mesma frase.
+
+No QR Code, a mensagem da campanha também pode ter anexo.
+
+## Controle de tempo
+
+### Horário comercial
+
+Escolha um horário em **Horário comercial** para enviar só dentro dele. Fora do horário, a campanha pausa e volta no próximo horário comercial.
+
+### Envio das mensagens
+
+Escolha **Lento**, **Moderado** (padrão), **Rápido** ou **Personalizado**. Os tempos de cada opção, que são os mesmos no QR Code e no WhatsApp oficial, estão em [Velocidade de envio e horário comercial](/docs/campanhas/velocidade-e-horario).
+
+No QR Code, o ritmo pesa no risco de bloqueio: tempos curtos terminam a campanha mais rápido, mas aumentam o risco de bloqueio automático. Tempos muito longos dão mais tempo para os contatos denunciarem o número como spam.
+
+## O que a Kinbox faz sozinha na Express
+
+- Mostra "digitando..." por 2 segundos antes de cada mensagem.
+- Confere se o número da lista tem WhatsApp antes de enviar. Número sem WhatsApp falha, sem envio.
+
+## Durante a campanha
+
+Se muitas mensagens não forem entregues, se as respostas caírem ou se os bloqueios aumentarem, pause a campanha.
+
+Na conexão **Express**, se o canal desconectar durante a campanha, pause a campanha e use **Resumir** depois de reconectar: as mensagens enviadas com o canal desconectado falham e não são reenviadas.
+
+## Próximos passos
+
+- [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp)
+- [Meu número foi bloqueado](/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado)
+- [Acompanhar os resultados da campanha](/docs/campanhas/acompanhar-resultados)
+- [Boas práticas de campanha](/docs/campanhas/boas-praticas)

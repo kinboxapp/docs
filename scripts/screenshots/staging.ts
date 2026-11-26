@@ -1,18 +1,44 @@
 /**
  * Acesso ao staging do Kinbox, compartilhado pelo seed e pela captura.
  *
- * As credenciais vêm de `KINBOX_STAGING_EMAIL` e `KINBOX_STAGING_PASSWORD`. Se elas não estiverem no
- * ambiente, o script lê `~/.config/kinbox/staging.env`. Nada de credencial fica neste repositório.
+ * Nada de endereço nem de credencial fica neste repositório:
+ * - os endereços vêm de `KINBOX_STAGING_API_V0`, `KINBOX_STAGING_API_V3`, `KINBOX_STAGING_WEB` e `KINBOX_STAGING_WIDGET`.
+ *   Se uma delas não estiver no ambiente, o script lê `~/.config/kinbox/docs-staging.env`;
+ * - as credenciais vêm de `KINBOX_STAGING_EMAIL` e `KINBOX_STAGING_PASSWORD`, ou de `~/.config/kinbox/staging.env`.
  */
+import { existsSync, readFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 
+/** Lê um arquivo `CHAVE=valor` local (aceita `export` e aspas). Devolve vazio se ele não existir. */
+function lerEnvLocal(nome: string): Record<string, string> {
+  const caminho = join(homedir(), '.config/kinbox', nome)
+  if (!existsSync(caminho)) return {}
+  const valores: Record<string, string> = {}
+  for (const linha of readFileSync(caminho, 'utf8').split('\n')) {
+    const m = linha.match(/^\s*(?:export\s+)?([A-Z0-9_]+)\s*=\s*(.*?)\s*$/)
+    if (m) valores[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2')
+  }
+  return valores
+}
+
+const hosts = lerEnvLocal('docs-staging.env')
+
+/** Endereço do staging: do ambiente ou do arquivo local. Falha com a variável que falta, sem valor padrão. */
+function endereco(variavel: string) {
+  const valor = process.env[variavel] || hosts[variavel]
+  if (!valor) throw new Error(`Defina ${variavel} no ambiente ou em ~/.config/kinbox/docs-staging.env (veja o README dos prints)`)
+  return valor.replace(/\/+$/, '')
+}
+
 /** api-v0 (login, inbox, operadores) */
-export const API_V0 = process.env.KINBOX_STAGING_API_V0 || 'https://staging-api.kinbox.com.br/api'
+export const API_V0 = endereco('KINBOX_STAGING_API_V0')
 /** api-v2 (rotas `/v3`) */
-export const API_V3 = process.env.KINBOX_STAGING_API_V3 || 'https://api4-staging.kinbox.com.br/v3'
+export const API_V3 = endereco('KINBOX_STAGING_API_V3')
 /** front do staging */
-export const WEB_URL = process.env.KINBOX_STAGING_WEB || 'https://staging.kinbox.com.br'
+export const WEB_URL = endereco('KINBOX_STAGING_WEB')
+/** script do chat do site (widget) no staging, o mesmo que o código de instalação do staging carrega */
+export const WIDGET_URL = endereco('KINBOX_STAGING_WIDGET')
 
 /** Nome do workspace de documentação. O seed e a captura o encontram por este nome. */
 export const DOCS_WORKSPACE_NAME = process.env.DOCS_WORKSPACE_NAME || 'Loja Exemplo'
@@ -36,20 +62,9 @@ export type LoginResponse = {
 
 /** Lê as credenciais do ambiente ou do arquivo local, sem nunca imprimi-las. */
 export async function credentials() {
-  let email = process.env.KINBOX_STAGING_EMAIL
-  let password = process.env.KINBOX_STAGING_PASSWORD
-  if (!email || !password) {
-    const file = Bun.file(join(homedir(), '.config/kinbox/staging.env'))
-    if (await file.exists()) {
-      for (const line of (await file.text()).split('\n')) {
-        const m = line.match(/^\s*(?:export\s+)?([A-Z_]+)\s*=\s*(.*)\s*$/)
-        if (!m) continue
-        const value = m[2].replace(/^(['"])(.*)\1$/, '$2')
-        if (m[1] === 'KINBOX_STAGING_EMAIL') email ||= value
-        if (m[1] === 'KINBOX_STAGING_PASSWORD') password ||= value
-      }
-    }
-  }
+  const local = lerEnvLocal('staging.env')
+  const email = process.env.KINBOX_STAGING_EMAIL || local.KINBOX_STAGING_EMAIL
+  const password = process.env.KINBOX_STAGING_PASSWORD || local.KINBOX_STAGING_PASSWORD
   if (!email || !password) {
     throw new Error('Defina KINBOX_STAGING_EMAIL e KINBOX_STAGING_PASSWORD (ex.: `. ~/.config/kinbox/staging.env`)')
   }

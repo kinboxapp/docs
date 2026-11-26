@@ -1,1 +1,1935 @@
-[]
+[
+  {
+    "pergunta": "Como ligo meu número de WhatsApp na Kinbox lendo o QR Code?",
+    "esperado": [
+      "docs/canais/conectar-whatsapp-app",
+      "llm/canais/conectar-whatsapp-app"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O whatsapp deslogou e o QR Code sumiu da tela do canal, o que eu faço?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte",
+      "llm/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Apareceu um aviso de que meu número possivelmente foi bloqueado pelo WhatsApp",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado",
+      "llm/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Qual a diferença entre a API oficial e o modo QR Code do WhatsApp?",
+    "esperado": [
+      "docs/canais/whatsapp/visao-geral",
+      "llm/faq/whatsapp-qual-escolher"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Meu canal ainda está no modo antigo, sem o v5. Como passo para a alternativa nova sem perder as conversas?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo",
+      "llm/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para atender as ligações do WhatsApp do QR Code pela Kinbox?",
+    "esperado": [
+      "llm/faq/whatsapp-qr-ligacoes",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Onde vejo todos os canais que estão conectados e como excluo um canal?",
+    "esperado": [
+      "docs/canais/visao-geral",
+      "llm/canais/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Para que serve a opção Apenas Receptivo no canal do WhatsApp?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/configuracoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O que eu faço para o WhatsApp não banir meu número?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Qual velocidade usar no disparo em massa pelo QR Code para não ser bloqueado?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Consigo mandar botões ou localização pelo WhatsApp do QR Code?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona",
+      "llm/faq/whatsapp-qr-botoes-e-templates",
+      "llm/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Acabei de comprar um chip novo, já posso ligar ele na Kinbox e começar a mandar mensagem?",
+    "esperado": [
+      "llm/faq/whatsapp-aquecer-numero",
+      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "As mensagens dos grupos do meu WhatsApp aparecem na Kinbox?",
+    "esperado": [
+      "llm/faq/whatsapp-grupos",
+      "docs/canais/whatsapp/whatsapp-app/configuracoes",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Conectei o WhatsApp pelo QR Code e as conversas antigas não apareceram",
+    "esperado": [
+      "llm/faq/whatsapp-qr-historico",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quantos números de WhatsApp posso conectar no meu plano?",
+    "esperado": [
+      "llm/faq/canais-limite-do-plano",
+      "docs/canais/visao-geral",
+      "llm/canais/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço backup das conversas do WhatsApp no Google Drive do meu celular?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Que diferença tem entre usar um bot e colocar um agente de IA para responder os clientes?",
+    "esperado": [
+      "docs/conceitos/automacao-e-ia",
+      "llm/faq/bot-ou-agente-de-ia"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Meu saldo da carteira está caindo todo dia, o que está consumindo?",
+    "esperado": [
+      "llm/faq/o-que-consome-saldo",
+      "docs/conceitos/saldo-e-creditos"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "O cliente voltou a escrever depois que resolvi e apareceu outro número de protocolo. Por quê?",
+    "esperado": [
+      "docs/conceitos/conversas-e-sessoes",
+      "docs/conversas/gerenciar-conversas",
+      "llm/faq/conversa-protocolo"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Quero que um atendente veja as conversas do grupo dele e as atribuídas a ele, mesmo em outro grupo, mas não as demais de outros grupos. Qual acesso escolho?",
+    "esperado": [
+      "docs/conceitos/workspace-membros-e-papeis",
+      "llm/conversas/caixa-de-entrada-do-kinbox"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "O que é ticket no funil operacional? É a mesma coisa que conversa?",
+    "esperado": [
+      "docs/conceitos/contatos-e-negocios",
+      "docs/conceitos/glossario",
+      "docs/crm/visao-geral"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Dá para juntar dois ambientes da Kinbox num só, com os contatos e conversas dos dois?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como conecto meu número na API oficial do WhatsApp pela Kinbox?",
+    "esperado": [
+      "docs/canais/whatsapp-api-oficial-padrao",
+      "llm/canais/whatsapp-api-oficial-padrao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para continuar usando o WhatsApp Business no celular depois de ligar o número na API oficial?",
+    "esperado": [
+      "docs/canais/whatsapp-api-oficial-coexistente",
+      "llm/canais/whatsapp-api-oficial-coexistente"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que no WhatsApp oficial o campo de digitar sumiu e só aparece o botão de enviar template?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas",
+      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns",
+      "docs/conversas/problemas-comuns"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "O canal oficial mostra um aviso amarelo dizendo que tem mais de um app conectado. O que significa?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns",
+      "llm/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A Kinbox cobra por cada template enviado no WhatsApp oficial?",
+    "esperado": [
+      "llm/faq/whatsapp-oficial-preco-das-mensagens",
+      "docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para pagar as mensagens da Meta junto com a mensalidade da Kinbox?",
+    "esperado": [
+      "llm/faq/whatsapp-oficial-preco-das-mensagens"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como cadastro o cartão de crédito no Gerenciador de Anúncios do Facebook para impulsionar posts?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero tirar uma planilha com todas as mensagens que a equipe trocou com os clientes no mês passado",
+    "esperado": [
+      "docs/conversas/acoes-em-lote-e-exportar",
+      "llm/conversas/acoes-em-lote-e-exportar",
+      "llm/faq/conversa-exportar-historico"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A conversa do cliente está com um colega e quando tento mandar mensagem aparece que não tenho permissão",
+    "esperado": [
+      "docs/conversas/problemas-comuns",
+      "llm/faq/conversa-com-outro-atendente",
+      "llm/conversas/caixa-de-entrada-do-kinbox"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como deixo uma resposta pronta com o primeiro nome do cliente para usar com a barra?",
+    "esperado": [
+      "docs/conversas/criar-frases-rapidas-para-suas-conversas",
+      "llm/faq/conversa-frases-com-variaveis"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Tem como fechar sozinho os atendimentos em que o cliente parou de responder?",
+    "esperado": [
+      "llm/faq/conversa-encerrar-por-inatividade"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço uma aba na caixa de entrada só com as conversas do suporte que ainda não têm responsável?",
+    "esperado": [
+      "docs/conversas/criar-filtros-de-conversa",
+      "llm/conversas/criar-filtros-de-conversa"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como recupero uma conversa que apaguei no aplicativo do WhatsApp do meu celular?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Onde eu crio um modelo de mensagem para mandar pelo WhatsApp oficial e pedir a aprovação da Meta?",
+    "esperado": [
+      "docs/canais/criar-templates-dentro-do-kinbox",
+      "docs/canais/whatsapp/whatsapp-templates/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Meta recusou meu template e trocou outro de utilidade para marketing. O que eu faço?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-templates/template-rejeitado",
+      "llm/faq/whatsapp-template-categoria"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Coloquei {{first_name}} na variável do template da campanha e chegou o texto cru. Por quê?",
+    "esperado": [
+      "llm/faq/whatsapp-template-variaveis",
+      "docs/canais/whatsapp/whatsapp-templates/enviar-template",
+      "llm/canais/whatsapp/whatsapp-templates/enviar-template"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para mandar um formulário que o cliente preenche dentro do próprio WhatsApp?",
+    "esperado": [
+      "docs/canais/criar-flows-dentro-do-kinbox",
+      "docs/canais/whatsapp/whatsapp-templates/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como envio vários produtos com foto lado a lado numa mensagem só do WhatsApp oficial?",
+    "esperado": [
+      "docs/canais/criar-carrossel-dentro-do-kinbox"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como peço para o Google aprovar meu anúncio de pesquisa mais rápido?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quantos dias dura o período de teste da Kinbox antes de eu ter que pagar?",
+    "esperado": [
+      "docs/assinatura/visao-geral",
+      "llm/faq/assinatura-precos"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Preciso de mais duas pessoas na equipe, como aumento as licenças do meu plano?",
+    "esperado": [
+      "docs/assinatura/assinar-ou-mudar-plano"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde pego a segunda via do boleto da mensalidade?",
+    "esperado": [
+      "docs/assinatura/faturas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como coloco dinheiro na carteira para a IA continuar funcionando?",
+    "esperado": [
+      "docs/assinatura/adicionar-saldo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Minha mensalidade venceu e sumiu o campo de escrever nas conversas, o que faço?",
+    "esperado": [
+      "docs/assinatura/assinatura-vencida",
+      "llm/faq/assinatura-o-que-acontece-se-atrasar"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como faço para declarar o imposto de renda da minha empresa?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como coloco um colega novo da equipe para usar a Kinbox comigo?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/gerenciar-membros",
+      "docs/primeiros-passos/convidar-sua-equipe"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que os atendentes vejam só as conversas do grupo deles. Onde configuro isso?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios",
+      "docs/administracao/referencia-de-permissoes",
+      "docs/conceitos/workspace-membros-e-papeis",
+      "llm/conversas/caixa-de-entrada-do-kinbox"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Aparece que o limite foi atingido quando tento chamar mais uma pessoa para o ambiente. O que faço?",
+    "esperado": [
+      "llm/faq/membro-limite-de-licencas",
+      "docs/administracao/licencas-e-propriedade",
+      "docs/administracao/problemas-com-membros"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Vou sair da empresa e preciso passar a conta principal do ambiente para outra pessoa",
+    "esperado": [
+      "docs/administracao/licencas-e-propriedade"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Mandei o convite mas o funcionário diz que não chegou nada no e-mail",
+    "esperado": [
+      "docs/administracao/problemas-com-membros",
+      "docs/configuracoes-no-workspace/gerenciar-membros"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como sincronizo os membros da Kinbox com o Active Directory da minha empresa?",
+    "esperado": [
+      "llm/faq/conta-sso"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Liguei a IA no WhatsApp mas ela não responde ninguém, o que pode ser?",
+    "esperado": [
+      "docs/agente-de-ia/problemas-comuns",
+      "llm/agente-de-ia/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como faço o agente de IA passar o atendimento para alguém da equipe?",
+    "esperado": [
+      "llm/faq/agente-de-ia-transferir-para-humano",
+      "docs/agente-de-ia/conectar-canais",
+      "docs/agente-de-ia/ferramentas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para colocar dois agentes de IA respondendo por mensagem no mesmo número?",
+    "esperado": [
+      "llm/faq/agente-de-ia-um-por-canal",
+      "docs/agente-de-ia/conectar-canais"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Que tipos de arquivo posso mandar para a IA aprender sobre minha empresa?",
+    "esperado": [
+      "docs/agente-de-ia/conhecimento",
+      "llm/agente-de-ia/conhecimento"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quanto de saldo a inteligência artificial consome por mensagem?",
+    "esperado": [
+      "llm/faq/agente-de-ia-custo",
+      "docs/conceitos/saldo-e-creditos"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como treino o assistente de voz da Alexa para ler minhas conversas da Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "A IA consegue atender ligação do WhatsApp?",
+    "esperado": [
+      "docs/agente-de-ia/agente-de-voz",
+      "llm/agente-de-ia/agente-de-voz"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quero mandar uma promoção pelo WhatsApp para uma planilha de clientes, como monto isso?",
+    "esperado": [
+      "docs/campanhas/campanhas-no-kinbox",
+      "docs/campanhas/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Criei um disparo novo e ele não sai do status aguardando outra campanha, o que houve?",
+    "esperado": [
+      "llm/faq/campanha-uma-por-canal",
+      "docs/campanhas/problemas-comuns",
+      "docs/campanhas/velocidade-e-horario"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Na mensagem da campanha apareceu 'Olá 2' em vez do nome da pessoa, por quê?",
+    "esperado": [
+      "docs/campanhas/problemas-comuns",
+      "llm/campanhas/campanhas-no-kinbox"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para fazer disparo de SMS em massa e quanto crédito gasta cada mensagem?",
+    "esperado": [
+      "docs/campanhas/campanha-de-sms"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como vejo quem leu e quem respondeu a campanha que enviei ontem?",
+    "esperado": [
+      "docs/campanhas/acompanhar-resultados"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para programar posts no feed do Instagram pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quanto tempo demora para uma campanha terminar de enviar tudo?",
+    "esperado": [
+      "docs/campanhas/velocidade-e-horario"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Publiquei meu chatbot, ele está ligado, mas quando o cliente manda mensagem nada acontece. O que pode ser?",
+    "esperado": [
+      "docs/bot/problemas-comuns",
+      "llm/bot/blocos-do-bot"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como monto um menu automático com opções para o cliente escolher pelo número?",
+    "esperado": [
+      "docs/bot/blocos-do-bot",
+      "docs/bot/aprender-a-usar-o-bot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para o bot consultar o status do pedido no meu sistema pela API e responder o cliente?",
+    "esperado": [
+      "docs/bot/integracoes-do-bot",
+      "llm/bot/integracoes-do-bot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O robô começou a responder dentro dos grupos do WhatsApp, como faço ele parar?",
+    "esperado": [
+      "llm/faq/bot-grupos-whatsapp",
+      "docs/bot/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O que acontece se o cliente some no meio do fluxo do bot e não responde mais?",
+    "esperado": [
+      "llm/faq/bot-sessao-expirada"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo criar um bot que responde pelo Telegram pessoal do meu celular, sem cadastrar canal na Kinbox?",
+    "esperado": [
+      "docs/canais/telegram",
+      "llm/canais/telegram"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Como faço para as DMs do Instagram da minha loja caírem na Kinbox?",
+    "esperado": [
+      "docs/canais/instagram",
+      "llm/canais/instagram"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero atender pela Kinbox as mensagens que chegam na fanpage do Facebook, como conecto?",
+    "esperado": [
+      "docs/canais/facebook/conectar",
+      "llm/canais/facebook/conectar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Meu canal do Instagram ficou desconectado e a página aparece cinza quando tento conectar de novo, o que fazer?",
+    "esperado": [
+      "docs/canais/instagram/problemas-comuns",
+      "llm/faq/instagram-reconectar"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Tem como parar de abrir conversa toda vez que alguém responde meu story?",
+    "esperado": [
+      "docs/canais/instagram/configuracoes",
+      "llm/faq/instagram-stories-e-mencoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Estou no período de teste e não consigo adicionar o Instagram, é normal?",
+    "esperado": [
+      "llm/faq/instagram-teste-gratis",
+      "llm/canais/instagram"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "No teste grátis consigo conectar duas páginas do Facebook?",
+    "esperado": [
+      "llm/faq/canais-limite-do-plano",
+      "llm/canais/facebook/conectar",
+      "docs/canais/facebook/conectar"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para publicar posts e agendar stories do Instagram pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como coloco autenticação de dois fatores com o Google Authenticator na minha conta?",
+    "esperado": [
+      "docs/conta/verificacao-em-duas-etapas",
+      "llm/conta/verificacao-em-duas-etapas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Apareceu que atingi o limite de sessões ativas no ambiente, como libero?",
+    "esperado": [
+      "docs/conta/senha-e-sessoes",
+      "llm/conta/problemas-de-acesso"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "As notificações da Kinbox não aparecem no meu navegador, por quê?",
+    "esperado": [
+      "llm/faq/conta-nao-recebo-notificacoes",
+      "docs/conta/notificacoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Esqueci a senha do meu e-mail pessoal do Gmail, como recupero?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como mudo minha foto e meu nome que aparecem para a equipe na Kinbox?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como passo de um ambiente para outro sem precisar sair da minha conta?",
+    "esperado": [
+      "docs/conta/trocar-de-workspace"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Fiquei indisponível e parou de tocar o som de mensagem nova, é normal?",
+    "esperado": [
+      "docs/conta/disponibilidade",
+      "llm/faq/conta-nao-recebo-notificacoes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O tempo que o cliente passa conversando com o bot entra no tempo médio de espera do relatório?",
+    "esperado": [
+      "llm/faq/relatorio-tme-tma",
+      "docs/relatorios/como-funcionam"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como vejo quanto tempo cada pessoa da equipe ficou online ontem?",
+    "esperado": [
+      "docs/relatorios/presenca"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para ver na Kinbox o NPS do atendimento calculado automaticamente com promotores e detratores?",
+    "esperado": [
+      "llm/atendimento/pesquisa-de-satisfacao"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Onde vejo a nota que os clientes deram para cada atendente?",
+    "esperado": [
+      "docs/relatorios/avaliacao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quantas conversas estão esperando atendimento agora, sem ninguém responder?",
+    "esperado": [
+      "docs/relatorios/visao-geral",
+      "docs/relatorios/ao-vivo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que o número de atendimentos de um atendente é diferente no relatório de atribuição e no de interação?",
+    "esperado": [
+      "llm/relatorios/como-funcionam",
+      "docs/relatorios/interacao",
+      "docs/relatorios/atribuicao"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Onde acompanho o gasto com templates e a fatura do WhatsApp oficial dentro da Kinbox?",
+    "esperado": [
+      "llm/faq/relatorio-consumo-da-meta"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como coloco o chat da Kinbox no site da minha empresa para falar com quem está navegando?",
+    "esperado": [
+      "docs/canais/widget"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero trocar a cor do botão de chat e pedir nome e e-mail antes da pessoa começar a conversar",
+    "esperado": [
+      "docs/canais/widget/personalizar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Qual o tamanho máximo de arquivo que o visitante consegue mandar pelo chat do site?",
+    "esperado": [
+      "llm/canais/widget",
+      "docs/canais/widget/problemas-comuns"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Tem plugin da Kinbox para instalar o chat no WordPress?",
+    "esperado": [
+      "llm/faq/widget-wordpress-wix"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como coloco um botão do WhatsApp no meu site junto com o chat?",
+    "esperado": [
+      "docs/canais/widget/configuracoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Dá para colar o mesmo código do chat em duas lojas virtuais diferentes?",
+    "esperado": [
+      "llm/faq/widget-varios-sites"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo fazer chamada de vídeo com o visitante pelo chat do site?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para as conversas novas serem divididas entre os vendedores em rodízio?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
+      "docs/atendimento/estrategias-de-atribuicao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Criei uma regra de distribuição e nenhuma conversa está caindo para a equipe, o que pode ser?",
+    "esperado": [
+      "docs/atendimento/problemas-comuns",
+      "llm/atendimento/estrategias-de-atribuicao"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para colocar o horário de almoço no horário de atendimento da empresa?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-e-gerenciar-horarios"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como mando uma pesquisa de satisfação quando termino o atendimento?",
+    "esperado": [
+      "docs/atendimento/pesquisa-de-satisfacao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que recebi uma conversa nova mesmo estando indisponível?",
+    "esperado": [
+      "docs/atendimento/problemas-comuns",
+      "docs/atendimento/estrategias-de-atribuicao",
+      "docs/conta/disponibilidade"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como separo a equipe em setores, tipo vendas e suporte?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-e-gerenciar-grupos",
+      "docs/atendimento/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Kinbox calcula e paga bônus para os atendentes de acordo com a nota das avaliações?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Onde eu gero a chave para chamar a API da Kinbox a partir do meu ERP?",
+    "esperado": [
+      "docs/desenvolvedor/tokens-de-api",
+      "llm/desenvolvedor/tokens-de-api",
+      "llm/faq/api-referencia"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero usar o Claude para ler as conversas do meu atendimento, como conecto?",
+    "esperado": [
+      "docs/desenvolvedor/mcp",
+      "llm/desenvolvedor/mcp",
+      "llm/faq/mcp-o-que-da-para-fazer"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como faço uma página do meu sistema aparecer do lado da conversa?",
+    "esperado": [
+      "docs/desenvolvedor/criando-plugin-integracao",
+      "llm/desenvolvedor/criando-plugin-integracao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Meu bot tem que esperar meu sistema aprovar o pedido antes de seguir, dá para fazer?",
+    "esperado": [
+      "docs/desenvolvedor/webhook-continuar-bot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero pôr no meu CRM um link que abre a conversa do cliente pelo telefone",
+    "esperado": [
+      "docs/usando-o-kinbox/conversa-em-um-clique"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como integro o chat do meu próprio aplicativo à Caixa de entrada da Kinbox?",
+    "esperado": [
+      "docs/desenvolvedor/criando-canal-customizado",
+      "docs/canais/canal-customizado"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Kinbox tem um SDK oficial em Python para a API?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero ligar pelo WhatsApp para um cliente, mas aparece que ele ainda não deu permissão. O que faço?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+      "docs/canais/ligacoes/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para ligar do navegador para o telefone fixo de um contato?",
+    "esperado": [
+      "docs/canais/ligacoes/ligar-por-telefone",
+      "docs/canais/ligacoes/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde baixo o áudio gravado de uma ligação?",
+    "esperado": [
+      "llm/faq/ligacoes-gravacao",
+      "docs/canais/ligacoes/visao-geral",
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+      "docs/canais/ligacoes/configuracoes-voip"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Meu cliente pode me ligar num número de telefone comum e eu atender pela Kinbox?",
+    "esperado": [
+      "llm/faq/voip-receber-ligacoes",
+      "docs/canais/ligacoes/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A ligação do WhatsApp do cliente não toca para o atendente, por quê?",
+    "esperado": [
+      "docs/canais/ligacoes/problemas-comuns",
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Por que a aba Ligações não aparece no meu WhatsApp oficial?",
+    "esperado": [
+      "docs/canais/ligacoes/problemas-comuns",
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Consigo fazer chamada de vídeo com o cliente pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero criar o negócio no HubSpot sem sair da conversa com o cliente, como configuro?",
+    "esperado": [
+      "docs/integracoes/hubspot",
+      "llm/integracoes/hubspot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como faço os leads convertidos no RD Station Marketing virarem contato na Kinbox?",
+    "esperado": [
+      "docs/integracoes/rdstation-marketing-webhook",
+      "llm/integracoes/rdstation-marketing-webhook"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O botão para criar lead no Bitrix24 aparece cinza na conversa, o que falta?",
+    "esperado": [
+      "docs/integracoes/bitrix24",
+      "llm/integracoes/bitrix24"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Cliquei em Obter token no Zoho e o refresh token não apareceu",
+    "esperado": [
+      "docs/integracoes/zoho",
+      "llm/integracoes/zoho"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como ligo o NectarCRM para os atendentes cadastrarem contatos pela conversa?",
+    "esperado": [
+      "docs/integracoes/nectarcrm",
+      "llm/integracoes/nectarcrm"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que cada vez que crio oportunidade no RD Station CRM aparece uma empresa repetida?",
+    "esperado": [
+      "docs/integracoes/rdstation-crm",
+      "llm/integracoes/rdstation-crm"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Sumiu a integração com o Followize, onde ela foi parar?",
+    "esperado": [
+      "llm/faq/integracao-followize"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A Kinbox tem integração pronta com o Salesforce?",
+    "esperado": [
+      "llm/faq/integracao-nao-listada",
+      "docs/integracoes/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O quadro do CRM na conversa mostra o programa de fidelidade e os pontos acumulados do cliente?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Tenho uma planilha do Excel com meus clientes, como coloco todos na Kinbox de uma vez?",
+    "esperado": [
+      "docs/clientes/importar-contatos"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O mesmo cliente aparece duas vezes com o número do WhatsApp com e sem o 9, como junto os dois?",
+    "esperado": [
+      "docs/clientes/mesclar-contatos"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que a conversa só possa ser finalizada se o atendente preencher o CPF do cliente",
+    "esperado": [
+      "docs/configuracoes-no-workspace/campos-personalizados-no-kinbox"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Apaguei um contato e o histórico de mensagens dele sumiu, dá para recuperar?",
+    "esperado": [
+      "docs/conversas/clientes-contatos-e-organizacoes",
+      "llm/faq/contato-excluir-apaga-conversas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como cadastro a empresa do cliente e ligo vários contatos a ela com o cargo de cada um?",
+    "esperado": [
+      "docs/clientes/organizacoes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que os atendentes não vejam o celular dos clientes, como faço?",
+    "esperado": [
+      "llm/faq/contato-esconder-telefone",
+      "docs/administracao/referencia-de-permissoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A Kinbox mostra os contatos num mapa pelo endereço de cada um?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero receber os e-mails do contato da empresa na caixa de entrada da Kinbox, qual tipo de conexão uso?",
+    "esperado": [
+      "docs/canais/e-mail/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Coloquei host, porta e senha do IMAP e aparece erro ao testar conexão, o que confiro?",
+    "esperado": [
+      "docs/canais/e-mail/por-imap",
+      "docs/canais/e-mail/problemas-comuns",
+      "llm/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Onde pego o Tenant ID e o Client Secret para ligar o Outlook da empresa?",
+    "esperado": [
+      "docs/canais/e-mail/outlook"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Ativei o encaminhamento do Gmail, mas a resposta chega ao cliente como via Kinbox, é normal?",
+    "esperado": [
+      "docs/canais/e-mail/por-encaminhamento",
+      "docs/canais/e-mail/problemas-comuns",
+      "llm/faq/email-spam"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Os e-mails levam alguns minutos para entrar na Kinbox, por quê?",
+    "esperado": [
+      "llm/faq/email-atraso",
+      "docs/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para conectar a caixa de e-mail pela Kinbox usando POP3?",
+    "esperado": [
+      "llm/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo saber se o cliente abriu o e-mail que respondi pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para a IA corrigir o português da minha mensagem antes de mandar para o cliente?",
+    "esperado": [
+      "docs/copiloto/usar-o-copiloto-de-ia",
+      "llm/faq/copiloto-assistente-kin"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero criar um botão de IA que reescreva o texto no jeito da minha empresa, dá para montar um comando próprio?",
+    "esperado": [
+      "docs/copiloto/comandos-personalizados"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para a IA dar uma nota de 0 a 10 para cada atendimento resolvido?",
+    "esperado": [
+      "llm/faq/ia-avalia-atendimento",
+      "docs/copiloto/analises-de-ia"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Meu saldo está caindo e não liguei nada, o copiloto cobra quando clico em Sugestões?",
+    "esperado": [
+      "llm/faq/copiloto-custo",
+      "llm/copiloto/configuracoes-de-copiloto"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Posso mandar um arquivo .md para a base de conhecimento do bot?",
+    "esperado": [
+      "llm/faq/base-de-conhecimento-markdown",
+      "docs/copiloto/base-de-conhecimento"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como eu sei quais clientes estão irritados sem precisar abrir e ler cada conversa?",
+    "esperado": [
+      "docs/copiloto/analises-de-ia"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O copiloto consegue publicar posts nas redes sociais da minha loja?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Arrasto o card para a próxima coluna do funil e ele volta sozinho, o que está travando?",
+    "esperado": [
+      "llm/faq/funil-negociacao-nao-muda-de-etapa",
+      "docs/crm/gerenciando-funil-de-vendas",
+      "llm/crm/gerenciando-funil-de-vendas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Subi uma planilha de negócios errada no funil, tem como apagar tudo que ela criou?",
+    "esperado": [
+      "llm/faq/funil-reverter-importacao",
+      "docs/crm/importar-negociacoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para criar uma tarefa automática de follow-up quando o lead entra numa etapa do funil?",
+    "esperado": [
+      "docs/crm/cadencias"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para abrir um negócio no CRM direto da conversa com o cliente?",
+    "esperado": [
+      "llm/faq/funil-negocio-da-conversa",
+      "docs/crm/gerenciando-funil-de-vendas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Por que o sistema não deixa eu apagar um funil antigo?",
+    "esperado": [
+      "llm/faq/funil-excluir-funil",
+      "docs/crm/criar-funil-de-vendas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Clico para marcar a negociação como ganha e aparece um aviso pedindo para preencher um campo, como resolvo?",
+    "esperado": [
+      "docs/crm/motivos-de-perda-e-regras",
+      "docs/crm/gerenciando-funil-de-vendas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A Kinbox gera proposta comercial em PDF a partir da negociação?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero saber quem apagou uma tag da minha conta semana passada, onde eu vejo isso?",
+    "esperado": [
+      "docs/administracao/auditoria",
+      "llm/faq/auditoria-quem-apagou",
+      "llm/configuracoes-no-workspace/configuracoes-gerais"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O cliente manda mensagem de madrugada e a mensagem de ausência não chega pra ele, por quê?",
+    "esperado": [
+      "docs/administracao/mensagens-automaticas",
+      "llm/configuracoes-no-workspace/configuracoes-gerais",
+      "llm/faq/atendimento-mensagem-fora-do-horario"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A mensagem de ausência está disparando na hora errada, umas três horas fora do nosso expediente. O que eu confiro?",
+    "esperado": [
+      "llm/faq/workspace-mudar-fuso",
+      "docs/configuracoes-no-workspace/configuracoes-gerais",
+      "docs/administracao/mensagens-automaticas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A agência que cuida da nossa conta consegue ler as conversas dos nossos clientes? Dá para bloquear?",
+    "esperado": [
+      "docs/administracao/acesso-do-parceiro",
+      "llm/faq/workspace-parceiro-ve-conversas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como faço para encerrar e apagar o ambiente da minha empresa na Kinbox?",
+    "esperado": [
+      "docs/administracao/excluir-workspace"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde eu troco o logo e o nome da empresa que aparecem na Kinbox?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configuracoes-gerais"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Consigo baixar o histórico da Auditoria em uma planilha?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como ligo o bot do Telegram da minha empresa na Kinbox?",
+    "esperado": [
+      "docs/canais/telegram"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Colei o token do bot, o canal do Telegram ficou conectado, mas nenhuma mensagem chega. O que pode ser?",
+    "esperado": [
+      "docs/canais/telegram",
+      "llm/canais/telegram"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Onde compro mais créditos para mandar SMS?",
+    "esperado": [
+      "docs/canais/sms",
+      "docs/assinatura/adicionar-saldo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Mandei um SMS para o cliente e ficou com erro dizendo que não tem créditos",
+    "esperado": [
+      "docs/canais/sms",
+      "llm/canais/sms"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Vocês têm canal de RCS ou de mensagens da Apple?",
+    "esperado": [
+      "llm/faq/rcs-e-apple-messages"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para responder pela Kinbox as perguntas que fazem nos meus anúncios do Mercado Livre?",
+    "esperado": [
+      "llm/faq/mercado-livre",
+      "llm/canais/mercado-livre"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A Kinbox mostra se o SMS foi entregue no celular do cliente?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Meu formulário do site precisa mandar os leads direto para a Kinbox e criar o contato. Como faço?",
+    "esperado": [
+      "docs/cenarios/integrar-via-webhook-com-cenarios"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Liguei o cenário mas ele nunca aparece no Analítico, o que pode ser?",
+    "esperado": [
+      "docs/cenarios/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá pra cadastrar uma URL para a Kinbox me avisar toda vez que chegar mensagem nova?",
+    "esperado": [
+      "llm/faq/cenarios-webhook-de-saida"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Rodar cenário gasta créditos da carteira? O que são essas operações?",
+    "esperado": [
+      "llm/faq/cenarios-operacoes",
+      "docs/cenarios/execucoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quero mandar todo fim de dia os negócios de um funil para o meu ERP. Qual o limite de itens que o loop aguenta?",
+    "esperado": [
+      "docs/cenarios/gatilhos-e-acoes",
+      "llm/cenarios/gatilhos-e-acoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Como eu ligo um cenário depois de montar os passos? Mexi no botão e não mudou nada.",
+    "esperado": [
+      "docs/cenarios/criar-um-cenario"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para montar um cenário que publica stories no Instagram da loja todo dia de manhã?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Onde fica o chat interno para eu conversar com o pessoal da minha equipe?",
+    "esperado": [
+      "docs/salas/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Como crio uma sala privada só para os gerentes da loja?",
+    "esperado": [
+      "docs/salas/usar-salas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Se eu silenciar uma sala, ainda fico sabendo quando algum colega me marcar com @ lá?",
+    "esperado": [
+      "docs/salas/usar-salas",
+      "llm/salas/usar-salas"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O dono da empresa consegue ler as mensagens diretas que eu troco com um colega?",
+    "esperado": [
+      "docs/salas/auditar-mensagens-diretas",
+      "llm/faq/salas-cliente-ve"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Sumiu o botão das salas lá em cima, o que pode ter acontecido?",
+    "esperado": [
+      "docs/salas/usar-salas",
+      "docs/salas/visao-geral"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para usar as salas da equipe pelo aplicativo no celular?",
+    "esperado": [
+      "llm/faq/salas-no-celular"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para fazer chamada de vídeo com a equipe dentro das salas?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Fiz uma automação para lembrar o cliente do orçamento depois de 2 horas e outra para encerrar a conversa depois de 24 horas sem mensagem, mas só uma delas funciona. O que está errado?",
+    "esperado": [
+      "docs/automacao/problemas-comuns",
+      "llm/automacao/gatilhos-e-acoes"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Quero que a Kinbox mande sozinha uma mensagem cobrando quem recebeu orçamento e sumiu. Como eu monto isso?",
+    "esperado": [
+      "docs/automacao/exemplos"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "As conversas que o nosso sistema abre pela API não disparam a automação de tempo sem nova mensagem. Tem alguma configuração para isso?",
+    "esperado": [
+      "llm/faq/automacao-sessoes-por-api",
+      "docs/automacao/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Coloquei 10 minutos na automação e a mensagem só saiu uns 13 minutos depois. Isso é normal?",
+    "esperado": [
+      "llm/faq/automacao-atraso"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Que ação eu consigo colocar numa automação que roda quando um atendente fica online?",
+    "esperado": [
+      "docs/automacao/gatilhos-e-acoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Onde eu crio uma automação nova e quem da equipe pode mexer nas automações?",
+    "esperado": [
+      "docs/automacao/configurando-automacoes",
+      "docs/automacao/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para criar uma automação que publica um post no Facebook da loja toda segunda-feira?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Montei um painel com os números de vendas, mas ele continua mostrando os valores de manhã. Como faço os cartões puxarem os dados de agora?",
+    "esperado": [
+      "docs/relatorios/dashboard",
+      "llm/faq/dashboard-snapshot"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quero um gráfico de barras com o valor total das negociações de cada vendedor no mês. Onde eu crio isso?",
+    "esperado": [
+      "docs/relatorios/dashboard"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Gastei mais saldo da carteira do que eu esperava nessa quinzena. Onde vejo o que consumiu, serviço por serviço?",
+    "esperado": [
+      "docs/relatorios/saldo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Preciso baixar a gravação das chamadas que a equipe fez por telefone na semana passada e mandar a lista para a diretoria em planilha.",
+    "esperado": [
+      "docs/relatorios/ligacoes",
+      "llm/faq/ligacoes-gravacao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde vejo quantos clientes terminaram a conversa irritados e quais leads o copiloto marcou como quentes?",
+    "esperado": [
+      "docs/relatorios/copiloto"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que o supervisor veja os relatórios, mas sem conseguir apagar os painéis que eu montei. Qual opção do papel resolve?",
+    "esperado": [
+      "docs/relatorios/exportar-e-permissoes",
+      "llm/relatorios/exportar-e-permissoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Dá para agendar o envio do dashboard em PDF por e-mail toda segunda-feira para os gestores?",
+    "esperado": [
+      "llm/relatorios/exportar-e-permissoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Quero ver na Kinbox quanto gastei e quantos leads vieram dos meus anúncios do Facebook e do Instagram. Como ligo a conta de anúncios?",
+    "esperado": [
+      "docs/marketing/meta-ads"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Tenho uma conta gerenciadora no Google Ads com várias contas de clientes embaixo. Dá para escolher quais delas aparecem no relatório?",
+    "esperado": [
+      "docs/marketing/google-ads",
+      "llm/marketing/relatorios-de-marketing"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Coloquei o script de rastreamento do site pelo Tag Manager, mas o teste da instalação fica parado esperando e nenhum evento chega. O que pode ser?",
+    "esperado": [
+      "docs/marketing/tracking",
+      "llm/marketing/tracking"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "O botão de atualizar o relatório de anúncios do Google ficou travado e diz que as consultas do dia acabaram. Quando volta a funcionar?",
+    "esperado": [
+      "llm/faq/marketing-limite-de-consultas",
+      "docs/marketing/relatorios-de-marketing"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como descubro se o cliente que chamou no WhatsApp veio do anúncio do Instagram ou da campanha do Google?",
+    "esperado": [
+      "llm/faq/marketing-origem-do-lead",
+      "docs/marketing/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O que significam CPL e ROAS no painel de marketing e de onde a Kinbox tira esses números?",
+    "esperado": [
+      "docs/marketing/relatorios-de-marketing",
+      "llm/marketing/relatorios-de-marketing"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Consigo acompanhar os resultados dos meus anúncios do TikTok dentro da Kinbox?",
+    "esperado": [
+      "docs/marketing/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Quem vê o ícone Meta atual no topo da tela? Um vendedor que não participa da meta também vê?",
+    "esperado": [
+      "llm/metas/criando-metas-no-kinbox"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Coloquei lembrete na tarefa e não apareceu aviso nenhum, nem no celular. Por que não fui avisado?",
+    "esperado": [
+      "llm/faq/tarefas-lembrete",
+      "docs/tarefas/criando-e-gerenciando-tarefas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quando exporto a lista de tarefas, quais colunas vêm na planilha?",
+    "esperado": [
+      "llm/tarefas/criando-e-gerenciando-tarefas"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Quero um objetivo de R$ 50 mil em vendas para o time comercial em dezembro, com um marco na metade. Como monto isso?",
+    "esperado": [
+      "docs/metas/criando-metas-no-kinbox"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Fechei uma venda de um negócio antigo, mas ela não somou no resultado do mês. O que pode ter acontecido?",
+    "esperado": [
+      "docs/metas/como-as-metas-sao-calculadas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como faço o Google Agenda do meu celular tocar um alarme antes de cada compromisso pessoal?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero oferecer consulta de 40 minutos de segunda a sexta na agenda da Kinbox. Onde cadastro esse serviço e o horário dele?",
+    "esperado": [
+      "docs/agenda/servicos-e-locais",
+      "llm/agenda/kinbox-agenda",
+      "docs/agenda/kinbox-agenda"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como marco horário para um cliente na agenda, escolhendo três horários seguidos de uma vez só?",
+    "esperado": [
+      "docs/agenda/agendamentos",
+      "llm/agenda/kinbox-agenda"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Eu vejo os agendamentos no calendário, mas a recepcionista não vê nenhum e nem aparece a opção Agendamento para ela. O que falta liberar?",
+    "esperado": [
+      "docs/agenda/kinbox-agenda",
+      "docs/agenda/agendamentos",
+      "llm/agenda/kinbox-agenda"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Numa reserva de mesa pela agenda, qual o máximo de pessoas e quantas mesas o sistema consegue juntar para um grupo?",
+    "esperado": [
+      "llm/agenda/kinbox-agenda"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O paciente recebe lembrete automático no WhatsApp antes da consulta marcada na agenda?",
+    "esperado": [
+      "llm/faq/agenda-lembretes",
+      "docs/agenda/agendamentos"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Os horários marcados na agenda da Kinbox aparecem no meu Google Agenda do celular?",
+    "esperado": [
+      "llm/faq/agenda-google-calendar",
+      "docs/agenda/kinbox-agenda"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como importo para a agenda da Kinbox uma planilha com os agendamentos que eu tinha em outro sistema?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Indiquei uma empresa para usar a Kinbox e quero que a conta dela caia na minha carteira de parceiro. Como faço?",
+    "esperado": [
+      "docs/programa-de-parceiros/convidar-clientes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Sou parceiro e preciso entrar no ambiente de um cliente meu para arrumar umas configurações. Onde faço isso?",
+    "esperado": [
+      "docs/programa-de-parceiros/inspecionar-cliente"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Configurei tags, funis e bot num ambiente modelo. Tem como copiar tudo isso para os clientes novos que eu trouxer?",
+    "esperado": [
+      "docs/programa-de-parceiros/templates"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Em que dia do mês a Kinbox paga a comissão de parceiro?",
+    "esperado": [
+      "llm/faq/parceiro-quando-recebo",
+      "docs/programa-de-parceiros/pagamento-das-comissoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Sou parceiro da Kinbox. Onde no painel eu consulto quanto de comissão ganho em cada cliente?",
+    "esperado": [
+      "docs/programa-de-parceiros/niveis-do-programa-de-comissionamento"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O item Parceria não aparece no meu menu lateral. Por quê?",
+    "esperado": [
+      "docs/programa-de-parceiros/visao-geral"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como vejo quanto rende o programa de afiliados do Mercado Livre?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Estou atendendo um cliente no chat e quero emitir um boleto do Inter para ele ali mesmo, sem abrir o internet banking. Tem como?",
+    "esperado": [
+      "docs/integracoes/banco-inter"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Uso o Tiny como ERP. Consigo ligar o contato da conversa a um cliente de lá e ver os dados cadastrais já preenchidos no Tiny sem sair da Kinbox?",
+    "esperado": [
+      "docs/integracoes/tiny-erp"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Trabalho com proteção veicular. Dá para puxar os dados de um carro pela placa sem sair da conversa?",
+    "esperado": [
+      "docs/integracoes/anycar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Vendo IPTV e queria liberar um teste para o cliente direto pela conversa da Kinbox. É possível?",
+    "esperado": [
+      "docs/integracoes/smarters",
+      "docs/integracoes/gestor-premium"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Desliguei a integração do Asaas, mas o bot continua mandando boleto para os clientes. Por quê?",
+    "esperado": [
+      "docs/integracoes/asaas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Consigo mandar um Pix ou um link de pagamento para o cliente pela conversa?",
+    "esperado": [
+      "llm/faq/cobrar-pelo-chat"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para a Kinbox receber os pagamentos aprovados no Mercado Pago e dar baixa automática nos pedidos?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Tem aplicativo da Kinbox para Android ou só para iPhone? Onde eu baixo?",
+    "esperado": [
+      "llm/faq/app-onde-baixar",
+      "docs/app/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Instalei o app no celular, mas as notificações do segundo workspace em que trabalho não chegam. O que falta?",
+    "esperado": [
+      "docs/app/notificacoes-no-app"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como mando um áudio ou uma foto para o cliente pelo app no celular?",
+    "esperado": [
+      "docs/app/atender-pelo-celular"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero apagar minha conta da Kinbox e todos os meus dados pessoais. Como faço pelo celular?",
+    "esperado": [
+      "docs/app/excluir-conta"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para configurar os canais e ver os relatórios pelo app do celular?",
+    "esperado": [
+      "llm/app/visao-geral",
+      "docs/app/visao-geral"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Consigo usar o app da Kinbox no meu iPad, com a tela deitada?",
+    "esperado": [
+      "llm/faq/app-tablet"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para o WhatsApp do meu celular fazer backup automático das conversas no Google Drive?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Onde conecto meu primeiro WhatsApp?",
+    "esperado": [
+      "docs/primeiros-passos/conectar-o-primeiro-canal",
+      "docs/canais/whatsapp/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Fiz o cadastro mas o código de 6 dígitos nunca chegou no meu e-mail, o que eu faço?",
+    "esperado": [
+      "llm/faq/nao-recebi-o-codigo-de-confirmacao",
+      "docs/primeiros-passos/criar-seu-workspace-no-kinbox",
+      "llm/primeiros-passos/criar-seu-workspace-no-kinbox"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Cliquei em pular na configuração guiada do Kin sem querer, como volto para ela?",
+    "esperado": [
+      "llm/faq/pular-onboarding",
+      "docs/primeiros-passos/configurar-com-o-kin",
+      "llm/primeiros-passos/configurar-com-o-kin"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Mandei uma mensagem de teste. Como respondo e encerro a conversa?",
+    "esperado": [
+      "docs/primeiros-passos/atender-a-primeira-conversa",
+      "docs/conversas/gerenciar-conversas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como meu time tira o certificado de Operador Certificado da Academia e como eu cobro um prazo deles?",
+    "esperado": [
+      "llm/faq/academia-certificado",
+      "docs/primeiros-passos/videos-para-comecar",
+      "llm/primeiros-passos/videos-para-comecar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Minha empresa é de varejo e marquei Vendas no onboarding do Kin: qual funil e quais etapas ele cria?",
+    "esperado": [
+      "llm/primeiros-passos/configurar-com-o-kin"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "A Kinbox oferece um curso presencial com certificado reconhecido pelo MEC?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a velocidade da luz no vácuo?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a capital da Austrália?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço um bolo de cenoura com cobertura de chocolate?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quem ganhou a Copa do Mundo de 2002?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como trocar o óleo do carro?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a fórmula de Bhaskara?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quanto tempo leva para cozinhar arroz integral?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a melhor época para visitar o Japão?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para tirar o passaporte brasileiro?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como configuro uma VPN no meu roteador?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para abrir uma conta no Nubank?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como edito um vídeo no CapCut?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para renovar a minha CNH vencida?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual o melhor adubo para plantar tomate em vaso?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como mudo o toque de chamada do meu iPhone?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual o horário de funcionamento dos Correios no sábado?",
+    "esperado": [],
+    "tipo": "negativo"
+  }
+]

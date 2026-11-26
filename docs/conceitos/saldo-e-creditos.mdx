@@ -1,0 +1,70 @@
+---
+title: "Saldo da carteira e créditos: o que consome"
+description: Para que serve o saldo da carteira, o que gasta saldo (IA, copiloto, ligações), o que usa créditos de SMS e o que acontece quando o saldo acaba.
+keywords: [saldo, carteira, créditos, crédito, consumo, o que gasta, saldo acabou, saldo insuficiente, recarga, adicionar saldo, créditos de sms, custo da ia, alerta de saldo]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
+  - api:src/modules/agents/agent.runner.ts
+  - api:src/modules/whatsapp-calling/whatsapp-calling.service.ts
+  - api-v0:server/controllers/WbaCloudController.js
+codigo:
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - web:src/pages/settings/billing/AddBalanceModal/index.tsx
+  - web:src/pages/settings/billing/WalletAlertModal.tsx
+  - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
+  - web:src/pages/settings/copilot/CopilotChatDrop.tsx
+  - api:src/modules/agents/agent.runner.ts
+  - api:src/modules/signals/signals.definitions.ts
+  - api:src/modules/voip/voip.service.ts
+  - api:src/modules/whatsapp-calling/whatsapp-calling.service.ts
+  - api-v0:server/auxiliary/walletDefaults.js
+verificado_em: 2026-11-26
+---
+
+O **saldo** da carteira é o valor em reais do workspace usado para pagar serviços avulsos, como inteligência artificial e ligações.
+
+## Saldo da carteira e créditos de SMS
+
+A carteira tem dois recursos independentes. Cada workspace tem a própria carteira (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)), e a assinatura do plano é cobrada à parte (veja [Assinatura: como o plano é montado](/docs/assinatura/visao-geral)).
+
+| Tipo | O que é | Para que serve |
+| --- | --- | --- |
+| **Saldo disponível** | Valor em reais na carteira do workspace | Recursos de IA (agentes, copiloto, análises, transcrição) e ligações |
+| **Créditos de SMS** | Créditos exclusivos para SMS (cada crédito equivale ao disparo de um SMS) | Envio de mensagens por SMS |
+
+## O que gasta o saldo
+
+O relatório **Saldo** (em **Relatórios**) agrupa o gasto nestas categorias:
+
+- **Agente de IA**: cada resposta de um agente de IA (inclusive quando chamado pelo bloco **Agente de IA** dentro de um bot) e o processamento do conhecimento dos agentes de IA.
+- **Copiloto**: comandos e chat do copiloto, **Avaliadores** e **Revisor de mensagens**.
+- **Análises**: os recursos de análise do **Copiloto**, quando ligados, como **Análise de sentimento**, **Lead score**, **Classificação de intenção**, **Cliente preso no bot**, **Sugestão de retorno**, **Aviso ao resolver** e **Não reabrir por agradecimento**.
+- **Voz e áudio**: transcrição de áudios; nas ligações do WhatsApp, o atendimento por IA fora da franquia, a transcrição pedida pelo botão **Transcrever** e o resumo da transcrição (a gravação e a transcrição automática estão incluídas no plano de ligações); no VoIP, a transcrição e o resumo das ligações.
+- **Outros**: ligações por telefone (VoIP), minutos excedentes do plano de ligações do WhatsApp e geração de FAQ a partir das conversas.
+
+Nas ligações do WhatsApp, a cobrança conta por minuto iniciado e ligações não atendidas não são cobradas. Os minutos atendidos pela equipe saem da franquia do plano de ligações e apenas o excedente desconta do saldo (veja [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/ligacoes/visao-geral)).
+
+Recursos do **Copiloto** e análises só consomem saldo quando estão ligados, exceto o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (e gasta saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende da tela do Copiloto (veja [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto)). Veja também [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia).
+
+## O que não gasta saldo
+
+- **SMS**: usa **Créditos de SMS**, não o saldo da carteira.
+- **Templates do WhatsApp oficial**: não descontam do saldo da carteira (a Meta cobra direto na conta do WhatsApp; veja [Antes de conectar o WhatsApp oficial](/docs/canais/requisitos-para-se-ter-uma-api-oficial)).
+- **Bot** sem recursos de IA (bloco **Agente de IA**, **Usar prompt**, **Transcrever áudio** e **Assistente Kin**; veja [Bot: visão geral](/docs/bot/visao-geral)), **Automações**, [**Cenários**](/docs/cenarios/visao-geral) e **Atribuição automática**: não geram débito na carteira. Nos cenários, a exceção é o botão **Corrigir e formatar com IA** no corpo da **Requisição HTTP**, que usa o saldo.
+
+## Quando o saldo acaba
+
+- **Agentes de IA**: param de responder quando o saldo fica baixo demais. No teste do agente, a tela mostra **Saldo Insuficiente**. Veja [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns).
+- **Copiloto**: o menu no chat mostra **Seus créditos acabaram** com o botão **Comprar créditos**. Quem não tem acesso ao financeiro vê "Fale com um administrador para colocar créditos no ambiente.". Nas telas do copiloto, "créditos" quer dizer o saldo da carteira, não os **Créditos de SMS**.
+- **Ligações por telefone (VoIP)**: exigem um saldo mínimo para começar e são encerradas se o saldo acabar durante a chamada.
+
+## Onde acompanhar e pôr saldo
+
+O saldo, os créditos de SMS, a recarga e o alerta de saldo baixo ficam em **Configurações** → **Assinatura** (item que só aparece para quem tem acesso ao financeiro), e o consumo por categoria fica em **Relatórios** → [**Saldo**](/docs/relatorios/saldo). Veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo) e [Configurar o alerta de saldo](/docs/assinatura/alerta-de-saldo).
+
+Todo workspace novo começa com um saldo de cortesia para testar os agentes de IA antes da primeira recarga.
+
+Veja também o [Glossário](/docs/conceitos/glossario).

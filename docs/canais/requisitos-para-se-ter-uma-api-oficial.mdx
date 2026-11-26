@@ -1,0 +1,57 @@
+---
+title: Antes de conectar o WhatsApp oficial
+description: O que é o WhatsApp oficial na Kinbox, o que você precisa antes de conectar e o que muda no atendimento.
+keywords: [whatsapp oficial, waba, bm, business manager, gerenciador de negócios, api oficial, requisitos, antes de conectar, meta, conta do whatsapp business, facebook, coexistência, janela de 24 horas, template, cobrança da meta]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/embed/AddWhatsappEmbedded.tsx
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/controllers/NewPaymentController.js
+codigo:
+  - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/embed/**
+  - web:src/pages/settings/channels/whatsappCloud/**
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/modules/meta/CloudApiClient.js
+  - api-v0:server/controllers/NewPaymentController.js
+verificado_em: 2026-11-26
+---
+
+O WhatsApp oficial liga um número de telefone à Kinbox pela API da Meta, numa janela da própria Meta aberta dentro da Kinbox, sem outro provedor no meio.
+
+Se você ainda está decidindo entre o canal oficial e o QR Code, veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral).
+
+## O que você precisa
+
+- **Permissão na Kinbox:** ser o [proprietário](/docs/conceitos/workspace-membros-e-papeis) do workspace ou ter a permissão **Gerenciar Canais**, sem a restrição **Somente pode dar manutenção simples em canais**.
+- **Canal de WhatsApp livre no plano:** todos os canais de WhatsApp ativos (oficiais e por QR Code) entram na mesma contagem do limite do plano. Veja mais em [Canais](/docs/canais/visao-geral).
+- **Conta do Facebook com acesso na Meta:** na janela da Meta, você entra com o Facebook para escolher ou criar a empresa, a conta do WhatsApp Business e o número, e autoriza a Kinbox a gerenciar a conta do WhatsApp Business, enviar mensagens e acessar a empresa.
+- **Modo de uso definido:** decidir se o número vai funcionar só na Kinbox ou no app WhatsApp Business e na Kinbox ao mesmo tempo.
+
+As telas e exigências dentro da janela (como dados da empresa, confirmação do número e forma de pagamento) são da Meta e podem mudar. A Kinbox não controla essas etapas.
+
+## Padrão ou coexistência
+
+- **Só na Kinbox (padrão):** você usa o número apenas no WhatsApp oficial, sem o app WhatsApp Business no celular. Veja [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao).
+- **No app WhatsApp Business e na Kinbox (coexistência):** o número continua no app WhatsApp Business do celular e entra na Kinbox pelo WhatsApp oficial ao mesmo tempo. Veja [Usar o mesmo número no app WhatsApp Business e na Kinbox (coexistência)](/docs/canais/whatsapp-api-oficial-coexistente).
+
+## O que muda no atendimento
+
+- **Janela de 24 horas:** depois de 24 horas sem mensagem do contato, você só pode enviar um template aprovado. Veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas).
+- **Templates:** os modelos de mensagem são criados e enviados para aprovação na tela **WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**). Veja [Templates, Flows e carrossel: o que é cada um](/docs/canais/whatsapp/whatsapp-templates/visao-geral).
+- **Cobrança das mensagens:** a Meta cobra as mensagens direto na sua conta do WhatsApp. A Kinbox não cobra mensagens nem templates, não desconta do [saldo da carteira](/docs/conceitos/saldo-e-creditos) e não mostra estimativa de custo. Ligações pelo WhatsApp oficial têm cobrança própria (veja [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp)).
+- **Status na Kinbox:** na lista de canais, o canal oficial aparece com o ícone "WhatsApp Oficial" e o status **Conectado**, mas esse status não acompanha problemas ou restrições na Meta. Qualidade do número e limite de envio também não aparecem na Kinbox. Veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
+
+## Próximos passos
+
+<CardGroup cols={2}>
+  <Card title="Conectar o WhatsApp oficial" href="/docs/canais/whatsapp-api-oficial-padrao">
+    Passo a passo para conectar um número usado só na Kinbox.
+  </Card>
+  <Card title="Usar no app e na Kinbox (coexistência)" href="/docs/canais/whatsapp-api-oficial-coexistente">
+    Como manter o número no app WhatsApp Business do celular ao mesmo tempo.
+  </Card>
+</CardGroup>
