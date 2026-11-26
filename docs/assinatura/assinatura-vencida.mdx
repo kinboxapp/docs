@@ -1,0 +1,75 @@
+---
+title: Minha assinatura venceu ou o pagamento falhou
+description: O que acontece quando a assinatura ou o teste grátis vence, o que deixa de funcionar depois da carência e como regularizar o pagamento.
+keywords: [assinatura vencida, assinatura expirada, teste grátis acabou, pagamento atrasado, atraso, bloqueado, não consigo responder, campo de mensagem sumiu, cartão recusado, boleto vencido, carência]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/hooks/useInit.tsx
+  - web:src/stores/sessionStore.jsx
+  - web:src/pages/inbox/Chat/index.tsx
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/scheduler/deleteChannelsScheduler.js
+codigo:
+  - web:src/hooks/useInit.tsx
+  - web:src/stores/sessionStore.jsx
+  - web:src/pages/inbox/Chat/index.tsx
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/scheduler/deleteChannelsScheduler.js
+  - api-v0:server/services/WorkspacePlatformService.js
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+- Aparece uma faixa no topo da Kinbox avisando que o teste grátis está acabando ("Faltam N dias para acabar sua degustação."), que a assinatura venceu ("Sua assinatura expirou. Você tem mais N dias de acesso.") ou pedindo para selecionar um plano ("Sua assinatura expirou. Por favor, selecione um plano nas configurações de assinatura.").
+- O campo de mensagem sumiu das conversas na **Caixa de entrada** e não dá para responder.
+- Ao convidar um membro ou criar um canal, aparece a mensagem "Assinatura expirada".
+- Na página **Assinatura**, o plano aparece como **Expirado** ou **Cancelado**, ou existe uma fatura com status **Não pago** ou **Falha ao pagar**.
+
+## O que acontece e quando
+
+| Momento | O que acontece |
+| --- | --- |
+| 5 dias antes do vencimento | A fatura da mensalidade é gerada e enviada para os **E-mails de cobrança**. No cartão de crédito, a cobrança é automática. |
+| No vencimento (**Expira em**) sem pagamento | O status muda para **Expirado** em **Configurações** → **Assinatura** e a faixa no topo informa quantos dias de acesso restam. |
+| Até 3 dias depois do vencimento | Período de carência: o workspace continua funcionando normalmente enquanto você regulariza o pagamento. |
+| Depois de 3 dias do vencimento | O campo de mensagem some das conversas e não é possível convidar membros nem adicionar canais. |
+
+A mesma carência de **3 dias** vale depois dos **7 dias** do teste grátis.
+
+A Kinbox não envia e-mail automático avisando que a assinatura venceu — o aviso aparece na faixa no topo do app. O botão da faixa só aparece no computador e para quem tem a permissão **Assinatura**; quem não tem a permissão deve avisar o proprietário ou um administrador do workspace.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="Boleto ou Pix não pago">
+    Vá em **Configurações** → **Assinatura** → **Faturas**. No menu **...** da fatura em aberto, escolha **Ver Boleto**, **Copiar código do boleto** ou **Ver QR code** e faça o pagamento (veja [Faturas, boletos e nota fiscal](/docs/assinatura/faturas)). Se a fatura do mês ainda não saiu, clique em **Gerar boleto agora** ou **Pagar agora**.
+
+    Quando o pagamento é confirmado, a data em **Expira em** avança e o acesso volta ao normal. Se você pagar o Pix com a janela aberta, a tela confirma sozinha; se pagar depois, a confirmação chega pelo retorno do banco.
+  </Accordion>
+  <Accordion title="Cartão de crédito recusado">
+    Em **Configurações** → **Assinatura** → **Faturas**, clique no status **Falha ao pagar** para ver o erro da cobrança. A Kinbox não tenta cobrar o cartão de novo sozinha.
+
+    No menu **...** da fatura, clique em **Tentar pagar novamente**, escolha o mesmo cartão ou adicione outro e finalize o pagamento. Se for aprovado, esse cartão passa a ser usado nas próximas cobranças. Veja o passo a passo em [Faturas, boletos e nota fiscal](/docs/assinatura/faturas).
+  </Accordion>
+  <Accordion title="Assinatura cancelada">
+    Quando a assinatura está com status **Cancelado**, vá em **Configurações** → **Assinatura**, clique em **Assinar um plano** e contrate novamente (veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)).
+  </Accordion>
+  <Accordion title="Teste grátis acabou">
+    Depois dos 7 dias de teste grátis e dos 3 dias de carência, o campo de mensagem some das conversas e não dá para adicionar membros nem canais até você contratar um plano. Vá em **Configurações** → **Assinatura**, clique em **Assinar um plano** e siga [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
+  </Accordion>
+  <Accordion title="Não vejo a página Assinatura">
+    Só o proprietário do workspace e membros com a permissão **Assinatura** conseguem abrir **Configurações** → **Assinatura**. Peça a um administrador ou ao proprietário do workspace para acessar a página e regularizar a cobrança.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Se o problema continuar depois de tentar essas soluções, fale com o suporte informando:
+
+- o nome do workspace;
+- a data exibida em **Expira em**;
+- a forma de pagamento da assinatura;
+- se for cartão de crédito, a mensagem exibida ao clicar em **Falha ao pagar**.
