@@ -1,0 +1,20 @@
+# Prints da central de ajuda. Formato em plans/central-de-ajuda/03-skill-deploy-docs.md §2.E.
+#
+# id        identificador usado em `--ids`
+# url       caminho no app (staging web), já dentro do workspace de documentação
+# passos    ações antes do print: esperar, clicar, digitar {seletor, texto}, tecla, pausa (ms)
+# alvo      seletor do recorte; uma lista recorta o retângulo que cobre todos
+# mascarar  seletores borrados antes do print (dados que não podem aparecer)
+# arquivo   saída em images/ajuda/<secao>/<nome>.webp
+# paginas   páginas da central que usam o print
+
+- id: tags-lista
+  url: /settings/tags
+  passos:
+    - esperar: '.g_table_wrapper >> text=VIP'
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/tags/lista-de-tags.webp
+  paginas: []

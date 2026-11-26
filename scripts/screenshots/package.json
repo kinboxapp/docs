@@ -1,0 +1,13 @@
+{
+  "name": "kinbox-docs-screenshots",
+  "private": true,
+  "type": "module",
+  "description": "Seed do workspace de documentação no staging e captura dos prints da central de ajuda",
+  "scripts": {
+    "seed": "bun seed.ts",
+    "capturar": "bun capturar.ts"
+  },
+  "dependencies": {
+    "playwright": "1.65.1"
+  }
+}
