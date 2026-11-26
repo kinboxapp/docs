@@ -794,5 +794,58 @@
     "pergunta": "A Kinbox calcula e paga bônus para os atendentes de acordo com a nota das avaliações?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para atender no computador as ligações que os clientes fazem pelo WhatsApp oficial?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero ligar pelo WhatsApp para um cliente, mas aparece que ele ainda não deu permissão. O que faço?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+      "docs/canais/ligacoes/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para ligar do navegador para o telefone fixo de um contato?",
+    "esperado": [
+      "docs/canais/ligacoes/ligar-por-telefone",
+      "docs/canais/ligacoes/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde baixo o áudio gravado de uma ligação?",
+    "esperado": [
+      "docs/canais/ligacoes/visao-geral",
+      "docs/canais/ligacoes/configuracoes-voip",
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A ligação por telefone caiu no meio dizendo que o saldo acabou",
+    "esperado": [
+      "docs/canais/ligacoes/problemas-comuns",
+      "docs/canais/ligacoes/ligar-por-telefone"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Meu cliente pode me ligar num número de telefone comum e eu atender pela Kinbox?",
+    "esperado": [
+      "llm/faq/voip-receber-ligacoes",
+      "docs/canais/ligacoes/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo fazer chamada de vídeo com o cliente pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

@@ -1,0 +1,80 @@
+---
+title: "Ligações na Kinbox: WhatsApp oficial e telefone"
+description: Os dois jeitos de ligar e atender ligações na Kinbox, pelo WhatsApp oficial ou por telefone (VoIP), com o que cada um exige e quanto gasta.
+keywords: [ligações, ligar para cliente, chamada de voz, voip, ligação whatsapp, telefone, ligar pelo navegador, receber ligação, gravação de ligação, plano de ligações, ligações whatsapp]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/components/whatsappCall/CallContactButton.tsx
+  - web:src/pages/settings/voip/index.tsx
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - web:src/components/whatsappCall/VoicePlansModal.tsx
+  - api:src/modules/voip/voip.service.ts
+  - api:src/modules/whatsapp-calling/whatsapp-calling.service.ts
+  - api:src/modules/whatsapp-calling/whatsapp-call-voice-plan.service.ts
+codigo:
+  - web:src/components/whatsappCall/**
+  - web:src/pages/settings/voip/**
+  - web:src/pages/settings/channels/voip/**
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - web:src/pages/inbox/MessageVoipCall.tsx
+  - api:src/modules/voip/**
+  - api:src/modules/whatsapp-calling/**
+verificado_em: 2026-11-26
+---
+
+Na Kinbox, você liga para o contato e atende ligações pelo navegador, usando o microfone do computador, sem sair da conversa. Há dois tipos: **ligações pelo WhatsApp** (apenas no [WhatsApp oficial](/docs/canais/whatsapp/visao-geral)) e **ligação por telefone (VoIP)**.
+
+<Note>
+Quem pode: configurar as duas opções exige ser o proprietário do workspace ou ter a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Ligar por telefone (VoIP) exige **Pode ligar para o contato** (o proprietário já tem). As ligações pelo WhatsApp são um recurso em teste (**Beta**) que pode não aparecer no seu workspace e exigem o plano **Ligações WhatsApp**, contratado por quem cuida da assinatura ([Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)).
+</Note>
+
+## Comparação entre os dois tipos
+
+| Característica | Ligações pelo WhatsApp | Ligação por telefone (VoIP) |
+| --- | --- | --- |
+| Canal | Apenas **WhatsApp oficial**, sem [coexistência](/docs/canais/whatsapp-api-oficial-coexistente) | Qualquer conversa em que o contato tenha telefone no cadastro |
+| Disponível | Recurso em teste (**Beta**): pode não aparecer no workspace | Para todos os workspaces (menu **Voip**) |
+| Receber ligações | Sim: o contato liga pelo WhatsApp para o número oficial | **Não**: o VoIP apenas faz ligações |
+| Fazer ligações | Sim, depois que o contato permite receber ligações | Sim, para telefone fixo ou celular |
+| Quem liga | O membro na conversa (para atender: proprietário ou permissão **Responder**, disponível e fora de outra ligação) | Proprietário ou membro com a permissão **Pode ligar para o contato** |
+| Quem configura | Proprietário ou **Gerenciar Canais**, na aba **Ligações** do canal oficial | Proprietário ou **Gerenciar Canais**, em **Configurações** → **Chat** → **Voip** |
+| Custo | Plano **Ligações WhatsApp** com franquia de minutos; o excedente sai do [saldo da carteira](/docs/conceitos/saldo-e-creditos); gravação e transcrição incluídas | [Saldo da carteira](/docs/conceitos/saldo-e-creditos), por minuto de ligação atendida (não exige plano) |
+| Gravação | Opção **Gravar ligações** na aba **Ligações** do canal | Opção **Gravar chamadas** em **Configurações** → **Chat** → **Voip** |
+| IA | Um [agente de voz](/docs/agente-de-ia/agente-de-voz) pode atender as ligações | Não tem agente de voz; oferece resumo por IA da transcrição |
+
+## Para que serve cada um
+
+- **Ligações pelo WhatsApp:** use quando o contato já conversa pelo WhatsApp oficial e você quer receber e fazer ligações no mesmo número, seguindo as regras da Meta (como a permissão do contato para ligar).
+- **Ligação por telefone (VoIP):** use quando precisar ligar para qualquer número de telefone do contato, inclusive fixo, sem depender do WhatsApp.
+
+## Onde fica
+
+- **Configurações** → **Chat** → **Voip**: ajustes do VoIP para o workspace inteiro.
+- **Configurações** → **Chat** → **Canais** → canal de WhatsApp oficial → aba **Ligações** (selo **Beta**): ajustes das ligações pelo WhatsApp daquele canal.
+- Na conversa (na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox)), no painel do contato à direita: botão de telefone (**Ligar**) para iniciar uma ligação.
+- **Relatórios** → **Ligações**: histórico e gravações das ligações feitas e recebidas.
+
+## O que fica registrado
+
+Cada ligação entra como uma mensagem na conversa (**Ligação de voz**, **Ligação recebida pelo WhatsApp** ou **Ligação feita pelo WhatsApp**). Ao clicar nessa mensagem, você abre o painel **Ligação de voz**, que mostra o áudio para ouvir e baixar, o **Resumo** e a **Transcrição** quando houver gravação.
+
+## O que não existe
+
+- **Receber ligações por telefone (VoIP):** o VoIP da Kinbox apenas faz ligações para o telefone do contato.
+- **Ligações pelo WhatsApp por QR Code:** canais conectados por QR Code não fazem nem recebem ligações na Kinbox (veja [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)).
+- **Ligações no WhatsApp oficial em coexistência:** a Meta não oferece ligações pela API em números em [coexistência](/docs/canais/whatsapp-api-oficial-coexistente); nesse modo, as ligações ficam apenas no app WhatsApp Business do celular.
+
+Se alguma ligação não tocar, falhar ou cair, veja [Não consigo ligar ou a ligação caiu](/docs/canais/ligacoes/problemas-comuns).
+
+<CardGroup cols={3}>
+  <Card title="Ligações pelo WhatsApp oficial (Beta)" href="/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp">
+    Como ativar no canal, atender ligações recebidas e pedir permissão para ligar.
+  </Card>
+  <Card title="Ligar por telefone (VoIP)" href="/docs/canais/ligacoes/ligar-por-telefone">
+    Como ligar do navegador para o telefone fixo ou celular de um contato.
+  </Card>
+  <Card title="Configurações de VoIP" href="/docs/canais/ligacoes/configuracoes-voip">
+    Gravação de chamadas, transcrição, resumo por IA e uso do SIP reserva.
+  </Card>
+</CardGroup>

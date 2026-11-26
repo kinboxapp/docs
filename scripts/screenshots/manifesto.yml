@@ -1686,3 +1686,41 @@
   arquivo: images/ajuda/widget/balao-no-site.webp
   paginas:
     - docs/canais/widget/configuracoes
+
+# Seção ligacoes (Canais › Ligações)
+#
+# A tela do VoIP vem do workspace de documentação. A aba Ligações (Beta) do WhatsApp oficial só existe em workspace com o
+# recurso em teste e canal oficial: vem do canal oficial de teste do workspace de testes (id 1), só leitura (o clique só
+# troca de aba). As descrições de Gravar ligações e Fazer ligações levam tarja porque trazem preço por minuto, que a doc
+# não publica (e que não bate com o que o código cobra com plano de ligações). Sem print do menu Ligar nem do pedido de
+# permissão: abrir o menu pode iniciar uma ligação real.
+
+- id: ligacoes-voip-ajustes
+  url: /settings/voip
+  passos:
+    - esperar: 'text=Usar SIP reserva'
+    - pausa: 1000
+  alvo:
+    - 'div.card-bordered:has-text("Ligue para seus clientes")'
+    - 'div.card-bordered:has-text("Usar SIP reserva")'
+  mascarar: []
+  arquivo: images/ajuda/ligacoes/voip-ajustes.webp
+  paginas:
+    - docs/canais/ligacoes/configuracoes-voip
+
+- id: ligacoes-whatsapp-aba
+  workspace: Kinbox
+  url: /settings/channels/2
+  passos:
+    - esperar: '.ant-drawer-body'
+    - clicar: '.ant-drawer button:has-text("Ligações")'
+    - esperar: 'text=IA atende as ligações'
+    - pausa: 1500
+  alvo: '.ant-drawer-body .flex.flex-col.gap-5'
+  mascarar:
+    - '.ant-drawer-title'
+    - '.ant-drawer-body div.text-secondary:has-text("Grava e transcreve")'
+    - '.ant-drawer-body div.text-secondary:has-text("Atendentes podem ligar")'
+  arquivo: images/ajuda/ligacoes/aba-ligacoes-whatsapp.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp

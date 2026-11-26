@@ -1,0 +1,152 @@
+---
+title: Não consigo ligar ou a ligação caiu
+description: O que fazer quando não dá para ligar ou atender pelo WhatsApp ou por telefone (VoIP), a ligação não toca, cai no meio ou fica sem gravação.
+keywords: [não consigo ligar, ligação não toca, ligação caiu, sem permissão para ligar, cliente não permitiu, limite de pedidos, saldo insuficiente ligação, chamada perdida, sem gravação, aba ligações não aparece, a meta não oferece ligações neste número]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/components/whatsappCall/CallContactButton.tsx
+  - web:src/components/whatsappCall/useWhatsappOutboundCall.tsx
+  - web:src/components/whatsappCall/WhatsappCallManager.tsx
+  - web:src/components-old/chat/side/DetailsTitle.tsx
+  - api:src/modules/whatsapp-calling/whatsapp-call-permission.service.ts
+  - api:src/modules/whatsapp-calling/ring-targets.ts
+  - api:src/modules/voip/voip.service.ts
+codigo:
+  - web:src/components/whatsappCall/**
+  - web:src/components-old/chat/side/DetailsTitle.tsx
+  - web:src/pages/settings/channels/voip/**
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - api:src/modules/whatsapp-calling/**
+  - api:src/modules/voip/**
+verificado_em: 2026-11-26
+---
+
+Use esta página quando você não consegue ligar ou atender pelo [WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp) ou por [telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone), a chamada não toca, cai no meio ou fica sem gravação ou transcrição.
+
+## Sintoma
+
+- Não aparece a aba **Ligações** no canal ou a opção **Ligar pelo WhatsApp**.
+- Não consigo ligar pelo WhatsApp ou aparece "Sem permissão".
+- A ligação do WhatsApp não toca para mim ou não chega na Kinbox.
+- Não consigo ligar por telefone (VoIP), falta saldo ou não tenho permissão.
+- A ligação caiu no meio.
+- Não há gravação ou não aparece a transcrição.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="A aba Ligações ou a opção Ligar pelo WhatsApp não aparece">
+    As ligações pelo WhatsApp são um recurso em teste (**Beta**) e existem apenas em canais de **WhatsApp oficial** (o WhatsApp por QR Code não tem ligações pela Kinbox). Sem a liberação do recurso no workspace, a aba **Ligações** e a opção **Ligar pelo WhatsApp** não aparecem.
+
+    Confira também se você é o proprietário do workspace ou tem a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)), necessária para abrir e editar as configurações do canal. Se o canal é oficial e a aba não aparece, fale com o suporte.
+  </Accordion>
+
+  <Accordion title='Ao ligar uma opção abre o aviso "Ligações pelo WhatsApp"'>
+    O workspace ainda não tem o plano **Ligações WhatsApp**, obrigatório para receber e fazer ligações pelo WhatsApp oficial.
+
+    Quem cuida da assinatura vê o botão **Ver planos** para contratar em **Configurações** → **Assinatura** (veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)). Os demais membros veem o recado "Peça para o gestor do ambiente assinar um plano de Ligações WhatsApp em Configurações > Assinatura.".
+  </Accordion>
+
+  <Accordion title='Aviso "A Meta não oferece ligações neste número"'>
+    O número de WhatsApp oficial está em [coexistência](/docs/canais/whatsapp-api-oficial-coexistente) com o app WhatsApp Business no celular. Nesse modo, a Meta não oferece ligações pela API: elas ficam apenas no app do celular e não chegam à Kinbox.
+
+    Para fazer e receber ligações pelo WhatsApp na Kinbox, o número precisa estar conectado apenas na API oficial, sem o app WhatsApp Business. Como alternativa para fazer ligações, você pode [ligar por telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone).
+  </Accordion>
+
+  <Accordion title='"Sem permissão. Pedir ao cliente" ou "O cliente ainda não permitiu receber ligações"'>
+    Pelas regras da Meta, você só pode ligar pelo WhatsApp oficial depois que o contato permite receber ligações (ligações recebidas não precisam de permissão).
+
+    Clique em **Ligar pelo WhatsApp** para abrir **Pedir permissão para ligar** e clique em **Enviar pedido** (veja [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp)). Se o contato não respondeu nas últimas 24 horas, o envio usa o template de pedido de permissão aprovado pela Meta: confira na aba **Ligações** do canal se o template não está **em análise** ou **rejeitado**.
+  </Accordion>
+
+  <Accordion title='"Enviar pedido" desativado ou "Limite de pedidos atingido (1 por dia e 2 por semana)."'>
+    A Meta limita quantos pedidos de permissão de ligação podem ser enviados para o mesmo contato (exibido na tela como "Limite de pedidos atingido (1 por dia e 2 por semana).").
+
+    Aguarde até a data mostrada na janela **Pedir permissão para ligar** para enviar um novo pedido.
+  </Accordion>
+
+  <Accordion title='"Permissão retirada: 4 ligações sem resposta" ou "Limite de ligações com este cliente atingido..."'>
+    A Meta retira a permissão do contato depois de 4 ligações feitas seguidas sem resposta. Combine um horário com o contato por mensagem antes de enviar um novo pedido de permissão.
+
+    Se aparecer "Limite de ligações com este cliente atingido.", aguarde a data informada na tela para tentar ligar novamente.
+  </Accordion>
+
+  <Accordion title="A ligação do WhatsApp não toca para mim">
+    A ligação recebida pelo WhatsApp oficial toca apenas para membros que podem atender: proprietário ou quem tem a permissão **Responder**, está online, disponível (não **Ausente** — veja [Disponibilidade](/docs/conta/disponibilidade)) e fora de outra ligação. Se a conversa já tem um responsável disponível, a chamada toca apenas para ele.
+
+    Confira também:
+
+    - Em **Configurações** → **Notificações** (veja [Notificações](/docs/conta/notificacoes)), se **Quando receber ligação do WhatsApp** e **Quando receber ligação do WhatsApp em conversa sem responsável** estão ligadas.
+    - Se o microfone está liberado no navegador (quando bloqueado, o cartão mostra "Ative o microfone para receber ligações" e não exibe **Atender**).
+  </Accordion>
+
+  <Accordion title='A ligação recebida aparece como "Chamada perdida" sem tocar'>
+    Sem o plano **Ligações WhatsApp** ativo, ou sem franquia de minutos sobrando e sem saldo na carteira, a Kinbox recusa a ligação recebida na Meta e registra **Chamada perdida** na conversa. Confira o plano em [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) e o saldo em [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
+
+    O status **Chamada perdida** também aparece quando ninguém atende em cerca de 60 segundos. Se você usa agente de voz e a IA não atendeu, veja [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns).
+  </Accordion>
+
+  <Accordion title='"Você precisa ter mais saldo na carteira para fazer ligações." ou "...para fazer chamadas."'>
+    - **WhatsApp oficial:** acabou a franquia do plano **Ligações WhatsApp** e o saldo na carteira está abaixo do mínimo para iniciar uma ligação.
+    - **Telefone (VoIP):** o saldo na carteira está abaixo do mínimo exigido para iniciar uma chamada VoIP.
+
+    Adicione saldo em [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo) e tente novamente.
+  </Accordion>
+
+  <Accordion title='"Você não tem permissão para fazer chamadas voip." ou botão desativado'>
+    Ligar por telefone (VoIP) exige ser o proprietário do workspace ou ter a permissão **Pode ligar para o contato** no papel ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Sem essa permissão e sem ligação pelo WhatsApp possível naquela conversa, o botão de telefone fica desativado com a dica "Você não tem permissão para fazer chamadas de voz.".
+
+    Peça ao proprietário ou a quem gerencia permissões para ativar **Pode ligar para o contato** no seu papel.
+  </Accordion>
+
+  <Accordion title="O botão de telefone não aparece na conversa">
+    O botão de telefone só aparece quando o contato tem um número de telefone no cadastro **ou** quando a conversa é de WhatsApp oficial com o recurso de ligações liberado.
+
+    Para fazer uma ligação por telefone (VoIP), cadastre o número de telefone no cadastro do contato.
+  </Accordion>
+
+  <Accordion title="A ligação caiu no meio">
+    - **Saldo acabou:** no VoIP, a tela avisa "Seu saldo acabou. A chamada será encerrada." e encerra a ligação. No WhatsApp oficial, uma faixa vermelha avisa 30 segundos antes ("Saldo de ligações esgotado...") e, se não houver recarga, a conversa recebe "Ligação encerrada: o saldo de ligações (franquia do plano e carteira) acabou.".
+    - **Falha de rede ou navegador:** no WhatsApp oficial, pode aparecer "A conexão de áudio da ligação falhou". Confira a conexão de internet e o microfone.
+    - **Aba fechada ou recarregada:** fechar ou recarregar a aba do navegador encerra a ligação feita pelo WhatsApp.
+  </Accordion>
+
+  <Accordion title='Não há gravação ou aparece "Não há gravação disponível"'>
+    A gravação só existe quando a opção estava ligada antes da ligação: **Gravar ligações** na aba **Ligações** do canal oficial (WhatsApp) ou **Gravar chamadas** em **Configurações** → **Chat** → **Voip** (veja [Configurações de VoIP: gravação, resumo por IA e SIP reserva](/docs/canais/ligacoes/configuracoes-voip)).
+
+    Outras causas possíveis:
+
+    - **WhatsApp sem plano nem saldo:** aparece "Gravação desativada: saldo insuficiente" durante a ligação.
+    - **VoIP com SIP reserva:** com **Usar SIP reserva** ativado, a gravação não é feita.
+    - **Falha ao enviar a gravação no WhatsApp:** o navegador de quem atendeu não conseguiu enviar o áudio no fim ("Não foi possível enviar a gravação da ligação").
+  </Accordion>
+
+  <Accordion title="Não aparece transcrição">
+    - **Telefone (VoIP):** a transcrição não é automática. Abra o painel **Ligação de voz** na mensagem da conversa e clique em **Transcrever** (gasta saldo da carteira). Se não houver saldo suficiente, aparece "Saldo insuficiente"; em caso de erro, "Não foi possível transcrever a chamada".
+    - **WhatsApp oficial:** quando há gravação, a transcrição é gerada automaticamente. Se ela falhou, abra o painel **Ligação de voz** e clique em **Transcrever** (essa transcrição gasta saldo da carteira, mesmo com o plano).
+  </Accordion>
+
+  <Accordion title='"Encerre a ligação atual antes de iniciar outra" ou "Encerre a ligação antes de resolver a conversa"'>
+    Você só pode manter uma ligação ativa por vez (seja VoIP ou WhatsApp) e não pode resolver uma conversa enquanto uma ligação do WhatsApp estiver em andamento.
+
+    Encerre a ligação atual na janela da chamada antes de iniciar outra ligação ou resolver a conversa.
+  </Accordion>
+
+  <Accordion title='Aviso "Este número está com SIP ativado"'>
+    As ligações desse número de WhatsApp oficial estão configuradas na Meta para ir para outro provedor (SIP), impedindo a Kinbox de fazer e receber ligações.
+
+    Quem tem a permissão **Gerenciar Canais** (ou é proprietário) pode clicar em **Desativar SIP e ligar** na janela do aviso, ou desativar em **Configurações** → **Chat** → **Canais** → canal oficial → aba **Ligações** → **Desativar SIP**. Quem não tem essa permissão vê o aviso para pedir a quem gerencia os canais.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte da Kinbox informando:
+
+- O tipo de ligação (WhatsApp oficial ou telefone/VoIP).
+- O nome do canal e a conversa em que tentou ligar ou atender.
+- O horário da tentativa.
+- O texto exato do aviso ou da mensagem de erro que apareceu na tela.
+
+Veja também [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/ligacoes/visao-geral).
