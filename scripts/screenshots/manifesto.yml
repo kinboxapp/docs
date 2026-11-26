@@ -1912,6 +1912,7 @@
     - pausa: 1000
   alvo: '.g_settings_simple_page >> visible=true'
   mascarar: []
+  altura: 1150
   arquivo: images/ajuda/contatos/importar-confirmar.webp
   paginas:
     - docs/clientes/importar-contatos
@@ -1938,6 +1939,7 @@
     - pausa: 2500
   alvo: 'div[class*="max-w-[1200px]"] >> visible=true'
   mascarar: []
+  altura: 958
   arquivo: images/ajuda/contatos/perfil-da-organizacao.webp
   paginas:
     - docs/clientes/organizacoes
@@ -1973,7 +1975,7 @@
     - pausa: 800
   alvo: '.ant-drawer-content'
   mascarar: []
-  altura: 1500
+  altura: 1320
   arquivo: images/ajuda/contatos/novo-campo.webp
   paginas:
     - docs/configuracoes-no-workspace/campos-personalizados-no-kinbox

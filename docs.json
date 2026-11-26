@@ -164,15 +164,16 @@
             "icon": "handshake",
             "pages": [
               {
-                "group": "Contatos e campos personalizados",
+                "group": "Contatos, organizações e campos personalizados",
                 "pages": [
                   "docs/conversas/clientes-contatos-e-organizacoes",
+                  "docs/clientes/organizacoes",
                   "docs/clientes/importar-contatos",
                   "docs/clientes/exportar-contatos",
                   "docs/clientes/mesclar-contatos",
-                  "docs/clientes/organizacoes",
                   "docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
-                  "docs/clientes/tipos-de-campo"
+                  "docs/clientes/tipos-de-campo",
+                  "docs/clientes/problemas-comuns"
                 ]
               }
             ]

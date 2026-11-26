@@ -32,7 +32,7 @@ Detalhes de referência de [Importar contatos de uma planilha](/docs/clientes/im
 
 - **Formatos:** `.csv` (separado por vírgula ou ponto e vírgula; use codificação UTF-8 para manter acentos) ou Excel `.xlsx` (lê apenas a **primeira aba**; números longos do `.xlsx` são lidos sem perda de dígitos).
 - **Tamanho:** um arquivo por vez, até **10 MB**. Sem limite fixo de linhas além do tamanho do arquivo.
-- **Estrutura:** a primeira linha é tratada como cabeçalho; colunas sem cabeçalho e linhas vazias são ignoradas.
+- **Estrutura:** a primeira linha é tratada como cabeçalho. Dê a cada coluna usada um cabeçalho preenchido e diferente dos outros, e confira a prévia depois de enviar o arquivo. Linhas vazias são ignoradas.
 - **Planilha modelo:** arquivo `.csv` baixado em **Baixar planilha modelo** com as colunas **Nome**, **Telefone**, **E-mail**, **Notas**, mais **Organização**, **CNPJ** e **Cargo** (com **Gerenciar Organizações**) e uma coluna para cada campo personalizado de contato.
 - **Mensagens de erro de arquivo:**
   - "O tamanho do arquivo é maior que o permitido. O Máximo é {{maxSizeInMB}}MB."
@@ -55,21 +55,23 @@ A Kinbox associa automaticamente uma coluna quando o cabeçalho corresponde exat
 | **Cargo do contato** | Organização | `cargo`, `funcao`, `role`, `job title` |
 | **Razão social** | Organização | `razao social`, `legal name` |
 | **Site** | Organização | `site`, `website`, `url`, `site da empresa` |
+| **Telefone da organização** | Organização | `telefone da empresa`, `telefone da organizacao` |
+| **E-mail da organização** | Organização | `email da empresa`, `e-mail da empresa`, `email da organizacao`, `e-mail da organizacao` |
 | **Segmento** | Organização | `segmento`, `setor`, `ramo` |
 | Campos personalizados (contato e organização) | Campos personalizados | Nome exato do campo ou chave reservada |
 
-Também estão disponíveis para seleção manual no grupo **Organização** (com **Gerenciar Organizações**): **Telefone da organização** e **E-mail da organização**. Um campo já escolhido aparece com "(já usado)".
+Os campos do grupo **Organização** só aparecem com **Gerenciar Organizações**. Um campo já escolhido aparece com "(já usado)".
 
 ## Avisos do mapeamento
 
 - Sem telefone nem e-mail mapeado (impede avançar): "Mapeie a coluna de telefone ou de e-mail para continuar".
-- Números em notação científica: "Números longos corrompidos pelo Excel na coluna {{columns}}" — "Alguns valores estão em notação científica (ex.: 5.58599E+12) e perderam os últimos dígitos. Essas linhas vão dar erro. Formate a coluna como texto na planilha e exporte de novo, ou envie o arquivo .xlsx.".
+- Números em notação científica: "Números longos corrompidos pelo Excel na coluna {{columns}}" — "Alguns valores estão em notação científica e perderam os últimos dígitos. Essas linhas vão dar erro. Formate a coluna como texto na planilha e exporte de novo, ou envie o arquivo .xlsx.".
 - Colunas de organização sem nome nem CNPJ: "Mapeie o nome ou o CNPJ da organização" — "Sem eles não dá para saber a qual organização cada contato pertence, e as colunas da organização serão ignoradas.".
 - Dica exibida quando há permissão de organizações: "Organizações: mapeie o nome e/ou o CNPJ da organização para vincular cada contato a ela. No próximo passo você revisa as organizações que não encontramos no cadastro.".
 
 ## Organizações
 
-- **Agrupamento e busca:** linhas são agrupadas por CNPJ (ou pelo nome, quando não há CNPJ). A busca procura primeiro pelo CNPJ e depois pelo nome ou razão social, sem diferenciar acentos nem maiúsculas. Organizações excluídas não são consideradas.
+- **Agrupamento e busca:** linhas são agrupadas por CNPJ (ou pelo nome, quando não há CNPJ). A busca procura primeiro pelo CNPJ. Sem CNPJ na linha, procura pelo nome ou pela razão social, sem diferenciar acentos nem maiúsculas. Com um CNPJ que não foi encontrado, a busca pelo nome só considera organizações cadastradas sem CNPJ. Organizações excluídas não são consideradas. Confira a organização sugerida antes de avançar. As abas **Para revisar** e **Todas** só aparecem quando parte das organizações precisa de revisão e parte não.
 - **Status exibidos:** **Encontrada pelo CNPJ**, **Encontrada pelo nome**, **{{count}} com o mesmo nome** e **Não encontrada**.
 - **Ação padrão por status:**
   - Encontrada → vincular à organização existente.
@@ -83,7 +85,7 @@ Também estão disponíveis para seleção manual no grupo **Organização** (co
 
 ## Contatos existentes
 
-A Kinbox identifica um contato existente pelo mesmo telefone (com ou sem o 9, com ou sem o `55`) **ou** pelo mesmo e-mail (sem diferenciar maiúsculas). A opção **Atualizar contatos existentes com os dados da planilha** vem marcada por padrão:
+A Kinbox identifica um contato existente pelo mesmo telefone (com ou sem o 9, com ou sem o `55`) **ou** pelo mesmo e-mail (sem diferenciar maiúsculas). A opção **Atualizar contatos existentes com os dados da planilha** vem marcada por padrão. Não há desempate garantido quando o telefone da linha é de um contato e o e-mail é de outro: corrija a linha antes de **Finalizar**.
 
 | Regra | Opção marcada (padrão) | Opção desmarcada |
 | --- | --- | --- |
@@ -112,11 +114,11 @@ Linhas com erro não são importadas:
 
 ## Campos personalizados
 
-O texto da célula é gravado exatamente como está, sem validar tipo, lista de opções, data ou número (veja [Tipos de campo e validações](/docs/clientes/tipos-de-campo)).
+O texto da célula é gravado sem os espaços do início e do fim, sem validar tipo, lista de opções, data ou número (veja [Tipos de campo e validações](/docs/clientes/tipos-de-campo)).
 
 ## Origem
 
-Contatos criados pela importação ficam registrados com origem de importação e sem **Criado por**. A importação não envia mensagens nem cria conversas.
+Contatos criados pela importação ficam registrados com origem de importação e sem **Criado por**.
 
 ## Progresso, cancelar e histórico
 
@@ -127,7 +129,6 @@ Contatos criados pela importação ficam registrados com origem de importação 
 - **Histórico de importações:** lista todas as importações do workspace (10 por página; não exibe qual membro importou) com **Arquivo**, **Status** (**Concluído**, **Processando**, **Pendente**, **Falhou**, **Cancelado**), **Data**, **Linhas**, **Criados** e **Erros**.
 - **Detalhes da importação:** aba **Resumo** (**Status**, **Arquivo**, **Criado em**, **Concluído em**, total, **Processadas** e contadores) e aba **Erros ({{count}})** com **Linha** e **Erro** (cada item expande os dados da linha).
 - **Limite e numeração de erros:** ficam armazenados apenas os primeiros **100 erros** ("Mostrando os primeiros {{count}} erros."). A coluna **Linha** conta o cabeçalho como linha 1 e não conta linhas vazias da planilha.
-- **Atalhos da tela:** setas `←` e `→` avançam ou voltam passos; `Esc` fecha.
 
 ## Limites
 
@@ -135,6 +136,6 @@ Contatos criados pela importação ficam registrados com origem de importação 
 - **Nome do contato:** até 128 caracteres.
 - **Notas:** até 2048 caracteres.
 - **Cargo do contato:** até 128 caracteres.
-- **E-mail:** convertido para minúsculas.
+- **E-mail:** convertido para minúsculas e cortado em 100 caracteres.
 - **Organizações distintas por planilha:** até 5000.
 - **Erros guardados por importação:** até 100.

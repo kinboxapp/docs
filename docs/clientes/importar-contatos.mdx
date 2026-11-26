@@ -26,13 +26,14 @@ verificado_em: 2026-11-26
 Importe uma planilha CSV ou Excel (`.xlsx`) para cadastrar vários contatos de uma vez, atualizar dados de contatos já existentes e vinculá-los a organizações.
 
 <Note>
-  Quem pode: membros com a permissão **Gerenciar Contatos** ou o proprietário do workspace. Se o item **Clientes** não aparecer no menu lateral, peça ao proprietário para dar **Gerenciar Contatos** ao seu papel (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)). Para vincular ou criar organizações durante a importação, também é necessário ter **Gerenciar Organizações** — sem ela, os campos de organização não aparecem no mapeamento, a planilha modelo sai sem essas colunas e o passo de revisão de organizações é omitido.
+  Quem pode: membros com a permissão **Gerenciar Contatos** ou o proprietário do workspace. Para vincular ou criar organizações na importação, também **Gerenciar Organizações**.
 </Note>
 
 ## Antes de começar: prepare a planilha
 
+- **Permissões:** sem **Gerenciar Organizações**, os campos de organização não aparecem no mapeamento, a planilha modelo sai sem essas colunas e o passo de revisão de organizações não aparece. Se o item **Clientes** não aparecer no menu lateral, peça ao proprietário para dar **Gerenciar Contatos** ao seu papel (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)).
 - **Formato e tamanho:** arquivo `.csv` (separado por vírgula ou ponto e vírgula, em UTF-8) ou Excel `.xlsx` de até **10 MB**. No Excel, a Kinbox lê apenas a **primeira aba**.
-- **Cabeçalho:** coloque o nome de cada coluna na **primeira linha**. Colunas sem cabeçalho e linhas vazias são ignoradas.
+- **Cabeçalho:** coloque o nome de cada coluna na **primeira linha**. Dê a cada coluna que você vai usar um cabeçalho preenchido e diferente dos outros, e confira a prévia depois de enviar o arquivo. Linhas vazias são ignoradas.
 - **Identificação obrigatória:** cada linha precisa ter ao menos **telefone** ou **e-mail** — são eles que identificam contatos já cadastrados.
 - **Telefones:** números de outro país devem começar com `+` e o código do país. Números do Brasil podem ir com ou sem o `55` (por exemplo, `+55 11 90000-0001` ou `11 90000-0001`).
 - **Números longos no Excel:** formate as colunas de **telefone** e **CNPJ** como **texto** para evitar que o Excel converta os números em notação científica e apague os últimos dígitos (ou envie o arquivo em `.xlsx`).
@@ -69,13 +70,13 @@ Importe uma planilha CSV ou Excel (`.xlsx`) para cadastrar vários contatos de u
   <Step title="Revise as organizações">
     Este passo aparece apenas quando você mapeia o nome ou o CNPJ da organização (e tem **Gerenciar Organizações**).
 
-    A Kinbox procura organizações já cadastradas primeiro pelo CNPJ e, sem ele, pelo nome ou razão social (sem diferenciar acentos nem maiúsculas). Use as abas **Para revisar** e **Todas** para escolher a ação de cada empresa:
+    A Kinbox procura organizações já cadastradas primeiro pelo CNPJ. Se a linha não tem CNPJ, procura pelo nome ou pela razão social (sem diferenciar acentos nem maiúsculas). Se a linha tem um CNPJ que não foi encontrado, a busca pelo nome só considera organizações cadastradas sem CNPJ. Confira a organização sugerida para cada empresa e troque a ação quando precisar:
 
     - vincular a uma organização existente (quando há mais de uma com o mesmo nome, a Kinbox sugere a mais antiga);
     - criar uma nova organização (**Criar “...”**);
     - selecionar **Não vincular** (ação padrão quando a planilha traz apenas CNPJ sem nome e a empresa não é encontrada).
 
-    Organizações já existentes não têm seus dados alterados pela planilha, e a empresa importada entra como secundária para contatos que já têm uma organização principal. Clique em **Próximo**.
+    Quando só parte das empresas precisa de revisão, aparecem as abas **Para revisar** e **Todas**. Organizações já existentes não têm seus dados alterados pela planilha, e a empresa importada entra como secundária para contatos que já têm uma organização principal. Clique em **Próximo**.
 
     <Frame caption="Passo Revise as organizações mostrando empresas existentes a vincular e novas a criar">
       <img src="/images/ajuda/contatos/importar-organizacoes.webp" alt="Tela Revise as organizações com resumo de 1 vincular a existentes, 1 criar e 0 não vincular, abas Para revisar e Todas e a empresa fictícia Mercado Exemplo marcada como Não encontrada com a ação Criar Mercado Exemplo" />
@@ -95,7 +96,9 @@ Importe uma planilha CSV ou Excel (`.xlsx`) para cadastrar vários contatos de u
 
 ## Contatos que já existem
 
-A Kinbox reconhece que um contato já existe quando a linha traz o mesmo telefone (com ou sem o `55` e o nono dígito) ou o mesmo e-mail (sem diferenciar maiúsculas). Veja o efeito da opção **Atualizar contatos existentes com os dados da planilha**:
+A Kinbox reconhece que um contato já existe quando a linha traz o mesmo telefone (com ou sem o `55` e o nono dígito) ou o mesmo e-mail (sem diferenciar maiúsculas). Se o telefone da linha é de um contato e o e-mail é de outro, corrija a linha antes de clicar em **Finalizar**: a importação usa um só contato por linha.
+
+Veja o efeito da opção **Atualizar contatos existentes com os dados da planilha**:
 
 | Dado na planilha | Opção marcada (padrão) | Opção desmarcada |
 | --- | --- | --- |
@@ -104,7 +107,7 @@ A Kinbox reconhece que um contato já existe quando a linha traz o mesmo telefon
 | **Célula vazia** | Nunca apaga um dado já salvo no contato. | Nunca apaga um dado já salvo no contato. |
 | **Organização** | Vincula a organização (como secundária se já houver principal); se o contato já estiver nela, o cargo não muda. | Vincula a organização (como secundária se já houver principal); se o contato já estiver nela, o cargo não muda. |
 
-Os contatos novos criados pela planilha aparecem como vindos da importação (sem **Criado por**). A importação não envia mensagens nem cria conversas — para falar com uma lista de contatos de uma vez, veja [Criar uma campanha](/docs/campanhas/campanhas-no-kinbox).
+Os contatos novos criados pela planilha aparecem como vindos da importação (sem **Criado por**). Para falar com uma lista de contatos de uma vez, veja [Criar uma campanha](/docs/campanhas/campanhas-no-kinbox).
 
 ## Acompanhar e cancelar
 

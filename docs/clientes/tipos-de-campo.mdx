@@ -32,12 +32,12 @@ Todos os tipos podem ser usados em qualquer entidade.
 | **Seleção Multipla** | Multiseleção | Várias opções | Lista com busca; exibido separado por vírgula |
 | **Booleano** | Booleano | Sim ou não | **Sim** ou **Não** |
 | **Número** | Número | Número inteiro | Campo numérico |
-| **Decimal** | Decimal | Número com casas decimais (de 0 para cima) | Campo com 2 casas decimais |
+| **Decimal** | Decimal | Número com casas decimais (não aceita número negativo) | Campo com 2 casas decimais |
 | **Data** | Data | Data | `DD/MM/AAAA` |
 | **Data e hora** | Data e hora | Data e hora | `DD/MM/AAAA HH:mm` |
 | **Json** | Json | Dados estruturados (bot e integrações) | Editor de código |
 
-- No formulário de criar ou editar contato, **Texto em área** e **Json** ficam fora da lista recolhida dos demais campos.
+- No formulário de criar ou editar contato, **Texto em área** e **Json** aparecem abaixo dos demais campos (em largura total) e não entram na contagem exibida na seção.
 - Campos do tipo **Json** não aparecem em automações, condições nem filtros de relatório. Para usar no bot, veja [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
 
 ## Entidades
@@ -55,6 +55,8 @@ A entidade não pode ser alterada depois que o campo é criado.
 | **Organização** | Organização | Formulário e perfil da organização, importação e exportação de organizações |
 | **Negociação** | Negociação | Negociação |
 | **Tarefa** | Tarefa | Tarefa |
+
+Também usam campos personalizados: o [bot](/docs/bot/blocos-do-bot) (incluindo [campos JSON](/docs/bot/usar-campo-personalizado-em-json)), os [agentes de IA](/docs/agente-de-ia/ferramentas), as automações, as integrações e os [links e a API para desenvolvedores](/docs/desenvolvedor/visao-geral) (por exemplo, preencher campos do contato pelo link em [Abrir uma conversa por link](/docs/usando-o-kinbox/conversa-em-um-clique)).
 
 ## Opções por entidade
 

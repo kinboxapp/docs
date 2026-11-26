@@ -30,7 +30,7 @@ Exporte sua base de contatos ou de organizações em arquivo CSV ou Excel (`.xls
 
 <Steps>
   <Step title="Filtre a lista de contatos">
-    Vá em **Clientes** → **Contatos** e aplique a busca, os filtros (como **Organização** ou **Criado entre**) e a ordenação que quiser levar para o arquivo.
+    Vá em **Clientes** → **Contatos** e aplique a busca e os filtros (como **Criado entre**). No modo **Contatos**, o arquivo segue a busca, os filtros e a ordem da tela.
   </Step>
 
   <Step title="Escolha o formato e o modo">
@@ -44,12 +44,12 @@ Exporte sua base de contatos ou de organizações em arquivo CSV ou Excel (`.xls
 
 ## Contatos × Por conversa
 
-Use **Contatos** para ter os dados completos de cada contato e **Por conversa** para ter os dados de atendimento.
+Use **Contatos** para ter os dados completos de cada contato e **Por conversa** para ter os dados de atendimento. No modo **Por conversa**, use a busca e os filtros de data para recortar as linhas; não use o filtro **Organização**.
 
 | Modo | Como as linhas vêm | Colunas incluídas |
 | --- | --- | --- |
-| **Contatos** | Uma linha por contato, seguindo a busca, os filtros e a ordem da tela. | **ID**, **Nome**, **Criado em**, **Criado por**, **E-mail**, **Celular**, **Organização** (a principal), campos personalizados de contato (se algum tiver o mesmo nome de uma coluna fixa, ganha " (campo)" no fim), **Facebook**, **Instagram**, **Telegram**, **ID Externo** e **Notas**. |
-| **Por conversa** | Uma linha por conversa (o mesmo contato pode aparecer em várias linhas), da conversa mais recente para a mais antiga. | Dados do contato, **Grupo**, **Chat Ativo** (Sim/Não), **E-mail do membro**, **Protocolo**, **Resolvida em**, primeira e última mensagem do membro e do contato na sessão, **Sessão criada em** e campos personalizados de sessão. |
+| **Contatos** | Uma linha por contato, seguindo a busca, os filtros e a ordem da tela. | **ID**, **Nome**, **Criado em**, **Criado por**, **E-mail**, **Celular**, **Organização** (a principal), campos personalizados de contato (se algum tiver o mesmo nome de uma coluna fixa, ganha " (campo)" no fim), **Facebook**, **Instagram**, **Telegram**, **ID Externo** e **Notas**. As colunas **Membro** e **Tags** também existem, mas vêm vazias neste modo. |
+| **Por conversa** | Uma linha por conversa (o mesmo contato pode aparecer em várias linhas). A ordem não segue a da tela. | **ID** (da conversa), **Nome**, **E-mail**, **Celular**, **Criado em**, **Membro**, **Tags**, campos personalizados de contato, **Grupo**, **Chat Ativo** (Sim/Não), **E-mail do membro**, **Protocolo**, **Resolvida em**, data e hora da primeira e da última mensagem do membro e do contato na sessão, **Sessão criada em** e campos personalizados de sessão. |
 
 Se o seu papel tiver a restrição **Restringir relatórios aos grupos do membro**, a exportação inclui apenas os contatos visíveis na sua lista.
 

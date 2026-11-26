@@ -884,7 +884,15 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "A Kinbox sincroniza os contatos com o Google Contatos automaticamente?",
+    "pergunta": "Quero que os atendentes não vejam o celular dos clientes, como faço?",
+    "esperado": [
+      "llm/faq/contato-esconder-telefone",
+      "docs/administracao/referencia-de-permissoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A Kinbox mostra os contatos num mapa pelo endereço de cada um?",
     "esperado": [],
     "tipo": "negativo"
   }

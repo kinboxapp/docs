@@ -32,6 +32,8 @@ Crie campos personalizados para registrar informações que os campos padrão da
   <img src="/images/ajuda/contatos/campos-personalizados.webp" alt="Tela Campos personalizados mostrando o botão Novo campo, busca Pesquisar por nome, filtro de entidade em Tudo e quatro campos personalizados listados com tipo e entidade" />
 </Frame>
 
+Nessa lista, o nome de cada campo aparece com iniciais maiúsculas e sem acento. Nas outras telas, ele aparece como foi cadastrado.
+
 ## Criar um campo
 
 <Steps>
@@ -78,7 +80,7 @@ Nas entidades **Contato** e **Sessão de conversa**, você pode ativar **Obrigat
 - **Obrigatório sempre:** ative **Obrigatório**.
 - **Obrigatório só em uma condição:** ligue **Vincular obrigatoriedade** e escolha outro **Campo** (de contato ou de sessão). O campo passa a ser obrigatório quando o outro campo estiver preenchido com qualquer valor — por exemplo, exigir "Motivo da troca" somente quando "Número do pedido" estiver preenchido.
 
-Se um campo obrigatório estiver vazio quando o membro clicar em **Resolver** (em uma conversa ou em lote), a conversa não é encerrada, o painel lateral abre com o campo destacado e aparece "Campo obrigatório ... não foi setado.". Veja [Atender uma conversa: responder, notas, resolver e reabrir](/docs/conversas/gerenciar-conversas), [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar) e [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
+Se um campo obrigatório estiver vazio quando o membro clicar em **Resolver** numa conversa, ela não é resolvida: o painel lateral abre com o campo destacado e aparece "Campo obrigatório ... não foi setado.". Ao resolver em lote, a Kinbox pula as conversas com campo obrigatório vazio e informa no fim quantas foram resolvidas. Veja [Atender uma conversa: responder, notas, resolver e reabrir](/docs/conversas/gerenciar-conversas), [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar) e [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
 
 A obrigatoriedade vale apenas para resolver a conversa e **não** impede salvar um contato em **Clientes** → **Contatos**.
 
@@ -86,8 +88,10 @@ Não combine **Obrigatório** com **Esconder**, pois o campo bloqueia a resoluç
 
 ## Mostrar ou esconder nos painéis
 
-- **Sempre mostrar** (somente **Contato**): mantém o campo visível no painel **Contato** da conversa mesmo sem valor preenchido. Ativar **Sempre mostrar** desativa **Esconder**.
+- **Sempre mostrar** (somente **Contato**): mantém o campo visível no painel **Contato** da conversa mesmo sem valor preenchido.
 - **Esconder** (**Contato** e **Sessão de conversa**): oculta o campo nos painéis laterais da conversa.
+
+As duas não ficam ligadas juntas: ligar uma desliga a outra.
 
 ## Editar, clonar, reordenar e excluir
 
@@ -108,8 +112,4 @@ Campos criados por integrações aparecem com um ícone de "Integrado com outro 
 
 ## Onde os campos aparecem
 
-- **Contato:** formulário e perfil do [contato](/docs/conversas/clientes-contatos-e-organizacoes), painel **Contato** na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), colunas da tabela de contatos, [importação](/docs/clientes/importar-contatos), [exportação](/docs/clientes/exportar-contatos) e [formulário do widget](/docs/canais/widget/personalizar).
-- **Sessão de conversa:** painel da [sessão](/docs/conceitos/conversas-e-sessoes) na conversa, filtros de [relatórios](/docs/relatorios/como-funcionam), exportação **Por conversa** e [formulário do widget](/docs/canais/widget/personalizar).
-- **Organização:** formulário, perfil e importação de [organizações](/docs/clientes/organizacoes).
-- **Outras entidades:** cadastros de **Membro**, **Grupo**, **Canal**, **Produto**, **Negociação** e **Tarefa**.
-- **Automações e canais:** [blocos do bot](/docs/bot/blocos-do-bot) (incluindo [campos JSON](/docs/bot/usar-campo-personalizado-em-json)), [agentes de IA](/docs/agente-de-ia/ferramentas), automações, integrações e [links e API para desenvolvedores](/docs/desenvolvedor/visao-geral) (por exemplo, preencher campos do contato pelo link em [Abrir uma conversa por link](/docs/usando-o-kinbox/conversa-em-um-clique)).
+Cada entidade mostra os campos num lugar: o contato no formulário, no perfil e no painel da conversa; a sessão no painel da conversa; os demais nos cadastros de cada um. A lista completa, com importação, exportação, [formulário do widget](/docs/canais/widget/personalizar), bot, [agentes de IA](/docs/agente-de-ia/ferramentas) e [links para desenvolvedores](/docs/desenvolvedor/visao-geral), está em [Tipos de campo e validações](/docs/clientes/tipos-de-campo).

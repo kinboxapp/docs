@@ -47,7 +47,7 @@ Quando o papel do membro tem a restrição **Restringir relatórios aos grupos d
 
 ## Contato privado
 
-A chave **Contato privado** fica em **Configurações** no formulário do contato, com a ajuda "Somente membros que tem permissão para ver contatos privados conseguem ver o telefone e email do contato.". Apenas o proprietário e membros com **Ver telefone de contatos privados** veem essa chave.
+A chave **Contato privado** fica na seção **Configurações** do formulário do contato, com a ajuda "Somente membros que tem permissão para ver contatos privados conseguem ver o telefone e email do contato.". Apenas o proprietário e membros com **Ver telefone de contatos privados** veem essa chave.
 
 Efeito por local para quem **não** tem **Ver telefone de contatos privados**:
 
@@ -67,11 +67,13 @@ Efeito por local para quem **não** tem **Ver telefone de contatos privados**:
   - Sem resultado: "Nenhum contato encontrado" — "Tente outra busca ou remova alguns filtros." com **Limpar filtros**.
 - **Filtros:** **E-mail**, **Celular**, **Criado entre**, **Sessão criada entre**, **Organização** e **Filtro de conversa** (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)), com atalhos de data **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**, e botões **Limpar** e **Aplicar**.
 - **Ordenação:** **Mais recentes** (padrão), **Mais antigos**, **Nome (A-Z)** e **Nome (Z-A)**.
+- **Colunas da lista em cartões:** **Nome** (com cargo e organização principal ou, sem organização, o e-mail ou o telefone embaixo), **Canais** (ícones; passe o mouse para ver o valor), **Organização** (a principal e "Mais {{count}} organizações"), **Criado** (há quanto tempo e por quem, ou de onde veio). Cada filtro aplicado vira uma etiqueta acima da lista, com um X para tirar.
 - **Visões e carregamento:** cartões (padrão; única opção no celular) ou tabela (preferência salva no navegador; **Mostrar colunas...** inclui campos personalizados de contato). Carrega 30 contatos por vez ao rolar ("Mostrando X de Y").
 
 ## Cadastro
 
-- **Obrigatoriedade:** nenhum campo é obrigatório em **Criar contato**, exceto **E-mail** ("Campo obrigatório") quando **Vincular ao Kinbox Agenda** está ligado.
+- **Obrigatoriedade:** nenhum campo é obrigatório em **Criar contato**, exceto quando **Vincular ao Kinbox Agenda** está ligado.
+- **Vincular ao Kinbox Agenda** (só com o app Kinbox Agenda ativo): com a chave ligada, **E-mail** ("Campo obrigatório") e o campo de data de nascimento (quando existir no workspace) passam a ser obrigatórios para salvar. Concluir o vínculo também exige **Celular**: sem celular, o contato é salvo, mas não fica vinculado. Se o vínculo falhar depois de salvar, aparece "Contato salvo, mas não foi possível sincronizar com o Kinbox Agenda.".
 - **Foto:** até 2 MB (erro "Erro ao fazer upload. O tamanho máximo deve ser 2MB.").
 - **Telefone e e-mail repetidos:** o telefone é salvo com o código do país escolhido na bandeira. Se já existe contato com exatamente o mesmo telefone, retorna "Já existe um contato cadastrado com esse telefone". E-mail repetido não é recusado.
 - **Avisos ao salvar:** "Contato criado." ou "Contato salvo.". Se alguma organização escolhida na criação falhar ao vincular: "Contato criado, mas {{count}} organização(ões) não foram vinculadas.".
@@ -99,7 +101,7 @@ Efeito por local para quem **não** tem **Ver telefone de contatos privados**:
 
 Detalhes de [Mesclar contatos duplicados](/docs/clientes/mesclar-contatos).
 
-- **Onde e para quem aparece:** apenas na seção vermelha **Contato duplicado** no painel lateral da conversa na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), para quem atende a conversa e vê o painel lateral.
+- **Onde fica:** na seção vermelha **Contato duplicado**, no painel lateral de uma conversa de WhatsApp, na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox).
 - **Condições para aparecer:** conversa de WhatsApp ([oficial ou QR Code](/docs/canais/whatsapp/visao-geral)), existência de outro contato no workspace com o mesmo número (com ou sem o 9 após o DDD) e pelo menos uma conversa nesse outro contato. E-mail, nome e outros canais não geram detecção. Não existe mesclar contatos de outros canais nem pela lista de contatos.
 - **Limite por ação:** dois contatos por vez (com vários duplicados, mescle um de cada vez).
 - **Confirmação e sucesso:** "Esse contato duplicado será mesclado com o contato atual. Todas as conversas passarão para o contato atual." e "Esse processo é irreversível, quer proceder?" → botão **Proceder** → aviso "Contatos mesclados com sucesso".

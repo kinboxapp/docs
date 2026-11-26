@@ -29,17 +29,14 @@ Como escondo o telefone do contato de alguns atendentes?
 
 ## Resposta
 
-Há dois jeitos, configurados em **Configurações** → **Ambiente** → **Permissões** (seção **Contatos**) pelo proprietário do workspace (na tela, **ambiente**) ou por quem tem a permissão **Permissões**:
+Há dois jeitos, e cada um fica num lugar diferente:
 
-1. **Para esconder o telefone de todos os contatos para certos membros:** marque a restrição **Esconder telefone** no papel desses membros. O telefone some da lista de contatos, do formulário do contato, da lista de conversas, do painel da conversa e da exportação de conversas, e aparece como `*******` no perfil do contato.
-2. **Para esconder telefone e e-mail apenas de contatos específicos:** marque a chave **Contato privado** em **Configurações** no formulário do contato (a chave aparece apenas para o proprietário e para membros com **Ver telefone de contatos privados**). Membros sem **Ver telefone de contatos privados** não veem telefone nem e-mail na tela, e esses dados saem em branco na exportação de contatos.
+1. **Esconder o telefone de todos os contatos para certos membros:** em **Configurações** → **Ambiente** → **Permissões**, no papel desses membros, marque a restrição **Esconder telefone** (seção **Contatos**). Quem pode mudar papéis é o proprietário do workspace ou quem tem a permissão **Permissões**. O telefone some da lista e do formulário de contatos, da lista de conversas, do painel da conversa e da exportação de conversas, e aparece como `*******` no perfil do contato. Para impedir também que o membro baixe a lista de contatos, marque **Não pode exportar contatos** no mesmo papel: ela desativa as opções de exportação de contatos e de organizações.
+2. **Esconder telefone e e-mail só de alguns contatos:** abra o formulário do contato (**Clientes** → **Contatos** → **Novo contato** ou **Editar**) e ligue **Contato privado** na seção **Configurações**. A chave aparece só para o proprietário e para quem tem **Ver telefone de contatos privados**. Quem não tem essa permissão não vê o telefone nem o e-mail desse contato, e esses dados saem em branco na exportação de contatos.
 
-Outras restrições úteis na mesma seção do papel:
+Para que o membro não troque o número do contato, marque também **Proibir alterar celular** no papel dele.
 
-- **Não pode exportar contatos:** impede que o membro exporte a lista de contatos e de organizações.
-- **Proibir alterar celular:** impede que o membro edite o número do contato.
-
-O proprietário do workspace sempre vê todos os telefones e e-mails e não sofre restrições.
+O proprietário do workspace sempre vê todos os telefones e e-mails.
 
 Veja mais em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios), [Referência de permissões](/docs/administracao/referencia-de-permissoes) e [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes).
 

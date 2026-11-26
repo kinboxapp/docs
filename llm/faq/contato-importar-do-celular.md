@@ -7,18 +7,13 @@ tipo: faq
 fontes:
   - mobile:src/app/(tabs)/profile/index.tsx
   - mobile:src/app/import-contacts.tsx
+  - mobile:src/app/(tabs)/_layout.tsx
   - api:src/modules/contact-imports/contact-imports.service.ts
 codigo:
-  - web:src/pages/crm/contacts/ImportContacts/**
-  - web:src/pages/crm/deals/ImportDeals/components/FileUploadStep.tsx
-  - web:src/pages/crm/deals/ImportDeals/helpers/**
-  - web:src/components-old/common/SettingsPage/SettingsPageSteps.tsx
-  - api:src/modules/contact-spreadsheet-imports/**
-  - api:src/modules/contacts/contact.helper.ts
-  - api:src/modules/contacts/contacts.repository.ts
-  - api:src/modules/organizations/organizations.service.ts
   - mobile:src/app/import-contacts.tsx
   - mobile:src/app/(tabs)/profile/index.tsx
+  - mobile:src/app/(tabs)/_layout.tsx
+  - mobile:src/domain/phoneContacts.ts
   - api:src/modules/contact-imports/**
 verificado_em: 2026-11-26
 ---
@@ -31,7 +26,7 @@ Posso importar os contatos do meu celular?
 
 Sim, pelo app da Kinbox para celular, desde que o seu papel tenha a permissão **Gerenciar Contatos** ou você seja o proprietário do workspace (sem essa permissão, a opção não aparece).
 
-No app, acesse a aba de perfil e toque em **Importar contatos do celular**. Depois de conceder acesso em "Permitir acesso aos contatos", o app lista os contatos da agenda que têm telefone ("Os contatos da agenda com telefone aparecerão aqui."), oferece **Selecionar todos** e **Desmarcar todos**, e conclui em **Importar**.
+No app, abra a aba **Você** e toque em **Importar contatos do celular**. Depois de conceder acesso em "Permitir acesso aos contatos", o app lista os contatos da agenda que têm telefone ("Os contatos da agenda com telefone aparecerão aqui."), oferece **Selecionar todos** e **Desmarcar todos**, e conclui em **Importar**.
 
 Antes de enviar, o app pede confirmação informando que os contatos selecionados serão adicionados ao workspace e que quem já estiver na Kinbox com o mesmo telefone não será duplicado: contatos com telefone já cadastrado são ignorados e não são atualizados. Se houver erro no meio do processo, você pode tentar de novo ("Você pode tentar de novo: quem já foi enviado não será duplicado.").
 
