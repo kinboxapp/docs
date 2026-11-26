@@ -1,0 +1,87 @@
+---
+title: "Bot, automações, cenários e agentes de IA: qual usar"
+description: O que fazem o bot, as automações, os cenários, os agentes de IA e o copiloto da Kinbox, e como escolher a ferramenta certa para cada caso.
+keywords: [bot, chatbot, robô, automação, automações, cenário, cenários, agente de ia, inteligência artificial, chatgpt, copiloto, atribuição automática, qual usar, diferença]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/bot/Bot.tsx
+  - web:src/pages/settings/automations/index.tsx
+  - web:src/pages/settings/workflows/index.tsx
+  - web:src/pages/settings/agents/index.tsx
+  - web:src/pages/settings/copilot/index.tsx
+  - api:src/modules/agents/agent-bot.service.ts
+codigo:
+  - web:src/pages/settings/bot/Bot.tsx
+  - web:src/pages/settings/bot/panels/MidLeftPanel.tsx
+  - web:src/pages/settings/bot/drawers/EditNodeLLMDrawer.tsx
+  - web:src/pages/settings/automations/EditAutomations.tsx
+  - web:src/pages/settings/workflows/actions/workflow.triggers.defs.ts
+  - web:src/pages/agents/onboarding/index.tsx
+  - web:src/pages/agents/components/connections/ConnectionPicker.tsx
+  - web:src/pages/settings/copilot/index.tsx
+  - api:src/modules/agents/agent-bot.service.ts
+verificado_em: 2026-11-26
+---
+
+A Kinbox reúne diferentes ferramentas de automação e inteligência artificial — cada uma feita para atender contatos, agir nos bastidores, integrar sistemas ou apoiar a equipe.
+
+| Ferramenta | O que é | Com quem conversa | Onde fica | Gasta saldo? |
+| --- | --- | --- | --- | --- |
+| **Bot** | Fluxo montado com blocos (mensagens, menus, perguntas, decisões e integrações) | O contato, com respostas previstas | **Configurações** → **Automação** → **Bot** | Só no bloco **Agente de IA** |
+| **Agentes de IA** | Agente com IA que conversa com as próprias palavras, segue etapas e usa ferramentas e conhecimento | O contato, por texto (e por voz no **Agente de voz**, em teste) | **Configurações** → **Automação** → **Agentes de IA** | Sim |
+| **Automações** | Regras do tipo gatilho → condições → ações dentro da Kinbox | Ninguém diretamente | **Configurações** → **Automação** → **Automações** | Não (só o bot com IA que ela executar) |
+| **Cenários** | Fluxos de passos para integrar sistemas externos e manipular dados | Ninguém diretamente | **Configurações** → **Automação** → **Cenários** | Não (só o bot com IA que ele executar) |
+| **Copiloto** | Assistente de IA do time que sugere, revisa, resume, transcreve e analisa | O membro | **Configurações** → **Automação** → **Copiloto** | Sim |
+| **Atribuição automática** | Regras que distribuem conversas entre os membros disponíveis | Ninguém diretamente | **Configurações** → **Automação** → **Atribuição automática** | Não |
+
+## Bot
+
+O **Bot** (**Configurações** → **Automação** → **Bot**, botão **Novo Bot**) conduz o contato por um fluxo montado com blocos e respostas previstas, como **Mensagem**, **Menu**, **Entrada de dados**, **Decisão**, **Atendimento**, **Ação de CRM** e **Integração**.
+
+Ele pode ser ativado por condições (por exemplo, se o contato é novo ou já existente) e atender todos os canais ou canais escolhidos (inclusive grupos do WhatsApp, quando habilitado). Para ativar um bot, todos os caminhos do fluxo precisam terminar no bloco **Fim do bot**. Um bot sem bloco de IA não consome saldo.
+
+## Agentes de IA
+
+Os **Agentes de IA** (**Configurações** → **Automação** → **Agentes de IA**, botão **Novo agente de IA**) conversam com o contato usando as próprias palavras, seguindo um fluxograma com etapas, base de conhecimento e ferramentas como **Transferir para humano**.
+
+O **Agente de texto** atende por mensagem nos canais conectados. Existe também o **Agente de voz** (**Beta**), que atende ligações do WhatsApp oficial em tempo real; por estar em teste, ele pode não aparecer no seu workspace. Cada canal é atendido por apenas um agente de IA, e o uso consome saldo da carteira.
+
+## Automações
+
+As **Automações** (**Configurações** → **Automação** → **Automações**, botão **Nova automação**) executam ações quando um evento acontece na Kinbox e as condições definidas são atendidas.
+
+Exemplos de gatilhos incluem **Nova conversa ou sessão**, **Ao resolver uma conversa**, **Ao adicionar tag** e gatilhos por tempo (como **Tempo sem nenhuma resposta do membro na sessão nova**). Entre as ações estão **Enviar mensagem**, **Executar bot**, **Atribuir**, **Criar negociação** e **Integração**.
+
+## Cenários
+
+Os **Cenários** (**Configurações** → **Automação** → **Cenários**, botão **Novo Cenário**) montam fluxos de passos voltados a integrar sistemas e tratar dados.
+
+Eles começam por gatilhos como **Webhook recebido**, **Mensagem de campanha enviada**, **Nova Sessão** ou **Agendamento cíclico**, e executam passos sobre contatos, conversas, negócios e produtos, além de utilitários como **Requisição HTTP** e **Loop sobre itens da lista**.
+
+## Copiloto
+
+O **Copiloto** (**Configurações** → **Automação** → **Copiloto**) é o assistente de IA do time. Diferente do bot e dos agentes de IA, ele não atende o contato sozinho: ajuda o membro com sugestões no chat, revisão de mensagens, resumos, transcrição automática de áudios e análises. O uso consome saldo da carteira.
+
+## Atribuição automática
+
+A **Atribuição automática** (**Configurações** → **Automação** → **Atribuição automática**) distribui conversas entre os membros segundo regras predefinidas. Apenas membros marcados como **Disponível** recebem novos atendimentos por esse recurso.
+
+## Como elas se combinam
+
+- **Bot + Agente de IA**: dentro de um fluxo de bot, o bloco **Agente de IA** chama um agente (e, se quiser, uma **Base de conhecimento**) naquele ponto da conversa. Apenas esse bloco consome saldo.
+- **Agente conectado aos canais**: ao conectar um agente de IA diretamente a canais, a Kinbox cria um bot gerenciado por esse agente (ele aparece na lista de bots com o aviso de que deve ser ativado ou desativado no próprio agente).
+- **Automações e cenários**: uma automação pode usar a ação **Executar bot**, e cenários também incluem passos de conversa.
+
+Para saber exatamente o que consome saldo em cada recurso, veja [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos).
+
+## Como decidir
+
+- Quer um menu fixo, coletar dados com perguntas definidas e transferir para o time: use **Bot**.
+- Quer que a IA converse, tire dúvidas com base de conhecimento e execute ações sozinha: use **Agentes de IA** (gasta saldo).
+- Quer reagir a eventos e tempos (sem resposta, ao resolver, ao adicionar tag): use **Automações**.
+- Quer integrar outro sistema (receber dados por webhook, chamar uma API ou rodar em horário fixo): use **Cenários**.
+- Quer ajudar o membro a escrever, resumir e analisar: use **Copiloto** (gasta saldo).
+- Quer distribuir conversas entre o time: use **Atribuição automática**.
+
+Veja também [Como a Kinbox funciona](/docs/conceitos/visao-geral) e o [Glossário](/docs/conceitos/glossario).

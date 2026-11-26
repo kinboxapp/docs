@@ -125,6 +125,51 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Que diferença tem entre usar um bot e colocar um agente de IA para responder os clientes?",
+    "esperado": [
+      "docs/conceitos/automacao-e-ia",
+      "llm/faq/bot-ou-agente-de-ia"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Meu saldo da carteira está caindo todo dia, o que está consumindo?",
+    "esperado": [
+      "llm/faq/o-que-consome-saldo",
+      "docs/conceitos/saldo-e-creditos"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "O cliente voltou a escrever depois que resolvi e apareceu outro número de protocolo. Por quê?",
+    "esperado": [
+      "docs/conceitos/conversas-e-sessoes",
+      "docs/conversas/gerenciar-conversas",
+      "llm/faq/conversa-protocolo"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Quero que um atendente veja as conversas do grupo dele e as atribuídas a ele, mesmo em outro grupo, mas não as demais de outros grupos. Qual acesso escolho?",
+    "esperado": [
+      "docs/conceitos/workspace-membros-e-papeis"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "O que é ticket no funil operacional? É a mesma coisa que conversa?",
+    "esperado": [
+      "docs/conceitos/contatos-e-negocios",
+      "docs/conceitos/glossario"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Dá para juntar dois ambientes da Kinbox num só, com os contatos e conversas dos dois?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Como conecto meu número na API oficial do WhatsApp pela Kinbox?",
     "esperado": [
       "docs/canais/whatsapp-api-oficial-padrao",

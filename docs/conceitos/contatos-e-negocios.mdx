@@ -1,0 +1,81 @@
+---
+title: Contatos, organizações e negociações
+description: O que são contatos, organizações, negociações, funis e etapas na Kinbox e como eles se ligam às conversas.
+keywords: [contato, cliente, lead, organização, empresa, negociação, negócio, card, oportunidade, funil, etapa, funil comercial, funil operacional, ticket, ganho, perdido, contato privado]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/crm/contacts/EditContact.tsx
+  - web:src/pages/crm/organizations/OrganizationsList.tsx
+  - web:src/pages/crm/deals/deal.helper.tsx
+  - web:src/pages/settings/pipelines/wizard/PipelineWizardSteps.tsx
+  - api:src/modules/deals/deal.schema.ts
+  - api-v0:server/services/CustomerService.js
+  - web:src/pages/crm/deals/AddDeal/index.tsx
+  - api:src/modules/deals/deals.service.ts
+codigo:
+  - web:src/pages/crm/contacts/index.tsx
+  - web:src/pages/crm/contacts/EditContact.tsx
+  - web:src/pages/crm/organizations/OrganizationsList.tsx
+  - web:src/pages/crm/deals/deal.helper.tsx
+  - web:src/pages/settings/pipelines/wizard/**
+  - api:src/modules/deals/deal.schema.ts
+  - api-v0:server/services/CustomerService.js
+  - api-v0:server/services/CustomerPlatformService.js
+  - web:src/pages/crm/deals/AddDeal/**
+  - api:src/modules/deals/deals.service.ts
+verificado_em: 2026-11-26
+---
+
+Na Kinbox, **contatos** são as pessoas com quem o workspace conversa, **organizações** são as empresas ligadas a eles no CRM e **negociações** são vendas ou processos acompanhados nas etapas de um **funil**.
+
+## Contato
+
+O contato é a pessoa com quem o workspace conversa. A lista fica no menu **Clientes** → **Contatos**.
+
+Quando alguém envia a primeira mensagem em um canal, a Kinbox cria o contato e a conversa automaticamente. Se já existe no workspace um contato com o mesmo telefone ou e-mail, a Kinbox usa esse contato em vez de criar outro. Você também pode criar contatos manualmente ou importar uma planilha.
+
+Um mesmo contato pode ter várias conversas, uma por canal — veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes).
+
+A ficha do contato guarda:
+
+- **Nome** e **Canais** (**E-mail** e **Celular**);
+- **Organizações** vinculadas;
+- **Notas**, **Campos personalizados** e **Campanhas de Ads**;
+- **Configurações**, com **Vincular ao Kinbox Agenda** e **Contato privado**.
+
+Quando **Contato privado** está marcado, somente membros com permissão para ver contatos privados conseguem ver o telefone e o e-mail daquela pessoa.
+
+Se a mesma pessoa entrar por um canal que não traz telefone nem e-mail (como o Instagram), a Kinbox cria um segundo contato para ela.
+
+## Organização
+
+A **organização** representa uma empresa no CRM e fica em **Clientes** → **Organizações**, com o botão **Nova organização**.
+
+Um contato pode estar vinculado a uma ou mais organizações, e as organizações também aceitam **Campos personalizados**. Dentro da página de uma organização, você pode iniciar uma **Nova negociação**.
+
+Excluir uma organização tira a empresa da listagem, mas preserva os contatos vinculados e as negociações ligadas a ela.
+
+## Negociação, funil e etapa
+
+Uma **negociação** (que na tela também aparece como "negócio") é uma venda ou um processo acompanhado no CRM. Cada negociação aparece como um cartão dentro de uma **etapa** do **funil**.
+
+O **funil** é o quadro com etapas em colunas, acessível no menu **Funis**. Você cria e edita funis em **Configurações** → **CRM** → **Funis**.
+
+Toda negociação tem um contato. A organização é opcional, e a conversa também: a negociação fica ligada a uma conversa quando nasce dela ou quando você associa as duas. Ela guarda ainda nome, valor, produtos, status, o membro responsável, o grupo, o funil, a etapa e **Campos personalizados**.
+
+Os status padrão de uma negociação são **Aberto**, **Ganho** e **Perdido**. A Kinbox oferece dois tipos de funil:
+
+- **Funil Comercial**: tem valor monetário; usado para vendas, propostas, orçamentos e negociações financeiras, com encerramento como **Ganho** ou **Perdido**.
+- **Funil Operacional**: não tem valor monetário; usado para suporte, atendimento, implantação, onboarding e processos internos. Nesse funil, a negociação aparece como **ticket**, com os encerramentos **Resolvido** e **Não resolvido**. (**Ticket** se refere apenas a essa negociação operacional, nunca a uma conversa da Caixa de entrada.)
+
+## Como tudo se liga
+
+| De | Para | Relação |
+| --- | --- | --- |
+| Contato | Conversas | Uma conversa por canal |
+| Contato | Organizações | Um contato pode estar ligado a uma ou mais organizações |
+| Negociação | Contato, organização e conversa | Sempre tem um contato; organização e conversa são opcionais |
+| Negociação | Funil e etapa | Fica em uma etapa de um funil |
+
+Veja também [Como a Kinbox funciona](/docs/conceitos/visao-geral) e o [Glossário](/docs/conceitos/glossario).
