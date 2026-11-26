@@ -347,7 +347,21 @@
                   "docs/integracoes/rdstation-marketing-webhook",
                   "docs/integracoes/bitrix24",
                   "docs/integracoes/zoho",
-                  "docs/integracoes/nectarcrm"
+                  "docs/integracoes/nectarcrm",
+                  "docs/integracoes/dom360"
+                ]
+              },
+              {
+                "group": "Pagamentos, ERP e gestão",
+                "pages": [
+                  "docs/integracoes/banco-inter",
+                  "docs/integracoes/asaas",
+                  "docs/integracoes/hinova",
+                  "docs/integracoes/anycar",
+                  "docs/integracoes/tiny-erp",
+                  "docs/integracoes/sensedata",
+                  "docs/integracoes/smarters",
+                  "docs/integracoes/gestor-premium"
                 ]
               },
               {
@@ -866,18 +880,6 @@
     },
     {
       "source": "/docs/integracoes/followize",
-      "destination": "/docs/integracoes/visao-geral"
-    },
-    {
-      "source": "/docs/integracoes/banco-inter",
-      "destination": "/docs/integracoes/visao-geral"
-    },
-    {
-      "source": "/docs/integracoes/smarters",
-      "destination": "/docs/integracoes/visao-geral"
-    },
-    {
-      "source": "/docs/integracoes/tiny-erp",
       "destination": "/docs/integracoes/visao-geral"
     },
     {

@@ -1672,5 +1672,53 @@
     "pergunta": "Como vejo quanto rende o programa de afiliados do Mercado Livre?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Estou atendendo um cliente no chat e quero emitir um boleto do Inter para ele ali mesmo, sem abrir o internet banking. Tem como?",
+    "esperado": [
+      "docs/integracoes/banco-inter"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Uso o Tiny como ERP. Consigo ligar o contato da conversa a um cliente de lá e ver os dados cadastrais já preenchidos no Tiny sem sair da Kinbox?",
+    "esperado": [
+      "docs/integracoes/tiny-erp"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Trabalho com proteção veicular. Dá para puxar os dados de um carro pela placa sem sair da conversa?",
+    "esperado": [
+      "docs/integracoes/anycar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Vendo IPTV e queria liberar um teste para o cliente direto pela conversa da Kinbox. É possível?",
+    "esperado": [
+      "docs/integracoes/smarters",
+      "docs/integracoes/gestor-premium"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Desliguei a integração do Asaas, mas o bot continua mandando boleto para os clientes. Por quê?",
+    "esperado": [
+      "docs/integracoes/asaas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Consigo mandar um Pix ou um link de pagamento para o cliente pela conversa?",
+    "esperado": [
+      "llm/faq/cobrar-pelo-chat"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para a Kinbox receber os pagamentos aprovados no Mercado Pago e dar baixa automática nos pedidos?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

@@ -74,6 +74,7 @@ Para o bot pausar no bloco **Esperar um tempo** (**Recebimento de webhook**, com
   - Em **Ver dados do contato** no simulador, a opção **Pular integrações** pula todos os blocos **Integração**.
 - **Integrações prontas (grupo Outros):**
   - As integrações prontas usam a conexão com aquele sistema que o workspace configurou.
+  - Ações prontas de pagamento e gestão: **Consulta boletos ASAAS** ([Integrar com o Asaas](/docs/integracoes/asaas)), **Consulta boletos SGA** ([Integrar com a Hinova](/docs/integracoes/hinova)), **Criar lead no Dom360**, **Atualizar usuário no Dom360** e **Consulta usuário no Dom360** ([Integrar com o Dom360](/docs/integracoes/dom360)), **Consulta RENAJUD Plus na Anycar** ([Integrar com a Anycar](/docs/integracoes/anycar)). As do Asaas, da Hinova e da Anycar enviam mensagem ao cliente na conversa; confirme a identidade do cliente no fluxo antes desses blocos.
   - Na simulação, integrações do grupo **Outros** são puladas. Na conversa real, falhas em integrações prontas não mudam o caminho do fluxo.
 
 ## Executar código

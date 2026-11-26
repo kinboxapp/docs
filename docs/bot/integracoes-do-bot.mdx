@@ -90,7 +90,15 @@ O bloco tem **uma única saída**: tanto em caso de sucesso quanto em caso de fa
 
 ## Integrações prontas
 
-Em **Tipo de integração**, o grupo **Outros** reúne integrações prontas para conectar sistemas externos sem montar o JSON manualmente; HubSpot, Bitrix24, RD Station Marketing e Pipedrive estão entre as que têm ações prontas. Para que uma integração pronta funcione no fluxo, o workspace precisa ter a conexão com aquele sistema configurada; as de HubSpot, Bitrix24, RD Station Marketing e Pipedrive ficam em **Apps** (veja [Apps e integrações: instalar e usar](/docs/integracoes/visao-geral)); na simulação, integrações de **Outros** são puladas, então teste em uma conversa real usando **Executar bot** (veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
+Em **Tipo de integração**, o grupo **Outros** reúne ações prontas de sistemas externos, sem montar o JSON: [HubSpot](/docs/integracoes/hubspot), [Bitrix24](/docs/integracoes/bitrix24), [RD Station Marketing](/docs/integracoes/rdstation-marketing), [Pipedrive](/docs/integracoes/pipedrive), [Asaas](/docs/integracoes/asaas) (**Consulta boletos ASAAS**), [Hinova](/docs/integracoes/hinova) (**Consulta boletos SGA**), [Dom360](/docs/integracoes/dom360) e [Anycar](/docs/integracoes/anycar) (**Consulta RENAJUD Plus na Anycar**), entre outras.
+
+Nas integrações listadas acima, a ação usa a conexão daquele sistema, que fica em **Apps** (veja [Apps e integrações: instalar e usar](/docs/integracoes/visao-geral)). Algumas ações de **Outros** não dependem de app.
+
+Na simulação, as ações de **Outros** são puladas. Para testar, publique o fluxo e use **Executar bot** em uma conversa real (veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
+
+<Note>
+  As ações do Asaas, da Hinova e da Anycar mandam mensagem ao cliente na conversa. Confirme a identidade do cliente no fluxo do bot antes desses blocos.
+</Note>
 
 ## Esconder o conteúdo com senha
 

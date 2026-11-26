@@ -31,22 +31,22 @@ Caminho no menu: **Configurações** → **Integrações** → **Apps** (`/setti
 | App | Caminho relativo | Descrição na lista | Título do quadro na conversa | Página |
 | --- | --- | --- | --- | --- |
 | **Mola** | `/settings/apps/mola` | Sistema de consignado completo | **Mola** | — |
-| **Banco Inter** | `/settings/apps/banco-inter` | Gere boletos de cobrança | **Banco Inter** | — |
+| **Banco Inter** | `/settings/apps/banco-inter` | Gere boletos de cobrança | **Banco Inter** | [Integrar com o Banco Inter](/docs/integracoes/banco-inter) |
 | **Pipedrive** | `/settings/apps/pipedrive` | CRM e funil de vendas | **Pipedrive** | [Integrar com o Pipedrive](/docs/integracoes/pipedrive) |
-| **Dom360** | `/settings/apps/dom360` | CRM completo | **Dom360** | — |
+| **Dom360** | `/settings/apps/dom360` | CRM completo | **Dom360** | [Integrar com o Dom360](/docs/integracoes/dom360) |
 | **RD Station CRM** | `/settings/apps/rdstation` | CRM e funil de vendas | **RD Station CRM** | [Integrar com o RD Station CRM](/docs/integracoes/rdstation-crm) |
 | **RD Station Marketing** | `/settings/apps/rdstation-marketing` | Marketing digital | **RD Station Marketing** | [Integrar com o RD Station Marketing](/docs/integracoes/rdstation-marketing) |
-| **Tiny ERP** | `/settings/apps/tinyerp` | Software de ERP | **Tiny ERP** | — |
-| **Sensedata** | `/settings/apps/sensedata` | Customer Success | **Sensedata** | — |
-| **Smarters** | `/settings/apps/smarters` | Software de gestão de IPTV | **Smarters** | — |
-| **Gestor Premium** | `/settings/apps/gestor_premium` | Gestão de IPTV | **Gestor Premium** | — |
+| **Tiny ERP** | `/settings/apps/tinyerp` | Software de ERP | **Tiny ERP** | [Integrar com o Tiny ERP](/docs/integracoes/tiny-erp) |
+| **Sensedata** | `/settings/apps/sensedata` | Customer Success | **Sensedata** | [Integrar com a Sensedata](/docs/integracoes/sensedata) |
+| **Smarters** | `/settings/apps/smarters` | Software de gestão de IPTV | **Smarters** | [Integrar com a Smarters](/docs/integracoes/smarters) |
+| **Gestor Premium** | `/settings/apps/gestor_premium` | Gestão de IPTV | **Gestor Premium** | [Integrar com o Gestor Premium](/docs/integracoes/gestor-premium) |
 | **Hubspot** | `/settings/apps/hubspot` | Plataforma de CRM | **Hubspot** | [Integrar com o HubSpot](/docs/integracoes/hubspot) |
 | **Zoho CRM** | `/settings/apps/zoho` | Plataforma de CRM | **Zoho** | [Integrar com o Zoho CRM](/docs/integracoes/zoho) |
 | **Bitrix24** | `/settings/apps/bitrix24` | CRM e gestão de projetos | **Bitrix24** | [Integrar com o Bitrix24](/docs/integracoes/bitrix24) |
 | **NectarCRM** | `/settings/apps/nectarcrm` | Gestão de Vendas B2B | **NectarCRM** | [Integrar com o NectarCRM](/docs/integracoes/nectarcrm) |
-| **Hinova** | `/settings/apps/hinova` | Soluções Digitais | — | — |
-| **Anycar** | `/settings/apps/anycar` | Consulta de Veículos por placa | **Anycar** | — |
-| **Asaas** | `/settings/apps/asaas` | Sistema financeiro | — | — |
+| **Hinova** | `/settings/apps/hinova` | Soluções Digitais | — | [Integrar com a Hinova](/docs/integracoes/hinova) |
+| **Anycar** | `/settings/apps/anycar` | Consulta de Veículos por placa | **Anycar** | [Integrar com a Anycar](/docs/integracoes/anycar) |
+| **Asaas** | `/settings/apps/asaas` | Sistema financeiro | — | [Integrar com o Asaas](/docs/integracoes/asaas) |
 
 ## Regras gerais da tela Apps e dos quadros
 
@@ -64,11 +64,15 @@ Caminho no menu: **Configurações** → **Integrações** → **Apps** (`/setti
 
 ## Ações prontas no bot e app do agente de IA
 
-- **Bot (bloco Integração, grupo Outros):** há ações prontas de várias integrações (entre elas as listadas abaixo, além de Dom360 e Anycar); usam a conexão configurada em **Apps** e são puladas na simulação do bot (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)):
+- **Bot (bloco Integração, grupo Outros):** há ações prontas de várias integrações (entre elas as listadas abaixo); usam a conexão configurada em **Apps** e são puladas na simulação do bot (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)):
   - **HubSpot:** `Consulta contato no HubSpot`, `Consulta negócio no HubSpot`, `Atualiza negócio no HubSpot`, `Cria ou atualiza Objeto no HubSpot`.
   - **Bitrix24:** `Cria Oportunidade no Bitrix`, `Atualiza Oportunidade no Bitrix`, `Cria ou atualiza contato no Bitrix`.
   - **RD Station Marketing:** `Cria ou atualiza contato no RDMarketing`.
   - **Pipedrive:** `Sincroniza contato, lead, deal, activity e notas no Pipedrive`, `Cria ou atualiza a deal no Pipedrive`, `Cria ou atualiza atividade de agenda no Pipedrive`.
+  - **Asaas:** `Consulta boletos ASAAS` (veja [Integrar com o Asaas](/docs/integracoes/asaas)).
+  - **Hinova:** `Consulta boletos SGA` (veja [Integrar com a Hinova](/docs/integracoes/hinova)).
+  - **Dom360:** `Criar lead no Dom360`, `Atualizar usuário no Dom360`, `Consulta usuário no Dom360` (veja [Integrar com o Dom360](/docs/integracoes/dom360)).
+  - **Anycar:** `Consulta RENAJUD Plus na Anycar` (veja [Integrar com a Anycar](/docs/integracoes/anycar)).
 - **Agente de IA:** o app **HubSpot** disponível nas ferramentas do agente usa login próprio separado da integração de **Apps** (veja [Dar ferramentas ao agente: Agenda, Google Calendar e HubSpot](/docs/agente-de-ia/ferramentas)).
 
 ## Integrações retiradas e sistemas sem integração pronta
