@@ -1771,12 +1771,12 @@
     "tipo": "negativo"
   },
   {
-    "pergunta": "Quero testar a Kinbox antes de pagar: quantos dias eu tenho e preciso colocar cartão?",
+    "pergunta": "Onde conecto meu primeiro WhatsApp?",
     "esperado": [
-      "llm/faq/teste-gratis",
-      "docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+      "docs/primeiros-passos/conectar-o-primeiro-canal",
+      "docs/canais/whatsapp/visao-geral"
     ],
-    "tipo": "faq"
+    "tipo": "guia"
   },
   {
     "pergunta": "Fiz o cadastro mas o código de 6 dígitos nunca chegou no meu e-mail, o que eu faço?",
@@ -1797,10 +1797,10 @@
     "tipo": "faq"
   },
   {
-    "pergunta": "Acabei de criar a conta: como coloco meus atendentes para dentro do workspace?",
+    "pergunta": "Mandei uma mensagem de teste. Como respondo e encerro a conversa?",
     "esperado": [
-      "docs/primeiros-passos/convidar-sua-equipe",
-      "docs/configuracoes-no-workspace/gerenciar-membros"
+      "docs/primeiros-passos/atender-a-primeira-conversa",
+      "docs/conversas/gerenciar-conversas"
     ],
     "tipo": "guia"
   },
@@ -1814,10 +1814,9 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Que tags e funil o onboarding com o Kin cria para uma loja de varejo?",
+    "pergunta": "Minha empresa é de varejo e marquei Vendas no onboarding do Kin: qual funil e quais etapas ele cria?",
     "esperado": [
-      "llm/primeiros-passos/configurar-com-o-kin",
-      "docs/primeiros-passos/configurar-com-o-kin"
+      "llm/primeiros-passos/configurar-com-o-kin"
     ],
     "tipo": "referencia"
   },

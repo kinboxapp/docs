@@ -6,8 +6,7 @@ publico: llm
 tipo: referencia
 fontes:
   - web:src/pages/auth/register/Register.tsx
-  - api:src/modules/operators/signup/signup.service.ts
-  - api:src/modules/operators/signup/signup.email.ts
+  - api:src/modules/operators/signup/
   - api-v0:server/controllers/OperatorController.js
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/config/constants.js
@@ -81,8 +80,8 @@ Todo workspace novo começa no teste grátis de **7 dias** (até o fim do 7º di
 Acima do limite de canais (exceto Instagram), aparece "Seu plano atual não permite adicionar o novo canal". Veja a tabela geral em [Canais: conectar e gerenciar](/docs/canais/visao-geral).
 
 - **Avisos durante o teste:** nos últimos dias, aparece no topo a faixa "Faltam N dias para acabar sua degustação." — para quem tem permissão de cobrança (fora do aplicativo de celular e fora de plano gerenciado por parceiro), ela traz "Não perca tempo" e o botão **Assine agora!**. Em **Configurações** → **Assinatura**, aparece o título "Trial" com o tempo restante ou "Expirado", "Expira em" e **Assinar um plano**. Na tela **Escolha um ambiente**, o workspace exibe a etiqueta **Teste grátis**.
-- **Quando o teste acaba sem assinatura:** aparece a faixa "Sua assinatura expirou. Por favor, selecione um plano nas configurações de assinatura." (com **Ver Plano** para quem cuida da assinatura). O editor de mensagens some das conversas (não dá para responder), e tentar adicionar canal ou membro falha com "Sua assinatura expirou". Veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) e [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
-- **Estender o teste:** não há botão no aplicativo para o cliente estender o prazo. Fale com o suporte (ou com o seu parceiro, se a conta foi criada por um).
+- **Quando o teste acaba sem assinatura:** o bloqueio vem alguns dias depois do fim do teste. Com o teste vencido há mais de 3 dias, aparece a faixa "Sua assinatura expirou. Por favor, selecione um plano nas configurações de assinatura." (com **Ver Plano** para quem cuida da assinatura). O editor de mensagens some das conversas (não dá para responder), e tentar adicionar canal ou membro falha com "Sua assinatura expirou". Veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) e [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
+- **Estender o teste:** não há botão no aplicativo para o cliente estender o prazo. Fale com o suporte (ou com o parceiro, se o workspace estiver ligado a um).
 - **Outro workspace:** cada workspace novo criado pela mesma conta começa o próprio teste grátis de 7 dias.
 
 ## O que o cadastro cria
@@ -97,10 +96,10 @@ Acima do limite de canais (exceto Instagram), aparece "Seu plano atual não perm
 
 - **E-mail em minúsculas:** o endereço é salvo em letras minúsculas.
 - **Sessão aberta no navegador:** abrir a tela de cadastro encerra a sessão que estava aberta no mesmo navegador.
-- **Conta criada por link de parceiro:** fica vinculada a esse parceiro; o onboarding do Kin não abre e a assinatura pode ser gerenciada pelo parceiro.
+- **Workspace ligado a um parceiro:** o onboarding do Kin não abre e a assinatura pode ser gerenciada pelo parceiro. Quem recebeu um link de cadastro de um parceiro da Kinbox cria a conta a partir desse link.
 - **Aplicativo para celular:** não tem tela de cadastro; crie a conta no navegador.
 - **Validações dos campos:** "Digite um email válido", "Digite seu nome completo", "Digite seu celular", "Digite um celular válido", "A senha ainda não atende a todos os requisitos" e "Digite o nome da sua empresa".
-- **Erros gerais:** "Muitas tentativas. Aguarde um instante e tente de novo." (muitas verificações seguidas) e "Erro ao se registrar, fale com o suporte." (falha geral ao criar a conta).
+- **Erros gerais:** "Muitas tentativas. Aguarde um instante e tente de novo." (muitas tentativas em pouco tempo) e "Erro ao se registrar, fale com o suporte." (falha geral ao criar a conta).
 
 ## Sintomas e soluções
 
@@ -115,6 +114,6 @@ Acima do limite de canais (exceto Instagram), aparece "Seu plano atual não perm
 | Botão **Continuar com o Google** não aparece | Recurso não habilitado na tela | Fazer o cadastro normalmente pelo campo **Email** |
 | "Você não pode adicionar canais de Instagram em plano trial" | O teste grátis não permite conectar Instagram | Assinar um plano em [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) |
 | Editor de mensagens sumiu ao fim do teste grátis | O teste grátis terminou sem assinatura | Escolher um plano em [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) ou regularizar em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida) |
-| Precisa de mais tempo de teste | Não existe botão de extensão no app | Falar com o suporte (ou com o parceiro, se a conta veio de um) |
+| Precisa de mais tempo de teste | Não existe botão de extensão no app | Falar com o suporte (ou com o parceiro, se o workspace estiver ligado a um) |
 
 Veja também [Criar sua conta e o workspace](/docs/primeiros-passos/criar-seu-workspace-no-kinbox) e [Não consigo entrar na Kinbox](/docs/conta/problemas-de-acesso).

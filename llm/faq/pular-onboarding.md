@@ -25,7 +25,7 @@ Sim. Clique em **Pular onboarding** no topo de qualquer etapa (no celular, **Pul
 - **Não volta depois:** depois de pular ou concluir, o onboarding não reabre e não existe botão para iniciá-lo de novo. Você pode fazer ou ajustar cada configuração nas telas normais da Kinbox: [Convidar sua equipe](/docs/primeiros-passos/convidar-sua-equipe), [Conectar o primeiro canal](/docs/primeiros-passos/conectar-o-primeiro-canal) e [Agentes de IA: visão geral](/docs/agente-de-ia/visao-geral).
 - **Pular só uma etapa:** durante o fluxo, dá para pular apenas partes específicas com **Pular por agora** (time), **Pular** (site) e **Conectar depois** (canal).
 - **Fechar o navegador no meio:** fechar a aba sem confirmar o pulo não encerra o onboarding — ao entrar de novo, ele retoma do início da etapa em que você parou.
-- **Quem não vê o onboarding:** membros convidados e contas criadas por parceiro ou por modelo vão direto para a Kinbox, sem passar pelo Kin.
+- **Workspace ligado a um parceiro:** o onboarding do Kin não abre. Membros convidados e workspaces criados por modelo também vão direto para a Kinbox, sem passar pelo Kin.
 
 Veja tudo o que o fluxo configura em [Configurar o workspace com o Kin](/docs/primeiros-passos/configurar-com-o-kin).
 

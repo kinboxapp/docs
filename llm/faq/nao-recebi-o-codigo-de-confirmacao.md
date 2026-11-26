@@ -6,8 +6,7 @@ publico: llm
 tipo: faq
 fontes:
   - web:src/pages/auth/register/Register.tsx
-  - api:src/modules/operators/signup/signup.service.ts
-  - api:src/modules/operators/signup/signup.email.ts
+  - api:src/modules/operators/signup/
 codigo:
   - web:src/pages/auth/register/**
   - api:src/modules/operators/signup/**

@@ -3705,7 +3705,6 @@
   esconder:
     - '.request-inspector'
   alvo:
-    - '.auth-hero'
     - '.auth-card'
   mascarar: []
   arquivo: images/ajuda/primeiros-passos/cadastro.webp

@@ -1,17 +1,14 @@
 ---
 title: "Academia: trilhas, exame, certificado e atribuição de treinamentos"
 description: Referência da Kinbox Academia — trilhas e lições, regras do exame prático, certificado e sua verificação, aba Equipe, atribuição e lembretes de treinamento.
-keywords: [academia, trilhas, lições, exame, missões, estrelas, nota, certificado, validade do certificado, verificar certificado, número de série, linkedin, insígnia, xp, nível, aba equipe, atribuir treinamento, prazo, lembrete, trilha bloqueada]
+keywords: [academia, trilhas, lições, exame, missões, estrelas, nota, certificado, validade do certificado, verificar certificado, linkedin, insígnia, xp, nível, aba equipe, atribuir treinamento, prazo, lembrete, trilha bloqueada]
 publico: llm
 tipo: referencia
 fontes:
   - web:src/pages/academia/shared/content.ts
-  - web:src/pages/academia/certificacao/index.tsx
-  - web:src/pages/academia/certificacao/team/TeamTab.tsx
-  - web:src/pages/academia/certificacao/team/AssignPopover.tsx
+  - web:src/pages/academia/certificacao/
   - web:src/pages/academia/verify/CertificateVerify.tsx
-  - api:src/modules/academy/academy.service.ts
-  - api:src/modules/academy/academy.utils.ts
+  - api:src/modules/academy/
 codigo:
   - web:src/pages/academia/**
   - api:src/modules/academy/**
@@ -52,19 +49,19 @@ Status exibidos em cada trilha: **Não iniciada**, **Em andamento**, **Certifica
 
 - **Formato:** prático, na caixa de entrada em modo treino, com situações e lista de missões, sem dicas.
 - **Aprovação:** passa quem cumprir todas as missões. Missões que o papel do membro não permite são removidas do exame. Pular uma situação reprova.
-- **Pontuação e estrelas:** nota de 0 a 100 e até 3 estrelas. Passar da meta de tempo tira pontos (impactando as estrelas), mas não reprova.
+- **Pontuação e estrelas:** nota de 0 a 100 e até 3 estrelas. Passar da meta de tempo afeta a pontuação e as estrelas, mas não reprova por si só.
 - **Tentativas:** sem limite de tentativas e sem tempo de espera (**Tentar de novo**). Iniciar o exame de novo anula uma tentativa que estava aberta.
 - **Expiração da tentativa:** deixar o exame aberto por muitas horas expira a tentativa com "Tentativa de exame expirada. Comece o exame de novo."
 - **Resultado:** "Exame aprovado!" ou "Faltou um detalhe".
 
 ## Certificado e verificação
 
-- **Emissão e validade:** um certificado por trilha, gerado em **Emitir certificado** ao passar no exame. Vale **1 ano** ("Emitido em", "Válido até"). Não há renovação e refazer o exame não emite outro certificado.
+- **Emissão e validade:** um certificado por trilha, criado automaticamente na primeira aprovação no exame. **Emitir certificado** é o botão que abre o resultado e o certificado já emitido. Vale **1 ano** ("Emitido em", "Válido até"). Refazer o exame não emite outro certificado.
 - **Ações:** logo após aprovar, **Ver minhas insígnias**, **Compartilhar no LinkedIn** e **Baixar PDF**. Depois, na seção **Insígnias**, clicar na insígnia conquistada abre **Verificação do certificado** com **Copiar link**, **LinkedIn** (abre o formulário de certificação já preenchido) e **Baixar PDF**.
-- **Nome no certificado:** usa o nome cadastrado no **Perfil** do membro; alterar o nome no perfil depois atualiza o nome na página de verificação.
-- **Número de série:** formato `KBX-ATD-2026-XXXXXX`.
-- **Página de verificação:** quem recebe o link do certificado ou lê o QR Code dele abre a página de verificação. Ela mostra o status — "Certificado válido e ativo", "Certificado autêntico, mas vencido" ("Venceu em") ou "Certificado não encontrado" — junto com Titular (nome), Certificação, Nº de série, datas e "Emissor: Academia Kinbox".
-- **Escopo por workspace:** o progresso e os certificados são separados por pessoa **em cada workspace**. Ao entrar em outro workspace, o membro começa do zero na Academia, mas o link público de verificação de um certificado já emitido continua funcionando.
+- **Nome no certificado:** vem do nome cadastrado no **Perfil** do membro e acompanha mudanças feitas depois no perfil.
+- **Número de série:** cada certificado traz um número de série.
+- **Página de verificação:** o link do certificado e o QR Code dele levam à página de verificação, que serve para compartilhar o certificado. Ela mostra o status — "Certificado válido e ativo", "Certificado autêntico, mas vencido" ("Venceu em") ou "Certificado não encontrado" — junto com o nome do titular, Certificação, Nº de série, datas e "Emissor: Academia Kinbox".
+- **Escopo por workspace:** o progresso e os certificados são separados por pessoa **em cada workspace**. Ao entrar em outro workspace, o membro começa do zero na Academia, mas o link de verificação de um certificado já emitido continua funcionando.
 
 ## Aba Equipe e atribuição de treinamentos
 
@@ -88,7 +85,7 @@ Com a assinatura ou o teste grátis vencido, a Academia abre normalmente, mas li
 | O ícone **Academia** não aparece na barra lateral | Acesso pela barra lateral indisponível ou no celular | Abrir pela foto do perfil → **Ajuda e documentação** → **Academia** (no celular, **Ajuda & Documentação**) |
 | Membro não aparece em **Para quem** ao atribuir treinamento | O membro está inativo, já tem aquele certificado, não tem permissão para a trilha (ex.: CRM e Vendas) ou é você mesmo | Conferir se o membro está ativo, se já é certificado e se o papel dele permite a trilha |
 | Membro diz que não recebeu e-mail do treinamento atribuído | A atribuição notifica no sino dentro da Kinbox e na faixa da aba **Trilhas**, não por e-mail | Orientar o membro a abrir a **Academia** ou conferir o sino de notificações; se precisar, clicar em **Lembrar** |
-| Meu certificado venceu após 1 ano | Validade de 1 ano sem renovação; refazer o exame não emite outro certificado | A página de verificação passa a exibir "Certificado autêntico, mas vencido" com a data de vencimento |
+| Meu certificado venceu após 1 ano | Validade de 1 ano; refazer o exame não emite outro certificado | Não há renovação pela Academia; fale com o suporte. A página de verificação passa a exibir "Certificado autêntico, mas vencido" com a data de vencimento |
 | "Tentativa de exame expirada. Comece o exame de novo." | O exame ficou aberto por muitas horas sem concluir | Iniciar uma nova tentativa em **Fazer exame** (não há limite de tentativas) |
 | Troquei de workspace e meu progresso zerou | Progresso e certificados são registrados por pessoa em cada workspace | Voltar ao workspace original para ver as insígnias; o link de verificação já emitido continua válido |
 | Lições e exame bloqueados com aviso de assinatura expirada | Assinatura ou teste grátis do workspace venceu | Regularizar em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida) |
