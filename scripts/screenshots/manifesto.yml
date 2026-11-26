@@ -8,6 +8,7 @@
 #           nenhum elemento faz o item falhar
 # arquivo   saída em images/ajuda/<secao>/<nome>.webp
 # paginas   páginas da central que usam o print
+# largura  (opcional) largura da janela em px só para o item (padrão 1440; abaixo de 768 o app troca de layout)
 # workspace (opcional) workspace do print; padrão: o de documentação. Outro workspace só para telas
 #           que o de documentação não tem (ex.: canal de WhatsApp) e sempre com `mascarar`
 
@@ -31,6 +32,7 @@
 
 - id: canais-lista
   url: /settings/channels
+  largura: 900
   passos:
     - esperar: 'tbody tr[data-index="0"]'
   alvo:

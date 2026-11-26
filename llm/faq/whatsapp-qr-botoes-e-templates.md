@@ -21,9 +21,9 @@ Dá para mandar botões, listas, localização ou template pelo QR Code?
 
 ## Resposta
 
-Não. No WhatsApp por QR Code (conexão **Express**), a Kinbox não envia templates, botões, listas, menus interativos nem localização — qualquer tentativa de envio desses formatos fica com erro.
+Não. No WhatsApp por QR Code (conexão **Express**), a Kinbox não envia templates, botões, listas, menus interativos nem localização: qualquer tentativa de envio desses formatos fica com erro.
 
-Como contorno, nos menus do bot a Kinbox envia as opções em formato de texto, uma por linha, em vez de botões. Já templates aprovados pela Meta, Flows, carrossel e recursos interativos oficiais existem somente no WhatsApp oficial. No recebimento, se o contato mandar localização ou responder a um botão/lista, a Kinbox exibe o conteúdo na conversa. Veja detalhes em [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
+Como contorno, nos menus do bot a Kinbox envia as opções em formato de texto, uma por linha, em vez de botões. Templates aprovados pela Meta, Flows e carrossel existem no WhatsApp oficial. No recebimento, se o contato mandar localização ou responder a um botão/lista, a Kinbox exibe o conteúdo na conversa. Veja detalhes em [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
 
 ## Variações
 

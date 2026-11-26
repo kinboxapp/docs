@@ -75,14 +75,16 @@ Só na conexão **Express**, com o canal em **Necessário ler QR-Code**.
     </Frame>
   </Step>
   <Step title="Gere o código">
-    Confira o número em **Número do WhatsApp** e clique em **Gerar código**. A Kinbox mostra um código no formato `XXXX-XXXX`. Clique em **Copiar** se quiser.
+    Confira o número no campo e clique em **Gerar código**. A Kinbox mostra um código no formato `XXXX-XXXX`. Clique em **Copiar** se quiser.
   </Step>
   <Step title="Digite o código no celular">
     No WhatsApp do celular, toque em **Dispositivos conectados** → **Conectar dispositivo**, depois em **Conectar com número de telefone**, e digite o código.
   </Step>
 </Steps>
 
-Se o código não funcionar, clique em **Gerar novo código**. Se ainda assim não funcionar, clique em **Voltar para QR Code** e conecte pelo QR Code.
+- **A Kinbox não gerou o código** (aparece uma mensagem de erro e o botão continua **Gerar código**): confira o número no campo e clique em **Gerar código** de novo.
+- **O celular recusou o código**: clique em **Gerar novo código** e digite o código novo.
+- Se não der certo, clique em **Voltar para QR Code** e conecte pelo QR Code.
 
 ## Depois de conectar
 
@@ -96,9 +98,9 @@ Ajuste as opções do canal em [Configurações do WhatsApp por QR Code](/docs/c
 
 - **O QR Code expirou.** Na **Express**, o QR Code fica disponível por cerca de 13 minutos. Depois disso, o canal fica **Desconectado** e o QR Code some. Clique em **Reiniciar canal** para gerar outro.
 - **Número inválido.** Na **Express**, o número precisa ter de 10 a 15 dígitos, contando o DDI.
-- **O canal já está ativo.** Já existe um canal ativo com esse número no workspace. Procure o canal na lista.
+- **O canal já está ativo.** Já existe um canal ativo com esse número. Procure o canal na lista. Se não achar, fale com o suporte.
 - **Limite do plano.** O plano chegou ao limite de canais de WhatsApp, ou a assinatura venceu.
-- **O canal ficou com `pending_review` ou `error`.** A criação não terminou. Fale com o suporte.
+- **O status aparece como `pending_review` ou `error` (em inglês).** A criação do canal não terminou. Fale com o suporte e informe o ID do canal.
 
 Para outros casos, veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte).
 

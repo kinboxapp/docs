@@ -23,7 +23,7 @@
                 "pages": [
                   "docs/canais/whatsapp/visao-geral",
                   {
-                    "group": "QR Code (Express e Clássica)",
+                    "group": "Por QR Code",
                     "pages": [
                       "docs/canais/conectar-whatsapp-app",
                       "docs/canais/whatsapp/whatsapp-app/o-que-funciona",

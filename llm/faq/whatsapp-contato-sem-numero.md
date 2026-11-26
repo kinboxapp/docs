@@ -24,7 +24,7 @@ No WhatsApp por QR Code, isso acontece em dois casos:
 - **Conversa de grupo**: o contato da conversa é o próprio grupo, que não tem telefone. Quem escreveu aparece em cada mensagem. Numa menção, o participante cujo número o WhatsApp esconde aparece como "Participante" seguido do final do identificador.
 - **Contato que o WhatsApp mostra sem número**: em alguns casos o WhatsApp troca o número por um identificador de privacidade. Nessas conversas, o que você manda pelo celular não entra na Kinbox.
 
-Veja "O que funciona e o que não funciona no WhatsApp por QR Code" (`/docs/canais/whatsapp/whatsapp-app/o-que-funciona`). O caso do WhatsApp oficial é tratado na seção do WhatsApp oficial.
+Veja [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
 
 ## Variações
 

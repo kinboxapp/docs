@@ -31,7 +31,7 @@ O único contorno é excluir o canal e criar de novo com o mesmo número, escolh
 - excluir um canal **Express** tira o canal de todos os bots que o usavam: é preciso ligar o canal aos bots de novo;
 - o número fica sem enviar e receber pela Kinbox até você ler o QR Code no canal novo (a **Clássica** pode levar até 10 minutos para mostrar o QR Code).
 
-A Kinbox recomenda a **Express**. Veja "Migrar da conexão Clássica para a Express" (`/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo`).
+A Kinbox recomenda a **Express**. Veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
 
 ## Variações
 

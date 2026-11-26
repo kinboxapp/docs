@@ -46,6 +46,8 @@ Detalhes de referência sobre a conexão **Clássica**, complementares à págin
 - Só em canais **Clássica** com **Versão** = **Multidevice** a janela traz o seletor **Tipo de conexão** (**Express** marcado por padrão, **Clássica** como opção). Canal com **Versão antiga** não vê o seletor: não dá para passar para a **Express** pelo **Recriar**; orientar a falar com o suporte.
   - **Migrando para Express**: converte o mesmo registro do canal (mesmo ID, conversas e configurações). O ambiente antigo só é desligado depois que a **Express** foi criada. Se a criação falhar, o canal pode ficar como estava ou com o status cru `pending_review`: conferir o status e, se aparecer `pending_review` ou `error`, falar com o suporte com o ID do canal. Em seguida, o canal fica **Desconectado** até pedir o novo QR Code.
   - **Recriando como Clássica**: o canal entra em **Criando...** (até 10 minutos) e pede leitura de QR Code novamente.
+- Na troca para **Express**, o número salvo no canal precisa ter de 10 a 15 dígitos (com DDI); senão, a troca falha com `"Número inválido"` e o canal continua **Clássica**. Orientar a falar com o suporte.
+- Canal **Clássica** sem data de **Última vez recriado** também cai nas verificações por data: mostra **Recomendado recriar canal** e não pode ser usado em campanhas até ser recriado.
 - Se o canal ainda estiver em criação ao tentar recriar, exibe: `"Este canal ainda se encontra em processamento. Por favor tente novamente em instantes."`
 - **Recriar** não passa pela checagem de limite de canais do plano.
 - Em canais **Express**, **Recriar** apenas reinicia a conexão do número (equivalente a **Reiniciar canal**), não exibe o seletor **Tipo de conexão** e não atualiza a data de **Última vez recriado**.

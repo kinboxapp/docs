@@ -35,7 +35,7 @@ Em alguns workspaces com recursos em teste, o painel do canal tem o **Aquecedor*
 - **Ultra**: para contas ativas; começa com 90 a 100 e sobe mais rápido até 200 a 300 mensagens por dia.
 - **Personalizado**: usa o mesmo volume do **Moderado** e deixa escolher os **Tipos de envio** (Texto, Imagem, Áudio, Vídeo, Status).
 
-Os perfis prontos duram 30 dias. Durante o aquecimento, a lista de canais mostra o selo **Aquecendo**. O **Aquecedor** pode não aparecer no seu workspace. Veja "Como evitar que o número seja bloqueado" (`/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp`).
+Os perfis prontos duram 30 dias. Durante o aquecimento, a lista de canais mostra o selo **Aquecendo**. O **Aquecedor** pode não aparecer no seu workspace. Veja [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp).
 
 ## Variações
 

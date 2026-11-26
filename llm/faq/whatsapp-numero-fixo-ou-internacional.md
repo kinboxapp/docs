@@ -1,6 +1,6 @@
 ---
 title: Posso conectar um número fixo ou de outro país?
-description: A Kinbox aceita números de 10 a 15 dígitos com DDI sem restringir país nem diferenciar fixo de celular, desde que o número tenha uma conta de WhatsApp para parear.
+description: Depende de o número ter uma conta de WhatsApp; a Kinbox não bloqueia DDI de outro país nem diferencia fixo de celular, mas confere de 10 a 15 dígitos na Express e não garante que todo número funcione.
 keywords: [número fixo, telefone fixo, número internacional, outro país, ddi, número inválido, conectar whatsapp]
 publico: llm
 tipo: faq
@@ -33,7 +33,7 @@ Regras que a Kinbox confere:
 - Na **Clássica**, a Kinbox só exige que o número seja preenchido.
 - Número do Brasil no código de conexão: a Kinbox tenta descobrir se a conta está registrada com ou sem o nono dígito. Se o código não funcionar, gere outro ou conecte pelo QR Code.
 
-Exemplo de formato: `+55 11 90000-0001`. Passo a passo em "Conectar o WhatsApp pelo QR Code" (`/docs/canais/conectar-whatsapp-app`).
+Exemplo de formato: `+55 11 90000-0001`. Passo a passo em [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
 
 ## Variações
 

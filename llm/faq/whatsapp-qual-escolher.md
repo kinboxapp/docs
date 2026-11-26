@@ -29,7 +29,7 @@ O **WhatsApp oficial** (**API Oficial**) conecta pelo cadastro da Meta e tem tem
 
 O **WhatsApp por QR Code** (**Modo QRCode**) funciona como um aparelho conectado ao WhatsApp do celular: não tem limite de 24 horas para responder, aceita grupos e deixa usar o celular junto sem configurar nada. Em troca, não envia templates, botões, listas nem localização, e o número pode ser bloqueado pelo WhatsApp se receber denúncias de spam. O oficial também permite usar o aplicativo WhatsApp Business junto, mas só com a coexistência da Meta.
 
-Os dois tipos contam no mesmo limite de canais de WhatsApp do plano. No QR Code, a conexão recomendada é a **Express**; a **Clássica** é o modo antigo. Tabela completa: "Qual WhatsApp usar: oficial ou QR Code" (`/docs/canais/whatsapp/visao-geral`).
+Os dois tipos contam no mesmo limite de canais de WhatsApp do plano. No QR Code, a conexão recomendada é a **Express**; a **Clássica** é o modo antigo. Tabela completa: [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral).
 
 ## Variações
 

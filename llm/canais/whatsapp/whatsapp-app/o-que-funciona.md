@@ -27,11 +27,11 @@ Detalhes completos de referência da página humana "O que funciona e o que não
 | Tipo de mensagem | Suportado | Limite / comportamento |
 | --- | --- | --- |
 | Texto | Sim | — |
-| Imagem | Sim | Aceita legenda. Limite de 16 MB no envio. |
-| Vídeo | Sim | Aceita legenda. Limite de 16 MB no envio. |
-| Áudio | Sim | Enviado como mensagem de voz. Limite de 16 MB. Não aceita legenda: o texto vai em mensagem separada logo depois do áudio. |
-| Documento | Sim | Aceita legenda. Limite de 100 MB no envio. |
-| Figurinha (sticker) | Sim | Limite de 16 MB no envio. |
+| Imagem | Sim | Aceita legenda. Até 16 MB (limite do motor do WhatsApp por QR Code). |
+| Vídeo | Sim | Aceita legenda. Até 16 MB (limite do motor do WhatsApp por QR Code). |
+| Áudio | Sim | Enviado como mensagem de voz. Até 16 MB (limite do motor do WhatsApp por QR Code). Não aceita legenda: o texto vai em mensagem separada logo depois do áudio. |
+| Documento | Sim | Aceita legenda. Até 100 MB (limite do motor do WhatsApp por QR Code). |
+| Figurinha (sticker) | Sim | Até 16 MB (limite do motor do WhatsApp por QR Code). |
 | Contato | Sim | — |
 | Reação | Sim | — |
 | Responder citando mensagem | Sim | Sempre é enviada; se a mensagem original for antiga e não estiver mais em cache, a citação pode ir sem o conteúdo. |
@@ -42,7 +42,9 @@ Detalhes completos de referência da página humana "O que funciona e o que não
 
 - Com o canal desconectado ou bloqueado, o envio é recusado na hora; a mensagem fica com erro e não é reenviada sozinha quando o canal reconecta.
 
-## Recebimento (Express) — avisos exatos e tipos descartados
+Os limites de 16 MB e 100 MB são do motor do WhatsApp por QR Code no envio. Não há limite próprio da Kinbox conferido no código do envio; o que vale para o anexo na tela da conversa não foi auditado.
+
+## Recebimento (Express): avisos exatos e tipos descartados
 
 | O que o contato envia | O que aparece na Kinbox |
 | --- | --- |

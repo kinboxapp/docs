@@ -5,7 +5,7 @@ Ferramentas para tirar os prints da central de ajuda no staging, sempre no works
 | Arquivo | Para que serve |
 | --- | --- |
 | `seed.ts` | Cria ou completa o workspace de documentação (`Loja Exemplo`) |
-| `manifesto.yml` | Um item por print: `id`, `url`, `passos`, `alvo`, `mascarar`, `arquivo`, `paginas` e, opcional, `workspace` |
+| `manifesto.yml` | Um item por print: `id`, `url`, `passos`, `alvo`, `mascarar`, `arquivo`, `paginas` e, opcionais, `workspace` e `largura` (janela mais estreita para telas que ficam largas demais) |
 | `capturar.ts` | Abre o staging com Playwright e gera os WebP em `images/ajuda/<secao>/<nome>.webp` |
 | `staging.ts` | Login e chamadas às APIs do staging, usado pelos dois scripts |
 

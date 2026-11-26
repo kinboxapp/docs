@@ -31,6 +31,7 @@ Detalhes técnicos de referência da página humana "Conectar o WhatsApp pelo QR
 
 ## Regras do número e código de conexão
 
+- **Falha ao gerar × código recusado**: se a Kinbox não gera o código, aparece uma mensagem de erro (tabela abaixo) e o botão continua **Gerar código**. **Gerar novo código** só aparece quando já há um código na tela; use quando o celular recusar o código. **Voltar para QR Code** é sempre a saída.
 - **Formato aceito (Express e código de conexão)**: de 10 a 15 dígitos incluindo o DDI (exemplo: `+55 11 90000-0001`). A Kinbox remove qualquer caractere que não seja dígito antes de validar.
 - **Clássica**: a Kinbox só exige que o número seja preenchido; não confere a quantidade de dígitos.
 - **DDI e número fixo**: o código não restringe o DDI nem diferencia número fixo de celular; o número precisa ter uma conta de WhatsApp ativa para fazer o pareamento.
@@ -50,7 +51,7 @@ Detalhes técnicos de referência da página humana "Conectar o WhatsApp pelo QR
 | Tentativa de ler QR enquanto a Clássica ainda cria | `"Seu ambiente está sendo criado, em até 10 minutos ele estará disponível."` |
 | Já existe canal ativo com o número (Express) | `"Este canal já está ativo; verifique antes de tentar novamente"` |
 | Canal do número em criação ou com criação inconclusiva (Express) | `"Este canal está em processamento ou possui criação inconclusiva; verifique antes de tentar novamente"` |
-| Já existe canal ativo com o número (Clássica) | `"Já existe um canal ativo com esse número [ID]"` |
+| Já existe canal ativo com o número (Clássica). A checagem vale também para canal ativo com o mesmo número em **outro workspace**: nesse caso o canal não aparece na lista da pessoa | `"Já existe um canal ativo com esse número [ID]"` |
 
 ## Número já usado no workspace
 

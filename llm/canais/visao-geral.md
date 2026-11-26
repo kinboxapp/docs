@@ -63,7 +63,7 @@ No layout novo, os textos aparecem com Inicial Maiúscula em cada palavra por CS
 - **Número bloqueado**: ícone vermelho com a dica `"Seu canal foi possivelmente bloqueado pelo WhatsApp"`.
 - **Migração em andamento**: ícone de carregamento com a dica `"Em transferência de conversas"`.
 - **Aquecedor**: selo **Aquecendo** (`"Canal em aquecimento."`), visível apenas em workspaces com recursos em teste.
-- **Clássica antiga**: canal **Clássica** criado antes de 09/01/2023 exibe **Recomendado recriar canal** com a dica `'Canal desatualizado. Recomendado recriar. Vá no seu canal, clique em "ações" e em Recriar canal. Será necessário ler o QRCode novamente.'`
+- **Clássica antiga**: canal **Clássica** criado ou recriado pela última vez antes de 09/01/2023 (ou sem data de **Última vez recriado**) exibe **Recomendado recriar canal** com a dica `'Canal desatualizado. Recomendado recriar. Vá no seu canal, clique em "ações" e em Recriar canal. Será necessário ler o QRCode novamente.'`
 
 ## Filtro e exportação da lista
 
@@ -74,7 +74,10 @@ No layout novo, os textos aparecem com Inicial Maiúscula em cada palavra por CS
 
 - **Excluir** um canal de WhatsApp apenas desliga o canal (fica inativo e não apaga as conversas). Na conexão **Express**, a exclusão também remove o canal dos bots que o usavam.
 - Excluir um canal **Clássica** não tira o canal dos bots (diferente da **Express**); não prometa nada sobre bots depois de excluir um canal **Clássica**.
-- Criar novamente um canal com o **mesmo número** no mesmo workspace reaproveita o canal excluído: mantém o mesmo ID e traz as conversas antigas de volta, inclusive quando o canal excluído era **Clássica** e o novo canal é criado como **Express**.
+- Só no QR Code (**Express** ou **Clássica**): criar novamente um canal com o **mesmo número** no mesmo workspace reaproveita o canal excluído: mantém o mesmo ID e traz as conversas antigas de volta, inclusive quando o canal excluído era **Clássica** e o novo canal é criado como **Express**.
+
+- WhatsApp oficial: criar de novo com o mesmo número gera um canal novo (outro ID); as conversas do canal excluído não voltam para ele.
+- Excluir um canal **Express** cuja criação não terminou (status cru `pending_review` ou `error`) pode falhar com um erro: nesse caso, falar com o suporte com o ID do canal.
 
 ## Migrar conversas: o que não é migrado
 

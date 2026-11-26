@@ -10,7 +10,7 @@
  *     para achar seletores antes de escrever o item do manifesto
  *
  * Faz login no staging web, entra no workspace de documentação, abre a `url` de cada item, executa os
- * `passos`, borra os seletores de `mascarar`, recorta o seletor `alvo` e salva o WebP em `arquivo`.
+ * `passos`, cobre com tarja os seletores de `mascarar`, recorta o seletor `alvo` e salva o WebP em `arquivo`.
  */
 import { mkdir } from 'node:fs/promises'
 import { homedir } from 'node:os'
@@ -34,6 +34,8 @@ type Item = {
   mascarar?: string[]
   arquivo: string
   paginas?: string[]
+  /** Largura da janela (px) só para este item, para telas largas demais. Padrão: 1440. Abaixo de 768 o app usa o layout antigo. */
+  largura?: number
   /** Workspace onde o print é tirado. Padrão: o workspace de documentação. Outro workspace só para telas que ele não tem (ex.: WhatsApp), sempre com `mascarar`. */
   workspace?: string
 }
@@ -50,6 +52,8 @@ const CSS_ESTAVEL = `
   /* Sem animação, os modais do antd ficariam presos no estado inicial da entrada (invisíveis) */
   .ant-zoom-appear, .ant-zoom-appear-prepare, .ant-zoom-enter, .ant-zoom-enter-prepare,
   .ant-fade-appear, .ant-fade-appear-prepare, .ant-fade-enter, .ant-fade-enter-prepare { opacity: 1 !important; transform: none !important; }
+  /* Fundo branco atrás de modais: os cantos arredondados do recorte não mostram a tela de trás */
+  .ant-modal-mask { background: #fff !important; }
 `
 
 function argumentos() {
@@ -165,7 +169,7 @@ async function recorte(page: Page, alvo: string | string[]) {
   }
   const x = Math.max(0, Math.min(...caixas.map((c) => c.x)))
   const y = Math.max(0, Math.min(...caixas.map((c) => c.y)))
-  const direita = Math.min(VIEWPORT.width, Math.max(...caixas.map((c) => c.x + c.width)))
+  const direita = Math.min(page.viewportSize()?.width || VIEWPORT.width, Math.max(...caixas.map((c) => c.x + c.width)))
   const baixo = Math.min(VIEWPORT.height, Math.max(...caixas.map((c) => c.y + c.height)))
   return { x, y, width: direita - x, height: baixo - y }
 }
@@ -180,6 +184,7 @@ async function garantirWorkspace(page: Page, nome: string) {
 
 async function capturar(page: Page, conversor: Page, item: Item) {
   await garantirWorkspace(page, item.workspace || DOCS_WORKSPACE_NAME)
+  await page.setViewportSize({ width: item.largura || VIEWPORT.width, height: VIEWPORT.height })
   await page.goto(WEB_URL + item.url, { waitUntil: 'domcontentloaded' })
   await page.waitForLoadState('networkidle').catch(() => {})
   await page.addStyleTag({ content: CSS_ESTAVEL })
