@@ -112,6 +112,24 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Administração",
+            "icon": "gear",
+            "pages": [
+              {
+                "group": "Assinatura e cobrança",
+                "pages": [
+                  "docs/assinatura/visao-geral",
+                  "docs/assinatura/assinar-ou-mudar-plano",
+                  "docs/assinatura/adicionar-saldo",
+                  "docs/assinatura/alerta-de-saldo",
+                  "docs/assinatura/faturas",
+                  "docs/assinatura/cancelar",
+                  "docs/assinatura/assinatura-vencida"
+                ]
+              }
+            ]
           }
         ]
       },
@@ -481,26 +499,6 @@
       "destination": "/docs/conceitos/automacao-e-ia"
     },
     {
-      "source": "/docs/bot/aprendendo-a-usar-o-bot",
-      "destination": "/docs/bot/aprender-a-usar-o-bot"
-    },
-    {
-      "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",
-      "destination": "/docs/agente-de-ia/visao-geral"
-    },
-    {
-      "source": "/docs/bot/usando-campo-personalizado-json",
-      "destination": "/docs/bot/usar-campo-personalizado-em-json"
-    },
-    {
-      "source": "/docs/bot/usando-integracao-por-execucao-de-codigo",
-      "destination": "/docs/bot/usando-integracao-execucao-codigo"
-    },
-    {
-      "source": "/docs/usando-o-kinbox/aprendendo-a-usar-o-bot",
-      "destination": "/docs/bot/aprender-a-usar-o-bot"
-    },
-    {
       "source": "/docs/canais",
       "destination": "/docs/canais/visao-geral"
     },
@@ -655,6 +653,26 @@
     {
       "source": "/docs/conversas/clientes-contatos-e-organizacoes",
       "destination": "/docs/conceitos/contatos-e-negocios"
+    },
+    {
+      "source": "/docs/bot/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
+    },
+    {
+      "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",
+      "destination": "/docs/agente-de-ia/visao-geral"
+    },
+    {
+      "source": "/docs/bot/usando-campo-personalizado-json",
+      "destination": "/docs/bot/usar-campo-personalizado-em-json"
+    },
+    {
+      "source": "/docs/bot/usando-integracao-por-execucao-de-codigo",
+      "destination": "/docs/bot/usando-integracao-execucao-codigo"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
     }
   ]
 }

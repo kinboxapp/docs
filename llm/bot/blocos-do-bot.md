@@ -229,7 +229,7 @@ Dentro do bot, consomem saldo apenas:
 - **Transcrever áudio** no bloco **Menu**;
 - botão **Assistente Kin** nos blocos **Integração** (exige saldo acima de R$ 0,10).
 
-Os demais blocos não consomem saldo. Veja [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos).
+Os demais blocos não consomem saldo. Veja [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos). Para colocar saldo, veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo); para ser avisado antes de o saldo acabar, veja [Configurar o alerta de saldo](/docs/assinatura/alerta-de-saldo).
 
 ## Simulação × conversa real
 

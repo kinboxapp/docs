@@ -1,0 +1,87 @@
+---
+title: Faturas, boletos e nota fiscal
+description: Onde ver as faturas da assinatura, pegar a segunda via do boleto ou o Pix, baixar a nota fiscal e pagar de novo uma fatura recusada no cartão.
+keywords: [fatura, faturas, boleto, segunda via, código de barras, pix, nota fiscal, nf, comprovante, pagamento recusado, cartão recusado, tentar pagar novamente]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - web:src/pages/settings/billing/v2/Invoices.tsx
+  - web:src/pages/settings/billing/v2/UpcomingInvoiceAlert.tsx
+  - web:src/pages/settings/billing/v2/RetryPaymentModal.tsx
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/scheduler/NewPaymentScheduler.js
+codigo:
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - web:src/pages/settings/billing/v2/Invoices.tsx
+  - web:src/pages/settings/billing/v2/UpcomingInvoiceAlert.tsx
+  - web:src/pages/settings/billing/v2/RetryPaymentModal.tsx
+  - web:src/pages/settings/billing/v2/retryPayment.helper.ts
+  - web:src/pages/settings/billing/v2/PaymentErrorStatusTag.tsx
+  - web:src/pages/settings/billing/InvoicePrintV2.tsx
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/scheduler/NewPaymentScheduler.js
+verificado_em: 2026-11-26
+---
+
+Acompanhe as faturas da mensalidade do seu workspace, emita a segunda via do boleto ou do Pix, baixe a nota fiscal e tente pagar novamente quando uma cobrança no cartão for recusada.
+
+<Note>Só quem tem a permissão **Assinatura** (ou é o proprietário do workspace) vê esta página. No teste grátis, a seção **Faturas** não aparece.</Note>
+
+## Onde ficam
+
+Vá em **Configurações** → **Assinatura** e role até **Faturas**. A seção lista as 3 faturas de mensalidade mais recentes, com **Data de pagamento**, **Data de expiração**, valor e status. Para abrir uma fatura, passe o mouse na linha e clique em **Ver**.
+
+Clique em **Ver tudo** para abrir a página **Faturas**, onde você pode filtrar pelas abas **Tudo**, **Pago** e **Não pago**, pesquisar por ID e clicar na linha para abrir a fatura.
+
+A seção **Faturas** mostra apenas mensalidades da assinatura. Recargas de saldo ficam no **Histórico de recargas** e compras de SMS ficam no **Histórico SMS** (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
+
+## Status das faturas
+
+| Status | O que significa |
+| --- | --- |
+| **Pago** | Pagamento confirmado. |
+| **Não pago** | Fatura em aberto, aguardando pagamento. |
+| **Falha ao pagar** | A cobrança no cartão de crédito foi recusada. Clique no status para ver o erro retornado. |
+| **Cancelado** | Mensalidade cancelada porque o plano mudou ou a assinatura foi cancelada. Enquanto a assinatura está cancelada, toda fatura não paga aparece assim. |
+
+## Segunda via do boleto ou Pix
+
+Quando a fatura tem boleto, Pix, nota fiscal ou uma nova tentativa de pagamento, aparece o menu **...** na linha dela. Nele, escolha a opção da sua forma de pagamento:
+
+- **Boleto:** **Ver Boleto** abre o boleto; quando o boleto ainda não foi gerado, a opção é **Visualizar boleto**. **Copiar código do boleto** copia a linha digitável.
+- **Pix:** clique em **Ver QR code** para abrir o QR Code e copiar o código Pix.
+
+## Comprovante e nota fiscal
+
+- **Comprovante:** **Ver** (ao passar o mouse na linha) ou **Ver fatura** (no menu **...**) abre a fatura numa aba nova, com número, datas, período, método de pagamento, dados de cobrança e resumo. A fatura pode ser vista ou impressa pelo navegador; use como comprovante de pagamento só quando ela constar como **Pago**.
+- **Nota fiscal:** a opção **Baixar nota fiscal** aparece no menu **...** quando o PDF da nota estiver disponível. Quando não aparecer, fale com o suporte para pedir a nota fiscal.
+
+## Quando a fatura sai
+
+A fatura da mensalidade é gerada automaticamente **5 dias** antes da data em **Expira em** e enviada para os **E-mails de cobrança** cadastrados.
+
+- No **Cartão de crédito**, a cobrança é feita automaticamente no cartão da assinatura.
+- No **Boleto** e no **Pix**, enquanto a fatura do mês ainda não foi gerada, a seção **Faturas** pode mostrar o botão **Gerar boleto agora** (boleto) ou **Pagar agora** (Pix) para emitir antes. O botão só aparece com a assinatura **PRO** não cancelada, no período atual e sem fatura do período paga ou aguardando pagamento. Se ele não aparecer e a fatura não estiver na lista, fale com o suporte.
+
+Se a fatura não for paga até o vencimento, há 3 dias de carência; as restrições começam no 4º dia depois do vencimento (veja [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida)).
+
+Para trocar a forma de pagamento das próximas cobranças (por exemplo, mudar de boleto para cartão), fale com o suporte.
+
+## Pagamento recusado no cartão
+
+Quando uma cobrança no cartão falha, a Kinbox não tenta cobrar de novo sozinha. Quando a mensalidade mais recente está com **Falha ao pagar**, é do período atual e a assinatura **PRO** não cancelada está no cartão, aparece a opção de tentar de novo com o mesmo cartão ou com outro:
+
+<Steps>
+  <Step title="Confira o motivo da recusa">
+    Em **Configurações** → **Assinatura** → **Faturas**, clique no status **Falha ao pagar** para abrir a janela com o erro retornado pela cobrança.
+  </Step>
+  <Step title="Abra uma nova tentativa de pagamento">
+    No menu **...** da fatura, clique em **Tentar pagar novamente** (na página **Faturas**, também há o link **Pagar novamente** na coluna **Data de pagamento**). Se a opção não aparecer, fale com o suporte.
+  </Step>
+  <Step title="Escolha o cartão e confirme">
+    Na janela **Tentar pagar novamente**, selecione o cartão em **Cartão** (ou clique em **Adicionar novo cartão**) e clique no botão de pagar. Se o pagamento for aprovado, esse cartão passa a ser usado nas próximas cobranças.
+  </Step>
+</Steps>
+
+A fatura antiga continua listada como **Falha ao pagar** para histórico e uma nova entrada aparece na lista. Se a assinatura venceu após a falha, veja [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).

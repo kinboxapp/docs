@@ -115,7 +115,7 @@ async function run(kinbox) {
 - **No editor Código (Executar código):** grupo **Código** com **Analisar e corrigir**, **Explicar**, **Refatorar** e **Gerar código** (abre **Instruções** com o campo **O que você gostaria de fazer?**).
 - **No editor Json (Chamar endpoint):** grupo **JSON** com **Analisar e corrigir**, **Explicar** e **Gerar JSON** (sem **Refatorar**).
 - **Saída:** o resultado é exibido abaixo do editor na área **Resultado** e não substitui o conteúdo automaticamente.
-- **Saldo:** consome saldo da carteira (veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)). Quando o saldo está em R$ 0,10 ou menos, as opções ficam desativadas com a dica `(Pouco ou nenhum crédito restante)` e aparecem **Seus créditos acabaram** e **Comprar créditos** para qualquer membro. Ao clicar em **Comprar créditos**, quem tem a permissão **Assinatura** (ou o proprietário) vai para a tela de saldo; os demais veem `"Fale com um administrador para colocar créditos no ambiente."`.
+- **Saldo:** consome saldo da carteira (veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)). Quando o saldo está em R$ 0,10 ou menos, as opções ficam desativadas com a dica `(Pouco ou nenhum crédito restante)` e aparecem **Seus créditos acabaram** e **Comprar créditos** para qualquer membro. Ao clicar em **Comprar créditos**, quem tem a permissão **Assinatura** (ou o proprietário) vai para a tela de saldo (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)); os demais veem `"Fale com um administrador para colocar créditos no ambiente."`.
 
 ## Campo personalizado do tipo Json
 
