@@ -2766,6 +2766,86 @@
   paginas:
     - docs/canais/sms
 
+# Seção salas (Atendimento › Salas)
+#
+# As salas não têm rota: o botão @ do topo abre o painel. Dados do seed (etapa `salas`): sala pública "Avisos" com
+# mensagens fictícias, uma fixada, uma reação e uma resposta em thread, e a privada "Gerência". As mensagens saem em
+# nome da conta de teste (proprietária real): foto e nome do autor sempre com tarja.
+- id: salas-painel
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Avisos'
+    - esperar: '[data-room-message] >> text=A nova coleção'
+    # Sem o painel Membros e com Mensagens diretas recolhida: os membros fictícios do seed não aceitaram o convite
+    - clicar: 'aside.room-panel .h-16 button.room-icon-button'
+    - clicar: '.room-sidebar-scroll button:has-text("Mensagens diretas")'
+    - pausa: 800
+  alvo: '.rooms-drawer .ant-drawer-content'
+  mascarar:
+    - '.rooms-drawer figure'
+    - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
+  arquivo: images/ajuda/salas/painel-das-salas.webp
+  paginas:
+    - docs/salas/visao-geral
+
+- id: salas-nova-sala
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - esperar: '.room-sidebar-scroll >> text=Avisos'
+    - clicar: '.rooms-drawer button.room-icon-button >> nth=0'
+    - esperar: '.ant-modal-content >> text=Criar nova sala'
+    - digitar: { seletor: '.ant-modal-content input[type=text] >> nth=0', texto: 'Vendas' }
+    - digitar: { seletor: '.ant-modal-content textarea', texto: 'Metas, campanhas e dúvidas sobre pedidos' }
+    - clicar: '.ant-modal-content .ant-select:has-text("Pública")'
+    - clicar: '.ant-select-dropdown:not(.ant-select-dropdown-hidden) >> text=Privada'
+    - esperar: '.ant-modal-content >> text=Membros'
+    - pausa: 600
+  alvo: '.ant-modal-content'
+  mascarar:
+    - '.ant-modal-content .ant-select-multiple .ant-select-selection-item'
+  arquivo: images/ajuda/salas/nova-sala.webp
+  paginas:
+    - docs/salas/usar-salas
+
+- id: salas-acoes-mensagem
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Avisos'
+    - esperar: '[data-room-message] >> text=A nova coleção'
+    # Só a barra sobre a mensagem fixada: o menu ⋯ cobriria o texto das outras mensagens
+    - passar: '[data-room-message]:has-text("Bom dia, equipe")'
+    - pausa: 600
+  alvo:
+    - '[data-room-message]:has-text("Bom dia, equipe")'
+    - '[data-room-message]:has-text("Bom dia, equipe") .room-toolbar-button >> nth=0'
+    - '[data-room-message]:has-text("Bom dia, equipe") .room-toolbar-button >> nth=-1'
+  mascarar:
+    - '.rooms-drawer [data-room-message] figure'
+    - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
+  arquivo: images/ajuda/salas/acoes-da-mensagem.webp
+  paginas:
+    - docs/salas/usar-salas
+
+- id: salas-auditoria
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Auditoria'
+    - esperar: '.rooms-drawer >> text=sem marcar nada como lido'
+    - pausa: 600
+  # Recorte: do topo do painel até o aviso do centro, sem o branco abaixo e sem a seção Mensagens diretas
+  alvo:
+    - '.room-sidebar-scroll .room-list-item:has-text("Gerência")'
+    - '.rooms-drawer .ant-select'
+    - '.rooms-drawer >> text=sem marcar nada como lido'
+  mascarar: []
+  arquivo: images/ajuda/salas/auditoria.webp
+  paginas:
+    - docs/salas/auditar-mensagens-diretas
+
 # Seção cenarios (Automação e IA › Cenários)
 #
 # Os três cenários de exemplo vêm do seed (`bun seed.ts --so funil,bot,cenarios`) e ficam sempre desligados: nada roda

@@ -1328,5 +1328,55 @@
     "pergunta": "Dá para montar um cenário que publica stories no Instagram da loja todo dia de manhã?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Onde fica o chat interno para eu conversar com o pessoal da minha equipe?",
+    "esperado": [
+      "docs/salas/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Como crio uma sala privada só para os gerentes da loja?",
+    "esperado": [
+      "docs/salas/usar-salas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Se eu silenciar uma sala, ainda fico sabendo quando algum colega me marcar com @ lá?",
+    "esperado": [
+      "docs/salas/usar-salas",
+      "llm/salas/usar-salas"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O dono da empresa consegue ler as mensagens diretas que eu troco com um colega?",
+    "esperado": [
+      "docs/salas/auditar-mensagens-diretas",
+      "llm/faq/salas-cliente-ve"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Sumiu o botão das salas lá em cima, o que pode ter acontecido?",
+    "esperado": [
+      "docs/salas/usar-salas",
+      "docs/salas/visao-geral"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para usar as salas da equipe pelo aplicativo no celular?",
+    "esperado": [
+      "llm/faq/salas-no-celular"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para fazer chamada de vídeo com a equipe dentro das salas?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

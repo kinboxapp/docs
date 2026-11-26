@@ -446,6 +446,62 @@ async function garantirRespostasRapidas(api: Api) {
   log(`respostas rápidas: ${RESPOSTAS_RAPIDAS.length}`)
 }
 
+/**
+ * Salas (prints da seção salas): a sala pública "Avisos" com mensagens internas fictícias da equipe,
+ * uma fixada, uma com reação e uma resposta em thread, e a sala privada "Gerência". As mensagens
+ * saem em nome da conta de teste (dona do workspace): os prints mascaram nome e foto do autor.
+ * Salas são só da equipe: nada é enviado a contato. Cada sala é achada pelo nome e pela privacidade,
+ * e cada mensagem, fixação, reação e resposta só é criada se ainda faltar (rodar de novo não duplica).
+ */
+async function garantirSalas(api: Api) {
+  const salas = lista(await api.v0('GET', '/rooms'))
+  const acharSala = (name: string, privacy: string) => salas.find((r) => r.name === name && r.type !== 'dm' && (r.privacy || 'public') === privacy)
+  const eu = lista(await api.v0('GET', '/operators?limit=100')).find((o) => o.isOwner)
+  let avisos = acharSala('Avisos', 'public')
+  if (!avisos) {
+    avisos = await api.v0('POST', '/rooms', { name: 'Avisos', description: 'Comunicados para toda a equipe', privacy: 'public', color: '#3498db', memberIds: [] })
+  }
+  if (!acharSala('Gerência', 'private')) {
+    await api.v0('POST', '/rooms', { name: 'Gerência', description: 'Metas e escalas da semana', privacy: 'private', color: '#8e44ad', memberIds: eu ? [eu.id] : [] })
+  }
+  const avisosId = String(avisos.id || avisos._id)
+  const textos = [
+    'Bom dia, equipe! A partir de segunda, o atendimento de sábado vai até as 14h.',
+    'Lembrete: antes de encerrar o dia, confiram se ficou alguma conversa sem responsável.',
+    'A nova coleção de cafés especiais chega na quinta. As fotos já estão na pasta de produtos.',
+  ]
+  const resposta = 'Combinado. Vou atualizar as frases rápidas com os novos sabores.'
+  // Pagina o histórico (mais recentes primeiro) até achar todas as mensagens de exemplo ou chegar ao fim
+  const porPagina = 200
+  const acharExemplos = async () => {
+    const achadas = new Map<string, any>()
+    for (let offset = 0; ; offset += porPagina) {
+      const pagina = lista(await api.v3('GET', `/rooms/${avisosId}/messages?limit=${porPagina}&offset=${offset}`))
+      for (const m of pagina) if (!m.threadId && textos.includes(m.text) && !achadas.has(m.text)) achadas.set(m.text, m)
+      if (achadas.size === textos.length || pagina.length < porPagina) return achadas
+    }
+  }
+  let mensagens = await acharExemplos()
+  for (const text of textos) {
+    if (!mensagens.has(text)) await api.v0('POST', `/rooms/${avisosId}/messages`, { text, type: 'text' })
+  }
+  mensagens = await acharExemplos()
+  const [primeira, , terceira] = textos.map((text) => mensagens.get(text))
+  const idDe = (m: any) => String(m._id || m.id)
+  if (!primeira.pinnedAt) await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(primeira)}/pin`, {})
+  const meuId = String(eu?.id ?? '')
+  const joinha = (primeira.reactions || []).find((r: any) => r.emoji === '👍')
+  // A rota de reação alterna: só reage se a conta ainda não reagiu com 👍
+  if (!joinha || (meuId && !(joinha.operatorIds || []).map(String).includes(meuId))) {
+    await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(primeira)}/reactions`, { emoji: '👍' })
+  }
+  const thread = await api.v3('GET', `/rooms/${avisosId}/messages/${idDe(terceira)}/thread`)
+  if (!lista(thread?.replies ?? thread).some((m) => m.text === resposta)) {
+    await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(terceira)}/thread`, { text: resposta, type: 'text' })
+  }
+  log(`salas: "Avisos" (pública, ${textos.length} mensagens, fixada, reação e resposta) e "Gerência" (privada)`)
+}
+
 /** Agente de IA criado pelo mesmo caminho do onboarding. Nasce desligado e sem canal. */
 async function garantirAgente(api: Api) {
   const existente = lista(await api.v3('GET', '/agents')).find((a) => a.name === AGENTE.name)
@@ -796,6 +852,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['widget de exemplo', () => garantirWidgetExemplo(api)],
   ['clientes', () => garantirClientes(api, contatoIds)],
   ['crm', () => garantirCrm(api, contatoIds)],
+  ['salas', () => garantirSalas(api)],
   ['cenarios', () => garantirCenarios(api, canal)],
 ]
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
