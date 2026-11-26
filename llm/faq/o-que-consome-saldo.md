@@ -38,10 +38,11 @@ O consumo do saldo se divide nestas categorias:
 - **Análises** (recursos do **Copiloto**, quando ligados): **Análise de sentimento**, **Lead score**, **Classificação de intenção**, **Cliente preso no bot**, **Sugestão de retorno**, **Aviso ao resolver** e **Não reabrir por agradecimento**.
 - **Voz e áudio**: transcrição de áudios, ligações do WhatsApp (minutos iniciados, gravação e atendimento por IA; ligações não atendidas não cobram), transcrição e resumo de chamadas de voz.
 - **Outros**: ligações por telefone (VoIP), minutos excedentes do plano de ligações do WhatsApp e geração de FAQ a partir das conversas.
+- **Mensagens**: o relatório **Saldo** tem essa sexta categoria, para mensagens cobradas por envio. Hoje, as mensagens de template do WhatsApp oficial não descontam da carteira, então ela costuma ficar vazia.
 
 **O que não gasta saldo**: envios de SMS (usam **Créditos de SMS**), templates do WhatsApp oficial (não descontam da carteira), bots sem o bloco **Agente de IA**, **Automações**, **Cenários** e **Atribuição automática**.
 
-Quando o saldo fica muito baixo, perto de zero, o agente de IA para de responder (no teste do agente aparece **Saldo Insuficiente**). O copiloto passa a mostrar **Seus créditos acabaram** (nas telas do copiloto, "créditos" é o saldo da carteira) e as ligações por telefone são encerradas se o saldo acabar. Em agentes gerenciados por um parceiro, o consumo pode sair da carteira do parceiro em vez da carteira do workspace.
+Quando o saldo fica muito baixo, perto de zero, o agente de IA para de responder (no teste do agente aparece **Saldo Insuficiente** e "O agente não respondeu porque o saldo acabou. Faça uma recarga para continuar."). O copiloto passa a mostrar **Seus créditos acabaram** (nas telas do copiloto, "créditos" é o saldo da carteira) e as ligações por telefone são encerradas se o saldo acabar. Em agentes gerenciados por um parceiro, o consumo pode sair da carteira do parceiro em vez da carteira do workspace.
 
 Para acompanhar os gastos, consulte **Relatórios** → **Saldo** (por categoria) e o **Extrato do saldo**. A recarga é feita por **Pix** em **Configurações** → **Assinatura** → **Carteira** → **Adicionar saldo** (**Assinatura** só aparece para quem tem acesso ao financeiro).
 

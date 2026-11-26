@@ -150,7 +150,7 @@
     "tipo": "conceito"
   },
   {
-    "pergunta": "Quero que um atendente veja as conversas do grupo dele e as que forem atribuídas a ele, e nada de outros grupos. Qual acesso escolho?",
+    "pergunta": "Quero que um atendente veja as conversas do grupo dele e as atribuídas a ele, mesmo em outro grupo, mas não as demais de outros grupos. Qual acesso escolho?",
     "esperado": [
       "docs/conceitos/workspace-membros-e-papeis"
     ],
