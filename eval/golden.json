@@ -90,5 +90,50 @@
     "pergunta": "Como faço backup das conversas do WhatsApp no Google Drive do meu celular?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como conecto meu número na API oficial do WhatsApp pela Kinbox?",
+    "esperado": [
+      "docs/canais/whatsapp-api-oficial-padrao",
+      "llm/canais/whatsapp-api-oficial-padrao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para continuar usando o WhatsApp Business no celular depois de ligar o número na API oficial?",
+    "esperado": [
+      "docs/canais/whatsapp-api-oficial-coexistente",
+      "llm/canais/whatsapp-api-oficial-coexistente"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que no WhatsApp oficial o campo de digitar sumiu e só aparece o botão de enviar template?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas",
+      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "O canal oficial mostra um aviso amarelo dizendo que tem mais de um app conectado. O que significa?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns",
+      "llm/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A Kinbox cobra por cada template enviado no WhatsApp oficial?",
+    "esperado": [
+      "llm/faq/whatsapp-oficial-preco-das-mensagens",
+      "docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como cadastro o cartão de crédito no Gerenciador de Anúncios do Facebook para impulsionar posts?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

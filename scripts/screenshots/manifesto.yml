@@ -126,3 +126,72 @@
   arquivo: images/ajuda/whatsapp/conectar-com-numero-de-telefone.webp
   paginas:
     - docs/canais/conectar-whatsapp-app
+
+# Seção whatsapp-oficial (Canais › WhatsApp › WhatsApp oficial)
+
+# Tela "API Oficial" antes de abrir a janela da Meta, no workspace de documentação. Não clica no botão:
+# a janela da Meta é de terceiros e criaria um canal real.
+- id: whatsapp-oficial-conectar
+  url: /settings/channels/new/whatsapp/embedded
+  passos:
+    - esperar: '.g_settings_simple_page button:has-text("Conectar WhatsApp")'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/whatsapp-oficial/conectar-api-oficial.webp
+  paginas:
+    - docs/canais/whatsapp-api-oficial-padrao
+    - docs/canais/whatsapp-api-oficial-coexistente
+
+# Aviso amarelo da verificação na Meta num canal oficial de teste do workspace de testes (id 1).
+# Só o aviso entra no recorte; título, número, IDs e token do canal ficam borrados e fora do recorte.
+- id: whatsapp-oficial-aviso-canal
+  workspace: Kinbox
+  url: /settings/channels/2
+  passos:
+    - esperar: '.ant-drawer-body .ant-alert'
+    - pausa: 1000
+  alvo: '.ant-drawer-body .ant-alert'
+  mascarar:
+    - '.ant-drawer-title'
+    - '.ant-drawer-body #description'
+    - '.ant-drawer-body #phone'
+    - '.ant-drawer-body #waba_id'
+    - '.ant-drawer-body #identifier'
+    - '.ant-drawer-body #hashIdentifier'
+  arquivo: images/ajuda/whatsapp-oficial/aviso-mais-de-um-app.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns
+
+# Editor de uma conversa do canal oficial de teste (workspace 1) com a janela aberta: contador no canto.
+# Só o editor entra no recorte (sem nome, número nem mensagens do contato). A conversa precisa ter
+# recebido mensagem do contato nas últimas 24 h; se a janela fechar, troque o id por outra conversa aberta.
+- id: whatsapp-oficial-janela-aberta
+  workspace: Kinbox
+  url: /inbox/all/3313
+  passos:
+    - esperar: '.g_chat_countdown'
+    - pausa: 1000
+  alvo: '.chat-actions-box'
+  mascarar:
+    - '.chat-actions-box .ant-avatar-group'
+  arquivo: images/ajuda/whatsapp-oficial/janela-aberta-contador.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas
+
+# Rodapé de uma conversa do canal oficial de teste (workspace 1) com a janela de 24 h encerrada.
+# Só os dois botões entram no recorte.
+- id: whatsapp-oficial-janela-encerrada
+  workspace: Kinbox
+  url: /inbox/all/3418
+  passos:
+    - esperar: '.finished-chat-footer:visible >> text=Enviar nota de time'
+    - pausa: 1000
+  alvo: '.finished-chat-footer:visible'
+  mascarar:
+    - '.finished-chat-footer .ant-avatar-group'
+  arquivo: images/ajuda/whatsapp-oficial/janela-encerrada.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas

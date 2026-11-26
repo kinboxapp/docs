@@ -34,6 +34,17 @@
                       "docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte",
                       "docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado"
                     ]
+                  },
+                  {
+                    "group": "WhatsApp oficial",
+                    "pages": [
+                      "docs/canais/requisitos-para-se-ter-uma-api-oficial",
+                      "docs/canais/whatsapp-api-oficial-padrao",
+                      "docs/canais/whatsapp-api-oficial-coexistente",
+                      "docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas",
+                      "docs/canais/whatsapp/whatsapp-cloud-api/configuracoes",
+                      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+                    ]
                   }
                 ]
               }
@@ -523,10 +534,6 @@
       "destination": "/docs/canais/visao-geral"
     },
     {
-      "source": "/docs/canais/requisitos-para-se-ter-uma-api-oficial",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
       "source": "/docs/canais/sms",
       "destination": "/docs/canais/visao-geral"
     },
@@ -535,16 +542,36 @@
       "destination": "/docs/canais/visao-geral"
     },
     {
-      "source": "/docs/canais/whatsapp-api-oficial-coexistente",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
-      "source": "/docs/canais/whatsapp-api-oficial-padrao",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
       "source": "/docs/canais/widget",
       "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/inscricao-para-uma-conta-comercial-oficial",
+      "destination": "/docs/canais/whatsapp-api-oficial-padrao"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/solicite-acesso-a-api-whatsapp-por-meio-de-nosso-parceiro-de-negocios",
+      "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/status-do-meu-canal-whatsapp-business",
+      "destination": "/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/usando-um-numero-existente-para-whatsapp-business",
+      "destination": "/docs/canais/whatsapp-api-oficial-coexistente"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/verifique-sua-conta-do-facebook-business-para-obter-acesso-a-mensagens-ilimitadas-do-whatsapp",
+      "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-cloud-api/instalacao",
+      "destination": "/docs/canais/whatsapp-api-oficial-padrao"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+      "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
     }
   ]
 }
