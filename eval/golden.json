@@ -1020,6 +1020,109 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Quero receber os e-mails do contato da empresa na caixa de entrada da Kinbox, qual tipo de conexão uso?",
+    "esperado": [
+      "docs/canais/e-mail/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Coloquei host, porta e senha do IMAP e aparece erro ao testar conexão, o que confiro?",
+    "esperado": [
+      "docs/canais/e-mail/por-imap",
+      "docs/canais/e-mail/problemas-comuns",
+      "llm/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Onde pego o Tenant ID e o Client Secret para ligar o Outlook da empresa?",
+    "esperado": [
+      "docs/canais/e-mail/outlook"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Ativei o encaminhamento do Gmail, mas a resposta chega ao cliente como via Kinbox, é normal?",
+    "esperado": [
+      "docs/canais/e-mail/por-encaminhamento",
+      "docs/canais/e-mail/problemas-comuns",
+      "llm/faq/email-spam"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Os e-mails levam alguns minutos para entrar na Kinbox, por quê?",
+    "esperado": [
+      "llm/faq/email-atraso",
+      "docs/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para conectar a caixa de e-mail pela Kinbox usando POP3?",
+    "esperado": [
+      "llm/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo saber se o cliente abriu o e-mail que respondi pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para a IA corrigir o português da minha mensagem antes de mandar para o cliente?",
+    "esperado": [
+      "docs/copiloto/usar-o-copiloto-de-ia",
+      "llm/faq/copiloto-assistente-kin"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero criar um botão de IA que reescreva o texto no jeito da minha empresa, dá para montar um comando próprio?",
+    "esperado": [
+      "docs/copiloto/comandos-personalizados"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para a IA dar uma nota de 0 a 10 para cada atendimento resolvido?",
+    "esperado": [
+      "llm/faq/ia-avalia-atendimento",
+      "docs/copiloto/analises-de-ia"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Meu saldo está caindo e não liguei nada, o copiloto cobra quando clico em Sugestões?",
+    "esperado": [
+      "llm/faq/copiloto-custo",
+      "llm/copiloto/configuracoes-de-copiloto"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Posso mandar um arquivo .md para a base de conhecimento do bot?",
+    "esperado": [
+      "llm/faq/base-de-conhecimento-markdown",
+      "docs/copiloto/base-de-conhecimento"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como eu sei quais clientes estão irritados sem precisar abrir e ler cada conversa?",
+    "esperado": [
+      "docs/copiloto/analises-de-ia"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O copiloto consegue publicar posts nas redes sociais da minha loja?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Arrasto o card para a próxima coluna do funil e ele volta sozinho, o que está travando?",
     "esperado": [
       "llm/faq/funil-negociacao-nao-muda-de-etapa",

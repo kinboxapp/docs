@@ -96,7 +96,8 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | **Não pode sincronizar histórico** | Impede usar **Sincronizar histórico** (disponível apenas no WhatsApp por QR Code na conexão Clássica). | — |
 | **Não pode exportar para CSV** | Desativa **Exportar para CSV** na conversa e impede **Exportar conversas** em lote. | "Seu perfil não pode exportar conversas." |
 | **Não pode transcrever áudio** | O membro não transcreve áudios. | — |
-| **Esconder notas do contato**, **Esconder informações do contato**, **Esconder informações da sessão**, **Esconder linha do tempo**, **Esconder sentimento do cliente**, **Esconder lead score**, **Esconder informações de integração** | Ocultam as respectivas seções do painel lateral da conversa. | — |
+| **Esconder notas do contato**, **Esconder informações do contato**, **Esconder informações da sessão**, **Esconder linha do tempo**, **Esconder informações de integração** | Ocultam as respectivas seções do painel lateral da conversa. | — |
+| **Esconder sentimento do cliente**, **Esconder lead score** | Escondem do membro o sentimento e o lead score lidos pelo copiloto (veja [Analisar conversas com IA](/docs/copiloto/analises-de-ia)). | — |
 
 ## Regras de atribuição, grupo, bot e transferência
 

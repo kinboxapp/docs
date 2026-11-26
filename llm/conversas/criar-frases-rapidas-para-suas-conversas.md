@@ -68,7 +68,7 @@ Referência complementar de [Criar frases rápidas](/docs/conversas/criar-frases
   - Frase com anexos: abre a janela de envio de arquivos com os anexos carregados.
   - Frase de voz: abre a janela de áudio com a gravação pronta para envio.
 - **Desligar o atalho `/`:** engrenagem **Configurações das Frases Rápidas** → **Habilitar atalho para frases rápidas ("/")** → **Salvar** (aviso "Salvo"). Preferência salva por navegador.
-- **Sugestão do copiloto:** com **Sugerir frases rápidas** ativado nas configurações do copiloto, exibe até 3 frases sugeridas no topo da janela **Respostas Rápidas**. Só aparece quando a sugestão automática do copiloto está ligada, a conversa está no escopo do copiloto e o workspace tem saldo na carteira; consome saldo da carteira uma vez por mensagem nova.
+- **Sugestão do copiloto:** com **Sugerir frases rápidas** ativado nas configurações do copiloto, exibe até 3 frases sugeridas no topo da janela **Respostas Rápidas**. Só aparece quando a sugestão automática do copiloto está ligada, a conversa está no escopo do copiloto e o workspace tem saldo na carteira; consome saldo da carteira uma vez por mensagem nova (veja [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia)).
 
 ## Chaves reservadas (variáveis)
 
