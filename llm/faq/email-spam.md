@@ -5,7 +5,7 @@ keywords: [email spam, cair no spam, entregabilidade, spf, dkim, autenticação 
 publico: llm
 tipo: faq
 fontes:
-  - api-v0:server/modules/mailgun/**
+  - api-v0:server/modules/**
   - api-v0:server/controllers/MailController.js
   - api-v0:server/modules/mail/smtp-client.js
 codigo:
@@ -13,7 +13,7 @@ codigo:
   - web:src/pages/settings/channels/email/**
   - api-v0:server/controllers/MailController.js
   - api-v0:server/modules/mail/**
-  - api-v0:server/modules/mailgun/**
+  - api-v0:server/modules/**
   - api-v0:server/modules/scheduler/MailScheduler.js
   - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26

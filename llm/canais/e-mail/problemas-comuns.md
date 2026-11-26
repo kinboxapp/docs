@@ -10,7 +10,7 @@ fontes:
   - api-v0:server/modules/mail/imap-client.js
   - api-v0:server/modules/accessRestriction/rules.js
   - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
-  - api-v0:server/modules/mailgun/**
+  - api-v0:server/modules/**
   - api-v0:server/modules/mail/smtp-client.js
   - api-v0:server/controllers/IntegrationsController.js
 codigo:
@@ -19,7 +19,7 @@ codigo:
   - api-v0:server/controllers/MailController.js
   - api-v0:server/controllers/IntegrationsController.js
   - api-v0:server/modules/mail/**
-  - api-v0:server/modules/mailgun/**
+  - api-v0:server/modules/**
   - api-v0:server/modules/scheduler/MailScheduler.js
   - api-v0:server/modules/accessRestriction/**
   - api-v0:server/modules/scheduler/schedulerManager.js
