@@ -1,7 +1,7 @@
 ---
 title: Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)
 description: Como ligar o Claude, o ChatGPT, o Codex, o Cursor ou outro assistente de IA ao seu workspace pelo MCP, escolher as permissões, acompanhar e revogar as conexões.
-keywords: [mcp, claude, chatgpt, codex, cursor, conector, servidor mcp, model context protocol, assistente de ia, conectar ia, conexões ativas, revogar conexão, oauth]
+keywords: [mcp, claude, chatgpt, codex, cursor, conector, servidor mcp, model context protocol, assistente de ia, conectar ia, conexões ativas, revogar conexão, oauth, privacidade, exemplos de pedidos, ferramenta não aparece]
 publico: humano
 tipo: guia
 fontes:
@@ -11,6 +11,7 @@ fontes:
   - api:src/modules/mcp/oauth/mcp-oauth.service.ts
   - api:src/modules/mcp/mcp-server.factory.ts
   - api:src/modules/mcp/mcp-rate-limit.service.ts
+  - api:src/modules/mcp/mcp-tool.registry.ts
 codigo:
   - web:src/pages/settings/mcp/**
   - web:src/pages/oauth/McpConsent.tsx
@@ -163,6 +164,18 @@ A IA só enxerga as ferramentas das permissões que você marcou, e cada ação 
 
 Ações que não têm volta (como excluir ou remover algo) só acontecem depois que a IA confirma com você. A IA não cancela nem troca o plano, não envia mensagens em conversas resolvidas há mais de 30 dias e, no WhatsApp oficial fora da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas), envia apenas templates aprovados. Há também limites de uso para chamadas e envios.
 
+## Exemplos de pedidos
+
+Depois de conectar, peça em linguagem natural no aplicativo de IA. Alguns exemplos (nomes fictícios):
+
+- "Resuma as conversas abertas de hoje."
+- "Encontre o contato Ana Souza e resuma o histórico de conversas dela."
+- "Liste as negociações abertas no funil Vendas."
+- "Qual foi o tempo médio de primeira resposta de cada membro nesta semana?"
+- "Crie uma tarefa para amanhã às 10h na negociação Loja Exemplo."
+
+Os quatro primeiros só consultam dados e funcionam com **Ver conversas, contatos e negócios**. O último precisa de **Alterar conversas, contatos e negócios**. Em todos, a IA só vê e faz o que o papel de quem autorizou permite.
+
 ## Conexões ativas e revogar
 
 Em **Configurações** → **Integrações** → **MCP**, abra o cartão **Conexões ativas** para ver as conexões OAuth de todo o workspace, com **Aplicativo**, **Permissões** (**Leitura**, **Escrita** e **Envio**), **Conectado em**, **Ultimo uso** e **Revogar**. Use **Atualizar** para recarregar a lista.
@@ -185,9 +198,17 @@ Para aplicativos sem suporte a OAuth, use a aba **Outros** com um token criado e
 
 Cada chamada bem-sucedida da IA pelo MCP fica registrada em **Configurações** → **Auditoria** (exige a permissão **Auditoria**) em nome do membro que conectou, na entidade **MCP** (veja [Ver o histórico de alterações (Auditoria)](/docs/administracao/auditoria)).
 
+## Privacidade
+
+O que o assistente lê no workspace pelo MCP (conversas, contatos, negociações e o que mais as permissões liberarem) é enviado ao provedor do aplicativo de IA que você conectou e segue a política de privacidade desse provedor. Confira essa política antes de conectar.
+
+Na Kinbox, o tratamento dos dados segue a [Política de Privacidade](https://www.kinbox.com.br/privacy/) e os [Termos de Uso](https://www.kinbox.com.br/terms/). Para cortar o acesso do aplicativo, revogue a conexão em **Conexões ativas**.
+
 ## Problemas comuns
 
 - **A opção MCP não aparece no menu.** Você precisa da permissão **Integrações** (ou ser o proprietário do workspace) para abrir a tela **MCP**.
 - **Aparece "Autorização indisponível" ou pedido expirado.** O pedido de autorização vale 15 minutos e só pode ser respondido uma vez. Volte ao aplicativo de IA e inicie a conexão novamente.
+- **A ferramenta não aparece no assistente.** O assistente só recebe as ferramentas das permissões marcadas na tela **Autorizar acesso**. Por exemplo, sem **Enviar mensagens aos seus clientes**, ele não consegue responder conversas. Para incluir uma permissão, revogue a conexão em **Conexões ativas** e conecte de novo marcando a opção. Se a ferramenta aparece mas a IA diz que "Seu papel não permite usar...", falta a permissão no seu papel: peça a quem gerencia os papéis do workspace para ajustá-lo (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+- **Parou de funcionar depois de revogar.** Ao clicar em **Revogar**, o aplicativo perde o acesso de vez, e a conexão não volta sozinha. O mesmo acontece quando ela expira depois de 30 dias sem renovar. Para usar de novo, refaça o passo a passo no aplicativo de IA (se ele ainda mostrar a Kinbox, desconecte ou remova o conector antes) e autorize outra vez.
 - **A IA conectou no workspace errado.** A autorização usa sempre o workspace aberto no navegador naquele momento. Revogue a conexão em **Conexões ativas**, troque para o workspace certo na Kinbox e refaça a conexão.
 - **A IA recusa executar ações por restrições do papel.** Se o seu papel tiver restrições de visualização ou de envio, o MCP pode recusar o uso e pedir que o proprietário do workspace use o MCP ou ajuste o seu papel.
