@@ -11,6 +11,12 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Novidades",
+        "pages": [
+          "novidades"
+        ]
+      },
+      {
         "tab": "API reference",
         "groups": [
           {
@@ -340,6 +346,14 @@
     {
       "source": "/api-reference/auto/v1tags/:slug*",
       "destination": "/api-reference/tags/:slug*"
+    },
+    {
+      "source": "/changelog",
+      "destination": "/novidades"
+    },
+    {
+      "source": "/api",
+      "destination": "/api-reference/authentication"
     }
   ]
 }
