@@ -27,7 +27,7 @@ Num worktree novo, rode o `bun install` de novo: o `node_modules` não vem junto
 bun seed.ts
 ```
 
-O seed encontra o workspace pelo nome e só cria o que falta, então pode rodar quantas vezes quiser. Para rodar só algumas etapas (as do começo — workspace, widget, tags, conversas e contatos — rodam sempre), use `bun seed.ts --so funil,membros,crm` com os nomes da lista `etapas` do fim do arquivo (nome desconhecido ou `--so` sem lista para o seed com erro). A etapa `crm` depende de `funil` e `membros`: sem os membros, ela falha em vez de deixar os negócios com o dono real da conta. Ele cria:
+O seed encontra o workspace pelo nome e só cria o que falta, então pode rodar quantas vezes quiser. Para rodar só algumas etapas (as do começo — workspace, widget, tags, conversas e contatos — rodam sempre), use `bun seed.ts --so funil,membros,crm` com os nomes da lista `etapas` do fim do arquivo (nome desconhecido ou `--so` sem lista para o seed com erro). A etapa `marketing` só roda quando pedida em `--so` (fica fora da execução padrão). A etapa `crm` depende de `funil` e `membros`: sem os membros, ela falha em vez de deixar os negócios com o dono real da conta. Ele cria:
 
 - o workspace `Loja Exemplo`, com o onboarding guiado marcado como pulado;
 - um canal de widget (`Chat do site`);

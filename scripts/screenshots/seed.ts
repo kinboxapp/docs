@@ -940,6 +940,24 @@ async function garantirDashboard(api: Api) {
   log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length} snapshot(s)`)
 }
 
+// Seção marketing: cadastra o site fictício "Site da loja" (https://www.example.com) com a chave "Chave do site".
+// Os apps Meta Ads e Tracking são ligados pela tela (Configurações → Integrações → Apps → Habilitar integração → Salvar);
+// o Google Ads fica desligado, para o print da divulgação. Nada é conectado à Meta: o site é fictício e o seed não
+// instala o snippet. Só roda com `--so marketing` (fora da execução padrão).
+async function garantirMarketing(api: Api) {
+  const integracoes = lista(await api.v0('GET', '/integrations'))
+  const desligados = ['meta_ads', 'tracking'].filter((type) => !integracoes.find((i) => i.type === type)?.isEnabled)
+  if (desligados.length) log(`marketing: ligue pela tela os apps ${desligados.join(', ')} antes de capturar`)
+  if (desligados.includes('tracking')) return
+  const origem = 'https://www.example.com'
+  const visao = await api.v3('GET', '/tracking/overview')
+  if ((visao?.domains || []).some((d: any) => d.origin === origem)) return log('marketing: site de Tracking já existe')
+  const chaves = lista(await api.v3('GET', '/tracking/site-keys'))
+  const chave = chaves.find((k: any) => k.name === 'Chave do site' && k.isActive && k.siteKey)
+  const siteKey = chave?.siteKey || (await api.v3('POST', '/tracking/site-keys', { name: 'Chave do site' })).plainToken
+  await api.v3('POST', '/tracking/domains', { name: 'Site da loja', origin: origem, siteKey })
+  log('marketing: site "Site da loja" criado')
+
 /**
  * Tarefas de exemplo (seção `tarefas-e-metas`): cinco tarefas com responsáveis fictícios, vínculos com negócios
  * e contatos do seed, prioridades e prazos relativos a hoje, e uma tarefa com subtarefas. Nenhuma é do tipo
@@ -1079,6 +1097,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['salas', () => garantirSalas(api)],
   ['cenarios', () => garantirCenarios(api, canal)],
   ['dashboard', () => garantirDashboard(api)],
+  ['marketing', () => garantirMarketing(api)],
   ['tarefas', () => garantirTarefas(api, contatoIds)],
   ['metas', () => garantirMetas(api)],
 ]
@@ -1088,8 +1107,9 @@ const etapas: [string, () => Promise<unknown>][] = [
 // `tarefas` e `metas` ficam fora da execução padrão (só rodam com `--so`) porque mudam prints de outras seções
 // (`contatos-perfil`, `funis-quadro` e o cartão Tarefas do dashboard). Dependem de `funil`, `membros` e `crm`
 // (`metas` também remarca como ganho o negócio "Presente de aniversário"): rode `--so funil,membros,crm,tarefas,metas`.
-const SO_COM_SO = ['tarefas', 'metas']
 const nomesEtapas = etapas.map(([nome]) => nome)
+/** Etapas que só rodam quando pedidas em `--so` (ficam fora da execução padrão). */
+const SO_SOB_PEDIDO = ['marketing', 'tarefas', 'metas']
 const soArg = process.argv.indexOf('--so')
 let so: string[] | undefined
 if (soArg > -1) {
@@ -1110,7 +1130,7 @@ await garantirConversas(api, canal, tagIds)
 const contatoIds = await garantirContatos(api)
 
 for (const [nome, etapa] of etapas) {
-  if (so ? !so.includes(nome) : SO_COM_SO.includes(nome)) continue
+  if (so ? !so.includes(nome) : SO_SOB_PEDIDO.includes(nome)) continue
   try {
     await etapa()
   } catch (e) {
