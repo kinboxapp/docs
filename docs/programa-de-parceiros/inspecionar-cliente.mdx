@@ -1,0 +1,69 @@
+---
+title: Inspecionar o workspace de um cliente
+description: Como o parceiro abre o workspace de um cliente da carteira para dar suporte, a diferença entre inspeção básica e avançada e o que muda quando o cliente restringe as conversas.
+keywords: [inspecionar ambiente, inspecionar cliente, acessar workspace do cliente, suporte ao cliente, entrar no ambiente do cliente, inspeção básica, inspeção avançada, conversas restritas pelo cliente, resetar senha, parceiro mcp]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/partner/PartnerWorkspaces/index.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - web:src/pages/settings/index.tsx
+  - web:src/components/feedback/PartnerConversationsBlocked.tsx
+  - web:src/lib/partner-conversations.ts
+  - api:src/modules/mcp/tools/partner.tools.ts
+codigo:
+  - web:src/pages/partner/PartnerWorkspaces/**
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - web:src/components/feedback/PartnerConversationsBlocked.tsx
+  - web:src/lib/partner-conversations.ts
+  - api:src/modules/mcp/tools/partner.tools.ts
+verificado_em: 2026-11-26
+---
+
+A inspeção permite abrir o workspace de um cliente (na tela, **ambiente**) da sua carteira para ajudar em configurações e suporte.
+
+<Note>
+  Quem pode: apenas parceiros que cuidam dos clientes, nos clientes ligados a esse tipo de vínculo, com a permissão **Pode inspecionar clientes (Básico)** ou **Pode inspecionar clientes (Avançado)** no papel. Se o item **Inspecionar Ambiente** não aparecer no menu do cliente, a sua parceria é só de indicação ou o seu papel não tem a permissão de inspecionar. Se o seu papel tiver **Limitar ambientes que pode visualizar**, você vê apenas os clientes selecionados.
+</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra o workspace do cliente">
+    Vá em **Parceria** → **Clientes**, abra o menu **⋯** do cliente e clique em **Inspecionar Ambiente**, se a opção aparecer no menu do cliente.
+  </Step>
+  <Step title="Confira o workspace no topo antes de alterar">
+    O workspace do cliente abre em uma nova aba do navegador, enquanto o painel **Parceria** continua aberto na aba original. Não há faixa de aviso dizendo que você está inspecionando, então confira o nome do workspace no topo da tela antes de mudar algo.
+  </Step>
+  <Step title="Feche a aba para sair">
+    Para sair, feche a aba do cliente.
+  </Step>
+</Steps>
+
+## Básico e avançado
+
+As duas permissões de inspeção mudam o acesso à tela **Assinatura** do cliente (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes) e [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)):
+
+| Permissão no papel | O que você acessa na inspeção |
+| --- | --- |
+| **Pode inspecionar clientes (Básico)** | Acessa o workspace do cliente, sem ver informações de **Assinatura**. |
+| **Pode inspecionar clientes (Avançado)** | Acessa o workspace do cliente e pode ver e alterar informações de **Assinatura**. |
+
+O restante do acesso acompanha o que o cliente permite no próprio workspace.
+
+## Quando o cliente restringe as conversas
+
+O cliente pode desligar a opção **Permitir que o parceiro veja as conversas** no workspace dele. Quando isso acontece, aparece um cadeado ao lado do nome dele na lista **Clientes** com a dica "Conversas restritas pelo cliente".
+
+Durante a inspeção, o item **Caixa de entrada** some do menu e, ao tentar abrir uma conversa, a tela exibe "Conversas restritas pelo cliente" ("O cliente não permite que o parceiro veja as conversas deste ambiente. Relatórios e configurações continuam disponíveis.") com o botão **Ir para relatórios**.
+
+O cartão **Parceria** do cliente não aparece para você enquanto inspeciona: a decisão de liberar ou restringir as conversas é sempre do cliente (veja [Controlar o que o parceiro vê no seu workspace](/docs/administracao/acesso-do-parceiro)).
+
+## Resetar a senha de um membro
+
+A opção **Resetar senha** aparece no menu **⋯** do cliente apenas para parceiro que cuida dos clientes, com a permissão **Pode resetar senha de membros** no papel e somente quando o cliente não restringiu as conversas (se ela não aparecer, a sua parceria naquele cliente é só de indicação, o seu papel não tem a permissão ou o cliente restringiu as conversas). Ela não funciona para o proprietário do cliente; para o membro voltar a entrar na conta, o caminho indicado é ele usar **Esqueceu a senha?** na tela de login (veja [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes)).
+
+## Pelo MCP
+
+Se o seu papel tiver permissão de inspecionar clientes, você pode autorizar **Acessar os ambientes clientes do parceiro** ao conectar uma IA pelo [MCP](/docs/desenvolvedor/mcp). As ações feitas por esse caminho ficam registradas na [Auditoria](/docs/administracao/auditoria) do workspace do cliente.

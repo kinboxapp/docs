@@ -3499,3 +3499,48 @@
   mascarar: []
   arquivo: images/ajuda/agenda/novo-agendamento.webp
   paginas: [docs/agenda/agendamentos]
+
+# Seção programa-de-parceiros (Parceiros › Programa de parceiros)
+#
+# Telas do painel de parceria no workspace de documentação (Loja Exemplo), sem clientes, comissões nem dados reais.
+# O link de convite do staging é trocado por um endereço example.com com um identificador fictício.
+
+- id: parceiros-painel
+  url: /partner/workspaces
+  passos:
+    - esperar: 'text=Prev. de Comissão'
+    - pausa: 1000
+  alvo:
+    - 'div.group\/section:text-is("Parceria")'
+    - 'a:has-text("Templates")'
+    - '.ant-card:has(> .ant-card-body > div:text-is("Trial"))'
+  mascarar: []
+  arquivo: images/ajuda/programa-de-parceiros/painel.webp
+  paginas:
+    - docs/programa-de-parceiros/visao-geral
+
+- id: parceiros-convite
+  url: /partner/invite
+  passos:
+    - esperar: 'text=Url de convite'
+    - pausa: 1000
+    - trocarTexto: { seletor: '.ant-form-item:has-text("Url de convite") input', texto: 'https://www.example.com/user/register?partnerId=00000' }
+  alvo: '.ant-card:has-text("Convite por URL")'
+  mascarar: []
+  arquivo: images/ajuda/programa-de-parceiros/convidar-cliente.webp
+  paginas:
+    - docs/programa-de-parceiros/convidar-clientes
+
+# Só abre a janela Criar template, sem clicar em Criar (criar um template cria um ambiente novo).
+- id: parceiros-criar-template
+  url: /partner/templates
+  passos:
+    - esperar: 'button:has-text("Novo Template")'
+    - clicar: 'button:has-text("Novo Template")'
+    - esperar: '.ant-modal-content:has-text("Criar template")'
+    - pausa: 800
+  alvo: '.ant-modal-content:has-text("Criar template")'
+  mascarar: []
+  arquivo: images/ajuda/programa-de-parceiros/criar-template.webp
+  paginas:
+    - docs/programa-de-parceiros/templates

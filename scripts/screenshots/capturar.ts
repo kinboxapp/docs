@@ -217,9 +217,12 @@ async function executarPasso(page: Page, passo: Passo) {
   }
   else if ('trocarTexto' in passo) {
     const total = await localizar(page, passo.trocarTexto.seletor).evaluateAll((els, texto) => {
-      // Em campo de formulário, troca o texto de exemplo (placeholder); nos outros elementos, o texto.
+      // Em campo de formulário, troca o valor (se o campo estiver preenchido) ou o texto de exemplo (placeholder); nos outros elementos, o texto.
       for (const el of els) {
-        if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) el.placeholder = texto
+        if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+          if (el.value) el.value = texto
+          else el.placeholder = texto
+        }
         else el.textContent = texto
       }
       return els.length

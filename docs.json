@@ -420,6 +420,18 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Parceiros",
+            "icon": "handshake-angle",
+            "pages": [
+              "docs/programa-de-parceiros/visao-geral",
+              "docs/programa-de-parceiros/convidar-clientes",
+              "docs/programa-de-parceiros/templates",
+              "docs/programa-de-parceiros/inspecionar-cliente",
+              "docs/programa-de-parceiros/niveis-do-programa-de-comissionamento",
+              "docs/programa-de-parceiros/pagamento-das-comissoes"
+            ]
           }
         ]
       },
