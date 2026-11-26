@@ -477,6 +477,11 @@ async function garantirWidgetExemplo(api: Api) {
   const canais = lista(await api.v0('GET', '/integrations/channel'))
   let canal = canais.find((c) => String(c.channelId) === '10' && c.description === WIDGET_EXEMPLO)
   let widget = canal ? lista(await api.v3('GET', '/widget')).find((w) => String(w.channelId) === String(canal.id)) : undefined
+  if (canal && !widget) {
+    // Canal sem configurações de widget (criação interrompida): desativa para não deixar um canal órfão na lista
+    await api.v3('DELETE', `/widget/channel/${canal.id}`)
+    log(`widget de exemplo: canal órfão ${canal.id} desativado`)
+  }
   if (!widget) {
     widget = await api.v3('POST', '/widget', { name: WIDGET_EXEMPLO, companyName: EMPRESA })
     canal = { id: widget.channelId }

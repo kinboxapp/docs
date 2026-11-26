@@ -52,7 +52,7 @@ Use esta página quando o botão do chat não aparece no site, some no celular, 
   </Accordion>
 
   <Accordion title="Endereço fora de Restringir domínio">
-    Com **Restringir domínio** ligado em [Configurações do widget](/docs/canais/widget/configuracoes), o chat compara o endereço **exato** do site (com `https://`, com ou sem `www` conforme o site abre, sem barra no fim e sem caminho). `https://www.example.com` e `https://example.com` são dois endereços diferentes, e a opção ligada com a lista vazia bloqueia o chat em todos os sites.
+    Com **Restringir domínio** ligado em [Configurações do widget](/docs/canais/widget/configuracoes), o chat compara o endereço **exato** do site: o protocolo que o site usa (`https://` ou `http://`), o domínio com ou sem `www` conforme o site abre e a porta, se houver, sem barra no fim e sem caminho. `https://www.example.com` e `https://example.com` são dois endereços diferentes, e a opção ligada com a lista vazia bloqueia o chat em todos os sites.
 
     Cadastre todos os endereços exatos em que o site abre (ou desligue **Restringir domínio**), clique em **Salvar mudanças** e recarregue o site.
   </Accordion>
@@ -64,7 +64,10 @@ Use esta página quando o botão do chat não aparece no site, some no celular, 
   </Accordion>
 
   <Accordion title="O botão sumiu, mas o código está lá">
-    Duas opções do cartão **Ajustes** escondem o botão do chat: **Esconder botão do widget** (quando ligada, o chat só abre por um botão ou link do site que chame `window.openWidget()`) e **Usar somente WhatsApp** em **Habilitar balão de WhatsApp** (deixa apenas o botão verde do WhatsApp).
+    Duas opções do cartão **Ajustes** escondem o botão do chat:
+
+    - **Esconder botão do widget:** o chat abre só pelo balão da **Chamada para ação**, se estiver ligada, ou por um botão ou link do site que chame `window.openWidget()`.
+    - **Usar somente WhatsApp** (em **Habilitar balão de WhatsApp**): fica só o botão verde do WhatsApp. Se **Número** estiver vazio, nenhum dos dois botões aparece.
 
     Abra [Configurações do widget](/docs/canais/widget/configuracoes), desligue a opção que não deve estar ativa, clique em **Salvar mudanças** e recarregue o site.
   </Accordion>
@@ -73,6 +76,12 @@ Use esta página quando o botão do chat não aparece no site, some no celular, 
     O código de um widget excluído não mostra nada no site, e excluir não pode ser desfeito. Já um código copiado de outro widget ou de outro workspace faz o chat carregar com as configurações de lá e enviar as conversas para aquele outro canal.
 
     Abra o widget certo em **Configurações** → **Chat** → **Canais** (ou crie um novo), clique em **Copiar código** no cartão **Instalação**, substitua o código no site e publique de novo.
+  </Accordion>
+
+  <Accordion title="O visitante preencheu o formulário e a conversa não chegou">
+    Sem a mensagem automática, enviar o formulário não cria a conversa: ela só nasce quando o visitante escreve a primeira mensagem.
+
+    Para a conversa chegar logo depois do **Iniciar**, ligue **Enviar mensagem automática ao enviar o formulário** no cartão **Formulário** (veja [Personalizar a aparência, os textos e o formulário do widget](/docs/canais/widget/personalizar)) e clique em **Salvar mudanças**.
   </Accordion>
 
   <Accordion title="As mudanças não aparecem no site">
@@ -94,7 +103,7 @@ Use esta página quando o botão do chat não aparece no site, some no celular, 
   </Accordion>
 
   <Accordion title="O arquivo do visitante não vai">
-    O visitante pode enviar um arquivo por vez, de até 10 MB, nos tipos aceitos (imagens, PDF, documentos, planilhas, vídeo MP4 ou ZIP) e cujo conteúdo corresponda à extensão; o chat mostra a mensagem de erro na própria janela do visitante. Gravação de áudio não existe no chat do site.
+    O visitante pode enviar um arquivo por vez, de até 10 MB, nos tipos aceitos (imagens, PDF, documentos, planilhas, vídeo MP4 ou ZIP). O chat mostra a mensagem de erro na própria janela do visitante. O botão de clipe fica desativado enquanto outro arquivo está sendo enviado ou quando o chat está sem conexão. Gravação de áudio não existe no chat do site.
 
     Peça ao visitante para reduzir o tamanho do arquivo, usar um formato aceito e enviar um arquivo por vez.
   </Accordion>

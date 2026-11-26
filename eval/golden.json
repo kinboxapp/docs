@@ -711,18 +711,10 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Liguei a restrição de domínio e o chat sumiu do meu site, o que fiz de errado?",
-    "esperado": [
-      "docs/canais/widget/problemas-comuns",
-      "docs/canais/widget/configuracoes",
-      "llm/canais/widget"
-    ],
-    "tipo": "solucao-de-problema"
-  },
-  {
     "pergunta": "Qual o tamanho máximo de arquivo que o visitante consegue mandar pelo chat do site?",
     "esperado": [
-      "llm/canais/widget"
+      "llm/canais/widget",
+      "docs/canais/widget/problemas-comuns"
     ],
     "tipo": "referencia"
   },
@@ -730,6 +722,20 @@
     "pergunta": "Tem plugin da Kinbox para instalar o chat no WordPress?",
     "esperado": [
       "llm/faq/widget-wordpress-wix"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como coloco um botão do WhatsApp no meu site junto com o chat?",
+    "esperado": [
+      "docs/canais/widget/configuracoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Dá para colar o mesmo código do chat em duas lojas virtuais diferentes?",
+    "esperado": [
+      "llm/faq/widget-varios-sites"
     ],
     "tipo": "faq"
   },

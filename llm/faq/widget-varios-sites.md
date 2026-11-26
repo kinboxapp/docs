@@ -26,7 +26,7 @@ Posso usar o mesmo widget em vários sites?
 
 ## Resposta
 
-Sim, o mesmo código de widget funciona em vários sites, desde que **Restringir domínio** esteja desligado ou inclua todos os endereços exatos na lista (com `https://`, com ou sem `www` conforme cada site abre, sem barra no fim e sem caminho).
+Sim, o mesmo código de widget funciona em vários sites, desde que **Restringir domínio** esteja desligado ou inclua todos os endereços exatos na lista (com o protocolo que cada site usa, com ou sem `www` conforme ele abre e a porta, se houver, sem barra no fim e sem caminho).
 
 Antes de reutilizar o mesmo código, considere dois efeitos:
 

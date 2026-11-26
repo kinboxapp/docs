@@ -1,7 +1,7 @@
 ---
 title: "Configurações do widget: domínios, horário, celular e balão do WhatsApp"
 description: O que faz cada opção do cartão Ajustes do widget da Kinbox, como restringir domínio, horário comercial, mostrar no celular, chamada para ação e balão do WhatsApp.
-keywords: [ajustes do widget, restringir domínio, domínio permitido, horário comercial widget, online, mostrar widget no celular, esconder botão, chamada para ação, balão de texto, balão do whatsapp, botão whatsapp no site, código de rastreio, imagem personalizada, sons, excluir widget, renomear widget]
+keywords: [ajustes do widget, logo, foto do chat, avatar, restringir domínio, domínio permitido, horário comercial widget, online, mostrar widget no celular, esconder botão, chamada para ação, balão de texto, balão do whatsapp, botão whatsapp no site, código de rastreio, imagem personalizada, sons, excluir widget, renomear widget]
 publico: humano
 tipo: referencia
 fontes:
@@ -26,91 +26,85 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-As opções de comportamento do chat do site ficam no cartão **Ajustes** da tela do widget (**Configurações** → **Chat** → **Canais** → clique no widget). Depois de alterar qualquer opção, clique em **Salvar mudanças**; as mudanças salvas aparecem no site quando a página é aberta ou recarregada.
+As opções de comportamento do chat do site ficam no cartão **Ajustes** da tela do widget (**Configurações** → **Chat** → **Canais** → clique no widget). Depois de mudar uma opção, clique em **Salvar mudanças**. As mudanças salvas aparecem no site quando a página é aberta ou recarregada.
 
 <Note>
-  **Quem pode:** o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista de canais e a tela do widget. A restrição **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir** (não cria nem exclui widgets).
+  **Quem pode:** o proprietário do workspace e membros com a permissão **Gerenciar Canais**, sem a restrição **Não pode gerenciar widget.** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 </Note>
-
-<Frame caption="Cartão Ajustes com as opções de comportamento do widget">
-  <img src="/images/ajuda/widget/ajustes.webp" alt="Cartão Ajustes aberto mostrando os interruptores Mostrar avatares dos membros, Usar imagem personalizada, Chamada para ação com texto e 5 segundos, Mostrar widget no celular, Esconder botão do widget, Habilitar sons, Restringir domínio com https://www.example.com, Habilitar balão de WhatsApp com número e texto padrão, e Habilitar horário comercial" />
-</Frame>
 
 ## Ajustes
 
-Ao criar um widget, vêm ligados por padrão **Mostrar avatares dos membros**, **Mostrar widget no celular** e **Habilitar sons**; as demais opções vêm desligadas. Opções com campos extras abrem esses campos quando o interruptor está ligado.
+Cada opção é um interruptor. Algumas mostram campos extras quando ligadas. Ao criar um widget, **Mostrar avatares dos membros**, **Mostrar widget no celular** e **Habilitar sons** vêm ligados, e as outras vêm desligadas.
 
-| Opção | Padrão | O que faz |
-| --- | --- | --- |
-| **Mostrar avatares dos membros** | Ligado | O topo do chat e as respostas mostram a foto do membro que respondeu. Desligado, mostra a foto do widget. |
-| **Usar imagem personalizada** | Desligado | Abre um campo para enviar uma imagem, que vira o botão do chat e a foto do topo. Desligado, o chat usa a foto do workspace do momento em que o widget foi criado. |
-| **Chamada para ação** | Desligado | "Balão de texto que aparece depois de algum tempo se o lead não tiver interagido com o widget ainda." Define **Texto** e **Tempo até aparecer** (em **segundos**; ajuda "Tempo de espera até o texto aparecer para o visitante."; aceita apenas número, senão exibe "Digite um número"; vazio ou `0` espera 1 segundo). Aparece a cada página aberta enquanto o visitante não abriu o chat e toca som se **Habilitar sons** estiver ligado. |
-| **Mostrar widget no celular** | Ligado | Desligado, o chat não aparece em nenhuma tela com menos de 768 px de largura (celular ou janela estreita no computador). |
-| **Esconder botão do widget** | Desligado | "Caso queira manualmente controlar quando o widget deve ser aberto você pode deixar o botão do widget escondido." Esconde o botão do chat e o indicador de não lidas. Veja **Esconder o botão**, abaixo. |
-| **Habilitar sons** | Ligado | Toca som ao enviar mensagem, ao chegar resposta e quando a chamada para ação aparece. |
-| **Restringir domínio** | Desligado | Limita o chat apenas aos endereços da lista. Veja **Restringir domínio**, abaixo. |
-| **Habilitar balão de WhatsApp** | Desligado | Mostra um botão verde do WhatsApp junto ao botão do chat. Veja **Balão de WhatsApp**, abaixo. |
-| **Habilitar horário comercial** | Desligado | "Mostra que os membros estão online durante o horário comercial". Escolhe um horário em **Selecione o horário**. Veja **Horário comercial**, abaixo. |
+| Opção | O que faz |
+| --- | --- |
+| **Mostrar avatares dos membros** | Mostra a foto do membro que respondeu no topo do chat e nas respostas. |
+| **Usar imagem personalizada** | Troca o ícone do botão e a foto do topo do chat por uma imagem sua (por exemplo, o logo). Sem ela, vale a foto do workspace do momento em que o widget foi criado. |
+| **Chamada para ação** | Mostra um balão de texto ao lado do botão depois de um tempo. Veja abaixo. |
+| **Mostrar widget no celular** | Desligado, o chat não aparece em telas com menos de 768 px de largura (celular ou janela estreita no computador). |
+| **Esconder botão do widget** | Esconde o botão do chat no site. Veja abaixo. |
+| **Habilitar sons** | Toca som no chat do visitante, por exemplo quando chega uma resposta. |
+| **Restringir domínio** | Deixa o chat funcionar só nos endereços da lista. Veja abaixo. |
+| **Habilitar balão de WhatsApp** | Mostra um botão verde do WhatsApp junto do botão do chat. Veja abaixo. |
+| **Habilitar horário comercial** | Mostra "Online" no topo do chat durante o horário escolhido. Veja abaixo. |
+
+## Chamada para ação
+
+Ligue **Chamada para ação** e preencha **Texto** e **Tempo até aparecer** (em segundos). O balão aparece ao lado do botão do chat depois desse tempo, enquanto o visitante não abriu o chat. Clicar no balão abre o chat.
+
+<Frame caption="Botão do chat com a chamada para ação e, acima, o botão do WhatsApp">
+  <img src="/images/ajuda/widget/balao-no-site.webp" alt="Canto de uma página com o botão verde do chat, o balão de chamada para ação com o texto Oi, está precisando de ajuda? e o botão verde do WhatsApp acima" />
+</Frame>
 
 ## Restringir domínio
 
-Com **Restringir domínio** desligado, o código funciona em qualquer site onde for colado. Ao ligar a opção, digite cada endereço permitido e pressione **Enter** ou vírgula (o campo mostra o exemplo `https://example.com.br`).
+Com **Restringir domínio** desligado, o código funciona em qualquer site onde for colado. Ao ligar, digite cada endereço permitido e aperte **Enter** ou vírgula.
 
-O endereço precisa ser **exato**: protocolo e domínio (e porta, se houver), sem barra no fim e sem caminho:
+<Frame caption="Restringir domínio com um endereço cadastrado">
+  <img src="/images/ajuda/widget/restringir-dominio.webp" alt="Opção Restringir domínio ligada com o endereço https://www.example.com cadastrado" />
+</Frame>
+
+O endereço precisa ser **exato**: o protocolo que o site usa (`https://` ou `http://`), o domínio e a porta, se houver, sem barra no fim e sem caminho.
 
 - `https://www.example.com` e `https://example.com` são endereços diferentes: cadastre os dois se o site abre dos dois jeitos.
-- `http://` e `https://` são diferentes.
-- `https://example.com/` (com barra no fim), `https://example.com/contato` (com caminho) e `example.com` (sem `https://`) não batem.
-- Subdomínios contam separado (por exemplo, `https://blog.example.com`).
-
-Se **Restringir domínio** ficar ligado com a lista vazia, o chat não aparece em lugar nenhum.
+- `https://example.com/` (com barra no fim), `https://example.com/contato` (com caminho) e `example.com` (sem o protocolo) não funcionam.
+- Cada subdomínio é um endereço (por exemplo, `https://blog.example.com`).
+- Com a opção ligada e a lista vazia, o chat não aparece em nenhum site.
 
 ## Balão de WhatsApp
 
-Ligue **Habilitar balão de WhatsApp** para mostrar um botão verde do WhatsApp junto ao botão do chat:
+Ligue **Habilitar balão de WhatsApp** e preencha **Número** (o país vem como Brasil) e **Texto padrão**. Sem **Número**, o botão verde não aparece.
 
-- **Número** (seletor de país com Brasil por padrão): número que recebe a conversa. Sem **Número** preenchido, o balão não aparece no site.
-- **Texto padrão** (exemplo da tela: "Oi, quero saber mais sobre seus serviços."): mensagem pré-preenchida ao abrir o WhatsApp.
 - No computador, o botão verde aparece quando o visitante passa o mouse sobre o botão do chat. No celular, o primeiro toque mostra o botão verde e o segundo abre o chat.
+- O botão verde abre o WhatsApp (site ou app) numa conversa com o **Número**, com o **Texto padrão** já escrito. A conversa acontece no WhatsApp desse número. Para recebê-la na Kinbox, o número precisa estar conectado como canal de WhatsApp (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
+- **Usar somente WhatsApp:** com **Número** preenchido, o botão do chat some e fica só o botão verde, maior. O chat da Kinbox não abre.
+- **Capturar informações de campanha:** quando o endereço da página tem parâmetros (por exemplo, `utm_campaign`), o link do WhatsApp leva junto os dados da página. Marcando também **Enviar código de rastreio na mensagem**, a Kinbox pode acrescentar um código curto, como "(ref: K7F2Q9)", no fim do **Texto padrão**, para identificar a campanha mesmo no WhatsApp do celular.
 
-<Frame caption="Botão do chat com a chamada para ação e o balão do WhatsApp acima">
-  <img src="/images/ajuda/widget/balao-no-site.webp" alt="Canto inferior de uma página mostrando o botão verde do chat, o balão de chamada para ação com o texto Oi, está precisando de ajuda? e o botão verde do WhatsApp acima" />
-</Frame>
-
-Clicar no botão verde abre o WhatsApp (site ou app) em uma conversa com o **Número** e o **Texto padrão** preenchido. A conversa acontece no WhatsApp daquele número; para recebê-la na Kinbox, conecte esse número como canal de WhatsApp no workspace (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
-
-Opções extras do balão:
-
-- **Usar somente WhatsApp:** esconde o botão do chat da Kinbox e deixa apenas o botão verde do WhatsApp, maior. O chat da Kinbox não abre.
-- **Capturar informações de campanha:** quando a página abre com parâmetros de campanha na URL (como `utm_campaign`), o link do WhatsApp leva informações da página. Marcada essa caixa, aparece **Enviar código de rastreio na mensagem** ("Acrescenta um código curto no fim da mensagem, ex.: (ref: K7F2Q9). Ele identifica a campanha mesmo quando o lead abre o WhatsApp pelo celular."), que acrescenta o código "(ref: ...)" no fim do **Texto padrão** apenas quando a página foi aberta com parâmetros de campanha na URL. Sem parâmetros na URL, o link abre normalmente sem código. (A captura de campanha nas conversas pelo chat do site é automática e não depende dessa caixa.)
+As conversas pelo próprio chat do site guardam os dados de campanha da página sem precisar dessa caixa.
 
 ## Horário comercial
 
-Com **Habilitar horário comercial** ligado, selecione um horário em **Selecione o horário**. A lista traz os horários cadastrados em **Configurações** → **Ambiente** → **Horários** (o workspace aparece na tela como **ambiente**). Se a lista estiver vazia, cadastre um horário antes.
+Ligue **Habilitar horário comercial** e escolha um horário em **Selecione o horário**. A lista traz os horários de **Configurações** → **Ambiente** → **Horários**; se estiver vazia, cadastre um horário antes.
 
-- O topo do chat mostra "Online" apenas quando **Habilitar horário comercial** está ligado e dentro do horário cadastrado, comparado pelo **relógio do aparelho do visitante**. Em qualquer outro caso, o topo mostra a **Mensagem de fora do expediente**.
-- O horário comercial não fecha o chat: o visitante continua podendo enviar mensagens fora do expediente.
-- Na **Pré-visualização**, enquanto **Habilitar horário comercial** está ligado, o topo mostra "Online" o tempo todo.
+- O topo do chat mostra "Online" dentro do horário, pelo **relógio do aparelho do visitante**. Fora dele, ou com a opção desligada, mostra a **Mensagem de fora do expediente**.
+- O horário não fecha o chat: o visitante continua podendo mandar mensagens.
+- Na **Pré-visualização**, com a opção ligada, o topo mostra "Online" o tempo todo.
 
 ## Esconder o botão
 
-Com **Esconder botão do widget** ligado, o botão flutuante e o indicador de mensagens não lidas ficam ocultos no site. Quem cuida do site pode abrir o chat a partir de um botão ou link próprio chamando `window.openWidget()`.
+Com **Esconder botão do widget** ligado, o botão do chat e o número de mensagens não lidas ficam escondidos no site. O chat abre de duas formas: pelo balão da **Chamada para ação**, se estiver ligada, ou por um botão ou link do seu site que chame `window.openWidget()` (peça a quem cuida do site).
 
 ## Outras ações
 
 | Ação | Onde fica | O que faz |
 | --- | --- | --- |
-| Renomear | Lápis **Editar nome** ao lado do título na tela do widget | Abre **Editar nome do widget** para alterar o nome que a equipe vê como canal ("Nome atualizado"). |
-| **Copiar ID** | Menu de três pontos na lista de canais | Copia o ID do canal ("ID do canal (...) copiado para clipboard."). |
-| **Excluir** | Menu de três pontos na lista de canais | Pede confirmação ("Tem certeza que deseja excluir esse canal?"), desativa o canal e apaga as configurações do widget. |
-| **Copiar código** | Cartão **Instalação** na tela do widget | Copia o código de instalação para colar no site ("Copiado para o clipboard"). |
+| Renomear | Lápis **Editar nome** ao lado do nome do widget | Muda o nome que a equipe vê como canal das conversas ("Nome atualizado"). |
+| **Copiar código** | Cartão **Instalação** | Copia o código de instalação para colar no site ("Copiado para o clipboard"). |
 
-<Warning>
-  **Excluir** tira o chat de todos os sites com aquele código e não pode ser desfeito. As conversas já registradas ficam salvas, mas um novo widget gera um código novo que precisa ser instalado no site no lugar do antigo.
-</Warning>
+Para **Copiar ID** e **Excluir**, veja [Instalar o chat no seu site](/docs/canais/widget).
 
-## Quem pode
+## Veja também
 
-Criar, editar e excluir widgets exige a permissão **Gerenciar Canais** ou ser o proprietário do workspace (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)). A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista de canais e a tela do widget. A restrição **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir**, impedindo criar ou excluir widgets.
-
-Veja também [Instalar o chat no seu site](/docs/canais/widget), [Personalizar a aparência, os textos e o formulário do widget](/docs/canais/widget/personalizar) e [Canais: conectar e gerenciar](/docs/canais/visao-geral).
+- [Personalizar a aparência, os textos e o formulário do widget](/docs/canais/widget/personalizar)
+- [O chat não aparece no meu site](/docs/canais/widget/problemas-comuns)
+- [Canais: conectar e gerenciar](/docs/canais/visao-geral)

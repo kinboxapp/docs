@@ -28,6 +28,8 @@ type Passo =
   | { passar: string }
   /** Arrasta `de` até `para`; `x`/`y` (px) soltam num ponto dentro de `para` (ex.: área vazia do fluxograma) */
   | { arrastar: { de: string; para: string; x?: number; y?: number } }
+  /** Troca o texto do elemento antes do print (ex.: código de instalação do staging pelo formato de produção, com dados fictícios) */
+  | { trocarTexto: { seletor: string; texto: string } }
 
 type Item = {
   id: string
@@ -47,7 +49,8 @@ type Item = {
   /** Workspace onde o print é tirado. Padrão: o workspace de documentação. Outro workspace só para telas que ele não tem (ex.: WhatsApp), sempre com `mascarar`. */
   workspace?: string
   /**
-   * Abre o site de teste (página fictícia servida pela própria captura em SITE_TESTE, sem rede) com o código
+   * Abre o site de teste (página fictícia que a própria captura serve em SITE_TESTE: o HTML não sai da máquina, mas o
+   * script e as configurações do chat vêm do staging) com o código
    * de instalação do widget de nome `widget` do workspace de documentação, em vez de uma tela do app.
    * Seletores que começam com `widget>> ` procuram dentro do chat (iframe do widget).
    */
@@ -205,6 +208,13 @@ async function executarPasso(page: Page, passo: Passo) {
     const posicao = x !== undefined && y !== undefined ? { targetPosition: { x, y } } : {}
     await page.locator(de).first().dragTo(page.locator(para).first(), { timeout: 30_000, ...posicao })
   }
+  else if ('trocarTexto' in passo) {
+    const total = await localizar(page, passo.trocarTexto.seletor).evaluateAll((els, texto) => {
+      for (const el of els) el.textContent = texto
+      return els.length
+    }, passo.trocarTexto.texto)
+    if (!total) throw new Error(`trocarTexto: o seletor não achou nenhum elemento: ${passo.trocarTexto.seletor}`)
+  }
   else throw new Error(`Passo desconhecido: ${JSON.stringify(passo)}`)
 }
 
@@ -257,7 +267,6 @@ async function capturar(page: Page, conversor: Page, item: Item) {
   await page.setViewportSize({ width: item.largura || VIEWPORT.width, height: item.altura || VIEWPORT.height })
   if (item.site) {
     const html = paginaDeTeste(await codigoDoWidget(item.site.widget))
-    await page.unroute(`${SITE_TESTE}/**`).catch(() => {})
     await page.route(`${SITE_TESTE}/**`, (rota) => rota.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: html }))
     await page.goto(SITE_TESTE + item.url, { waitUntil: 'domcontentloaded' })
   } else {
@@ -340,7 +349,9 @@ try {
   }
   for (const item of itens) {
     try {
-      const { destino, bytes } = await capturar(page, conversor, item)
+      const { destino, bytes } = await capturar(page, conversor, item).finally(() =>
+        item.site ? page.unroute(`${SITE_TESTE}/**`).catch(() => {}) : undefined,
+      )
       console.log(`✓ ${item.id} → ${destino.replace(RAIZ + '/', '')} (${Math.round(bytes / 1024)} KB)`)
     } catch (e) {
       falhas++

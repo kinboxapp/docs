@@ -1392,9 +1392,11 @@
   paginas:
     - docs/canais/instagram/configuracoes
 
-# Seção widget (Canais › Chat do site). O widget "Site da loja" é criado e configurado pelo seed (garantirWidgetExemplo).
-# O código de instalação do staging traz endereços do staging: fica sempre sob tarja. Os prints do chat abrem o site de
-# teste da captura (`site:`), uma página fictícia em www.example.com servida pelo próprio Playwright, sem rede.
+# Seção widget (Canais › Chat do site). O widget "Site da loja" é criado e configurado pelo seed (garantirWidgetExemplo)
+# e é aberto pela lista de canais (clique no nome), sem id fixo. O código de instalação do staging traz endereços do
+# staging: antes do print, a caixa recebe o formato de produção (o mesmo de web:src/pages/settings/widget/index.tsx) com
+# identificação fictícia. Os prints do chat abrem o site de teste da captura (`site:`): o HTML da página fictícia em
+# www.example.com é servido pelo próprio Playwright, mas o script e as configurações do chat vêm do staging.
 
 - id: widget-adicionar
   url: /settings/channels/new
@@ -1403,47 +1405,52 @@
     - esperar: '.ant-drawer-body input#name'
     - digitar: { seletor: '.ant-drawer-body input#name', texto: 'Site da loja' }
     - pausa: 800
+  altura: 520
   alvo:
     - '.ant-drawer-header'
-    - '.ant-drawer-body .ant-form-item:has(#name)'
+    - '.ant-drawer-footer'
   mascarar: []
   arquivo: images/ajuda/widget/adicionar-widget.webp
   paginas:
     - docs/canais/widget
 
 - id: widget-instalacao
-  url: /settings/channels/widget/257
+  url: /settings/channels
   passos:
+    - clicar: 'text=Site da loja'
     - esperar: 'button:has-text("Copiar código")'
     - pausa: 800
+    - trocarTexto: { seletor: '.break-all.rounded-lg', texto: '<script type="text/javascript">;(function(){window.__kb=window.__kb||{},window.__kb.license="000000000000000000000000:000";var e=document.createElement("script");e.type="module",e.async=!0,e.src="https://widget.kinbox.com.br/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>' }
   alvo:
     - 'header:has-text("Instalação")'
     - 'button:has-text("Copiar código")'
-  mascarar:
-    - '.break-all.rounded-lg'
+  mascarar: []
   arquivo: images/ajuda/widget/instalacao.webp
   paginas:
     - docs/canais/widget
 
 - id: widget-tela
-  url: /settings/channels/widget/257
+  url: /settings/channels
   passos:
+    - clicar: 'text=Site da loja'
     - esperar: 'button:has-text("Copiar código")'
     - pausa: 1000
+    - trocarTexto: { seletor: '.break-all.rounded-lg', texto: '<script type="text/javascript">;(function(){window.__kb=window.__kb||{},window.__kb.license="000000000000000000000000:000";var e=document.createElement("script");e.type="module",e.async=!0,e.src="https://widget.kinbox.com.br/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>' }
   alvo:
     - 'text=Site da loja'
     - 'aside:has-text("Pré-visualização")'
     - 'div.card-bordered.mb-4:has-text("Ajustes")'
-  mascarar:
-    - '.break-all.rounded-lg'
+  mascarar: []
   arquivo: images/ajuda/widget/tela-do-widget.webp
   paginas:
     - docs/canais/widget/personalizar
 
 - id: widget-aparencia
-  url: /settings/channels/widget/257
+  url: /settings/channels
   altura: 1400
   passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
     - clicar: 'div.card-bordered.mb-4:has-text("Aparência") .ant-collapse-header'
     - pausa: 1000
   alvo: 'div.card-bordered.mb-4:has-text("Aparência")'
@@ -1453,9 +1460,11 @@
     - docs/canais/widget/personalizar
 
 - id: widget-textos
-  url: /settings/channels/widget/257
+  url: /settings/channels
   altura: 1500
   passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
     - clicar: 'div.card-bordered.mb-4:has-text("Textos") .ant-collapse-header'
     - pausa: 1000
   alvo: 'div.card-bordered.mb-4:has-text("Textos")'
@@ -1465,9 +1474,11 @@
     - docs/canais/widget/personalizar
 
 - id: widget-formulario
-  url: /settings/channels/widget/257
+  url: /settings/channels
   altura: 1700
   passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
     - clicar: 'div.card-bordered.mb-4:has-text("Formulário") .ant-collapse-header'
     - pausa: 1000
   alvo: 'div.card-bordered.mb-4:has-text("Formulário")'
@@ -1476,15 +1487,20 @@
   paginas:
     - docs/canais/widget/personalizar
 
-- id: widget-ajustes
-  url: /settings/channels/widget/257
+# Ajustes: recorte só da opção Restringir domínio, a que a página explica com o print (as outras ficam na tabela)
+- id: widget-restringir-dominio
+  url: /settings/channels
   altura: 2200
   passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'button:has-text("Copiar código")'
     - clicar: 'div.card-bordered.mb-4:has-text("Ajustes") .ant-collapse-header'
     - pausa: 1000
-  alvo: 'div.card-bordered.mb-4:has-text("Ajustes")'
+  alvo:
+    - 'div.card-bordered.mb-4:has-text("Ajustes") >> text=Restringir domínio'
+    - 'div.card-bordered.mb-4:has-text("Ajustes") .ant-select:has(.ant-select-selection-overflow)'
   mascarar: []
-  arquivo: images/ajuda/widget/ajustes.webp
+  arquivo: images/ajuda/widget/restringir-dominio.webp
   paginas:
     - docs/canais/widget/configuracoes
 

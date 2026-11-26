@@ -28,23 +28,23 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Configure a cor, a posição, os textos do cabeçalho, a mensagem inicial e o formulário pré-chat do widget. Você acompanha o visual na **Pré-visualização** enquanto edita, antes de salvar.
+Configure a cor, a posição, os textos do topo do chat, a mensagem inicial e o formulário pré-chat do widget. Você acompanha o visual na **Pré-visualização** enquanto edita, antes de salvar.
 
 <Note>
-  **Quem pode:** o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista de canais e a tela do widget. A restrição **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir**.
+  **Quem pode:** o proprietário do workspace e membros com a permissão **Gerenciar Canais**, sem a restrição **Não pode gerenciar widget.** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 </Note>
 
 ## A tela do widget
 
-1. Vá em **Configurações** → **Chat** → **Canais** e clique no widget que você quer personalizar. Se o widget não aparecer na lista, peça ao proprietário para tirar a restrição **Não pode gerenciar widget.** do seu papel.
-2. Abaixo do cartão **Instalação**, os cartões **Aparência**, **Textos**, **Formulário** e **Ajustes** começam fechados. Clique em cada cartão para abrir e editar.
-3. À direita fica a **Pré-visualização**, com as opções **Fechado**, **Formulário** e **Chat**. Ela atualiza na hora, enquanto você muda os campos.
-   - Se a **Pré-visualização** não aparecer, aumente a largura da janela do navegador: ela só aparece em telas largas (a partir de 1280 px) e fora do celular.
-   - **Formulário** fica desativado se o formulário não tiver campos. Com **Usar somente WhatsApp** ligado em **Ajustes**, **Formulário** e **Chat** ficam desativados e a prévia mostra "Pré-visualização indisponível" e "O balão abre a conversa direto no WhatsApp."
-4. Ao alterar qualquer campo, aparece a barra com **Cancelar** (desfaz as mudanças não salvas) e **Salvar mudanças** (salva e mostra "Configurações salvas"). As mudanças salvas só aparecem no site quando a página é aberta ou recarregada.
+Vá em **Configurações** → **Chat** → **Canais** e clique no widget. Se o widget não aparecer na lista, peça ao proprietário para tirar a restrição **Não pode gerenciar widget.** do seu papel.
 
-<Frame caption="Tela de edição do widget com os cartões fechados à esquerda e a Pré-visualização à direita">
-  <img src="/images/ajuda/widget/tela-do-widget.webp" alt="Tela do widget Site da loja com o lápis ao lado do título, o cartão Instalação, os cartões Aparência, Textos, Formulário e Ajustes fechados e a Pré-visualização com Fechado, Formulário selecionado e Chat" />
+- Abaixo do cartão **Instalação** ficam os cartões **Aparência**, **Textos**, **Formulário** e **Ajustes**. Eles começam fechados: clique em cada um para abrir.
+- À direita fica a **Pré-visualização**, com as opções **Fechado**, **Formulário** e **Chat**. Ela muda na hora, enquanto você edita. Se ela não aparecer, aumente a janela do navegador: ela só aparece em telas largas (a partir de 1280 px) e fora do celular.
+- **Formulário** fica desativado quando o formulário não tem campos. Com o balão de WhatsApp ligado, com **Número** preenchido e **Usar somente WhatsApp** marcado, **Formulário** e **Chat** ficam desativados.
+- Ao alterar qualquer campo, aparece a barra com **Cancelar** (desfaz o que não foi salvo) e **Salvar mudanças** (aviso "Configurações salvas"). As mudanças salvas aparecem no site quando a página é aberta ou recarregada.
+
+<Frame caption="Tela do widget com os cartões à esquerda e a Pré-visualização à direita">
+  <img src="/images/ajuda/widget/tela-do-widget.webp" alt="Tela do widget Site da loja com o lápis ao lado do título, o cartão Instalação com o código e o botão Copiar código, os cartões Aparência, Textos, Formulário e Ajustes fechados e a Pré-visualização com Fechado, Formulário selecionado e Chat" />
 </Frame>
 
 ## Aparência
@@ -53,57 +53,72 @@ Abra o cartão **Aparência** para definir a cor e a posição do botão do chat
 
 | Campo | O que faz | Padrão |
 | --- | --- | --- |
-| **Tema** | Cor principal do botão e do cabeçalho do chat. Oferece 10 cores prontas e um ícone de pincel para escolher qualquer outra cor. | Azul (`#0d5acf`) |
+| **Tema** | Cor principal do botão e do topo do chat. Escolha uma das 10 cores ou clique no pincel para escolher qualquer outra. | Azul |
 | **Cor do texto** | **Claro** ou **Escuro**: cor do texto e dos ícones sobre a cor do tema. | **Claro** |
 | **Posição na tela** | **Esquerda** ou **Direita**: lado da página onde o botão fica. | **Direita** |
-| **Espaçamento lateral** | Distância, em px, entre o botão e a lateral da tela. | `20` |
-| **Espaçamento embaixo** | Distância, em px, entre o botão e a parte de baixo da tela. | `20` |
+| **Espaçamento lateral** | Distância, em px, entre o botão e a lateral da tela. | 20 |
+| **Espaçamento embaixo** | Distância, em px, entre o botão e a parte de baixo da tela. | 20 |
 
-Em telas com menos de 768 px de largura (celular ou janela estreita), o chat aberto ocupa a tela toda, sem os espaçamentos. Para trocar a foto do botão e do topo do chat, use **Usar imagem personalizada** em [Configurações do widget](/docs/canais/widget/configuracoes).
+Em telas com menos de 768 px de largura (celular ou janela estreita), o chat aberto ocupa a tela toda. Para trocar a foto do botão e do topo do chat, use **Usar imagem personalizada** em [Configurações do widget](/docs/canais/widget/configuracoes).
 
-<Frame caption="Cartão Aparência com Tema, Cor do texto, Posição na tela e espaçamentos">
-  <img src="/images/ajuda/widget/aparencia.webp" alt="Cartão Aparência aberto exibindo 10 cores de Tema com verde selecionado e ícone de pincel, Cor do texto em Claro, Posição na tela em Direita e Espaçamento lateral e Espaçamento embaixo em 20 px" />
+<Frame caption="Cartão Aparência">
+  <img src="/images/ajuda/widget/aparencia.webp" alt="Cartão Aparência aberto com as 10 cores de Tema, a verde selecionada, o pincel, Cor do texto em Claro, Posição na tela em Direita e Espaçamento lateral e Espaçamento embaixo em 20 px" />
 </Frame>
 
 ## Textos
 
-Abra o cartão **Textos** para configurar o cabeçalho do chat e as mensagens de boas-vindas.
+Abra o cartão **Textos** para configurar o topo do chat e as mensagens de boas-vindas.
 
 | Campo | O que faz | Padrão |
 | --- | --- | --- |
-| **Nome de exibição** | Ajuda na tela: O nome da sua empresa ou "Suporte", "Atendimento", etc. Aparece no topo do chat até um membro responder; depois, o topo mostra o nome do membro. Se ficar vazio, mostra "Suporte". | Nome do workspace na criação |
-| **Mensagem de fora do expediente** | Ajuda na tela: "Vamos te responder assim que possível". Aparece no topo do chat sempre que o status não estiver "Online" (inclusive quando **Habilitar horário comercial** está desligado). | "Vamos te responder assim que possível" |
-| **Descrição do time** | Ajuda na tela: "Em poucas palavras fale sobre seu time ou expectativas que o cliente pode ter com esse chat". Texto exibido abaixo do status no topo do chat. | "Nos pergunte qualquer coisa, ou deixe seu feedback." |
-| **Mensagem inicial** | Mensagens exibidas uma por vez quando o visitante abre o chat. Clique em **Mensagem** (botão com `+`) para adicionar outra ou no **X** para remover. Deixar uma mensagem vazia impede salvar ("Obrigatório."). | "👋 Olá! Como podemos te ajudar?" |
+| **Nome de exibição** | Nome da empresa ou da equipe (ex.: "Suporte", "Atendimento") no topo do chat. | Nome do workspace quando o widget foi criado |
+| **Mensagem de fora do expediente** | Frase de status no topo do chat quando ele não está "Online". | "Vamos te responder assim que possível" |
+| **Descrição do time** | Poucas palavras sobre a equipe ou sobre o que o visitante pode esperar do chat. | "Nos pergunte qualquer coisa, ou deixe seu feedback." |
+| **Mensagem inicial** | Mensagens que aparecem uma por vez quando o visitante abre o chat. Clique em **Mensagem** para adicionar outra e no **X** para remover. Uma mensagem vazia impede salvar ("Obrigatório."). | "👋 Olá! Como podemos te ajudar?" |
 
-Regras importantes sobre os textos:
+Como esses textos aparecem para o visitante:
 
-- **Topo do chat:** depois que um membro responde, o topo passa a mostrar o nome do último membro que respondeu. O status "Online" só aparece com **Habilitar horário comercial** ligado e dentro do horário, pelo relógio do aparelho do visitante; em qualquer outro caso, aparece a **Mensagem de fora do expediente**.
-- **Mensagem inicial:** aparece apenas na janela do visitante e não entra no histórico da conversa na Kinbox. Se o formulário pré-chat tiver campos, a mensagem inicial aparece depois que o visitante clica em **Iniciar**.
+- **Topo do chat aberto:** mostra o nome (o **Nome de exibição** ou, se vazio, "Suporte"), a frase de status e a **Descrição do time**. No computador, o topo começa aberto; no celular, começa recolhido. Depois que o visitante escreve, o topo se recolhe e mostra só o nome e o status (o visitante pode clicar nele para abrir de novo).
+- **Depois que um membro responde:** o topo passa a mostrar o nome do último membro que respondeu.
+- **Status:** "Online" só aparece com **Habilitar horário comercial** ligado e dentro do horário, pelo relógio do aparelho do visitante. Em qualquer outro caso, aparece a **Mensagem de fora do expediente**. Veja [Configurações do widget](/docs/canais/widget/configuracoes).
+- **Mensagem inicial:** aparece só na janela do visitante e não entra na conversa da Kinbox. Se o formulário pré-chat tiver campos, ela aparece depois que o visitante clica em **Iniciar**.
 
-<Frame caption="Cartão Textos com Nome de exibição, Mensagem de fora do expediente, Descrição do time e Mensagem inicial">
-  <img src="/images/ajuda/widget/textos.webp" alt="Cartão Textos aberto mostrando Nome de exibição Loja Exemplo, Mensagem de fora do expediente, Descrição do time, Mensagem inicial com botão X para remover e o botão Mensagem com ícone de mais" />
+<Frame caption="Cartão Textos">
+  <img src="/images/ajuda/widget/textos.webp" alt="Cartão Textos aberto com Nome de exibição Loja Exemplo, Mensagem de fora do expediente, Descrição do time, Mensagem inicial com o X para remover e o botão Mensagem" />
 </Frame>
 
 ## Formulário antes do chat
 
-Abra o cartão **Formulário** ("O formulário pré-chat permite que você colete informações do visitante antes do início do chat.") para pedir dados antes de o visitante começar a conversar. Sem campos adicionados, o chat abre direto.
+O formulário pré-chat pede dados ao visitante antes de ele começar a conversar. Sem campos, o chat abre direto.
 
-- **Descrição:** escreva o texto exibido acima dos campos (padrão: "Bem-vindo! Por favor preencha o formulário abaixo antes de iniciar o chat.").
-- **Adicionar campos:** em **Campos**, clique em **Campo** (botão com `+`) e escolha entre **Nome**, **E-mail**, **Celular** e os campos personalizados de contato e de sessão do workspace (cadastrados em **Configurações** → **Ambiente** → **Campos personalizados**; o workspace aparece na tela como **ambiente**). Campos já adicionados ficam desativados na lista; campos personalizados de outros tipos não aparecem.
-- **Editar e organizar campos:** em cada campo da lista, clique no nome para mudar o texto que o visitante vê (um nome vazio impede salvar, com "Obrigatório."), marque a caixa **Obrigatório** para exigir o preenchimento, arraste pela alça à esquerda para mudar a ordem ou clique na lixeira **Remover** para excluir o campo.
-- **Mensagem automática:** ligue **Enviar mensagem automática ao enviar o formulário** ("Ao enviar o formulário, o widget manda esta mensagem em nome do visitante. Assim a conversa é criada no Kinbox e o bot do canal já começa o atendimento.") e preencha **Mensagem** (obrigatória quando ligada; exemplo da tela: "e.g: Olá! Acabei de preencher o formulário."). Com ela ligada, a conversa nasce na Kinbox assim que o visitante clica em **Iniciar** e o [bot](/docs/bot/aprender-a-usar-o-bot) do canal já pode atender. Com ela desligada, a conversa só nasce quando o visitante escreve.
+<Steps>
+  <Step title="Abra o cartão Formulário">
+    Em **Descrição**, escreva o texto que aparece acima dos campos.
+  </Step>
+  <Step title="Adicione os campos">
+    Em **Campos**, clique em **Campo** e escolha **Nome**, **E-mail**, **Celular** ou um campo personalizado de contato ou de sessão (cadastrados em **Configurações** → **Ambiente** → **Campos personalizados**). Campos personalizados de outras áreas, como negociação, não aparecem na lista. Um campo já adicionado fica desativado.
+  </Step>
+  <Step title="Ajuste cada campo">
+    Mude o nome do campo, que é o texto que o visitante vê (vazio impede salvar). Marque **Obrigatório** para exigir o preenchimento. Arraste pela alça à esquerda para mudar a ordem, ou clique na lixeira (**Remover**) para tirar o campo.
+  </Step>
+  <Step title="Ligue a mensagem automática, se quiser">
+    Ligue **Enviar mensagem automática ao enviar o formulário** e preencha **Mensagem** (obrigatória quando ligada). O widget manda essa mensagem em nome do visitante assim que ele clica em **Iniciar**: a conversa é criada na Kinbox na hora e o [bot](/docs/bot/aprender-a-usar-o-bot) do canal já pode começar o atendimento. Com ela desligada, a conversa só nasce quando o visitante escreve.
+  </Step>
+  <Step title="Salve">
+    Clique em **Salvar mudanças**.
+  </Step>
+</Steps>
 
-Como a Kinbox trata os dados preenchidos:
-
-- O formulário aparece uma vez por navegador, antes da primeira mensagem.
-- Ao clicar em **Iniciar**, a Kinbox procura um contato com o mesmo e-mail ou celular. Se encontrar, usa esse contato e preenche apenas o que estiver vazio nele (sem sobrescrever dados já salvos); se não encontrar, cria um novo contato.
-- Campos personalizados de contato são gravados no contato; campos personalizados de sessão vão para a sessão junto com a primeira mensagem.
-
-<Frame caption="Cartão Formulário com campos configurados e mensagem automática ligada">
-  <img src="/images/ajuda/widget/formulario.webp" alt="Cartão Formulário aberto com Descrição, Campos Nome e E-mail marcados como obrigatórios, Celular opcional, alças de arrastar, ícones de lixeira, botão Campo e Enviar mensagem automática ao enviar o formulário ligado com Mensagem preenchida" />
+<Frame caption="Cartão Formulário com campos e a mensagem automática ligada">
+  <img src="/images/ajuda/widget/formulario.webp" alt="Cartão Formulário aberto com Descrição, os campos Nome e E-mail marcados como obrigatórios, Celular opcional, alças de arrastar, lixeiras, o botão Campo e Enviar mensagem automática ao enviar o formulário ligado com a Mensagem preenchida" />
 </Frame>
+
+O que acontece com os dados:
+
+- O formulário aparece para cada visitante uma vez por navegador, antes da primeira mensagem.
+- Ao clicar em **Iniciar**, a Kinbox procura um contato com o mesmo e-mail ou celular. Se encontrar, usa esse contato e completa o nome e os campos personalizados que estiverem vazios. O e-mail e o celular do contato não mudam, mesmo vazios. Se não encontrar, cria um contato novo.
+- Campos personalizados de contato são gravados no contato. Campos personalizados de sessão vão para a sessão, junto com a primeira mensagem.
 
 ## Próximos passos
 
-Para configurar o cartão **Ajustes** (domínios permitidos, exibição no celular, horário comercial, chamada para ação e balão de WhatsApp), veja [Configurações do widget](/docs/canais/widget/configuracoes).
+Para o cartão **Ajustes** (domínios permitidos, celular, horário comercial, chamada para ação e balão de WhatsApp), veja [Configurações do widget](/docs/canais/widget/configuracoes).

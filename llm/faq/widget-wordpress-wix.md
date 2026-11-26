@@ -32,7 +32,7 @@ Para instalar:
 1. Crie ou abra o widget em **Configurações** → **Chat** → **Canais** e, no cartão **Instalação**, clique em **Copiar código**.
 2. Cole o código antes da tag `</body>` em todas as páginas do seu site.
 3. Em plataformas que não deixam editar o HTML diretamente, use a opção da própria plataforma para acrescentar código ao site (como rodapé ou código personalizado), configurada para carregar em todas as páginas. Se a plataforma não aceitar código personalizado no site, não há outra forma de instalar o widget.
-4. Se **Restringir domínio** estiver ligado nos ajustes do widget, cadastre o endereço exato do site publicado (com `https://`, com ou sem `www` conforme o site abre, sem barra no fim e sem caminho).
+4. Se **Restringir domínio** estiver ligado nos ajustes do widget, cadastre o endereço exato do site publicado (com o protocolo que o site usa, com ou sem `www` conforme ele abre e a porta, se houver, sem barra no fim e sem caminho).
 
 Se você não tem acesso ao código ou às configurações do site, envie o código copiado para a pessoa que cuida dele. Veja o passo a passo em [Instalar o chat no seu site](/docs/canais/widget) e, se o chat não aparecer, veja [O chat não aparece no meu site](/docs/canais/widget/problemas-comuns).
 
