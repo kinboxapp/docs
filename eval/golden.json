@@ -778,9 +778,9 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Quero saber de qual anúncio veio o cliente que clicou no botão de WhatsApp do meu site",
+    "pergunta": "Quero pôr no meu CRM um link que abre a conversa do cliente pelo telefone",
     "esperado": [
-      "docs/desenvolvedor/redirecionador-via-whatsapp"
+      "docs/usando-o-kinbox/conversa-em-um-clique"
     ],
     "tipo": "guia"
   },

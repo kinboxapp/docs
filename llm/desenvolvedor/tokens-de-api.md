@@ -44,19 +44,21 @@ Se um membro sem a permissão de inspeção tentar criar token com escopo de par
 - O token fica vinculado ao membro que o criou. Se essa pessoa sair do workspace ou for desativada, o token para de funcionar e é necessário criar outro token.
 - Conforme indicado na tela de criação, o token também respeita o papel de quem o criou (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Quando o papel não tem a permissão exigida ou possui uma restrição que impede a rota, a API devolve as mensagens listadas abaixo.
 
-## Mensagens de erro da API
+## Mensagens que você pode receber
 
-| Mensagem / status | Causa |
-| --- | --- |
-| `Missing or invalid Authorization header` | Cabeçalho `Authorization` ausente ou sem o prefixo `Bearer `. |
-| `Invalid API token format` | Token não começa com `kb_live_` (por exemplo, uso do **Token v0** na API pública). |
-| `Invalid or revoked API token` | Token incorreto ou já revogado. |
-| `The user who created this API token is inactive or no longer in the workspace. Create a new token.` | Membro que criou o token foi desativado ou saiu do workspace. |
-| `This API token lacks the "<escopo>" scope. Create a token with it in Settings › API.` | Falta a permissão (`read`, `write` ou `send`) no token. |
-| `The role of the user who created this API token lacks permission: <permissões>` | O papel de quem criou o token não tem a permissão exigida pela rota. |
-| `The role of the user who created this API token has the restriction <restrição>, which blocks this route.` | O papel de quem criou o token tem uma restrição que bloqueia a rota. |
-| `The role of the user who created this API token restricts which conversations and messages it can read (<restrições>), and this route does not apply that restriction yet.` | O papel de quem criou o token limita quais conversas e mensagens ele vê, e a rota chamada ainda não aplica essa limitação. Use um token criado por um membro sem essas restrições. |
-| `ThrottlerException: Too Many Requests` (HTTP 429) | Limite de chamadas excedido. |
+Mensagens que a API pode devolver, conforme a rota e a situação:
+
+| Mensagem / status | Causa | O que fazer |
+| --- | --- | --- |
+| `Missing or invalid Authorization header` | Cabeçalho `Authorization` ausente ou sem o prefixo `Bearer `. | Envie `Authorization: Bearer <token>`. |
+| `Invalid API token format` | O token não começa com `kb_live_` (por exemplo, o **Token v0**). | Use um token criado em **Criar token**. |
+| `Invalid or revoked API token` | Token incorreto ou revogado. | Confira o valor copiado ou crie outro token. |
+| `The user who created this API token is inactive or no longer in the workspace. Create a new token.` | Quem criou o token foi desativado ou saiu do workspace. | Crie um token novo com um membro ativo. |
+| `This API token lacks the "<escopo>" scope. Create a token with it in Settings › API.` | Falta ao token a permissão (`read`, `write` ou `send`) que a chamada exige. | Crie um token com essa permissão. |
+| `The role of the user who created this API token lacks permission: <permissões>` | O papel de quem criou o token não tem a permissão que a rota pede. | Ajuste o papel ou crie o token com um membro que tenha a permissão. |
+| `The role of the user who created this API token has the restriction <restrição>, which blocks this route.` | O papel de quem criou o token tem uma restrição que bloqueia a rota. | Ajuste o papel ou crie o token com um membro sem essa restrição. |
+| `The role of the user who created this API token restricts which conversations and messages it can read (<restrições>), and this route does not apply that restriction yet.` | O papel de quem criou o token limita quais conversas e mensagens ele vê. | Crie o token com um membro sem essas restrições. |
+| `ThrottlerException: Too Many Requests` (HTTP 429) | Limite de chamadas excedido. | Espere alguns segundos e repita. |
 
 ## Limite de chamadas
 

@@ -37,10 +37,10 @@ O canal customizado liga um chat seu (app, site ou sistema próprio) à [Caixa d
     - Envie uma imagem opcional (`JPEG/PNG - Min. 100x100px`).
     - Preencha **Descrição** (obrigatório, por exemplo "App da loja").
     - Copie o **Endpoint para receber mensagens** (`https://api.kinbox.com.br/api/v1/channels/<identificador>/messages`), que já vem gerado. É para essa URL que o seu sistema enviará as mensagens do cliente.
-    - Preencha **Endpoint para enviar mensagem e atualização de status** com a URL do seu sistema que receberá um `POST` sempre que um membro interagir em uma conversa desse canal.
+    - Preencha **Endpoint para enviar mensagem e atualização de status** com a URL do seu sistema que recebe as mensagens de saída (respostas dos membros) e o evento de resolução da conversa.
 
     <Frame caption="Painel Conectar Canal Customizado com Descrição e os endpoints de entrada e saída">
-      <img src="/images/ajuda/desenvolvedores/canal-customizado.webp" alt="Painel Conectar Canal Customizado preenchido com Descrição App da loja, Endpoint para receber mensagens com URL da API da Kinbox e Endpoint para enviar mensagem e atualização de status preenchido com https://exemplo.com/kinbox/webhook" />
+      <img src="/images/ajuda/desenvolvedores/canal-customizado.webp" alt="Painel Conectar Canal Customizado preenchido com Descrição App da loja, Endpoint para receber mensagens com tarja e Endpoint para enviar mensagem e atualização de status preenchido com https://exemplo.com/kinbox/webhook" />
     </Frame>
   </Step>
 

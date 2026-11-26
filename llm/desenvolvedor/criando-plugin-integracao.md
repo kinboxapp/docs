@@ -52,7 +52,7 @@ Referência técnica dos plugins da Kinbox, complementando [Criar um plugin para
 
 ## Parâmetros no endereço e verificação de origem
 
-- **Query string acrescentada pela Kinbox** (só nos modos que abrem dentro da Kinbox; em **Nova página** e **Popup** não há parâmetros): `dark_mode` (`true` ou `false`), `app_plugin_type` (`inbox`), `operator_id` (ID do membro logado) e, no modo **Tela inteira**, `display_mode=fullscreen`.
+- **Parâmetros que o plugin pode usar** (só nos modos que abrem dentro da Kinbox; em **Nova página** e **Popup** não há parâmetros): `dark_mode` (`true` ou `false`), `app_plugin_type` (`inbox`), `operator_id` (ID do membro logado) e, no modo **Tela inteira**, `display_mode=fullscreen`.
 - **Mesma origem:** a Kinbox só aceita mensagens vindas da mesma origem do **Endpoint** cadastrado; mensagens de outra origem são ignoradas. Se o plugin redirecionar para outro domínio, as funções da biblioteca param de responder.
 
 ## Biblioteca `kinboxjs.js`

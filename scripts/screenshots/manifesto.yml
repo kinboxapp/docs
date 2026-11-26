@@ -1484,7 +1484,8 @@
   paginas:
     - docs/desenvolvedor/criando-plugin-integracao
 
-# Painel Conectar Canal Customizado (não conecta). O recorte vai de Descrição até o último campo.
+# Painel Conectar Canal Customizado (não conecta). O recorte vai de Descrição até o último campo. O endereço de
+# recebimento traz um identificador gerado na hora: leva tarja (a página mostra o formato do endereço).
 - id: dev-canal-customizado
   url: /settings/channels/new
   passos:
@@ -1496,7 +1497,8 @@
   alvo:
     - '.ant-form-item:has(#description)'
     - '#hashIdentifier'
-  mascarar: []
+  mascarar:
+    - '.ant-form-item:has(input[disabled]) input'
   arquivo: images/ajuda/desenvolvedores/canal-customizado.webp
   paginas:
     - docs/desenvolvedor/criando-canal-customizado

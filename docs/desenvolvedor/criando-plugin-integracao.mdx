@@ -117,6 +117,21 @@ Nos modos **Normal**, **Modal**, **Painel lateral**, **Página lateral** e **Tel
 
 Nos modos **Nova página** e **Popup**, nada disso acontece: a página abre só com o endereço.
 
+<Accordion title="Funções da biblioteca">
+  | Função | O que faz |
+  | --- | --- |
+  | `Kinbox.on("conversation", fn)` | Recebe os dados da conversa aberta (também `"no_conversation"` e `"callback"`). |
+  | `Kinbox.loading(true)` / `Kinbox.loading(false)` | Mostra ou tira o carregamento sobre o plugin. |
+  | `Kinbox.toast(tipo, texto)` | Mostra um aviso (`success`, `error`, `info` ou `warning`). |
+  | `Kinbox.dialog("confirm", { title, description, okText, cancelText }, fn)` | Pede confirmação; `fn` recebe `true` ou `false`. |
+  | `Kinbox.setProperty({ key, type, contactId, fields })` | Grava campos personalizados do contato (`type: "contact"`) ou da sessão (`type: "session"`, com `sessionId`); a resposta chega no evento `callback`. |
+  | `Kinbox.assignTo(idDoMembro)` | Atribui a conversa aberta ao membro. |
+  | `Kinbox.moveToGroup(idDoGrupo)` | Move a conversa aberta para o grupo. |
+  | `Kinbox.addTag(idDaTag)` / `Kinbox.removeTag(idDaTag)` | Põe ou tira a tag da conversa aberta. |
+  | `Kinbox.sendForm({ items, type, title }, fn)` | Abre um formulário da Kinbox (`type`: `"modal"` ou `"drawer"`); `fn` recebe as respostas. |
+  | `Kinbox.getWorkspaceInfo(fn)` | Entrega membros, grupos, tags, campos personalizados, canais e papéis do workspace. |
+</Accordion>
+
 ## Editar ou excluir um plugin
 
 Em **Configurações** → **Integrações** → **Plugins** (com busca **Pesquisar por nome** e filtros **Tudo** e **Visível somente para mim**), clique no plugin para editar ou exclua pelo menu da linha.

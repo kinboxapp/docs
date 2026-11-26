@@ -20,55 +20,75 @@ verificado_em: 2026-11-26
 
 O redirecionador de WhatsApp é um link da Kinbox para o botão de WhatsApp do seu site que registra de qual campanha o cliente veio (por parâmetros como `utm_campaign` e `gclid`) e abre o WhatsApp com uma mensagem pronta. Com o código de rastreio ligado, a mensagem recebe no fim um código curto, como `(ref: K7F2Q9)`, que a Kinbox lê para gravar a campanha na sessão, inclusive quando o cliente abre o WhatsApp pelo celular.
 
+<Note>
+  Quem pode: a opção 1 exige a permissão **Gerenciar Canais** (ou ser proprietário), para editar o widget. A opção 2 não exige login: é um link público no seu site. A opção 3 usa a API pública, com um token criado por quem tem a permissão **Integrações** (veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api)).
+</Note>
+
 ## Escolha a opção
 
 | Opção | Quando usar |
 | --- | --- |
-| **Pelo Widget da Kinbox** | Você já usa o balão de WhatsApp do Widget no seu site. |
+| **Pelo Widget da Kinbox** | Você já usa o [chat no seu site](/docs/canais/widget) e quer o balão de WhatsApp dele. |
 | **Com link próprio** | Você tem seu próprio botão ou link de WhatsApp no site. |
 | **Registrar a origem pela API** | Seu sistema já captura os parâmetros da campanha antes do contato chamar no WhatsApp. |
 
 ## Opção 1: pelo Widget
 
-1. Abra o widget em **Configurações** → **Chat** → **Canais** e vá ao cartão **Ajustes**.
-2. Ligue **Habilitar balão de WhatsApp**, preencha **Número** e **Texto padrão** e marque **Capturar informações de campanha**. **Usar somente WhatsApp** é opcional: ele só decide se o botão do chat continua aparecendo.
-3. Com **Capturar informações de campanha** marcada, aparece a opção **Enviar código de rastreio na mensagem**: marque-a e clique em **Salvar mudanças**.
+<Steps>
+  <Step title="Abra os ajustes do widget">
+    Vá em **Configurações** → **Chat** → **Canais**, clique no widget e vá ao cartão **Ajustes** (veja [Configurações do widget](/docs/canais/widget/configuracoes)).
+  </Step>
+  <Step title="Ligue o balão de WhatsApp">
+    Ligue **Habilitar balão de WhatsApp**, preencha **Número** e **Texto padrão** e marque **Capturar informações de campanha**. **Usar somente WhatsApp** é opcional: ele só decide se o botão do chat continua aparecendo.
+  </Step>
+  <Step title="Ligue o código de rastreio e salve">
+    Com **Capturar informações de campanha** marcada, aparece **Enviar código de rastreio na mensagem**: marque-a e clique em **Salvar mudanças**.
+  </Step>
+</Steps>
 
 Com **Capturar informações de campanha** e **Enviar código de rastreio na mensagem** marcadas, o balão passa pelo redirecionador com código **apenas quando a página do site tem parâmetros de campanha no endereço**. Sem parâmetros de campanha na página, o botão abre o WhatsApp diretamente, sem código.
 
 ## Opção 2: link próprio
 
-Monte o link no formato abaixo:
+<Steps>
+  <Step title="Monte o link">
+    Monte o link no formato abaixo:
 
-```text
-https://api4.kinbox.com.br/v3/tracking/whatsapp/<número>?text=<mensagem>&origin=<endereço do site>&tracking_code=1&<parâmetros da campanha>
-```
+    ```text
+    https://api4.kinbox.com.br/v3/tracking/whatsapp/<número>?text=<mensagem>&origin=<endereço do site>&tracking_code=1&<parâmetros da campanha>
+    ```
 
-| Parte do link | O que informar |
-| --- | --- |
-| `<número>` | Obrigatório. Telefone apenas com dígitos, incluindo DDI e DDD (por exemplo, `5511900000001`). Um número inválido retorna `"Número de WhatsApp inválido"` (HTTP 400). |
-| `text` | Opcional. Mensagem pronta para o cliente enviar (codificada para URL). |
-| `origin` | Opcional. Endereço do seu site (aparece como **Origem** nos detalhes da sessão). |
-| `tracking_code` | Opcional. Envie `1` (ou `true`) para incluir o código de rastreio na mensagem pronta. |
-| `<parâmetros da campanha>` | Qualquer outro parâmetro de campanha (como `utm_source`, `utm_campaign`, `gclid`), até 40 parâmetros (`text`, `phone` e `tracking_code` não entram nessa contagem). |
+    | Parte do link | O que informar |
+    | --- | --- |
+    | `<número>` | Obrigatório. Telefone apenas com dígitos, incluindo DDI e DDD (por exemplo, `5511900000001`). Um número inválido retorna `"Número de WhatsApp inválido"` (HTTP 400). |
+    | `text` | Opcional. Mensagem pronta para o cliente enviar (codificada para URL). |
+    | `origin` | Opcional. Endereço do seu site (aparece como **Origem** nos detalhes da sessão). Conta entre os 40 parâmetros. |
+    | `tracking_code` | Opcional. Envie `1` (ou `true`) para incluir o código de rastreio na mensagem pronta. |
+    | `<parâmetros da campanha>` | Qualquer outro parâmetro de campanha (como `utm_source`, `utm_campaign`, `gclid`). O link lê até 40 parâmetros, contando `origin` e `source_url`; `text`, `phone` e `tracking_code` não contam. |
+    | `source_url` | Opcional. Endereço completo da página de origem; também conta como dado de campanha. |
 
-O código de rastreio só é acrescentado quando o link tem **pelo menos um parâmetro de campanha**. `origin` sozinho não conta: sem nenhum parâmetro de campanha, o link abre o WhatsApp apenas com a mensagem, sem código. O link aceita até 30 cliques por minuto por visitante (acima disso retorna erro).
+    O código de rastreio só é acrescentado quando o link tem **pelo menos um parâmetro de campanha** ou `source_url`. `origin` sozinho não basta: sem parâmetro de campanha nem `source_url`, o link abre o WhatsApp apenas com a mensagem, sem código. O link aceita até 30 cliques por minuto por visitante (acima disso retorna erro).
 
-Exemplo em JavaScript para montar o link com os parâmetros de campanha da página atual (só os que você escolher):
+    Exemplo em JavaScript para montar o link com os parâmetros de campanha da página atual (só os que você escolher):
 
-```js
-const numero = "5511900000001";
-const daPagina = new URLSearchParams(window.location.search);
-const params = new URLSearchParams();
-for (const chave of ["utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
-  if (daPagina.get(chave)) params.set(chave, daPagina.get(chave));
-}
-params.set("text", "Olá, quero saber mais.");
-params.set("origin", "https://www.exemplo.com.br");
-params.set("tracking_code", "1");
+    ```js
+    const numero = "5511900000001";
+    const daPagina = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams();
+    for (const chave of ["utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid"]) {
+      if (daPagina.get(chave)) params.set(chave, daPagina.get(chave));
+    }
+    params.set("text", "Olá, quero saber mais.");
+    params.set("origin", "https://www.exemplo.com.br");
+    params.set("tracking_code", "1");
 
-const urlWhatsApp = `https://api4.kinbox.com.br/v3/tracking/whatsapp/${numero}?${params.toString()}`;
-```
+    const urlWhatsApp = `https://api4.kinbox.com.br/v3/tracking/whatsapp/${numero}?${params.toString()}`;
+    ```
+  </Step>
+  <Step title="Teste e publique">
+    Abra o link no navegador com um parâmetro de campanha (por exemplo, `utm_campaign=teste`) e confira se o WhatsApp abre com a mensagem e o código `(ref: ...)` no fim. Depois, ponha o link no botão do seu site.
+  </Step>
+</Steps>
 
 ## O código de rastreio
 
@@ -84,12 +104,17 @@ const urlWhatsApp = `https://api4.kinbox.com.br/v3/tracking/whatsapp/${numero}?$
 
 ## Registrar a origem pela API
 
-Ao [criar um contato](/api-reference/contacts/create-a-contact) ou [atualizar um contato](/api-reference/contacts/update-a-contact) pela API pública (com um [token de API](/docs/desenvolvedor/tokens-de-api)), envie `nextSessionReferral` com os parâmetros da campanha. A **próxima sessão aberta pelo contato** naquele telefone, em até 7 dias, recebe essa origem (vale uma vez; sessões iniciadas por um membro em chat ativo não recebem).
-
-O contato precisa ter um telefone válido — caso contrário a API responde `"Informe um telefone válido para usar nextSessionReferral"` (HTTP 400). Ao atualizar um contato sem informar novo telefone, a API usa o telefone já cadastrado. Veja também os endpoints de contatos em [Listar contatos](/api-reference/contacts/list-all-contacts).
+<Steps>
+  <Step title="Envie a origem ao criar ou atualizar o contato">
+    Ao [criar um contato](/api-reference/contacts/create-a-contact) ou [atualizar um contato](/api-reference/contacts/update-a-contact) pela API pública (com um [token de API](/docs/desenvolvedor/tokens-de-api)), envie `nextSessionReferral` com os parâmetros da campanha. O contato precisa ter um telefone válido; caso contrário a API responde `"Informe um telefone válido para usar nextSessionReferral"` (HTTP 400). Ao atualizar sem informar telefone, a API usa o telefone já cadastrado.
+  </Step>
+  <Step title="Aguarde a próxima sessão do contato">
+    A **próxima sessão aberta pelo contato** naquele telefone, em até 7 dias, recebe essa origem (vale uma vez; sessões iniciadas por um membro em chat ativo não recebem). Veja também os endpoints de contatos em [Listar contatos](/api-reference/contacts/list-all-contacts).
+  </Step>
+</Steps>
 
 ## Problemas comuns
 
-- **A mensagem abriu sem código `(ref: ...)`.** O link (ou a página do site, no Widget) não tinha parâmetros de campanha no endereço, ou `tracking_code=1` não foi enviado.
+- **A mensagem abriu sem código `(ref: ...)`.** O link (ou a página do site, no Widget) não tinha parâmetro de campanha nem `source_url` (só `origin` não basta), ou `tracking_code=1` não foi enviado.
 - **A campanha não apareceu na sessão.** O cliente apagou o código antes de enviar, passaram-se mais de 7 dias desde a geração do código, o código já tinha sido usado ou a sessão já possuía uma origem registrada.
 - **Apareceu "Número de WhatsApp inválido".** Revise o número no link: use apenas dígitos, com DDI e DDD (por exemplo, `5511900000001`).

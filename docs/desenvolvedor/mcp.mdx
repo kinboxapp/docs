@@ -24,7 +24,7 @@ Com o MCP, você liga o Claude, o ChatGPT e outros assistentes de IA ao seu work
 Não confunda o MCP com o [Agente de IA](/docs/agente-de-ia/visao-geral) da Kinbox: o Agente de IA atende seus contatos dentro da plataforma, enquanto o MCP conecta um assistente de IA seu, de fora, ao workspace.
 
 <Note>
-  Quem pode: para ver a tela **MCP** e a lista de conexões, você precisa da permissão **Integrações** ou ser o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). A IA age sempre em nome de quem autorizou, com o papel dessa pessoa (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)), e a conexão vale para o workspace aberto no navegador na hora de autorizar.
+  Quem pode: para ver a tela **MCP** e a lista de conexões, você precisa da permissão **Integrações** ou ser o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). No workspace da conexão, a IA age em nome de quem autorizou, com o papel dessa pessoa (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)) (nos workspaces clientes de um parceiro, a IA age como proprietário do cliente, dentro das permissões de parceiro), e a conexão vale para o workspace aberto no navegador na hora de autorizar.
 </Note>
 
 ## Antes de começar
@@ -154,11 +154,12 @@ Vá em **Configurações** → **Integrações** → **MCP**. O cartão **Como c
 
 ## O que a IA consegue fazer
 
-A IA só enxerga as ferramentas das permissões que você marcou, e cada ação respeita o papel de quem autorizou:
+A IA só enxerga as ferramentas das permissões que você marcou, e cada ação respeita o papel de quem autorizou no workspace da conexão:
 
 - **Ver conversas, contatos e negócios:** consultar conversas, relatórios, contatos, negociações, tarefas, campanhas, equipe e configurações.
 - **Alterar conversas, contatos e negócios:** organizar conversas (resolver, atribuir, tags, notas), cuidar de contatos, negociações e tarefas, pausar ou excluir campanhas e ajustar equipe e configurações.
-- **Enviar mensagens aos seus clientes:** responder e iniciar conversas, iniciar bot numa conversa, agendar mensagens, criar campanhas, editar a mensagem ou retomar campanhas e ligar bots, agentes, cenários ou automações.
+- **Enviar mensagens aos seus clientes:** responder e iniciar conversas.
+- **Alterar e Enviar juntas** (as duas permissões): iniciar bot numa conversa, agendar ou editar mensagens agendadas, criar campanhas (WhatsApp por QR Code ou SMS), editar a mensagem ou retomar campanhas, e criar, ligar ou editar bots, agentes, cenários ou automações que podem rodar. Rascunhos e desligar pedem só **Alterar**.
 
 Ações que não têm volta (como excluir ou remover algo) só acontecem depois que a IA confirma com você. A IA não cancela nem troca o plano, não envia mensagens em conversas resolvidas há mais de 30 dias e, no WhatsApp oficial fora da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas), envia apenas templates aprovados. Há também limites de uso para chamadas e envios.
 

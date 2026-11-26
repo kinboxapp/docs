@@ -53,7 +53,7 @@ Pause um fluxo de bot enquanto o seu sistema processa uma ação fora da Kinbox 
     | `customerPlatformId` | Sim | Número da conversa que está aguardando o webhook. |
     | `token` | Sim | O **Token v0** do workspace (aceita com ou sem `Bearer ` na frente). Não use o token `kb_live_`. |
     | `text` | Não | Mensagem de texto que o bot envia ao contato antes de continuar o fluxo. |
-    | `customFieldsList` | Não | Lista de itens `{ "placeholder": "<chave>", "value": "<valor>" }` gravados como campos personalizados **da sessão**. Só os 3 primeiros itens são lidos; os sem `placeholder` ou sem `value` são pulados. |
+    | `customFieldsList` | Não | Lista de itens `{ "placeholder": "<chave>", "value": "<valor>" }` gravados como campos personalizados **da sessão**. Só os 3 primeiros itens são lidos; os sem `placeholder` ou sem `value` são pulados (valores como `false` e `0` também são ignorados). |
 
     Exemplo de chamada:
 
@@ -76,10 +76,10 @@ Pause um fluxo de bot enquanto o seu sistema processa uma ação fora da Kinbox 
 
 O bot continua a execução a partir do bloco ligado logo depois de **Esperar um tempo**. Os campos personalizados da sessão gravados por `customFieldsList` podem ser usados nos blocos seguintes — por exemplo, em um bloco **Decisão** (veja [Blocos do bot](/docs/bot/blocos-do-bot)). Se você gravar um campo do tipo **Json**, veja como ler suas propriedades em [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
 
-Chame o endereço uma única vez para cada vez que o bot chegar ao bloco **Esperar um tempo**.
+Chame o endereço uma única vez para cada vez que o bot chegar ao bloco **Esperar um tempo**: chamar de novo faz o bot repetir o trecho a partir desse bloco.
 
 ## Quando a chamada não faz nada ou retorna erro
 
-- **Resposta HTTP 200 com `{}`:** essa resposta sozinha não confirma que o bot continuou. A chamada não faz nada se a conversa não tiver sessão aberta, se a sessão for de outro workspace ou se o bot não estiver esperando o webhook naquela conversa. Confira na conversa se o bot seguiu.
+- **Resposta HTTP 200 com `{}`:** essa resposta sozinha não confirma que o bot continuou. A chamada não faz nada se a conversa não tiver sessão aberta, se a sessão for de outro workspace ou se não houver uma espera registrada para essa conversa. Confira na conversa se o bot seguiu.
 - **Token errado (por exemplo, um token `kb_live_`):** a chamada responde com erro e o bot não continua. Use o **Token v0**.
 - **Erro `token is required` ou `customerPlatformId is required`:** um dos dois campos obrigatórios não foi enviado no corpo JSON.
