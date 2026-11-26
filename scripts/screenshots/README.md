@@ -52,6 +52,8 @@ bun capturar.ts --explorar /settings/channels/new/whatsapp/web --clicar 'text=Op
                                    # (aceita --workspace <nome>), para achar seletores antes de escrever o item
 ```
 
+Passos aceitos no item: `esperar`, `clicar`, `digitar` ({seletor, texto}), `tecla`, `pausa` (ms), `passar` (passa o mouse sobre o seletor) e `arrastar` ({de, para, x, y}: arrasta um elemento até outro; `x`/`y` soltam num ponto dentro de `para`, útil para puxar a seta de um bloco do fluxograma e soltar no vazio).
+
 Seletores que costumam funcionar no app:
 
 - Painel lateral (drawer): `alvo` com `.ant-drawer-header` e um elemento do fim do conteúdo; o recorte vai do topo do painel até ele, sem o espaço vazio.

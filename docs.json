@@ -95,6 +95,27 @@
             ]
           },
           {
+            "group": "Automação e IA",
+            "icon": "robot",
+            "pages": [
+              {
+                "group": "Agentes de IA",
+                "pages": [
+                  "docs/agente-de-ia/visao-geral",
+                  "docs/agente-de-ia/criando-seu-agente-de-ia",
+                  "docs/agente-de-ia/conhecimento",
+                  "docs/agente-de-ia/ferramentas",
+                  "docs/agente-de-ia/fluxograma-e-etapas",
+                  "docs/agente-de-ia/acoes-do-fluxograma",
+                  "docs/agente-de-ia/testar",
+                  "docs/agente-de-ia/conectar-canais",
+                  "docs/agente-de-ia/agente-de-voz",
+                  "docs/agente-de-ia/problemas-comuns"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Campanhas e marketing",
             "icon": "bullhorn",
             "pages": [
@@ -116,6 +137,16 @@
             "group": "Administração",
             "icon": "gear",
             "pages": [
+              {
+                "group": "Membros e permissões",
+                "pages": [
+                  "docs/configuracoes-no-workspace/gerenciar-membros",
+                  "docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios",
+                  "docs/administracao/licencas-e-propriedade",
+                  "docs/administracao/referencia-de-permissoes",
+                  "docs/administracao/problemas-com-membros"
+                ]
+              },
               {
                 "group": "Assinatura e cobrança",
                 "pages": [
@@ -652,6 +683,38 @@
     {
       "source": "/docs/conversas/clientes-contatos-e-organizacoes",
       "destination": "/docs/conceitos/contatos-e-negocios"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-tags",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",
+      "destination": "/docs/agente-de-ia/visao-geral"
     }
   ]
 }
