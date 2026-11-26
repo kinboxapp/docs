@@ -62,10 +62,10 @@ Detalhes de referência da seção Assinatura. Páginas para pessoas: [Assinatur
 ## Status, avisos e carência
 
 - **Status do plano:** **Ativo**, **Expirado** (passou da data em **Expira em**) e **Cancelado**.
-- **Aviso no topo da página Assinatura** (assinatura **PRO** ativa, com vencimento futuro):
+- **Aviso no topo da página Assinatura** (assinatura **PRO** não cancelada, com vencimento futuro):
   - cartão de crédito: "Sua assinatura será renovada automaticamente em \<data\>, daqui a \<tempo\>.";
   - boleto ou Pix: "Sua assinatura vence em \<data\>, daqui a \<tempo\>.".
-- **Carência de 3 dias:** depois de **Expira em**, no teste grátis e na assinatura **PRO**, as restrições de assinatura vencida só começam 3 dias depois. Isso vale também para assinatura cancelada: o que conta é a data em **Expira em**.
+- **Carência de 3 dias:** depois de **Expira em**, no teste grátis e na assinatura **PRO**, as restrições de assinatura vencida só começam no 4º dia depois do vencimento. Isso vale também para assinatura cancelada: o que conta é a data em **Expira em**.
 
 ### Faixas no topo do app
 
@@ -85,9 +85,9 @@ A faixa da carência da assinatura **PRO** não aparece para membros com a restr
 | --- | --- |
 | 5 dias antes de **Expira em** | A fatura da mensalidade é gerada e o e-mail "Kinbox - Fatura da assinatura" vai para os **E-mails de cobrança**. No cartão, a cobrança é automática. |
 | Em **Expira em**, sem pagamento | O status passa a **Expirado** na página **Assinatura**. Começa a carência. |
-| Até 3 dias depois de **Expira em** | As restrições de assinatura vencida ainda não começam. |
-| Mais de 3 dias depois de **Expira em** | O campo de mensagem some das conversas na **Caixa de entrada**. Convidar membro ou criar canal de WhatsApp ou Instagram mostra "Assinatura expirada". |
-| 7 dias depois de **Expira em** | Os canais de **WhatsApp por QR Code** (**Express** e **Clássica**) são desconectados e saem da lista de canais. Vale para teste grátis e **PRO**, exceto em workspaces de parceiros. O WhatsApp oficial não entra nessa regra. |
+| Do 1º ao 3º dia depois de **Expira em** | As restrições de assinatura vencida ainda não começam. |
+| A partir do 4º dia depois de **Expira em** | O campo de mensagem some das conversas na **Caixa de entrada**. Convidar membro ou criar canal de WhatsApp ou Instagram mostra "Assinatura expirada". |
+| 7 dias depois de **Expira em** | Os canais de **WhatsApp por QR Code** (**Express** e **Clássica**) são desconectados e saem da lista de canais. Vale para teste grátis e **PRO**, exceto no workspace do próprio parceiro. O WhatsApp oficial não entra nessa regra. |
 
 - Para usar de novo um número de WhatsApp por QR Code que saiu da lista, é preciso conectá-lo outra vez (veja [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app)).
 - **E-mails:** não há e-mail avisando que a assinatura venceu; o aviso é a faixa no topo do app. Os e-mails que vão para os **E-mails de cobrança** são "Kinbox - Assinatura realizada com sucesso", "Kinbox - Assinatura atualizada", "Kinbox - Assinatura cancelada" e "Kinbox - Fatura da assinatura".
@@ -112,7 +112,7 @@ A faixa da carência da assinatura **PRO** não aparece para membros com a restr
 
 | Mensagem | Quando aparece |
 | --- | --- |
-| "Assinatura expirada" | Convidar membro ou criar canal de WhatsApp ou Instagram mais de 3 dias depois de **Expira em**. |
+| "Assinatura expirada" | Convidar membro ou criar canal de WhatsApp ou Instagram a partir do 4º dia depois de **Expira em**. |
 | "Número limite de operadores atingido" | Convidar membro quando todas as licenças estão em uso, ou contratar menos licenças que os membros ativos. A mensagem diz "operadores", mas se refere às licenças de membro. |
 | "Você precisa remover canais de Whatsapp para prosseguir com a contratação" | Criar canal de WhatsApp acima das linhas do plano, ou contratar menos linhas que os canais conectados. |
 | "Você precisa remover canais de Instagram para prosseguir com a contratação" | O mesmo, para Instagram. |
@@ -128,15 +128,15 @@ A faixa da carência da assinatura **PRO** não aparece para membros com a restr
 - **Onde:** a seção **Faturas** da página **Assinatura** mostra as 3 mensalidades mais recentes. **Ver tudo** abre a lista completa, com as abas **Tudo**, **Pago** e **Não pago** e a busca por ID. Não aparece no teste grátis. Recargas de saldo ficam no **Histórico de recargas**; compras de SMS, no **Histórico SMS**.
 - **Status:** **Pago**, **Não pago**, **Falha ao pagar** e **Cancelado**. Enquanto a assinatura está cancelada, toda fatura não paga aparece como **Cancelado**.
 - **Erro do cartão:** clicar em **Falha ao pagar** abre a janela com "Erro retornado ao gerar a cobrança:" e o motivo, ou "Não foi possível identificar a mensagem de erro desta cobrança.".
-- **Abrir a fatura:** **Ver** aparece ao passar o mouse na linha da fatura, na página **Assinatura**; na lista de **Faturas**, basta clicar na linha. A fatura abre numa aba nova e serve como comprovante.
+- **Abrir a fatura:** **Ver** aparece ao passar o mouse na linha da fatura, na página **Assinatura**; na lista de **Faturas**, basta clicar na linha. A fatura abre numa aba nova e pode ser vista ou impressa, inclusive quando ainda não foi paga (o campo **Valor pago** mostra um traço). Use como comprovante de pagamento só quando constar como **Pago**.
 - **Menu ...:** só aparece quando a fatura tem boleto, Pix, nota fiscal ou a opção de nova tentativa. Opções possíveis: **Ver fatura**, **Ver Boleto** (abre o boleto; quando o boleto ainda não foi gerado, a opção é **Visualizar boleto**), **Copiar código do boleto**, **Ver QR code**, **Baixar nota fiscal** e **Tentar pagar novamente**. Fatura paga no cartão e sem nota fiscal não tem esse menu, só **Ver**.
 - **Nota fiscal:** a opção **Baixar nota fiscal** aparece na fatura quando o PDF estiver disponível. Quando não aparecer, fale com o suporte para pedir a nota fiscal.
-- **Geração:** a mensalidade é gerada 5 dias antes de **Expira em**, para assinatura **PRO** ativa. Paga a fatura, **Expira em** avança um mês a partir do vencimento anterior, não da data do pagamento.
-- **Vencimento do Pix da mensalidade:** 6 dias depois do vencimento da assinatura. As restrições de assinatura vencida começam 3 dias depois do vencimento, então pagar o Pix perto da data de vencimento dele pode deixar o workspace alguns dias sem responder conversas.
-- **Gerar boleto agora** / **Pagar agora:** aparecem na seção **Faturas** só quando a assinatura **PRO** está ativa, no boleto ou no Pix, no período atual da assinatura e sem fatura desse período paga ou aguardando pagamento. Respostas possíveis: "Geração antecipada disponível apenas para assinaturas ativas", "Geração antecipada disponível apenas para boleto e Pix", "Já existe uma fatura em aberto ou paga para este período". Se o botão não aparecer e a fatura não estiver na lista, o caminho é falar com o suporte.
+- **Geração:** a mensalidade é gerada 5 dias antes de **Expira em**, para assinatura **PRO** não cancelada. Paga a fatura, **Expira em** avança um mês a partir do vencimento anterior, não da data do pagamento.
+- **Vencimento do Pix da mensalidade:** 6 dias depois do vencimento da assinatura. As restrições de assinatura vencida começam no 4º dia depois do vencimento, então pagar o Pix perto da data de vencimento dele pode deixar o workspace alguns dias sem responder conversas.
+- **Gerar boleto agora** / **Pagar agora:** aparecem na seção **Faturas** só quando a assinatura **PRO** não está cancelada, é no boleto ou no Pix, a data em **Expira em** está entre 4 dias atrás e 1 mês à frente, e não há fatura desse período paga ou aguardando pagamento. Respostas possíveis: "Geração antecipada disponível apenas para assinaturas ativas", "Geração antecipada disponível apenas para boleto e Pix", "Já existe uma fatura em aberto ou paga para este período". Se o botão não aparecer e a fatura não estiver na lista, o caminho é falar com o suporte.
 - **Tentar pagar novamente** / **Pagar novamente:**
   - A Kinbox não cobra de novo sozinha um cartão recusado.
-  - A opção só aparece na mensalidade com **Falha ao pagar** mais recente do período atual, com a assinatura **PRO** ativa no cartão. Se não aparecer, o caminho é falar com o suporte.
+  - A opção só aparece quando a mensalidade mais recente está com **Falha ao pagar**, é do período atual e a assinatura **PRO** não cancelada está no cartão. Se não aparecer, o caminho é falar com o suporte.
   - Na janela, o cartão atual não pode ser excluído. Aprovado, o cartão escolhido passa a ser o das próximas cobranças.
   - Ao enviar: "Pagamento enviado. A confirmação pode levar alguns instantes.". A fatura recusada continua na lista como **Falha ao pagar** e a nova entra na lista.
   - Até 5 tentativas a cada 5 minutos por workspace. Mensagens: "Não foi possível tentar o pagamento. Tente novamente em alguns minutos.", "Não foi possível processar o pagamento com o cartão informado", "Muitas tentativas de pagamento, tente novamente em alguns minutos".
@@ -144,7 +144,7 @@ A faixa da carência da assinatura **PRO** não aparece para membros com a restr
 ## Carteira: saldo e créditos de SMS
 
 - **Dois saldos separados:** **Saldo disponível** (reais) e **Créditos de SMS** são comprados à parte, os dois só por Pix. O saldo da carteira não compra créditos de SMS.
-- **Recarga de saldo:** **Valor a adicionar** começa preenchido com R$ 500,00 e aceita a partir de R$ 5. Na janela **Pagar com Pix**, a tela confere o pagamento a cada 10 segundos enquanto está aberta; ao confirmar: "Pagamento confirmado. Crédito adicionado.".
+- **Recarga de saldo:** **Valor a adicionar** começa preenchido com R$ 500,00 e aceita a partir de R$ 5,00. Na janela **Pagar com Pix**, a tela confere o pagamento a cada 10 segundos enquanto está aberta; ao confirmar: "Pagamento confirmado. Crédito adicionado.".
 - **Histórico de recargas:** status **Pago** e **Aguardando pagamento**; o botão da linha reabre o QR Code; **...** → **Exportar** (CSV ou XLSX); **Ver relatório de uso** para quem tem permissão de relatórios.
 - **Extrato do saldo:** créditos e débitos com os filtros **Criado entre** e **Tipo** (**Crédito** ou **Débito**). O atalho **Comprar créditos** do copiloto, quando aparece **Seus créditos acabaram**, abre esse extrato. Para recarregar, use **Adicionar saldo** em **Configurações** → **Assinatura**.
 - **Créditos de SMS:** pacotes de 1 mil a 1 milhão de créditos. Depois do Pix pago, a compra aparece como **Pago, aguardando liberação** no **Histórico SMS** até os créditos entrarem, o que pode levar até 1 dia útil. Para liberação imediata ou problema, fale com o suporte. Status: **Pago**, **Pago, aguardando liberação**, **Aguardando pagamento**. Mensagens: "O valor mínimo da compra é R$ 5,00" e "Compra de novas SMS's está desabilitada no momento".
@@ -153,7 +153,7 @@ A faixa da carência da assinatura **PRO** não aparece para membros com a restr
 ## Alerta de saldo baixo
 
 - **Onde fica:** no topo do **Histórico de recargas** (clique em **Saldo disponível**), botão **Configurar alerta de saldo** ou **Alerta de saldo: \<valor\>**.
-- **Valores:** R$ 10 por padrão quando nunca foi configurado; 0 desativa.
+- **Valores:** R$ 10,00 por padrão quando nunca foi configurado; 0 desativa. Com consumo muito baixo, a previsão de duração pode ser de milhares de dias.
 - **Permissão:** salvar exige a permissão **Assinatura** ou ser o proprietário. Sem ela: "Você não tem permissão para gerenciar o financeiro".
 - **Frequência:** a Kinbox verifica o saldo a cada 30 minutos.
 - **Quando avisa:** o saldo está abaixo do limite **e**, no consumo médio diário dos últimos 14 dias, acaba em até 30 dias. Workspace sem consumo nos últimos 14 dias não recebe aviso, mesmo abaixo do limite.

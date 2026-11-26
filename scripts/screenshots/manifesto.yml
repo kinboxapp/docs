@@ -455,7 +455,11 @@
     - clicar: 'button:has-text("Alerta de saldo")'
     - esperar: '.ant-modal-content >> text=Avisar quando o saldo ficar abaixo de'
     - pausa: 800
-  alvo: '.ant-modal-content'
+  # Recorte até a linha "Saldo atual": a previsão depende do consumo do workspace de documentação e muda.
+  alvo:
+    - '.ant-modal-content .ant-modal-title'
+    - '.ant-modal-content .ant-modal-close'
+    - '.ant-modal-content .bg-base-200 > div:first-child'
   mascarar: []
   arquivo: images/ajuda/assinatura/alerta-de-saldo.webp
   paginas:

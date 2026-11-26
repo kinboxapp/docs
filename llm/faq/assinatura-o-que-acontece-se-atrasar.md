@@ -1,6 +1,6 @@
 ---
 title: O que acontece se eu atrasar o pagamento?
-description: Há 3 dias de carência após o vencimento; depois o campo de mensagem some e não dá para adicionar membros nem canais, e após 7 dias os canais de WhatsApp por QR Code são excluídos.
+description: Há 3 dias de carência após o vencimento; a partir do 4º dia o campo de mensagem some e não dá para convidar membros nem criar canais de WhatsApp ou Instagram, e 7 dias depois os canais de WhatsApp por QR Code saem da lista.
 keywords: [atrasar pagamento, assinatura vencida, boleto vencido, carência, bloqueio, quantos dias bloqueia, perco minhas conversas, canais excluídos, pagamento atrasado]
 publico: llm
 tipo: faq
@@ -26,7 +26,7 @@ O que acontece se eu atrasar o pagamento?
 
 ## Resposta
 
-Depois do vencimento há **3 dias** de carência; passado esse prazo, o campo de mensagem some das conversas e não dá para convidar membros nem criar canais de WhatsApp ou Instagram. **7 dias** depois do vencimento, os canais de WhatsApp por QR Code são desconectados e saem da lista de canais (exceto em workspaces de parceiros).
+Depois do vencimento há **3 dias** de carência; a partir do 4º dia, o campo de mensagem some das conversas e não dá para convidar membros nem criar canais de WhatsApp ou Instagram. **7 dias** depois do vencimento, os canais de WhatsApp por QR Code são desconectados e saem da lista de canais (exceto no workspace do próprio parceiro).
 
 - Pagar a fatura em **Configurações** → **Assinatura** → **Faturas** atualiza a data em **Expira em** e tira essas restrições.
 - A Kinbox não envia e-mail avisando que a assinatura venceu; o aviso aparece na faixa no topo do app.
