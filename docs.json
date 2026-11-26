@@ -11,6 +11,24 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Central de ajuda",
+        "groups": [
+          {
+            "group": "Conceitos",
+            "icon": "lightbulb",
+            "pages": [
+              "docs/conceitos/visao-geral",
+              "docs/conceitos/workspace-membros-e-papeis",
+              "docs/conceitos/conversas-e-sessoes",
+              "docs/conceitos/contatos-e-negocios",
+              "docs/conceitos/automacao-e-ia",
+              "docs/conceitos/saldo-e-creditos",
+              "docs/conceitos/glossario"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Novidades",
         "pages": [
           "novidades"

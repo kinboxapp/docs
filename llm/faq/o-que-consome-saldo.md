@@ -1,0 +1,58 @@
+---
+title: O que gasta o saldo da carteira?
+description: O saldo da carteira paga os recursos de IA (agentes, copiloto, análises, transcrição) e as ligações; SMS usa créditos próprios e templates do WhatsApp oficial não descontam da carteira.
+keywords: [saldo, carteira, consumo, o que gasta, créditos, saldo diminuindo, custo da ia, sms, template]
+publico: llm
+tipo: faq
+fontes:
+  - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
+  - api:src/modules/agents/agent.runner.ts
+  - api-v0:server/controllers/WbaCloudController.js
+  - web:src/pages/settings/billing/BillingV2.tsx
+codigo:
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - web:src/pages/settings/billing/AddBalanceModal/index.tsx
+  - web:src/pages/settings/billing/WalletAlertModal.tsx
+  - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
+  - web:src/pages/settings/copilot/CopilotChatDrop.tsx
+  - api:src/modules/agents/agent.runner.ts
+  - api:src/modules/signals/signals.definitions.ts
+  - api:src/modules/voip/voip.service.ts
+  - api:src/modules/whatsapp-calling/whatsapp-calling.service.ts
+  - api-v0:server/auxiliary/walletDefaults.js
+verificado_em: 2026-11-26
+---
+
+## Pergunta
+
+O que gasta o saldo da carteira?
+
+## Resposta
+
+O saldo da carteira paga os recursos de inteligência artificial (agentes de IA, copiloto, análises e transcrição) e as ligações; o envio de SMS usa **Créditos de SMS** separados.
+
+O consumo do saldo se divide nestas categorias:
+
+- **Agente de IA**: respostas dos agentes de IA (inclusive quando usados pelo bloco **Agente de IA** do bot) e processamento da base de conhecimento.
+- **Copiloto**: comandos, chat do copiloto, avaliadores e revisor de mensagens (apenas quando ativados).
+- **Análises** (recursos do **Copiloto**, quando ligados): **Análise de sentimento**, **Lead score**, **Classificação de intenção**, **Cliente preso no bot**, **Sugestão de retorno**, **Aviso ao resolver** e **Não reabrir por agradecimento**.
+- **Voz e áudio**: transcrição de áudios, ligações do WhatsApp (minutos iniciados, gravação e atendimento por IA; ligações não atendidas não cobram), transcrição e resumo de chamadas de voz.
+- **Outros**: ligações por telefone (VoIP), minutos excedentes do plano de ligações do WhatsApp e geração de FAQ a partir das conversas.
+
+**O que não gasta saldo**: envios de SMS (usam **Créditos de SMS**), templates do WhatsApp oficial (não descontam da carteira), bots sem o bloco **Agente de IA**, **Automações**, **Cenários** e **Atribuição automática**.
+
+Quando o saldo fica em R$ 1,00 ou menos, o agente de IA para de responder (no teste do agente aparece **Saldo Insuficiente**). O copiloto passa a mostrar **Seus créditos acabaram** (nas telas do copiloto, "créditos" é o saldo da carteira) e as ligações por telefone são encerradas se o saldo acabar. Em agentes gerenciados por um parceiro, o consumo pode sair da carteira do parceiro em vez da carteira do workspace.
+
+Para acompanhar os gastos, consulte **Relatórios** → **Saldo** (por categoria) e o **Extrato do saldo**. A recarga é feita por **Pix** em **Configurações** → **Assinatura** → **Carteira** → **Adicionar saldo** (**Assinatura** só aparece para quem tem acesso ao financeiro).
+
+Veja mais detalhes em [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos).
+
+## Variações
+
+- por que meu saldo está diminuindo
+- o que desconta da carteira da kinbox
+- a inteligência artificial da kinbox cobra saldo
+- quanto gasta o agente de ia
+- sms usa o saldo da carteira
+- template do whatsapp oficial desconta do saldo
+- o que para de funcionar quando o saldo acaba

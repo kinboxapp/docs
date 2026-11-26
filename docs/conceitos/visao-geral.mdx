@@ -1,0 +1,99 @@
+---
+title: Como a Kinbox funciona
+description: As peças da Kinbox (workspace, canais, contatos, conversas, membros, funis, automação e IA, saldo) e como elas se ligam.
+keywords: [como funciona, visão geral, o que é a kinbox, primeiros conceitos, menu, caixa de entrada, onde fica, estrutura da kinbox]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/layouts/BaseLayout.tsx
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/channels/AddChannel.tsx
+  - api-v0:server/modules/chat/auxiliary/sendMessageByClient.js
+codigo:
+  - web:src/layouts/BaseLayout.tsx
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/inbox/index.tsx
+  - web:src/components-old/header/WorkspaceDrop.tsx
+  - web:src/pages/settings/channels/AddChannel.tsx
+verificado_em: 2026-11-26
+---
+
+A Kinbox é uma plataforma de atendimento que reúne os canais de mensagem da sua empresa em uma única **Caixa de entrada**, junto com CRM, automações, inteligência artificial e relatórios.
+
+## As peças da Kinbox
+
+Cada parte da plataforma se conecta no fluxo de atendimento:
+
+- **Workspace** (na tela, **ambiente**): é o espaço da sua empresa na Kinbox. Canais, membros, contatos, conversas, plano e saldo pertencem a um workspace. Veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
+- **Canais**: são as contas de mensagem ligadas ao workspace — como WhatsApp, Instagram, Facebook, Telegram, E-mail, SMS, Widget e canal Customizado — gerenciadas em **Configurações** → **Chat** → **Canais**.
+- **Contato e conversa**: quando alguém envia a primeira mensagem em um canal, a Kinbox cria o contato e a conversa automaticamente. Cada canal usado por um contato forma uma conversa própria. Veja [Contatos, organizações e negociações](/docs/conceitos/contatos-e-negocios) e [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes).
+- **Caixa de entrada e sessão**: é onde os membros atendem as conversas, organizadas nos atalhos **Abertos**, **Meus**, **Seguindo** e **Arquivados**. Cada atendimento dentro da conversa é uma sessão com número de protocolo próprio. Veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes).
+
+<Frame caption="Caixa de entrada com o menu lateral de ícones à esquerda, o painel Chat no meio e a lista de conversas em Abertos à direita">
+  <img src="/images/ajuda/conceitos/caixa-de-entrada.webp" alt="Tela da Caixa de entrada da Kinbox mostrando o menu lateral com ícones, o painel Chat com os atalhos Abertos, Meus, Seguindo, Arquivados e Filtros, e a lista de conversas abertas com tags" />
+</Frame>
+
+- **Membros, grupos e papéis**: membros são as pessoas com acesso ao workspace, organizados em grupos (como equipes de vendas ou suporte) e com um papel de permissão que define o que cada pessoa vê e faz. As conversas podem ser atribuídas a um membro e a um grupo. Veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
+- **Funis e negociações**: formam o CRM da Kinbox, onde você acompanha vendas ou processos organizados em etapas. Cada negociação liga contato, organização e conversa. Veja [Contatos, organizações e negociações](/docs/conceitos/contatos-e-negocios).
+- **Automação e IA**: bot, automações, cenários, agentes de IA e copiloto ajudam a atender contatos, executar regras automáticas, integrar sistemas e apoiar o time. Veja [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia).
+- **Relatórios**: o menu **Relatórios** reúne os indicadores do workspace para quem tem permissão de acesso.
+- **Saldo**: recursos de inteligência artificial e ligações consomem o saldo em reais da carteira do workspace. Veja [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos).
+
+## Onde fica cada coisa
+
+O menu lateral exibe apenas ícones; o nome de cada item aparece quando você passa o mouse sobre ele. **Caixa de entrada**, **Tarefas** e **Configurações** aparecem para todos. Os outros itens só aparecem se o seu papel tiver a permissão correspondente:
+
+| Item do menu | Para que serve |
+| --- | --- |
+| **Caixa de entrada** | Atender as conversas recebidas pelos canais conectados. |
+| **Funis** | Acompanhar negociações nas etapas dos funis de CRM. |
+| **Relatórios** | Consultar os relatórios do workspace, inclusive o uso de saldo. |
+| **Tarefas** | Gerenciar suas tarefas pendentes e concluídas. |
+| **Clientes** | Gerenciar contatos e organizações com quem você se relaciona. |
+| **Campanhas** | Enviar mensagens em massa. |
+| **Metas** | Acompanhar objetivos definidos para o time. |
+| **Configurações** | Ajustar seu perfil e as configurações do workspace. |
+| **Parceria** | Aparece apenas em workspaces parceiros. |
+
+Outros acessos fixos da interface:
+
+- **Botão do ambiente** (no topo da tela): mostra o nome do ambiente atual, permite alternar entre workspaces com o mesmo login e criar um novo em **Adicionar ambiente**.
+- **Salas** (no topo da tela): abre o chat interno do time.
+- **Academia** (no rodapé do menu lateral): leva às trilhas de treinamento da Kinbox.
+
+### Seções de Configurações
+
+Dentro de **Configurações**, os ajustes são agrupados por tema (cada item depende da permissão do membro):
+
+- **Configurações**: **Perfil** e **Notificações**.
+- **Ambiente**: **Geral**, **Membros**, **Permissões**, **Grupos**, **Frases rápidas**, **Tags**, **Horários** e **Campos personalizados**.
+- **Chat**: **Voip** e **Canais**.
+- **Agenda**: **Serviços**, **Local** e **Lembretes** (disponível quando a Agenda está liberada).
+- **Automação**: **Atribuição automática**, **Automações**, **Cenários**, **WhatsApp API**, **Bot**, **Agentes de IA**, **Copiloto** e **Base de conhecimento**.
+- **CRM**: **Funis** e **Produtos**.
+- **Marketing**: **Tracking**.
+- **Integrações**: **Apps**, **Plugins**, **API Tokens** e **MCP**.
+- No fim do menu: **Assinatura** (somente para quem tem acesso ao financeiro) e **Auditoria**.
+
+## Explore os conceitos
+
+<CardGroup cols={2}>
+  <Card title="Workspace, membros e papéis" href="/docs/conceitos/workspace-membros-e-papeis">
+    O que é o workspace (ambiente), o proprietário, as licenças, os papéis de permissão e os grupos.
+  </Card>
+  <Card title="Conversas, sessões e status" href="/docs/conceitos/conversas-e-sessoes">
+    A diferença entre conversa, sessão e protocolo e como funcionam os status da Caixa de entrada.
+  </Card>
+  <Card title="Contatos, organizações e negociações" href="/docs/conceitos/contatos-e-negocios">
+    Como contatos, organizações, negociações, funis e etapas se ligam às conversas.
+  </Card>
+  <Card title="Bot, automações, cenários e agentes de IA" href="/docs/conceitos/automacao-e-ia">
+    O que cada ferramenta faz e como escolher a opção certa para cada caso.
+  </Card>
+  <Card title="Saldo da carteira e créditos" href="/docs/conceitos/saldo-e-creditos">
+    O que consome o saldo da carteira, o que usa créditos de SMS e o que acontece quando o saldo acaba.
+  </Card>
+  <Card title="Glossário" href="/docs/conceitos/glossario">
+    Lista rápida dos termos usados na Kinbox e como eles aparecem na tela.
+  </Card>
+</CardGroup>
