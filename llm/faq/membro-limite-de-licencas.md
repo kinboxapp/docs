@@ -23,12 +23,12 @@ Por que não consigo convidar mais um membro?
 
 Porque todas as licenças de membro do plano já estão em uso, porque o e-mail já está no workspace ou porque a assinatura está vencida. O mais comum é o limite de licenças.
 
-Todo membro com acesso ativo ocupa uma licença — inclusive o proprietário do workspace e quem foi convidado e ainda não aceitou o convite. Membros marcados como **Inativo** não ocupam licença. Quando o limite é atingido, a Kinbox exibe a mensagem `"Número limite de operadores atingido"`. Para liberar vaga, desative quem não usa mais o workspace em **Configurações** → **Ambiente** → **Membros** ou aumente o número de licenças em **Configurações** → **Assinatura** → **Mudar plano** (exige a permissão **Assinatura** ou ser o proprietário). Em teste grátis ou com a assinatura cancelada, o botão é **Assinar um plano**. Quando o plano é gerenciado por um parceiro, nenhum dos dois botões aparece: fale com o parceiro.
+Todo membro com acesso ativo ocupa uma licença — inclusive o proprietário do workspace e quem foi convidado e ainda não aceitou o convite. Membros marcados como **Inativo** não ocupam licença. Quando o limite é atingido, a Kinbox exibe a mensagem `"Número limite de operadores atingido"`. Para liberar vaga, desative quem não usa mais o workspace em **Configurações** → **Ambiente** → **Membros** ou aumente o número de licenças em **Configurações** → **Assinatura** → **Mudar plano** (exige a permissão **Assinatura** ou ser o proprietário). Em teste grátis ou com a assinatura cancelada, o botão é **Assinar um plano**. Quando o plano é gerenciado por um parceiro, nenhum dos dois botões aparece: fale com o parceiro. Veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
 
 Outros dois motivos impedem o envio do convite:
 
 - Se aparecer `"Já existe um convite para esse operador"`, o e-mail já está cadastrado no workspace (ativo, **Inativo** ou **Convidado**): pesquise o e-mail em **Membros** com o filtro **Tudo** para usar **Reativar** ou **Reenviar convite**.
-- Se aparecer `"Assinatura expirada"`, a assinatura do workspace está vencida há mais de 3 dias e precisa ser regularizada para liberar novos convites.
+- Se aparecer `"Assinatura expirada"`, a assinatura do workspace está vencida há mais de 3 dias e precisa ser regularizada para liberar novos convites (veja [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida)).
 
 Veja mais em [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade).
 
