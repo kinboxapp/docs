@@ -9,12 +9,16 @@ fontes:
   - api:src/modules/whatsapp-api/services/core/whatsapp-api-status-monitor.service.ts
   - api:src/modules/whatsapp-api/clients/whatsapp-api-meta.client.ts
   - web:src/pages/settings/whatsappApi/services/whatsappApi.service.ts
+  - web:src/components-old/header/NotificationDropItem.tsx
+  - api:src/modules/whatsapp-api/services/core/whatsapp-api-notifications.service.ts
 codigo:
   - api-v0:server/controllers/WbaCloudController.js
   - api:src/modules/whatsapp-api/services/core/whatsapp-api-status-monitor.service.ts
   - api:src/modules/whatsapp-api/clients/whatsapp-api-meta.client.ts
   - web:src/pages/settings/whatsappApi/services/whatsappApi.service.ts
   - web:src/pages/settings/channels/whatsappCloud/**
+  - web:src/components-old/header/NotificationDropItem.tsx
+  - api:src/modules/whatsapp-api/services/core/whatsapp-api-notifications.service.ts
 verificado_em: 2026-11-26
 ---
 
@@ -26,7 +30,7 @@ Onde vejo a qualidade do meu número do WhatsApp oficial?
 
 A Kinbox não tem uma tela que mostre a qualidade do seu número do WhatsApp oficial.
 
-O status **Conectado** na lista de canais também não reflete a qualidade nem eventuais alertas do número na Meta. Na tela **WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**), a Kinbox exibe apenas a qualidade dos templates, não a do número. Para consultar a qualidade do número, acesse diretamente a Meta. Veja mais em [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
+O status **Conectado** na lista de canais também não reflete a qualidade nem eventuais alertas do número na Meta. A tela **WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**) também não mostra qualidade, nem do número nem dos templates: a qualidade de um template só aparece numa notificação no sino, **Qualidade do template:** "A qualidade caiu no template", quando ela cai. Para consultar a qualidade do número, acesse diretamente a Meta. Veja mais em [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns).
 
 ## Variações
 

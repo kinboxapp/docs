@@ -58,6 +58,17 @@
                       "docs/canais/whatsapp/whatsapp-cloud-api/configuracoes",
                       "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
                     ]
+                  },
+                  {
+                    "group": "Templates, Flows e carrossel",
+                    "pages": [
+                      "docs/canais/whatsapp/whatsapp-templates/visao-geral",
+                      "docs/canais/criar-templates-dentro-do-kinbox",
+                      "docs/canais/whatsapp/whatsapp-templates/enviar-template",
+                      "docs/canais/criar-flows-dentro-do-kinbox",
+                      "docs/canais/criar-carrossel-dentro-do-kinbox",
+                      "docs/canais/whatsapp/whatsapp-templates/template-rejeitado"
+                    ]
                   }
                 ]
               }
@@ -567,18 +578,6 @@
       "destination": "/docs/canais/visao-geral"
     },
     {
-      "source": "/docs/canais/criar-carrossel-dentro-do-kinbox",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
-      "source": "/docs/canais/criar-flows-dentro-do-kinbox",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
-      "source": "/docs/canais/criar-templates-dentro-do-kinbox",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
       "source": "/docs/canais/instagram",
       "destination": "/docs/canais/visao-geral"
     },
@@ -617,6 +616,14 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-cloud-api/instalacao",
       "destination": "/docs/canais/whatsapp-api-oficial-padrao"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-templates/condicoes-para-templates",
+      "destination": "/docs/canais/whatsapp/whatsapp-templates/template-rejeitado"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-templates/criando-templates-no-360dialog",
+      "destination": "/docs/canais/criar-templates-dentro-do-kinbox"
     },
     {
       "source": "/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
