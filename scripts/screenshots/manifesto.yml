@@ -2160,14 +2160,16 @@
     - docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp
 
 # Seção copiloto. Antes de capturar, o copiloto do workspace de documentação é configurado só durante a captura
-# (script fora do repo) e volta a ficar vazio depois. Os itens "funcoes", "galeria", "comandos-personalizados" e
-# "intencao" pedem as funções Sugestões automáticas, Comandos de chat (com 2 comandos personalizados fictícios),
-# Análise de sentimento, Aviso ao resolver, Classificação de intenção e Lead score ligadas; o item "menu-conversa"
-# pede só Comandos de chat (sem sugestões automáticas, para abrir a conversa sem gastar saldo).
-# Tela do Copiloto com as funções adicionadas e o bloco Adicionar função (sem o cabeçalho do app).
+# (script fora do repo) e volta a ficar vazio depois. Os itens "galeria", "comandos-personalizados" e "intencao"
+# foram capturados com Sugestões automáticas, Comandos de chat (com 2 comandos personalizados fictícios), Análise de
+# sentimento, Aviso ao resolver, Classificação de intenção e Lead score ligadas; o item "funcoes" com 4 delas, sem
+# Sugestões automáticas; o item "menu-conversa" só com Comandos de chat (sem sugestões automáticas, para abrir a
+# conversa sem gastar saldo).
+# Tela do Copiloto com 4 funções adicionadas (Comandos de chat, Análise de sentimento, Classificação de intenção e
+# Lead score; sem Sugestões automáticas) e o bloco Adicionar função, sem o cabeçalho do app.
 - id: copiloto-funcoes
   url: /settings/copilot
-  altura: 1900
+  altura: 1500
   passos:
     - esperar: 'text=Adicionar função'
     - pausa: 1500
@@ -2178,7 +2180,6 @@
   arquivo: images/ajuda/copiloto/funcoes.webp
   paginas:
     - docs/copiloto/copiloto-atualizado
-    - docs/copiloto/configuracoes-de-copiloto
 
 # Galeria "Escolha uma função..." aberta pelo bloco Adicionar função.
 - id: copiloto-galeria
@@ -2274,3 +2275,22 @@
   arquivo: images/ajuda/copiloto/botao-sugestoes.webp
   paginas:
     - docs/copiloto/usar-o-copiloto-de-ia
+
+# Lista de bases com uma base fictícia em Aguardando processamento e o menu de três pontos aberto (Editar,
+# Processar, Excluir). A base é criada sem processar só para a captura e apagada depois. Não clica em Processar.
+- id: copiloto-bases-lista
+  url: /settings/knowledge-bases
+  passos:
+    - esperar: 'text=Políticas de troca e de'
+    - passar: 'text=Políticas de troca e de'
+    - clicar: 'button.ant-dropdown-trigger.ml-auto'
+    - esperar: '.ant-dropdown:visible >> text=Processar'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Tudo")'
+    - 'text=Políticas de troca e de'
+    - '.ant-dropdown:visible'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/bases-lista.webp
+  paginas:
+    - docs/copiloto/base-de-conhecimento

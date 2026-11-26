@@ -92,27 +92,18 @@ As análises do copiloto leem a conversa sozinhas depois das mensagens do contat
 ## Avaliadores
 
 - **O que faz:** executa avaliações sob medida (até **10 avaliadores** por workspace) que leem a conversa e salvam o resultado em um [campo personalizado](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox) (da sessão ou do contato) ou aplicam tags na conversa (disparando as automações de tag).
-- **Como configurar:** abra a função **Avaliadores**, clique em **Criar avaliador** (ou **Novo avaliador**) e escolha **Em branco** ou um dos 10 modelos prontos:
-
-| Grupo | Modelo | Quando avalia | Onde salva |
-| --- | --- | --- | --- |
-| Qualidade do atendimento | **Nota do atendimento** | Ao resolver | Campo "Nota do atendimento" (Sessão, Nota 0–10) |
-| Qualidade do atendimento | **Problema resolvido?** | Ao resolver | Campo "Problema resolvido" (Sessão, Sim/não) |
-| Qualidade do atendimento | **Pontos a melhorar** | Ao resolver | Campo "Pontos a melhorar" (Sessão, Seleção múltipla) |
-| Vendas | **Motivo de perda** | Ao resolver (pula negociação ganha) | Campo "Motivo de perda" (Sessão, Seleção única) |
-| Vendas | **Objeções do cliente** | A cada mensagem | Campo "Objeções" (Sessão, Seleção múltipla) |
-| Vendas | **Pediu desconto?** | A cada mensagem | Campo "Pediu desconto" (Sessão, Sim/não) |
-| Vendas | **Oportunidade futura** | Ao resolver | Campo "Oportunidade futura" (Contato, Sim/não) |
-| Suporte | **Urgência** | No início da conversa | Campo "Urgência" (Sessão, Seleção única) |
-| Relacionamento | **Risco de cancelamento** | A cada mensagem | Campo "Risco de cancelamento" (Contato, Nota 0–10) |
-| Relacionamento | **Não quer receber mensagens** | A cada mensagem | Campo "Não contatar" (Contato, Sim/não) |
+- **Como configurar:** abra a função **Avaliadores**, clique em **Criar avaliador** (ou **Novo avaliador**) e escolha **Em branco** ou um dos 10 modelos prontos, que já vêm com o momento da avaliação e o campo onde o resultado é salvo:
+  - **Qualidade do atendimento:** **Nota do atendimento**, **Problema resolvido?** e **Pontos a melhorar**.
+  - **Vendas:** **Motivo de perda**, **Objeções do cliente**, **Pediu desconto?** e **Oportunidade futura**.
+  - **Suporte:** **Urgência**.
+  - **Relacionamento:** **Risco de cancelamento** e **Não quer receber mensagens**.
 
 No editor do avaliador, preencha **Nome**, **Quando avaliar** (**No início da conversa**, **A cada mensagem** ou **Ao resolver**), **O que avaliar** e **Onde salvar o resultado**:
 
 - **Campo personalizado:** escolha **Usar campo existente** (campos de número, seleção ou sim/não da sessão ou do contato) ou **Criar campo novo** (**Nome do campo**, **Tipo** entre **Nota**, **Seleção única**, **Seleção múltipla** ou **Sim/não**, e **Fica em** entre **Sessão** ou **Contato**). O campo novo só é criado quando você clica em **Salvar mudanças** na página do Copiloto. Conforme o tipo, você pode ajustar **Nota mínima** e **Nota máxima**, **Como reconhecer cada opção** ou **Aplicar tag quando for "sim" (opcional)**.
 - **Tags:** adicione regras em **Adicionar regra de tag** escolhendo a **Tag** e escrevendo a condição em que ela deve ser aplicada.
 
-Se quiser ignorar quem já comprou, ligue **Pular contatos com negociação ganha**. Clique em **Salvar avaliador** e depois em **Salvar mudanças** na página.
+Se quiser ignorar quem já comprou, ligue **Pular contatos com negociação ganha**. Clique em **Salvar avaliador**, depois em **Adicionar** (ou **Concluir**, se a função já estava adicionada) na janela da função **Avaliadores** e, por fim, em **Salvar mudanças** na página.
 
 Na lista de avaliadores, você pode ligar ou desligar cada um sem apagar, editar pelo ícone de lápis ou remover pela lixeira (**Remover**).
 
@@ -124,25 +115,14 @@ Na lista de avaliadores, você pode ligar ou desligar cada um sem apagar, editar
 
 ## Onde ver os resultados
 
-- **Cartão Sessão (painel lateral da conversa):** as linhas do copiloto aparecem no topo do cartão, na ordem **Atendimento automático** (quando detectado), **Intenção**, **Sentimento** e **Lead score**, seguidas pelos campos personalizados da sessão.
-
-| Texto no cartão | O que significa |
-| --- | --- |
-| **Aguardando** | Aguardando mensagens do contato para iniciar a análise. |
-| **Sem saldo** | Sem saldo na carteira para rodar as análises (quem tem acesso ao financeiro vê **Recarregar créditos**). |
-| **Analisando** | O copiloto ainda não tem certeza da intenção (pode exibir um palpite na dica). |
-| **Avaliando** | O copiloto ainda não tem confiança para definir o lead score. |
-| **Já é cliente** | O contato tem negociação ganha e não é mais avaliado no lead score. |
-
+- **Cartão Sessão (painel lateral da conversa):** as linhas do copiloto aparecem no topo do cartão, na ordem **Atendimento automático** (quando detectado), **Intenção**, **Sentimento** e **Lead score**, seguidas pelos campos personalizados da sessão. Enquanto não há leitura, a linha mostra **Aguardando**; com saldo de R$ 0,20 ou menos, as linhas ainda sem leitura mostram **Sem saldo** (os resultados já registrados continuam aparecendo). No lead score, **Já é cliente** indica um contato com negociação ganha, que não é mais avaliado.
 - **Lista de conversas (conversas abertas):** mostra 🆘 para cliente preso no bot, 😡 ou 😕 para contato irritado ou impaciente, e o selo com a nota apenas para leads **Quente** ou **Excelente**.
-- **Relatórios → Copiloto:** exibe as abas das funções ligadas (**Qualidade** para os modelos **Nota do atendimento**, **Problema resolvido?** ou **Pontos a melhorar** salvando em campo; **Sentimento**; **Intenções**; **Lead score**; e **Atendimento automático** para **Cliente preso no bot** ou **Não reabrir por agradecimento**). O item aparece para quem tem a permissão **Gerenciar relatórios** (veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam)).
+- **Relatórios → Copiloto:** reúne os resultados em abas (**Qualidade**, **Sentimento**, **Intenções**, **Lead score** e **Atendimento automático**), cada uma disponível quando a função correspondente está ligada. O item aparece para quem tem a permissão **Gerenciar relatórios** (veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam)).
 
-## Quem vê os resultados
+## Restrições de papel
 
-Para esconder o sentimento ou o lead score no painel lateral da conversa e na lista de conversas de um papel, ative **Esconder sentimento do cliente** ou **Esconder lead score** no quadro **Restrições** da seção **Conversas** do papel (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)). O proprietário do workspace sempre vê.
-
-**Intenção** e **Cliente preso no bot** (🆘) não têm restrição própria e ficam visíveis para todos os membros que acessam a conversa.
+Os papéis podem ter as restrições **Esconder sentimento do cliente** e **Esconder lead score**, no quadro **Restrições** da seção **Conversas** (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)).
 
 ## Quanto gasta
 
-Todas as análises ligadas rodam juntas em uma única leitura depois das mensagens do contato (e avaliadores **Ao resolver** rodam quando a conversa é resolvida), descontando do [saldo da carteira](/docs/conceitos/saldo-e-creditos) conforme as funções ativas. Sem saldo, as análises param e o cartão **Sessão** mostra **Sem saldo** até você [adicionar saldo](/docs/assinatura/adicionar-saldo).
+Todas as análises ligadas rodam juntas em uma única leitura depois das mensagens do contato (e avaliadores **Ao resolver** rodam quando a conversa é resolvida), descontando do [saldo da carteira](/docs/conceitos/saldo-e-creditos) conforme as funções ativas. Sem saldo, as análises param até você [adicionar saldo](/docs/assinatura/adicionar-saldo).

@@ -43,7 +43,7 @@ Veja como cada recurso aparece no atendimento em [Usar o copiloto na conversa](/
 - **Lead score:** dá uma nota de 0 a 100 para a intenção de compra do contato a cada mensagem dele.
 - **Cliente preso no bot:** detecta quando o contato está preso ou frustrado com o bot ou agente de IA e pode passar a conversa para humano.
 
-Veja como ligar cada análise e onde acompanhar os resultados em [Analisar conversas com IA: sentimento, avaliadores, intenções e lead score](/docs/copiloto/analises-de-ia).
+Veja como ligar cada análise e onde acompanhar os resultados em [Analisar conversas com IA](/docs/copiloto/analises-de-ia).
 
 ### Regras do workspace
 
@@ -57,18 +57,18 @@ Veja todas as opções e valores padrão em [Configurações do copiloto](/docs/
 As funções ficam em **Configurações** → **Automação** → **Copiloto**.
 
 <Note>
-  Quem pode configurar: membros com a permissão **Copiloto** (na seção **Gerenciamento do Ambiente** do papel) ou o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). As configurações valem para o workspace inteiro. Usar os recursos na conversa não exige a permissão **Copiloto**: depende de a função estar adicionada e salva, de a conversa estar em **Onde o copiloto atua** e de haver saldo na carteira.
+  Quem pode configurar: membros com a permissão **Copiloto** (na seção **Gerenciamento do Ambiente** do papel) ou o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). As configurações valem para o workspace inteiro. Usar os recursos na conversa não exige a permissão **Copiloto**: a maioria depende de a função estar adicionada e salva, de a conversa estar em **Onde o copiloto atua** e de haver saldo na carteira. As exceções são o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (e gasta saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende deste painel.
 </Note>
 
 <Frame caption="Tela do Copiloto com funções adicionadas em cartões e o bloco Adicionar função">
-  <img src="/images/ajuda/copiloto/funcoes.webp" alt="Tela do Copiloto exibindo seis cartões de funções adicionadas (Sugestões automáticas, Comandos de chat, Análise de sentimento, Aviso ao resolver, Classificação de intenção e Lead score) e o bloco Adicionar função" />
+  <img src="/images/ajuda/copiloto/funcoes.webp" alt="Tela do Copiloto exibindo quatro cartões de funções adicionadas (Comandos de chat, Análise de sentimento, Classificação de intenção e Lead score) e o bloco Adicionar função" />
 </Frame>
 
 A tela funciona como uma galeria: clique em **Adicionar função**, escolha o recurso, clique em **Adicionar** e depois em **Salvar mudanças** na barra inferior (as mudanças podem levar até 60 segundos para fazer efeito) — veja os detalhes em [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto).
 
 ## Quanto gasta
 
-O copiloto consome [saldo da carteira](/docs/conceitos/saldo-e-creditos) do workspace — nas telas do copiloto, esse saldo é chamado de "créditos", mas é o saldo em reais da carteira, não os **Créditos de SMS**. Só gasta o que está ligado e quando roda; funções desligadas não geram cobrança. Sem saldo, as funções param e o menu no editor mostra **Seus créditos acabaram** com o botão **Comprar créditos**. Para recarregar, veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
+O copiloto consome [saldo da carteira](/docs/conceitos/saldo-e-creditos) do workspace — nas telas do copiloto, esse saldo é chamado de "créditos", mas é o saldo em reais da carteira, não os **Créditos de SMS**. As funções gastam quando estão ligadas e rodam, exceto o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (e gasta saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende deste painel. Sem saldo, as funções param e o menu no editor mostra **Seus créditos acabaram** com o botão **Comprar créditos**. Para recarregar, veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
 
 ## Base de conhecimento
 
@@ -76,9 +76,9 @@ As **Sugestões automáticas** podem consultar uma [Base de conhecimento](/docs/
 
 ## Outros lugares com o copiloto
 
-- **Editores do WhatsApp oficial:** o botão **Criar com Copiloto** abre um painel lateral para criar [templates](/docs/canais/criar-templates-dentro-do-kinbox), [WhatsApp Flows](/docs/canais/criar-flows-dentro-do-kinbox) e [carrosséis](/docs/canais/criar-carrossel-dentro-do-kinbox). Funciona de forma independente das funções ligadas na tela do Copiloto e usa saldo da carteira.
-- **Editor de campanhas:** o mesmo menu de comandos (ícone de estrelas) aparece no campo **Mensagem** ao [criar uma campanha](/docs/campanhas/campanhas-no-kinbox) quando **Comandos de chat** está adicionado.
-- **Relatórios:** os dados das análises aparecem em **Relatórios** → **Copiloto** quando ao menos uma função com aba de relatório está ligada (veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam)).
+- **Editores do WhatsApp oficial:** a opção **Criar com Copiloto** abre um painel lateral para criar [templates](/docs/canais/criar-templates-dentro-do-kinbox) e [WhatsApp Flows](/docs/canais/criar-flows-dentro-do-kinbox); no [carrossel](/docs/canais/criar-carrossel-dentro-do-kinbox), o painel abre pelo ícone **Copiloto** na barra do campo **Corpo da mensagem**. Funciona de forma independente das funções ligadas na tela do Copiloto e usa saldo da carteira.
+- **Editor de campanhas:** o mesmo menu de comandos (ícone de estrelas) aparece no campo **Mensagem** ao [criar uma campanha](/docs/campanhas/campanhas-no-kinbox) por WhatsApp por QR Code ou SMS, quando **Comandos de chat** está adicionado.
+- **Relatórios:** os dados das análises aparecem em **Relatórios** → **Copiloto** quando há uma aba disponível, para quem tem a permissão **Gerenciar relatórios** (veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam)).
 
 O antigo Assistente Kin foi substituído pelo menu do copiloto, ativado pela função **Comandos de chat**.
 

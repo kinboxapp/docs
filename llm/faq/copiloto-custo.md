@@ -1,6 +1,6 @@
 ---
 title: O copiloto gasta saldo?
-description: Sim. O copiloto consome saldo da carteira do workspace sempre que uma função ligada roda, e funções desligadas não geram cobrança.
+description: Sim. O copiloto consome saldo da carteira do workspace quando uma função ligada roda, quando alguém clica no botão Sugestões e quando o painel Criar com Copiloto é usado nos editores do WhatsApp oficial.
 keywords: [copiloto é pago, quanto custa o copiloto, copiloto consome créditos, saldo copiloto, sugestões de resposta gastam saldo, análise de sentimento cobra, como economizar saldo no copiloto, extrato copiloto]
 publico: llm
 tipo: faq
@@ -27,7 +27,7 @@ O copiloto gasta saldo?
 
 ## Resposta
 
-Sim. O copiloto consome o saldo da carteira do workspace (chamado de "créditos" nas telas do copiloto) sempre que uma função ligada roda; funções desligadas não gastam saldo.
+Sim. O copiloto consome o saldo da carteira do workspace (chamado de "créditos" nas telas do copiloto) sempre que uma função ligada roda. Funções desligadas não gastam, exceto o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (e gasta saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende da tela do Copiloto.
 
 O que consome saldo e como aparece no **Extrato do saldo**:
 

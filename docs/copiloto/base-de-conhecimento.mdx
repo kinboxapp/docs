@@ -27,8 +27,10 @@ verificado_em: 2026-11-26
 Crie bases de conhecimento com textos ou documentos da sua empresa para que o copiloto (nas **Sugestões automáticas**) e o bloco **Agente de IA** do bot consultem esse conteúdo ao sugerir ou gerar respostas. A cada resposta, a Kinbox busca apenas os trechos mais parecidos com a mensagem do contato, e não a base inteira.
 
 <Note>
-  Quem pode e fronteira: criar, editar, processar e excluir bases exige a permissão **Base de conhecimento** ou ser o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Cada workspace pode ter até **20 bases de conhecimento**. Para dar conhecimento a um agente de IA, use o [conhecimento do agente](/docs/agente-de-ia/conhecimento) — a base de conhecimento desta página é um cadastro separado, usado pelo copiloto e pelo bloco **Agente de IA** do bot.
+  Quem pode: criar, editar, processar e excluir bases exige a permissão **Base de conhecimento** ou ser o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Cada workspace pode ter até **20 bases de conhecimento**.
 </Note>
+
+Os agentes de IA têm um cadastro próprio de conhecimento, separado desta base: para ensinar um agente, veja [Ensinar o agente com arquivos, textos, sites e vídeos](/docs/agente-de-ia/conhecimento).
 
 ## Antes de começar
 
@@ -64,6 +66,10 @@ Markdown (`.md`), CSV, planilhas, imagens, `.doc` antigo, links de site e vídeo
   </Step>
   <Step title="Processe a base">
     Na linha da base, abra o menu de três pontos e clique em **Processar**. Aguarde o status mudar de **Processando** para **Pronto**. Se ficar em **Erro**, revise o conteúdo ou o arquivo, salve e clique em **Processar** novamente.
+
+    <Frame caption="Base em Aguardando processamento com o menu de três pontos aberto">
+      <img src="/images/ajuda/copiloto/bases-lista.webp" alt="Linha de uma base de conhecimento com o status Aguardando processamento e o menu de três pontos aberto com as opções Editar, Processar e Excluir" />
+    </Frame>
   </Step>
 </Steps>
 

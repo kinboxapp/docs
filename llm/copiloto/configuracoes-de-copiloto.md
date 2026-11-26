@@ -61,8 +61,9 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 | Função / recurso | Onde aparece | Condições extras | Descrição no **Extrato do saldo** |
 | --- | --- | --- | --- |
 | **Onde o copiloto atua** | Limita todas as funções | — | Não gera cobrança |
-| **Sugestões automáticas** | Bloco **Sugestões** acima do editor; topo de **Frases rápidas** | Última mensagem do contato, conversa aberta, sem bot, no escopo, sem restrição **Não mostrar sugestões de respostas** | `"Uso do copilot"` (e `"Transcrição de áudio"` ao transcrever áudios) |
-| **Comandos de chat** | Ícone de estrelas (**Copiloto**) no editor de conversas e campanhas | Função adicionada e conversa no escopo | `"Uso do copilot"` |
+| **Sugestões automáticas** | Bloco **Sugestões** acima do editor | Última mensagem do contato, conversa aberta, sem bot, no escopo, sem restrição **Não mostrar sugestões de respostas**, saldo acima de R$ 0,20 | `"Uso do copilot"` (e `"Transcrição de áudio"` ao transcrever áudios) |
+| Frases rápidas sugeridas (opção **Sugerir frases rápidas**) | Topo da janela **Frases rápidas** | **Sugestões automáticas** e **Sugerir frases rápidas** ligadas, frases cadastradas, conversa no escopo, saldo acima de R$ 0,20 | `"Uso do copilot"` |
+| **Comandos de chat** | Ícone de estrelas (**Copiloto**) no editor de conversas e de campanhas por WhatsApp por QR Code ou SMS | Função adicionada; nas conversas, a conversa precisa estar no escopo | `"Uso do copilot"` |
 | **Análise de sentimento** | Cartão **Sessão** e lista de conversas abertas (só Irritado/Impaciente) | Mensagem do contato, conversa aberta, no escopo | `"Análise de sentimento"` |
 | **Avaliadores** | Campo personalizado da sessão/contato e tags da conversa | Até 10 avaliadores; campo ativo; campo de contato exige contato | `"Avaliadores do copiloto"` |
 | **Revisor de mensagens** | Janela **Revise antes de enviar** | Resposta de texto com 12+ caracteres (não nota interna), no escopo, ao menos 1 categoria/regra ativa | `"Revisor de mensagens"` |
@@ -76,7 +77,7 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 
 ## Menu do copiloto (**Comandos de chat**)
 
-- Só aparece no editor (conversas e [campanhas](/docs/campanhas/campanhas-no-kinbox)) com **Comandos de chat** adicionada e conversa dentro de **Onde o copiloto atua**.
+- Só aparece com **Comandos de chat** adicionada: no editor das conversas (nas conversas, a conversa precisa estar no escopo de **Onde o copiloto atua**) e no campo **Mensagem** das [campanhas](/docs/campanhas/campanhas-no-kinbox) por WhatsApp por QR Code ou SMS.
 - Estrutura: título **Copiloto**, ícone `?` (**Central de ajuda**), busca **Pesquisar ação** (filtra pelo nome; sem resultado mostra `"Nada encontrado"`), navegação por setas e `Enter`, e grupos **Personalizado**, **Conversa**, **Mudar texto**, **Mudar tom para** e **Gerar texto**.
 - Enquanto um comando está em execução, o botão não abre outro.
 - **Resumir sessão** (grupo **Conversa**): não precisa de texto no editor; lê até as **100 mensagens** mais recentes da sessão atual; se não houver mensagem de texto na sessão, mostra `"Nenhuma mensagem encontrada"`.
@@ -98,7 +99,8 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 ## Sugestões de resposta e frases rápidas
 
 - **Quando o bloco Sugestões aparece:** última mensagem (de texto/mídia, sem contar notas e eventos) é do contato, conversa não está resolvida, bot não está atendendo, conversa está em **Onde o copiloto atua** e o papel do membro não tem a restrição **Não mostrar sugestões de respostas**.
-- **Sob demanda:** mesmo sem **Sugestões automáticas** adicionada, o botão **Sugestões** aparece nas mesmas condições acima e gera sugestões ao clicar (consumindo saldo). Para escondê-lo, use a restrição **Não mostrar sugestões de respostas** no papel ou restrinja **Onde o copiloto atua**.
+- **Com Sugestões automáticas ligada:** as sugestões são geradas ao abrir a conversa. Com saldo de R$ 0,20 ou menos, nada é gerado e o bloco **Sugestões** não aparece.
+- **Sob demanda:** mesmo sem **Sugestões automáticas** adicionada, o botão **Sugestões** aparece nas mesmas condições acima e gera sugestões ao clicar (consumindo saldo). Com saldo de R$ 0,20 ou menos, o botão pode continuar aparecendo, mas o clique não gera sugestões. Para escondê-lo, use a restrição **Não mostrar sugestões de respostas** no papel ou restrinja **Onde o copiloto atua**.
 - **O que lê:** até **100 mensagens** da sessão atual (contato, membros e bot).
   - **Processar imagens** (padrão ligado): analisa apenas imagens enviadas pelo contato.
   - **Transcrever áudios** (padrão ligado): transcreve os áudios presentes entre as **5 mensagens mais recentes** (inclusive de membros), mostra `"Transcrevendo áudios"` e salva a transcrição na mensagem.
@@ -106,7 +108,7 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 - **Opções e limites:** **Instruções extras** até **10.000 caracteres**; **Criatividade** de `0` a `1,2` (passos de `0,2`: **Muito conservador**, **Conservador**, **Neutro** = `0,4` padrão, **Criativo**, **Muito criativo**, **Super criativo**, **Doido varrido**); **Quantidade de sugestões** de `1` a `3` (padrão `1`).
 - **Personalizar por grupo:** usa o grupo do **membro em atendimento** (não o grupo da conversa). Vale a primeira regra que tiver um grupo do membro. A base de conhecimento configurada em uma regra vale mesmo com **Usar base de conhecimento** desligado no padrão.
 - **Reaproveitamento e tempo limite:** a sugestão gerada para a mesma última mensagem fica guardada por **72 horas** (não gera nem cobra novamente ao reabrir a conversa). Se a geração passar de **30 segundos**, nenhuma sugestão é exibida.
-- **Frases rápidas sugeridas:** com **Sugestões automáticas** e **Sugerir frases rápidas** (padrão ligado) ativas, sugere até **3 frases** no topo de **Frases rápidas**, fazendo uma consulta por sessão e última mensagem. Exige frases rápidas cadastradas, conversa no escopo e saldo acima de R$ 0,10.
+- **Frases rápidas sugeridas:** com **Sugestões automáticas** e **Sugerir frases rápidas** (padrão ligado) ativas, sugere até **3 frases** no topo de **Frases rápidas**, fazendo uma consulta por sessão e última mensagem. Exige frases rápidas cadastradas, conversa no escopo e saldo acima de R$ 0,20.
 
 ## Análises automáticas
 
@@ -124,6 +126,23 @@ Detalhes de configuração em [Analisar conversas com IA: sentimento, avaliadore
   - **Cliente preso no bot:** roda apenas enquanto um bot ou agente de IA atende e depois que o contato responde ao bot (a mensagem que iniciou o bot não conta). Detecta uma vez por sessão. **Só sinalizar** (padrão) marca com 🆘; **Passar para humano** interrompe o bot, registra `"Bot interrompido pelo Copiloto: o cliente parecia preso no atendimento automático."` e transfere para **Mover para o grupo** (se preenchido, disparando automações de grupo). Se um humano já tiver assumido ou a conversa estiver resolvida, nenhuma ação é executada. O 🆘 some da lista e do cartão quando um membro responde (a detecção continua no relatório).
   - **Avaliadores:** até **10 avaliadores** (`"Limite de 10 avaliadores. Remova um avaliador para criar outro."`). **Nome** até **60 caracteres**; **O que avaliar** até **1.000 caracteres**; **Nome do campo** novo até **60 caracteres**. Gatilhos: **No início da conversa** (repete até decidir ou atingir 5 leituras, uma vez por sessão), **A cada mensagem** (atualiza a cada mensagem do contato, inclusive durante o bot) e **Ao resolver** (5 s após resolver, lê últimas 20 mensagens). Saída em **Campo personalizado** (número/decimal, seleção única, seleção múltipla ou sim/não, em **Sessão** ou **Contato**) ou **Tags** (dispara automações de tag). Campo novo só é criado ao clicar em **Salvar mudanças** (`"Não foi possível criar o campo personalizado. Tente de novo."`). Se o campo for apagado depois, o avaliador mostra `"Campo removido"` e deixa de rodar. Campo de **Contato** só grava se a conversa tiver contato. **Nota** grava valor inteiro na faixa escolhida (padrão `0` a `10`); **Seleção única** e **Sim/não** só gravam quando há boa certeza; **Seleção múltipla** e **Tags** marcam cada item com boa certeza. **Pular contatos com negociação ganha** ignora contatos com negociação ganha em qualquer funil. Validações do editor: `"Dê um nome para o avaliador"`, `"Escreva o que o copiloto deve avaliar"`, `"Dê um nome para o campo"`, `"Adicione as opções"`, `"Escolha o campo"`, `"Escolha a tag"`, `"Escreva a condição"`.
 
+### Modelos prontos de avaliador
+
+| Grupo | Modelo | Quando avalia | Onde salva |
+| --- | --- | --- | --- |
+| Qualidade do atendimento | **Nota do atendimento** | Ao resolver | Campo "Nota do atendimento" (Sessão, Nota 0–10) |
+| Qualidade do atendimento | **Problema resolvido?** | Ao resolver | Campo "Problema resolvido" (Sessão, Sim/não) |
+| Qualidade do atendimento | **Pontos a melhorar** | Ao resolver | Campo "Pontos a melhorar" (Sessão, Seleção múltipla) |
+| Vendas | **Motivo de perda** | Ao resolver (já vem com **Pular contatos com negociação ganha**) | Campo "Motivo de perda" (Sessão, Seleção única) |
+| Vendas | **Objeções do cliente** | A cada mensagem | Campo "Objeções" (Sessão, Seleção múltipla) |
+| Vendas | **Pediu desconto?** | A cada mensagem | Campo "Pediu desconto" (Sessão, Sim/não) |
+| Vendas | **Oportunidade futura** | Ao resolver | Campo "Oportunidade futura" (Contato, Sim/não) |
+| Suporte | **Urgência** | No início da conversa | Campo "Urgência" (Sessão, Seleção única) |
+| Relacionamento | **Risco de cancelamento** | A cada mensagem | Campo "Risco de cancelamento" (Contato, Nota 0–10) |
+| Relacionamento | **Não quer receber mensagens** | A cada mensagem | Campo "Não contatar" (Contato, Sim/não) |
+
+Se o workspace já tem um campo com o mesmo nome e tipo, o modelo usa esse campo. Depois de **Salvar avaliador**, é preciso clicar em **Adicionar** (ou **Concluir**) na janela da função e em **Salvar mudanças** na página.
+
 ## Estados do cartão Sessão
 
 As linhas do copiloto aparecem no topo do cartão **Sessão** na ordem **Atendimento automático** (só quando detectado), **Intenção**, **Sentimento** e **Lead score**.
@@ -131,7 +150,7 @@ As linhas do copiloto aparecem no topo do cartão **Sessão** na ordem **Atendim
 | Estado / texto | Significado |
 | --- | --- |
 | **Aguardando** | `"Aguardando mensagens do cliente para analisar."` |
-| **Sem saldo** | `"Sem saldo para a análise do copiloto."` (com **Recarregar créditos** para quem tem acesso ao financeiro). Aparece com saldo de R$ 0,20 ou menos. |
+| **Sem saldo** | `"Sem saldo para a análise do copiloto."` (com **Recarregar créditos** para quem tem acesso ao financeiro). Aparece com saldo de R$ 0,20 ou menos, nas linhas que ainda não têm leitura; resultados já registrados continuam aparecendo. |
 | **Analisando** | `"O copiloto ainda não tem certeza da intenção. Palpite: {{name}}"` (ou após 5 leituras sem certeza). |
 | **Avaliando** | `"O copiloto ainda não tem confiança para avaliar este lead."` |
 | **Já é cliente** | `"Este contato já é cliente (tem negociação ganha), então o lead score não é mais analisado."` |
@@ -147,6 +166,16 @@ Nenhum aviso bloqueia o membro: sem saldo, fora do escopo, com erro ou ao atingi
   - Até **5 regras personalizadas**: **Nome da regra** (até 40 caracteres), **O que o revisor deve verificar** (até 300 caracteres) e até **12 Exemplos** (opcional, até 200 caracteres cada). Validações: `"Dê um nome para a regra"`, `"Já existe uma regra com esse nome"`, `"Descreva o que o revisor deve verificar"`.
   - Com aviso, abre **Revise antes de enviar** (**Editar mensagem** / **Enviar mesmo assim**) com as mensagens de categoria (`"Pode soar ríspida ou impaciente."`, `"Faz uma promessa comercial ao cliente."`, `"Não responde a uma pergunta que o cliente fez."`, `"Pode expor uma informação sensível."`, `"Pode fugir do padrão de comunicação da empresa."`) ou a descrição da regra personalizada.
   - Tempo máximo de espera: **3,5 segundos**. Passando disso ou em caso de falha, envia sem aviso.
+  - Itens iniciais de **O que será verificado** por categoria:
+
+    | Categoria | Começa | Itens iniciais |
+    | --- | --- | --- |
+    | **Tom inadequado** | Ligada | Resposta seca ou monossilábica; Ironia ou sarcasmo; Culpar o cliente; Impaciência com o cliente |
+    | **Promessas comerciais** | Ligada | Desconto; Prazo de entrega ou de solução; Reembolso ou devolução; Brinde; Condição especial de pagamento |
+    | **Perguntas não respondidas** | Ligada | Sem lista editável |
+    | **Informações sensíveis** | Desligada | Senha ou código de acesso; Token ou chave de API; Número completo de cartão; Dados pessoais de outro cliente |
+    | **Padrão de comunicação da empresa** | Desligada | Abreviações como "vc", "pq" ou "tb"; Gírias ou linguagem informal demais; Excesso de emojis; Mensagem toda em letras maiúsculas |
+
 - **Aviso ao resolver:**
   - Roda apenas ao clicar em **Resolver** na conversa aberta (ações em lote na lista e reabertura não passam pela verificação). Lê as últimas 20 mensagens da sessão.
   - Com pendência de certeza alta, abre **Ficou algo em aberto?** com um dos motivos (`"O cliente fez uma pergunta que ainda não foi respondida."`, `"Foi prometido um retorno ao cliente que ainda não aconteceu."`, `"O cliente parece estar aguardando alguma ação do atendimento."`), `"Quer resolver a conversa mesmo assim?"` e os botões **Voltar para a conversa** e **Resolver mesmo assim**.
@@ -155,7 +184,7 @@ Nenhum aviso bloqueia o membro: sem saldo, fora do escopo, com erro ou ao atingi
   - Lê **20 segundos** depois de mensagens do contato e do membro; não roda com bot ou agente de IA atendendo nem quando já existe mensagem agendada pendente; sugere no máximo **1 vez por sessão** (mesmo se dispensada).
   - Faixa **Ficou um retorno combinado** (**Agendar** / **Dispensar**) aparece apenas para quem tem a permissão **Agendar mensagem**, com conversa aberta e sem agendamento pendente. **Dispensar** ou concluir o agendamento remove a faixa para todos.
   - Ao clicar em **Agendar**, exibe `"O copiloto está preparando a sugestão..."` e preenche **Data** (no fuso do workspace, sempre futura; **09:00** quando não há horário combinado; primeiro dia útil quando não há dia exato) e texto apenas se o membro ainda não tiver editado os campos. Se falhar ou passar de **20 segundos**, mostra `"Não foi possível gerar a sugestão. Preencha o agendamento manualmente."`.
-  - No **WhatsApp oficial**, quando a data fica fora da janela de 24 horas, sugere um modelo aprovado e preenche variáveis (exclui modelos com arquivo no cabeçalho, carrossel, botão com variável ou Flow). Sem modelo compatível, mostra `"Nenhum modelo aprovado combina com este retorno. Fora da janela de 24h do WhatsApp, escolha um modelo para enviar."`.
+  - No **WhatsApp oficial**, quando a data fica fora da janela de 24 horas, sugere um template aprovado e preenche as variáveis (ficam de fora templates com arquivo no cabeçalho, carrossel, botão com variável ou Flow). Sem template compatível, mostra `"Nenhum modelo aprovado combina com este retorno. Fora da janela de 24h do WhatsApp, escolha um modelo para enviar."`.
 - **Não reabrir por agradecimento:**
   - Condições conjuntas: função ligada, mensagem do contato recebida em até **24 horas** após resolver a última sessão, mensagem **apenas de texto** com até **2.000 caracteres** (áudio, imagem, arquivo, figurinha ou texto maior reabrem normalmente), conversa dentro do escopo, saldo acima de R$ 0,20, e conteúdo classificado com certeza muito alta como apenas agradecimento, confirmação, despedida ou reação (qualquer pergunta, pedido, problema ou assunto novo reabre). Lê as últimas **10 mensagens** da sessão resolvida como contexto.
   - Quando mantida resolvida: não reabre nem cria sessão, não marca como não lida nem pendente, registra a mensagem de sistema `"Mensagem de encerramento: a conversa continua resolvida (Copiloto)"` e contabiliza em **Reaberturas evitadas**.
@@ -167,16 +196,19 @@ Nas telas do copiloto, "créditos" significa o [saldo da carteira](/docs/conceit
 
 | Saldo na carteira | Comportamento |
 | --- | --- |
-| **R$ 0,10 ou menos** | O menu do copiloto exibe **Seus créditos acabaram** com os comandos desativados, botão **Comprar créditos** (para quem não acessa o financeiro: `"Fale com um administrador para colocar créditos no ambiente."`) e dica `"Copiloto (Pouco ou nenhum crédito restante)"`. Sugestões automáticas e frases rápidas sugeridas não são geradas. |
-| **Entre R$ 0,11 e R$ 0,20** | O menu abre normalmente, mas clicar em um comando mostra `"Saldo insuficiente."`. Sugestões, análises, avisos, **Não reabrir por agradecimento** e **Criar com Copiloto** não rodam (todos exigem saldo **acima de R$ 0,20**). O cartão **Sessão** mostra **Sem saldo**. |
+| **R$ 0,10 ou menos** | O menu do copiloto exibe **Seus créditos acabaram** com os comandos desativados, botão **Comprar créditos** (para quem não acessa o financeiro: `"Fale com um administrador para colocar créditos no ambiente."`) e dica `"Copiloto (Pouco ou nenhum crédito restante)"`. Sugestões de resposta e frases rápidas sugeridas não são geradas. |
+| **Entre R$ 0,11 e R$ 0,20** | O menu abre normalmente, mas clicar em um comando mostra `"Saldo insuficiente."`. Sugestões de resposta, frases rápidas sugeridas, análises, avisos, **Não reabrir por agradecimento** e **Criar com Copiloto** não rodam (todos exigem saldo **acima de R$ 0,20**). As linhas do cartão **Sessão** que ainda não têm leitura mostram **Sem saldo**; resultados já registrados continuam aparecendo. |
 | **R$ 0,90 ou menos** | A transcrição automática de áudios das sugestões não roda (exige saldo **acima de R$ 0,90**). Com **Transcrever áudios** ligado e um áudio entre as mensagens recentes, as sugestões daquela conversa também param de aparecer, sem aviso. |
 
-O saldo consultado para análises fica em cache por até **30 segundos**. O botão **Comprar créditos** leva ao **Extrato do saldo** — para fazer a recarga, acesse **Configurações** → **Assinatura** → **Adicionar saldo** (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
+Uma recarga ou o fim do saldo pode levar até **30 segundos** para refletir nas análises. O botão **Comprar créditos** leva ao **Extrato do saldo** — para fazer a recarga, acesse **Configurações** → **Assinatura** → **Adicionar saldo** (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
 
-## Restrições de papel e relatório
+## Restrições de papel
 
-- **Não mostrar sugestões de respostas** (seção **Copiloto** do papel): esconde o bloco e o botão **Sugestões** no chat (não esconde o menu de comandos). Vale também para o proprietário quando o papel dele tem essa restrição.
-- **Esconder sentimento do cliente** e **Esconder lead score** (quadro **Restrições** da seção **Conversas** do papel): ocultam essas informações no painel lateral e na lista de conversas (o proprietário sempre vê). Mudanças de papel levam até **60 segundos** para refletir nas análises.
+- **Não mostrar sugestões de respostas** (seção **Copiloto** do papel; texto da tela: `"Não aparecer sugestões de respostas no chat e nem o botão para sugerir respostas."`) vale para o bloco e o botão **Sugestões**; o menu de comandos depende da função **Comandos de chat**. Vale também para o proprietário quando o papel dele tem essa restrição.
+- **Esconder sentimento do cliente** e **Esconder lead score** (quadro **Restrições** da seção **Conversas** do papel). Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+
+## Relatório
+
 - **Relatórios** → **Copiloto**: exige a permissão **Gerenciar relatórios** e ao menos uma aba disponível (sem nenhuma função ligada, mostra `"Ligue um recurso do copiloto em Configurações → Copiloto para ver os relatórios."`). Abas disponíveis: **Qualidade** (quando um dos modelos **Nota do atendimento**, **Problema resolvido?** ou **Pontos a melhorar** está ligado salvando em campo), **Sentimento**, **Intenções**, **Lead score** e **Atendimento automático** (com **Cliente preso no bot** ou **Não reabrir por agradecimento**). Desligar a função oculta a aba correspondente.
 
 ## Problemas comuns
@@ -187,11 +219,12 @@ O saldo consultado para análises fica em cache por até **30 segundos**. O bot�
 | Menu mostra **Seus créditos acabaram** | Saldo da carteira em R$ 0,10 ou menos. |
 | Comando mostra `"Saldo insuficiente."` | Saldo da carteira em R$ 0,20 ou menos. |
 | Comando mostra `"Escreva um texto para usar essa ação do assistente."` | Editor vazio ao acionar um comando de **Mudar texto**, **Mudar tom para** ou **Personalizado**. |
-| Bloco **Sugestões** não aparece | Última mensagem é de membro, conversa resolvida, bot atendendo, conversa fora de **Onde o copiloto atua**, restrição **Não mostrar sugestões de respostas** no papel ou saldo em R$ 0,10 ou menos. |
+| Bloco **Sugestões** não aparece | Última mensagem é de membro, conversa resolvida, bot atendendo, conversa fora de **Onde o copiloto atua**, restrição **Não mostrar sugestões de respostas** no papel ou, com **Sugestões automáticas** ligada, saldo em R$ 0,20 ou menos. |
+| Botão **Sugestões** aparece, mas o clique não gera nada | Saldo da carteira em R$ 0,20 ou menos. |
 | Sugestões pararam de aparecer numa conversa com áudio | Saldo da carteira entre R$ 0,11 e R$ 0,90 com **Transcrever áudios** ligado: o áudio recente não é transcrito e as sugestões daquela conversa param, sem aviso. Adicione saldo ou desligue **Transcrever áudios**. |
 | Sugestão ignora a base de conhecimento | Base em status diferente de **Pronto** (ver [Base de conhecimento do bot e do copiloto](/docs/copiloto/base-de-conhecimento)), interruptor desligado ou regra de **Personalizar por grupo** apontando para outra base. |
 | Cartão **Sessão** fica em **Aguardando** | Nenhuma mensagem de texto do contato ainda, ou conversa fora de **Onde o copiloto atua**. |
-| Cartão **Sessão** mostra **Sem saldo** | Saldo da carteira em R$ 0,20 ou menos. |
+| Cartão **Sessão** mostra **Sem saldo** | Saldo da carteira em R$ 0,20 ou menos; aparece nas linhas que ainda não têm leitura. |
 | Intenção continua em **Analisando** ou não muda | Ainda sem certeza (ou parou após 5 leituras sem certeza). Depois de definida com certeza, a intenção trava até o fim da sessão. |
 | Lead score mostra **Já é cliente** ou **Avaliando** | Contato já tem negociação ganha em algum funil (**Já é cliente**) ou ainda não há confiança suficiente (**Avaliando**). |
 | 🆘 sumiu da conversa | Um membro respondeu a conversa (o alerta some da lista e do cartão, mas continua no relatório). |

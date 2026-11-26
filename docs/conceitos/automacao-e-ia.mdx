@@ -46,7 +46,7 @@ Ele começa sozinho quando o contato abre uma sessão nova num canal do bot. Voc
 
 ## Agentes de IA
 
-Os **Agentes de IA** (**Configurações** → **Automação** → **Agentes de IA**, botão **Novo agente de IA**) conversam com o contato com as próprias palavras, usando as instruções que você escreve, o conhecimento que você cadastra (separado da **Base de conhecimento**) e ferramentas como **Transferir para humano**; um fluxograma é opcional.
+Os **Agentes de IA** (**Configurações** → **Automação** → **Agentes de IA**, botão **Novo agente de IA**) conversam com o contato com as próprias palavras, usando as instruções que você escreve, o conhecimento que você cadastra (separado da [Base de conhecimento](/docs/copiloto/base-de-conhecimento)) e ferramentas como **Transferir para humano**; um fluxograma é opcional.
 
 O **Agente de texto** atende por mensagem nos canais conectados. Existe também o **Agente de voz** (**Beta**), que atende ligações do WhatsApp oficial em tempo real; por estar em teste, ele pode não aparecer no seu workspace. Cada canal tem um único agente de texto para as mensagens; no WhatsApp oficial com ligações, um agente de voz à parte atende as ligações. O uso consome saldo da carteira. Veja [Agentes de IA: visão geral](/docs/agente-de-ia/visao-geral).
 
@@ -72,7 +72,7 @@ A **Atribuição automática** (**Configurações** → **Automação** → **At
 
 ## Como elas se combinam
 
-- **Bot + Agente de IA**: dentro de um fluxo de bot, o bloco **Agente de IA** chama um agente (e, se quiser, uma **Base de conhecimento**) naquele ponto da conversa. Esse bloco consome saldo a cada resposta (os outros recursos de IA do bot estão em [Bot: visão geral](/docs/bot/visao-geral)).
+- **Bot + Agente de IA**: dentro de um fluxo de bot, o bloco **Agente de IA** chama um agente (e, se quiser, uma [Base de conhecimento](/docs/copiloto/base-de-conhecimento)) naquele ponto da conversa. Esse bloco consome saldo a cada resposta (os outros recursos de IA do bot estão em [Bot: visão geral](/docs/bot/visao-geral)).
 - **Agente conectado aos canais**: ao conectar um agente de IA diretamente a canais, a Kinbox cria um bot gerenciado por esse agente (ele aparece na lista de bots com o aviso de que deve ser ativado ou desativado no próprio agente).
 - **Automações e cenários**: uma automação pode usar a ação **Executar bot**, e cenários também incluem passos de conversa.
 

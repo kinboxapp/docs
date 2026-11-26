@@ -1,5 +1,5 @@
 ---
-title: "Base de conhecimento antiga: tipos aceitos, tamanho, processamento e erros"
+title: "Base de conhecimento do bot e do copiloto: tipos aceitos, tamanho, processamento e erros"
 description: Regras da base de conhecimento do copiloto e do bot na Kinbox, com tipos e tamanho de arquivo, limite de bases, status, mensagens de erro ao processar, o que acontece ao editar ou excluir e como ela é usada nas respostas.
 keywords: [base de conhecimento, tipos de arquivo aceitos, 5 mb, limite de 20 bases, você atingiu o limite máximo de 20 bases de conhecimento, o arquivo não é suportado, erro ao processar documento, arquivo da base de conhecimento inválido, não foi possível baixar o arquivo da base, aguardando processamento, processar desativado, pdf escaneado, base não usada pelo copiloto]
 publico: llm

@@ -33,8 +33,8 @@ O saldo da carteira paga os recursos de inteligência artificial (agentes de IA,
 
 O consumo do saldo se divide nestas categorias:
 
-- **Agente de IA**: respostas dos agentes de IA (inclusive quando usados pelo bloco **Agente de IA** do bot) e processamento da base de conhecimento.
-- **Copiloto**: comandos, chat do copiloto, avaliadores e revisor de mensagens (apenas quando ativados; veja [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto)).
+- **Agente de IA**: respostas dos agentes de IA (inclusive quando usados pelo bloco **Agente de IA** do bot) e processamento do **conhecimento** dos agentes de IA.
+- **Copiloto**: comandos, chat do copiloto, avaliadores e revisor de mensagens (apenas quando ativados, exceto o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (e gasta saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende da tela do Copiloto; veja [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto)).
 - **Análises** (recursos do **Copiloto**, quando ligados): **Análise de sentimento**, **Lead score**, **Classificação de intenção**, **Cliente preso no bot**, **Sugestão de retorno**, **Aviso ao resolver** e **Não reabrir por agradecimento**.
 - **Voz e áudio**: transcrição de áudios; nas ligações do WhatsApp, o atendimento por IA fora da franquia, a transcrição pedida pelo botão **Transcrever** e o resumo da transcrição (a gravação e a transcrição automática estão incluídas no plano de ligações; ligações não atendidas não cobram); no VoIP, a transcrição e o resumo das ligações.
 - **Outros**: ligações por telefone (VoIP), minutos excedentes do plano de ligações do WhatsApp e geração de FAQ a partir das conversas.

@@ -51,14 +51,14 @@ Todas as funções do copiloto são configuradas em **Configurações** → **Au
 | Função | O que faz | Onde atua / quem vê | Opções (padrão) | Guia |
 | --- | --- | --- | --- | --- |
 | **Onde o copiloto atua** | Limita todas as funções a canais e grupos | Todas as funções | **Canais**, **Grupos** (vazio = todos) | [Nesta página](#onde-o-copiloto-atua) |
-| **Sugestões automáticas** | Sugere respostas ao abrir a conversa | Bloco **Sugestões** acima do editor | Ver **Sugestões automáticas** abaixo | [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia) |
-| **Comandos de chat** | Abre o menu do copiloto no editor | Ícone de estrelas no editor (conversas e campanhas) | **Comandos padrão** (todos ligados), **Comandos personalizados** (desligado) | [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia) e [Criar comandos personalizados](/docs/copiloto/comandos-personalizados) |
+| **Sugestões automáticas** | Sugere respostas ao abrir a conversa | Bloco **Sugestões** acima do editor | Ver [Sugestões automáticas](#sugestões-automáticas) abaixo | [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia) |
+| **Comandos de chat** | Abre o menu do copiloto no editor | Ícone de estrelas no editor (conversas e campanhas por WhatsApp por QR Code ou SMS) | **Comandos padrão** (todos ligados), **Comandos personalizados** (desligado) | [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia) e [Criar comandos personalizados](/docs/copiloto/comandos-personalizados) |
 | **Análise de sentimento** | Avalia o sentimento do contato a cada mensagem | Cartão **Sessão** e lista (só Irritado/Impaciente) | Sem opções | [Analisar conversas com IA](/docs/copiloto/analises-de-ia) |
 | **Avaliadores** | Avaliações próprias salvas em campo ou tags | Campos da sessão/contato e tags | Até 10 avaliadores | [Analisar conversas com IA](/docs/copiloto/analises-de-ia) |
 | **Revisor de mensagens** | Revisa a resposta antes de enviar | Janela **Revise antes de enviar** | 5 categorias (3 ligadas), até 12 itens por categoria, até 5 regras personalizadas | [Nesta página](#revisor-de-mensagens) e [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia) |
 | **Aviso ao resolver** | Avisa pendência ao clicar em **Resolver** | Janela **Ficou algo em aberto?** | Sem opções | [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia) |
 | **Sugestão de retorno** | Sugere agendar quando a conversa combina retorno | Faixa **Ficou um retorno combinado** (precisa de **Agendar mensagem**) | Sem opções | [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia) |
-| **Não reabrir por agradecimento** | Mantém resolvida se o contato só agradecer em até 24 h | Mensagem de sistema na conversa | Sem opções | Nesta página |
+| **Não reabrir por agradecimento** | Mantém resolvida se o contato só agradecer em até 24 h | Mensagem de sistema na conversa | Sem opções | [Nesta página](#não-reabrir-por-agradecimento) |
 | **Cliente preso no bot** | Detecta contato preso no bot ou agente de IA | 🆘 na lista e cartão **Sessão** | **Quando detectar**: **Só sinalizar** (padrão) ou **Passar para humano** + **Mover para o grupo** (opcional) | [Analisar conversas com IA](/docs/copiloto/analises-de-ia) |
 | **Classificação de intenção** | Identifica a intenção no começo da sessão | Cartão **Sessão** e tag opcional | 5 intenções iniciais + **Outro**, até 10 | [Analisar conversas com IA](/docs/copiloto/analises-de-ia) |
 | **Lead score** | Nota de 0 a 100 de intenção de compra | Cartão **Sessão** e lista (só Quente/Excelente) | **Seu cliente ideal**, **Personalizar critérios de cada faixa** | [Analisar conversas com IA](/docs/copiloto/analises-de-ia) |
@@ -94,13 +94,7 @@ Níveis de **Criatividade** na régua, do mais conservador ao mais criativo: **M
 
 Revisa respostas de texto antes do envio (não revisa notas internas, mídias nem mensagens curtas, e não confere se uma informação está certa). Categorias ou regras desativadas não são consideradas, e uma categoria sem itens não é verificada.
 
-| Categoria | Começa | Itens iniciais em **O que será verificado** |
-| --- | --- | --- |
-| **Tom inadequado** | Ligada | Resposta seca ou monossilábica; Ironia ou sarcasmo; Culpar o cliente; Impaciência com o cliente |
-| **Promessas comerciais** | Ligada | Desconto; Prazo de entrega ou de solução; Reembolso ou devolução; Brinde; Condição especial de pagamento |
-| **Perguntas não respondidas** | Ligada | Sem lista editável |
-| **Informações sensíveis** | Desligada | Senha ou código de acesso; Token ou chave de API; Número completo de cartão; Dados pessoais de outro cliente |
-| **Padrão de comunicação da empresa** | Desligada | Abreviações como "vc", "pq" ou "tb"; Gírias ou linguagem informal demais; Excesso de emojis; Mensagem toda em letras maiúsculas |
+As cinco categorias são **Tom inadequado**, **Promessas comerciais** e **Perguntas não respondidas** (já começam ligadas), **Informações sensíveis** e **Padrão de comunicação da empresa** (começam desligadas). Cada categoria, exceto **Perguntas não respondidas**, tem uma lista **O que será verificado** que você pode editar.
 
 Nas categorias com lista, digite um item e pressione `Enter` para adicionar (até 12 por categoria) ou clique no `×` para remover.
 
@@ -119,9 +113,9 @@ Quando a conversa é mantida resolvida, a mensagem entra no histórico seguida d
 ## Comandos de chat, análises e permissões
 
 - **Comandos de chat:** veja como configurar comandos padrão e próprios em [Criar comandos personalizados](/docs/copiloto/comandos-personalizados).
-- **Análises (sentimento, avaliadores, intenção, lead score e cliente preso no bot):** veja em [Analisar conversas com IA: sentimento, avaliadores, intenções e lead score](/docs/copiloto/analises-de-ia).
-- **Restrições por papel:** veja como esconder sugestões, sentimento ou lead score em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+- **Análises (sentimento, avaliadores, intenção, lead score e cliente preso no bot):** veja em [Analisar conversas com IA](/docs/copiloto/analises-de-ia).
+- **Restrições por papel:** **Não mostrar sugestões de respostas** (seção **Copiloto** do papel), **Esconder sentimento do cliente** e **Esconder lead score** (seção **Conversas**); veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 
 ## Saldo
 
-Cada função gasta [saldo da carteira](/docs/conceitos/saldo-e-creditos) apenas quando está ligada e roda; sem saldo, a função para. Para recarregar, veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
+As funções gastam [saldo da carteira](/docs/conceitos/saldo-e-creditos) quando estão ligadas e rodam; sem saldo, a função para. As exceções são o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (e gasta saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende deste painel. Para recarregar, veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).

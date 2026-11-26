@@ -1059,6 +1059,13 @@
     "tipo": "faq"
   },
   {
+    "pergunta": "Como eu sei quais clientes estão irritados sem precisar abrir e ler cada conversa?",
+    "esperado": [
+      "docs/copiloto/analises-de-ia"
+    ],
+    "tipo": "guia"
+  },
+  {
     "pergunta": "O copiloto consegue publicar posts nas redes sociais da minha loja?",
     "esperado": [],
     "tipo": "negativo"
