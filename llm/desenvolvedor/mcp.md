@@ -74,7 +74,7 @@ Ao ultrapassar um limite, a ferramenta retorna `RATE_LIMITED` com o tempo de esp
 
 ## Travas por papel
 
-O proprietário do workspace nunca sofre trava. Papéis com determinadas restrições de visualização ou envio recebem `PROVISIONAL_LOCK` com a mensagem `"O MCP ainda não aplica algumas restrições do seu papel (ex.: tags ou dados do contato ocultos, horário de atendimento, canais permitidos para envio). Por segurança, ele fica bloqueado para papéis com essas restrições até que sejam aplicadas. Peça ao dono do workspace para usar o MCP ou ajustar o seu papel."`.
+O proprietário do workspace nunca sofre trava. Papéis com determinadas restrições de visualização ou envio recebem `PROVISIONAL_LOCK`: o MCP fica bloqueado para esses papéis. O que fazer: peça ao proprietário do workspace para usar o MCP ou ajustar o seu papel.
 
 Restrições que ativam essa trava (rótulos de **Configurações** → **Ambiente** → **Permissões**):
 

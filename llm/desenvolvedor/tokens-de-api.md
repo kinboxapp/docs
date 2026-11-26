@@ -57,7 +57,7 @@ Mensagens que a API pode devolver, conforme a rota e a situação:
 | `This API token lacks the "<escopo>" scope. Create a token with it in Settings › API.` | Falta ao token a permissão (`read`, `write` ou `send`) que a chamada exige. | Crie um token com essa permissão. |
 | `The role of the user who created this API token lacks permission: <permissões>` | O papel de quem criou o token não tem a permissão que a rota pede. | Ajuste o papel ou crie o token com um membro que tenha a permissão. |
 | `The role of the user who created this API token has the restriction <restrição>, which blocks this route.` | O papel de quem criou o token tem uma restrição que bloqueia a rota. | Ajuste o papel ou crie o token com um membro sem essa restrição. |
-| `The role of the user who created this API token restricts which conversations and messages it can read (<restrições>), and this route does not apply that restriction yet.` | O papel de quem criou o token limita quais conversas e mensagens ele vê. | Crie o token com um membro sem essas restrições. |
+| Começa com `The role of the user who created this API token restricts which conversations and messages it can read…` | O papel de quem criou o token limita quais conversas e mensagens ele vê. | Confira com o proprietário do workspace se o papel de quem criou o token atende ao acesso que a integração precisa. |
 | `ThrottlerException: Too Many Requests` (HTTP 429) | Limite de chamadas excedido. | Espere alguns segundos e repita. |
 
 ## Limite de chamadas
