@@ -21,9 +21,9 @@ verificado_em: 2026-11-26
 
 Referência técnica complementar de [Ensinar o agente com arquivos, textos, sites e vídeos](/docs/agente-de-ia/conhecimento). Vale para agentes de texto e de voz.
 
-## Limites reais do conhecimento do agente
+## Limites do conhecimento do agente
 
-| Fonte / item | Comportamento real |
+| Fonte / item | Como funciona |
 | --- | --- |
 | **Upload de arquivos** (tamanho) | Limite de **5 MB** por arquivo no navegador, um arquivo por vez. Acima disso exibe `"O tamanho do arquivo é maior que o permitido. O Máximo é 5MB."`. |
 | **Upload de arquivos** (formatos) | O seletor aceita somente `.pdf`, `.txt` e `.docx`. Qualquer outro formato arrastado exibe `"O arquivo não é suportado."`. |
@@ -36,10 +36,10 @@ Referência técnica complementar de [Ensinar o agente com arquivos, textos, sit
 
 ## Estados, fila e erros do processamento
 
-- **Em processamento** (`pending` / `ingesting`): ícone girando no cartão. O processamento roda em fila, um conhecimento por vez, e o status atualiza em tempo real na tela.
-- **Pronto** (`ready`): ícone normal. **Quantidade de caracteres** é preenchida na criação (texto colado) ou após o processamento (arquivo, site, YouTube).
-- **Erro** (`error`): nome riscado com selo vermelho `"Error"` (em inglês na tela) e dica `"Ocorreu um erro ao treinar o conhecimento"`.
-- **Motivo do erro:** as razões internas (como vídeo sem legenda ou falha ao extrair conteúdo do site) ficam apenas nos logs e **não aparecem para o cliente**.
+- **Em processamento:** ícone girando no cartão. O processamento roda em fila, um conhecimento por vez, e o status atualiza em tempo real na tela.
+- **Pronto:** ícone normal. **Quantidade de caracteres** é preenchida na criação (texto colado) ou após o processamento (arquivo, site, YouTube).
+- **Erro:** nome riscado com selo vermelho `"Error"` (em inglês na tela) e dica `"Ocorreu um erro ao treinar o conhecimento"`.
+- **Motivo do erro:** a tela não mostra o motivo do erro, como vídeo sem legenda ou página inacessível.
 - **Sem botão de reprocessar:** num item com erro, clicar no **X** remove imediatamente do agente, sem confirmação. A orientação é conferir o arquivo ou link e adicionar novamente.
 
 ## Como o agente busca e usa o conhecimento

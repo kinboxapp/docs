@@ -1,7 +1,7 @@
 ---
 title: Posso ter dois agentes no mesmo canal?
-description: Não; cada canal é atendido por um único agente de IA, mas você pode usar um agente com Subagente ou Executar outro agente no fluxograma, ou chamar agentes dentro de um bot.
-keywords: [dois agentes mesmo canal, varios agentes no whatsapp, um agente por canal, mover canal de agente, agente e bot mesmo canal, subagente]
+description: Não; cada canal tem um único agente de texto para as mensagens; no WhatsApp oficial com ligações, um agente de voz à parte atende as ligações. Para comportamentos diferentes, você pode usar um agente com Subagente ou Executar outro agente no fluxograma, ou chamar agentes dentro de um bot.
+keywords: [dois agentes mesmo canal, varios agentes no whatsapp, um agente de texto por canal, agente de voz, mover canal de agente, agente e bot mesmo canal, subagente]
 publico: llm
 tipo: faq
 fontes:
@@ -30,7 +30,7 @@ Não para as mensagens: cada canal tem um único agente de texto — ao conectar
 
 Se você precisa de comportamentos diferentes no mesmo canal, existem três caminhos:
 
-- Usar um único agente com o [Fluxograma](/docs/agente-de-ia/fluxograma-e-etapas), dividindo o atendimento em blocos de **Subagente** ou chamando o fluxo de outro agente com **Executar outro agente**.
+- Usar um único agente de texto com o [Fluxograma](/docs/agente-de-ia/fluxograma-e-etapas), dividindo o atendimento em blocos de **Subagente** ou chamando o fluxo de outro agente com **Executar outro agente**.
 - Em agentes que já possuem etapas configuradas, usar **Etapas** para alternar instruções, conhecimento e ferramentas.
 - Montar um fluxo em **Bot** e chamar agentes diferentes pelo bloco **Agente de IA** conforme a escolha do contato.
 

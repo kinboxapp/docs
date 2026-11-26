@@ -1,6 +1,6 @@
 ---
 title: Quantos agentes de IA posso criar?
-description: O plano da Kinbox não limita a quantidade de agentes de IA que você cria; o que limita o uso é a regra de um agente por canal e o saldo disponível na carteira.
+description: O plano da Kinbox não limita a quantidade de agentes de IA que você cria; o que limita o uso é que cada canal tem um único agente de texto para as mensagens (no WhatsApp oficial com ligações, um agente de voz à parte atende as ligações) e o saldo disponível na carteira.
 keywords: [quantos agentes de ia, limite de agentes, criar varios agentes, clonar agente, importar agente, agentes no plano]
 publico: llm
 tipo: faq
@@ -23,7 +23,7 @@ Quantos agentes de IA posso criar?
 
 ## Resposta
 
-O plano da Kinbox não limita a quantidade de agentes de IA que você pode criar no workspace; na prática, o uso é limitado pela regra de um único agente por canal conectado e pelo saldo disponível na carteira.
+O plano da Kinbox não limita a quantidade de agentes de IA que você pode criar no workspace; na prática, o uso é limitado pelo saldo disponível na carteira e pela regra dos canais: cada canal tem um único agente de texto para as mensagens; no WhatsApp oficial com ligações, um agente de voz à parte atende as ligações.
 
 Você também pode criar novos agentes copiando um agente existente pelo menu **Clonar** ou importando um arquivo `.json` exportado em **Importar agente** (a cópia não leva os canais conectados do original e nasce ligada).
 

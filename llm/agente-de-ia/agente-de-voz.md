@@ -1,6 +1,6 @@
 ---
 title: "Agente de voz: plano, saldo, franquia, teste de 10 minutos e coexistência"
-description: Regras do agente de voz da Kinbox para ligações do WhatsApp oficial, com requisitos, mensagens da tela, cobrança por minuto sem valores, franquia do plano, coexistência e limites do teste por voz.
+description: Regras do agente de voz da Kinbox para ligações do WhatsApp oficial, com requisitos, mensagens da tela, cobrança por minuto, franquia do plano, coexistência e limites do teste por voz.
 keywords: [agente de voz não atende, ligação whatsapp ia, coexistência ligações, plano de ligações whatsapp, saldo ligação, franquia, teste de 10 minutos, ligação encerrada saldo, quando a ia atende]
 publico: llm
 tipo: referencia
@@ -68,6 +68,6 @@ Em qualquer das opções, se o workspace estiver sem plano de **Ligações Whats
 ## O que fica na conversa e quem pode assumir
 
 - Painel **Ligação do WhatsApp com IA** na conversa: **Ouvir**, **Assumir**, transcrição ao vivo e **Enviar para a IA** (se a IA já saiu, retorna `"A IA não está mais na ligação"`).
-- **Quem pode entrar ou assumir:** membros para quem a ligação toca (responsável disponível ou quem vê a conversa sem responsável), dono do workspace e quem tem acesso a todas as conversas. Demais recebem `"Você não pode entrar nesta ligação"`.
+- **Quem pode entrar ou assumir:** membros para quem a ligação toca (responsável disponível ou quem vê a conversa sem responsável), proprietário do workspace e quem tem acesso a todas as conversas. Demais recebem `"Você não pode entrar nesta ligação"`.
 - Erros ao assumir: `"Outro atendente já assumiu esta ligação"` e `"Você já está em outra ligação"`.
 - Registro final na conversa: `"Atendida por {{name}}"` ou `"Atendida por {{name}}, depois por um atendente"`, **Resumo da IA** e transcrição (falas Cliente, nome do agente e Atendente) quando a gravação não trouxe transcrição própria.

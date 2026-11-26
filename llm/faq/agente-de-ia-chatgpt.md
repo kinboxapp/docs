@@ -1,6 +1,6 @@
 ---
 title: Dá para usar ChatGPT ou outra IA para responder os clientes?
-description: Sim; o agente de IA da Kinbox já usa modelos de IA de mercado escolhidos em Configurações → Modelo (ou o padrão da Kinbox), sem precisar nem permitir conectar conta ou chave própria.
+description: "Não dá para conectar sua conta ou chave do ChatGPT; os Agentes de IA da Kinbox já usam modelos de IA, escolhidos em Modelo, e cobram do saldo."
 keywords: [chatgpt na kinbox, integrar chatgpt, usar minha chave de ia, escolher modelo de ia, ia para responder clientes, modelo llm]
 publico: llm
 tipo: faq

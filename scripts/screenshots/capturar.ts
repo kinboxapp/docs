@@ -65,6 +65,7 @@ const CSS_ESTAVEL = `
   .ant-slide-down-appear, .ant-slide-down-appear-prepare, .ant-slide-down-enter, .ant-slide-down-enter-prepare { opacity: 1 !important; transform: none !important; }
   /* ...e, sem animação, também não terminam de sair: some com eles na saída */
   .ant-slide-up-leave, .ant-slide-down-leave, .ant-zoom-leave, .ant-fade-leave { display: none !important; }
+  .ant-modal-wrap:has(.ant-zoom-leave) { display: none !important; }
   /* Fundo branco atrás de modais: os cantos arredondados do recorte não mostram a tela de trás */
   .ant-modal-mask { background: #fff !important; }
 `
@@ -151,7 +152,7 @@ async function executarPasso(page: Page, passo: Passo) {
   else if ('arrastar' in passo) {
     const { de, para, x, y } = passo.arrastar
     const posicao = x !== undefined && y !== undefined ? { targetPosition: { x, y } } : {}
-    await page.locator(de).first().dragTo(page.locator(para).first(), { timeout: 30_000, force: true, ...posicao })
+    await page.locator(de).first().dragTo(page.locator(para).first(), { timeout: 30_000, ...posicao })
   }
   else throw new Error(`Passo desconhecido: ${JSON.stringify(passo)}`)
 }

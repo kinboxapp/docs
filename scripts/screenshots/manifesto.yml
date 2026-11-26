@@ -428,6 +428,21 @@
   paginas:
     - docs/agente-de-ia/criando-seu-agente-de-ia
 
+- id: agente-configuracoes-perfil
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
+    - esperar: '.ant-drawer-content >> text=Informações básicas do agente'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .rounded-app.mb-4:has-text("Informações básicas do agente")'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/configuracoes-perfil.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
 - id: agente-conectar-canal
   url: /settings/agents/6b0793fd9f2e3f185bc07afa
   passos:
@@ -443,8 +458,9 @@
   paginas:
     - docs/agente-de-ia/conectar-canais
 
-# Fluxograma de exemplo montado na hora (Início → Subagente), sem publicar: puxar a seta do
-# bloco e soltar no vazio cria o bloco ligado e abre "Selecione uma ação". O recorte pega só os blocos.
+# Fluxograma de exemplo montado na hora (Início → Coletar dados → Subagente → Transferir), sem publicar: puxar a
+# seta do bloco e soltar no vazio cria o bloco ligado e abre "Selecione uma ação". Os blocos novos recebem os ids
+# 1, 2 e 3; no fim, "Enquadrar" (último botão da barra inferior) mostra o desenho inteiro.
 - id: agente-fluxograma
   url: /settings/agents/6b0793fd9f2e3f185bc07afa
   passos:
@@ -457,18 +473,47 @@
         para: '#side-panel .react-flow__pane'
         x: 560
         y: 330
-    - esperar: '.ant-modal-content >> text=Selecione uma ação'
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
     - digitar:
-        seletor: '.ant-modal-content input'
-        texto: 'Subagente'
-    - clicar: '.ant-modal-content a.cursor-pointer:has-text("Subagente")'
-    - pausa: 800
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Coletar dados'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Coletar dados")'
+    - pausa: 1000
     - tecla: Escape
     - pausa: 800
-    - pausa: 1200
+    - arrastar:
+        de: '#side-panel .react-flow__handle.source[data-nodeid="1"]'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 560
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Subagente'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Subagente")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - arrastar:
+        de: '#side-panel .react-flow__handle.source[data-nodeid="2"]'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 560
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Transferir'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Transferir")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - clicar: '#side-panel [class*="_board_bottom_center"] button >> nth=-1'
+    - pausa: 1500
   alvo:
     - '#side-panel .react-flow__node-start'
-    - '#side-panel .react-flow__node:has-text("Subagente")'
+    - '#side-panel .react-flow__node[data-id="1"]'
+    - '#side-panel .react-flow__node[data-id="2"]'
+    - '#side-panel .react-flow__node[data-id="3"]'
   mascarar: []
   arquivo: images/ajuda/agente-de-ia/fluxograma.webp
   paginas:
