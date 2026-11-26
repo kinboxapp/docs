@@ -2370,14 +2370,8 @@
   passos:
     - esperar: 'div.text-md:text-is("Fuso horário")'
     - pausa: 800
-    # O workspace de documentação não tem fuso nem moeda escolhidos (a tela mostra o campo vazio e a Kinbox usa
-    # Brasília e real). Para o print, o campo mostra o texto da opção correspondente; nada é salvo.
-    - trocarTexto:
-        seletor: 'div.py-6:has(div.text-md:text-is("Fuso horário")) .ant-select-selector'
-        texto: '(UTC-03:00) Brasilia'
-    - trocarTexto:
-        seletor: 'div.py-6:has(div.text-md:text-is("Moeda")) .ant-select-selector'
-        texto: 'Brazilian Real'
+    # O workspace de documentação não tem fuso nem moeda escolhidos: o print mostra a tela como está
+    # (campos vazios) e o texto da página explica que valem Brasília e real.
   alvo:
     - 'h3:text-is("Preferências")'
     - 'div.card-bordered:has(div.text-md:text-is("Fuso horário"))'
@@ -2422,25 +2416,12 @@
   passos:
     - esperar: 'tbody.ant-table-tbody tr:nth-child(6)'
     - pausa: 800
+  # O cabeçalho do cartão vai até a borda direita do cartão: o recorte não corta a tabela seco à direita.
   alvo:
-    - 'button:has-text("Filtros")'
+    - '.ant-card-head'
     - 'tbody.ant-table-tbody tr:nth-child(6)'
   mascarar:
     - 'tbody.ant-table-tbody tr td:first-child > div'
   arquivo: images/ajuda/workspace/auditoria-lista.webp
-  paginas:
-    - docs/administracao/auditoria
-
-- id: auditoria-filtros
-  url: /settings/audit
-  passos:
-    - esperar: 'tbody.ant-table-tbody tr'
-    - clicar: 'button:has-text("Filtros")'
-    - esperar: '.ant-dropdown-menu label[for="actionMethod"]'
-    - pausa: 800
-  # O recorte é só o painel de filtros (opaco, por cima da lista): a coluna Autor fica fora do print.
-  alvo: '.ant-dropdown-menu'
-  mascarar: []
-  arquivo: images/ajuda/workspace/auditoria-filtros.webp
   paginas:
     - docs/administracao/auditoria

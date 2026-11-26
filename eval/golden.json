@@ -1126,6 +1126,7 @@
     "pergunta": "Quero saber quem apagou uma tag da minha conta semana passada, onde eu vejo isso?",
     "esperado": [
       "docs/administracao/auditoria",
+      "llm/faq/auditoria-quem-apagou",
       "llm/configuracoes-no-workspace/configuracoes-gerais"
     ],
     "tipo": "guia"
@@ -1140,17 +1141,19 @@
     "tipo": "solucao-de-problema"
   },
   {
-    "pergunta": "A hora das mensagens na Kinbox está uma hora adiantada, como eu arrumo o fuso?",
+    "pergunta": "A mensagem de ausência está disparando na hora errada, umas três horas fora do nosso expediente. O que eu confiro?",
     "esperado": [
       "llm/faq/workspace-mudar-fuso",
-      "docs/configuracoes-no-workspace/configuracoes-gerais"
+      "docs/configuracoes-no-workspace/configuracoes-gerais",
+      "docs/administracao/mensagens-automaticas"
     ],
-    "tipo": "faq"
+    "tipo": "solucao-de-problema"
   },
   {
     "pergunta": "A agência que cuida da nossa conta consegue ler as conversas dos nossos clientes? Dá para bloquear?",
     "esperado": [
-      "docs/administracao/acesso-do-parceiro"
+      "docs/administracao/acesso-do-parceiro",
+      "llm/faq/workspace-parceiro-ve-conversas"
     ],
     "tipo": "guia"
   },
@@ -1162,11 +1165,11 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "A Kinbox segue a LGPD com os dados dos meus clientes?",
+    "pergunta": "Onde eu troco o logo e o nome da empresa que aparecem na Kinbox?",
     "esperado": [
-      "llm/faq/lgpd-e-privacidade"
+      "docs/configuracoes-no-workspace/configuracoes-gerais"
     ],
-    "tipo": "faq"
+    "tipo": "guia"
   },
   {
     "pergunta": "Consigo baixar o histórico da Auditoria em uma planilha?",

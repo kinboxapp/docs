@@ -1,7 +1,7 @@
 ---
 title: "Configurações do workspace: padrões, regras da caixa de entrada, Auditoria, parceiro e exclusão"
 description: Detalhes das configurações gerais do workspace na Kinbox — valores padrão, efeito de cada opção da Caixa de Entrada, fuso horário, idioma e moeda, o que a Auditoria registra, o acesso do parceiro e quem pode excluir o workspace.
-keywords: [configurações gerais, padrão do workspace, fuso vazio, brasília, horário de verão, idioma padrão, moeda, mensagem fora do horário a cada mensagem, mensagem ao resolver não enviada, chaves first_name, enviar nome do membro instagram sms, indicação de pendente, tempo de tolerância 360, campos obrigatórios de sessão, auditoria 30 dias, membro removido, parceiro via mcp, quem pode excluir o workspace, o nome do ambiente está incorreto]
+keywords: [configurações gerais, padrão do workspace, fuso vazio, brasília, horário de verão, idioma padrão, moeda, mensagem fora do horário a cada mensagem, quem apagou, quem mudou, nome da empresa, trocar logo, mensagem ao resolver não enviada, chaves first_name, enviar nome do membro instagram sms, indicação de pendente, tempo de tolerância 360, campos obrigatórios de sessão, auditoria 30 dias, membro removido, parceiro via mcp, quem pode excluir o workspace, o nome do ambiente está incorreto]
 publico: llm
 tipo: referencia
 fontes:
@@ -11,12 +11,9 @@ fontes:
   - web:src/components-old/inbox/ConversationItem/index.tsx
   - web:src/components-old/inbox/NewMessageModal/index.tsx
   - web:src/components-old/ui/CustomFieldSelect/index.tsx
-  - web:src/lib/partner-conversations.ts
   - api-v0:server/controllers/WorkspaceController.js
-  - api-v0:server/controllers/OperatorController.js
   - api-v0:server/controllers/EventsController.js
   - api-v0:server/controllers/CallController.js
-  - api-v0:server/controllers/AuditController.js
   - api-v0:server/auxiliary/Utils.js
   - api-v0:server/modules/chat/auxiliary/parser.js
   - api:src/modules/audit/audit.schema.ts
@@ -25,17 +22,15 @@ fontes:
 codigo:
   - web:src/pages/settings/workspace/**
   - web:src/pages/settings/audit/**
+  - web:src/layouts/BaseLayout.tsx
   - web:src/components-old/inbox/ConversationItem/index.tsx
   - web:src/components-old/inbox/NewMessageModal/index.tsx
-  - web:src/lib/partner-conversations.ts
   - web:src/lib/timezones.json
   - api-v0:server/controllers/WorkspaceController.js
   - api-v0:server/controllers/EventsController.js
   - api-v0:server/controllers/CallController.js
-  - api-v0:server/controllers/AuditController.js
   - api-v0:server/services/CallService.js
   - api-v0:server/modules/chat/auxiliary/**
-  - api:src/modules/audit/**
   - api:src/modules/mcp/mcp-audit.service.ts
 verificado_em: 2026-11-26
 ---
@@ -48,7 +43,7 @@ Alterar **Configurações** → **Ambiente** → **Geral** no workspace (na tela
 
 | Opção | Valor inicial |
 | --- | --- |
-| **Fuso horário** | `(UTC-03:00) Brasilia` para quem cria a conta pelo cadastro; vazio para workspaces criados depois em **Criar ambiente** (vazio vale Brasília, UTC−3) |
+| **Fuso horário** | `(UTC-03:00) Brasilia` para quem cria a conta pelo cadastro; vazio para workspaces criados depois em **Criar ambiente** (vazio: a maior parte das regras usa Brasília, UTC−3) |
 | **Idioma padrão do ambiente** | **Português (Brasil)** |
 | **Moeda** | Vazio (vale real, BRL) |
 | **Tornar indisponível se inativo.** | Desligada (sugestão inicial de 30 minutos ao ligar) |
@@ -62,9 +57,9 @@ Alterar **Configurações** → **Ambiente** → **Geral** no workspace (na tela
 ## Fuso, idioma, moeda e layout
 
 - **Como salvar e validação:** **Imagem do ambiente** (até 2 MB; erro `"Erro ao fazer upload. O tamanho máximo deve ser 2MB."`; aviso `"Imagem do ambiente alterada."`) e **Nome do ambiente** (obrigatório; aviso `"Nome do ambiente editado."`) salvam na hora. As demais opções só valem após **Salvar mudanças** (`"Suas preferências foram atualizadas."`). Campos numéricos aceitam números (erro `"Digite um número"`). Sair da tela sem salvar perde as alterações.
-- **Fuso horário (106 opções em inglês):** vale para as regras do workspace que dependem de hora — horários de atendimento, **Mensagem quando fora do horário comercial**, bot, **Limitar horário que pode responder** e **Limitar horário de acesso ao ambiente** do papel. Campo vazio vale Brasília (UTC−3). A hora exibida na tela (hora das mensagens, listas e **Auditoria**) segue o relógio e o fuso do computador ou celular de cada pessoa, não o fuso do workspace. A Kinbox usa uma diferença de horas fixa o ano todo; em fusos de lugares com horário de verão, a hora das regras pode ficar 1 hora diferente em parte do ano — nesse caso, fale com o suporte.
+- **Fuso horário (106 opções em inglês):** vale para as regras do workspace que dependem de hora — horários de atendimento, **Mensagem quando fora do horário comercial**, bot, automações, campanhas, **Limitar horário que pode responder** e **Limitar horário de acesso ao ambiente** do papel. Com o campo vazio, a maior parte das regras usa Brasília (UTC−3); escolha o fuso e clique em **Salvar mudanças** para que todas sigam o mesmo horário. A hora exibida na tela (hora das mensagens, listas e **Auditoria**) segue o relógio e o fuso do computador ou celular de cada pessoa, não o fuso do workspace. A Kinbox usa uma diferença de horas fixa o ano todo; em fusos de lugares com horário de verão, a hora das regras pode ficar 1 hora diferente em parte do ano — nesse caso, fale com o suporte.
 - **Horário comercial:** escolhe um horário cadastrado em **Configurações** → **Ambiente** → **Horários**; é a base de TME, TMP e TMA nos relatórios e da **Mensagem quando fora do horário comercial**.
-- **Idioma padrão do ambiente:** **Português (Brasil)** ou **English**. Funciona como idioma de reserva para avisos gerados sem tela aberta (como notificações push) de membros sem idioma definido no perfil (ordem de prioridade: idioma do perfil, idioma do workspace, português do Brasil). A interface de cada membro segue o perfil ou o navegador, e as mensagens automáticas da **Caixa de Entrada** saem exatamente como foram escritas, sem tradução.
+- **Idioma padrão do ambiente:** **Português (Brasil)** ou **English**. Idioma das notificações (como as push) de quem não escolheu idioma no perfil (ordem de prioridade: idioma do perfil, idioma do workspace, português do Brasil). Não muda o idioma das telas (cada membro escolhe em [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario)) nem traduz as mensagens automáticas da **Caixa de Entrada**, que saem exatamente como foram escritas.
 - **Moeda (119 opções em inglês):** muda apenas o símbolo e o formato dos valores nas negociações e metas, sem converter valores já cadastrados. Campo vazio vale real (BRL). O preço de produtos continua em R$.
 - **Inatividade:** **Tornar indisponível se inativo.** conta sem atividade em todas as abas abertas da Kinbox e volta o membro para disponível ao mexer novamente; não age em quem ficou indisponível manualmente, em quem tem **Não torna indisponível se ficar inativo** nem no proprietário. **Tornar offline se inativo** desconecta a atualização em tempo real (`"Você foi desconectado por inatividade."` com **Reconectar**); não age em quem tem **Não torna offline se ficar inativo** nem no proprietário.
 - **Layout no celular:** no celular, a tela se chama **Seu ambiente** e o campo do nome aparece como **Nome da organização**.
@@ -72,35 +67,38 @@ Alterar **Configurações** → **Ambiente** → **Geral** no workspace (na tela
 ## Caixa de Entrada: condições de cada opção
 
 - **Mensagem ao resolver conversa:** sai quando a sessão é resolvida, se a chave está ligada e há texto. Não sai quando a sessão resolvida tinha sido reaberta (pelo **Tempo de tolerância ao resolver conversa** ou por **Reabrir**) nem quando a conversa é resolvida ao ser transferida para outro canal. Resolvida por membro, sai como mensagem do membro; sem membro (bot ou automação), sai como mensagem de bot. Aceita as chaves de frase rápida (`{{first_name}}`, `{{name}}` etc.), trocando cada chave apenas na primeira vez que aparece (sem dado, a chave é removida). No WhatsApp oficial, segue a [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas).
-- **Mensagem quando fora do horário comercial:** só em conversa com membro responsável e com um **Horário comercial** escolhido em **Preferências** (conversas sem responsável ou só com grupo não recebem). Sai a cada mensagem do contato fora do horário, como mensagem de bot. Segue o **Fuso horário** do workspace e recalcula no máximo a cada minuto. Não troca chaves como `{{first_name}}` — use texto sem chaves.
+- **Mensagem quando fora do horário comercial:** só em conversa com membro responsável e com um **Horário comercial** escolhido em **Preferências** (conversas sem responsável ou só com grupo não recebem). Sai a cada mensagem do contato fora do horário, como mensagem de bot. Segue o **Fuso horário** do workspace; a Kinbox recalcula se está dentro ou fora do horário no máximo a cada minuto, então pode levar até 1 minuto para a virada do horário valer. Não troca chaves como `{{first_name}}` — use texto sem chaves.
 - **Mensagem quando membro indisponível:** só em conversa com membro responsável indisponível; fora do horário tem prioridade quando as duas condições ocorrem juntas. Sai a cada mensagem do contato, como mensagem de bot, e não troca chaves — use texto sem chaves.
-- **Preservar tags ao resolver uma conversa:** ligada (padrão), a sessão nova do mesmo contato herda as tags da sessão anterior; desligada, a sessão nova começa sem tags e a sessão resolvida mantém as dela.
+- **Preservar tags ao resolver uma conversa:** ligada (padrão), a próxima sessão da mesma conversa (o mesmo contato no mesmo canal) herda as tags da sessão anterior; desligada, a sessão nova começa sem tags e a sessão resolvida mantém as dela.
 - **Enviar nome do membro em cada mensagem:** inclui o nome do perfil do membro numa linha antes do texto no formato `*Nome:*` (negrito no WhatsApp), apenas em mensagens enviadas por membro (não bot nem automação). Funciona no WhatsApp (QR Code e oficial), Facebook Messenger, Instagram e SMS (no SMS o nome vai com os asteriscos). Telegram e e-mail não recebem o prefixo.
 - **Sempre atribuir ao membro que responder:** sem ela, quem responde uma conversa sem responsável vira o responsável; ligada, quem envia uma mensagem comum assume a conversa mesmo se ela já tinha outro responsável (notas privadas não alteram a atribuição).
 - **Desatribuir ao reabrir se membro offline:** retira o responsável quando o contato escreve e a sessão é reaberta dentro do **Tempo de tolerância ao resolver conversa** com o responsável offline. Não age em sessão nova.
 - **Nota de avaliação pública:** mostra `"⭐"` e a média de avaliação de cada membro na lista de membros das **Salas**.
 - **Indicação dinâmica de conversa pendente:** troca o círculo azul (`"Aguardando resposta do membro"`) por alerta amarelo e depois vermelho segundo os campos de **horas** e **minutos**, contados desde que a conversa ficou pendente ou desde a última mensagem; **Destacar cor do fundo** pinta o fundo da linha. Se o campo de horas ou minutos de um nível ficar vazio, a cor correspondente nunca aparece — preencha horas e minutos (use `0` quando não quiser horas). Os mesmos tempos são usados no painel **Ao vivo** dos relatórios.
-- **Tempo de tolerância ao resolver conversa:** ligada, mensagens do contato até X minutos após resolver reabrem a mesma sessão (sem novo protocolo e sem disparar o bot de início); desligada, toda mensagem após resolver abre sessão nova. Afeta **Mensagem ao resolver conversa** (sessão reaberta não envia) e **Desatribuir ao reabrir se membro offline**.
+- **Tempo de tolerância ao resolver conversa:** ligada, mensagens do contato até X minutos após resolver reabrem a mesma sessão (sem novo protocolo e sem disparar o bot de início); desligada, uma mensagem após resolver abre sessão nova. Exceção nos dois casos: com **Não reabrir por agradecimento** do copiloto ligada, uma mensagem só de agradecimento até 24 horas depois de resolver pode manter a conversa resolvida (veja [Não reabrir por agradecimento](/docs/copiloto/configuracoes-de-copiloto#não-reabrir-por-agradecimento)). Afeta **Mensagem ao resolver conversa** (sessão reaberta não envia) e **Desatribuir ao reabrir se membro offline**.
 - **Campos obrigatórios no chat ativo:** exige ligar a chave e selecionar pelo menos um campo. A lista de seleção mostra campos personalizados de contato e de sessão, mas a janela de iniciar conversa (**Enviar mensagem**) pede apenas os campos de **contato**.
 
 ## Auditoria
 
 - **Quem pode:** precisa da permissão **Auditoria** na seção **Gerenciamento do Ambiente** do papel ou ser o proprietário (nos papéis prontos, apenas **Administrador**).
-- **Escopo e retenção:** registra ações concluídas com sucesso que criam, alteram ou excluem algo nos últimos 30 dias. Consultas e tentativas com erro não entram. Exceção: ações de parceiro pelo MCP entram mesmo quando falham (como **Falhou**) e ficam guardadas por até 180 dias.
+- **Escopo e retenção:**
+  - **Histórico comum:** ações concluídas com sucesso que criam, alteram ou excluem algo, guardadas por 30 dias. Consultas feitas na tela e tentativas com erro não entram.
+  - **Chamadas pelo MCP:** entram também as de leitura. As da IA de um membro entram quando dão certo, em nome do membro. As de parceiro entram mesmo quando falham (como **Falhou**). Algumas chamadas pelo MCP, como as de parceiro, ficam guardadas por até 180 dias.
 - **Lista (20 registros por página, mais recente primeiro):**
-  - **Autor:** nome e foto do membro, **Membro removido**, **Integração** (quando a ação veio de uma integração) ou `Parceiro <workspace> · <membro>` (dica `"Ação feita por um parceiro pelo MCP"`).
+  - **Autor:** nome e foto do membro, **Membro removido**, **Integração** (quando a ação veio de uma integração) ou, em ações de parceiro pelo MCP, a palavra **Parceiro** seguida do nome do workspace do parceiro e do nome de quem fez a chamada (dica `"Ação feita por um parceiro pelo MCP"`).
   - **Ação:** **Criou**, **Atualizou**, **Excluiu** (ou rótulo próprio); para parceiro pelo MCP: **Consultou**, **Alterou** ou **Falhou**.
   - **Entidade:** **Tag**, **Assinatura**, **Bot**, **Permissão**, **Meta**, **Negociação**, **Tarefa**, **Automações**, **Relatório**, **Grupo**, **Membro**, **Contato**, **Campo personalizado**, **Filtro**, **Frase Rápida**, **Atribuição automática**, **WhatsApp**, **Instagram**, **Integração**, **MCP**. Itens sem nome amigável aparecem com o nome técnico em inglês (como `workspace`, `products`, `pipelines`, `organizations`, `workflows`).
-  - **Descrição:** nome ou detalhe do item; mudanças de disponibilidade mostram `"Automático: inatividade"`, `"Automático: horário de atendimento"` ou `"Manual"`; tarefas mostram `"Motivo: <motivo>."`. Clicar copia o ID (`"ID da entidade copiado"`; erro: `"Não foi possível copiar o ID da entidade"`).
+  - **Descrição:** nome ou detalhe do item; mudanças de disponibilidade mostram `"Automático: inatividade"`, `"Automático: horário de atendimento"` ou `"Manual"`; tarefas mostram `"Motivo: <motivo>."`. Clicar copia o ID da entidade, quando disponível (`"ID da entidade copiado"`; erro: `"Não foi possível copiar o ID da entidade"`).
   - **Quando:** tempo relativo e data/hora no relógio do aparelho de quem olha.
 - **Ações de parceiro pelo MCP:** entidade **MCP**; grava parceiro, quem chamou, ferramenta usada e resultado (nunca os dados consultados). Exemplos de nomes de ação exibidos na descrição: `"Listar"`, `"Ver status"`, `"Criar WhatsApp"`, `"Gerar QR code"`, `"Ver plano"`, `"Faturas em aberto"`, `"Histórico de faturas"`, `"Créditos de SMS"`, `"Saldo da carteira"`; em caso de erro, mostra a dica `"A chamada do parceiro falhou."`.
-- **Filtros:** **Criado entre** (atalhos **Hoje** e **Ontem**), **Membro**, **Ação** (**Criou**, **Atualizou (Put)**, **Atualizou (Patch)**, **Excluiu**, **Parceiro via MCP**), **Entidade** (**Bot**, **Permissão**, **Grupo**, **Membro**, **Filtros**, **Assinatura**, **Canal**, **Automação**, **Frases Rápidas**, **Campos personalizados**, **Tarefa**) e **ID da entidade**. **Entidade** e **ID da entidade** substituem um ao outro (use um de cada vez). Ações de criação geralmente não têm o ID no endereço e podem não aparecer na busca por **ID da entidade**. **Atualizou (Put)** e **Atualizou (Patch)** aparecem ambos como **Atualizou** na lista.
+- **Filtros:** **Criado entre** (atalhos **Hoje** e **Ontem**), **Membro**, **Ação** (**Criou**, **Atualizou (Put)**, **Atualizou (Patch)**, **Excluiu**, **Parceiro via MCP**), **Entidade** (**Bot**, **Permissão**, **Grupo**, **Membro**, **Filtros**, **Assinatura**, **Canal**, **Automação**, **Frases Rápidas**, **Campos personalizados**, **Tarefa**) e **ID da entidade**. **Entidade** e **ID da entidade** substituem um ao outro (use um de cada vez). Itens fora das 11 opções do filtro **Entidade** aparecem na lista; para achá-los, filtre por **Membro**, **Criado entre** ou **ID da entidade**. Ações de criar podem não aparecer na busca por **ID da entidade**. **Atualizou (Put)** e **Atualizou (Patch)** são dois tipos de alteração e ambos aparecem como **Atualizou** na lista.
 
 ## Parceiro
 
-- O cartão **Parceria** só aparece se o workspace for ligado a um parceiro que pode inspecioná-lo, e não aparece para o próprio parceiro enquanto ele inspeciona.
+- O cartão **Parceria** só aparece se o workspace for ligado a um parceiro que pode inspecioná-lo. O parceiro não vê o cartão **Parceria** enquanto inspeciona o workspace.
 - **Permitir que o parceiro veja as conversas** vem ligada; alterá-la exige a permissão **Workspace** no papel ou ser o proprietário e clicar em **Salvar mudanças**.
-- Com a opção desligada, o parceiro continua acessando relatórios e configurações, mas não vê as conversas: **Caixa de entrada** some na inspeção, tentar abrir uma conversa mostra `"Conversas restritas pelo cliente"` (`"O cliente não permite que o parceiro veja as conversas deste ambiente. Relatórios e configurações continuam disponíveis."`), mensagens, mídias, notas fixadas e prévias de conversas na busca não aparecem, e pelo MCP as ferramentas de leitura, escrita e envio em conversas ficam bloqueadas para o parceiro.
+- Com a opção desligada, o parceiro deixa de ver as conversas do workspace: o item **Caixa de entrada** some do menu dele e tentar abrir uma conversa mostra `"Conversas restritas pelo cliente"` (`"O cliente não permite que o parceiro veja as conversas deste ambiente. Relatórios e configurações continuam disponíveis."`).
+- Para conferir as chamadas do parceiro pelo MCP: **Configurações** → **Auditoria** → **Filtros** → **Ação** **Parceiro via MCP** → **Filtrar**.
 - Nenhuma tela do workspace exibe qual parceiro está ligado nem oferece opção para desvincular; para isso, fale com o suporte.
 
 ## Excluir o workspace: quem pode e mensagens
@@ -118,6 +116,7 @@ Alterar **Configurações** → **Ambiente** → **Geral** no workspace (na tela
 
 | Sintoma | Causa | O que fazer |
 | --- | --- | --- |
+| Item **Auditoria** não aparece no menu | Membro sem a permissão **Auditoria** no papel | Peça a quem administra o workspace para liberar **Auditoria** em **Gerenciamento do Ambiente**. |
 | Item **Geral** não aparece no menu | Membro sem a permissão **Workspace** no papel | Peça ao proprietário ou a quem administra o workspace para liberar **Workspace** em **Gerenciamento do Ambiente**. |
 | Cartão **Admin** (**Excluir ambiente**) não aparece | O membro não é o proprietário do workspace | Só o proprietário pode excluir; peça a ele ou solicite a transferência da propriedade. |
 | Cartão **Parceria** não aparece | O workspace não é ligado a um parceiro que pode inspecioná-lo (ou está aberto em inspeção pelo parceiro) | Sem parceiro com inspeção o cartão não existe; para confirmar vínculo, fale com o suporte. |
@@ -127,4 +126,4 @@ Alterar **Configurações** → **Ambiente** → **Geral** no workspace (na tela
 | `{{first_name}}` saiu literal na mensagem automática | Chave usada em **Mensagem quando fora do horário comercial** ou **Mensagem quando membro indisponível** | Remova as chaves; apenas **Mensagem ao resolver conversa** substitui chaves de frase rápida. |
 | Cor amarela ou vermelha de conversa pendente não aparece | Campo de horas ou minutos vazio, ou opção desligada/não salva | Preencha horas e minutos (use `0` quando não quiser horas) e clique em **Salvar mudanças**. |
 | Hora mostrada na tela está errada | Relógio ou fuso do computador ou celular de quem olha | Ajuste a data e a hora do aparelho; para regras (horário comercial, bot, limites), ajuste **Fuso horário** em **Geral**. |
-| Ação não aparece na **Auditoria** | Foi consulta/leitura, tentativa com erro, tem mais de 30 dias, buscou criação por **ID da entidade** ou filtrou só Put ou só Patch | Consultas, erros comuns e itens com mais de 30 dias não entram; em alterações, filtre **Atualizou (Put)** e depois **Atualizou (Patch)**, e use **Entidade** ou **ID da entidade** um por vez. |
+| Ação não aparece na **Auditoria** | Foi consulta feita na tela, tentativa com erro, tem mais de 30 dias, buscou criação por **ID da entidade**, filtrou só Put ou só Patch, ou o item não está entre as opções de **Entidade** | Consultas feitas na tela, erros e itens com mais de 30 dias não entram (chamadas pelo MCP entram, inclusive as de leitura); em alterações, filtre **Atualizou (Put)** e depois **Atualizou (Patch)**; use **Entidade** ou **ID da entidade** um por vez, ou filtre por **Membro** e **Criado entre**. |

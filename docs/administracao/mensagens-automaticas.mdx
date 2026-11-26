@@ -1,7 +1,7 @@
 ---
 title: Mensagens automáticas e regras da caixa de entrada
 description: Como configurar na Kinbox a mensagem ao resolver a conversa, a mensagem fora do horário comercial e a de membro indisponível, e o que fazem as regras da caixa de entrada, como preservar tags, enviar o nome do membro, tempo de tolerância e indicação de conversa pendente.
-keywords: [mensagem automática, mensagem ao resolver conversa, mensagem de encerramento, mensagem fora do horário, mensagem de ausência, membro indisponível, preservar tags, enviar nome do membro, assinatura do atendente, sempre atribuir ao membro que responder, desatribuir ao reabrir, nota de avaliação pública, conversa pendente, sla, tempo de tolerância, reabrir sessão, campos obrigatórios no chat ativo]
+keywords: [mensagem automática, mensagem ao resolver conversa, mensagem de encerramento, mensagem fora do horário, mensagem de ausência, membro indisponível, preservar tags, enviar nome do membro, assinatura do atendente, sempre atribuir ao membro que responder, desatribuir ao reabrir, nota de avaliação pública, conversa pendente, sla, tempo de tolerância, reabrir sessão, campos obrigatórios no chat ativo, mensagem de boas-vindas, saudação, mensagem de despedida]
 publico: humano
 tipo: guia
 fontes:
@@ -29,7 +29,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-O cartão **Caixa de Entrada** em **Configurações** → **Ambiente** → **Geral** reúne as mensagens automáticas e as regras de atendimento do seu workspace (na tela, **ambiente**). Todas as opções valem para o workspace inteiro.
+O cartão **Caixa de Entrada** em **Configurações** → **Ambiente** → **Geral** reúne as mensagens automáticas e as regras de atendimento do seu workspace (na tela, **ambiente**). Todas as opções valem para o workspace inteiro. A mensagem de boas-vindas (saudação) não fica neste cartão: ela é feita com um bot (veja [Bot: visão geral](/docs/bot/visao-geral)).
 
 <Note>
   Quem pode: você precisa da permissão **Workspace** no papel (na tela, **Permissão**) ou ser o proprietário do workspace (veja [Configurações gerais do workspace](/docs/configuracoes-no-workspace/configuracoes-gerais)). As mudanças só passam a valer depois de clicar em **Salvar mudanças**.
@@ -73,7 +73,7 @@ O cartão **Caixa de Entrada** em **Configurações** → **Ambiente** → **Ger
 
 - Só funciona em conversas que **têm um membro responsável** e com um **Horário comercial** escolhido em **Preferências** (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)). Conversas sem responsável ou atribuídas apenas a um grupo não recebem essa mensagem.
 - Sai **a cada mensagem** enviada pelo contato fora do horário.
-- O horário segue o **Fuso horário** configurado em **Preferências**, e a Kinbox recalcula o status de dentro ou fora do horário no máximo a cada minuto.
+- O horário segue o **Fuso horário** configurado em **Preferências**. Pode levar até 1 minuto para a virada do horário valer.
 - O texto sai exatamente como escrito: chaves como `{{first_name}}` não são trocadas.
 
 Para avisar fora do horário também em conversas sem responsável, use um [bot](/docs/bot/visao-geral) com horário ou uma automação (veja [Organizar a equipe de atendimento](/docs/atendimento/visao-geral)).
@@ -90,11 +90,11 @@ Para avisar fora do horário também em conversas sem responsável, use um [bot]
 
 ### Preservar tags ao resolver uma conversa
 
-Quando ligada, a sessão seguinte do mesmo contato herda as tags da sessão anterior. Quando desligada, a sessão nova começa sem tags, enquanto a sessão resolvida mantém as tags que já tinha (veja [Criar e usar tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags)).
+Quando ligada, a próxima sessão da mesma conversa (o mesmo contato no mesmo canal) herda as tags da sessão anterior. Quando desligada, a sessão nova começa sem tags, enquanto a sessão resolvida mantém as tags que já tinha (veja [Criar e usar tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags)).
 
 ### Enviar nome do membro em cada mensagem
 
-Adiciona o nome do perfil do membro em negrito na primeira linha antes do texto (por exemplo, **Ana:**). Vale apenas para mensagens enviadas por um membro (não para bot ou automação), no WhatsApp, Facebook Messenger e Instagram (o texto de ajuda na tela cita WhatsApp e Facebook). O nome exibido é o cadastrado no perfil do membro (veja [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario)).
+Adiciona o nome do perfil do membro na primeira linha, antes do texto (por exemplo, **Ana:**; no WhatsApp, aparece em negrito). Vale apenas para mensagens enviadas por um membro (não para bot ou automação), no WhatsApp, Facebook Messenger e Instagram (o texto de ajuda na tela cita WhatsApp e Facebook). O nome exibido é o cadastrado no perfil do membro (veja [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario)).
 
 ### Sempre atribuir ao membro que responder
 
@@ -118,7 +118,7 @@ Na lista da **Caixa de entrada**, conversas pendentes (aguardando resposta do me
 
 ### Tempo de tolerância ao resolver conversa
 
-Quando ligada, se o contato mandar mensagem antes do tempo definido em minutos após a sessão ser resolvida, a Kinbox reabre a mesma sessão em vez de criar uma nova — sem novo protocolo e sem disparar novamente o bot de início. Por exemplo, com 30 minutos de tolerância, uma resposta enviada 10 minutos após o encerramento volta para a mesma sessão. Quando desligada, toda mensagem depois de resolver abre uma sessão nova (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes) e [Bot: visão geral](/docs/bot/visao-geral)).
+Quando ligada, se o contato mandar mensagem antes do tempo definido em minutos após a sessão ser resolvida, a Kinbox reabre a mesma sessão em vez de criar uma nova — sem novo protocolo e sem disparar novamente o bot de início. Por exemplo, com 30 minutos de tolerância, uma resposta enviada 10 minutos após o encerramento volta para a mesma sessão. Quando desligada, uma mensagem depois de resolver abre uma sessão nova. Nos dois casos há uma exceção: com a função **Não reabrir por agradecimento** do copiloto ligada, uma mensagem só de agradecimento pode manter a conversa resolvida (veja [Não reabrir por agradecimento](/docs/copiloto/configuracoes-de-copiloto#não-reabrir-por-agradecimento), [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes) e [Bot: visão geral](/docs/bot/visao-geral)).
 
 ### Campos obrigatórios no chat ativo
 
