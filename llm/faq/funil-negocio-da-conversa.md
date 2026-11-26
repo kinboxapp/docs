@@ -41,7 +41,7 @@ Como funciona na prática:
 - **Responsável:** se você deixar **Responsável** vazio no formulário, a negociação fica atribuída a quem a criou (não ao responsável da conversa).
 - **Bloqueios na criação:** se aparecer `"Você não pode criar um negócio..."` ou `"Você já tem um máximo de ... negociações abertas com esse contato."`, seu papel tem uma restrição de criação para contatos com negociação aberta ou o funil atingiu o limite de negociações abertas por contato.
 - **Associar uma negociação já existente:** abra a negociação e use **⋯** → **Associar uma conversa** (ou use **Associar conversas** em [Ações em lote no funil](/docs/crm/acoes-em-lote)).
-- **Criação automática:** bots e agentes de IA também podem criar negociações ligadas à conversa — veja [Blocos do bot](/docs/bot/blocos-do-bot) (**Ação de CRM**) e [Ações do fluxograma](/docs/agente-de-ia/acoes-do-fluxograma) (**Criar negócio**), além de automações e cenários.
+- **Criação automática:** bots e agentes de IA também podem criar negociações ligadas à conversa — veja [Blocos do bot](/docs/bot/blocos-do-bot) (**Ação de CRM**) e [Ações do fluxograma](/docs/agente-de-ia/acoes-do-fluxograma) (**Criar negócio**), além de automações e [cenários](/docs/cenarios/gatilhos-e-acoes).
 
 Para mais detalhes sobre edição e regras das negociações, veja [Trabalhar com negociações no funil](/docs/crm/gerenciando-funil-de-vendas).
 

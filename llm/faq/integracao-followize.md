@@ -33,7 +33,7 @@ Se você precisa integrar com o Followize ou com outro sistema fora da lista de 
 - **API pública** da Kinbox (com token de API) para ler e gravar dados a partir do outro sistema (veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api));
 - **Plugins** para abrir uma página do seu sistema dentro do painel da conversa (veja [Criar um plugin para o painel da conversa](/docs/desenvolvedor/criando-plugin-integracao));
 - **Bloco Integração do bot** usando **Chamar endpoint** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot));
-- **Cenários** para receber webhooks e fazer requisições HTTP (veja [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia)).
+- **Cenários** para receber webhooks e fazer requisições HTTP (veja [Receber dados de outro sistema por webhook](/docs/cenarios/integrar-via-webhook-com-cenarios) e [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia)).
 
 ## Variações
 

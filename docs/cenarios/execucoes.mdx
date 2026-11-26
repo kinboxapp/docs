@@ -1,0 +1,85 @@
+---
+title: "Acompanhar as execuções no Analítico"
+description: Onde ver cada vez que um cenário rodou, o que significa cada status, como abrir os passos de uma execução e exportar o histórico.
+keywords: [analítico, execuções do cenário, histórico do cenário, cenário falhou, status da execução, operações, exportar execuções, log do cenário]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/workflows/WorkflowHeader.tsx
+  - web:src/pages/settings/workflows/analytics/AnalyticsDrawer.tsx
+  - web:src/pages/settings/workflows/analytics/AnalyticsCore.tsx
+  - web:src/pages/settings/workflows/analytics/AnalyticsExecutionModal.tsx
+  - web:src/pages/settings/workflows/analytics/AnalyticsExecutionActionModal.tsx
+  - api:src/modules/workflows/executions/workflow-log.schema.ts
+codigo:
+  - web:src/pages/settings/workflows/**
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - api:src/modules/workflows/**
+verificado_em: 2026-11-26
+---
+
+Use o painel **Analítico** para conferir cada vez que um cenário rodou, verificar o status, inspecionar os dados de cada passo e exportar o histórico de execuções.
+
+<Note>
+  Abrir o editor e o **Analítico** exige a permissão **Cenários** (ou ser o proprietário). Veja [Referência de permissões](/docs/administracao/referencia-de-permissoes).
+</Note>
+
+## Abrir o Analítico
+
+Vá em **Configurações** → **Automação** → **Cenários**, abra o cenário e clique no ícone de gráfico **Analítico**, à direita do botão **Publicar**.
+
+- Se o botão **Analítico** estiver desabilitado, publique o cenário pela primeira vez clicando em **Publicar**.
+- Se o botão **Analítico** não aparecer, acesse pelo computador — na tela do celular o editor não mostra **Analítico** nem **Publicar**.
+
+## Filtros e totais
+
+No topo do painel lateral **Analítico**, você encontra:
+
+- **Atualizar**: recarrega os dados exibidos.
+- **Período**: **Hoje**, **Últimos 7 dias**, **Últimos 15 dias** ou **Últimos 30 dias** (padrão: **Últimos 30 dias**).
+- **Status**: **Tudo** (padrão), **Pendente**, **Aguardando**, **Executando**, **Falhou** ou **Concluído**.
+- Menu de três pontos com **Exportar** (**CSV** ou **XLSX**).
+
+Logo abaixo ficam o gráfico de execuções por dia e quatro totais do período selecionado: **Executando agora**, **Falhas**, **Concluídos** e **Operações**. O número de operações cresce com os passos que cada execução roda; ele serve para acompanhar o tamanho das execuções e não desconta [saldo da carteira](/docs/conceitos/saldo-e-creditos).
+
+## Status das execuções
+
+A tabela mostra as colunas **Gatilho** (com o total de execuções entre parênteses), **Status**, **Início**, **Duração** e **Operações**.
+
+| Status na tabela | O que significa |
+| --- | --- |
+| **Executando** | O cenário está rodando neste momento. |
+| **Aguardando** | A execução está parada em um passo **Esperar um tempo**. |
+| **Pendente** | A execução está esperando um passo terminar. |
+| **Executado** (**Concluído** no filtro) | A execução terminou sem erro — inclusive quando parou em uma saída extra sem caminho ligado (como **Não encontrado**). |
+| **Falhou** | A execução parou por causa de um erro em um passo. |
+
+## Ver os passos de uma execução
+
+Clique na linha da execução — ou abra o menu de três pontos da linha e escolha **Ver detalhes** (o menu também oferece **Copiar ID** para copiar o identificador da execução).
+
+A janela **Execução** mostra, na ordem, todos os passos que rodaram com uma descrição do que aconteceu em cada um (por exemplo, se o contato foi encontrado, se a requisição foi enviada ou qual caminho da decisão foi seguido) e o resultado final ("Execução concluída com sucesso." ou "Houve falha durante a execução.").
+
+Clique em qualquer passo dessa lista para abrir seus detalhes:
+
+- **Entrada**: dados enviados para a ação.
+- **Saída**: dados retornados ao executar a ação.
+- **Erro**: mensagem de erro, quando houver.
+
+Nos passos que encontram ou criam um contato, conversa, negociação ou produto, a janela exibe o link **Ver …** para abrir o registro diretamente.
+
+## Exportar
+
+Para baixar o histórico filtrado pelo período e pelo status atuais, clique no menu de três pontos no topo do **Analítico** e escolha **Exportar** → **CSV** ou **XLSX**.
+
+## Por quanto tempo fica guardado
+
+O histórico de execuções fica guardado por **60 dias**. No **Analítico**, o filtro **Período** mostra no máximo os **Últimos 30 dias**.
+
+## Veja também
+
+- [Meu cenário não rodou](/docs/cenarios/problemas-comuns)
+- [Criar e publicar um cenário](/docs/cenarios/criar-um-cenario)
+- [Gatilhos e ações dos cenários](/docs/cenarios/gatilhos-e-acoes)
+- [Cenários: visão geral](/docs/cenarios/visao-geral)
