@@ -189,7 +189,8 @@
     "pergunta": "Por que no WhatsApp oficial o campo de digitar sumiu e só aparece o botão de enviar template?",
     "esperado": [
       "docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas",
-      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns",
+      "docs/conversas/problemas-comuns"
     ],
     "tipo": "conceito"
   },
@@ -211,6 +212,52 @@
   },
   {
     "pergunta": "Como cadastro o cartão de crédito no Gerenciador de Anúncios do Facebook para impulsionar posts?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero tirar uma planilha com todas as mensagens que a equipe trocou com os clientes no mês passado",
+    "esperado": [
+      "docs/conversas/acoes-em-lote-e-exportar",
+      "llm/conversas/acoes-em-lote-e-exportar",
+      "llm/faq/conversa-exportar-historico"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A conversa do cliente está com um colega e quando tento mandar mensagem aparece que não tenho permissão",
+    "esperado": [
+      "docs/conversas/problemas-comuns",
+      "llm/faq/conversa-com-outro-atendente",
+      "llm/conversas/caixa-de-entrada-do-kinbox"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como deixo uma resposta pronta com o primeiro nome do cliente para usar com a barra?",
+    "esperado": [
+      "docs/conversas/criar-frases-rapidas-para-suas-conversas",
+      "llm/faq/conversa-frases-com-variaveis"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Tem como fechar sozinho os atendimentos em que o cliente parou de responder?",
+    "esperado": [
+      "llm/faq/conversa-encerrar-por-inatividade"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço uma aba na caixa de entrada só com as conversas do suporte que ainda não têm responsável?",
+    "esperado": [
+      "docs/conversas/criar-filtros-de-conversa",
+      "llm/conversas/criar-filtros-de-conversa"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como recupero uma conversa que apaguei no aplicativo do WhatsApp do meu celular?",
     "esperado": [],
     "tipo": "negativo"
   },
