@@ -1573,6 +1573,59 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Quero oferecer consulta de 40 minutos de segunda a sexta na agenda da Kinbox. Onde cadastro esse serviço e o horário dele?",
+    "esperado": [
+      "docs/agenda/servicos-e-locais",
+      "llm/agenda/kinbox-agenda"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como marco horário para um cliente na agenda, escolhendo três horários seguidos de uma vez só?",
+    "esperado": [
+      "docs/agenda/agendamentos",
+      "llm/agenda/kinbox-agenda"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Eu vejo os agendamentos no calendário, mas a recepcionista não vê nenhum e nem aparece a opção Agendamento para ela. O que falta liberar?",
+    "esperado": [
+      "docs/agenda/kinbox-agenda",
+      "docs/agenda/agendamentos",
+      "llm/agenda/kinbox-agenda"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Numa reserva de mesa pela agenda, qual o máximo de pessoas e quantas mesas o sistema consegue juntar para um grupo?",
+    "esperado": [
+      "llm/agenda/kinbox-agenda"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O paciente recebe lembrete automático no WhatsApp antes da consulta marcada na agenda?",
+    "esperado": [
+      "llm/faq/agenda-lembretes",
+      "docs/agenda/agendamentos"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Os horários marcados na agenda da Kinbox aparecem no meu Google Agenda do celular?",
+    "esperado": [
+      "llm/faq/agenda-google-calendar",
+      "docs/agenda/kinbox-agenda"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como importo para a agenda da Kinbox uma planilha com os agendamentos que eu tinha em outro sistema?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Indiquei uma empresa para usar a Kinbox e quero que a conta dela caia na minha carteira de parceiro. Como faço?",
     "esperado": [
       "docs/programa-de-parceiros/convidar-clientes"

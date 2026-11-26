@@ -73,7 +73,7 @@ Efeito por local para quem **não** tem **Ver telefone de contatos privados**:
 ## Cadastro
 
 - **Obrigatoriedade:** nenhum campo é obrigatório em **Criar contato**, exceto quando **Vincular ao Kinbox Agenda** está ligado.
-- **Vincular ao Kinbox Agenda** (só com o app Kinbox Agenda ativo): com a chave ligada, **E-mail** ("Campo obrigatório") e o campo de data de nascimento (quando existir no workspace) passam a ser obrigatórios para salvar. Criar ou refazer o vínculo também exige **Celular**: sem celular, o contato é salvo, mas o vínculo não é criado. Se o vínculo falhar depois de salvar, aparece "Contato salvo, mas não foi possível sincronizar com o Kinbox Agenda.".
+- **Vincular ao Kinbox Agenda** ([Kinbox Agenda: visão geral](/docs/agenda/kinbox-agenda)): com a chave ligada, **E-mail** ("Campo obrigatório") e o campo de data de nascimento (quando existir no workspace) passam a ser obrigatórios para salvar. Criar ou refazer o vínculo também exige **Celular**: sem celular, o contato é salvo, mas o vínculo não é criado. Se o vínculo falhar depois de salvar, aparece "Contato salvo, mas não foi possível sincronizar com o Kinbox Agenda.".
 - **Foto:** até 2 MB (erro "Erro ao fazer upload. O tamanho máximo deve ser 2MB.").
 - **Telefone e e-mail repetidos:** o telefone é salvo com o código do país escolhido na bandeira. Se já existe contato com exatamente o mesmo telefone, retorna "Já existe um contato cadastrado com esse telefone". E-mail repetido não é recusado.
 - **Avisos ao salvar:** "Contato criado." ou "Contato salvo.". Se alguma organização escolhida na criação falhar ao vincular: "Contato criado, mas {{count}} organização(ões) não foram vinculadas.".
