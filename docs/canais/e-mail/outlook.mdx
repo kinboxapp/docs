@@ -46,7 +46,7 @@ Conecte uma caixa do **Outlook** (Microsoft 365) à Kinbox usando um aplicativo 
     </Frame>
   </Step>
   <Step title="Conecte o canal">
-    Clique em **Conectar canal**. A Kinbox testa o acesso e a leitura da Caixa de Entrada. Se der certo, aparece "Canal de Outlook criado." e o canal abre com status **Conectado**. Se a Microsoft recusar o acesso ou a leitura, aparece um aviso de erro com a mensagem da Microsoft.
+    Clique em **Conectar canal**. A Kinbox testa o acesso e a leitura da Caixa de Entrada. Se der certo, aparece "Canal de Outlook criado." e o canal entra na lista de **Canais**, com status **Conectado**. Clique nele para abrir o painel. Se a Microsoft recusar o acesso ou a leitura, aparece um aviso de erro (às vezes em inglês ou sem detalhes).
   </Step>
   <Step title="Faça um teste">
     De outro endereço de e-mail, mande uma mensagem para a caixa conectada e espere até cerca de 2 minutos sem abri-la no Outlook. Confira a conversa chegando na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) e responda pela Kinbox para confirmar o envio.
@@ -65,13 +65,13 @@ Conecte uma caixa do **Outlook** (Microsoft 365) à Kinbox usando um aplicativo 
 
 ## O que a Kinbox lê e envia
 
-- **Leitura a cada 2 minutos:** a Kinbox lê apenas a **Caixa de Entrada**, somente **e-mails não lidos** e somente os **recebidos no mesmo dia**, marcando cada e-mail importado como lido.
+- **Leitura a cada 2 minutos:** a Kinbox lê apenas a **Caixa de Entrada**, somente **e-mails não lidos** e somente os **recebidos hoje**, marcando cada e-mail importado como lido. Um e-mail que ficar sem ler de um dia para o outro não entra mais.
 - **Começo do texto e anexos:** a conexão Outlook traz apenas o **começo do texto** de cada e-mail (não o e-mail inteiro) e os anexos de até 10 MB cada; anexos maiores ficam de fora sem aviso.
 - **Respostas:** saem pela própria conta do **Graph Sender**, ficam salvas nos itens enviados da conta e enviam arquivos como anexo.
 - **Status Conectado:** o selo **Conectado** não garante que os e-mails estão chegando — erros de leitura ou de envio não alteram o status do canal.
 
 <Tip>
-  Não abra o e-mail no Outlook antes de ele aparecer na Kinbox. E-mails já lidos fora da Kinbox não entram na **Caixa de entrada**, e a leitura busca apenas e-mails recebidos no mesmo dia.
+  Não abra o e-mail no Outlook antes de ele aparecer na Kinbox. E-mails já lidos fora da Kinbox não entram na **Caixa de entrada**, e a leitura busca apenas e-mails recebidos hoje.
 </Tip>
 
 ## Depois de conectar
@@ -85,6 +85,6 @@ Pelo painel do canal você só altera a **Descrição** e eventuais [campos pers
 - **Aviso de erro ao conectar:** confira **Tenant ID**, **Client ID**, **Client Secret**, **Graph Sender** e se o aplicativo tem permissão para ler, marcar como lido e enviar e-mails na caixa.
 - **Os e-mails pararam de chegar ou as respostas ficam com erro:** conecte de novo com os mesmos dados (usando o mesmo **Graph Sender**).
 - **O e-mail chegou cortado:** a conexão Outlook traz só o começo do texto de cada e-mail. Para receber o texto inteiro, use [IMAP/SMTP](/docs/canais/e-mail/por-imap) ou [encaminhamento](/docs/canais/e-mail/por-encaminhamento).
-- **Anexo grande não chegou:** o limite é de 10 MB por anexo.
+- **Anexo grande não chegou:** veja o limite de anexos em "O que a Kinbox lê e envia".
 
 Para mais diagnósticos, veja [Os e-mails não chegam ou não saem](/docs/canais/e-mail/problemas-comuns).

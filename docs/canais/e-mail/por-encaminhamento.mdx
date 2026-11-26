@@ -8,7 +8,7 @@ fontes:
   - web:src/pages/settings/channels/email/AddEmail.tsx
   - web:src/pages/settings/channels/email/EditEmail.tsx
   - api-v0:server/controllers/MailController.js
-  - api-v0:server/modules/**
+  - api-v0:server/modules/mail*/**
   - api-v0:server/controllers/IntegrationsController.js
 codigo:
   - web:src/pages/settings/channels/email/AddChannelEmail.tsx
@@ -16,7 +16,7 @@ codigo:
   - web:src/pages/settings/channels/email/EditEmail.tsx
   - api-v0:server/controllers/MailController.js
   - api-v0:server/routes/MailApiRoutes.js
-  - api-v0:server/modules/**
+  - api-v0:server/modules/mail*/**
   - api-v0:server/controllers/IntegrationsController.js
 verificado_em: 2026-11-26
 ---
@@ -46,10 +46,10 @@ Crie um canal de e-mail **Por encaminhamento** para receber na [Caixa de entrada
     </Frame>
   </Step>
   <Step title="Crie o canal">
-    Clique em **Conectar canal**. A Kinbox mostra "Canal de E-mail criado." e abre o painel do canal, já com status **Conectado**.
+    Clique em **Conectar canal**. Aparece "Canal de E-mail criado." e o canal entra na lista de **Canais**, com status **Conectado**.
   </Step>
   <Step title="Copie o endereço gerado pela Kinbox">
-    No painel do canal criado, copie o endereço exibido em **Configurações de Encaminhamento**. O mesmo endereço também aparece embaixo do nome do canal na lista de **Canais** — se não conseguir selecionar o texto no campo do painel, copie o endereço diretamente da lista.
+    Na lista de **Canais**, clique no canal para abrir o painel e copie o endereço exibido em **Configurações de Encaminhamento**. O mesmo endereço também aparece embaixo do nome do canal na lista: se não conseguir selecionar o texto no campo do painel, copie o endereço da lista.
   </Step>
   <Step title="Ative o encaminhamento no seu provedor">
     Abra as configurações do seu provedor de e-mail, procure a opção de encaminhamento (*forwarding*) e ative o encaminhamento de **todas** as mensagens para o endereço gerado pela Kinbox. Se precisar de orientação sobre onde fica essa opção, consulte a ajuda do seu provedor ou quem administra o e-mail da empresa.

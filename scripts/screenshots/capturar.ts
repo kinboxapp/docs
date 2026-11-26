@@ -215,7 +215,11 @@ async function executarPasso(page: Page, passo: Passo) {
   }
   else if ('trocarTexto' in passo) {
     const total = await localizar(page, passo.trocarTexto.seletor).evaluateAll((els, texto) => {
-      for (const el of els) el.textContent = texto
+      // Em campo de formulário, troca o texto de exemplo (placeholder); nos outros elementos, o texto.
+      for (const el of els) {
+        if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) el.placeholder = texto
+        else el.textContent = texto
+      }
       return els.length
     }, passo.trocarTexto.texto)
     if (!total) throw new Error(`trocarTexto: o seletor não achou nenhum elemento: ${passo.trocarTexto.seletor}`)

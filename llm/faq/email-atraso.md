@@ -15,7 +15,6 @@ codigo:
   - api-v0:server/controllers/MailController.js
   - api-v0:server/controllers/IntegrationsController.js
   - api-v0:server/modules/mail/**
-  - api-v0:server/modules/**
   - api-v0:server/modules/scheduler/MailScheduler.js
   - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
@@ -37,7 +36,7 @@ Quando o e-mail não chega nunca, as causas variam conforme o tipo de conexão:
 
 - **IMAP/SMTP e Outlook:** só entram e-mails **não lidos** que estejam na pasta de entrada (INBOX / Caixa de Entrada). E-mail aberto antes em outro programa ou movido para spam ou outra pasta não entra.
 - **IMAP/SMTP:** só entram e-mails recebidos a partir do **dia** da conexão (ou da última reconexão). Se a senha da caixa mudou no provedor, a leitura para sem aviso; conecte de novo com o mesmo **IMAP Usuário** e a nova senha.
-- **Outlook:** só entram e-mails recebidos **no mesmo dia**. Se o acesso acabou (a Kinbox não renova esse acesso sozinha), a leitura para; conecte de novo com os mesmos dados e o mesmo **Graph Sender**.
+- **Outlook:** só entram e-mails recebidos **hoje**; um e-mail que ficar sem ler de um dia para o outro não entra mais. Se o acesso acabou (a Kinbox não renova esse acesso sozinha), a leitura para; conecte de novo com os mesmos dados e o mesmo **Graph Sender**.
 
 O selo **Conectado** do canal de e-mail não confirma que a leitura está funcionando. Veja o diagnóstico completo em [Os e-mails não chegam ou não saem](/docs/canais/e-mail/problemas-comuns).
 

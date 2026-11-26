@@ -14,7 +14,6 @@ codigo:
   - web:src/pages/settings/channels/email/**
   - api-v0:server/controllers/MailController.js
   - api-v0:server/modules/mail/**
-  - api-v0:server/modules/**
   - api-v0:server/modules/scheduler/MailScheduler.js
   - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
@@ -36,7 +35,7 @@ Os limites de canais de e-mail ativos dependem do plano (canais excluídos não 
 
 Regras para contas repetidas e visibilidade:
 
-- **Outro workspace:** a mesma caixa de e-mail não pode estar ativa em dois workspaces ao mesmo tempo (`"Essa conta já foi adicionada em outro ambiente"`).
+- **Outro workspace:** no **IMAP/SMTP** e no **Outlook**, a caixa cadastrada (**IMAP Usuário** ou **Graph Sender**) não pode ser canal ativo de dois workspaces (`"Essa conta já foi adicionada em outro ambiente"`). Excluir o canal no outro workspace não libera a caixa: fale com o suporte antes de excluir. No encaminhamento, cada canal tem um endereço próprio gerado pela Kinbox.
 - **Mesmo workspace:** no **IMAP/SMTP** e no **Outlook**, conectar de novo o mesmo endereço (**IMAP Usuário** ou **Graph Sender**) atualiza o canal existente sem duplicar. No **Por encaminhamento**, cada canal criado recebe um endereço próprio.
 - **Conversas:** quando o mesmo contato escreve para duas caixas diferentes, cada canal mantém a sua própria conversa com esse contato.
 - **Visibilidade por grupo:** não existe opção para restringir a visibilidade de um canal de e-mail por grupo. A opção **Restringir visibilidade** existe em outros canais (veja [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos)).

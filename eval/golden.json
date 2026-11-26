@@ -1046,7 +1046,8 @@
     "pergunta": "Ativei o encaminhamento do Gmail, mas a resposta chega ao cliente como via Kinbox, é normal?",
     "esperado": [
       "docs/canais/e-mail/por-encaminhamento",
-      "docs/canais/e-mail/problemas-comuns"
+      "docs/canais/e-mail/problemas-comuns",
+      "llm/faq/email-spam"
     ],
     "tipo": "solucao-de-problema"
   },
@@ -1060,6 +1061,13 @@
   },
   {
     "pergunta": "Dá para conectar a caixa de e-mail pela Kinbox usando POP3?",
+    "esperado": [
+      "llm/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo saber se o cliente abriu o e-mail que respondi pela Kinbox?",
     "esperado": [],
     "tipo": "negativo"
   }

@@ -14,8 +14,7 @@ codigo:
   - web:src/pages/settings/channels/AddChannel.tsx
   - web:src/pages/settings/channels/email/**
   - api-v0:server/controllers/MailController.js
-  - api-v0:server/modules/mail/**
-  - api-v0:server/modules/**
+  - api-v0:server/modules/mail*/**
   - api-v0:server/modules/scheduler/MailScheduler.js
   - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
@@ -40,7 +39,7 @@ Para escolher o tipo de conexão, vá em **Configurações** → **Chat** → **
 | **Como o e-mail chega** | Você liga, no seu provedor, o encaminhamento de todas as mensagens para um endereço gerado pela Kinbox. O e-mail entra assim que o provedor encaminha. | A Kinbox entra na sua caixa (com host, porta, usuário e senha) e lê os e-mails novos **a cada 2 minutos**. | A Kinbox lê a Caixa de Entrada da conta Microsoft 365 **a cada 2 minutos**, usando um aplicativo registrado na conta Microsoft da empresa. |
 | **De onde sai a resposta** | De um endereço da Kinbox, com o nome `<domínio do seu e-mail> via Kinbox`; o seu e-mail aparece como endereço de resposta. | Do seu próprio servidor de e-mail (SMTP), com o seu endereço. | Da própria conta do Outlook; a resposta fica nos itens enviados. |
 | **O que você precisa** | Acesso às configurações de encaminhamento do seu provedor de e-mail. | Os dados de IMAP e SMTP do seu provedor de e-mail. | Quem administre a conta Microsoft 365 da empresa para registrar o aplicativo e passar os dados. |
-| **Limites a saber** | Recebe apenas o que o provedor encaminha depois que o encaminhamento é ligado. | Lê só a pasta de entrada e só e-mails não lidos a partir do dia da conexão; a Kinbox marca cada e-mail como lido. | Lê só a Caixa de Entrada, só não lidos recebidos no mesmo dia e marca como lido; traz só o começo do texto de cada e-mail. |
+| **Limites a saber** | Recebe apenas o que o provedor encaminha depois que o encaminhamento é ligado. | Lê só a pasta de entrada e só e-mails não lidos a partir do dia da conexão; a Kinbox marca cada e-mail como lido. | Lê só a Caixa de Entrada, só não lidos recebidos hoje (um e-mail que ficar sem ler de um dia para o outro não entra mais) e marca como lido; traz só o começo do texto de cada e-mail. |
 
 ## Como escolher
 
@@ -51,7 +50,7 @@ Para escolher o tipo de conexão, vá em **Configurações** → **Chat** → **
 ## O que vale para as três
 
 - **Uma caixa por canal e limite do plano:** você pode conectar várias caixas criando um canal para cada uma. No teste grátis, o limite é de até 3 canais de e-mail ativos; na assinatura paga atual, não há limite de quantidade; contas mais antigas podem ter outros limites. Veja [Canais: conectar e gerenciar](/docs/canais/visao-geral) e [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
-- **Mesma caixa em dois workspaces:** o mesmo endereço de e-mail não pode ficar ativo em dois workspaces ao mesmo tempo.
+- **Mesma caixa em dois workspaces:** no **IMAP/SMTP** e no **Outlook**, a caixa cadastrada no canal (**IMAP Usuário** ou **Graph Sender**) não pode ser canal de dois workspaces. No encaminhamento, cada canal recebe um endereço próprio gerado pela Kinbox.
 - **Como o e-mail aparece na conversa:** cada e-mail recebido vira mensagem na conversa do contato naquele canal, e o contato é identificado pelo endereço do remetente. Na conversa, o balão mostra **Para:**, **De:** e **Assunto:**.
 - **Iniciar uma conversa por e-mail:** você também pode mandar a primeira mensagem para um contato por e-mail pela Kinbox; veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa).
 - **Respostas e arquivos:** por encaminhamento e IMAP/SMTP, as respostas saem em texto simples e arquivos enviados vão como link; no Outlook, o arquivo vai como anexo.

@@ -1,6 +1,6 @@
 ---
 title: Os e-mails não chegam ou não saem
-description: O que fazer quando os e-mails não aparecem na Kinbox, demoram, dão erro ao conectar ou as respostas não chegam ao cliente, no encaminhamento, no IMAP/SMTP e no Outlook.
+description: O que fazer quando os e-mails não aparecem na Kinbox, demoram, dão erro ao conectar ou as respostas não chegam ao contato, no encaminhamento, no IMAP/SMTP e no Outlook.
 keywords: [e-mail não chega, email não aparece, e-mail atrasado, erro ao testar conexão com o imap/smtp, essa conta já foi adicionada em outro ambiente, resposta não chega, e-mail com erro, via kinbox, outlook parou, troquei a senha do e-mail, e-mail cortado]
 publico: humano
 tipo: solucao-de-problema
@@ -15,8 +15,7 @@ codigo:
   - web:src/pages/settings/channels/index.tsx
   - api-v0:server/controllers/MailController.js
   - api-v0:server/controllers/IntegrationsController.js
-  - api-v0:server/modules/mail/**
-  - api-v0:server/modules/**
+  - api-v0:server/modules/mail*/**
   - api-v0:server/modules/scheduler/MailScheduler.js
   - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
@@ -59,14 +58,15 @@ O selo verde **Conectado** não garante que os e-mails estão chegando nem saind
     - Se o e-mail foi aberto em outro programa antes da leitura da Kinbox, ele fica marcado como lido e não entra.
     - E-mails em spam ou em outras pastas fora da pasta de entrada não entram.
     - Se a senha do e-mail mudou no provedor, a leitura para sem aviso e o canal continua **Conectado**. Conecte de novo em **Configurações** → **Chat** → **Canais** → **Novo canal** → **E-mail** → **IMAP/SMTP** usando o mesmo **IMAP Usuário** e a nova senha para atualizar o mesmo canal.
+    - Se o canal conectou mas nenhum e-mail chega desde o início, confira a caixa **TLS/SSL** do bloco **IMAP** conforme o seu provedor e conecte de novo com o mesmo **IMAP Usuário**.
 
     Veja [Conectar o e-mail por IMAP/SMTP](/docs/canais/e-mail/por-imap).
   </Accordion>
 
   <Accordion title="Outlook: o e-mail não aparece">
-    No tipo **Outlook**, a Kinbox lê a caixa **a cada 2 minutos**, somente na Caixa de Entrada, somente **e-mails não lidos** recebidos **no mesmo dia**, e marca cada e-mail como lido.
+    No tipo **Outlook**, a Kinbox lê a caixa **a cada 2 minutos**, somente na Caixa de Entrada, somente **e-mails não lidos** recebidos **hoje**, e marca cada e-mail como lido.
 
-    - Se o e-mail foi aberto no Outlook antes da leitura da Kinbox, ou chegou em outro dia, ele não entra.
+    - Se o e-mail foi aberto no Outlook antes da leitura da Kinbox, ele não entra. Um e-mail que ficar sem ler de um dia para o outro também não entra mais.
     - Se os e-mails pararem de chegar ou as respostas ficarem com erro, conecte de novo com os mesmos dados em **Configurações** → **Chat** → **Canais** → **Novo canal** → **E-mail** → **Outlook** (com o mesmo **Graph Sender**). O selo **Conectado** não muda quando o acesso acaba.
 
     Veja [Conectar o Outlook (Microsoft 365)](/docs/canais/e-mail/outlook).
@@ -76,7 +76,7 @@ O selo verde **Conectado** não garante que os e-mails estão chegando nem saind
     - **"Erro ao testar conexão com o IMAP/SMTP. Verifique os dados da conexão e tente novamente."** (**IMAP/SMTP**): a Kinbox não conseguiu entrar na caixa pelo IMAP. Confira **IMAP Host**, **IMAP Porta**, **IMAP Usuário**, **IMAP Senha** e **TLS/SSL**; se o provedor exigir senha de app, use essa senha.
     - **Sem Descrição** (**IMAP/SMTP**): o canal não é criado sem **Descrição**. Preencha o campo e tente de novo.
     - **Mensagem de erro da Microsoft** (**Outlook**): a Microsoft recusou o acesso ou a leitura da Caixa de Entrada. Confira **Tenant ID**, **Client ID**, **Client Secret**, **Graph Sender** e se o aplicativo tem permissão para ler, marcar como lido e enviar e-mails na caixa.
-    - **"Essa conta já foi adicionada em outro ambiente"** (qualquer tipo): essa caixa já é canal ativo de outro workspace ("ambiente", na tela). Exclua o canal no outro workspace (é preciso ter acesso lá) e conecte de novo neste.
+    - **"Essa conta já foi adicionada em outro ambiente"** (**IMAP/SMTP** ou **Outlook**): a caixa cadastrada (**IMAP Usuário** ou **Graph Sender**) já é canal de outro workspace ("ambiente", na tela). Fale com o suporte **antes** de excluir qualquer canal: excluir o canal no outro workspace não libera a caixa para este.
     - **"Seu plano atual não permite adicionar o novo canal"** (qualquer tipo): no teste grátis, o limite é de até 3 canais de e-mail ativos (contas mais antigas podem ter outros limites). Exclua um canal de e-mail ou ajuste o plano em [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) (veja [Canais: conectar e gerenciar](/docs/canais/visao-geral)).
     - **"Sua assinatura expirou"** (qualquer tipo): a assinatura está vencida. Regularize em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
   </Accordion>
@@ -87,6 +87,8 @@ O selo verde **Conectado** não garante que os e-mails estão chegando nem saind
     - **IMAP/SMTP:** o bloco **SMTP** não é testado ao conectar, e a Kinbox usa a senha informada em **IMAP Senha** também para enviar. Confira os dados de **SMTP** e se a senha do IMAP também funciona para enviar; para corrigir, conecte de novo com o mesmo **IMAP Usuário**.
     - **Outlook:** se os e-mails pararem de chegar ou as respostas ficarem com erro, conecte de novo com os mesmos dados, ou confirme com quem administra a conta Microsoft 365 se o aplicativo tem permissão para enviar e-mails pela caixa.
     - **Por encaminhamento:** a resposta sai por um endereço da Kinbox; confira o motivo exibido ao passar o mouse sobre o ícone de erro.
+
+    Em todos os tipos, confira também se o endereço do contato está certo.
   </Accordion>
 
   <Accordion title="O contato respondeu e a resposta não voltou para a Kinbox">
@@ -101,7 +103,7 @@ O selo verde **Conectado** não garante que os e-mails estão chegando nem saind
   </Accordion>
 
   <Accordion title="E-mail cortado, anexo faltando ou arquivo enviado como link">
-    - **E-mail cortado ou anexo ausente (apenas Outlook):** a conexão **Outlook** traz só o começo do texto de cada e-mail e anexos de até 10 MB cada (anexos maiores ficam de fora sem aviso). Para receber o texto completo, use **IMAP/SMTP** ou **Por encaminhamento**.
+    - **E-mail cortado ou anexo ausente (apenas Outlook):** a conexão **Outlook** traz só o começo do texto de cada e-mail e anexos de até 10 MB cada (os maiores ficam de fora sem aviso). Para receber o texto completo, use **IMAP/SMTP** ou **Por encaminhamento**.
     - **Arquivo enviado chegou como link (apenas encaminhamento e IMAP/SMTP):** nesses dois tipos, as respostas saem em texto simples e arquivos enviados pela Kinbox vão como link no corpo do e-mail. Apenas o **Outlook** envia arquivos como anexo.
   </Accordion>
 
