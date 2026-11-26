@@ -471,13 +471,22 @@ async function garantirSalas(api: Api) {
     'A nova coleção de cafés especiais chega na quinta. As fotos já estão na pasta de produtos.',
   ]
   const resposta = 'Combinado. Vou atualizar as frases rápidas com os novos sabores.'
-  const listar = async () => lista(await api.v3('GET', `/rooms/${avisosId}/messages?limit=50`)).filter((m) => !m.threadId)
-  let mensagens = await listar()
-  for (const text of textos) {
-    if (!mensagens.some((m) => m.text === text)) await api.v0('POST', `/rooms/${avisosId}/messages`, { text, type: 'text' })
+  // Pagina o histórico (mais recentes primeiro) até achar todas as mensagens de exemplo ou chegar ao fim
+  const porPagina = 200
+  const acharExemplos = async () => {
+    const achadas = new Map<string, any>()
+    for (let offset = 0; ; offset += porPagina) {
+      const pagina = lista(await api.v3('GET', `/rooms/${avisosId}/messages?limit=${porPagina}&offset=${offset}`))
+      for (const m of pagina) if (!m.threadId && textos.includes(m.text) && !achadas.has(m.text)) achadas.set(m.text, m)
+      if (achadas.size === textos.length || pagina.length < porPagina) return achadas
+    }
   }
-  mensagens = await listar()
-  const [primeira, , terceira] = textos.map((text) => mensagens.find((m) => m.text === text))
+  let mensagens = await acharExemplos()
+  for (const text of textos) {
+    if (!mensagens.has(text)) await api.v0('POST', `/rooms/${avisosId}/messages`, { text, type: 'text' })
+  }
+  mensagens = await acharExemplos()
+  const [primeira, , terceira] = textos.map((text) => mensagens.get(text))
   const idDe = (m: any) => String(m._id || m.id)
   if (!primeira.pinnedAt) await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(primeira)}/pin`, {})
   const meuId = String(eu?.id ?? '')
