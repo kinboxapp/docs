@@ -206,6 +206,19 @@
                   "docs/clientes/tipos-de-campo",
                   "docs/clientes/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Funis e negociações",
+                "pages": [
+                  "docs/crm/visao-geral",
+                  "docs/crm/gerenciando-funil-de-vendas",
+                  "docs/crm/criar-funil-de-vendas",
+                  "docs/crm/cadencias",
+                  "docs/crm/importar-negociacoes",
+                  "docs/crm/acoes-em-lote",
+                  "docs/crm/criar-e-gerenciar-produtos",
+                  "docs/crm/motivos-de-perda-e-regras"
+                ]
               }
             ]
           },
