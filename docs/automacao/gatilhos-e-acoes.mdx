@@ -10,7 +10,7 @@ fontes:
   - web:src/components-old/forms/ActionsInput/ActionScheduleTemplate.tsx
   - web:src/components-old/forms/ActionsInput/ActionScheduleBot.tsx
   - web:src/components-old/forms/ConditionsInput/index.tsx
-  - web:src/lib/constants.ts
+  - web:src/lib/constants.tsx
   - api-v0:server/controllers/AutomationEventsController.js
   - api-v0:server/modules/EventsEnum.js
 codigo:
@@ -37,14 +37,14 @@ Cada automação tem um único **Gatilho**. Trocar o gatilho depois apaga as con
 | **Nova conversa ou sessão** | O contato manda uma mensagem que abre uma sessão nova (ou a primeira conversa). |
 | **Nova conversa ou sessão iniciada pelo membro** | Um membro começa uma sessão nova enviando a primeira mensagem. |
 | **Ao resolver uma conversa** | Uma sessão (que não foi reaberta) é resolvida. Não roda quando a sessão tinha sido reaberta. |
-| **Ao resolver uma conversa reaberta** | É resolvida uma sessão que tinha sido reaberta dentro do tempo de tolerância. É excludente com **Ao resolver uma conversa**. |
+| **Ao resolver uma conversa reaberta** | É resolvida uma sessão que tinha sido reaberta dentro do tempo de tolerância. Nunca dispara junto com **Ao resolver uma conversa**. |
 | **Ao atribuir membro** | A conversa recebe um membro responsável (inclusive pela atribuição automática). |
 | **Ao mover grupo** | A conversa muda de grupo. |
 | **Ao adicionar tag** | Uma tag é adicionada à conversa (cada tag adicionada dispara de novo). |
 | **Ao transferir conversa** | A conversa é transferida para outro canal; a automação roda na conversa de destino. |
 | **Conversas reaberta dentro do tempo de tolerância** | O contato escreve depois da resolução, dentro do **Tempo de tolerância ao resolver conversa**, e a sessão é reaberta ([Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes) e [Configurações gerais](/docs/configuracoes-no-workspace/configuracoes-gerais)). |
 | **Negócio da conversa atualizado** | Uma negociação ligada à conversa é atualizada. |
-| **Chamada perdida** | Uma ligação do WhatsApp ou do telefone VoIP para o workspace não é atendida ([Problemas comuns em ligações](/docs/canais/ligacoes/problemas-comuns)). |
+| **Chamada perdida** | Uma ligação do WhatsApp ou do telefone VoIP para o workspace não é atendida ([Não consigo ligar ou a ligação caiu](/docs/canais/ligacoes/problemas-comuns)). |
 | **Tempo sem nenhuma resposta do membro na sessão nova** | Passam os minutos configurados desde que o contato abriu a sessão (nova ou reaberta) sem resposta de um membro. Para quando um membro responde e não conta em sessões iniciadas pelo membro. |
 | **Tempo sem nova mensagem** | Passam os minutos configurados desde a última mensagem do contato ou de um membro. Cada mensagem nova de um dos dois recomeça a contagem; dispara uma vez por sessão. |
 | **Tempo pendente** | Passam os minutos configurados enquanto a conversa está **Pendente** (aguardando resposta do membro). Para quando deixa de estar pendente e não conta em sessões iniciadas pelo membro ([Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)). |
@@ -67,7 +67,6 @@ Cada automação tem um único **Gatilho**. Trocar o gatilho depois apaga as con
   - Todos pedem **Minutos sem resposta** (ou **Minutos sem conversa criada** em **Tempo sem conversa ao criar contato**), obrigatório, mínimo `1` (nos gatilhos de conversa, vem com `3`) e avisam "Pode haver atraso de até 3 minutos.".
   - A caixa **Habilitar para sessões geradas por API ou Integração** só aparece em **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem** (se não aparecer, confira o gatilho escolhido). Sem marcá-la, esses dois gatilhos ignoram sessões abertas pela API ou por integrações.
   - Só **uma** automação ligada vale por gatilho de tempo. Se precisar de várias ações para o mesmo gatilho de tempo, coloque todas na mesma automação.
-  - **Tempo para expirar a Janela de 24h** só vale para canais de WhatsApp oficial.
 </Note>
 
 ## Condições
@@ -89,8 +88,9 @@ Quando você preenche os dois blocos, precisam bater todas as condições do pri
 | --- | --- | --- |
 | **Conversa** | **Contexto** | **Horário** (dentro ou fora de um horário cadastrado), **Tag** (só aparece no gatilho **Ao adicionar tag**; confere a tag que acabou de ser adicionada — se não aparecer, confira o gatilho escolhido) |
 | **Conversa** | **Contato** | **Tipo de contato** (**Primeira conversa do canal**, **Já conversou no canal**, **Contato novo**, **Contato já cadastrado**), **Nome do contato**, **E-mail do contato**, **Celular do contato**, **Negócios abertos do contato** e campos personalizados do contato |
-| **Conversa** | **Conversa/Sessão** | **Grupo**, **Atribuído**, **Campanha**, **Tags** (todas as tags da conversa), **Tipo de canal**, **Canal**, **Negócios abertos da conversa**, **Minutos desde sessão criada**, **Avaliação de atendimento**, **Ads** (**Google** / **Meta**) e campos personalizados da conversa |
-| **Ao membro ficar online** | **Membro** | **Horário**, **Grupo do membro** e **Disponibilidade do membro** (**Disponível** / **Indisponível**) |
+| **Conversa** | **Conversa/Sessão** | **Grupo**, **Atribuído**, **Campanha**, **Tags** (todas as tags da conversa), **Tipo de canal**, **Canal**, **Negócios abertos da conversa**, **Minutos desde sessão criada**, **Avaliação de atendimento**, **Ads** (**Google** / **Meta**) e campos personalizados da sessão |
+| **Ao membro ficar online** | **Contexto** | **Horário** |
+| **Ao membro ficar online** | **Membro** | **Grupo do membro** e **Disponibilidade do membro** (**Disponível** / **Indisponível**) |
 | **Tempo sem conversa ao criar contato** | — | Não tem condições |
 
 ## Ações
@@ -107,19 +107,19 @@ Clique em **Ação**, escolha uma opção em **Selecione uma ação...** e preen
 | **Resolver conversa** | Resolve a sessão e para as contagens de tempo daquela conversa. | Gatilhos de **Conversa** |
 | **Reabrir conversa** | Reabre a conversa. | Gatilhos de **Conversa** |
 | **Avaliar atendimento** | Envia a pesquisa de satisfação; o botão **Configurar** abre a configuração da pesquisa ([Pedir avaliação no fim do atendimento](/docs/atendimento/pesquisa-de-satisfacao)). | Gatilhos de **Conversa** |
-| **Agendar mensagem** | Agenda uma mensagem de texto definindo **Para quando?** (**Próximo horário comercial** + **Horários**; **Depois de um tempo específico** + **Dias**/**Horas**/**Minutos**; ou **Próxima segunda-feira** a **Próximo domingo** + **Horário**), **Canal** opcional (WhatsApp por QR Code), **Texto** e a caixa **Não reabrir conversa**. Usa o fuso horário do workspace ([Configurações gerais](/docs/configuracoes-no-workspace/configuracoes-gerais)). | Gatilhos de **Conversa** |
+| **Agendar mensagem** | Agenda uma mensagem de texto para depois, definindo **Para quando?**, **Canal** opcional (WhatsApp por QR Code), **Texto** e a caixa **Não reabrir conversa**. Usa o fuso horário do workspace ([Configurações gerais](/docs/configuracoes-no-workspace/configuracoes-gerais)). | Gatilhos de **Conversa** |
 | **Agendar mensagem template** | Agenda um template do WhatsApp oficial definindo **Para quando?**, **Canal** (obrigatório, só WhatsApp oficial) e **Modelo de mensagem** ([Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)). Usa o fuso horário do workspace. | Gatilhos de **Conversa** |
 | **Agendar execução de bot** | Agenda a execução de um **Bot** definindo **Para quando?** e a caixa **Não reabrir conversa**. Usa o fuso horário do workspace. | Gatilhos de **Conversa** |
 | **Criar negociação** | Cria uma negociação no CRM com nome, valor, funil, etapa, responsável, grupo e tags ([Funis e negociações: visão geral](/docs/crm/visao-geral)). | Gatilhos de **Conversa** |
 | **Atualizar negociação** | Atualiza campos das negociações da conversa. | Gatilhos de **Conversa** |
 | **Mudar etapa da negociação** | Move o **Negócio mais recente aberto da conversa** ou **Todos os negócios abertos da conversa** para o **Funil de vendas** e a **Etapa do funil** escolhidos. Dispara as [cadências](/docs/crm/cadencias) da etapa. | Gatilhos de **Conversa** |
 | **Integração** | Executa ações de apps conectados ao workspace, como o [HubSpot](/docs/integracoes/hubspot). | Gatilhos de **Conversa** |
-| **Atribuir conversas sem atendimento** | Distribui conversas abertas sem responsável usando **Atribuir ao membro do gatilho** ou **Atribuir para o membro que tem menos atendimentos**, com **Quantidade** e **Limite do membro**. Se a ação ou a opção **Atribuir ao membro do gatilho** não aparecer, confira o gatilho escolhido. | Apenas **Ao membro ficar online** |
-| **Iniciar conversa** | Abre uma conversa para o contato novo com **Canal** (obrigatório, WhatsApp), **Bot** (opcional) e **Texto** (obrigatório; em canal de WhatsApp oficial, escolhe-se um template no lugar do texto). Se não aparecer, confira o gatilho escolhido. | Apenas **Tempo sem conversa ao criar contato** |
+| **Atribuir conversas sem atendimento** | Distribui conversas abertas sem responsável do workspace usando **Atribuir ao membro do gatilho** ou **Atribuir para o membro que tem menos atendimentos**, com **Quantidade** e **Limite do membro**. A opção **Atribuir ao membro do gatilho** só existe em **Ao membro ficar online**; se não aparecer, confira o gatilho escolhido. | Gatilhos de **Conversa** e **Ao membro ficar online** |
+| **Iniciar conversa** | Abre uma conversa para o contato novo com **Canal** (obrigatório, WhatsApp), **Bot** (opcional) e **Texto** (obrigatório; em canal de WhatsApp oficial, escolhe-se um template no lugar do texto). É feita para **Tempo sem conversa ao criar contato**; nos gatilhos de **Conversa**, para responder na própria conversa, use **Enviar mensagem**. | **Tempo sem conversa ao criar contato** e gatilhos de **Conversa** |
 
 ### Cuidados com mensagens e bots
 
-- **Enviar mensagem:** envia apenas texto (sem anexo, template ou variáveis) e o campo **Canal** não lista o WhatsApp oficial; no WhatsApp oficial fora da janela de 24 horas só sai template.
+- **Enviar mensagem:** envia apenas texto (sem anexo ou template) e o campo **Canal** não lista o WhatsApp oficial; no WhatsApp oficial fora da janela de 24 horas só sai template.
 - **Agendar mensagem template:** o template sai pelo canal da conversa em que a automação rodou (não pelo **Canal** escolhido) e templates com mídia no cabeçalho não funcionam nesta ação.
 - **Agendar execução de bot:** funciona apenas em conversas de WhatsApp.
 

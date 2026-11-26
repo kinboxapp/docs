@@ -30,7 +30,6 @@ Crie uma automação para que a Kinbox execute ações sozinha quando um evento 
 
 ## Antes de começar
 
-- Confirme que você tem a permissão **Automações** ou é o proprietário do workspace.
 - Crie antes os itens que a automação vai usar — [horários](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios), [grupos](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos), [tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags), [bots](/docs/bot/visao-geral), [regras de atribuição automática](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas) e [funis](/docs/crm/visao-geral). As listas das condições e das ações só mostram o que já existe no workspace.
 
 ## Passo a passo
@@ -59,7 +58,7 @@ Crie uma automação para que a Kinbox execute ações sozinha quando um evento 
   <Step title="Preencha o tempo, se o gatilho for de tempo">
     Se você escolheu um gatilho de tempo, preencha **Minutos sem resposta** (ou **Minutos sem conversa criada**, no gatilho **Tempo sem conversa ao criar contato**). O campo é obrigatório, aceita no mínimo `1` minuto, vem com `3` nos gatilhos de conversa e mostra a ajuda "Pode haver atraso de até 3 minutos.". Se o campo de minutos não aparecer, confira se escolheu um gatilho de tempo.
 
-    Nos gatilhos **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**, também aparece a caixa **Habilitar para sessões geradas por API ou Integração**: marque se a automação também deve rodar em sessões abertas pela API ou por integrações. Essa caixa só aparece nesses dois gatilhos; se não aparecer, confira o gatilho escolhido.
+    Nos gatilhos **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**, também aparece a caixa **Habilitar para sessões geradas por API ou Integração**: marque se a automação também deve rodar em sessões abertas pela API ou por integrações. Se a caixa não aparecer, confira o gatilho escolhido.
 
     Lembre que só **uma** automação ligada vale por gatilho de tempo, e que **Tempo para expirar a Janela de 24h** só vale para WhatsApp oficial.
 
@@ -83,7 +82,7 @@ Crie uma automação para que a Kinbox execute ações sozinha quando um evento 
   <Step title="Adicione as ações">
     Clique em **Ação**, escolha uma opção em **Selecione uma ação...** e preencha os campos que aparecem. Repita para adicionar outras ações; o **X** remove a linha. As ações rodam na ordem em que aparecem na tela.
 
-    Algumas ações só aparecem em gatilhos específicos: **Atribuir conversas sem atendimento** (com a opção **Atribuir ao membro do gatilho**) só existe em **Ao membro ficar online**, e **Iniciar conversa** só existe em **Tempo sem conversa ao criar contato**. Se uma dessas ações não aparecer, confira o gatilho escolhido.
+    A lista de ações depende do gatilho: nos gatilhos de **Conversa** aparecem todas; em **Ao membro ficar online**, só **Atribuir conversas sem atendimento** (e só nesse gatilho existe a opção **Atribuir ao membro do gatilho**); em **Tempo sem conversa ao criar contato**, só **Iniciar conversa**. Se uma ação ou opção não aparecer, confira o gatilho escolhido. **Iniciar conversa** é feita para contatos novos sem conversa: para responder na própria conversa, use **Enviar mensagem**.
 
     Em **Enviar mensagem**, a mensagem é só texto e o campo **Canal** não lista o WhatsApp oficial (deixe vazio para enviar na própria conversa). **Agendar execução de bot** só funciona em conversas de WhatsApp.
 
@@ -108,7 +107,7 @@ Crie uma automação para que a Kinbox execute ações sozinha quando um evento 
   Excluir uma automação não tem volta. Se você quer apenas pausar o funcionamento sem perder a configuração, desligue o interruptor na lista em vez de excluir.
 </Warning>
 
-- **Testar:** ligue a automação e provoque o gatilho em uma conversa de teste — use uma sessão nova depois de salvar, porque a automação não é retroativa. Em gatilhos de tempo, teste com poucos minutos e espere até 3 minutos a mais ("Pode haver atraso de até 3 minutos.").
+- **Testar:** ligue a automação e provoque o gatilho em uma conversa de teste — use uma sessão nova depois de salvar, porque a automação não é retroativa. Em gatilhos de tempo, teste com poucos minutos e lembre do aviso "Pode haver atraso de até 3 minutos.". Para saber se rodou, veja o resultado na conversa: a ação **Atribuir** deixa a mensagem "Conversa atribuída por Automação …" (ou "Conversa transferida por Automação … para …"), um bot agendado pela automação aparece como "Bot iniciado por Automação …", e resolver ou reabrir mostra "Automação" no lugar do nome do membro.
 
 ## Boas práticas
 

@@ -33,7 +33,7 @@ Além disso, os envios agendados acontecem em ciclos:
 - **Agendar execução de bot** (só conversas de WhatsApp) e **Enviar mensagem** com **Canal** escolhido (só WhatsApp por QR Code e SMS): saem em ciclos de até 30 segundos.
 - **Tempo sem conversa ao criar contato**: verificado a cada minuto.
 
-Por isso, sempre conte com alguns minutos de margem; o disparo não ocorre no segundo exato.
+Quando um gatilho de tempo dispara uma ação agendada, as duas esperas podem se somar: o atraso do gatilho e o ciclo do envio agendado. Por isso, o disparo não ocorre no segundo exato.
 
 Outros comportamentos que podem parecer atraso na contagem:
 
@@ -42,7 +42,7 @@ Outros comportamentos que podem parecer atraso na contagem:
 - **Tempo para expirar a Janela de 24h** (apenas WhatsApp oficial): conta a partir da última mensagem do contato e recomeça quando ele envia outra mensagem.
 - **Condições e resolução:** nos gatilhos de tempo, as condições são conferidas na hora de disparar (não quando a contagem começa), e resolver a conversa para as contagens de tempo daquela conversa.
 
-Se a automação nunca disparou em vez de apenas atrasar, confira se há outra automação ligada usando o mesmo gatilho de tempo: só **uma** automação ligada vale por gatilho de tempo (a primeira pela ordem do nome). Nos gatilhos **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**, confira também se a sessão foi aberta pela API ou por integração e se a caixa **Habilitar para sessões geradas por API ou Integração** está marcada (ela só existe nesses dois gatilhos). Ver e editar automações em **Configurações** → **Automação** → **Automações** exige a permissão **Automações** ou ser o proprietário.
+Se a automação nunca disparou em vez de apenas atrasar, confira se há outra automação ligada usando o mesmo gatilho de tempo: só **uma** automação ligada vale por gatilho de tempo (a primeira elegível pela ordem do nome; em sessões abertas pela API ou por integração, a primeira com a caixa **Habilitar para sessões geradas por API ou Integração** marcada). Nos gatilhos **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**, confira também se a sessão foi aberta pela API ou por integração e se a caixa **Habilitar para sessões geradas por API ou Integração** está marcada (ela só existe nesses dois gatilhos). Ver e editar automações em **Configurações** → **Automação** → **Automações** exige a permissão **Automações** ou ser o proprietário.
 
 Veja mais em [Minha automação não disparou](/docs/automacao/problemas-comuns) e [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes).
 

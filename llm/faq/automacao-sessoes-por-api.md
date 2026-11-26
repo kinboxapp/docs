@@ -31,7 +31,7 @@ Como funcionam essas sessões:
 
 - **O que é uma sessão de API ou integração:** toda sessão aberta sem um membro, por envio feito pela API ou por integrações que enviam mensagens pela Kinbox. Essa marca fica na sessão e continua valendo mesmo depois que o contato responde.
 - **Gatilhos de nova sessão não disparam:** sessões abertas pela API ou por integração não disparam **Nova conversa ou sessão** (só sessão aberta por mensagem do contato) nem **Nova conversa ou sessão iniciada pelo membro** (exige um membro).
-- **Outros gatilhos funcionam normalmente:** gatilhos como **Ao resolver uma conversa**, **Ao adicionar tag**, **Ao atribuir membro** e **Ao mover grupo** disparam normalmente quando o evento acontece.
+- **Outros gatilhos:** gatilhos como **Ao resolver uma conversa**, **Ao adicionar tag**, **Ao atribuir membro** e **Ao mover grupo** disparam normalmente quando um membro faz a ação nessa sessão.
 
 Nos gatilhos de tempo, lembre também que só **uma** automação ligada vale por gatilho de tempo e que "Pode haver atraso de até 3 minutos.". Para conferir ou editar a automação em **Configurações** → **Automação** → **Automações**, é preciso ter a permissão **Automações** ou ser o proprietário do workspace.
 

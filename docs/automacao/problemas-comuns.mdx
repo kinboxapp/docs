@@ -28,7 +28,7 @@ A automação está criada, mas não fez nada, executou só parte das ações, r
 
 <AccordionGroup>
   <Accordion title="A automação está desligada">
-    Automações desligadas não rodam — inclusive se uma automação de tempo for desligada antes da hora de disparar. Embora toda automação nova nasça com **Ativo** ligado, alguém pode ter desligado antes de salvar ou pela lista.
+    Automações desligadas não disparam, e uma automação de tempo de conversa desligada antes da hora de disparar também não roda. Já em **Tempo sem conversa ao criar contato**, desligar impede novos agendamentos, mas os contatos que já estavam aguardando ainda podem ter a conversa aberta. Embora toda automação nova nasça com **Ativo** ligado, alguém pode ter desligado antes de salvar ou pela lista.
 
     Vá em **Configurações** → **Automação** → **Automações** (exige a permissão **Automações** ou ser o proprietário), use o filtro **Inativos** para conferir e ligue o interruptor da linha.
   </Accordion>
@@ -76,7 +76,7 @@ A automação está criada, mas não fez nada, executou só parte das ações, r
   <Accordion title="A automação disparou alguns minutos depois">
     Nos gatilhos de tempo, a própria tela avisa "Pode haver atraso de até 3 minutos.". Além disso, mensagens criadas por **Agendar mensagem** e **Agendar mensagem template** saem em ciclos de até 3 minutos.
 
-    Conte sempre com até 3 minutos a mais ao configurar prazos ou testar.
+    Ao configurar prazos ou testar, não conte com o disparo no minuto exato.
   </Accordion>
 
   <Accordion title="A mensagem, o bot agendado ou a avaliação não saiu">

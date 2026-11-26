@@ -1,14 +1,14 @@
 ---
 title: "Automações: ações aceitas por gatilho, atraso dos gatilhos por tempo e sessões criadas por API"
 description: Regras detalhadas das automações da Kinbox — quando cada gatilho dispara e para, uma automação por gatilho de tempo, limite de ações e de repetição, sessões de API ou integração, operadores das condições e bordas de cada ação.
-keywords: [regras automação, limite de ações automação, automação repetida, limite de execução de automação atingido, várias automações mesmo gatilho, sessão de integração, operadores condição, agendar template canal, automação hubspot, janela 24h automação]
+keywords: [regras automação, limite de ações automação, automação repetida, limite de execução de automação atingido, várias automações mesmo gatilho, sessão de integração, operadores condição, agendar template canal, automação hubspot, janela 24h automação, nome do cliente na mensagem, variáveis na mensagem da automação, first_name automação]
 publico: llm
 tipo: referencia
 fontes:
   - web:src/pages/settings/automations/EditAutomations.tsx
   - web:src/components-old/forms/ActionsInput/index.tsx
   - web:src/components-old/forms/ConditionsInput/index.tsx
-  - web:src/lib/constants.ts
+  - web:src/lib/constants.tsx
   - api-v0:server/controllers/AutomationEventsController.js
   - api-v0:server/controllers/CallController.js
   - api-v0:server/modules/conditionProcessor.js
@@ -64,19 +64,20 @@ Referência complementar de [Gatilhos, condições e ações das automações](/
   - **Tempo sem conversa ao criar contato**: verificado a cada minuto.
   - Por conta desses ciclos, conte com até 3 minutos a mais e não espere disparo no segundo exato.
 - **Fuso horário:** datas e horários das ações agendadas usam o fuso horário do workspace ([Configurações gerais](/docs/configuracoes-no-workspace/configuracoes-gerais)).
-- **Uma automação por gatilho de tempo:** nos quatro gatilhos de tempo de conversa (**Tempo sem nenhuma resposta do membro na sessão nova**, **Tempo sem nova mensagem**, **Tempo pendente** e **Tempo para expirar a Janela de 24h**), só **uma** automação ligada por gatilho vale para cada conversa — a primeira pela ordem do nome. As demais com o mesmo gatilho nunca disparam, mesmo com condições diferentes. Em **Tempo sem conversa ao criar contato**, também só a primeira automação ligada vale.
+- **Uma automação por gatilho de tempo:** nos quatro gatilhos de tempo de conversa (**Tempo sem nenhuma resposta do membro na sessão nova**, **Tempo sem nova mensagem**, **Tempo pendente** e **Tempo para expirar a Janela de 24h**), só **uma** automação ligada por gatilho vale para cada conversa — a primeira elegível pela ordem do nome (em sessões abertas pela API ou por integração, nos gatilhos que têm a caixa **Habilitar para sessões geradas por API ou Integração**, a primeira com a caixa marcada). As demais com o mesmo gatilho nunca disparam, mesmo com condições diferentes. Em **Tempo sem conversa ao criar contato**, também só a primeira automação ligada vale.
 - **Condições avaliadas no disparo:** nos gatilhos de tempo, as condições são conferidas na hora de disparar, não quando a contagem começa. Se as condições da automação escolhida não baterem na hora do disparo, nada roda.
 - **Cancelamento ao resolver ou desligar:** resolver a conversa para as contagens de tempo daquela conversa. Uma automação de tempo de conversa já agendada também é conferida na hora de disparar: se foi desligada ou excluída antes do disparo, não roda.
+- **Desligar em Tempo sem conversa ao criar contato:** desligar ou excluir impede novos agendamentos, mas não cancela os contatos que já estavam aguardando: passados os minutos, a conversa desses contatos ainda é aberta e, se a automação só foi desligada (não excluída), as ações dela rodam.
+- **Editar durante a contagem:** editar a automação não muda contagens de tempo de conversa já iniciadas; elas seguem com os minutos, as condições e as ações que valiam quando a contagem começou. A edição vale para as contagens seguintes.
 
 ## Sessões geradas por API ou integração
 
 - **Caixa de opção:** **Habilitar para sessões geradas por API ou Integração** só existe em **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem** (não tem efeito nos outros gatilhos). Sem essa caixa marcada, esses dois gatilhos ignoram sessões abertas pela API ou por uma integração.
 - **O que conta como sessão de API ou integração:** sessão aberta sem um membro, por envio pela API ou por integrações que enviam mensagens pela Kinbox. Essa marca fica na sessão e continua valendo mesmo depois que o contato responde.
-- **Gatilhos de nova sessão:** sessões abertas sem membro (por API ou integração) não disparam **Nova conversa ou sessão** (só sessão aberta por mensagem do contato) nem **Nova conversa ou sessão iniciada pelo membro** (exige um membro). Os demais gatilhos de conversa (resolver, tag, atribuir, mover grupo etc.) disparam normalmente quando o evento ocorre.
+- **Gatilhos de nova sessão:** sessões abertas sem membro (por API ou integração) não disparam **Nova conversa ou sessão** (só sessão aberta por mensagem do contato) nem **Nova conversa ou sessão iniciada pelo membro** (exige um membro). Os demais gatilhos de conversa (resolver, tag, atribuir, mover grupo etc.) disparam normalmente quando um membro faz a ação nessa sessão.
 
 ## Várias automações, ordem e limites
 
-- **Quantidade cadastrada:** a tela não limita a quantidade de automações cadastradas.
 - **Não é retroativa:** automações só reagem a eventos ocorridos depois de salvas e ligadas. Uma automação nova já nasce com **Ativo** ligado.
 - **Ordem e tolerância a falha:** há uma espera de cerca de 1 segundo antes de executar as ações. As ações rodam na ordem em que aparecem na tela; se uma ação falha, as seguintes continuam rodando.
 - **Limite de 10 ações por evento (gatilhos que não são de tempo):** todas as automações ligadas do mesmo gatilho cujas condições batem rodam. Suas ações são somadas (ordenadas pelo nome da automação e depois pela ordem das ações) e apenas as **10 primeiras** são executadas por evento.
@@ -88,6 +89,8 @@ Referência complementar de [Gatilhos, condições e ações das automações](/
 Quando **Condições** está desligado (**Sem condições**), a automação roda sempre. Quando ligado, exige todas as linhas de "Quando **todas** as condições são verdadeiras" **e** pelo menos uma linha de "E quando **qualquer** das condições são verdadeiras" (quando ambos os blocos têm condições).
 
 Uma condição com erro ou referenciando um campo personalizado que não existe mais pode fazer a automação nunca rodar.
+
+Na lista de campos, **Estado**, **Origem da sessão**, **Janela de resposta** e os campos de origem de anúncio e UTM (`source_id`, `utm_source`, `utm_medium`, `utm_campaign`, `gclid`) aparecem desabilitados nas automações: só podem ser usados em condições de bot.
 
 ### Gatilhos de Conversa
 
@@ -115,18 +118,18 @@ Os campos personalizados de contato e de sessão aparecem nas condições com o 
 | Tipo de campo | Operadores aceitos |
 | --- | --- |
 | **Texto**, **Texto em área**, **Seleção Multipla** | **é igual a**, **não é igual a**, **contém**, **não contém**, **é vazio**, **não é vazio** |
-| **Número**, **Decimal**, **Data** | **é igual a**, **não é igual a**, **é maior que**, **é menor que**, **é vazio**, **não é vazio** |
+| **Número**, **Decimal** | **é igual a**, **não é igual a**, **é maior que**, **é menor que**, **é vazio**, **não é vazio** |
 | **Booleano** (valor **Sim** ou **Não**) | **é igual a**, **é vazio**, **não é vazio** |
 | **Json** | **é igual a**, **não é igual a**, **é maior que**, **é menor que**, **é vazio**, **não é vazio**, **contém**, **não contém** |
-| **Seleção**, **Data e hora** | **é igual a**, **não é igual a**, **é vazio**, **não é vazio** |
+| **Seleção**, **Data**, **Data e hora** | **é igual a**, **não é igual a**, **é vazio**, **não é vazio** |
 
 ### Gatilho de Membro (**Ao membro ficar online**)
 
-| Campo | Operadores aceitos |
-| --- | --- |
-| **Horário** | **está dentro de**, **está fora de** |
-| **Grupo do membro** | **contém**, **não contém** |
-| **Disponibilidade do membro** (**Disponível** / **Indisponível**) | **é igual a** |
+| Grupo | Campo | Operadores aceitos |
+| --- | --- | --- |
+| **Contexto** | **Horário** | **está dentro de**, **está fora de** |
+| **Membro** | **Grupo do membro** | **contém**, **não contém** |
+| **Membro** | **Disponibilidade do membro** (**Disponível** / **Indisponível**) | **é igual a** |
 
 ### Gatilho de Contato (**Tempo sem conversa ao criar contato**)
 
@@ -134,8 +137,9 @@ Não possui condições (condições ligadas são ignoradas).
 
 ## Ações: campos e bordas
 
-- **Onde cada ação funciona:** **Atribuir conversas sem atendimento** funciona apenas em **Ao membro ficar online**; **Iniciar conversa** funciona apenas em **Tempo sem conversa ao criar contato**; todas as demais ações funcionam nos gatilhos de **Conversa**.
-- **Enviar mensagem:** **Texto** obrigatório (`"Por favor escreva um texto."`); **Canal** opcional (`"Mesmo canal da conversa caso não setado."`). Sem **Canal**, envia na própria conversa. O seletor **Canal** lista apenas WhatsApp por QR Code e SMS (não lista WhatsApp oficial); quando **Canal** é escolhido, envia ao telefone do contato por esse canal (em ciclo de até 30 segundos). Envia só texto (sem anexo, template ou variáveis). No WhatsApp oficial fora da janela de 24 horas só sai template.
+- **Onde cada ação aparece:** nos gatilhos de **Conversa**, a lista mostra todas as ações, inclusive **Atribuir conversas sem atendimento** e **Iniciar conversa**. **Ao membro ficar online** mostra só **Atribuir conversas sem atendimento** (e só nele existe a opção **Atribuir ao membro do gatilho**). **Tempo sem conversa ao criar contato** mostra só **Iniciar conversa**.
+- **Enviar mensagem:** **Texto** obrigatório (`"Por favor escreva um texto."`); **Canal** opcional (`"Mesmo canal da conversa caso não setado."`). Sem **Canal**, envia na própria conversa. O seletor **Canal** lista apenas WhatsApp por QR Code e SMS (não lista WhatsApp oficial); quando **Canal** é escolhido, envia ao telefone do contato por esse canal (em ciclo de até 30 segundos). Envia só texto (sem anexo nem template). No WhatsApp oficial fora da janela de 24 horas só sai template.
+- **Chaves com os dados do contato (Enviar mensagem e Agendar mensagem):** no envio, as chaves entre chaves duplas são trocadas pelos dados do contato: `{{name}}` (nome), `{{first_name}}` (primeira palavra do nome), `{{last_name}}` (última palavra do nome), `{{email}}`, `{{phone}}`, `{{protocol}}` (protocolo da sessão) e a chave de cada campo personalizado de contato (`{{chave_do_campo}}`). Campos personalizados da sessão não entram. Cada chave é trocada só na primeira vez que aparece no texto, e uma chave sem dado no contato pode sair em branco ou ficar escrita como está — teste antes. É diferente das mensagens automáticas da tela **Geral**, em que só a **Mensagem ao resolver conversa** troca chaves ([Mensagens automáticas e regras da caixa de entrada](/docs/administracao/mensagens-automaticas)). As chaves seguem as das [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas), exceto os campos personalizados da sessão e as chaves de campo JSON (`{{json:…}}`).
 - **Executar bot:** escolhe um bot e o inicia na conversa. Sem bot escolhido, nada acontece.
 - **Atribuir:** opções **Atribuir usando uma atribuição automática** (**Atribuição automática**), **Desatribuir membro**, **Desatribuir grupo** e **Atribuir a um membro específico** (**Membro**). A regra escolhida em **Atribuição automática** roda mesmo se estiver desligada na lista de regras; mantê-la desligada evita que ela rode sozinha em toda sessão nova.
 - **Mover para grupo:** opções **Mover para um grupo específico** (**Grupo**), **Atribuir ciclicamente a um grupo** (**Grupos participantes**, múltiplos) e **Atribuir a um grupo que o membro participa** (sem campo extra).
@@ -143,15 +147,15 @@ Não possui condições (condições ligadas são ignoradas).
 - **Resolver conversa:** resolve a sessão e para as contagens de tempo daquela conversa.
 - **Reabrir conversa:** reabre a conversa.
 - **Avaliar atendimento:** envia a pesquisa de satisfação do workspace (botão **Configurar**). Regras de quando a pesquisa não é enviada estão em [Pedir avaliação no fim do atendimento](/docs/atendimento/pesquisa-de-satisfacao).
-- **Agendar mensagem:** **Para quando?** (**Próximo horário comercial** + **Horários**; **Depois de um tempo específico** + **Dias**/**Horas**/**Minutos**, cada um a partir de 0; ou **Próxima segunda-feira** … **Próximo domingo** + **Horário**, de 15 em 15 minutos e 23:59), **Canal** opcional (WhatsApp por QR Code), **Texto** obrigatório e **Não reabrir conversa** (evita reabrir a conversa no envio). Sai em ciclos de até 3 minutos, no fuso do workspace, só texto (sem anexo).
+- **Agendar mensagem:** **Para quando?** (**Próximo horário comercial** + **Horários**; **Depois de um tempo específico** + **Dias**/**Horas**/**Minutos**, cada um a partir de 0; ou **Próxima segunda-feira** … **Próximo domingo** + **Horário**, de 15 em 15 minutos e 23:59), **Canal** opcional (WhatsApp por QR Code), **Texto** obrigatório e **Não reabrir conversa** (evita reabrir a conversa no envio). Troca as mesmas chaves do contato de **Enviar mensagem**. Sai em ciclos de até 3 minutos, no fuso do workspace, só texto (sem anexo).
 - **Agendar mensagem template:** **Para quando?** igual a **Agendar mensagem**, **Canal** obrigatório (só WhatsApp oficial) e **Modelo de mensagem**. O template sai pelo **canal da conversa** em que a automação rodou, não pelo **Canal** escolhido na ação — use em conversas do WhatsApp oficial em que o template está aprovado. Templates com mídia no cabeçalho não funcionam nesta ação ([Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)). Sai em ciclos de até 3 minutos, no fuso do workspace.
 - **Agendar execução de bot:** **Para quando?** igual a **Agendar mensagem**, **Bot** obrigatório e **Não reabrir conversa**. Funciona apenas em conversas de WhatsApp e sai em ciclos de até 30 segundos, no fuso do workspace.
 - **Criar negociação:** cria uma negociação no CRM com nome, valor, funil, etapa, responsável, grupo e tags ([Funis e negociações: visão geral](/docs/crm/visao-geral)).
 - **Atualizar negociação:** altera campos das negociações da conversa.
 - **Mudar etapa da negociação:** **Que negócios serão afetados** (**Negócio mais recente aberto da conversa** ou **Todos os negócios abertos da conversa**), **Funil de vendas** e **Etapa do funil**. Mudar a etapa por automação dispara as [cadências](/docs/crm/cadencias) da etapa.
 - **Integração:** executa ações de apps conectados. No [HubSpot](/docs/integracoes/hubspot), aparecem quatro opções, mas **Mudar etapa do negócio no Hubspot** não altera a etapa; apenas **Atualizar responsável do negócio**, **Salvar mensagens no negócio do Hubspot** e **Salvar mensagens no contato do Hubspot** atuam. Ações de outros apps dependem do app conectado.
-- **Atribuir conversas sem atendimento** *(só **Ao membro ficar online**)*: **Atribuir ao membro do gatilho** ou **Atribuir para o membro que tem menos atendimentos**, **Quantidade** e **Limite do membro**. Só atribui conversas abertas sem responsável e apenas a membros disponíveis.
-- **Iniciar conversa** *(só **Tempo sem conversa ao criar contato**)*: **Canal** obrigatório (WhatsApp), **Bot** opcional e **Texto** obrigatório (em canal de WhatsApp oficial, escolhe-se um template no lugar do texto; templates com mídia no cabeçalho não funcionam aqui).
+- **Atribuir conversas sem atendimento** *(gatilhos de **Conversa** e **Ao membro ficar online**)*: **Atribuir ao membro do gatilho** (opção que só existe em **Ao membro ficar online**) ou **Atribuir para o membro que tem menos atendimentos**, **Quantidade** e **Limite do membro**. Atribui conversas abertas sem responsável do workspace (não só a conversa do gatilho) e apenas a membros disponíveis.
+- **Iniciar conversa** *(feita para **Tempo sem conversa ao criar contato**; também aparece nos gatilhos de **Conversa**)*: **Canal** obrigatório (WhatsApp), **Bot** opcional e **Texto** obrigatório (em canal de WhatsApp oficial, escolhe-se um template no lugar do texto; templates com mídia no cabeçalho não funcionam aqui). Não troca chaves `{{...}}`. Num gatilho de **Conversa**, envia o texto (ou o template) pelo **Canal** escolhido para o telefone do contato, numa conversa desse canal; contato sem telefone não recebe nada. Para responder na própria conversa, use **Enviar mensagem**.
 
 ## Mensagens que a automação deixa na conversa
 
@@ -165,11 +169,12 @@ Não possui condições (condições ligadas são ignoradas).
 
 | Sintoma | Causa provável | O que fazer |
 | --- | --- | --- |
+| Contato novo teve a conversa aberta depois de desligar **Tempo sem conversa ao criar contato** | Desligar não cancela os contatos que já estavam aguardando | Comportamento esperado para contatos cadastrados antes de desligar |
 | Não vê **Automações** em **Configurações** | Falta a permissão **Automações** (ou não é o proprietário) | Peça ao proprietário ou gestor de papéis para liberar **Automações** em **Gerenciamento do Ambiente** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)) |
 | A automação está criada, mas nunca roda | Está desligada (**Ativo** desmarcado) | Ligue o interruptor na lista **Automações** (use o filtro **Inativos**) |
 | Não rodou em conversas que já estavam abertas | Automação não é retroativa | Teste em uma sessão nova criada depois de salvar e ligar |
 | Não rodou mesmo com o evento acontecendo | Condições não bateram ("todas" × "qualquer"), condição com campo personalizado apagado, ou condições de gatilho de tempo não batiam na hora do disparo | Revise os dois blocos de **Condições**; teste com **Sem condições** |
-| Segunda automação com o mesmo gatilho de tempo nunca dispara | Só **uma** automação ligada vale por gatilho de tempo (a primeira pela ordem do nome), mesmo com condições diferentes | Deixe apenas uma automação ligada por gatilho de tempo e reúna as ações nela |
+| Segunda automação com o mesmo gatilho de tempo nunca dispara | Só **uma** automação ligada vale por gatilho de tempo (a primeira elegível pela ordem do nome), mesmo com condições diferentes | Deixe apenas uma automação ligada por gatilho de tempo e reúna as ações nela |
 | Não rodou em conversa aberta pela API ou integração | **Habilitar para sessões geradas por API ou Integração** desmarcada (só existe em **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**), ou gatilho de nova sessão (**Nova conversa ou sessão** / **… iniciada pelo membro**), que não dispara nessas sessões | Marque a caixa nesses dois gatilhos de tempo ou use um gatilho compatível |
 | Não disparou quando o contato sumiu depois da resposta do membro | Usou **Tempo sem nenhuma resposta do membro na sessão nova** ou **Tempo pendente** (ambos param quando um membro responde e não contam em sessões iniciadas pelo membro) | Troque o gatilho para **Tempo sem nova mensagem** |
 | Não disparou ao resolver uma sessão reaberta | Usou **Ao resolver uma conversa** (não roda em sessões reabertas) | Use **Ao resolver uma conversa reaberta** |
@@ -177,6 +182,7 @@ Não possui condições (condições ligadas são ignoradas).
 | Gatilho de tempo não disparou porque a conversa foi resolvida | Resolver a conversa interrompe as contagens de tempo daquela conversa | Comportamento esperado; confira se outra automação resolveu a conversa antes |
 | Disparou alguns minutos depois do previsto | Atraso de até 3 minutos nos gatilhos de tempo e ciclos de até 3 minutos em **Agendar mensagem** / **Agendar mensagem template** (30 segundos em bot agendado e **Enviar mensagem** com **Canal**) | Considere até 3 minutos a mais; não conte com disparo no segundo exato |
 | **Enviar mensagem** não entregou no WhatsApp oficial | Fora da janela de 24 horas só sai template; o campo **Canal** também não lista WhatsApp oficial | Use **Agendar mensagem template** em conversas do WhatsApp oficial ([Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)) |
+| Aviso de inatividade não saiu no WhatsApp oficial, mas a conversa foi resolvida | Com 24 horas ou mais sem mensagem do contato, a janela de 24 horas já fechou e o texto não é entregue; a falha de uma ação não impede as seguintes (como **Resolver conversa**). **Agendar mensagem template** antes de resolver também não garante o aviso: sai em ciclo de até 3 minutos e pode chegar depois da resolução | Em canais sem janela (como WhatsApp por QR Code), o aviso de texto funciona; no WhatsApp oficial, o texto só é entregue com menos de 24 horas desde a última mensagem do contato ([Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)) |
 | **Agendar mensagem template** falhou ou saiu no canal errado | O envio usa o canal da conversa (ignora o **Canal** escolhido) ou o template tem mídia no cabeçalho | Use em conversas do WhatsApp oficial onde o template está aprovado e sem mídia no cabeçalho |
 | **Agendar execução de bot** não rodou | A conversa não é de WhatsApp | Essa ação só funciona em conversas de WhatsApp |
 | **Avaliar atendimento** não enviou pesquisa | Regra da pesquisa de satisfação (ex.: sessão reaberta, já avaliada, sem mensagem do contato ou sem responsável) | Veja [Pedir avaliação no fim do atendimento](/docs/atendimento/pesquisa-de-satisfacao) |

@@ -1653,6 +1653,7 @@
   arquivo: images/ajuda/atendimento/avaliacao-automacao.webp
   paginas:
     - docs/atendimento/pesquisa-de-satisfacao
+    - docs/automacao/exemplos
 
 # Configurar da ação Avaliar atendimento: painel Configurar Avaliação com Pergunta, Opções (Nota e Texto), Opção, Texto de agradecimento e Salvar (texto do bot de avaliação que o workspace recebe ao ser criado).
 - id: avaliacao-configurar
@@ -2907,7 +2908,7 @@
 # todas desligadas, e abertas pela lista (clique no nome), sem id fixo.
 
 # Lista Automações: título, Nova automação, busca, filtro Tudo e as linhas com nome, gatilho e interruptor (todas desligadas).
-# Sem print da lista de gatilhos aberta: o staging mostra um gatilho que ainda não está em produção (KIN-7905).
+# Sem print da lista de gatilhos aberta.
 - id: automacoes-lista
   largura: 1100
   url: /settings/automations

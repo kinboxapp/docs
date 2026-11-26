@@ -640,13 +640,21 @@ async function garantirAutomacoes(api: Api) {
       name: 'Orçamento para Vendas',
       trigger: 'trigger:conversation:tagged',
       conditions_active: true,
-      conditions: { all: [{ field: 'chat:tags', operator: 'contains', value: String(orcamento.id) }], any: null },
+      // Condição Tag (grupo Contexto, só no gatilho Ao adicionar tag): confere a tag recém-adicionada
+      conditions: { all: [{ field: 'context:chat-tag', operator: 'is', value: String(orcamento.id) }], any: null },
       actions: [{ type: 'action:conversation:move-to-group', value: 'group', groupId: vendas.id }],
     },
   ]
   const existentes = lista(await api.v0('GET', '/automations'))
+  // Exemplo ligado (ou sem o campo `active`, que a tela mostra como ligado) dispararia em conversas reais: avisa e para sem alterar nada
+  const ligados = existentes.filter((x) => exemplos.some((a) => a.name === x.name) && x.active !== false)
+  if (ligados.length) throw new Error(`automações de exemplo ligadas: ${ligados.map((x) => `"${x.name}"`).join(', ')}; desligue na tela e rode de novo`)
   for (const a of exemplos) {
-    if (!existentes.some((x) => x.name === a.name)) await api.v0('POST', '/automations', { ...a, active: false })
+    const atual = existentes.find((x) => x.name === a.name)
+    if (!atual) await api.v0('POST', '/automations', { ...a, active: false })
+    else if (JSON.stringify(atual.conditions ?? null) !== JSON.stringify(a.conditions ?? null)) {
+      await api.v0('PATCH', `/automations/${atual._id || atual.id}`, { conditions_active: a.conditions_active, conditions: a.conditions ?? null, active: false })
+    }
   }
   log(`automações: ${exemplos.map((a) => `"${a.name}"`).join(', ')} (desligadas)`)
 }
