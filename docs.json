@@ -343,6 +343,20 @@
                 ]
               },
               {
+                "group": "Pagamentos, ERP e gestão",
+                "pages": [
+                  "docs/integracoes/banco-inter",
+                  "docs/integracoes/asaas",
+                  "docs/integracoes/tiny-erp",
+                  "docs/integracoes/smarters",
+                  "docs/integracoes/sensedata",
+                  "docs/integracoes/gestor-premium",
+                  "docs/integracoes/dom360",
+                  "docs/integracoes/hinova",
+                  "docs/integracoes/anycar"
+                ]
+              },
+              {
                 "group": "Desenvolvedores",
                 "pages": [
                   "docs/desenvolvedor/visao-geral",
@@ -846,18 +860,6 @@
     },
     {
       "source": "/docs/integracoes/followize",
-      "destination": "/docs/integracoes/visao-geral"
-    },
-    {
-      "source": "/docs/integracoes/banco-inter",
-      "destination": "/docs/integracoes/visao-geral"
-    },
-    {
-      "source": "/docs/integracoes/smarters",
-      "destination": "/docs/integracoes/visao-geral"
-    },
-    {
-      "source": "/docs/integracoes/tiny-erp",
       "destination": "/docs/integracoes/visao-geral"
     },
     {
