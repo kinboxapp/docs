@@ -1,0 +1,63 @@
+---
+title: Configurações do WhatsApp oficial
+description: O que é cada aba, campo e ação de um canal de WhatsApp oficial na Kinbox.
+keywords: [configurações whatsapp oficial, canal oficial, apenas receptivo, restringir visibilidade, atualizar registro, migrar conversas, excluir canal, descrição do canal, templates, campos]
+publico: humano
+tipo: referencia
+fontes:
+  - web:src/pages/settings/channels/whatsappCloud/EditWhatsappCloud.tsx
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/inbox/Message.tsx
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/controllers/IntegrationsController.js
+codigo:
+  - web:src/pages/settings/channels/whatsappCloud/**
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/settings/channels/whatsapp/ForwardZapModal.tsx
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/controllers/IntegrationsController.js
+verificado_em: 2026-11-26
+---
+
+Abra as configurações em **Configurações** → **Chat** → **Canais** e clique no canal de WhatsApp oficial que você quer editar.
+
+## Abas e campos
+
+| Aba | Campo ou seção | O que faz |
+| --- | --- | --- |
+| **Geral** | Aviso amarelo | Exibe alertas da verificação feita na Meta, com "Em caso de dúvida entre em contato com o nosso suporte". Veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns). |
+| **Geral** | **Status** | Mostra o selo do canal (**Conectado**). Esse selo não reflete restrições nem qualidade na Meta. |
+| **Geral** | **Descrição** | Nome do canal dentro da Kinbox (obrigatório; exemplo: "Canal de suporte"). Nasce com o nome verificado do número na Meta; editar aqui não muda o nome no WhatsApp. |
+| **Geral** | **Número** | Número conectado ao canal, somente leitura. |
+| **Geral** | **Apenas Receptivo** | "Com essa opção marcada, o canal não pode enviar mensagem ativa e nem ser usado em campanhas." |
+| **Acesso** | **Restringir visibilidade** | "Selecione os grupos que tem acesso a visualizar esse canal". |
+| **Ligações** | Configurações de ligações (Beta) | Configura ligações pelo WhatsApp oficial. É um recurso em teste e pode não aparecer no seu workspace. |
+| **Templates** | **Gerenciar** | Abre a tela **WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**) na área de templates. Aparece em canais conectados pela janela da Meta. |
+| **Campos** | Campos personalizados | Mostra os campos personalizados de canal configurados no workspace, quando existirem. |
+
+Quando você altera algum campo, o botão **Salvar** aparece no rodapé do painel.
+
+## Ações na lista de canais
+
+No menu de três pontos do canal em **Configurações** → **Chat** → **Canais**:
+
+| Ação | O que faz |
+| --- | --- |
+| **Copiar ID** | Copia o ID do canal ("ID do canal (...) copiado para clipboard."). |
+| **Migrar conversas** | Passa todas as conversas deste canal para outro canal de WhatsApp. As conversas que chegam a um canal oficial começam com a [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas) fechada, e conversas de grupo vindas do QR Code deixam de ser grupo (o canal oficial não tem grupos). Veja detalhes em [Canais](/docs/canais/visao-geral). |
+| **Atualizar registro** | Pede de novo à Meta o registro do número no canal. Você normalmente não precisa desta ação: use só quando o suporte pedir. Não use em canais de [coexistência](/docs/canais/whatsapp-api-oficial-coexistente). Mostra "Atualizando registro..." enquanto executa; quando dá certo, não aparece confirmação, e se a Meta recusar aparece o erro. |
+| **Editar** | Abre o painel de configurações do canal. |
+| **Excluir** | Desativa o canal na Kinbox (as conversas ficam) e desliga o recebimento de mensagens na conta do WhatsApp Business. |
+
+<Warning>Ao confirmar **Excluir**, a Kinbox desliga o recebimento de mensagens da conta do WhatsApp Business inteira. Se a mesma conta tiver outro número conectado como outro canal na Kinbox, esse outro canal também para de receber mensagens. O número não é removido da API da Meta. Se você reconectar o mesmo número depois, o canal antigo volta com as conversas.</Warning>
+
+## O que não dá para fazer aqui
+
+- As ações **Desconectar**, **Reiniciar**, **Recriar** e **Sincronizar histórico** não existem no WhatsApp oficial.
+- Não dá para apagar uma mensagem enviada pelo WhatsApp oficial: a opção de apagar não aparece na conversa.
+- Não dá para alterar nome de exibição, foto nem descrição do perfil do número no WhatsApp pela Kinbox — isso é feito na Meta.
+- Não dá para ver a qualidade do número nem o limite diário de envio da Meta pela Kinbox.
+
+## Permissões
+
+Editar o canal exige ser o proprietário do workspace ou ter a permissão **Gerenciar Canais**. Membros com a restrição **Somente pode dar manutenção simples em canais** não veem **Novo canal** nem **Excluir** na lista e, ao tentar salvar o canal oficial, veem um aviso de que não têm permissão para editar o canal.

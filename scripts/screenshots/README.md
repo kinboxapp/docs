@@ -67,4 +67,5 @@ Depois de capturar, abra cada imagem e confira que ela mostra o que o item descr
 - Este repositório é público. Só entram prints do workspace de documentação, com dados fictícios.
 - O staging pode mostrar elementos que só existem lá (ex.: um cartão "WhatsApp Cloud API" de teste na escolha do WhatsApp). Confira a tela inteira antes de escolher o recorte.
 - Telas que o workspace de documentação não tem (canal de WhatsApp) podem vir do workspace de testes com `workspace: Kinbox` no item. Nesse caso `mascarar` é obrigatório (a captura recusa o item sem ele) e cada seletor precisa achar um elemento (senão o item falha): cubra nome do canal, número e qualquer nome de pessoa, e recorte só o bloco que a página usa.
+- A conta de teste do staging é admin do sistema: o menu lateral mostra o item "Admin", que o cliente não vê, e o staging mostra um selo "Stag" no canto. Use `esconder` (some do print) para eles, não `mascarar`.
 - O dono do workspace é uma conta real: o nome e a foto dele aparecem no cabeçalho, nas respostas das conversas e na lista de membros. Recorte fora dessas áreas ou ponha o seletor em `mascarar`.

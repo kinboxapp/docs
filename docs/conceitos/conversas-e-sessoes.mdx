@@ -1,0 +1,66 @@
+---
+title: Conversas, sessões e status
+description: A diferença entre conversa, sessão e protocolo na Kinbox, quando uma sessão começa, reabre ou termina, e o que significa cada status da conversa.
+keywords: [conversa, sessão, protocolo, número do protocolo, nova sessão, resolver, reabrir, arquivados, abertos, meus, seguindo, pendente, atribuída, tolerância, ticket, atendimento]
+publico: humano
+tipo: conceito
+fontes:
+  - api-v0:server/services/CallService.js
+  - web:src/pages/inbox/NewSessionSeparator.tsx
+  - web:src/components-old/chat/side/ContactChannelsPanel/index.tsx
+  - web:src/components-old/chat/side/ContactHistory.tsx
+  - web:src/pages/inbox/index.tsx
+codigo:
+  - api-v0:server/services/CallService.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageByClient.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+  - web:src/pages/inbox/index.tsx
+  - web:src/pages/inbox/NewSessionSeparator.tsx
+  - web:src/components-old/chat/side/ChatTimeline/**
+  - web:src/components-old/chat/side/ContactHistory.tsx
+  - web:src/components-old/chat/side/ContactChannelsPanel/**
+  - web:src/pages/settings/workspace/index.tsx
+verificado_em: 2026-11-26
+---
+
+Na Kinbox, uma **conversa** é a troca de mensagens com um contato num canal. Cada **sessão** é um atendimento dentro dessa conversa, com um número de **protocolo** próprio.
+
+## Conversa
+
+Cada combinação de contato e canal forma uma conversa. Se o mesmo contato fala com o seu workspace pelo WhatsApp e pelo Instagram, são duas conversas.
+
+A conversa guarda todo o histórico com aquele contato naquele canal, sessão após sessão. As outras conversas do mesmo contato aparecem em **Informações da conversa** → **Conversas**. Veja também [Contatos, organizações e negociações](/docs/conceitos/contatos-e-negocios).
+
+## Sessão e protocolo
+
+Uma **sessão** é um atendimento, do início até ser resolvido. Cada sessão recebe um **protocolo**.
+
+Na conversa, o começo de cada sessão aparece como a faixa **Nova sessão**, seguida de `#` e do número do protocolo. O membro responsável, o grupo e as tags valem para a sessão, e cada sessão tem os próprios tempos de espera e de atendimento e a própria avaliação. A lista das sessões anteriores fica em **Informações da conversa** → **Histórico**.
+
+**Automações** (gatilho **Nova conversa ou sessão**) e **Cenários** (gatilho **Nova Sessão**) também reagem a cada sessão nova.
+
+## Quando uma sessão começa, reabre ou termina
+
+| O que acontece | Resultado |
+| --- | --- |
+| O contato manda mensagem e há uma sessão aberta | A mensagem entra na sessão atual. |
+| Um membro clica em **Resolver** | A sessão termina. |
+| O contato escreve depois de resolvida, fora do tempo de tolerância (ou com ele desligado) | Normalmente começa uma sessão nova, com protocolo novo. |
+| O contato escreve dentro do **Tempo de tolerância ao resolver conversa** (quando ligado) | A sessão anterior é reaberta. |
+| Um membro inicia a conversa pelo botão **Enviar mensagem** | Começa uma sessão na conversa. |
+
+O **Tempo de tolerância ao resolver conversa** fica nas configurações do workspace (na tela, **ambiente**), em **Configurações** → **Ambiente** → **Geral**, e vem desligado em workspaces novos.
+
+Não confunda a sessão da Kinbox com a [janela de 24 horas do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas), que é uma regra da Meta para enviar mensagens nesse canal.
+
+## Estados de uma conversa
+
+- **Aberta**: tem uma sessão em andamento.
+- **Resolvida**: a última sessão foi resolvida. A conversa sai das visões de abertas e vai para **Arquivados**.
+- **Atribuída**: a sessão tem um membro responsável e pode ter um grupo. Sem membro, a conversa fica sem responsável. A **Atribuição automática** distribui conversas entre os membros marcados como **Disponível**.
+- **Pendente**: o contato mandou mensagem e ainda não teve resposta. Deixa de ficar pendente quando um membro responde ou resolve. Dá para mudar à mão com **Marcar como pendente** e **Desmarcar como pendente**.
+- **Seguindo**: você acompanha a conversa com a ação **Seguir**, mesmo sem ser o responsável.
+
+Na **Caixa de entrada**, as conversas aparecem separadas em visões, como **Abertos**, **Meus**, **Seguindo** e **Arquivados**. Quais conversas cada membro vê depende do **Acesso as Conversas** do papel dele: veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
+
+Veja também [Como a Kinbox funciona](/docs/conceitos/visao-geral) e o [Glossário](/docs/conceitos/glossario).
