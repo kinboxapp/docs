@@ -940,6 +940,25 @@ async function garantirDashboard(api: Api) {
   log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length} snapshot(s)`)
 }
 
+// Seção marketing: cadastra o site fictício "Site da loja" (https://www.example.com) com a chave "Chave do site".
+// Os apps Meta Ads e Tracking são ligados pela tela (Configurações → Integrações → Apps → Habilitar integração → Salvar);
+// o Google Ads fica desligado, para o print da divulgação. Nada é conectado à Meta: o site é fictício e o seed não
+// instala o snippet. Só roda com `--so marketing` (fora da execução padrão).
+async function garantirMarketing(api: Api) {
+  const integracoes = lista(await api.v0('GET', '/integrations'))
+  const desligados = ['meta_ads', 'tracking'].filter((type) => !integracoes.find((i) => i.type === type)?.isEnabled)
+  if (desligados.length) log(`marketing: ligue pela tela os apps ${desligados.join(', ')} antes de capturar`)
+  if (desligados.includes('tracking')) return
+  const origem = 'https://www.example.com'
+  const visao = await api.v3('GET', '/tracking/overview')
+  if ((visao?.domains || []).some((d: any) => d.origin === origem)) return log('marketing: site de Tracking já existe')
+  const chaves = lista(await api.v3('GET', '/tracking/site-keys'))
+  const chave = chaves.find((k: any) => k.name === 'Chave do site' && k.isActive && k.siteKey)
+  const siteKey = chave?.siteKey || (await api.v3('POST', '/tracking/site-keys', { name: 'Chave do site' })).plainToken
+  await api.v3('POST', '/tracking/domains', { name: 'Site da loja', origin: origem, siteKey })
+  log('marketing: site "Site da loja" criado')
+}
+
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
 // (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
 const falhas: Record<string, string> = {}
@@ -958,11 +977,14 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['salas', () => garantirSalas(api)],
   ['cenarios', () => garantirCenarios(api, canal)],
   ['dashboard', () => garantirDashboard(api)],
+  ['marketing', () => garantirMarketing(api)],
 ]
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
 // `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.
 // `cenarios` depende de `funil` (o funil "Vendas") e de `bot` (o bot "Atendimento inicial"): rode `--so funil,bot,cenarios`.
 const nomesEtapas = etapas.map(([nome]) => nome)
+/** Etapas que só rodam quando pedidas em `--so` (ficam fora da execução padrão). */
+const SO_SOB_PEDIDO = ['marketing']
 const soArg = process.argv.indexOf('--so')
 let so: string[] | undefined
 if (soArg > -1) {
@@ -983,7 +1005,7 @@ await garantirConversas(api, canal, tagIds)
 const contatoIds = await garantirContatos(api)
 
 for (const [nome, etapa] of etapas) {
-  if (so && !so.includes(nome)) continue
+  if (so ? !so.includes(nome) : SO_SOB_PEDIDO.includes(nome)) continue
   try {
     await etapa()
   } catch (e) {
