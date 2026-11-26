@@ -2765,3 +2765,77 @@
   arquivo: images/ajuda/outros-canais/sms-comprar-creditos.webp
   paginas:
     - docs/canais/sms
+
+# Seção salas (Atendimento › Salas)
+#
+# As salas não têm rota: o botão @ do topo abre o painel. Dados do seed (etapa `salas`): sala pública "Avisos" com
+# mensagens fictícias, uma fixada, uma reação e uma resposta em thread, e a privada "Gerência". As mensagens saem em
+# nome da conta de teste (proprietária real): foto e nome do autor sempre com tarja.
+- id: salas-painel
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Avisos'
+    - esperar: '[data-room-message] >> text=A nova coleção'
+    - pausa: 800
+  alvo: '.rooms-drawer .ant-drawer-content'
+  mascarar:
+    - '.rooms-drawer figure'
+    - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
+    - '.rooms-drawer .truncate.text-sm.font-medium'
+  arquivo: images/ajuda/salas/painel-das-salas.webp
+  paginas:
+    - docs/salas/visao-geral
+
+- id: salas-nova-sala
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - esperar: '.room-sidebar-scroll >> text=Avisos'
+    - clicar: '.rooms-drawer button.room-icon-button >> nth=0'
+    - esperar: '.ant-modal-content >> text=Criar nova sala'
+    - digitar: { seletor: '.ant-modal-content input[type=text] >> nth=0', texto: 'Vendas' }
+    - digitar: { seletor: '.ant-modal-content textarea', texto: 'Metas, campanhas e dúvidas sobre pedidos' }
+    - clicar: '.ant-modal-content .ant-select:has-text("Pública")'
+    - clicar: '.ant-select-dropdown:not(.ant-select-dropdown-hidden) >> text=Privada'
+    - esperar: '.ant-modal-content >> text=Membros'
+    - pausa: 600
+  alvo: '.ant-modal-content'
+  mascarar:
+    - '.ant-modal-content .ant-select-multiple .ant-select-selection-item'
+  arquivo: images/ajuda/salas/nova-sala.webp
+  paginas:
+    - docs/salas/usar-salas
+
+- id: salas-acoes-mensagem
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Avisos'
+    - esperar: '[data-room-message] >> text=A nova coleção'
+    - passar: '[data-room-message]:has-text("A nova coleção")'
+    - clicar: '[data-room-message]:has-text("A nova coleção") .room-toolbar-button >> nth=-1'
+    - esperar: '.ant-dropdown:not(.ant-dropdown-hidden) >> text=Salvar para depois'
+    - pausa: 600
+  alvo:
+    - '[data-room-message]:has-text("A nova coleção")'
+    - '.ant-dropdown:not(.ant-dropdown-hidden) .ant-dropdown-menu'
+  mascarar:
+    - '.rooms-drawer [data-room-message] figure'
+    - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
+  arquivo: images/ajuda/salas/acoes-da-mensagem.webp
+  paginas:
+    - docs/salas/usar-salas
+
+- id: salas-auditoria
+  url: /
+  passos:
+    - clicar: 'button:has(i.fa-at)'
+    - clicar: '.room-sidebar-scroll >> text=Auditoria'
+    - esperar: '.rooms-drawer >> text=Escolha um membro'
+    - pausa: 600
+  alvo: '.rooms-drawer .ant-drawer-content'
+  mascarar: []
+  arquivo: images/ajuda/salas/auditoria.webp
+  paginas:
+    - docs/salas/auditar-mensagens-diretas

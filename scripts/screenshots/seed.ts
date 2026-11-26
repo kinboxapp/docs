@@ -446,6 +446,40 @@ async function garantirRespostasRapidas(api: Api) {
   log(`respostas rápidas: ${RESPOSTAS_RAPIDAS.length}`)
 }
 
+/**
+ * Salas (prints da seção salas): a sala pública "Avisos" com mensagens internas fictícias da equipe,
+ * uma fixada, uma com reação e uma resposta em thread, e a sala privada "Gerência". As mensagens
+ * saem em nome da conta de teste (dona do workspace): os prints mascaram nome e foto do autor.
+ * Salas são só da equipe: nada é enviado a contato.
+ */
+async function garantirSalas(api: Api) {
+  const salas = lista(await api.v0('GET', '/rooms'))
+  let avisos = salas.find((r) => r.name === 'Avisos' && r.type !== 'dm')
+  if (!avisos) {
+    avisos = await api.v0('POST', '/rooms', { name: 'Avisos', description: 'Comunicados para toda a equipe', privacy: 'public', color: '#3498db', memberIds: [] })
+  }
+  if (!salas.some((r) => r.name === 'Gerência' && r.type !== 'dm')) {
+    const eu = lista(await api.v0('GET', '/operators?limit=100')).find((o) => o.isOwner)
+    await api.v0('POST', '/rooms', { name: 'Gerência', description: 'Metas e escalas da semana', privacy: 'private', color: '#8e44ad', memberIds: eu ? [eu.id] : [] })
+  }
+  const avisosId = String(avisos.id || avisos._id)
+  const mensagens = lista(await api.v3('GET', `/rooms/${avisosId}/messages?limit=50`))
+  if (!mensagens.length) {
+    const textos = [
+      'Bom dia, equipe! A partir de segunda, o atendimento de sábado vai até as 14h.',
+      'Lembrete: antes de encerrar o dia, confiram se ficou alguma conversa sem responsável.',
+      'A nova coleção de cafés especiais chega na quinta. As fotos já estão na pasta de produtos.',
+    ]
+    const criadas: any[] = []
+    for (const text of textos) criadas.push(await api.v0('POST', `/rooms/${avisosId}/messages`, { text, type: 'text' }))
+    const [primeira, , terceira] = criadas.map((m) => String(m._id || m.id))
+    await api.v3('POST', `/rooms/${avisosId}/messages/${primeira}/pin`, {})
+    await api.v3('POST', `/rooms/${avisosId}/messages/${primeira}/reactions`, { emoji: '👍' })
+    await api.v3('POST', `/rooms/${avisosId}/messages/${terceira}/thread`, { text: 'Combinado. Vou atualizar as frases rápidas com os novos sabores.', type: 'text' })
+  }
+  log(`salas: "Avisos" (pública, ${mensagens.length || 3} mensagens) e "Gerência" (privada)`)
+}
+
 /** Agente de IA criado pelo mesmo caminho do onboarding. Nasce desligado e sem canal. */
 async function garantirAgente(api: Api) {
   const existente = lista(await api.v3('GET', '/agents')).find((a) => a.name === AGENTE.name)
@@ -716,6 +750,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['widget de exemplo', () => garantirWidgetExemplo(api)],
   ['clientes', () => garantirClientes(api, contatoIds)],
   ['crm', () => garantirCrm(api, contatoIds)],
+  ['salas', () => garantirSalas(api)],
 ]
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
 // `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.

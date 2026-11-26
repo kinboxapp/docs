@@ -150,6 +150,14 @@
                   "docs/atendimento/pesquisa-de-satisfacao",
                   "docs/atendimento/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Salas",
+                "pages": [
+                  "docs/salas/visao-geral",
+                  "docs/salas/usar-salas",
+                  "docs/salas/auditar-mensagens-diretas"
+                ]
               }
             ]
           },

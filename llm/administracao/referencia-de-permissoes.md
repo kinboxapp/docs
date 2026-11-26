@@ -146,7 +146,7 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |
-| **Salas** | Libera criar e excluir salas de bate-papo. | — |
+| **Salas** | Libera criar, editar, clonar, ordenar e excluir salas de bate-papo. Veja [Conversar nas salas: mensagens diretas, menções e threads](/docs/salas/usar-salas). | — |
 | **Assinatura** | Mostra **Configurações** → **Assinatura**. | — |
 | **Campanhas** | Mostra **Campanhas** no menu lateral. | — |
 | **Proibir criar campanha de WhatsApp** | Impede criar campanhas de WhatsApp. | `"Você não tem permissão para criar campanhas de WhatsApp."` |
@@ -195,14 +195,14 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 | **Não torna indisponível se ficar inativo** | Impede que a regra de inatividade do workspace deixe o membro indisponível. | — |
 | **Não torna offline se ficar inativo** | Impede que a regra de inatividade do workspace deixe o membro offline. | — |
 | **Pode resetar senha de membros** | Libera **Resetar senha** na lista de membros (só o proprietário pode marcar). | — |
-| **Auditar mensagens diretas** | Libera leitura em modo somente leitura das mensagens diretas nas salas (mensagens diretas envolvendo o proprietário ficam de fora). | — |
+| **Auditar mensagens diretas** | Libera leitura em modo somente leitura das mensagens diretas nas salas (mensagens diretas envolvendo o proprietário ficam de fora). Veja [Auditar as mensagens diretas dos membros](/docs/salas/auditar-mensagens-diretas). | — |
 | **Limitar horário de acesso ao ambiente** *(Restrições)* | Fora do horário escolhido (pelo fuso horário do workspace), substitui o workspace pela tela de bloqueio **Fora do horário de acesso**, com os horários, `"Ou escolha outro ambiente para continuar."` e **Sair**. | `"Seu perfil só pode acessar o ambiente {nome do workspace} dentro do horário comercial."` |
 | **Limitar horário que pode ficar disponível** *(Restrições)* | Impede ativar disponibilidade fora do horário escolhido. | `"Você não pode ficar disponível fora do horário de trabalho"` |
 | **Não pode ficar indisponível** *(Restrições)* | Impede alterar disponibilidade para ausente. | `"Você não tem permissão para ficar indisponível"` |
 | **Não pode mudar disponibilidade** *(Restrições)* | Impede alterar a disponibilidade. | — |
 | **Não pode mudar informação de perfil** *(Restrições)* | Bloqueia editar informações em **Perfil** neste workspace. | `"O seu gestor desabilitou a edição de informações do seu perfil. Entre em contato com o gestor para mais informações."` |
-| **Não pode acessar as salas** *(Restrições)* | Oculta o ícone **Salas** e bloqueia notificações das salas. | — |
-| **Só pode ver membros que sejam dos seus grupos nos DMs.** *(Restrições)* | Limita mensagens diretas nas salas aos membros que compartilham algum grupo. | — |
+| **Não pode acessar as salas** *(Restrições)* | Oculta o ícone **Salas** e bloqueia notificações das salas. Veja [Salas: o chat interno da equipe](/docs/salas/visao-geral). | — |
+| **Só pode ver membros que sejam dos seus grupos nos DMs.** *(Restrições)* | Limita mensagens diretas nas salas aos membros que compartilham algum grupo. Veja [Conversar nas salas: mensagens diretas, menções e threads](/docs/salas/usar-salas). | — |
 | **Somente pode ver frases rápidas na lista se estiver no grupo da frase rápida** *(Restrições)* | Mostra na lista apenas frases rápidas com restrição de visibilidade de grupos aos quais o membro pertence. | — |
 | **Não marca como lido ao abrir uma conversa** *(Restrições)* | Evita marcar a conversa como lida automaticamente ao abri-la. | — |
 | **Não mostrar aviso de ambiente expirando.** *(Restrições)* | Oculta o banner de aviso no topo da tela quando o workspace está prestes a expirar. | — |
