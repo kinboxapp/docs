@@ -47,7 +47,7 @@ Detalhes de referência da página [Ligar para um contato por telefone (VoIP)](/
 
 ## Formatação do número e nono dígito
 
-- Antes de iniciar a chamada, a Kinbox limpa o telefone do cadastro do contato removendo símbolos, o prefixo internacional `"00"` e zeros à esquerda.
+- Antes de iniciar a ligação, a Kinbox limpa o telefone do cadastro do contato removendo símbolos, o prefixo internacional `"00"` e zeros à esquerda.
 - Em números do Brasil (com código `55` ou com DDD seguido de 8 ou 9 dígitos), quando o número local tem 8 dígitos e começa com `6`, `7`, `8` ou `9`, a Kinbox insere o nono dígito (`9`) automaticamente.
 - Outros formatos recebem apenas o prefixo `+`.
 - Se o telefone estiver vazio, a tentativa falha com `"Número de telefone não informado"`.
@@ -63,18 +63,18 @@ Detalhes de referência da página [Ligar para um contato por telefone (VoIP)](/
 | `"Seu saldo acabou. A chamada será encerrada."` | Saldo na carteira chegou a **R$ 0,50 ou menos** durante a ligação. |
 | `"Saldo insuficiente."` | Saldo insuficiente durante ligação com **Usar SIP reserva** ativado. |
 | `"Falha conexão voz"` | Falha na conexão de voz com **Usar SIP reserva** ativado. |
-| `"Número de telefone não informado"` | Contato sem telefone informado ao tentar iniciar a chamada. |
+| `"Número de telefone não informado"` | Contato sem telefone informado ao tentar iniciar a ligação. |
 | Janela da ligação fecha sem aviso | Acesso ao microfone bloqueado ou negado no navegador. |
 | `"Saldo insuficiente"` | Saldo da carteira de **R$ 0,20 ou menos** ao clicar em **Transcrever**. |
 | `"Não foi possível transcrever a chamada"` | Erro ao processar a transcrição da gravação. |
-| `"Não há gravação disponível"` / `"Verifique se a gravação está habilitada no canal de voip."` | Abertura do painel **Ligação de voz** de uma chamada sem áudio gravado. |
+| `"Não há gravação disponível"` / `"Verifique se a gravação está habilitada no canal de voip."` | Abertura do painel **Ligação de voz** de uma ligação sem áudio gravado. |
 
 ## Transcrição e resumo
 
 - A transcrição no VoIP é **manual**: abra a mensagem **Ligação de voz** na conversa e clique em **Transcrever** (disponível quando a ligação foi gravada).
 - A transcrição é feita em **português** e gera a **Transcrição** (falas separadas por pessoa com horário; clicar em uma fala leva o áudio até aquele ponto) e o **Resumo** com sentimento (**Positivo**, **Negativo** ou **Neutro**).
 - **Custo e saldo mínimo:** a transcrição gasta saldo da carteira por minuto de áudio arredondado para cima (lançamento `"Transcrição de chamada de voz"`) e o resumo também gasta saldo da carteira (lançamento `"Resumo da transcrição de chamada de voz"`). É necessário ter saldo **acima de R$ 0,20** na carteira para iniciar a transcrição.
-- As gravações podem ser baixadas em **Baixar áudio** (no painel **Ligação de voz**) ou em **Relatórios** → **Ligações** (**Baixar** / **Ver**, filtro `"Telefone (VoIP)"`), com o nome de arquivo `ligacao-voip-<id>.<extensão>`.
+- As gravações podem ser baixadas em **Baixar áudio** (no painel **Ligação de voz**) ou em **Relatórios** → **Ligações**, para quem tem a permissão **Gerenciar relatórios** (**Baixar** / **Ver**, filtro `"Telefone (VoIP)"`), com o nome de arquivo `ligacao-voip-<id>.<extensão>`.
 
 ## SIP reserva
 

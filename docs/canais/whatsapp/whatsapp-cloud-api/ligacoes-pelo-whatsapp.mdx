@@ -31,7 +31,7 @@ verificado_em: 2026-11-26
 Com as ligações pelo WhatsApp oficial, o contato liga pelo WhatsApp para o número da empresa e o membro atende pelo navegador, sem sair da conversa. O membro na conversa também pode ligar para o contato pelo WhatsApp, depois que o contato permite receber ligações.
 
 <Note>
-As ligações pelo WhatsApp são um recurso em teste (**Beta**) e podem não aparecer no seu workspace. Funcionam só em canais de **WhatsApp oficial** sem coexistência e exigem o plano **Ligações WhatsApp** (veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)). Para configurar o canal, é preciso ser o proprietário do workspace ou ter a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+As ligações pelo WhatsApp são um recurso em teste (**Beta**) e podem não aparecer no seu workspace. Para configurar o canal, é preciso ser o proprietário do workspace ou ter a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 </Note>
 
 ## Antes de começar
@@ -39,7 +39,7 @@ As ligações pelo WhatsApp são um recurso em teste (**Beta**) e podem não apa
 - O recurso em teste liberado no workspace (sem ele, a aba **Ligações** não aparece).
 - Um canal de **WhatsApp oficial** conectado (veja [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao)). O WhatsApp por QR Code não tem ligações pela Kinbox.
 - O número sem [coexistência](/docs/canais/whatsapp-api-oficial-coexistente) com o app WhatsApp Business.
-- O plano **Ligações WhatsApp**, contratado em **Configurações** → **Assinatura** por quem cuida da assinatura.
+- O plano **Ligações WhatsApp**, contratado em **Configurações** → **Assinatura** por quem cuida da assinatura (veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)).
 - Minutos sobrando na franquia do plano ou [saldo na carteira](/docs/conceitos/saldo-e-creditos).
 - Microfone liberado no navegador de quem liga ou atende.
 
@@ -78,12 +78,12 @@ Se o número estiver em coexistência, a aba mostra o aviso **A Meta não oferec
 
 O contato não precisa dar permissão para ligar para a empresa. Quando ele liga, a conversa dele recebe a mensagem **Ligação do WhatsApp** ("Tocando...") com os botões **Recusar** e **Atender**, para quem pode atender. Depois, a mensagem passa a **Ligação recebida pelo WhatsApp**.
 
-A ligação toca só para quem pode atender: o proprietário ou membros com a permissão **Responder**, online, com o interruptor **Disponível** ligado (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação. Quem tem só a opção **Responder apenas conversas dele** não recebe o toque, nem nas conversas atribuídas a ele. Se a conversa tem um responsável disponível, toca só para ele.
+A ligação toca só para quem pode atender: o proprietário ou membros com a permissão **Responder**, online, com o interruptor **Disponível** ligado (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação. Quem tem só a opção **Responder apenas conversas dele** não recebe o toque, nem nas conversas atribuídas a ele. Se a conversa tem um responsável que pode receber o toque, toca só para ele. Em conversa sem responsável, toca só para quem enxerga conversas sem atribuição daquele grupo, conforme o escopo do papel.
 
 Além da mensagem na conversa, pode aparecer um cartão em qualquer tela da Kinbox, com **Recusar** e **Atender**. Cada membro escolhe se quer esse aviso em **Configurações** → **Notificações** (veja [Receber notificações no navegador e no celular](/docs/conta/notificacoes)).
 
 - **Atender:** quem atender primeiro fica com a ligação, e a conversa passa a ser atribuída a essa pessoa. Durante a ligação, a janela mostra o tempo, os botões de silenciar e desligar e o selo **Gravando**, quando a gravação está ligada.
-- **Recusar:** tira a ligação só da sua tela. A ligação só é recusada no WhatsApp quando todos para quem ela tocou recusam.
+- **Recusar:** tira a ligação só da sua tela. A ligação só é recusada no WhatsApp quando todos para quem ela tocou recusam; se o canal tem agente de voz ligado, ela pode passar para o [agente de voz](/docs/agente-de-ia/agente-de-voz).
 - **Ninguém atendeu:** depois de cerca de 60 segundos, a ligação para de tocar e a conversa registra **Chamada perdida**.
 
 Fechar ou recarregar a aba do navegador encerra a ligação do WhatsApp em andamento.
@@ -109,7 +109,7 @@ Além dos itens de **Antes de começar**, a opção **Fazer ligações** precisa
 Clique em **Ligar pelo WhatsApp** para abrir a janela **Pedir permissão para ligar** e clique em **Enviar pedido**. O formato do pedido depende da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas):
 
 - **Dentro das 24 horas:** o pedido vai como mensagem, sem custo, e você pode editar o texto no campo **Mensagem**.
-- **Fora das 24 horas:** o pedido vai como template aprovado, com o botão **Permitir ligações**, cobrado pela Meta como uma mensagem. Se o template estiver **em análise**, aguarde a Meta. Se ainda não existir, quem tem **Gerenciar Canais** clica em **Criar template agora**; se foi **rejeitado**, em **Reenviar template**.
+- **Fora das 24 horas:** o pedido vai como template aprovado, com o botão **Permitir ligações**, cobrado pela Meta como uma mensagem. Se o template estiver **em análise**, aguarde a Meta. Se ainda não existir, quem tem **Gerenciar Canais** clica em **Criar template agora**; se foi **rejeitado**, em **Reenviar template**. Quem não vê esses botões pede a quem gerencia o canal.
 
 A Meta limita os pedidos ao mesmo contato. A tela avisa "Limite de pedidos atingido (1 por dia e 2 por semana)." e libera **Enviar pedido** de novo na data mostrada.
 
@@ -119,7 +119,7 @@ Se o contato não atender 4 ligações feitas seguidas, o WhatsApp retira a perm
 
 ## Depois da ligação
 
-A ligação fica na conversa como **Ligação recebida pelo WhatsApp** ou **Ligação feita pelo WhatsApp**, com a duração. Clique na mensagem para abrir o painel **Ligação de voz**. Com **Gravar ligações** ligada, o painel mostra o áudio e **Baixar áudio**; a **Transcrição** e o **Resumo** são gerados sozinhos e podem aparecer um pouco depois do áudio. Se a transcrição automática falhar, aparece o botão **Transcrever**, que gera a transcrição usando o saldo da carteira.
+A ligação fica na conversa como **Ligação recebida pelo WhatsApp** ou **Ligação feita pelo WhatsApp**, com a duração. Clique na mensagem para abrir o painel **Ligação de voz**. Com **Gravar ligações** ligada, o painel mostra o áudio e **Baixar áudio**; a **Transcrição** e o **Resumo** são gerados sozinhos e podem aparecer um pouco depois do áudio. Enquanto a transcrição automática não chega, o painel mostra o botão **Transcrever** no lugar dela. Aguarde alguns minutos e abra de novo; só clique se ela não aparecer, porque o botão usa o saldo da carteira, mesmo com o plano.
 
 Quem tem a permissão **Gerenciar relatórios** também encontra as ligações e as gravações em **Relatórios** → **Ligações**, com os filtros "WhatsApp: feitas" e "WhatsApp: recebidas".
 
@@ -133,8 +133,8 @@ Quem tem a permissão **Gerenciar relatórios** também encontra as ligações e
 
 ## Problemas comuns
 
-- **A aba Ligações ou a opção Ligar pelo WhatsApp não aparece.** Confira os itens de **Antes de começar**. Para configurar o canal, é preciso ser o proprietário ou ter **Gerenciar Canais**.
-- **A ligação recebida não toca para você.** Ela só toca para quem tem **Responder** (ou é o proprietário), está online, com **Disponível** ligado, e fora de outra ligação; quem tem só **Responder apenas conversas dele** não recebe o toque. Atenda pela mensagem **Ligação do WhatsApp** na conversa e confira o microfone e suas preferências em **Notificações**.
+- **A aba Ligações ou a opção Ligar pelo WhatsApp não aparece.** Confira os itens de **Antes de começar**.
+- **A ligação recebida não toca para você.** Confira as regras de **Receber ligações**, acima. Se **Atender** aparecer na mensagem **Ligação do WhatsApp** da conversa, atenda por ela; se não aparecer, confira quem é o responsável da conversa e o acesso do seu papel. Confira também o microfone e suas preferências em **Notificações**.
 - **A ligação recebida virou Chamada perdida sem tocar.** Sem o plano **Ligações WhatsApp**, ou sem franquia e sem saldo, a Kinbox recusa a ligação.
 
 Veja todas as causas e soluções em [Não consigo ligar ou a ligação caiu](/docs/canais/ligacoes/problemas-comuns).

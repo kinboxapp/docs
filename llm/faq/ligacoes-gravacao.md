@@ -1,6 +1,6 @@
 ---
 title: Onde ficam as gravações das ligações?
-description: As gravações ficam na mensagem da ligação dentro da conversa (painel Ligação de voz) e em Relatórios → Ligações, quando a gravação estava ativada antes da chamada.
+description: As gravações ficam na mensagem da ligação dentro da conversa (painel Ligação de voz) e em Relatórios → Ligações, quando a gravação estava ativada antes da ligação.
 keywords: [gravação de ligação, onde fica gravação, baixar gravação, ouvir ligação, áudio da ligação, gravar chamadas, gravar ligações, transcrição ligação]
 publico: llm
 tipo: faq
@@ -30,7 +30,7 @@ As gravações ficam primeiro na mensagem da ligação dentro da conversa (**Lig
 
 - **Quando a gravação existe:** apenas quando a opção já estava ligada antes da ligação — **Gravar ligações** na aba **Ligações** do canal de WhatsApp oficial (recurso em teste com plano **Ligações WhatsApp**) ou **Gravar chamadas** em **Configurações** → **Chat** → **Voip** (no VoIP).
 - **Quando não há gravação:** se a opção estava desligada; no WhatsApp oficial, se o navegador de quem atendeu falhou ao enviar o áudio no fim (`"Não foi possível enviar a gravação da ligação"`); no VoIP, quando **Usar SIP reserva** está ligada.
-- **Transcrição, resumo e download:** no WhatsApp oficial, a gravação e a transcrição automática estão incluídas no plano **Ligações WhatsApp**; o resumo gasta saldo da carteira, e a transcrição e o resumo podem aparecer um pouco depois do áudio. Se a transcrição automática falhar, o botão **Transcrever** gera a transcrição usando o saldo da carteira. No VoIP, a transcrição e o resumo são gerados clicando em **Transcrever** no painel **Ligação de voz** e gastam saldo. O arquivo baixado tem o nome `ligacao-voip-<id>` com a extensão do áudio.
+- **Transcrição, resumo e download:** no WhatsApp oficial, a gravação e a transcrição automática estão incluídas no plano **Ligações WhatsApp**; o resumo gasta saldo da carteira, e a transcrição e o resumo podem aparecer um pouco depois do áudio. Enquanto a transcrição automática não chega, o painel mostra o botão **Transcrever** no lugar dela. Aguarde alguns minutos e abra de novo; só clique se ela não aparecer, porque o botão usa o saldo da carteira, mesmo com o plano. No VoIP, a transcrição e o resumo são gerados clicando em **Transcrever** no painel **Ligação de voz** e gastam saldo. O arquivo baixado tem o nome `ligacao-voip-<id>` com a extensão do áudio.
 
 Veja mais em [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/ligacoes/visao-geral) e [Configurações de VoIP: gravação, resumo por IA e SIP reserva](/docs/canais/ligacoes/configuracoes-voip).
 

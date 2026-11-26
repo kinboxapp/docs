@@ -1812,8 +1812,8 @@
 
 # Seção ligacoes (Canais › Ligações)
 #
-# A tela do VoIP vem do workspace de documentação; a descrição de cobrança de Gravar chamadas leva tarja (a doc não
-# publica preço nem cobrança). A aba Ligações (Beta) do WhatsApp oficial só existe em workspace com o recurso em teste e
+# A tela do VoIP vem do workspace de documentação, só com o cartão Ajustes; a descrição de cobrança de Gravar chamadas
+# leva tarja (a doc não publica preço nem cobrança). A aba Ligações (Beta) do WhatsApp oficial só existe em workspace com o recurso em teste e
 # canal oficial: vem do canal oficial de teste do workspace de testes (id 1), só leitura (o clique só troca de aba). O
 # nome do canal é trocado por um texto genérico, e as descrições de Gravar ligações e Fazer ligações levam tarja porque
 # trazem valores por minuto. Sem print do menu Ligar nem do pedido de permissão: abrir o menu pode iniciar uma ligação
@@ -1824,9 +1824,7 @@
   passos:
     - esperar: 'text=Usar SIP reserva'
     - pausa: 1000
-  alvo:
-    - 'div.card-bordered:has-text("Ligue para seus clientes")'
-    - 'div.card-bordered:has-text("Usar SIP reserva")'
+  alvo: 'div.card-bordered:has-text("Usar SIP reserva")'
   mascarar:
     - 'div:text-is("Cobrado por minuto gravado.")'
   arquivo: images/ajuda/ligacoes/voip-ajustes.webp

@@ -54,13 +54,18 @@ Detalhes de referência da página [Fazer e receber ligações pelo WhatsApp ofi
 - **Fazer ligações:** libera **Ligar pelo WhatsApp** na conversa. Ao ativar, a Kinbox cria automaticamente o template padrão de pedido de permissão (`"Olá! Podemos te ligar por aqui no WhatsApp para continuar seu atendimento?"`, com botão de permitir ligações, categoria utilidade, pt-BR) e envia para aprovação da Meta. Também libera na Meta a permissão de retorno para quem ligou para a empresa.
 - **Template de pedido de permissão:** exibido abaixo de **Fazer ligações** com os estados **não criado** (botão **Criar template**), **em análise**, **aprovado** ou **rejeitado** (com o motivo entre parênteses e botão **Reenviar template**). Ao enviar: `"Template enviado para aprovação da Meta. Costuma levar alguns minutos."`. Se a criação automática falhar: `"Não foi possível criar o template de pedido de permissão: <erro>"`. O template também pode ser criado com a opção **Pedir permissão para ligar** (veja [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox)).
 
-## Para quem toca (ligações recebidas)
+## Quem recebe o toque (ligações recebidas)
 
-- Toca apenas para membros que podem atender: proprietário do workspace ou membro com a permissão **Responder**, online e disponível (interruptor **Disponível** ligado; veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação.
+- Só recebe o toque quem pode atender: o proprietário do workspace ou membro com a permissão **Responder**, online e disponível (interruptor **Disponível** ligado; veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação.
 - Quem tem só a opção **Responder apenas conversas dele** (no lugar de **Responder**) nunca recebe o toque de ligação do WhatsApp, nem nas conversas atribuídas a ele.
-- **Conversa com responsável que pode atender:** toca apenas para esse responsável.
-- **Conversa sem responsável (ou responsável indisponível):** toca para todos que podem atender e têm permissão para ver conversas sem atribuição, conforme o escopo de visão do papel e o grupo da conversa.
-- **Proprietário e acesso Global:** na conversa sem responsável disponível, entre os que podem atender, toca também para o proprietário e para quem tem acesso **Global** às conversas. O proprietário e quem tem acesso **Global** também podem atender pela mensagem da conversa, mesmo que a ligação não tenha tocado para eles.
+- **Conversa com responsável que pode receber o toque:** toca apenas para esse responsável.
+- **Conversa sem responsável (ou com responsável que não pode receber o toque):** toca para quem pode atender e enxerga conversas sem atribuição daquele grupo, conforme o escopo do papel. Entre esses, sempre entram o proprietário e quem tem acesso **Global** às conversas.
+
+## Quem pode atender
+
+- Quem recebeu o toque atende pelo cartão na tela ou pela mensagem da ligação na conversa.
+- Enquanto a ligação toca, o proprietário e quem tem acesso **Global** às conversas também podem atender pela mensagem da conversa, mesmo que a ligação não tenha tocado para eles.
+- Se **Atender** não aparecer na mensagem da conversa, a ligação não é para você: confira quem é o responsável da conversa e o acesso do seu papel.
 - **Na conversa:** enquanto toca, a mensagem da ligação aparece como **Ligação do WhatsApp** (`"Tocando..."`) com **Recusar** e **Atender** para quem pode atender; depois vira **Ligação recebida pelo WhatsApp**. Esse é o caminho de atender que não depende das preferências de notificação.
 - **Aviso na tela:** aparece um cartão em qualquer tela da Kinbox com nome e foto do contato, `"Ligação do WhatsApp"` e os botões **Recusar** e **Atender**. O som toca em apenas uma aba. Se a aba estiver em segundo plano e as notificações do navegador estiverem permitidas, aparece também uma notificação do navegador.
 - **Preferências pessoais** (em **Configurações** → **Notificações**, disponíveis com o recurso em teste; veja [Notificações](/docs/conta/notificacoes)):
@@ -93,7 +98,7 @@ Detalhes de referência da página [Fazer e receber ligações pelo WhatsApp ofi
 | `'Ative "Fazer ligações" nas configurações do canal'` | Opção **Fazer ligações** (ou **Receber ligações**) desligada na aba **Ligações** do canal. |
 | `"A Meta não oferece ligações em números em coexistência com o app WhatsApp Business"` | Número em coexistência; não permite ligações pela Kinbox. |
 | `"O contato não tem número de WhatsApp"` | Contato sem número de WhatsApp (apenas nome de usuário). |
-| `"Ligações pelo WhatsApp não estão ativas neste canal"` | O canal da conversa não está pronto para ligações pelo WhatsApp (por exemplo, recurso em teste não liberado). |
+| `"Ligações pelo WhatsApp não estão ativas neste canal"` | O canal da conversa não está pronto para ligações pelo WhatsApp (por exemplo, a consulta ao canal falhou ou o canal não é de WhatsApp oficial com acesso válido). |
 
 ## Pedido de permissão e limites da Meta
 
@@ -106,6 +111,7 @@ Na janela **Pedir permissão para ligar** (`"O WhatsApp só deixa a empresa liga
 | Fora das 24 horas (sem template aprovado) | Sem envio até aprovação. Quem tem **Gerenciar Canais** vê **Criar template agora** ou **Reenviar template**; os demais veem `"Peça a um administrador para criar o template nas configurações do canal."`. | `"O cliente não fala com você há mais de 24h"` seguido de `"O template de pedido de permissão está em análise pela Meta. Costuma levar alguns minutos."`, `"Fora da janela de 24h, o pedido precisa de um template aprovado pela Meta."` ou `"A Meta rejeitou o template de pedido de permissão."` |
 
 - **Confirmação do envio:** `"Pedido enviado. Quando o cliente permitir, você poderá ligar."`.
+- **Enviar pedido desativado:** acontece em dois casos. (1) Fora da janela de 24 horas sem template aprovado: siga o estado exibido (**em análise**: aguarde, sem botão; não criado: **Criar template agora**; rejeitado: **Reenviar template**; os botões só aparecem para **Gerenciar Canais** ou proprietário). (2) Limite de pedidos atingido, abaixo.
 - **Limite de pedidos (regra da Meta):** quando atingido, a janela exibe `"Limite de pedidos atingido (1 por dia e 2 por semana)."` e `"Tente de novo depois de <data>."`, com o botão **Enviar pedido** desativado.
 - **Validade da permissão:** a permissão temporária vale **7 dias** a partir do momento em que o contato permitiu; a permanente não expira.
 - **Permissão retirada:** quando retirada após 4 ligações seguidas sem resposta, a janela exibe `"O WhatsApp retirou a permissão em <data>, depois de 4 ligações seguidas sem resposta. Combine um horário por mensagem antes de pedir de novo."`.
@@ -161,7 +167,7 @@ Na janela **Pedir permissão para ligar** (`"O WhatsApp só deixa a empresa liga
 ## Gravação
 
 - Em ligações atendidas por pessoas, a gravação é feita no navegador de quem atendeu e enviada no encerramento (se falhar: `"Não foi possível enviar a gravação da ligação"`). Em ligações atendidas pelo agente de voz, a gravação cobre a ligação inteira.
-- No painel **Ligação de voz**, ficam disponíveis o player, **Baixar áudio** (arquivo `ligacao-voip-<id>.<extensão>`), **Resumo** (com sentimento **Positivo**, **Negativo** ou **Neutro**) e **Transcrição**. Se a transcrição automática tiver falhado, aparece o botão **Transcrever**: essa transcrição feita pelo botão exige saldo na carteira acima de **R$ 0,20** e é cobrada do saldo por minuto de áudio (`"Transcrição de chamada de voz"`), mesmo com o plano; sem saldo: `"Saldo insuficiente"`; se falhar: `"Não foi possível transcrever a chamada"`. As gravações também aparecem em **Relatórios** → **Ligações** com filtros `"WhatsApp: feitas"` e `"WhatsApp: recebidas"`.
+- No painel **Ligação de voz**, ficam disponíveis o player, **Baixar áudio** (arquivo `ligacao-voip-<id>.<extensão>`), **Resumo** (com sentimento **Positivo**, **Negativo** ou **Neutro**) e **Transcrição**. Enquanto a transcrição automática não chega, o painel mostra o botão **Transcrever** no lugar dela. Aguarde alguns minutos e abra de novo; só clique se ela não aparecer, porque o botão usa o saldo da carteira, mesmo com o plano. A transcrição pelo botão exige saldo na carteira acima de **R$ 0,20** e é cobrada do saldo por minuto de áudio (`"Transcrição de chamada de voz"`), mesmo com o plano; sem saldo: `"Saldo insuficiente"`; se falhar: `"Não foi possível transcrever a chamada"`. Para quem tem a permissão **Gerenciar relatórios**, as gravações também aparecem em **Relatórios** → **Ligações**, com os filtros `"WhatsApp: feitas"` e `"WhatsApp: recebidas"`.
 
 ## Agente de voz
 

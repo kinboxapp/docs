@@ -60,10 +60,11 @@ Use esta página quando você não consegue ligar ou atender pelo [WhatsApp ofic
     Clique em **Ligar pelo WhatsApp** para abrir **Pedir permissão para ligar** e clique em **Enviar pedido** (veja [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp)). Se o contato não respondeu nas últimas 24 horas, o envio usa o template de pedido de permissão aprovado pela Meta: confira na aba **Ligações** do canal se o template não está **em análise** ou **rejeitado**.
   </Accordion>
 
-  <Accordion title='"Enviar pedido" desativado ou "Limite de pedidos atingido (1 por dia e 2 por semana)."'>
-    A Meta limita quantos pedidos de permissão de ligação podem ser enviados para o mesmo contato (exibido na tela como "Limite de pedidos atingido (1 por dia e 2 por semana).").
+  <Accordion title='"Enviar pedido" desativado na janela Pedir permissão para ligar'>
+    O botão fica desativado em dois casos:
 
-    Aguarde até a data mostrada na janela **Pedir permissão para ligar** para enviar um novo pedido.
+    - **Com o aviso "Limite de pedidos atingido (1 por dia e 2 por semana).":** a Meta limita os pedidos ao mesmo contato. Aguarde a data mostrada na janela para enviar um novo pedido.
+    - **Fora da janela de 24 horas, sem template aprovado:** siga o que a janela mostra. Se o template está **em análise**, aguarde a Meta (não há botão). Se ainda não foi criado, clique em **Criar template agora**; se foi rejeitado, em **Reenviar template**. Esses botões só aparecem para quem tem **Gerenciar Canais** ou é o proprietário; quem não os vê pede a quem gerencia o canal.
   </Accordion>
 
   <Accordion title='"Permissão retirada: 4 ligações sem resposta" ou "Limite de ligações com este cliente atingido..."'>
@@ -73,9 +74,9 @@ Use esta página quando você não consegue ligar ou atender pelo [WhatsApp ofic
   </Accordion>
 
   <Accordion title="A ligação do WhatsApp não toca para mim">
-    A ligação recebida pelo WhatsApp oficial toca apenas para membros que podem atender: o proprietário ou quem tem a permissão **Responder**, está online e disponível (interruptor **Disponível** ligado; veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação. Quem tem só a opção **Responder apenas conversas dele** não recebe o toque, nem nas conversas atribuídas a ele. Se a conversa já tem um responsável disponível, a ligação toca apenas para ele.
+    A ligação recebida pelo WhatsApp oficial toca apenas para membros que podem atender: o proprietário ou quem tem a permissão **Responder**, está online e disponível (interruptor **Disponível** ligado; veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação. Quem tem só a opção **Responder apenas conversas dele** não recebe o toque, nem nas conversas atribuídas a ele. Se a conversa tem um responsável que pode receber o toque, a ligação toca apenas para ele. Em conversa sem responsável, toca só para quem enxerga conversas sem atribuição daquele grupo, conforme o escopo do papel.
 
-    Mesmo sem o aviso na tela, quem pode atender vê na conversa a mensagem **Ligação do WhatsApp** ("Tocando...") com **Recusar** e **Atender**: atenda por ela.
+    Se **Atender** aparecer na mensagem **Ligação do WhatsApp** ("Tocando...") da conversa, atenda por ela, mesmo sem o aviso na tela. Se não aparecer, confira quem é o responsável da conversa e o acesso do seu papel.
 
     Confira também:
 
@@ -86,12 +87,12 @@ Use esta página quando você não consegue ligar ou atender pelo [WhatsApp ofic
   <Accordion title='A ligação recebida aparece como "Chamada perdida" sem tocar'>
     Sem o plano **Ligações WhatsApp** ativo, ou sem franquia de minutos sobrando e sem saldo na carteira, a Kinbox recusa a ligação recebida na Meta e registra **Chamada perdida** na conversa. Confira o plano em [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) e o saldo em [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
 
-    O status **Chamada perdida** também aparece quando ninguém atende em cerca de 60 segundos. Se você usa agente de voz e a IA não atendeu, veja [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns).
+    O status **Chamada perdida** também aparece quando ninguém atende em cerca de 60 segundos. Se você usa agente de voz e a IA não atendeu, veja [Agente de voz para as ligações do WhatsApp (Beta)](/docs/agente-de-ia/agente-de-voz).
   </Accordion>
 
   <Accordion title='"Você precisa ter mais saldo na carteira para fazer ligações." ou "...para fazer chamadas."'>
     - **WhatsApp oficial:** acabou a franquia do plano **Ligações WhatsApp** e o saldo na carteira está abaixo do mínimo para iniciar uma ligação.
-    - **Telefone (VoIP):** o saldo na carteira está abaixo do mínimo exigido para iniciar uma chamada VoIP.
+    - **Telefone (VoIP):** o saldo na carteira está abaixo do mínimo exigido para iniciar uma ligação VoIP.
 
     Adicione saldo em [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo) e tente novamente.
   </Accordion>
@@ -125,7 +126,7 @@ Use esta página quando você não consegue ligar ou atender pelo [WhatsApp ofic
 
   <Accordion title="Não aparece transcrição">
     - **Telefone (VoIP):** a transcrição não é automática. Abra o painel **Ligação de voz** na mensagem da conversa e clique em **Transcrever** (gasta saldo da carteira). Se não houver saldo suficiente, aparece "Saldo insuficiente"; em caso de erro, "Não foi possível transcrever a chamada".
-    - **WhatsApp oficial:** quando há gravação, a transcrição e o resumo são gerados automaticamente e podem aparecer um pouco depois do áudio. Se ela falhou, abra o painel **Ligação de voz** e clique em **Transcrever** (essa transcrição gasta saldo da carteira, mesmo com o plano).
+    - **WhatsApp oficial:** quando há gravação, a transcrição e o resumo são gerados automaticamente e podem aparecer um pouco depois do áudio. Enquanto a transcrição automática não chega, o painel mostra o botão **Transcrever** no lugar dela. Aguarde alguns minutos e abra de novo; só clique se ela não aparecer, porque o botão usa o saldo da carteira, mesmo com o plano.
   </Accordion>
 
   <Accordion title='"Encerre a ligação atual antes de iniciar outra" ou "Encerre a ligação antes de resolver a conversa"'>
