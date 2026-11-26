@@ -30,7 +30,7 @@ Use este guia para identificar por que um cenário não começou, terminou sem e
 
 Abra o cenário pelo computador e clique no botão **Analítico** no topo do editor (se ele estiver desabilitado, publique o cenário pela primeira vez; se não aparecer, acesse pelo computador). O painel mostra no máximo os **Últimos 30 dias** de um histórico guardado por 60 dias.
 
-- Se a execução **não aparece** no **Analítico**, o cenário não começou.
+- Se a execução **não aparece** no **Analítico**, selecione **Tudo** em **Status**, confira o **Período** e clique em **Atualizar**. Se mesmo assim ela não aparecer, o cenário não começou.
 - Se ela **aparece**, confira a coluna **Status** e clique na linha para ver os passos e os campos **Entrada**, **Saída** e **Erro**. Veja [Acompanhar as execuções no Analítico](/docs/cenarios/execucoes).
 
 ## Causas e soluções
@@ -45,14 +45,14 @@ Abra o cenário pelo computador e clique no botão **Analítico** no topo do edi
       - Se o sistema externo receber erro 404 (não encontrado), o cenário está desligado, não publicado ou excluído, ou o endereço foi copiado errado.
       - Lembre que o endereço do webhook apenas confirma o recebimento; o resultado dos passos aparece no **Analítico**. Veja [Receber dados de outro sistema por webhook](/docs/cenarios/integrar-via-webhook-com-cenarios).
     - **Nova Sessão**: só dispara quando começa uma [sessão nova](/docs/conceitos/conversas-e-sessoes). Novas mensagens numa conversa já aberta não iniciam outra sessão. Confira também o campo **Canais** (vazio vale para **Todos os canais**).
-    - **Agendamento cíclico**: o horário segue o **Fuso horário** do workspace, no cartão **Preferências** de **Configurações** → **Ambiente** → **Geral**. Na periodicidade **Mensal**, dias 29, 30 ou 31 só rodam nos meses que têm esse dia. No **Cron customizado**, a expressão deve ter 5 campos e intervalo mínimo de 1 minuto. O agendamento só existe enquanto o cenário está ligado e publicado.
+    - **Agendamento cíclico**: o horário segue o [**Fuso horário**](/docs/configuracoes-no-workspace/configuracoes-gerais#preferências) do workspace, no cartão **Preferências** de **Configurações** → **Ambiente** → **Geral**. Na periodicidade **Mensal**, dias 29, 30 ou 31 só rodam nos meses que têm esse dia. No **Cron customizado**, a expressão deve ter 5 campos e intervalo mínimo de 1 minuto. O agendamento só existe enquanto o cenário está ligado e publicado.
     - **Mensagem de campanha enviada**: dispara apenas para mensagens de campanha enviadas pelo canal selecionado no gatilho.
     - **Sem permissão ou no celular**: ver, criar e editar cenários exige a permissão **Cenários** (ou ser o proprietário). No celular, o editor não mostra **Publicar** nem **Analítico** — use o computador.
   </Accordion>
 
   <Accordion title="Concluiu, mas não fez tudo">
     - **Parou em uma saída sem caminho ligado**: nos passos **Buscar contato**, **Buscar negócio**, **Buscar produto**, **Decisão** (saída **Não**) e **Atribuir para membro** (saída **Nenhum membro elegível**), se a saída extra não estiver ligada a outro passo, a execução termina ali como concluída (**Executado**), sem erro. Abra a execução no **Analítico** para conferir a última descrição (como "Contato não encontrado.") e ligue a saída extra se quiser tratar esse caso.
-    - **Requisição HTTP sem os dados da resposta**: se o sistema externo responder com erro ou não responder, o cenário segue para o próximo passo sem os campos da resposta. Clique no passo no **Analítico** para ver o que voltou em **Saída**, e confirme se a URL começa com `https://`.
+    - **Requisição HTTP sem os dados da resposta**: se o sistema externo responder com erro ou não responder, o cenário segue para o próximo passo sem os campos da resposta. Clique no passo no **Analítico** para ver o que voltou em **Saída**. Use um endereço `https://` (a tela orienta: "Apenas links https são permitidos").
     - **Decisão seguiu pelo caminho inesperado**: a comparação da **Decisão** diferencia maiúsculas de minúsculas.
     - **Contato duplicado**: use **Buscar contato** antes de **Criar contato** e ligue a saída **Não encontrado** ao **Criar contato**. O passo **Criar contato** já reaproveita um contato com o mesmo telefone, mas buscar antes permite atualizar o contato existente.
   </Accordion>
@@ -63,26 +63,31 @@ Abra o cenário pelo computador e clique no botão **Analítico** no topo do edi
     | Mensagem no Analítico | Causa e o que fazer |
     | --- | --- |
     | **Conversa não encontrada.** | **Buscar conversa** não achou resultado e a saída **Não encontrado** estava desligada. Ligue **Não encontrado** (por exemplo, a **Criar conversa**). |
-    | **Erro ao criar conversa.** / **Erro ao enviar mensagem.** | Ligue a saída **Em caso de falha** em **Criar conversa**. **Buscar conversa**, **Criar conversa** e **Enviar mensagem** só funcionam em canais de WhatsApp; no WhatsApp oficial, **Enviar mensagem** exige um [**Modelo de mensagem**](/docs/canais/whatsapp/whatsapp-templates/enviar-template) aprovado. |
+    | **Erro ao criar conversa.** | **Criar conversa** não conseguiu criar a conversa (por exemplo, telefone do contato inválido) e a saída **Em caso de falha** estava desligada. Ligue **Em caso de falha** a outro passo para tratar esse caso. **Criar conversa** só funciona em canais de WhatsApp. |
+    | **Erro ao enviar mensagem.** (ou outra mensagem do envio) | **Enviar mensagem** não conseguiu enviar. Esse passo não tem saída para falha: confira o canal (só WhatsApp) e, no WhatsApp oficial, use um [**Modelo de mensagem**](/docs/canais/whatsapp/whatsapp-templates/enviar-template) aprovado. |
     | **Limite máximo de iterações excedido.** | A lista do **Loop sobre itens da lista** tem mais itens que o **Limite máximo de repetições** (padrão 300, máximo 1000). Aumente esse limite — por exemplo, **Buscar negócio** com **Todos por funil** retorna até 500 itens. |
     | **Limite de loop excedido.** | Um caminho voltou para um passo anterior e repetiu o mesmo passo vezes demais na mesma execução. Use o passo **Loop sobre itens da lista** em vez de ligar caminhos em círculo. |
-    | **Ação não encontrada.** | O passo seguinte foi apagado do cenário enquanto a execução já estava em andamento. Revise o fluxo e publique novamente. |
+    | **Ação não encontrada.** | O cenário foi excluído, ou publicado sem nenhum passo, enquanto a execução estava em andamento. Se você só apagou um passo, a execução termina no passo anterior como **Executado**, sem esse erro. |
     | **Erro ao parsear o corpo da requisição.** | O **Body** da **Requisição HTTP** deixou de ser um JSON válido depois da troca das variáveis (por exemplo, aspas faltando em volta de uma variável de texto). Confira na **Pré-visualização (Exemplo)**. |
-    | **Execução travou por mais de uma hora.** | A execução ficou parada sem avançar por mais de uma hora e foi marcada como falha. |
+    | **Execução travou por mais de uma hora.** | A execução ficou parada sem avançar por mais de uma hora e pode ser marcada como **Falhou** na verificação diária. |
     | **Necessário informar…** / **…não informado.** | Um campo obrigatório do passo ficou vazio ou a variável usada veio vazia. Veja o que chegou em **Entrada** do passo no **Analítico**. |
   </Accordion>
 
   <Accordion title="Ficou Aguardando ou Pendente">
     - **Aguardando**: a execução está pausada em um passo **Esperar um tempo**. Se **Considerar horários** estiver ativada com um [horário cadastrado](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) e o fim da espera cair fora dele, a execução aguarda até o próximo horário permitido. O modo **Cíclico com fila** de **Atribuir para membro** não segura a execução — o cenário continua logo depois de colocar a conversa na fila.
-    - **Pendente**: a execução está esperando um passo terminar. Se ficar mais de uma hora sem avançar, muda para **Falhou**.
+    - **Pendente**: a execução está esperando um passo terminar. Se ficar mais de uma hora sem avançar, pode ser marcada como **Falhou** na verificação diária.
   </Accordion>
 
   <Accordion title="Desliguei e continuou rodando">
     Desligar o cenário impede **novas** execuções, mas as que já começaram (inclusive as que estão em **Esperar um tempo**) continuam rodando e passam a usar os passos da versão publicada mais recente.
 
-    Não existe botão para interromper uma execução em andamento. Se precisar impedir que um passo rode nas execuções já iniciadas, desligue o cenário, remova ou altere o passo e clique em **Publicar** (se o próximo passo deixar de existir, a execução falha com "Ação não encontrada.").
+    Não dá para interromper uma execução em andamento. Se precisar impedir que um passo rode nas execuções já iniciadas, desligue o cenário, remova ou altere o passo e clique em **Publicar**: a execução que ainda não chegou ao passo removido termina no passo anterior, como **Executado**.
   </Accordion>
 </AccordionGroup>
+
+## Ainda não resolveu?
+
+Se o problema continuar, fale com o suporte informando o nome do cenário, o ID da execução (no **Analítico**, abra o menu de três pontos da linha e escolha **Copiar ID**) e a mensagem de erro que aparece no **Analítico**.
 
 ## Veja também
 

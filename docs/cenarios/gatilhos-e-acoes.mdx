@@ -29,7 +29,7 @@ Consulte aqui os 4 gatilhos e todas as ações disponíveis nos cenários da Kin
 
 ## Gatilhos
 
-No cartão **Quando...**, clique em **Novo gatilho** para abrir a janela **Começar o cenário quando...**, que traz busca e agrupa os gatilhos por categoria (**Outros**, **Campanha**, **Conversa**). Um cenário pode ter mais de um gatilho no mesmo cartão, e qualquer um deles inicia a execução; para remover um gatilho, clique em **Excluir** no painel dele.
+No cartão **Quando...**, clique em **Novo gatilho** para abrir a janela **Começar o cenário quando...**, que traz busca e lista os gatilhos com o rótulo da categoria de cada um (**Outros**, **Campanha**, **Conversa**). O mesmo cartão aceita um gatilho de cada tipo, e qualquer um deles inicia a execução. Escolher de novo um tipo que já está no cartão substitui a configuração anterior desse gatilho. Para remover um gatilho, clique em **Excluir** no painel dele.
 
 | Gatilho | Categoria | Quando começa | O que configurar |
 | --- | --- | --- | --- |
@@ -43,7 +43,7 @@ No cartão **Quando...**, clique em **Novo gatilho** para abrir a janela **Come�
 - **Periodicidade**: **Diária** (padrão ao adicionar, às 09:00), **Semanal** (escolhe **Dia da semana**, de Domingo a Sábado), **Mensal** (escolhe **Dia do mês**, de 1 a 31) ou **Cron customizado**.
 - **Horário de execução**: defina hora (`00` a `23`) e minuto (`00` a `59`).
 - **Cron customizado**: preencha **Expressão cron** com 5 campos (`minuto hora dia-mês mês dia-semana`) e intervalo mínimo de 1 minuto — por exemplo, `*/15 * * * *`.
-- O horário segue o **Fuso horário** do workspace, no cartão **Preferências** de **Configurações** → **Ambiente** → **Geral**.
+- O horário segue o [**Fuso horário**](/docs/configuracoes-no-workspace/configuracoes-gerais#preferências) do workspace, no cartão **Preferências** de **Configurações** → **Ambiente** → **Geral**.
 
 <Frame caption="Painel do gatilho Agendamento cíclico configurado com periodicidade diária às 18:00">
   <img src="/images/ajuda/cenarios/gatilho-agendamento.webp" alt="Painel Quando... com Agendamento cíclico, Periodicidade Diária, Horário de execução 18:00, Excluir e Novo gatilho" />
@@ -51,11 +51,9 @@ No cartão **Quando...**, clique em **Novo gatilho** para abrir a janela **Come�
 
 ## Como os passos se ligam
 
-- **Adicionar passos**: clique no botão **+** à esquerda para abrir **Nova ação** (com busca em **Pesquisar...**), ou puxe a bolinha de saída de um passo e solte no vazio.
-- **Caminhos**: cada saída liga um único caminho, e um passo não pode se ligar a ele mesmo. Para apagar uma ligação, clique em **Excluir caminho**. Passos selecionados exibem **Clonar** e **Excluir** (ou **Clonar selecionados** e **Excluir selecionados**).
-- **Controles do editor**: a barra inferior traz **Tela menor**/**Tela cheia**, **Centralizar**, zoom, **Desfazer** e **Refazer**; o topo traz **Pesquisar ação**.
-- **Referências e variáveis**: cada passo recebe um número (`#1`, `#2`…) usado nas referências de passos seguintes (por exemplo, **Contato #1**, **Requisição #3**, **Loop #2**). Nos campos de texto, clique em `{...}` para abrir **Variáveis** (com busca em **Pesquisar**) e inserir campos do gatilho ou de passos anteriores.
-- **Saídas extras**: alguns passos têm saídas extras (bolinha vermelha). Se a saída extra não estiver ligada a outro passo, o cenário para ali.
+Para adicionar, ligar e configurar passos no editor, veja [Criar e publicar um cenário](/docs/cenarios/criar-um-cenario). Cada passo recebe um número (`#1`, `#2`…) usado nas referências dos passos seguintes (por exemplo, **Contato #1** ou **Loop #2**).
+
+Alguns passos têm saídas extras (bolinha vermelha), listadas nas tabelas abaixo. Se a saída extra não estiver ligada a outro passo, o cenário para ali.
 
 ## Ações
 
@@ -70,7 +68,7 @@ Os passos **Buscar conversa**, **Criar conversa** e **Enviar mensagem** funciona
 | **Resolver conversa** | Encerra a sessão aberta da conversa. | **Conversa** (referência). | — |
 | **Executar bot** | Inicia um bot na conversa (executa o bot mesmo que ele esteja desligado; veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)). | **Conversa**, **Bot** e **Opções** → **Reabrir conversa**. | — |
 | **Enviar mensagem** | Envia uma mensagem na conversa (só canais de WhatsApp). | **Conversa** (obrigatória) e **Canal**. No WhatsApp oficial, escolha um [**Modelo de mensagem**](/docs/canais/whatsapp/whatsapp-templates/enviar-template) aprovado (**Cabeçalho**, **Corpo**, **Mídia** com **URL da mídia** e **Nome do arquivo**, e **Botões**). No WhatsApp por QR Code, informe a **Mensagem** em texto livre. | — |
-| **Atribuir para membro** | Atribui a conversa a um membro ou a membros de um [grupo](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos). | **Conversa**, **Tipo** (**Cíclico**, **Cíclico com fila**, **Membro** ou **Último membro que atendeu a conversa**), **Membros participantes** ou **Grupos participantes** com **Capacidade** e **Condições de elegibilidade** (**Membro deve estar disponível**, **Membro deve estar online**). **Cíclico** faz rodízio dentro da capacidade; **Cíclico com fila** espera até alguém ter vaga. | **Nenhum membro elegível** |
+| **Atribuir para membro** | Atribui a conversa a um membro ou a membros de um [grupo](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos). | **Conversa**, **Tipo** e **Condições de elegibilidade**. **Cíclico** faz rodízio entre os membros; **Cíclico com fila** põe a conversa numa fila até alguém ter vaga (o cenário segue para o próximo passo). | **Nenhum membro elegível** (exceto em **Cíclico com fila**) |
 
 ### Contato
 
@@ -82,15 +80,17 @@ Os passos **Buscar conversa**, **Criar conversa** e **Enviar mensagem** funciona
 
 ### Negócio
 
-Os rótulos das ações usam "negócio" para as negociações dos funis.
+Os rótulos das ações usam "negócio" para as negociações dos [funis](/docs/crm/visao-geral).
 
 | Ação | O que faz | O que configurar | Saídas extras |
 | --- | --- | --- | --- |
 | **Buscar negócio** | Localiza uma negociação ou lista negociações de um funil. | **Modo de busca**: **Um negócio** (por **ID**, **Contato** e/ou **Conversa**, com filtros) ou **Todos por funil** (**Funil** obrigatório; retorna até 500 negociações, as mais novas primeiro, para uso em **Loop sobre itens da lista**). | **Não encontrado** |
-| **Criar negócio** | Cria uma nova negociação em um funil e etapa. | **Funil** e **Etapa** (obrigatórios), **Nome** ou **Contato**, **Conversa**, **Tags**, **Produtos** (do cadastro ou **Produtos por variável**), **Comentário** e campos da negociação (**Status** **Aberto**/**Ganho**/**Perdido**, **Responsável**, **Grupo**, **Valor** e campos personalizados). | — |
-| **Atualizar negócio** | Altera dados, etapa, tags, comentários ou produtos de uma negociação. | **Negócio** (referência), **Nome**, **Mudar etapa** (**Funil**, **Etapa**), **Adicionar tags**, **Remover tags**, **Adicionar comentário**, **Adicionar produto** / **Adicionar produto por variável** e campos da negociação. | — |
+| **Criar negócio** | Cria uma nova negociação em um funil e etapa. | **Funil** e **Etapa** (obrigatórios), **Nome** ou **Contato**, **Produtos** e campos da negociação. | — |
+| **Atualizar negócio** | Altera dados, etapa, tags, comentários ou produtos de uma negociação. | **Negócio** (referência), **Mudar etapa** e os campos a alterar. | — |
 
 ### Produto
+
+As ações usam os produtos cadastrados em [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos).
 
 | Ação | O que faz | O que configurar | Saídas extras |
 | --- | --- | --- | --- |
@@ -102,7 +102,7 @@ Os rótulos das ações usam "negócio" para as negociações dos funis.
 
 | Ação | O que faz | O que configurar | Saídas extras |
 | --- | --- | --- | --- |
-| **Requisição HTTP** | Chama um endereço `https://` externo e disponibiliza a resposta para os próximos passos. | **Método**, **Endereço URL**, **Headers** e **Body** (JSON). | — |
+| **Requisição HTTP** | Chama um endereço externo e disponibiliza a resposta para os próximos passos. | **Método**, **Endereço URL**, **Headers** e **Body** (JSON). | — |
 | **Esperar um tempo** | Pausa a execução pelo tempo escolhido (fica como **Aguardando** no **Analítico**). | **Duração**, **Unidade** (**Segundos**, **Minutos**, **Horas**, **Dias**) e **Considerar horários** (com um [horário cadastrado](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios), agendando para o próximo horário permitido se o fim da espera cair fora dele). | — |
 | **Decisão** | Compara uma variável com um valor e escolhe um de dois caminhos. | **Campo** (variável), **Operador** e **Valor**. | **Sim** (saída principal) e **Não** |
 | **Loop sobre itens da lista** | Roda os passos ligados em **Para cada item** uma vez para cada item de uma lista. | **Lista**, **Limite máximo de repetições**, **Tamanho do lote** e **Controle de paginação** (opcional). | **Para cada item** e **Concluído** |
@@ -110,7 +110,7 @@ Os rótulos das ações usam "negócio" para as negociações dos funis.
 
 #### Requisição HTTP
 
-- Aceita apenas endereços `https://` nos métodos **POST** (padrão), **GET**, **PUT**, **PATCH** e **DELETE**.
+- Use um endereço `https://` (a tela orienta: "Apenas links https são permitidos"). Métodos: **POST** (padrão), **GET**, **PUT**, **PATCH** e **DELETE**.
 - Configure cabeçalhos na aba **Headers** (**Chave** e **Valor**) e o corpo JSON na aba **Body** (**Corpo da requisição**, desabilitada em **GET** e **DELETE**), conferindo o formato em **Pré-visualização (Exemplo)**.
 - Clique em **Testar** (ou em **Testar Requisição** na aba **Resposta**) antes de clicar em **Salvar**: a resposta do teste vira o exemplo dos campos que os passos seguintes podem escolher em `{...}`.
 
@@ -119,19 +119,20 @@ Os rótulos das ações usam "negócio" para as negociações dos funis.
 </Note>
 
 <Frame caption="Janela Requisição HTTP configurada com método POST e variáveis do Loop no corpo JSON">
-  <img src="/images/ajuda/cenarios/requisicao-http.webp" alt="Janela Requisição #3 com Método POST, Endereço URL https://exemplo.com/api/pedidos, botão Testar, abas Headers, Body e Resposta, Corpo da requisição com variáveis do Loop #2 e Pré-visualização (Exemplo)" />
+  <img src="/images/ajuda/cenarios/requisicao-http.webp" alt="Janela Requisição #3 com Método POST, Endereço URL https://example.com/api/pedidos, botão Testar, abas Headers, Body e Resposta, Corpo da requisição com variáveis do Loop #2 e Pré-visualização (Exemplo)" />
 </Frame>
 
 #### Loop sobre itens da lista
 
-- Em **Lista**, clique em `{...}` e selecione o campo que contém a lista (como a saída de **Buscar negócio** em **Todos por funil** ou uma lista recebida por webhook).
+- Em **Lista**, clique em `{...}` e selecione o campo que contém a lista (como a saída de **Buscar negócio** em **Todos por funil** ou uma lista recebida por webhook). No quadro, o número ao lado da lista (como "· 1 itens") é a quantidade de itens do exemplo usado no editor, não da lista que a execução vai receber.
 - Os passos ligados à saída **Para cada item** executam uma vez por item. Quando a lista termina, o fluxo continua pela saída **Concluído**.
 - **Limite máximo de repetições**: de 1 a **1000** (padrão **300**). Se a lista tiver mais itens do que esse limite, a execução falha — ao combinar com **Buscar negócio** (**Todos por funil**, até 500 itens), aumente o limite.
 - **Tamanho do lote**: de 1 a **500** (padrão **50**), indicando quantos itens são processados antes de salvar o progresso e continuar.
 - **Controle de paginação** (opcional): campo com o cursor da próxima página quando a origem da lista é paginada.
+- Se o Loop der erro, a execução aparece como **Falhou** no **Analítico**.
 
 <Frame caption="Cenário Pedidos do dia para o ERP percorrendo as negociações do funil Vendas com o Loop sobre itens da lista">
-  <img src="/images/ajuda/cenarios/loop.webp" alt="Cenário Pedidos do dia para o ERP com Agendamento cíclico, Buscar negócio Todos por funil Vendas, Loop sobre itens da lista configurado para Até 500 itens, 50 por vez, e Requisição HTTP POST ligada à saída Para cada item" />
+  <img src="/images/ajuda/cenarios/loop.webp" alt="Cenário Pedidos do dia para o ERP com Agendamento cíclico, Buscar negócio Todos por funil Vendas, Loop sobre itens da lista com a lista $.data do Negócio #1, Até 500 itens, 50 por vez e as saídas Para cada item, Concluído e Erro, e Requisição HTTP POST para https://example.com ligada à saída Para cada item" />
 </Frame>
 
 #### Split

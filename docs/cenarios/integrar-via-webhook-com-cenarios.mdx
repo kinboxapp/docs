@@ -52,6 +52,10 @@ Este exemplo monta o cenário **Lead do site**, que recebe dados de um formulár
   </Step>
   <Step title="Envie uma amostra com a janela aberta">
     Com a janela **Webhook de Recebimento** aberta, envie uma amostra de dados usando **POST** com corpo em JSON para o **Endereço Url**. A captura funciona mesmo antes de clicar em **Publicar**.
+
+    <Warning>
+      **Enviar amostra com o cenário ligado executa o fluxo.** Se o cenário estiver ligado e publicado, a amostra também faz o cenário rodar e pode criar ou alterar registros com esses dados. Antes de enviar, confirme que o selo ao lado do interruptor, no topo do editor, mostra **Inativo**. Se mostrar **Live**, desligue o interruptor e clique em **Publicar**.
+    </Warning>
   </Step>
   <Step title="Confira os campos recebidos e salve">
     A amostra aparece em **Estrutura**, dividida em **Body** (dados do corpo) e/ou **Query** (parâmetros da URL). Clique em **Salvar** — o botão fica desabilitado até chegar uma amostra.
@@ -73,7 +77,7 @@ Este exemplo monta o cenário **Lead do site**, que recebe dados de um formulár
     </Frame>
   </Step>
   <Step title="Publique e ligue o cenário">
-    Clique em **Publicar** para gravar o cenário. Depois, ative o interruptor no topo do editor e clique em **Publicar** novamente (o selo passa para **Live**), ou ative o interruptor na lista **Cenários** (que grava na hora). O cenário só começa a rodar quando está **ligado e publicado**.
+    Ative o interruptor no topo do editor e clique em **Publicar** (o selo passa para **Live**). O cenário só começa a rodar quando está **ligado e publicado**.
   </Step>
   <Step title="Configure o sistema de origem e teste">
     Cadastre o **Endereço Url** no sistema que vai enviar os dados, faça um envio real e acompanhe o resultado em [Acompanhar as execuções no Analítico](/docs/cenarios/execucoes).
@@ -100,12 +104,8 @@ curl -X POST "SEU_ENDERECO_DO_WEBHOOK" \
   **Trate o Endereço Url como um segredo.** Qualquer sistema que tenha esse endereço consegue iniciar o cenário. Não o publique em páginas públicas. Se o endereço vazar, exclua o gatilho **Webhook recebido**, adicione outro (que gera um endereço novo) e clique em **Publicar**. Para reforçar, você pode enviar um campo combinado no corpo (por exemplo, `"chave": "..."`) e conferi-lo logo no início com um passo **Decisão** (**é igual a**).
 </Note>
 
-<Warning>
-  **Enviar amostra com o cenário ligado executa o fluxo.** Se você mandar uma amostra enquanto a janela **Webhook de Recebimento** está aberta e o cenário estiver ligado e publicado, o cenário também vai rodar com esses dados. Para definir ou atualizar a estrutura sem criar ou alterar registros, desligue o cenário antes.
-</Warning>
-
 - **Quando o endereço muda**: o **Endereço Url** muda se você excluir e recriar o gatilho, importar o cenário ou clonar o cenário (a cópia vem sem gatilho). Nesses casos, atualize o endereço no sistema de origem. Excluir o cenário desativa o endereço definitivamente.
-- **Quando o formato dos dados muda**: se o sistema externo passar a enviar novos campos, abra **Determinar estrutura** novamente, envie uma nova amostra, clique em **Salvar** e depois em **Publicar**. Sem determinar a estrutura, os campos não aparecem para escolha nas variáveis.
+- **Quando o formato dos dados muda**: se o sistema externo passar a enviar novos campos, desligue o cenário (o selo deve mostrar **Inativo**), abra **Determinar estrutura** novamente, envie uma nova amostra, clique em **Salvar**, ligue o interruptor de novo e clique em **Publicar**. Sem determinar a estrutura, os campos não aparecem para escolha nas variáveis.
 - **Evite duplicar contatos**: prefira usar **Buscar contato** antes de **Criar contato**. O passo **Criar contato** já reaproveita um contato com o mesmo telefone, mas buscar antes permite atualizar os dados do contato existente.
 
 ## Veja também

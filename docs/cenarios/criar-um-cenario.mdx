@@ -45,7 +45,7 @@ Monte um cenário do início ao fim no editor visual, publique e ligue para colo
   <Step title="Escolha o gatilho">
     No cartão **Quando...**, clique em **Novo gatilho** e selecione o evento desejado na janela **Começar o cenário quando...**. O painel do gatilho abre à direita para configuração.
 
-    Você pode adicionar mais de um gatilho no mesmo cartão; qualquer um deles começa o cenário. Veja os 4 gatilhos disponíveis em [Gatilhos e ações dos cenários](/docs/cenarios/gatilhos-e-acoes).
+    Você pode adicionar mais de um gatilho no mesmo cartão, um de cada tipo; qualquer um deles começa o cenário. Veja os 4 gatilhos disponíveis em [Gatilhos e ações dos cenários](/docs/cenarios/gatilhos-e-acoes).
   </Step>
   <Step title="Adicione os passos">
     Clique no botão **+** à esquerda para abrir o menu **Nova ação**, filtre em **Pesquisar...** se quiser e escolha a ação. Você também pode puxar a bolinha de saída de um passo e soltar no espaço vazio para abrir o mesmo menu com o caminho já ligado.
@@ -64,11 +64,10 @@ Monte um cenário do início ao fim no editor visual, publique e ligue para colo
       <img src="/images/ajuda/cenarios/editor.webp" alt="Editor do cenário Lead do site mostrando o selo Inativo, Publicar, Analítico, busca, cartão Quando... com Webhook recebido ligado a Buscar contato, Atualizar contato e Criar contato pela saída Não encontrado" />
     </Frame>
   </Step>
-  <Step title="Publique o cenário">
-    Clique em **Publicar** no topo do editor. Ao salvar, aparece o aviso "Cenário salvo". O botão **Publicar** fica desabilitado quando não há mudanças para gravar.
-  </Step>
-  <Step title="Ligue o cenário">
-    Ative o interruptor no topo do editor e clique em **Publicar** novamente, ou ative o interruptor na linha do cenário na lista **Cenários**.
+  <Step title="Ligue e publique o cenário">
+    Ative o interruptor no topo do editor e clique em **Publicar**. Ao salvar, aparece o aviso "Cenário salvo" e o selo ao lado do interruptor passa a exibir **Live**. O botão **Publicar** fica desabilitado quando não há mudanças para gravar.
+
+    Para publicar sem ligar, deixe o interruptor desligado: o cenário fica gravado como **Inativo**.
   </Step>
   <Step title="Teste pelo gatilho real">
     Como não há execução manual, provoque o gatilho de verdade (por exemplo, envie uma amostra ao webhook com o cenário ligado) e confira o resultado em [Acompanhar as execuções no Analítico](/docs/cenarios/execucoes).
@@ -98,7 +97,7 @@ Um cenário só roda quando está **ligado e publicado**. Os dois controles func
 Na lista **Cenários**, abra o menu de três pontos na linha do cenário para acessar **Editar**, **Clonar**, **Exportar** e **Excluir**. O menu de três pontos ao lado do filtro **Tudo** traz a opção **Importar**.
 
 - **Clonar**: abre uma cópia com o nome `<nome> (cópia)`, desligada e **sem gatilho**. Adicione o gatilho novamente e clique em **Publicar** — a cópia só é criada depois de publicada.
-- **Exportar**: baixa um arquivo `cenario_<nome>.json` com o nome e os passos do cenário, sem o status de ativo e sem histórico de execuções.
+- **Exportar**: baixa um arquivo `cenario_<nome>.json` com o nome, o gatilho e os passos do cenário, sem o status de ativo e sem histórico de execuções. O arquivo leva o **Endereço Url** do **Webhook recebido** e tudo o que foi digitado nos passos, inclusive os **Headers** da **Requisição HTTP**: não compartilhe o arquivo publicamente.
 - **Importar**: clique no menu de três pontos ao lado do filtro **Tudo** e escolha um arquivo `.json` exportado de um cenário. A Kinbox cria o cenário `Cópia importada de <nome>`, desligado. Se o cenário usar **Webhook recebido**, ele ganha um **Endereço Url** novo — atualize o endereço no sistema externo. Ao importar em outro workspace, confira cada passo (canais, bots, funis e membros) antes de ligar.
 - **Excluir**: pede confirmação ("Tem certeza que deseja excluir esse cenário?"), apaga o cenário e remove os gatilhos e agendamentos ligados a ele.
 

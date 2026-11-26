@@ -34,7 +34,8 @@ Complemento técnico de [Gatilhos e ações dos cenários](/docs/cenarios/gatilh
 
 ## Operações
 
-- Cada execução soma **1 operação** ao começar (gatilho) e **+1 operação** para cada passo que roda, inclusive o passo que falha.
+- Uma execução concluída registra **1 operação por passo executado**.
+- Se um passo falhar, a execução registra os passos que rodaram (incluindo o que falhou) **mais 1**.
 - Passos dentro de um **Loop sobre itens da lista** contam novamente a cada item processado.
 - O consumo aparece na coluna e no total **Operações** no **Analítico** e na variável **Operações consumidas**.
 - Operações servem para acompanhar o tamanho das execuções e **não descontam saldo da carteira**. A única funcionalidade do editor que usa saldo da carteira é o botão **Corrigir e formatar com IA** no corpo da **Requisição HTTP** (sem saldo suficiente, aparece `"Você não tem créditos suficientes para usar essa funcionalidade."`).
@@ -44,7 +45,8 @@ Complemento técnico de [Gatilhos e ações dos cenários](/docs/cenarios/gatilh
 - O histórico de execuções fica guardado por **60 dias**. O filtro **Período** do **Analítico** mostra no máximo os **Últimos 30 dias** (**Hoje**, **Últimos 7 dias**, **Últimos 15 dias**, **Últimos 30 dias**).
 - Os totais de dias anteriores são fechados uma vez por dia; os números de **Hoje** são contabilizados na hora.
 - Quando não há execuções no filtro, o painel mostra: `"Parece que você ainda não adicionou nenhum registro..."`.
-- Uma execução nos status **Executando** ou **Pendente** parada há mais de **1 hora** sem avançar (sem estar em espera) é marcada como **Falhou** com a mensagem `"Execução travou por mais de uma hora."`.
+- Uma execução nos status **Executando** ou **Pendente** parada há mais de **1 hora** sem avançar (sem estar em espera) pode ser marcada como **Falhou** na verificação diária, com a mensagem `"Execução travou por mais de uma hora."`.
+- Os dados do gatilho e dos passos de uma execução ficam guardados por até **31 dias** a partir do início. Um passo que roda depois disso (por exemplo, após um **Esperar um tempo** longo) não encontra mais esses dados: referências e variáveis do gatilho e de passos anteriores chegam vazias, e o passo pode falhar.
 - **Exportar** (**CSV** ou **XLSX**) gera o arquivo `relatorio_execucoes_<id do cenário>` com as execuções do período e status filtrados. Colunas exportadas: **ID**, **Status**, **Data de início**, **Data de término**, **Duração** (em ms), **Operações consumidas**, **Ações executadas** (números dos passos, ex.: `1 > 2 > 3`), **Tipo de gatilho**, **Dados recebidos** e **Erro**. Se a exportação falhar, aparece `"Ocorreu um erro ao exportar os dados"`.
 
 ## Webhook recebido
@@ -57,7 +59,7 @@ Complemento técnico de [Gatilhos e ações dos cenários](/docs/cenarios/gatilh
 | --- | --- |
 | Cenário ligado e publicado | `{"success": true}` na hora; o cenário roda em seguida por conta própria (a resposta não contém o resultado dos passos). |
 | Cenário desligado ou ainda não publicado, com a janela **Webhook de Recebimento** aberta | `success: false` com a mensagem `"Estrutura determinada mas cenário não foi publicado ainda."` |
-| Cenário desligado, excluído, gatilho trocado ou endereço incorreto | Erro **404** (`"Inbound Webhook not found"`). |
+| Cenário desligado, excluído, gatilho trocado ou endereço incorreto, com a janela **Webhook de Recebimento** fechada | Erro **404** (`"Inbound Webhook not found"`). |
 
 - Variáveis do grupo **Webhook**:
   - **Url**: URL do webhook de recebimento.
@@ -70,7 +72,7 @@ Complemento técnico de [Gatilhos e ações dos cenários](/docs/cenarios/gatilh
 - **Periodicidade**: **Diária** (padrão ao adicionar: 09:00), **Semanal** (**Dia da semana**: Domingo a Sábado), **Mensal** (**Dia do mês**: 1 a 31) e **Cron customizado**.
 - **Horário de execução**: hora (`00`–`23`) e minuto (`00`–`59`).
 - **Cron customizado**: campo **Expressão cron** com 5 campos (`minuto hora dia-mês mês dia-semana`), intervalo mínimo de 1 minuto (exemplo: `*/15 * * * *`). Mensagens de validação: `"Informe uma expressão cron."` e `"Expressão deve ter 5 campos: minuto hora dia-mês mês dia-semana."`.
-- O horário segue o **Fuso horário** do workspace, no cartão **Preferências** de **Configurações** → **Ambiente** → **Geral** (padrão `America/Sao_Paulo` quando não definido).
+- O horário segue o [**Fuso horário**](/docs/configuracoes-no-workspace/configuracoes-gerais#preferências) do workspace, no cartão **Preferências** de **Configurações** → **Ambiente** → **Geral** (padrão `America/Sao_Paulo` quando não definido).
 - Na periodicidade **Mensal**, escolher dia 29, 30 ou 31 faz o cenário rodar apenas nos meses que possuem esse dia.
 - O agendamento só existe enquanto o cenário está ligado e publicado; desligar remove o próximo disparo.
 - Variáveis do grupo **Agendamento cíclico**: **Data do disparo**, **Periodicidade**, **Hora configurada**, **Minuto configurado**, **Dia da semana**, **Dia do mês**, **Expressão cron**.
@@ -88,12 +90,11 @@ Quando uma saída extra não tem caminho ligado a outro passo, o resultado depen
 | --- | --- |
 | **Buscar conversa** sem resultado | **Falhou** com `"Conversa não encontrada."` |
 | **Criar conversa** com erro | **Falhou** com `"Erro ao criar conversa."` |
-| **Enviar mensagem** com erro | **Falhou** com a mensagem do erro ou `"Erro ao enviar mensagem."` |
 | **Buscar contato** sem resultado | **Concluído** (**Executado**), encerrando ali |
 | **Buscar negócio** sem resultado (ou lista vazia em **Todos por funil**) | **Concluído** (**Executado**), encerrando ali |
 | **Buscar produto** sem resultado | **Concluído** (**Executado**), encerrando ali |
 | **Decisão** = **Não** | **Concluído** (**Executado**), encerrando ali |
-| **Atribuir para membro** sem membro elegível | **Concluído** (**Executado**), encerrando ali |
+| **Atribuir para membro** sem membro elegível (tipos **Membro**, **Cíclico** e **Último membro que atendeu a conversa**; **Cíclico com fila** não tem essa saída) | **Concluído** (**Executado**), encerrando ali |
 
 ## Limite de repetição fora do Loop
 
@@ -107,12 +108,12 @@ Fora de um **Loop sobre itens da lista**, o mesmo passo pode rodar no máximo **
 - **Criar conversa**: apenas canais de WhatsApp. Registra a mensagem de sistema `"Conversa criada via Cenário"`. Telefone do contato com tamanho inválido causa falha e segue pela saída **Em caso de falha** (se ligada) ou falha a execução com `"Erro ao criar conversa."`. Sem contato: `"Contato #<n> não encontrado."`.
 - **Resolver conversa**: resolve a conversa com origem `"Cenário"`.
 - **Executar bot**: roda o bot mesmo que ele esteja desligado; com **Reabrir conversa** marcada, reabre conversas encerradas. Sem bot: `"Bot não informado."`.
-- **Enviar mensagem**: apenas canais de WhatsApp (o campo **Canal** fica travado quando a conversa escolhida já define um único canal). No WhatsApp oficial exige **Template oficial** (**Modelo de mensagem** aprovado); no WhatsApp por QR Code usa **Texto livre**. A mensagem sai como mensagem de bot. Erros: `"Template não informado para envio de mensagem."`, `"Mensagem não informada para envio."`, `"Canal não informado para envio de mensagem."`.
+- **Enviar mensagem**: apenas canais de WhatsApp (o campo **Canal** fica travado quando a conversa escolhida já define um único canal). No WhatsApp oficial exige **Template oficial** (**Modelo de mensagem** aprovado); no WhatsApp por QR Code usa **Texto livre**. A mensagem sai como mensagem de bot. Se o envio falhar, a execução falha com a mensagem do erro ou `"Erro ao enviar mensagem."`. Outros erros: `"Template não informado para envio de mensagem."`, `"Mensagem não informada para envio."`, `"Canal não informado para envio de mensagem."`.
 - **Atribuir para membro**:
   - **Cíclico**: distribui em rodízio entre membros ou grupos participantes que caibam na **Capacidade** configurada (`0` ou vazio = sem limite de conversas abertas).
-  - **Cíclico com fila**: coloca a conversa na fila e verifica vagas a cada **30 segundos**; o cenário segue para o próximo passo imediatamente após colocar a conversa na fila (não aguarda a atribuição).
+  - **Cíclico com fila**: põe a conversa numa fila até alguém ter vaga, verificando a cada **30 segundos**; o cenário segue para o próximo passo logo depois de colocar a conversa na fila (não aguarda a atribuição). Esse tipo não tem a saída **Nenhum membro elegível**.
   - **Último membro que atendeu a conversa**: busca o último membro das sessões anteriores dessa conversa.
-  - **Condições de elegibilidade** (**Membro deve estar disponível**, **Membro deve estar online**) aplicam-se a **Membro**, **Cíclico** e **Último membro que atendeu a conversa**.
+  - **Condições de elegibilidade** (**Membro deve estar disponível**, **Membro deve estar online**) aplicam-se a **Membro**, **Cíclico**, **Cíclico com fila** e **Último membro que atendeu a conversa**.
 
 ### Contato
 
@@ -122,6 +123,8 @@ Fora de um **Loop sobre itens da lista**, o mesmo passo pode rodar no máximo **
 
 ### Negócio
 
+As ações de negócio agem sobre as negociações dos funis (veja [Funis e negociações: visão geral](/docs/crm/visao-geral)).
+
 - **Buscar negócio**:
   - **Um negócio**: exige ID, contato ou conversa (`"Necessário informar id ou contato ou conversa para buscar negócio."`).
   - **Todos por funil**: exige **Funil** (`"Necessário informar funil para buscar negócios."`). Retorna até **500** negociações do funil, ordenadas das mais novas para as mais antigas. Campos do resultado: `data` (lista para o **Loop**), `totalCount`, `count` e `truncated`. Lista vazia segue pela saída **Não encontrado**.
@@ -129,6 +132,8 @@ Fora de um **Loop sobre itens da lista**, o mesmo passo pode rodar no máximo **
 - **Atualizar negócio**: sem negociação referenciada, falha com `"Negócio não encontrado."`.
 
 ### Produto
+
+As ações de produto usam o cadastro de produtos (veja [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos)).
 
 - **Buscar produto**: exige **ID** ou **ID Externo** (`"Necessário informar id ou id externo para buscar produto."`).
 - **Criar produto**: **Nome** obrigatório (`"Necessário informar nome do produto."`); grava **Nome**, **ID Externo**, **Descrição** e **Preço**.
@@ -162,13 +167,13 @@ Fora de um **Loop sobre itens da lista**, o mesmo passo pode rodar no máximo **
 
 | Mensagem | Causa |
 | --- | --- |
-| `Ação não encontrada.` | O passo seguinte não existe mais (por exemplo, foi apagado enquanto a execução estava em andamento). |
+| `Ação não encontrada.` | O cenário foi excluído, ou publicado sem nenhum passo, enquanto a execução estava em andamento. (Apagar só um passo faz a execução terminar no passo anterior, como **Executado**.) |
 | `Limite de loop excedido.` | Um mesmo passo rodou mais de 6 vezes na mesma execução fora de um **Loop**. |
 | `Limite máximo de iterações excedido.` | A lista do **Loop sobre itens da lista** excedeu o **Limite máximo de repetições** configurado. |
 | `Lista do loop não configurada.` | Campo **Lista** do **Loop sobre itens da lista** está vazio. |
 | `A variável da lista não retornou uma lista.` | O campo informado em **Lista** do **Loop** não contém uma lista. |
 | `Nenhuma saída do Split está ligada.` | Passo **Split** sem nenhum caminho conectado. |
-| `Execução travou por mais de uma hora.` | Execução em **Executando** ou **Pendente** ficou mais de 1 hora sem avançar. |
+| `Execução travou por mais de uma hora.` | Execução em **Executando** ou **Pendente** ficou mais de 1 hora sem avançar e foi marcada como **Falhou** na verificação diária. |
 | `Conversa não encontrada.` | **Buscar conversa** sem resultado e sem caminho na saída **Não encontrado**. |
 | `Erro ao criar conversa.` | **Criar conversa** falhou (ex.: telefone inválido) sem caminho na saída **Em caso de falha**. |
 | `Erro ao enviar mensagem.` | **Enviar mensagem** falhou sem mensagem mais específica. |

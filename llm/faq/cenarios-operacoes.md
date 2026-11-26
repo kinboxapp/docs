@@ -1,6 +1,6 @@
 ---
 title: O que são as operações consumidas por um cenário?
-description: Operação é cada passo que um cenário executa, mais o início; serve para acompanhar o tamanho das execuções e não desconta saldo da carteira.
+description: Operação é a contagem dos passos que um cenário executa; serve para acompanhar o tamanho das execuções e não desconta saldo da carteira.
 keywords: [operações cenário, operações consumidas, cenário gasta saldo, custo do cenário, limite de operações, analítico operações]
 publico: llm
 tipo: faq
@@ -22,7 +22,7 @@ O que são as operações consumidas por um cenário?
 
 ## Resposta
 
-Operação é a contagem de cada passo executado por um cenário, somada ao início da execução: cada vez que o cenário roda, conta **1 operação** ao começar (gatilho) e **+1 operação** para cada passo que executa, inclusive o passo que falha. Passos dentro de um **Loop sobre itens da lista** contam novamente a cada item processado.
+Operação é a contagem dos passos que uma execução do cenário roda. Uma execução concluída registra **1 operação por passo executado**. Se um passo falhar, a execução registra os passos que rodaram (incluindo o que falhou) **mais 1**. Passos dentro de um **Loop sobre itens da lista** contam novamente a cada item processado.
 
 Você acompanha o consumo na coluna e no total **Operações** no painel **Analítico** do cenário (acessível com a permissão **Cenários** ou como proprietário; o filtro mostra no máximo os **Últimos 30 dias** de um histórico guardado por 60 dias) e pela variável **Operações consumidas** dentro do próprio cenário.
 

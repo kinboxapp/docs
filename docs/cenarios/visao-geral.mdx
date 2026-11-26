@@ -39,7 +39,7 @@ Crie e edite cenários pelo computador, pois na tela do celular o editor não ex
 
 ### Gatilhos
 
-O gatilho (cartão **Quando...**) define o evento que inicia o cenário. Um cenário pode ter mais de um gatilho no mesmo cartão, e qualquer um deles começa a execução.
+O gatilho (cartão **Quando...**) define o evento que inicia o cenário. Um cenário pode ter mais de um gatilho no mesmo cartão (um de cada tipo), e qualquer um deles começa a execução.
 
 | Gatilho | Quando começa |
 | --- | --- |
@@ -68,12 +68,12 @@ Um cenário só roda quando está **ligado e publicado**. No editor, o botão **
 
 Cada vez que um cenário roda é uma execução. Você acompanha tudo no painel **Analítico**, que exibe filtros de até os **Últimos 30 dias** (o histórico fica guardado por 60 dias).
 
-Cada execução conta **operações** — 1 ao começar e mais 1 a cada passo executado — apenas para acompanhar o tamanho das execuções, sem descontar [saldo da carteira](/docs/conceitos/saldo-e-creditos). Veja [Acompanhar as execuções no Analítico](/docs/cenarios/execucoes).
+Cada execução registra um número de **operações**, que cresce com os passos executados. Você consulta esse número na coluna e no total **Operações** do **Analítico**; ele serve para acompanhar o tamanho das execuções e não desconta [saldo da carteira](/docs/conceitos/saldo-e-creditos). Veja [Acompanhar as execuções no Analítico](/docs/cenarios/execucoes).
 
 ## Exemplos de uso
 
 - **Lead do site**: receber dados de um formulário via webhook para buscar, atualizar ou criar o contato ([Receber dados de outro sistema por webhook](/docs/cenarios/integrar-via-webhook-com-cenarios)).
-- **Pedidos do dia para o ERP**: no fim do dia, buscar as negociações de um funil com **Todos por funil**, percorrer a lista no **Loop sobre itens da lista** e enviar cada item por **Requisição HTTP** ([Gatilhos e ações dos cenários](/docs/cenarios/gatilhos-e-acoes)).
+- **Pedidos do dia para o ERP**: todo dia no fim do expediente, buscar as negociações de um [funil](/docs/crm/visao-geral) com **Todos por funil**, percorrer a lista no **Loop sobre itens da lista** e enviar cada item por **Requisição HTTP**. **Todos por funil** não filtra as negociações pela data: a cada dia, a lista traz as negociações do funil (até 500), não só as do dia ([Gatilhos e ações dos cenários](/docs/cenarios/gatilhos-e-acoes)).
 - **Bot na nova sessão**: iniciar um bot automaticamente a cada sessão nova de um canal com **Nova Sessão** e **Executar bot** — essa ação executa o bot mesmo desligado ([Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
 - **Teste A/B**: dividir leads entre dois caminhos usando o **Split** ([Gatilhos e ações dos cenários](/docs/cenarios/gatilhos-e-acoes)).
 

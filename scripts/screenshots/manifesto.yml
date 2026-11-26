@@ -2731,7 +2731,9 @@
     - clicar: 'text=Lead do site'
     - esperar: '.react-flow__node[data-id="3"]'
     - pausa: 1500
-  alvo: '.workflow-fullscreen'
+  alvo:
+    - '.workflow-fullscreen .fixed.top-2'
+    - '.react-flow__node[data-id="3"]'
   mascarar: []
   arquivo: images/ajuda/cenarios/editor.webp
   paginas:
@@ -2796,7 +2798,9 @@
     - clicar: 'text=Pedidos do dia para o ERP'
     - esperar: '.react-flow__node[data-id="3"]'
     - pausa: 1500
-  alvo: '.workflow-fullscreen'
+  alvo:
+    - '.workflow-fullscreen .fixed.top-2'
+    - '.react-flow__node[data-id="3"]'
   mascarar: []
   arquivo: images/ajuda/cenarios/loop.webp
   paginas:
