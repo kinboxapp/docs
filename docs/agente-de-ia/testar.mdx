@@ -1,6 +1,6 @@
 ---
 title: Testar o agente antes de ativar
-description: Como conversar com o agente de IA no chat de teste, ver o que ele fez em cada resposta e simular clientes diferentes antes de ligar o agente aos canais.
+description: Como conversar com o agente de IA no chat de teste, ver o que ele fez em cada resposta e simular contatos diferentes antes de ligar o agente aos canais.
 keywords: [testar agente, chat de teste, simular conversa, inspecionar, ajustar simulação, limpar histórico, saldo insuficiente, testar por voz]
 publico: humano
 tipo: guia
@@ -18,11 +18,15 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Use o chat de teste no editor do agente para validar respostas, conhecimento, ferramentas e fluxograma antes de conectar o agente aos canais reais.
+Use o chat de teste no editor do agente para simular contatos diferentes e validar respostas, conhecimento, ferramentas e fluxograma antes de conectar o agente aos canais reais.
 
 <Note>
 Quem pode: membros com acesso ao agente (permissão **Agentes de IA** ou proprietário do workspace). Você não precisa conectar um canal para testar, mas o teste consome [saldo da carteira](/docs/conceitos/saldo-e-creditos) como uma resposta real. Em agentes **Gerenciado pelo parceiro**, apenas o chat de teste fica disponível.
 </Note>
+
+<Warning>
+Antes da primeira mensagem: o chat de teste consome [saldo da carteira](/docs/conceitos/saldo-e-creditos) como uma conversa real, e **Google Calendar**, **HubSpot** e a **ferramenta HTTP**/**Requisição HTTP** agem de verdade (podem criar eventos, alterar registros no HubSpot e chamar o seu sistema). Para testar essas ferramentas, use uma conta e um endereço de teste.
+</Warning>
 
 ## Passo a passo
 
@@ -54,7 +58,7 @@ Quem pode: membros com acesso ao agente (permissão **Agentes de IA** ou proprie
 | Linha de ferramenta | Mostra o que o agente fez (por exemplo, adicionou tag, transferiu para humano ou agendou follow-up). Clique para inspecionar. |
 | Linha de ação do fluxograma | Mostra o ícone e a descrição da ação executada no [fluxograma](/docs/agente-de-ia/fluxograma-e-etapas). Clique para inspecionar. |
 | Balão com **Nota:** | Nota interna que só a equipe veria na conversa real. |
-| Aviso **Saldo Insuficiente** | O saldo acabou e o agente não respondeu. Clique em **Adicionar saldo** para ir à tela de assinatura. |
+| Aviso **Saldo Insuficiente** | O saldo estava em R$ 1,00 ou menos e o agente não respondeu. Clique em **Adicionar saldo** para ir à tela de assinatura (precisa da permissão **Assinatura**). Em agente **Gerenciado pelo parceiro**, os gastos podem sair da carteira do parceiro. |
 | Contagem regressiva acima da caixa | Indica um follow-up agendado no teste; some quando dispara ou quando você envia uma nova mensagem. |
 | Aviso **Error:** | Mostra quando houve erro ao gerar a resposta. |
 
@@ -92,9 +96,6 @@ O histórico do chat e os ajustes da simulação ficam salvos no seu navegador, 
 | **Ferramenta HTTP** e **Requisição HTTP** | Rodam de verdade — chamam o endereço configurado (apenas a gravação de variáveis no contato ou na sessão é simulada). |
 | **Agendar follow-up** | Roda no chat de teste e dispara no horário marcado dentro da própria simulação. |
 
-<Warning>
-O chat de teste consome [saldo da carteira](/docs/conceitos/saldo-e-creditos) como uma conversa real e para quando o saldo acaba. Além disso, **Google Calendar**, **HubSpot** e a **ferramenta HTTP**/**Requisição HTTP** agem de verdade — teste com dados que você possa apagar.
-</Warning>
 
 ## Roteiro sugerido de testes
 

@@ -30,7 +30,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência técnica complementar das páginas humanas "Montar o fluxograma e as etapas do agente" (`/docs/agente-de-ia/fluxograma-e-etapas`) e "Ações do fluxograma" (`/docs/agente-de-ia/acoes-do-fluxograma`). Vale somente para o **agente de texto** (não existe no agente de voz; fica oculto em agentes **Gerenciado pelo parceiro**).
+Referência técnica complementar de [Montar o fluxograma do agente](/docs/agente-de-ia/fluxograma-e-etapas) e [Ações do fluxograma](/docs/agente-de-ia/acoes-do-fluxograma). Vale somente para o **agente de texto** (não existe no agente de voz; fica oculto em agentes **Gerenciado pelo parceiro**).
 
 ## Ações do fluxograma: campos, saídas, limites e teste
 
@@ -58,7 +58,7 @@ Na janela **Selecione uma ação**, as abas são **Top** (todas), **Apps** (**Go
 | **Atualizar negócio** (Core) | **Que negócios serão afetados** e campos de **Criar negócio** | D, E | — | Simulado |
 | **Criar tarefa** (Core) | **Nome da tarefa**, **Descrição**, **Tipo**, **Responsável**, **Obrigatória**, **Modo de agendamento** (**Daqui X minutos**, **Dias a partir de hoje** + **Horário**, **Em um dia e horário**), **Auto executar** / **Bot** | D, E | Funciona apenas no contexto de uma conversa. | Simulado |
 | **Buscar produtos** (Core) | **Termo de busca**, **Preço mínimo**, **Preço máximo**, **Limite** | D, E | **Limite**: 1 a 30 (padrão 10). | Consulta produtos |
-| **Requisição HTTP** (Core) | **Método**, **URL**, headers (**Add header**), corpo (JSON) | D, E | Tempo limite **30 segundos**. Dica diz `"Apenas links https são permitidos"`, mas o código não valida `https`. Falha **não** sai pela seta **Erro**: devolve `success: false` e segue pela saída normal. | **Roda de verdade** (chama a URL externa) |
+| **Requisição HTTP** (Core) | **Método**, **URL**, headers (**Add header**), corpo (JSON) | D, E | Tempo limite **30 segundos**. Use endereço `https`. Falha **não** sai pela seta **Erro**: devolve `success: false` e segue pela saída normal. | **Roda de verdade** (chama a URL externa) |
 | **Buscar conhecimento** (Core) | **Modo** (**Buscar nas bases (vetorial)** ou **Texto literal**), **Bases de conhecimento**, **Origem da busca** (**Últimas mensagens do cliente** ou **Termo customizado**), **Quantidade de últimas mensagens do cliente**, **Top K (chunks por base)** | D, E | Padrões: **2** últimas mensagens e **3** trechos por base. **Texto literal**: até **5.000 caracteres** (aviso `"Texto excede 5000 caracteres"`). | Busca nos conhecimentos reais |
 | **OCR** (Core) | **Origem do arquivo** (**Último arquivo do contato** ou **URL**), **Tipo de documento**, **Campos**, **Instruções (opcional)**, **Modelo LLM** | D, L, E | Procura nas últimas **30 mensagens**; PDF escaneado até **5 MB** e **30 páginas**; **URL** aceita apenas `https`. | Roda sobre o anexo/URL informado |
 | **Executar outro agente** (Core) | **Agente para executar**, **Iniciar em uma ação específica (opcional)** | D, E | Executa o fluxograma do outro agente e volta para a próxima ação quando terminar. Impede excluir o agente referenciado (**Agente em uso**). | Executa no teste |
@@ -72,7 +72,7 @@ Na janela **Selecione uma ação**, as abas são **Top** (todas), **Apps** (**Go
 | **Criar evento** (Apps › Google Calendar) | Conta Google, **Título**, **Início**, **Duração (minutos)**, **Descrição**, **Local**, **Convidados** (e-mails separados por vírgula), calendário (vazio = primário) | D, E | Exige conta Google conectada. | **Roda de verdade** (cria evento real) |
 | **Criar evento rápido** (Apps › Google Calendar) | Conta Google, **Texto** | D, E | Exige conta Google conectada. | **Roda de verdade** (cria evento real) |
 | **Consultar horários** (Apps › Kinbox Agenda) | **Serviço**, **Profissional**, **Data**, **Máximo de horários** | D, L | Exige Kinbox Agenda no plano (sem ele, cadeado e **Liberar potencial agora**). **Máximo de horários**: 1 a 20 (padrão **5**). | Roda de verdade (somente leitura) |
-| **Criar agendamento** (Apps › Kinbox Agenda) | **Serviço**, **Profissional**, **Início** (término pela duração do serviço) | D, L | Exige Agenda no plano. Nome, telefone e e-mail vêm do contato; **sem e-mail, o agendamento não é criado**. | **Simulado** (não grava no Agenda) |
+| **Criar agendamento** (Apps › Kinbox Agenda) | **Serviço**, **Profissional**, **Início** (término pela duração do serviço), **Data de nascimento**, quantidade de pessoas (só em serviços por capacidade) | D, L | Exige Agenda no plano. Exige nome, telefone, e-mail e **data de nascimento** do contato. Nome, telefone e e-mail vêm do contato; o que faltar no contato e a data de nascimento (que o contato da Kinbox não guarda) são tirados da conversa. Se ainda faltar algum dado, a saída traz `missing_contact_data` com os campos que faltam: ligue essa saída a um bloco que peça os dados ao contato. Quando o agendamento é criado, a equipe recebe uma nota interna com o resumo. | **Simulado** (não grava no Agenda) |
 | **Listar agendamentos** (Apps › Kinbox Agenda) | **Apenas agendamentos futuros**, **Incluir cancelados** | D, L | Exige Agenda no plano. | Roda de verdade (somente leitura) |
 | **Reagendar** (Apps › Kinbox Agenda) | **Agendamento**, **Novo início**, **Manter o profissional atual** | D, L | Exige Agenda no plano. | **Simulado** (não altera o Agenda) |
 | **Cancelar agendamento** (Apps › Kinbox Agenda) | **Agendamento** | D, L | Exige Agenda no plano. | **Simulado** (não cancela no Agenda) |
@@ -109,6 +109,7 @@ Blocos que fecham ciclos sem erro de loop infinito: **Subagente**, **Coletar dad
 
 ## Execução, travas e tratamento de erros
 
+- **Como o fluxograma anda:** a cada mensagem do contato, os blocos rodam em sequência até parar num bloco que conversa (**Subagente** ou **Coletar dados**), num bloco que espera (**Aguardar mensagem do cliente** ou **Delay**) ou no fim do caminho. **Subagente** e **Coletar dados** podem **Substituir** ou **Herdar** as **Instruções**, o **Conhecimento** e as **Ferramentas** do agente principal.
 - **Estado da sessão:** guardado por até **7 dias** por sessão. Conversas em andamento continuam do bloco onde pararam com o desenho publicado; sessões novas começam do **Início**.
 - **Concorrência:** o agente executa uma rodada por vez por conversa; mensagens recebidas no meio ficam no histórico para a próxima rodada.
 - **Interrupção por humano ou resolução:** se um membro assume a conversa ou ela é resolvida durante espera ou execução, a rodada é descartada e os follow-ups pendentes são cancelados.
@@ -116,6 +117,22 @@ Blocos que fecham ciclos sem erro de loop infinito: **Subagente**, **Coletar dad
 - **Subagente após Enviar mensagem:** se uma mensagem já foi enviada na mesma rodada (por exemplo, por **Enviar mensagem**), um **Subagente** logo em seguida não envia outra resposta na mesma rodada e aguarda o contato. Para falar naquela rodada, coloque o texto nas instruções do **Subagente**.
 - **Erros em blocos:** seguem pela seta **Erro** do bloco; sem seta **Erro**, vão para o bloco **Erro não tratado** (se existir). **Exceção:** **Requisição HTTP** que falha não segue pela seta **Erro** — retorna `success: false` e segue pela saída normal; use **Condição lógica** para tratar o resultado.
 - **Fim do caminho:** se o fluxo termina sem bloco que conversa e sem **Encerrar agente**, a resposta da rodada vem das instruções principais (ou da etapa escolhida) e o estado do fluxo é limpo.
+
+## Ferramenta HTTP (cartão Ferramentas)
+
+A ferramenta HTTP é cadastrada no workspace em **Selecione uma ferramenta** → **Adicionar ferramenta** e pode ser usada por vários agentes; editar ou excluir muda para todos. Página humana: [Dar ferramentas ao agente](/docs/agente-de-ia/ferramentas).
+
+| Bloco | O que se configura |
+| --- | --- |
+| **Configuração** | **Nome**, **Descrição** (o que faz e quando usar), **Método** (**GET**, **POST**, **PUT**, **PATCH** ou **DELETE**) e **URL** (use endereço `https`). |
+| **Headers** | Cabeçalhos enviados na chamada (**Add header**). |
+| **Parâmetros de path** | Valores entre chaves na URL, com tipo e preenchimento por **Prompt do LLM** (a IA tira da conversa) ou **Constante ou variável**. |
+| **Parâmetros de query** | Parâmetros de consulta (**Add param**). |
+| **Parâmetros do body** | Corpo JSON em **POST**, **PUT** e **PATCH**. |
+| **Atribuições de variáveis** | Atualiza variáveis (como campos do contato ou da sessão) com dados da resposta: **Valor** + **JSON Path** (**Add atribuição**). |
+
+- Tempo limite: **30 segundos**. Se a chamada falhar, o agente recebe o erro e segue a conversa.
+- No chat de teste a chamada é feita de verdade; só a gravação do resultado no contato ou na sessão é simulada.
 
 ## Follow-ups no fluxograma
 
@@ -128,5 +145,5 @@ Blocos que fecham ciclos sem erro de loop infinito: **Subagente**, **Coletar dad
 
 ## Transferir e Etapas (regras de borda)
 
-- **Transferir:** em **Cíclico com fila**, se não houver membro elegível, a conversa aguarda na fila por ordem de chegada (FIFO). Transferir para **Membro** ou **Grupo** desliga o bot do agente na conversa (o agente para naquela sessão e só volta numa sessão nova). Para **Usar atribuição automática**, **Cíclico**, **Cíclico com fila** e **Último membro que atendeu a conversa**, não afirme se o agente é desligado automaticamente. O fluxo continua pela saída do bloco na mesma rodada, mas novas rodadas não executam se o agente tiver sido desligado.
+- **Transferir:** em **Cíclico com fila**, se não houver membro elegível, a conversa aguarda na fila por ordem de chegada (FIFO). Transferir para **Membro** ou **Grupo** desliga o bot do agente na conversa (o agente para naquela sessão e só volta numa sessão nova). O fluxo continua pela saída do bloco na mesma rodada, mas novas rodadas não executam se o agente tiver sido desligado.
 - **Etapas:** o cartão **Etapas** só aparece em agentes que já têm pelo menos uma etapa (não há botão para criar a primeira etapa pela tela; etapas só surgem em agentes existentes, por clone ou importação). Quando o fluxograma não parou em **Subagente** ou **Coletar dados**, o agente lê as últimas **5 mensagens** e escolhe a primeira etapa ativa que passa nos **Dados obrigatórios** (essa escolha gasta saldo). Etapa nova nasce com **Herdar conhecimento** e **Herdar ferramentas** desligados, mas se a etapa não tiver nenhum conhecimento ou ferramenta próprio, o agente usa os do agente principal mesmo assim.

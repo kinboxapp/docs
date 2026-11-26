@@ -66,7 +66,7 @@ Toda alteração nos cartões da direita é salva na hora. Apenas a gaveta **Con
 
 ## Escrever as instruções
 
-As **Instruções** (também chamadas de prompt) dizem ao agente quem ele é e como deve conduzir o atendimento.
+As **Instruções** (também chamadas de prompt, o texto de orientação que a IA lê antes de responder) dizem ao agente quem ele é e como deve conduzir o atendimento.
 
 1. No cartão **Instruções**, clique para adicionar ou editar.
 2. No editor **Editar Instruções**, escreva as orientações do agente.
@@ -87,8 +87,8 @@ Para deixar as instruções mais claras, vale cobrir cinco pontos:
 
 Clique no ícone de engrenagem **Abrir configuração**, no topo do chat de teste, para abrir a gaveta **Configurações**. Ao terminar, clique em **Salvar**.
 
-<Frame caption="Gaveta Configurações com os blocos LLM e Comportamento">
-  <img src="/images/ajuda/agente-de-ia/configuracoes-do-agente.webp" alt="Gaveta Configurações do agente mostrando o campo Modelo no bloco LLM e as opções Modo silencioso, Usar apenas mensagens da sessão atual e Agrupar mensagens em sequência no bloco Comportamento, com o botão Salvar" />
+<Frame caption="Bloco Comportamento da gaveta Configurações">
+  <img src="/images/ajuda/agente-de-ia/configuracoes-do-agente.webp" alt="Bloco Comportamento das configurações do agente com as opções Modo silencioso, Usar apenas mensagens da sessão atual e Agrupar mensagens em sequência em segundos" />
 </Frame>
 
 | Bloco | Campo | O que faz |
@@ -96,7 +96,7 @@ Clique no ícone de engrenagem **Abrir configuração**, no topo do chat de test
 | **Perfil** | Avatar | Imagem do agente (JPEG ou PNG, mínimo 100×100 px). |
 | **Perfil** | **Nome do agente** | Nome obrigatório exibido na lista e no editor. |
 | **Perfil** | **Descrição** | Resumo curto do objetivo do agente. |
-| **LLM** | **Modelo** | Escolhe o modelo usado para responder. Cada opção exibe uma faixa de custo relativo (**$**, **$$** ou **$$$**). Deixe em branco para usar o modelo padrão da Kinbox. |
+| **LLM** (o modelo de IA que escreve as respostas) | **Modelo** | Escolhe o modelo usado para responder. Cada opção exibe uma faixa de custo relativo (**$**, **$$** ou **$$$**). Deixe em branco para usar o modelo padrão da Kinbox. |
 | **Comportamento** | **Modo silencioso** | Quando ligado, o agente não envia mensagens ao contato; ele apenas executa ferramentas e avalia condições de saída. |
 | **Comportamento** | **Usar apenas mensagens da sessão atual** | Faz o agente considerar só a [sessão](/docs/conceitos/conversas-e-sessoes) atual, ignorando conversas anteriores do contato. Vale também para subagentes e campos gerados por IA. |
 | **Comportamento** | **Agrupar mensagens em sequência** | Define de `0` a `300` segundos de espera antes de responder, juntando várias mensagens seguidas do contato em uma única resposta. A espera recomeça a cada nova mensagem; `0` responde imediatamente. |
@@ -118,6 +118,6 @@ Clonar ou importar não leva os canais conectados do agente original. A cópia n
 
 - [Ensinar o agente com arquivos, textos, sites e vídeos](/docs/agente-de-ia/conhecimento)
 - [Dar ferramentas ao agente: Agenda, Google Calendar e HubSpot](/docs/agente-de-ia/ferramentas)
-- [Montar o fluxograma e as etapas do agente](/docs/agente-de-ia/fluxograma-e-etapas)
+- [Montar o fluxograma do agente](/docs/agente-de-ia/fluxograma-e-etapas)
 - [Testar o agente antes de ativar](/docs/agente-de-ia/testar)
 - [Ligar o agente aos canais e passar para um humano](/docs/agente-de-ia/conectar-canais)

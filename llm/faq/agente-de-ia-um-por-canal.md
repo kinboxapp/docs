@@ -26,7 +26,7 @@ Posso ter dois agentes no mesmo canal?
 
 ## Resposta
 
-Não. Cada canal pode ser atendido diretamente por apenas um agente de IA — ao conectar um canal que já está em outro agente, a Kinbox abre a confirmação **Mover canal de agente** e desconecta o canal do primeiro agente.
+Não para as mensagens: cada canal tem um único agente de texto — ao conectar um canal que já está em outro agente de texto, a Kinbox abre a confirmação **Mover canal de agente** e desconecta o canal do primeiro agente. As ligações são separadas: o mesmo número de WhatsApp oficial pode ter um agente de texto para as mensagens e um [agente de voz](/docs/agente-de-ia/agente-de-voz) para as ligações (um agente de voz por número).
 
 Se você precisa de comportamentos diferentes no mesmo canal, existem três caminhos:
 

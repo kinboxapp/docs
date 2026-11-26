@@ -19,7 +19,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência técnica complementar da página humana "Ensinar o agente com arquivos, textos, sites e vídeos" (`/docs/agente-de-ia/conhecimento`). Vale para agentes de texto e de voz.
+Referência técnica complementar de [Ensinar o agente com arquivos, textos, sites e vídeos](/docs/agente-de-ia/conhecimento). Vale para agentes de texto e de voz.
 
 ## Limites reais do conhecimento do agente
 
@@ -28,7 +28,7 @@ Referência técnica complementar da página humana "Ensinar o agente com arquiv
 | **Upload de arquivos** (tamanho) | Limite de **5 MB** por arquivo no navegador, um arquivo por vez. Acima disso exibe `"O tamanho do arquivo é maior que o permitido. O Máximo é 5MB."`. |
 | **Upload de arquivos** (formatos) | O seletor aceita somente `.pdf`, `.txt` e `.docx`. Qualquer outro formato arrastado exibe `"O arquivo não é suportado."`. |
 | **Markdown (`.md`)** | **Não é aceito**, apesar de o texto da tela listar `"Tipos de arquivos suportados: PDF, .txt, Markdown, .docx"`. Arquivo `.md` arrastado retorna `"O arquivo não é suportado."`. Contorno: renomear ou salvar o conteúdo como `.txt`. |
-| **Texto colado** | O contador `(n/50000)` fica vermelho acima de 50.000 caracteres, mas o formulário e a API **não bloqueiam nem cortam** o texto — o conteúdo inteiro é enviado e processado. |
+| **Texto colado** | O contador `(n/50000)` fica vermelho acima de 50.000 caracteres. Para textos longos, prefira dividir em mais de um conhecimento. |
 | **Website** | Lê apenas a URL informada (não percorre subpáginas). Tenta extrair o texto principal visível e, se falhar, usa um leitor que abre páginas com JavaScript. Artigos pagos não são suportados. Falha na leitura marca o item com erro. |
 | **YouTube** | Importa apenas a transcrição de vídeos públicos (tenta português primeiro e depois a legenda padrão). Vídeos privados, muito recentes ou sem legenda falham e ficam com erro. |
 | **PDF e `.docx`** | `.txt` é lido em UTF-8; PDF e `.docx` têm o texto extraído. PDF escaneado (só imagem, sem texto selecionável) não possui texto para extração. |
@@ -66,4 +66,4 @@ Os limites abaixo valem para **anexos enviados pelo contato durante uma conversa
 
 ## Custo
 
-Processar um conhecimento debita saldo da carteira com a descrição `"Processamento da base de conhecimento"` (categoria **Agente de IA** no relatório **Saldo**), quando há custo de processamento. A busca nos trechos a cada resposta entra no débito da própria resposta do agente. Não citar preços.
+Processar um conhecimento debita saldo da carteira com a descrição `"Processamento da base de conhecimento"` (categoria **Agente de IA** no relatório **Saldo**), quando há custo de processamento. A busca nos trechos a cada resposta entra no débito da própria resposta do agente.

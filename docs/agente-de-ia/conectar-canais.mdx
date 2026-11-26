@@ -26,7 +26,7 @@ verificado_em: 2026-11-26
 Conecte o agente de texto aos canais do workspace para que ele comece a atender os contatos, controle quando ele fica ligado ou pausado e saiba como a conversa passa para um membro da equipe. Para ligar um agente de voz às ligações do WhatsApp oficial, veja [Agente de voz (Beta)](/docs/agente-de-ia/agente-de-voz).
 
 <Note>
-Quem pode: membros com a permissão **Agentes de IA** e o proprietário do workspace. Para abrir a tela de canais pelo link **Gerenciar canais**, o membro também precisa da permissão **Gerenciar Canais**.
+Quem pode: membros com a permissão **Agentes de IA** e o proprietário do workspace. Para abrir a tela de canais pelo link **Gerenciar canais**, o membro também precisa da permissão **Gerenciar Canais**. Em agentes **Gerenciado pelo parceiro**, os cartões do agente não aparecem: o cliente só testa o agente.
 </Note>
 
 ## Antes de começar
@@ -56,7 +56,7 @@ Quem pode: membros com a permissão **Agentes de IA** e o proprietário do works
 Ao conectar, o status do agente muda para **Conectado** e aparece o interruptor de controle no topo do painel da direita.
 
 <Note>
-**Um agente por canal:** cada canal é atendido por um único agente de IA. Mover o canal para outro agente desconecta automaticamente do primeiro. Bots comuns que atendem o mesmo canal continuam ativos.
+**Um agente de texto por canal:** cada canal tem um único agente de texto para as mensagens. Mover o canal para outro agente de texto desconecta automaticamente do primeiro. As ligações do WhatsApp oficial têm, à parte, um agente de voz: o mesmo número pode ter os dois. Bots comuns que atendem o mesmo canal continuam ativos.
 </Note>
 
 ## Desconectar, ligar e pausar
@@ -85,4 +85,4 @@ Uma conversa atendida pelo agente pode ir para a equipe de duas formas:
 - **Pelo agente:** configure a ferramenta **Transferir para humano** ou **Mover para grupo** (veja [Ferramentas](/docs/agente-de-ia/ferramentas)) ou a ação **Transferir** no fluxograma (veja [Ações do fluxograma](/docs/agente-de-ia/acoes-do-fluxograma)). Quando o agente transfere para um membro ou grupo, ele para de responder naquela sessão e só volta numa sessão nova.
 - **Pelo membro:** quando qualquer membro envia uma mensagem comum para o contato na conversa, o agente para de atender; se a conversa ainda não tinha responsável, o membro passa a ser o responsável. Enviar uma nota pro time não desliga o agente.
 
-Se o [saldo acabar](/docs/conceitos/saldo-e-creditos) durante o atendimento, o agente para de responder e a conversa fica sem o agente. Se o agente não estiver entrando nas conversas como esperado, veja [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns).
+Se o [saldo](/docs/conceitos/saldo-e-creditos) ficar insuficiente (R$ 1,00 ou menos) durante o atendimento, o agente para de responder e a conversa fica sem o agente. Se o agente não estiver entrando nas conversas como esperado, veja [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns).

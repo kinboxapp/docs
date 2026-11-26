@@ -23,7 +23,7 @@ Dá para usar ChatGPT ou outra IA para responder os clientes?
 
 ## Resposta
 
-Sim, por meio dos **Agentes de IA** da própria Kinbox, que já utilizam modelos de IA de mercado sem precisar de conta externa. Nas **Configurações** do agente de texto, no campo **Modelo**, você escolhe entre os modelos liberados pela Kinbox (cada opção mostra a faixa de custo relativo **$**, **$$** ou **$$$**) ou deixa em branco para usar o modelo padrão.
+Não dá para conectar sua conta ou chave do ChatGPT; os **Agentes de IA** da Kinbox já usam modelos de IA, escolhidos em **Modelo**, e cobram do saldo. Nas **Configurações** do agente de texto, no campo **Modelo**, você escolhe entre os modelos liberados pela Kinbox (cada opção mostra a faixa de custo relativo **$**, **$$** ou **$$$**) ou deixa em branco para usar o modelo padrão.
 
 Não há campo para informar uma conta ou chave própria de outro serviço de IA — o uso é sempre cobrado diretamente do [saldo da carteira](/docs/conceitos/saldo-e-creditos) na Kinbox.
 

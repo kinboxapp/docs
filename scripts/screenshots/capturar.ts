@@ -24,6 +24,10 @@ type Passo =
   | { digitar: { seletor: string; texto: string } }
   | { tecla: string }
   | { pausa: number }
+  /** Passa o mouse sobre o elemento (mostra o que só aparece no hover) */
+  | { passar: string }
+  /** Arrasta `de` até `para`; `x`/`y` (px) soltam num ponto dentro de `para` (ex.: área vazia do fluxograma) */
+  | { arrastar: { de: string; para: string; x?: number; y?: number } }
 
 type Item = {
   id: string
@@ -60,7 +64,7 @@ const CSS_ESTAVEL = `
   .ant-slide-up-appear, .ant-slide-up-appear-prepare, .ant-slide-up-enter, .ant-slide-up-enter-prepare,
   .ant-slide-down-appear, .ant-slide-down-appear-prepare, .ant-slide-down-enter, .ant-slide-down-enter-prepare { opacity: 1 !important; transform: none !important; }
   /* ...e, sem animação, também não terminam de sair: some com eles na saída */
-  .ant-slide-up-leave, .ant-slide-down-leave { display: none !important; }
+  .ant-slide-up-leave, .ant-slide-down-leave, .ant-zoom-leave, .ant-fade-leave { display: none !important; }
   /* Fundo branco atrás de modais: os cantos arredondados do recorte não mostram a tela de trás */
   .ant-modal-mask { background: #fff !important; }
 `
@@ -143,6 +147,12 @@ async function executarPasso(page: Page, passo: Passo) {
   else if ('digitar' in passo) await page.locator(passo.digitar.seletor).first().fill(passo.digitar.texto)
   else if ('tecla' in passo) await page.keyboard.press(passo.tecla)
   else if ('pausa' in passo) await page.waitForTimeout(passo.pausa)
+  else if ('passar' in passo) await page.locator(passo.passar).first().hover({ timeout: 30_000, force: true })
+  else if ('arrastar' in passo) {
+    const { de, para, x, y } = passo.arrastar
+    const posicao = x !== undefined && y !== undefined ? { targetPosition: { x, y } } : {}
+    await page.locator(de).first().dragTo(page.locator(para).first(), { timeout: 30_000, force: true, ...posicao })
+  }
   else throw new Error(`Passo desconhecido: ${JSON.stringify(passo)}`)
 }
 

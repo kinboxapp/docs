@@ -420,9 +420,9 @@
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
     - esperar: '.ant-drawer-content >> text=Comportamento'
-    - clicar: '.ant-drawer-content >> text=Configure como o agente deve se comportar'
+    - clicar: '.ant-drawer-content >> text=0 responde imediatamente'
     - pausa: 800
-  alvo: '.ant-drawer-content'
+  alvo: '.ant-drawer-body .rounded-app.mb-4:has-text("Configure como o agente deve se comportar")'
   mascarar: []
   arquivo: images/ajuda/agente-de-ia/configuracoes-do-agente.webp
   paginas:
@@ -437,25 +437,63 @@
     - pausa: 800
   alvo:
     - '.ant-modal-header'
-    - '.ant-modal-content button:has-text("Selecionar")'
+    - '.ant-modal-content >> text=Chat Do Site >> xpath=../..'
   mascarar: []
   arquivo: images/ajuda/agente-de-ia/conectar-canal.webp
   paginas:
     - docs/agente-de-ia/conectar-canais
 
-# Fluxograma vazio da Lia (só o Início): o print mostra o cabeçalho com Publicar e a barra inferior. Nada é publicado.
+# Fluxograma de exemplo montado na hora (Início → Subagente), sem publicar: puxar a seta do
+# bloco e soltar no vazio cria o bloco ligado e abre "Selecione uma ação". O recorte pega só os blocos.
 - id: agente-fluxograma
   url: /settings/agents/6b0793fd9f2e3f185bc07afa
   passos:
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
-    - esperar: '#side-panel .react-flow__node >> text=Início'
-    - pausa: 1500
-  alvo: '#side-panel'
+    - esperar: '#side-panel .react-flow__node-start'
+    - pausa: 1000
+    - arrastar:
+        de: '#side-panel .react-flow__node-start .react-flow__handle.source'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 330
+    - esperar: '.ant-modal-content >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content input'
+        texto: 'Subagente'
+    - clicar: '.ant-modal-content a.cursor-pointer:has-text("Subagente")'
+    - pausa: 800
+    - tecla: Escape
+    - pausa: 800
+    - pausa: 1200
+  alvo:
+    - '#side-panel .react-flow__node-start'
+    - '#side-panel .react-flow__node:has-text("Subagente")'
   mascarar: []
   arquivo: images/ajuda/agente-de-ia/fluxograma.webp
   paginas:
     - docs/agente-de-ia/fluxograma-e-etapas
+
+# Janela "Selecione uma ação", aberta ao puxar a seta do Início e soltar no vazio (nada é publicado).
+- id: agente-selecionar-acao
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
+    - esperar: '#side-panel .react-flow__node-start'
+    - pausa: 1000
+    - arrastar:
+        de: '#side-panel .react-flow__node-start .react-flow__handle.source'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 330
+    - esperar: '.ant-modal-content >> text=Selecione uma ação'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/selecionar-acao.webp
+  paginas:
+    - docs/agente-de-ia/acoes-do-fluxograma
 
 - id: agente-adicionar-conhecimento
   url: /settings/agents/6b0793fd9f2e3f185bc07afa

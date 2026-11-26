@@ -20,7 +20,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência técnica complementar da página humana "Agente de voz para as ligações do WhatsApp (Beta)" (`/docs/agente-de-ia/agente-de-voz`).
+Referência técnica complementar de [Agente de voz para as ligações do WhatsApp (Beta)](/docs/agente-de-ia/agente-de-voz).
 
 ## Requisitos e mensagens exatas
 
@@ -31,14 +31,14 @@ Referência técnica complementar da página humana "Agente de voz para as liga�
 | Sem coexistência | Número em coexistência com o app WhatsApp Business exibe `"Coexistência: a Meta não oferece ligações"` e não pode ser selecionado. Ao tentar: `"Em coexistência com o app WhatsApp Business: {{channels}}. A Meta não oferece ligações nesse modo."`. |
 | Plano de **Ligações WhatsApp** | Sem plano, abre a janela **Ligações pelo WhatsApp**: `"Para usar as ligações, o ambiente precisa assinar um dos planos de Ligações WhatsApp."`, com **Ver planos** (para quem tem acesso financeiro) ou `"Peça para o gestor do ambiente assinar um plano de Ligações WhatsApp em Configurações > Assinatura."`. |
 | Tipo do agente | Escolhido na criação (`"O tipo não muda depois: cada um tem recursos próprios"`). Um agente de texto não atende ligações: `"Só agentes de voz podem atender ligações. Crie um agente de voz em Agentes de IA."`. Sem agente escolhido no canal: `"Escolha o agente de IA que vai atender"`. |
-| Permissões | **Agentes de IA** para criar e conectar; **Gerenciar Canais** para configurar na aba **Ligações** do canal. |
+| Permissões | **Agentes de IA** para criar e editar o agente de voz. Conectar, trocar ou desconectar o WhatsApp oficial do agente (inclusive pelo cartão **Canais conectados** do editor) e configurar a aba **Ligações** do canal exigem também **Gerenciar Canais**. |
 | Conexão de canais | Um agente de voz por número (**Trocar o agente que atende**). O agente de voz não cria bot de mensagens nem responde mensagens de texto. Com um canal já conectado, o botão de adicionar não aparece no cartão **Canais conectados** — para adicionar outro WhatsApp, clique no selo do topo (**Atendendo ligações em...**). |
 
-## Quando a IA atende (comportamento real do código)
+## Quando a IA atende
 
 A configuração fica na aba **Ligações** do canal oficial → cartão **IA atende as ligações** → **Quando a IA atende**:
 
-- **Quando a conversa não tem atendente disponível** (padrão): se a conversa tem um responsável disponível para atender, a ligação toca **apenas para ele** e a IA não atende (mesmo que ele não atenda). Se a conversa não tem responsável disponível, a IA atende **na hora**, mesmo havendo outros membros disponíveis na equipe. (Atenção: o texto exibido no agente diz `"Atende quando ninguém da equipe está disponível"`, mas a regra que vale é esta.)
+- **Quando a conversa não tem atendente disponível** (padrão): se a conversa tem um responsável disponível para atender, a ligação toca **apenas para ele** e a IA não atende (mesmo que ele não atenda). Se a conversa não tem responsável disponível, a IA atende **na hora**, mesmo havendo outros membros disponíveis na equipe. O cartão do agente resume essa opção como "Atende quando ninguém da equipe está disponível"; na prática, a regra é a descrita aqui.
 - **Quando ninguém atende a tempo:** toca para a equipe e a IA atende após **Esperar antes da IA** (`5` a `45` segundos, padrão `20`). Se não houver ninguém para tocar, a IA atende na hora.
 - **Sempre:** a IA atende na hora.
 
@@ -50,9 +50,9 @@ Em qualquer das opções, se o workspace estiver sem plano de **Ligações Whats
 - **Pedir um atendente:** quando o contato pede uma pessoa, a ligação toca para a equipe; se ninguém assumir em **45 segundos**, a IA retorna e avisa o contato que a equipe vai retornar. Se a IA falhar ao entrar na chamada, a equipe é chamada.
 - **Encerrar a ligação:** a IA pode encerrar a chamada.
 
-## Custo, franquia e saldo mínimo (sem preço por minuto)
+## Custo, franquia e saldo mínimo
 
-- Cada minuto em que a IA fica na ligação é cobrado com arredondamento para cima (mínimo **1 minuto**), descrição `"Ligação atendida por IA"` (categoria **Voz e áudio** no relatório **Saldo**). Nunca citar preço por minuto.
+- Cada minuto em que a IA fica na ligação é cobrado com arredondamento para cima (mínimo **1 minuto**), descrição `"Ligação atendida por IA"` (categoria **Voz e áudio** no relatório **Saldo**).
 - **Franquia do plano:** planos de **Ligações WhatsApp** que incluem minutos de IA usam a franquia primeiro; o excedente é debitado da carteira. Planos sem minutos de IA debitam por minuto direto da carteira.
 - **Saldo mínimo sem franquia:** quando não há franquia cobrindo a ligação, a IA só atende se o saldo da carteira estiver acima de **R$ 0,50**.
 - **Saldo acabando durante a chamada:** há um aviso **30 segundos antes** e a ligação é encerrada, registrando na conversa `"Ligação encerrada: o saldo de ligações (franquia do plano e carteira) acabou."`.

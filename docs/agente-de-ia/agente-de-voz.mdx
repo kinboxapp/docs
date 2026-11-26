@@ -23,7 +23,7 @@ verificado_em: 2026-11-26
 Configure um agente de voz para atender, em tempo real, as ligações que os contatos fazem pelo WhatsApp para o seu número do [WhatsApp oficial](/docs/canais/whatsapp/visao-geral).
 
 <Note>
-O agente de voz é um recurso em teste (**Beta**) e pode não aparecer no seu workspace. Quem pode configurar: membros com a permissão **Agentes de IA** (e o proprietário do workspace) para criar e conectar o agente, e **Gerenciar Canais** para ajustar a aba **Ligações** do canal.
+O agente de voz é um recurso em teste (**Beta**) e pode não aparecer no seu workspace. Quem pode: a permissão **Agentes de IA** permite criar e editar o agente de voz. Para conectar, trocar ou desconectar o WhatsApp oficial do agente (inclusive pelo cartão do editor) e ajustar a aba **Ligações** do canal, o membro também precisa de **Gerenciar Canais**. O proprietário do workspace tem as duas.
 </Note>
 
 ## O que o agente de voz faz
@@ -66,7 +66,7 @@ Durante uma ligação recebida, ele conversa usando as instruções e a saudaç�
     - **Agente:** escolha o agente de voz.
     - **Quando a IA atende:**
       - **Quando a conversa não tem atendente disponível** (padrão): se a conversa tem um responsável que pode atender, a ligação toca apenas para ele e o agente de voz não atende; caso contrário, o agente atende na hora.
-      - **Quando ninguém atende a tempo:** a ligação toca para a equipe e o agente atende se ninguém atender no prazo de **Esperar antes da IA** (`5` a `45` segundos, padrão `20`); se não houver ninguém para tocar, o agente atende na hora.
+      - **Quando ninguém atende a tempo:** a ligação toca para a equipe e o agente atende se ninguém atender no prazo de **Esperar antes da IA**; se não houver ninguém para tocar, o agente atende na hora.
       - **Sempre:** o agente atende na hora.
     - **Voz:** escolha a voz do agente (clique no ícone de áudio para ouvir cada opção).
     - **Boas-vindas:** escreva a frase inicial de até 500 caracteres que o agente fala ao atender.
@@ -87,10 +87,9 @@ Você também pode usar o chat de teste por texto no painel da esquerda — veja
 
 ## O que aparece na conversa
 
-- Enquanto o agente de voz está na ligação, a conversa na **Caixa de entrada** mostra o painel **Ligação do WhatsApp com IA**, com **Ouvir**, **Assumir** (o agente se despede e passa a chamada ao membro), transcrição ao vivo e o campo **Enviar para a IA** para mandar orientações que o contato não ouve.
-- Se o contato pedir para falar com uma pessoa, o agente chama a equipe; se ninguém assumir em 45 segundos, ele retorna e avisa que a equipe vai retornar o contato.
-- Ao terminar, o registro da ligação na conversa mostra qual agente atendeu (e se um membro assumiu depois), o resumo e a transcrição quando disponível.
+Enquanto o agente de voz está na ligação, a conversa na **Caixa de entrada** mostra o painel **Ligação do WhatsApp com IA**, onde um membro pode **Ouvir**, **Assumir** a chamada ou usar **Enviar para a IA** para orientar o agente sem o contato ouvir. Se o contato pedir uma pessoa, o agente chama a equipe. No fim, o registro da ligação mostra qual agente atendeu, o resumo e a transcrição, quando disponível.
 
 ## Quanto custa
 
-Os minutos em que o agente de voz permanece na ligação consomem [saldo da carteira](/docs/conceitos/saldo-e-creditos) (arredondados para cima) ou descontam da franquia de minutos de IA incluída no plano de **Ligações WhatsApp**, quando disponível. Se o saldo e a franquia acabam durante a ligação, o sistema emite um aviso antes do encerramento e termina a chamada.
+Os minutos em que o agente de voz fica na ligação gastam [saldo da carteira](/docs/conceitos/saldo-e-creditos) ou a franquia de minutos de IA do plano de **Ligações WhatsApp**, quando houver. Se os dois acabarem durante a ligação, a chamada é encerrada depois de um aviso.
+

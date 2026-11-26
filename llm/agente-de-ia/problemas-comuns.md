@@ -23,7 +23,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Matriz de diagnóstico complementar da página humana "O agente não responde ou responde errado" (`/docs/agente-de-ia/problemas-comuns`).
+Matriz de diagnóstico complementar de [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns).
 
 ## Matriz de diagnóstico
 
@@ -50,10 +50,10 @@ Matriz de diagnóstico complementar da página humana "O agente não responde ou
 | Fluxograma parou com erro no meio da execução | Mesmo bloco rodou mais de 3 vezes na mesma rodada, ou bloco falhou sem seta **Erro** | Painel **Execução do agente** / **Inspeção** com erro | Revisar laços e adicionar seta **Erro** ou bloco **Erro não tratado** (lembrando que **Requisição HTTP** com falha segue pela saída normal). |
 | Não consegue excluir o agente | Outro bot ou outro agente referencia este agente | Janela **Agente em uso** (`"Tire o agente destes fluxos antes de excluir:"`) ou erro da API `"Este agente é usado em: {{nomes}}. Tire o agente desses fluxos antes de excluir."` (o bot gerenciado do próprio agente não bloqueia) | Remover o agente dos bots (bloco **Agente de IA**) e dos fluxogramas (**Executar outro agente** / **Subagente**) listados e tentar novamente. |
 | Não vê o fluxograma, os cartões de edição nem **Inspecionar** na conversa | Agente é **Gerenciado pelo parceiro** (ou é **Agente de voz**, no caso do fluxograma/ferramentas) | Selo **Gerenciado pelo parceiro** ou **Voz** na lista | Em agente gerenciado pelo parceiro, o cliente só pode testar; falar com o parceiro. |
-| Erro ao conectar canal no agente | Falha no servidor (ex.: criar bot do agente) | Mudança é desfeita e nenhum canal fica conectado | Repetir ou acionar o suporte informando nome do agente e do canal. |
+| Erro ao conectar canal no agente | A conexão não foi concluída | Mudança é desfeita e nenhum canal fica conectado | Repetir ou acionar o suporte informando nome do agente e do canal. |
 | **Executar bot** ou **Resolver conversa** não fazem nada no teste | Ignorados na simulação | Aviso na **Inspeção**: `"Esta ferramenta não é executada na simulação. Para testar use um canal real nas conexões do agente."` | Testar conectando o agente a um canal real de teste. |
-| Ajustes do bloco **Avançado** na simulação não mudam o comportamento | **Horário**, **Primeiro contato do canal**, **Contato novo** e **Usar habilidades** não são enviados ao agente no teste | Gaveta **Ajustes da simulação** → **Avançado** | Usar apenas **Campos da conversa** e **Campos de contato** na simulação. |
-| Teste criou evento ou chamou sistema real | Google Calendar, HubSpot, ferramenta HTTP / **Requisição HTTP** e **Agendar follow-up** rodam de verdade no teste | Eventos/chamadas reais durante teste no editor | Testar com dados descartáveis; criar/reagendar/cancelar do **Kinbox Agenda** (ferramentas e fluxograma) são simulados. |
+| Ajustes do bloco **Avançado** na simulação não mudam o comportamento | O bloco **Avançado** não muda a resposta do agente no teste | Gaveta **Ajustes da simulação** → **Avançado** | Na simulação, use **Campos da conversa** e **Campos de contato**. |
+| Teste criou evento ou chamou sistema real | Google Calendar, HubSpot e ferramenta HTTP / **Requisição HTTP** rodam de verdade no teste (o **Agendar follow-up** dispara só dentro da simulação) | Eventos/chamadas reais durante teste no editor | Testar com dados descartáveis; criar/reagendar/cancelar do **Kinbox Agenda** (ferramentas e fluxograma) são simulados. |
 | **Inspecionar** sumiu da conversa | Logs expiraram após 60 dias | Mensagem de início do agente sem botão **Inspecionar** | Esperado: histórico de execução fica disponível por 60 dias. |
 | **Agente de voz** não atende ligações | Recurso em teste não liberado, número em coexistência, sem plano de **Ligações WhatsApp** ou saldo em **R$ 0,50 ou menos** sem franquia | `"Ligações do WhatsApp ainda não estão liberadas para este workspace"`, `"Em coexistência com o app WhatsApp Business: {{channels}}. A Meta não oferece ligações nesse modo."`, `"Para usar as ligações, o ambiente precisa assinar um dos planos de Ligações WhatsApp."` | Conferir requisitos na irmã `agente-de-voz`. |
 
