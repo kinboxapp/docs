@@ -64,6 +64,26 @@
             ]
           },
           {
+            "group": "Atendimento",
+            "icon": "inbox",
+            "pages": [
+              {
+                "group": "Caixa de entrada",
+                "pages": [
+                  "docs/conversas/caixa-de-entrada-do-kinbox",
+                  "docs/conversas/gerenciar-conversas",
+                  "docs/conversas/atribuir-e-transferir",
+                  "docs/conversas/iniciar-conversa",
+                  "docs/conversas/agendar-mensagem",
+                  "docs/conversas/acoes-em-lote-e-exportar",
+                  "docs/conversas/criar-filtros-de-conversa",
+                  "docs/conversas/criar-frases-rapidas-para-suas-conversas",
+                  "docs/conversas/problemas-comuns"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Automação e IA",
             "icon": "robot",
             "pages": [
@@ -72,13 +92,13 @@
                 "pages": [
                   "docs/agente-de-ia/visao-geral",
                   "docs/agente-de-ia/criando-seu-agente-de-ia",
-                  "docs/agente-de-ia/fluxograma-e-etapas",
                   "docs/agente-de-ia/conhecimento",
                   "docs/agente-de-ia/ferramentas",
+                  "docs/agente-de-ia/fluxograma-e-etapas",
+                  "docs/agente-de-ia/acoes-do-fluxograma",
                   "docs/agente-de-ia/testar",
                   "docs/agente-de-ia/conectar-canais",
                   "docs/agente-de-ia/agente-de-voz",
-                  "docs/agente-de-ia/acoes-do-fluxograma",
                   "docs/agente-de-ia/problemas-comuns"
                 ]
               }
@@ -606,6 +626,10 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
       "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
+    },
+    {
+      "source": "/docs/conversas/clientes-contatos-e-organizacoes",
+      "destination": "/docs/conceitos/contatos-e-negocios"
     },
     {
       "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",

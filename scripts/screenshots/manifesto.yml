@@ -128,6 +128,152 @@
   arquivo: images/ajuda/whatsapp/conectar-com-numero-de-telefone.webp
   paginas:
     - docs/canais/conectar-whatsapp-app
+# Seção conversas — filtros e frases rápidas
+
+# Caixa de entrada → "Adicionar filtro": painel Gerenciar Filtros com Padrões e Personalizados (workspace sem filtros personalizados).
+- id: conversas-filtros-gerenciar
+  url: /inbox/all
+  passos:
+    - esperar: 'button[aria-label="Adicionar filtro"]'
+    - clicar: 'button[aria-label="Adicionar filtro"]'
+    - esperar: '.ant-drawer-title >> text=Gerenciar Filtros'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Gerenciar Filtros") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Gerenciar Filtros") .ant-drawer-body :text("Parece que você ainda não possui")'
+  mascarar: []
+  arquivo: images/ajuda/conversas/gerenciar-filtros.webp
+  paginas:
+    - docs/conversas/criar-filtros-de-conversa
+
+# "Novo filtro" dentro de Gerenciar Filtros: painel Criar filtro vazio, do título até o estado Resolvido (Nome, Descrição, Quem tem acesso?, Cor ou emoji, Condições, Estados com Aberto marcado).
+- id: conversas-filtros-novo
+  url: /inbox/all
+  passos:
+    - esperar: 'button[aria-label="Adicionar filtro"]'
+    - clicar: 'button[aria-label="Adicionar filtro"]'
+    - esperar: 'button[aria-label="Novo filtro"]'
+    - clicar: 'button[aria-label="Novo filtro"]'
+    - esperar: '.ant-drawer-title >> text=Criar filtro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Criar filtro") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Criar filtro") label:has-text("Resolvido")'
+  mascarar: []
+  arquivo: images/ajuda/conversas/novo-filtro.webp
+  paginas:
+    - docs/conversas/criar-filtros-de-conversa
+
+# Configurações → Ambiente → Frases rápidas → Nova frase: painel Criar frase rápida vazio.
+- id: conversas-frases-nova
+  url: /settings/quick-phrases/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar frase rápida'
+    - pausa: 800
+  alvo: '.ant-drawer-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/nova-frase-rapida.webp
+  paginas:
+    - docs/conversas/criar-frases-rapidas-para-suas-conversas
+
+# Seção conversas — caixa de entrada, iniciar, agendar e ações em lote
+
+# Caixa de entrada (layout novo) sem conversa aberta: menu "Chat" (Abertos, Meus, Seguindo, Arquivados, Filtros) e a lista.
+# A foto do membro atribuído é da conta dona (real): coberta com tarja. O selo "Stag" do staging fica fora ou coberto.
+- id: conversas-caixa-de-entrada
+  url: /inbox/all
+  passos:
+    - esperar: '.conversations-list >> text=Mariana Lima'
+    - pausa: 1000
+  alvo:
+    - '.inbox_side_item'
+    - '.conversations-header'
+    - 'a.message-item:has-text("Mariana Lima")'
+  mascarar:
+    - 'img[alt="avatar"]'
+    - '.request-inspector'
+  arquivo: images/ajuda/conversas/caixa-de-entrada.webp
+  paginas:
+    - docs/conversas/caixa-de-entrada-do-kinbox
+
+# Botão "Enviar mensagem" (lápis) da lista: janela vazia com Canal, Contato, Número (+55) e Texto.
+- id: conversas-enviar-mensagem
+  url: /inbox/all
+  passos:
+    - esperar: '[aria-label="Enviar mensagem"]'
+    - clicar: '[aria-label="Enviar mensagem"]'
+    - esperar: '.ant-modal-content >> text=Número'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/enviar-mensagem.webp
+  paginas:
+    - docs/conversas/iniciar-conversa
+
+# "Mais ações" (três pontos) da conversa → "Agendar mensagem": janela com Data, Texto e Repetir mensalmente. Não salva.
+- id: conversas-agendar-mensagem
+  url: /inbox/all/4393
+  passos:
+    - esperar: '[aria-label="Mais ações"]'
+    - clicar: '[aria-label="Mais ações"]'
+    - esperar: '.ant-dropdown-menu-item >> text=Agendar mensagem'
+    - clicar: '.ant-dropdown-menu-item >> text=Agendar mensagem'
+    - esperar: '.ant-modal-content >> text=Repetir mensalmente'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/agendar-mensagem.webp
+  paginas:
+    - docs/conversas/agendar-mensagem
+
+# Lista → "Mais opções" → "Executar ação..." → Ação = "Exportar conversas": Período e o resumo do arquivo. Não executa.
+- id: conversas-exportar-conversas
+  url: /inbox/all
+  passos:
+    - esperar: '[aria-label="Mais opções"]'
+    - clicar: '[aria-label="Mais opções"]'
+    - esperar: '.ant-dropdown-menu-item >> text=Executar ação...'
+    - clicar: '.ant-dropdown-menu-item >> text=Executar ação...'
+    - esperar: '.ant-modal-content >> text=Executar ação em lote'
+    - clicar: '.ant-modal-content .ant-select-selector'
+    - esperar: '.ant-select-item-option >> text=Exportar conversas'
+    - clicar: '.ant-select-item-option >> text=Exportar conversas'
+    - esperar: '.ant-modal-content >> text=Ver colunas'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conversas/exportar-conversas.webp
+  paginas:
+    - docs/conversas/acoes-em-lote-e-exportar
+
+# Cabeçalho de uma conversa do seed SEM responsável (Rafael Martins): Resolver, Atribuir (ícone de pessoa),
+# Mover para grupo e Mais ações. Sem responsável, o botão Atribuir não mostra a foto da conta dona. Janela de 1920 px
+# para o cabeçalho passar de 520 px e mostrar os rótulos Resolver e Atribuir.
+- id: conversas-cabecalho
+  largura: 1920
+  url: /inbox/all/4395
+  passos:
+    - esperar: '.g_chat_header_inner [aria-label="Mais ações"]'
+    - esperar: '.g_chat_header_inner >> text=Rafael Martins'
+    - pausa: 1000
+  alvo: '.g_chat_header_inner'
+  mascarar: []
+  arquivo: images/ajuda/conversas/cabecalho-da-conversa.webp
+  paginas:
+    - docs/conversas/gerenciar-conversas
+    - docs/conversas/atribuir-e-transferir
+
+# Editor da mesma conversa: campo de texto e os botões Áudio, Nota pro time, Frases rápidas, Emojis, Anexar e Enviar.
+- id: conversas-editor
+  url: /inbox/all/4392
+  passos:
+    - esperar: '.chat-actions-box textarea'
+    - pausa: 1000
+  alvo: '.chat-actions-box'
+  mascarar: []
+  arquivo: images/ajuda/conversas/editor-da-conversa.webp
+  paginas:
+    - docs/conversas/gerenciar-conversas
 
 # Seção whatsapp-oficial (Canais › WhatsApp › WhatsApp oficial)
 
