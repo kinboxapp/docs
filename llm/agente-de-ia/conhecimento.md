@@ -1,6 +1,6 @@
 ---
 title: "Conhecimento do agente: tamanho de arquivo, páginas, texto cortado, site e YouTube"
-description: Limites reais do conhecimento do agente de IA na Kinbox, estados e erros do processamento, como a busca usa o conhecimento e os limites dos arquivos que o contato manda na conversa.
+description: Limites do conhecimento do agente de IA na Kinbox, estados e erros do processamento, como a busca usa o conhecimento e os limites dos arquivos que o contato manda na conversa.
 keywords: [limite de arquivo conhecimento, 5 mb, markdown, 50 mil caracteres, 20 mb, pdf escaneado, youtube sem legenda, site não lido, error conhecimento, excluir conhecimento]
 publico: llm
 tipo: referencia

@@ -53,7 +53,7 @@ Em qualquer das opções, se o workspace estiver sem plano de **Ligações Whats
 ## Custo, franquia e saldo mínimo
 
 - Cada minuto em que a IA fica na ligação é cobrado com arredondamento para cima (mínimo **1 minuto**), descrição `"Ligação atendida por IA"` (categoria **Voz e áudio** no relatório **Saldo**).
-- **Franquia do plano:** planos de **Ligações WhatsApp** que incluem minutos de IA usam a franquia primeiro; o excedente é debitado da carteira. Planos sem minutos de IA debitam por minuto direto da carteira.
+- **Franquia do plano:** planos de **Ligações WhatsApp** que incluem minutos de IA usam a franquia primeiro, e só para a voz padrão (as vozes que a tela oferece hoje); o excedente é debitado da carteira. Com um nível de voz que não seja o padrão, ou em planos sem minutos de IA, a ligação é cobrada por minuto direto da carteira, mesmo que o plano tenha minutos.
 - **Saldo mínimo sem franquia:** quando não há franquia cobrindo a ligação, a IA só atende se o saldo da carteira estiver acima de **R$ 0,50**.
 - **Saldo acabando durante a chamada:** há um aviso **30 segundos antes** e a ligação é encerrada, registrando na conversa `"Ligação encerrada: o saldo de ligações (franquia do plano e carteira) acabou."`.
 
@@ -61,7 +61,7 @@ Em qualquer das opções, se o workspace estiver sem plano de **Ligações Whats
 
 - Limite de **10 minutos** por teste. No último minuto exibe `"O teste encerra em {{seconds}}s"`; ao fim, `"O teste chegou ao limite de 10 minutos"`.
 - **Não cria ligação real, não cobra, não exige plano nem saldo e não chama atendentes.** Apenas um teste ativo por pessoa por vez (abrir outro encerra o anterior).
-- Usa as instruções, o idioma e o conhecimento do agente, mas **não usa a voz nem as Boas-vindas configuradas no canal** (usa sempre a voz padrão e sem saudação inicial).
+- Usa as instruções, o idioma e o conhecimento do agente, mas **não usa a voz nem as Boas-vindas configuradas no canal** (usa sempre a voz padrão).
 - Mensagens de encerramento: `"Você encerrou a ligação"`, `"A IA encerrou a ligação"`, `"A IA transferiria para um atendente"`, `"A IA saiu da ligação"`, `"Não deu para testar"`.
 - Mensagens de erro: `"Permita o uso do microfone no navegador para testar por voz."`, `"Não foi possível iniciar o teste por voz."`, `"O serviço de voz está fora do ar. Tente de novo em alguns minutos."`.
 
