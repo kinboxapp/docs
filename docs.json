@@ -17,7 +17,8 @@
             "group": "API documentation",
             "pages": [
               "api-reference/authentication",
-              "api-reference/custom-fields"
+              "api-reference/custom-fields",
+              "api-reference/nao-existe"
             ]
           },
           {
