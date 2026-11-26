@@ -1,0 +1,122 @@
+---
+title: O chat não aparece no meu site
+description: O que fazer quando o widget da Kinbox não aparece no site, some no celular, não mostra Online, não recebe as conversas ou o visitante não consegue enviar arquivo.
+keywords: [widget não aparece, chat não aparece no site, widget sumiu, widget não carrega, widget não aparece no celular, domínio não permitido, domain not allowed, widget not found, não aparece online, mudanças não aparecem, visitante não recebe resposta, arquivo não envia widget, cartão widget não aparece]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - widget:src/widget.ts
+  - api:src/modules/channels/widget/widget.service.ts
+  - web:src/pages/settings/widget/index.tsx
+  - web:src/pages/settings/widget/Tweaks.tsx
+  - widget:src/upload.ts
+codigo:
+  - widget:src/widget.ts
+  - widget:src/app.tsx
+  - widget:src/upload.ts
+  - widget:src/chat/chat-editor.tsx
+  - widget:src/hooks/useBusinessHours.ts
+  - api:src/modules/channels/widget/widget.service.ts
+  - api:src/modules/channels/widget/widget-upload.constants.ts
+  - web:src/pages/settings/widget/**
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/settings/channels/AddChannel.tsx
+verificado_em: 2026-11-26
+---
+
+Use esta página quando o botão do chat não aparece no site, some no celular, não mostra "Online", não recebe as conversas no canal esperado ou quando você não consegue abrir ou salvar o widget na Kinbox.
+
+<Note>
+  **Quem pode conferir e editar o widget:** o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista de canais e a tela do widget; **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir**.
+</Note>
+
+## Sintoma
+
+- O botão do chat não aparece no site (ou aparece só em algumas páginas, ou não aparece no celular).
+- O chat aparece no site, mas as conversas não chegam ou chegam no widget errado.
+- As mudanças feitas na Kinbox não aparecem no site, ou o topo não mostra "Online".
+- O visitante não vê a resposta da equipe ou não consegue enviar arquivo.
+- Você não encontra o cartão **Widget**, a tela volta para **Canais** ou o botão **Salvar mudanças** não salva.
+
+## Causas e soluções
+
+<Tip>
+  Quem cuida do site pode abrir o console do navegador (ferramentas de desenvolvedor) e procurar uma mensagem que comece com "Kinbox", "Widget" ou "Domain" para identificar por que o chat não carregou.
+</Tip>
+
+<AccordionGroup>
+  <Accordion title="Código não instalado, fora do lugar ou só em algumas páginas">
+    O chat só carrega nas páginas que têm o código de instalação colado antes da tag `</body>` e já publicadas.
+
+    Confirme com quem cuida do site se o código de [Instalar o chat no seu site](/docs/canais/widget) foi colado antes de `</body>` em todas as páginas, publique a alteração e recarregue a página.
+  </Accordion>
+
+  <Accordion title="Endereço fora de Restringir domínio">
+    Com **Restringir domínio** ligado em [Configurações do widget](/docs/canais/widget/configuracoes), o chat compara o endereço **exato** do site (com `https://`, com ou sem `www` conforme o site abre, sem barra no fim e sem caminho). `https://www.example.com` e `https://example.com` são dois endereços diferentes, e a opção ligada com a lista vazia bloqueia o chat em todos os sites.
+
+    Cadastre todos os endereços exatos em que o site abre (ou desligue **Restringir domínio**), clique em **Salvar mudanças** e recarregue o site.
+  </Accordion>
+
+  <Accordion title="No celular não aparece">
+    Com **Mostrar widget no celular** desligado, o chat não aparece em nenhuma tela com menos de 768 px de largura, tanto no celular quanto em uma janela estreita no computador.
+
+    Abra o widget → cartão **Ajustes**, ligue **Mostrar widget no celular**, clique em **Salvar mudanças** e recarregue a página.
+  </Accordion>
+
+  <Accordion title="O botão sumiu, mas o código está lá">
+    Duas opções do cartão **Ajustes** escondem o botão do chat: **Esconder botão do widget** (quando ligada, o chat só abre por um botão ou link do site que chame `window.openWidget()`) e **Usar somente WhatsApp** em **Habilitar balão de WhatsApp** (deixa apenas o botão verde do WhatsApp).
+
+    Abra [Configurações do widget](/docs/canais/widget/configuracoes), desligue a opção que não deve estar ativa, clique em **Salvar mudanças** e recarregue o site.
+  </Accordion>
+
+  <Accordion title="Widget excluído ou código de outro widget ou workspace">
+    O código de um widget excluído não mostra nada no site, e excluir não pode ser desfeito. Já um código copiado de outro widget ou de outro workspace faz o chat carregar com as configurações de lá e enviar as conversas para aquele outro canal.
+
+    Abra o widget certo em **Configurações** → **Chat** → **Canais** (ou crie um novo), clique em **Copiar código** no cartão **Instalação**, substitua o código no site e publique de novo.
+  </Accordion>
+
+  <Accordion title="As mudanças não aparecem no site">
+    Alterações nos cartões só valem depois de clicar em **Salvar mudanças** na barra inferior (aviso "Configurações salvas"), e o site só carrega as configurações novas quando a página é aberta ou recarregada.
+
+    Confirme se salvou as alterações na tela do widget e recarregue a página do site.
+  </Accordion>
+
+  <Accordion title='Não aparece "Online"'>
+    O topo do chat mostra "Online" apenas com **Habilitar horário comercial** ligado, um horário escolhido em **Selecione o horário** e dentro desse horário **pelo relógio do aparelho do visitante**. Em qualquer outro caso (inclusive com a opção desligada), o topo mostra a **Mensagem de fora do expediente**.
+
+    Abra o cartão **Ajustes**, confirme que **Habilitar horário comercial** está ligado com o horário certo selecionado (os horários vêm de **Configurações** → **Ambiente** → **Horários**; o workspace aparece na tela como **ambiente**) e confira o relógio do aparelho usado no teste.
+  </Accordion>
+
+  <Accordion title="O visitante não vê a resposta">
+    A conversa do widget fica guardada no navegador do visitante, por widget, e o chat não envia e-mail nem aviso fora do site. O visitante só vê a resposta quando volta ao site no mesmo navegador em que conversou; em outro navegador, outro aparelho ou janela anônima, começa uma conversa nova.
+
+    Para continuar o atendimento fora do site caso o visitante saia da página, peça e-mail ou celular no formulário pré-chat (veja [Personalizar a aparência, os textos e o formulário do widget](/docs/canais/widget/personalizar)).
+  </Accordion>
+
+  <Accordion title="O arquivo do visitante não vai">
+    O visitante pode enviar um arquivo por vez, de até 10 MB, nos tipos aceitos (imagens, PDF, documentos, planilhas, vídeo MP4 ou ZIP) e cujo conteúdo corresponda à extensão; o chat mostra a mensagem de erro na própria janela do visitante. Gravação de áudio não existe no chat do site.
+
+    Peça ao visitante para reduzir o tamanho do arquivo, usar um formato aceito e enviar um arquivo por vez.
+  </Accordion>
+
+  <Accordion title="Não acho o cartão Widget, a tela volta para Canais ou não aparece Novo canal">
+    Gerenciar widgets exige a permissão **Gerenciar Canais** ou ser o proprietário do workspace. A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista e redireciona a tela do widget para **Canais**; a restrição **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir**.
+
+    Peça ao proprietário do workspace para revisar seu papel em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+  </Accordion>
+
+  <Accordion title="Não consigo salvar">
+    Um campo obrigatório ficou vazio e mostra "Obrigatório.": uma **Mensagem inicial** vazia no cartão **Textos**, o nome de um campo vazio no cartão **Formulário** ou a **Mensagem** da mensagem automática quando **Enviar mensagem automática ao enviar o formulário** está ligado.
+
+    Abra os cartões **Textos** e **Formulário**, preencha ou remova o item vazio e clique em **Salvar mudanças**.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte da Kinbox informando:
+
+- O nome do widget (ou o ID obtido em **Copiar ID**, no menu de três pontos da lista de canais).
+- O endereço exato do site onde o código foi instalado.
+- Se o problema acontece no computador, no celular ou nos dois.
+- A mensagem exibida no console do navegador, se houver.

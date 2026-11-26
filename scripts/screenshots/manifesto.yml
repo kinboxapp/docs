@@ -1391,3 +1391,128 @@
   arquivo: images/ajuda/instagram-e-facebook/configuracoes-facebook.webp
   paginas:
     - docs/canais/instagram/configuracoes
+
+# Seção widget (Canais › Chat do site). O widget "Site da loja" é criado e configurado pelo seed (garantirWidgetExemplo).
+# O código de instalação do staging traz endereços do staging: fica sempre sob tarja. Os prints do chat abrem o site de
+# teste da captura (`site:`), uma página fictícia em www.example.com servida pelo próprio Playwright, sem rede.
+
+- id: widget-adicionar
+  url: /settings/channels/new
+  passos:
+    - clicar: 'text=Widget'
+    - esperar: '.ant-drawer-body input#name'
+    - digitar: { seletor: '.ant-drawer-body input#name', texto: 'Site da loja' }
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .ant-form-item:has(#name)'
+  mascarar: []
+  arquivo: images/ajuda/widget/adicionar-widget.webp
+  paginas:
+    - docs/canais/widget
+
+- id: widget-instalacao
+  url: /settings/channels/widget/257
+  passos:
+    - esperar: 'button:has-text("Copiar código")'
+    - pausa: 800
+  alvo:
+    - 'header:has-text("Instalação")'
+    - 'button:has-text("Copiar código")'
+  mascarar:
+    - '.break-all.rounded-lg'
+  arquivo: images/ajuda/widget/instalacao.webp
+  paginas:
+    - docs/canais/widget
+
+- id: widget-tela
+  url: /settings/channels/widget/257
+  passos:
+    - esperar: 'button:has-text("Copiar código")'
+    - pausa: 1000
+  alvo:
+    - 'text=Site da loja'
+    - 'aside:has-text("Pré-visualização")'
+    - 'div.card-bordered.mb-4:has-text("Ajustes")'
+  mascarar:
+    - '.break-all.rounded-lg'
+  arquivo: images/ajuda/widget/tela-do-widget.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+- id: widget-aparencia
+  url: /settings/channels/widget/257
+  altura: 1400
+  passos:
+    - clicar: 'div.card-bordered.mb-4:has-text("Aparência") .ant-collapse-header'
+    - pausa: 1000
+  alvo: 'div.card-bordered.mb-4:has-text("Aparência")'
+  mascarar: []
+  arquivo: images/ajuda/widget/aparencia.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+- id: widget-textos
+  url: /settings/channels/widget/257
+  altura: 1500
+  passos:
+    - clicar: 'div.card-bordered.mb-4:has-text("Textos") .ant-collapse-header'
+    - pausa: 1000
+  alvo: 'div.card-bordered.mb-4:has-text("Textos")'
+  mascarar: []
+  arquivo: images/ajuda/widget/textos.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+- id: widget-formulario
+  url: /settings/channels/widget/257
+  altura: 1700
+  passos:
+    - clicar: 'div.card-bordered.mb-4:has-text("Formulário") .ant-collapse-header'
+    - pausa: 1000
+  alvo: 'div.card-bordered.mb-4:has-text("Formulário")'
+  mascarar: []
+  arquivo: images/ajuda/widget/formulario.webp
+  paginas:
+    - docs/canais/widget/personalizar
+
+- id: widget-ajustes
+  url: /settings/channels/widget/257
+  altura: 2200
+  passos:
+    - clicar: 'div.card-bordered.mb-4:has-text("Ajustes") .ant-collapse-header'
+    - pausa: 1000
+  alvo: 'div.card-bordered.mb-4:has-text("Ajustes")'
+  mascarar: []
+  arquivo: images/ajuda/widget/ajustes.webp
+  paginas:
+    - docs/canais/widget/configuracoes
+
+- id: widget-chat-no-site
+  site: { widget: 'Site da loja' }
+  url: /
+  passos:
+    - esperar: 'widget>> #widget-button'
+    - pausa: 1500
+    - clicar: 'widget>> #widget-button'
+    - esperar: 'widget>> form button[type="submit"]'
+    - pausa: 1500
+  alvo: '.kinbox-widget-container'
+  mascarar: []
+  arquivo: images/ajuda/widget/chat-no-site.webp
+  paginas:
+    - docs/canais/widget
+
+- id: widget-balao-no-site
+  site: { widget: 'Site da loja' }
+  url: /
+  passos:
+    - esperar: 'widget>> #widget-button'
+    - pausa: 6500
+    - passar: 'widget>> #widget-button'
+    - pausa: 1200
+  alvo: '.kinbox-widget-container'
+  mascarar: []
+  arquivo: images/ajuda/widget/balao-no-site.webp
+  paginas:
+    - docs/canais/widget/configuracoes

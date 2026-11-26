@@ -16,7 +16,7 @@ import { mkdir } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { chromium, type BrowserContext, type Page } from 'playwright'
-import { DOCS_WORKSPACE_NAME, WEB_URL, credentials } from './staging'
+import { API_V3, DOCS_WORKSPACE_NAME, WEB_URL, WIDGET_URL, client, credentials, findDocsWorkspace, login } from './staging'
 
 type Passo =
   | { esperar: string }
@@ -46,6 +46,55 @@ type Item = {
   altura?: number
   /** Workspace onde o print é tirado. Padrão: o workspace de documentação. Outro workspace só para telas que ele não tem (ex.: WhatsApp), sempre com `mascarar`. */
   workspace?: string
+  /**
+   * Abre o site de teste (página fictícia servida pela própria captura em SITE_TESTE, sem rede) com o código
+   * de instalação do widget de nome `widget` do workspace de documentação, em vez de uma tela do app.
+   * Seletores que começam com `widget>> ` procuram dentro do chat (iframe do widget).
+   */
+  site?: { widget: string }
+}
+
+/** Domínio reservado para exemplos. A captura responde por ele: nada sai para a internet nem para um site real. */
+const SITE_TESTE = 'https://www.example.com'
+const PREFIXO_WIDGET = 'widget>> '
+
+/** Página fictícia da loja de exemplo, com o código de instalação do widget antes de </body>. */
+const paginaDeTeste = (codigo: string) => `<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Loja Exemplo</title>
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; color: #1f2937; background: #f8fafc; }
+  header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 20px 48px; font-weight: 700; font-size: 22px; }
+  main { padding: 40px 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; }
+  .produto { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .foto { height: 160px; border-radius: 8px; background: #e2e8f0; margin-bottom: 12px; }
+  .linha { height: 12px; border-radius: 6px; background: #e5e7eb; margin: 8px 0; }
+</style></head>
+<body>
+<header>Loja Exemplo</header>
+<main>${'<div class="produto"><div class="foto"></div><div class="linha" style="width:80%"></div><div class="linha" style="width:50%"></div></div>'.repeat(6)}</main>
+${codigo}
+</body></html>`
+
+/** Código de instalação do widget, igual ao que a tela do widget mostra no staging. */
+async function codigoDoWidget(nome: string) {
+  const ws = findDocsWorkspace(await login())
+  if (!ws) throw new Error(`Workspace "${DOCS_WORKSPACE_NAME}" não encontrado. Rode o seed antes.`)
+  const api = client(ws.token)
+  const canais = await api.v0('GET', '/integrations/channel')
+  const canal = (Array.isArray(canais) ? canais : canais?.data || []).find((c: any) => String(c.channelId) === '10' && c.description === nome)
+  const widgets = await api.v3('GET', '/widget')
+  const widget = canal && (widgets?.data || []).find((w: any) => String(w.channelId) === String(canal.id))
+  if (!widget) throw new Error(`Widget "${nome}" não encontrado no workspace de documentação. Rode o seed antes.`)
+  const licenca = `${widget.id}:${ws.workspaceId}`
+  return `<script type="text/javascript">;(function(){window.__kb=window.__kb||{},window.__kb.license="${licenca}",window.__kb.apiUrl="${API_V3}",window.__kb.widgetUrl="${WIDGET_URL}";var e=document.createElement("script");e.type="module",e.async=!0,e.src="${WIDGET_URL}/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>`
+}
+
+/** Localiza o seletor na página ou, com o prefixo `widget>> `, dentro do chat do site de teste. */
+function localizar(page: Page, seletor: string) {
+  if (seletor.startsWith(PREFIXO_WIDGET)) {
+    return page.frameLocator('.kinbox-widget-container iframe').locator(seletor.slice(PREFIXO_WIDGET.length))
+  }
+  return page.locator(seletor)
 }
 
 const RAIZ = resolve(import.meta.dir, '../..')
@@ -145,12 +194,12 @@ async function garantirSessao(context: BrowserContext) {
 }
 
 async function executarPasso(page: Page, passo: Passo) {
-  if ('esperar' in passo) await page.locator(passo.esperar).first().waitFor({ state: 'visible', timeout: 30_000 })
-  else if ('clicar' in passo) await page.locator(passo.clicar).first().click({ timeout: 30_000 })
-  else if ('digitar' in passo) await page.locator(passo.digitar.seletor).first().fill(passo.digitar.texto)
+  if ('esperar' in passo) await localizar(page, passo.esperar).first().waitFor({ state: 'visible', timeout: 30_000 })
+  else if ('clicar' in passo) await localizar(page, passo.clicar).first().click({ timeout: 30_000 })
+  else if ('digitar' in passo) await localizar(page, passo.digitar.seletor).first().fill(passo.digitar.texto)
   else if ('tecla' in passo) await page.keyboard.press(passo.tecla)
   else if ('pausa' in passo) await page.waitForTimeout(passo.pausa)
-  else if ('passar' in passo) await page.locator(passo.passar).first().hover({ timeout: 30_000, force: true })
+  else if ('passar' in passo) await localizar(page, passo.passar).first().hover({ timeout: 30_000, force: true })
   else if ('arrastar' in passo) {
     const { de, para, x, y } = passo.arrastar
     const posicao = x !== undefined && y !== undefined ? { targetPosition: { x, y } } : {}
@@ -183,7 +232,7 @@ async function pngParaWebp(conversor: Page, png: Buffer) {
 async function recorte(page: Page, alvo: string | string[]) {
   const caixas = []
   for (const seletor of Array.isArray(alvo) ? alvo : [alvo]) {
-    const el = page.locator(seletor).first()
+    const el = localizar(page, seletor).first()
     await el.waitFor({ state: 'visible', timeout: 30_000 })
     const caixa = await el.boundingBox()
     if (!caixa) throw new Error(`Alvo sem área visível: ${seletor}`)
@@ -205,9 +254,16 @@ async function garantirWorkspace(page: Page, nome: string) {
 }
 
 async function capturar(page: Page, conversor: Page, item: Item) {
-  await garantirWorkspace(page, item.workspace || DOCS_WORKSPACE_NAME)
   await page.setViewportSize({ width: item.largura || VIEWPORT.width, height: item.altura || VIEWPORT.height })
-  await page.goto(WEB_URL + item.url, { waitUntil: 'domcontentloaded' })
+  if (item.site) {
+    const html = paginaDeTeste(await codigoDoWidget(item.site.widget))
+    await page.unroute(`${SITE_TESTE}/**`).catch(() => {})
+    await page.route(`${SITE_TESTE}/**`, (rota) => rota.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: html }))
+    await page.goto(SITE_TESTE + item.url, { waitUntil: 'domcontentloaded' })
+  } else {
+    await garantirWorkspace(page, item.workspace || DOCS_WORKSPACE_NAME)
+    await page.goto(WEB_URL + item.url, { waitUntil: 'domcontentloaded' })
+  }
   await page.waitForLoadState('networkidle').catch(() => {})
   await page.addStyleTag({ content: CSS_ESTAVEL })
   for (const passo of item.passos || []) await executarPasso(page, passo)
