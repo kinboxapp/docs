@@ -8,7 +8,7 @@ fontes:
   - web:src/pages/crm/campaigns/AddCampaign/LeadsSource.tsx
   - web:src/components-old/forms/Dropzone.tsx
   - api:src/modules/campaigns/chunks/chunk.worker.ts
-  - api-v0:server/controllers/SmsController.js
+  - api-v0:server/controllers/**
 codigo:
   - web:src/pages/crm/campaigns/AddCampaign/LeadsSource.tsx
   - api:src/modules/campaigns/chunks/chunk.worker.ts
