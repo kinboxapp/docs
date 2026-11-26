@@ -32,7 +32,7 @@ Referência técnica complementar de [Ensinar o agente com arquivos, textos, sit
 | **Website** | Lê apenas a URL informada (não percorre subpáginas). Tenta extrair o texto principal visível e, se falhar, usa um leitor que abre páginas com JavaScript. Artigos pagos não são suportados. Falha na leitura marca o item com erro. |
 | **YouTube** | Importa apenas a transcrição de vídeos públicos (tenta português primeiro e depois a legenda padrão). Vídeos privados, muito recentes ou sem legenda falham e ficam com erro. |
 | **PDF e `.docx`** | `.txt` é lido em UTF-8; PDF e `.docx` têm o texto extraído. PDF escaneado (só imagem, sem texto selecionável) não possui texto para extração. |
-| **Quantidade de conhecimentos** | Não há limite de quantidade para o conhecimento dos agentes. (O limite de 20 bases existe apenas na **Base de conhecimento** antiga em **Configurações** → **Automação**, que é um cadastro separado e não aparece em **Selecione um conhecimento**.) |
+| **Quantidade de conhecimentos** | Não há limite de quantidade para o conhecimento dos agentes. (O limite de 20 bases existe apenas na **Base de conhecimento** do bot e do copiloto, em **Configurações** → **Automação**, que é um cadastro separado e não aparece em **Selecione um conhecimento**; veja [Base de conhecimento do bot e do copiloto](/docs/copiloto/base-de-conhecimento).) |
 
 ## Estados, fila e erros do processamento
 

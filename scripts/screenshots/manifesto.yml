@@ -2222,3 +2222,139 @@
   arquivo: images/ajuda/e-mail/outlook-formulario.webp
   paginas:
     - docs/canais/e-mail/outlook
+
+# Seção copiloto. Antes de capturar, o copiloto do workspace de documentação é configurado só durante a captura
+# (script fora do repo) e volta a ficar vazio depois. Os itens "galeria", "comandos-personalizados" e "intencao"
+# foram capturados com Sugestões automáticas, Comandos de chat (com 2 comandos personalizados fictícios), Análise de
+# sentimento, Aviso ao resolver, Classificação de intenção e Lead score ligadas; o item "funcoes" com 4 delas, sem
+# Sugestões automáticas; o item "menu-conversa" só com Comandos de chat (sem sugestões automáticas, para abrir a
+# conversa sem gastar saldo).
+# Tela do Copiloto com 4 funções adicionadas (Comandos de chat, Análise de sentimento, Classificação de intenção e
+# Lead score; sem Sugestões automáticas) e o bloco Adicionar função, sem o cabeçalho do app.
+- id: copiloto-funcoes
+  url: /settings/copilot
+  altura: 1500
+  passos:
+    - esperar: 'text=Adicionar função'
+    - pausa: 1500
+  alvo:
+    - 'div.grid.grid-cols-1.gap-4'
+    - 'a:has-text("Adicionar função")'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/funcoes.webp
+  paginas:
+    - docs/copiloto/copiloto-atualizado
+
+# Galeria "Escolha uma função..." aberta pelo bloco Adicionar função.
+- id: copiloto-galeria
+  url: /settings/copilot
+  passos:
+    - esperar: 'text=Adicionar função'
+    - clicar: 'text=Adicionar função'
+    - esperar: 'text=Escolha uma função...'
+    - pausa: 1500
+  alvo: '.g_trigger_modal .ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/galeria.webp
+  paginas:
+    - docs/copiloto/configuracoes-de-copiloto
+
+# Janela da função Comandos de chat, rolada até Comandos personalizados (2 comandos fictícios) e Adicionar comando.
+- id: copiloto-comandos-personalizados
+  url: /settings/copilot
+  altura: 1800
+  passos:
+    - esperar: 'text=Adicionar função'
+    - clicar: 'div[role=button]:has-text("Comandos de chat")'
+    - esperar: 'button:has-text("Adicionar comando") >> visible=true'
+    - passar: 'button:has-text("Adicionar comando") >> visible=true'
+    - pausa: 1000
+  alvo:
+    - 'text=Comandos personalizados >> visible=true'
+    - 'button:has-text("Adicionar comando") >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/comandos-personalizados.webp
+  paginas:
+    - docs/copiloto/comandos-personalizados
+
+# Janela da função Classificação de intenção com as 5 intenções padrão e Outro.
+- id: copiloto-intencao
+  url: /settings/copilot
+  altura: 1800
+  passos:
+    - esperar: 'text=Adicionar função'
+    - clicar: 'div[role=button]:has-text("Classificação de intenção")'
+    - esperar: 'text=Adicionar intenção >> visible=true'
+    - pausa: 1500
+  alvo: '.ant-modal-content >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/intencao.webp
+  paginas:
+    - docs/copiloto/analises-de-ia
+
+# Menu do Copiloto aberto no editor de uma conversa do seed (última mensagem do membro: sem sugestão automática).
+# Recorte só do menu e do botão; os comandos personalizados fictícios aparecem no topo.
+- id: copiloto-menu-conversa
+  url: /inbox/all/4392
+  passos:
+    - esperar: '.chat-actions-box textarea'
+    - clicar: 'button[data-academia="copilot-commands"]'
+    - esperar: '[data-copilot-drop="true"]'
+    - pausa: 1200
+  alvo:
+    - '[data-copilot-drop="true"]'
+    - 'button[data-academia="copilot-commands"]'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/menu-na-conversa.webp
+  paginas:
+    - docs/copiloto/usar-o-copiloto-de-ia
+
+# Painel Criar base de conhecimento (tipo PDF, padrão). Não salva.
+- id: copiloto-base-nova
+  url: /settings/knowledge-bases
+  passos:
+    - clicar: 'button:has-text("Nova base de conhecimento")'
+    - esperar: 'text=Criar base de conhecimento'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/base-nova.webp
+  paginas:
+    - docs/copiloto/base-de-conhecimento
+
+# Botão Sugestões acima do editor numa conversa do seed cuja última mensagem é do contato (Rafael Martins).
+# Captura com o copiloto do workspace vazio: o botão aparece mesmo sem Sugestões automáticas e NÃO é clicado
+# (clicar gera sugestões e gasta saldo). Recorte do botão e do editor, sem a nota do sistema com o nome do dono.
+- id: copiloto-botao-sugestoes
+  url: /inbox/all/4395
+  passos:
+    - esperar: 'button.cps-toggle'
+    - pausa: 1200
+  alvo:
+    - 'button.cps-toggle'
+    - '.chat-actions-box'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/botao-sugestoes.webp
+  paginas:
+    - docs/copiloto/usar-o-copiloto-de-ia
+
+# Lista de bases com uma base fictícia em Aguardando processamento e o menu de três pontos aberto (Editar,
+# Processar, Excluir). A base é criada sem processar só para a captura e apagada depois. Não clica em Processar.
+- id: copiloto-bases-lista
+  url: /settings/knowledge-bases
+  passos:
+    - esperar: 'text=Políticas de troca e de'
+    - passar: 'text=Políticas de troca e de'
+    - clicar: 'button.ant-dropdown-trigger.ml-auto'
+    - esperar: '.ant-dropdown:visible >> text=Processar'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Tudo")'
+    - 'text=Políticas de troca e de'
+    - '.ant-dropdown:visible'
+  mascarar: []
+  arquivo: images/ajuda/copiloto/bases-lista.webp
+  paginas:
+    - docs/copiloto/base-de-conhecimento
