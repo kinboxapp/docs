@@ -31,13 +31,19 @@ Você tenta responder uma conversa e o campo de mensagem não aparece, mostra um
 
     **Como confirmar e resolver:** verifique se aparece a faixa "Essa conversa foi encerrada." e o botão **Reabrir conversa** no rodapé. Clique em **Reabrir conversa** (ou **Reabrir** no cabeçalho) para voltar a responder. Se aparecer "Você não tem permissão para reabrir conversas.", peça a permissão **Reabrir** ao administrador do workspace (na tela, **ambiente**). Veja [Atender uma conversa](/docs/conversas/gerenciar-conversas).
 
-    **Só no WhatsApp oficial:** se a janela de 24 horas está fechada, o rodapé mostra **Enviar template** como ação principal, e **Reabrir conversa** fica no menu ao lado. Reabrir não libera texto livre: veja o item da janela de 24 horas abaixo.
+    **Só no WhatsApp oficial:** se a janela de 24 horas está fechada (ou o contato nunca escreveu), o rodapé mostra **Enviar template** como ação principal, e **Reabrir conversa** fica no menu ao lado. Reabrir não libera texto livre: veja o item da janela de 24 horas abaixo.
   </Accordion>
 
-  <Accordion title='Aparece "Você não possui permissão para enviar essa mensagem." ou "...para enviar notas."'>
-    **Causa:** o seu papel não tem a permissão **Responder** (ou **Enviar notas privadas**, no caso de notas) ou possui a restrição **Responder apenas conversas dele** numa conversa que está sem atribuição ou com outra pessoa.
+  <Accordion title='Aparece "Você não possui permissão para enviar essa mensagem."'>
+    **Causa:** o seu papel não tem a permissão **Responder** ou tem a restrição **Responder apenas conversas dele**, e a conversa está sem responsável ou com outra pessoa.
 
-    **Como confirmar e resolver:** confira no cabeçalho se a conversa está atribuída a você. Se estiver com outro membro ou sem responsável, peça para atribuírem a conversa a você (veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir)). Caso contrário, peça ao administrador do workspace para liberar a permissão no seu papel.
+    **Como confirmar e resolver:** confira no cabeçalho se a conversa está atribuída a você. Se não estiver, peça para atribuírem a conversa a você (veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir)). Se já estiver, peça ao administrador do workspace a permissão **Responder** no seu papel.
+  </Accordion>
+
+  <Accordion title='Aparece "Você não possui permissão para enviar notas."'>
+    **Causa:** o seu papel não tem a permissão **Enviar notas privadas**. Atribuir a conversa não muda isso.
+
+    **Como confirmar e resolver:** peça ao administrador do workspace a permissão **Enviar notas privadas** no seu papel.
   </Accordion>
 
   <Accordion title='Aparece "Você não pode enviar mensagens para esse canal" ou "...esse horário"'>
@@ -55,7 +61,7 @@ Você tenta responder uma conversa e o campo de mensagem não aparece, mostra um
   <Accordion title='As mensagens estão escondidas com "Necessário ser atribuído à conversa para visualizar as mensagens"'>
     **Causa:** o seu papel tem a restrição **Esconder mensagens se não atribuído.** ou **Esconder mensagens se não atribuído, com botão de aceitar.**.
 
-    **Como confirmar e resolver:** se o botão **Aceitar conversa** aparecer e ninguém estiver atendendo o contato, clique nele para assumir a conversa e ver o histórico. Se aparecer "Já existe um membro atendendo esse contato." ou se não houver botão, peça a quem tem a permissão **Atribuir** para passar a conversa para você.
+    **Como confirmar e resolver:** se o botão **Aceitar conversa** aparecer, clique nele: sem responsável, a conversa passa para você e o histórico aparece. Se aparecer "Já existe um membro atendendo esse contato.", ou se não houver botão, peça a quem tem a permissão **Atribuir** para passar a conversa para você.
   </Accordion>
 
   <Accordion title='Aparece "Você não tem acesso ao canal desta conversa"'>
@@ -67,13 +73,17 @@ Você tenta responder uma conversa e o campo de mensagem não aparece, mostra um
   <Accordion title='A conversa fecha com "Você não tem permissão para ver essa conversa" ou não acho a conversa'>
     **Causa:** a conversa está em outra visão (como **Arquivados**, se já foi resolvida), fora do filtro aberto ou fora do **Acesso as Conversas** do seu papel. No caso de contas parceiras, o cliente pode ter bloqueado o acesso às conversas ("Conversas restritas pelo cliente").
 
-    **Como confirmar e resolver:** procure o contato na pesquisa geral (`Ctrl+K` / `⌘K`) ou verifique em **Arquivados**. Se a conversa fechar com o aviso de permissão, peça para atribuírem a conversa a você ou peça ao administrador do workspace para ajustar o **Acesso as Conversas** do seu papel. Para parceiros bloqueados, peça ao cliente para ativar **Permitir que o parceiro veja as conversas** em **Configurações** → **Ambiente** → **Geral**.
+    **Como confirmar e resolver:** procure o contato na pesquisa geral (`Ctrl+K` / `⌘K`) ou verifique em **Arquivados**. Se a conversa fechar com o aviso de permissão, peça para atribuírem a conversa a você ou peça ao administrador do workspace para ajustar o **Acesso as Conversas** do seu papel (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Para parceiros bloqueados, peça ao cliente para ativar **Permitir que o parceiro veja as conversas** em **Configurações** → **Ambiente** → **Geral**.
   </Accordion>
 
-  <Accordion title='No WhatsApp oficial aparece "A janela de tempo para respostas foi encerrada."'>
+  <Accordion title='No WhatsApp oficial aparece "A janela de tempo para respostas foi encerrada." ou "Resolvida · janela de 24h encerrada"'>
     **Causa:** no WhatsApp oficial, passaram mais de 24 horas desde a última mensagem do contato, ou ele nunca escreveu.
 
-    **Como confirmar e resolver:** no lugar do editor aparecem **Enviar template** e **Enviar nota de time** (com a conversa resolvida, a faixa "Resolvida · janela de 24h encerrada"). Envie um modelo de mensagem aprovado pela Meta em **Enviar template**. O texto livre volta quando o contato responder. Reabrir a conversa não muda isso.
+    **Como confirmar e resolver:**
+    - Conversa aberta: aparece a faixa "A janela de tempo para respostas foi encerrada." e, no lugar do editor, **Enviar template** e **Enviar nota de time**.
+    - Conversa resolvida: aparece "Resolvida · janela de 24h encerrada", com **Enviar template** como botão principal e **Reabrir conversa** e **Enviar nota de time** no menu ao lado.
+
+    Nos dois casos, envie um modelo de mensagem aprovado pela Meta em **Enviar template**. O texto livre volta quando o contato responder; reabrir a conversa não muda isso. Veja [Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas).
   </Accordion>
 
   <Accordion title='Aparece a faixa "Telefone desconectado" ou a mensagem fica marcada com erro'>

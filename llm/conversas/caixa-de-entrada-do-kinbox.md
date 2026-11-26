@@ -43,16 +43,16 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | Opção | O membro vê na lista | Exemplo |
 | --- | --- | --- |
 | **Global** | Todas as conversas | Ana vê tudo |
-| **Por Grupo ou sem Grupo** | As conversas dos grupos dele, as sem grupo e as atribuídas a ele | Ana vê as de Vendas, as sem grupo e as dela em qualquer grupo; não vê as de Suporte |
-| **Por Grupo** | As conversas dos grupos dele e as atribuídas a ele | Ana vê as de Vendas e as dela; não vê as sem grupo |
+| **Por Grupo ou sem Grupo** | As conversas dos grupos dele, as sem grupo e as atribuídas a ele | Ana vê as de Vendas, as sem grupo e as dela em qualquer grupo (inclusive as de Suporte atribuídas a ela); não vê as outras de Suporte |
+| **Por Grupo** | As conversas dos grupos dele e as atribuídas a ele, mesmo em outro grupo ou sem grupo | Ana vê as de Vendas e as atribuídas a ela (mesmo sem grupo ou em Suporte); não vê as sem grupo de outras pessoas nem as outras de Suporte |
 | **Por Grupo Limitado** | As atribuídas a ele (mesmo fora dos grupos dele) e as sem responsável dos grupos dele | Ana vê as dela e as de Vendas sem responsável; não vê as de Vendas atribuídas a Bruno |
 | **Limitado** | As atribuídas a ele e as sem responsável, desde que sem grupo ou de um grupo dele | Ana vê as dela e as sem responsável de Vendas ou sem grupo; não vê nada de Suporte, nem as dela que estejam em Suporte |
 | **Restrito** | Só as atribuídas a ele | Ana vê só as dela |
 
 - Seguir uma conversa **não** a traz para a lista: as descrições da tela de **Limitado** e **Restrito** falam em "seguindo", mas o que vale é a tabela acima. A visão **Seguindo** mostra só as conversas seguidas que o membro já vê pelo acesso dele.
-- Abrir uma conversa (por link, notificação ou pesquisa) é outra regra: abre para o proprietário do workspace, para quem tem **Global**, para o responsável, para quem segue a conversa e para quem recebeu as conversas compartilhadas. Fora disso, a conversa fecha com "Você não tem permissão para ver essa conversa".
+- Abrir uma conversa (por link, notificação ou pesquisa) é outra regra: abre tudo o que o acesso do papel já mostra na lista e, além disso, as conversas que o membro segue, as compartilhadas com ele e as atribuídas a ele em qualquer grupo. O proprietário e quem tem **Global** abrem tudo. Fora disso, a conversa fecha com "Você não tem permissão para ver essa conversa".
 - Proprietário do workspace: tem todas as permissões e não é afetado pelas restrições da seção.
-- Página de conceito sobre papéis: "Workspace, membros e papéis" (link a costurar).
+- Página de conceito sobre papéis: [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
 
 ## Permissões da seção Conversas
 
@@ -87,11 +87,11 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | **Somente pode mover para grupo que pertence** | A lista de **Mover para grupo** mostra só grupos de que o membro faz parte. | — |
 | **Não pode ver quem está visualizando a conversa** | Oculta o indicador de quem está visualizando a conversa. | — |
 | **Esconder mensagens se não atribuído.** | Esconde o histórico se a conversa não for do membro (sem botão de aceitar) e impede resolver. | "Necessário ser atribuído à conversa para visualizar as mensagens" / "Você só pode resolver essa conversa se for o atendente responsável." |
-| **Esconder mensagens se não atribuído, com botão de aceitar.** | Esconde o histórico e exibe **Aceitar conversa** se ninguém estiver atendendo. | "Necessário ser atribuído à conversa para visualizar as mensagens" / "Já existe um membro atendendo esse contato." |
+| **Esconder mensagens se não atribuído, com botão de aceitar.** | Esconde o histórico e exibe sempre o botão **Aceitar conversa**. Se a conversa já tem responsável, o clique mostra "Já existe um membro atendendo esse contato."; sem responsável, atribui a conversa ao membro. | "Necessário ser atribuído à conversa para visualizar as mensagens" / "Já existe um membro atendendo esse contato." |
 | **Esconder tags se não for atribuido** | Oculta as tags da conversa até o membro ser atribuído. | — |
 | **Não pode remover tags** | Permite adicionar tags na conversa, mas não remover. | — |
 | **Não pode executar ações em lote** | Desativa **Executar ação...** no menu **Mais opções** da lista. | — |
-| **Não pode compartilhar conversa** | Impede compartilhar a conversa com outros membros. | — |
+| **Não pode compartilhar conversa** | Tira a opção **Compartilhamento de conversas** do perfil do membro. | — |
 | **Não pode bloquear conversa** | Desativa **Bloquear** em **Mais ações**. | — |
 | **Não pode sincronizar histórico** | Impede usar **Sincronizar histórico** (disponível apenas no WhatsApp por QR Code na conexão Clássica). | — |
 | **Não pode exportar para CSV** | Desativa **Exportar para CSV** na conversa e impede **Exportar conversas** em lote. | "Seu perfil não pode exportar conversas." |

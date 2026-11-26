@@ -27,7 +27,7 @@ Isso acontece por causa de restrições configuradas no seu papel (o proprietár
 - **Esconder mensagens se não atribuído.** ou **Esconder mensagens se não atribuído, com botão de aceitar.:** a tela oculta o histórico com "Necessário ser atribuído à conversa para visualizar as mensagens". Mesmo quando aparece o botão **Aceitar conversa**, ele só funciona se ninguém estiver atendendo (caso contrário, exibe "Já existe um membro atendendo esse contato.").
 - **Restrições de chat ativo no Enviar mensagem:** bloqueiam iniciar conversa quando o número ou o contato já está em atendimento com outro membro, exibindo "{número} - Em atendimento" ou "{número} - Em atendimento com {nome}".
 
-Para resolver, peça a alguém com a permissão **Atribuir** para passar a conversa para você (veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir)), clique em **Aceitar conversa** quando a conversa estiver sem responsável, ou peça ao administrador do workspace para ajustar as permissões do seu papel. Consulte também [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
+Para resolver, peça a alguém com a permissão **Atribuir** para passar a conversa para você (veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir)), clique em **Aceitar conversa** quando a conversa estiver sem responsável, ou peça ao administrador do workspace para ajustar as permissões do seu papel (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Consulte também [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
 
 ## Variações
 

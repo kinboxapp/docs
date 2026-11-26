@@ -247,8 +247,10 @@
     - docs/conversas/acoes-em-lote-e-exportar
 
 # Cabeçalho de uma conversa do seed SEM responsável (Rafael Martins): Resolver, Atribuir ("Não atribuído"),
-# Mover para grupo, Mais ações e Modo foco. Sem responsável, o botão Atribuir não mostra a foto da conta dona.
+# Mover para grupo e Mais ações. Sem responsável, o botão Atribuir não mostra a foto da conta dona. Janela de 1920 px
+# para o cabeçalho passar de 520 px e mostrar os rótulos Resolver e Atribuir.
 - id: conversas-cabecalho
+  largura: 1920
   url: /inbox/all/4395
   passos:
     - esperar: '.g_chat_header_inner [aria-label="Mais ações"]'

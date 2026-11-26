@@ -34,7 +34,7 @@ Referência complementar de [Iniciar uma conversa com um contato](/docs/conversa
 - **Limitar canais que pode responder:** exibe no campo **Canal** apenas os canais permitidos para o papel.
 - **Limitar horário que pode responder:** fora do horário permitido, bloqueia com "Você não pode enviar mensagens esse horário".
 - **Restrições de chat ativo** (verificadas número a número):
-  - **Somente pode iniciar chat ativo com conversa não atribuída a outro membro.** — se o número já tem conversa aberta nesse canal atribuída a outra pessoa (ex.: Mariana já atende `+55 11 90000-0001` nesse WhatsApp), bloqueia com "{número} - Em atendimento". O servidor também valida esta restrição com "Você não tem permissão para realizar chat ativo para conversas em atendimento".
+  - **Somente pode iniciar chat ativo com conversa não atribuída a outro membro.** — se o número já tem conversa aberta nesse canal atribuída a outra pessoa (ex.: Mariana já atende `+55 11 90000-0001` nesse WhatsApp), bloqueia com "{número} - Em atendimento" (ou, em alguns casos, com "Você não tem permissão para realizar chat ativo para conversas em atendimento").
   - **Somente pode iniciar chat ativo com conversa não atribuída.** — bloqueia se o número já tem conversa aberta nesse canal atribuída a qualquer pessoa, inclusive o próprio membro (ex.: você mesmo já tem conversa aberta com `+55 11 90000-0001`), com "{número} - Em atendimento".
   - **Somente pode iniciar chat ativo com contato sem conversa atribuída.** — bloqueia se o contato já tem conversa aberta atribuída a outro membro em **qualquer** canal (ex.: Carlos está em atendimento com outra pessoa em outro canal), com "{número} - Em atendimento com {nome}".
 
@@ -69,7 +69,6 @@ Referência complementar de [Iniciar uma conversa com um contato](/docs/conversa
 | Número inválido ou sem WhatsApp | "Não é possível enviar mensagem para esse número" |
 | Fora do horário permitido | "Você não pode enviar mensagens esse horário" |
 | Canal bloqueado para ativo (API) | "Esse canal não tem permissão para chat ativo" |
-| Número já em atendimento | "{número} - Em atendimento" / "{número} - Em atendimento com {nome}" |
-| Bloqueio de chat ativo no servidor | "Você não tem permissão para realizar chat ativo para conversas em atendimento" |
+| Número em atendimento com outro membro | "{número} - Em atendimento" / "{número} - Em atendimento com {nome}" / "Você não tem permissão para realizar chat ativo para conversas em atendimento" |
 | QR Code com 4 a 10 números sem **Campanhas** | "Você não tem permissão para enviar mensagem ativa para mais de um número ao mesmo tempo. Necessário a permissão de Gerenciar campanhas." |
 | QR Code com mais de 10 números | "Proibido. Para enviar para mais de 10 números crie uma campanha." |

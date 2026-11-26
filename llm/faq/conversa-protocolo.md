@@ -22,7 +22,7 @@ A Kinbox gera número de protocolo de atendimento?
 
 Sim: cada atendimento (sessão) recebe um número, que é o protocolo.
 
-Ele aparece na conversa no separador "Nova sessão #N", pode ser enviado ao contato usando a chave reservada **Protocolo** (`{{protocol}}`) em [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas) ou mensagens digitadas, e entra na coluna **Protocolo** ao exportar conversas em lote (veja [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar)). O formato do número de protocolo não é configurável na tela. Veja também [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox).
+Ele aparece na conversa no separador "Nova sessão #N" (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)), pode ser enviado ao contato usando a chave reservada **Protocolo** (`{{protocol}}`) em [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas) ou mensagens digitadas, e entra na coluna **Protocolo** ao exportar conversas em lote (veja [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar)). O formato do número de protocolo não é configurável na tela. Veja também [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox).
 
 ## Variações
 

@@ -44,7 +44,7 @@ Referência complementar de [Ações em lote e exportar conversas](/docs/convers
 - **Período padrão:** mês passado inteiro.
 - **Limite de período:** máximo de **93 dias** por exportação.
 - **Limite de conversas:** máximo de **10.000 conversas** no período.
-- **Escopo:** diferente das outras ações em lote (que valem só para a lista que está na tela), a exportação consulta a visão ou o filtro duas vezes, uma para conversas abertas e outra para resolvidas, e mantém os outros critérios. Exemplo: exportar a partir de **Abertos** ou de **Arquivados** traz as abertas e as resolvidas que tiveram mensagens no período. A visão **Compartilhados** é a exceção: segue a lista como ela está. Só entram conversas que o membro pode ver.
+- **Escopo:** diferente das outras ações em lote (que valem só para a lista que está na tela), a exportação consulta a visão ou o filtro duas vezes, uma para conversas abertas e outra para resolvidas, e mantém os outros critérios. Exemplo: exportar a partir de **Abertos** ou de **Arquivados** traz as abertas e as resolvidas que tiveram mensagens no período. Exceções: **Compartilhados** segue a lista como está e exporta só as abertas; um filtro salvo com **Resolvido** marcado exporta só as resolvidas. Já um filtro com **Aberto** marcado (o padrão) exporta abertas e resolvidas, como as visões. Só entram conversas que o membro pode ver.
 - **Visibilidade e privacidade:**
   - Somente atendimentos dentro do acesso do membro são exportados.
   - Com **Esconder mensagens se não atribuído.** ou **Esconder mensagens se não atribuído, com botão de aceitar.**, entram apenas atendimentos atribuídos ao próprio membro.

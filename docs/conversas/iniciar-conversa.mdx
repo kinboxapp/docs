@@ -33,14 +33,19 @@ Envie a primeira mensagem para um contato pela Kinbox e comece uma conversa por 
     Selecione o **Canal** de saída. A lista mostra apenas canais de WhatsApp, SMS e e-mail liberados para o seu papel e que não estejam marcados como **Apenas Receptivo**.
   </Step>
   <Step title="Preencha o destinatário e a mensagem">
-    - **No WhatsApp por QR Code e no SMS:** preencha **Contato** (opcional, ou escolha um contato já cadastrado), digite o **Número** com código do país (`+55`) e DDD (por exemplo, `+55 11 90000-0001`) e escreva o **Texto**. O editor aceita [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas), emojis e chaves `{}`.
-    - No WhatsApp por QR Code, o editor também tem **Anexar** e **Gravar Áudio**. O SMS é só texto: sem anexos e sem áudio.
-    - **No WhatsApp oficial:** selecione um **Modelo de mensagem** em vez de digitar texto livre (veja abaixo).
-    - **No e-mail:** preencha **Email**, **Assunto** e o texto da mensagem.
-    - Se o workspace (na tela, **ambiente**) tiver **Campos obrigatórios no chat ativo** ativado em **Configurações** → **Ambiente** → **Geral**, preencha também os campos exibidos na janela.
+    O que preencher depende do canal:
+
+    - **WhatsApp por QR Code e SMS:**
+      1. Em **Contato**, digite um nome (opcional) ou escolha um contato já cadastrado.
+      2. Em **Número**, escolha o código do país no seletor (o padrão é `+55`) e digite o número com DDD, por exemplo `11 90000-0001`.
+      3. Escreva o **Texto**. O editor aceita [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas), emojis e chaves `{}`. No WhatsApp por QR Code, também tem **Anexar** e **Gravar Áudio**; o SMS é só texto.
+    - **WhatsApp oficial:** preencha o número e escolha um **Modelo de mensagem** em vez de texto livre (veja abaixo).
+    - **E-mail:** preencha **Email**, **Assunto** e o texto.
+
+    Se o workspace (na tela, **ambiente**) ligou **Campos obrigatórios no chat ativo** (**Configurações** → **Ambiente** → **Geral**), preencha também os campos que aparecem na janela.
 
     <Frame caption="Janela Enviar mensagem com Canal, Contato, Número e editor de Texto">
-      <img src="/images/ajuda/conversas/enviar-mensagem.webp" alt="Janela Enviar mensagem vazia com os campos Canal obrigatório, Contato opcional, Número com código +55 e DDD, editor de Texto e botão Enviar" />
+      <img src="/images/ajuda/conversas/enviar-mensagem.webp" alt="Janela Enviar mensagem vazia com os campos Canal obrigatório, Contato opcional, seletor de código do país +55 e Número com DDD, editor de Texto com os ícones Nota pro time, gravar áudio, frases rápidas, emoji, anexo e chaves, e botão Enviar" />
     </Frame>
   </Step>
   <Step title="Envie a mensagem">
@@ -50,7 +55,7 @@ Envie a primeira mensagem para um contato pela Kinbox e comece uma conversa por 
 
 ## WhatsApp oficial
 
-Para iniciar uma conversa pelo WhatsApp oficial, o campo de texto é substituído por **Modelo de mensagem**. Escolha um template aprovado pela Meta, preencha os campos solicitados (**Cabeçalho**, **Corpo**, **Botões** ou **Anexo**, conforme o modelo) e confira a **Pré-visualização** antes de clicar em **Enviar**.
+Para iniciar uma conversa pelo WhatsApp oficial, o campo de texto é substituído por **Modelo de mensagem** (veja [Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)). Escolha um template aprovado pela Meta, preencha os campos solicitados (**Cabeçalho**, **Corpo**, **Botões** ou **Anexo**, conforme o modelo) e confira a **Pré-visualização** antes de clicar em **Enviar**.
 
 ## Vários números
 

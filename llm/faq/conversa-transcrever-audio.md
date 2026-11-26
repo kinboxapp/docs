@@ -34,6 +34,5 @@ Veja mais em [Atender uma conversa](/docs/conversas/gerenciar-conversas).
 
 - como transformar mensagem de voz em texto na kinbox
 - tem transcrição de áudio do whatsapp na caixa de entrada
-- por que o botão transcrever não aparece no áudio
 - qual o tamanho máximo de áudio para transcrever
 - consigo ler o áudio do cliente sem ouvir

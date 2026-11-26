@@ -189,7 +189,8 @@
     "pergunta": "Por que no WhatsApp oficial o campo de digitar sumiu e só aparece o botão de enviar template?",
     "esperado": [
       "docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas",
-      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns"
+      "docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns",
+      "docs/conversas/problemas-comuns"
     ],
     "tipo": "conceito"
   },

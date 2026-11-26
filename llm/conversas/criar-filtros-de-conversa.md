@@ -46,8 +46,8 @@ O bloco **Estados** fica sempre visível no painel (o item **Estado** dentro do 
 | **Sem tags** | Conversas sem nenhuma tag aplicada. |
 | **Nunca respondidos** | Conversas sem nenhuma mensagem de membro, considerando apenas conversas criadas após `22/11/2022`. |
 | **Sessão sem resposta de operador** | Sessão atual ainda sem resposta de membro. |
-| **Janela de resposta expirado** | Apenas conversas de WhatsApp com contato individual (exclui grupos), com a janela vencida ou sem data de janela registrada. Por isso também pega conversas do WhatsApp por QR Code: para listar só o oficial, combine com **Canais**. |
-| **Janela de resposta aberta** | Apenas conversas de WhatsApp com contato individual (exclui grupos) com janela aberta. |
+| **Janela de resposta expirado** | Conversas individuais do WhatsApp oficial com a janela de 24 h vencida ou sem data de janela (o contato nunca escreveu). |
+| **Janela de resposta aberta** | Conversas individuais do WhatsApp oficial com a janela de 24 h aberta. |
 | **Sessão com erro de envio de mensagem** | Sessão marcada com erro de envio. |
 
 ### Pares mutuamente exclusivos
@@ -81,7 +81,6 @@ Marcar uma opção desmarca automaticamente a outra:
 - Tempo limite: se a contagem demorar mais de 2 segundos, exibe "—" com a dica "Esse filtro tem conversas demais para contar agora".
 - Memória (cache): dura 90 segundos. O filtro aberto consulta o número atual ao ser selecionado; os demais exibem o último valor conhecido (mais apagado, com "atualizado há ..." na dica).
 - **Atualizar contadores** (dica "Atualizar contadores de conversas"): recarrega sem usar a memória de 90 segundos para os filtros padrão e o filtro aberto (exibe "Atualizando...").
-- Limite de taxa: 60 pedidos de contagem por minuto.
 
 ## Pastas
 
