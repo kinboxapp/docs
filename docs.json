@@ -92,6 +92,16 @@
                 ]
               },
               {
+                "group": "E-mail",
+                "pages": [
+                  "docs/canais/e-mail/visao-geral",
+                  "docs/canais/e-mail/por-encaminhamento",
+                  "docs/canais/e-mail/por-imap",
+                  "docs/canais/e-mail/outlook",
+                  "docs/canais/e-mail/problemas-comuns"
+                ]
+              },
+              {
                 "group": "Chat do site (widget)",
                 "pages": [
                   "docs/canais/widget",
