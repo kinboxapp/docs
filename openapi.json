@@ -4160,7 +4160,7 @@
               "utm_medium": "cpc",
               "utm_campaign": "consultas",
               "gclid": "EAIaIQobChMI",
-              "origin": "https://www.meusite.com.br"
+              "origin": "https://www.example.com"
             }
           }
         },
@@ -4224,7 +4224,7 @@
               "utm_medium": "cpc",
               "utm_campaign": "consultas",
               "gclid": "EAIaIQobChMI",
-              "origin": "https://www.meusite.com.br"
+              "origin": "https://www.example.com"
             }
           }
         }
@@ -4410,12 +4410,12 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "712287883441111",
+            "example": "123456789012345",
             "description": "Id do template na Meta"
           },
           "name": {
             "type": "string",
-            "example": "disparo_cnc"
+            "example": "confirmacao_pedido"
           },
           "language": {
             "type": "string",
@@ -6330,11 +6330,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "712287883441111"
+            "example": "123456789012345"
           },
           "name": {
             "type": "string",
-            "example": "disparo_cnc"
+            "example": "confirmacao_pedido"
           },
           "language": {
             "type": "string",
