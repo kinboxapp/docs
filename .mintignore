@@ -5,3 +5,13 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Central de ajuda: conteúdo só para LLM, avaliação, scripts e regras dos agentes (públicos no GitHub, fora do site)
+llm/
+eval/
+scripts/
+guia-de-escrita.md
+AGENTS.md
+CLAUDE.md
+.agent/
+skills-lock.json

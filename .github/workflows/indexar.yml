@@ -1,0 +1,38 @@
+# Pede a indexação da central de ajuda na api-v2 de produção depois de cada push na main que mexe em conteúdo.
+# O staging não é chamado daqui: ele indexa a branch revisao-inicial sozinho (plano, 02 §1).
+# Os merges feitos pelo deploy-producao.yml usam o token do Actions e não disparam este workflow; aquele workflow
+# pede a indexação por conta própria.
+name: Indexar
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'llm/**'
+      - 'novidades.mdx'
+      - 'eval/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexar
+  cancel-in-progress: false
+
+jobs:
+  indexar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+
+      - name: Pede a indexação para a api-v2
+        env:
+          HELP_INDEX_TOKEN: ${{ secrets.HELP_INDEX_TOKEN }}
+          HELP_API_URL: ${{ vars.HELP_API_URL || 'https://api4.kinbox.com.br' }}
+          SHA: ${{ github.sha }}
+        run: bash .github/scripts/indexar.sh "$SHA"
