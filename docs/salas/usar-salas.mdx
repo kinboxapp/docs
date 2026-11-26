@@ -1,7 +1,7 @@
 ---
 title: "Conversar nas salas: mensagens diretas, menções e threads"
 description: Como criar uma sala, mandar mensagens, arquivos e áudios, mencionar colegas com @, responder em thread, reagir, editar, fixar, salvar e buscar mensagens, falar por mensagem direta e silenciar uma sala na Kinbox.
-keywords: [criar sala, nova sala, sala privada, adicionar membro na sala, mensagem direta, mandar mensagem para colega, mencionar, marcar colega, "@", thread, responder mensagem, reagir, editar mensagem, apagar mensagem, fixar mensagem, salvar mensagem, buscar mensagem, silenciar sala, mutar sala, excluir sala, enviar arquivo na sala, áudio na sala, não lidas]
+keywords: [criar sala, nova sala, sala privada, adicionar membro na sala, mensagem direta, dm, mandar mensagem para colega, mencionar, marcar colega, "@", thread, responder mensagem, reagir, editar mensagem, apagar mensagem, fixar mensagem, salvar mensagem, buscar mensagem, silenciar sala, mutar sala, excluir sala, enviar arquivo na sala, áudio na sala, não lidas]
 publico: humano
 tipo: guia
 fontes:
@@ -29,7 +29,7 @@ Crie e organize salas públicas ou privadas, envie mensagens, arquivos e áudios
   Quem pode no workspace (na tela, **ambiente**):
 
   - **Usar as salas:** todo membro, exceto quem tem a restrição **Não pode acessar as salas** no papel (quadro **Restrições** da seção **Outros**). O proprietário nunca é bloqueado. Se o botão **Salas** não aparecer no topo, peça a quem administra o workspace para tirar **Não pode acessar as salas** do seu papel.
-  - **Criar, editar, clonar, ordenar e excluir salas:** quem tem a permissão **Salas** (seção **Gerenciamento do Ambiente**) ou o proprietário. Os papéis prontos **Atendente** e acima já trazem essa permissão. Mandar mensagem, reagir, responder, fixar, salvar e buscar não dependem dela.
+  - **Criar, editar, clonar, ordenar e excluir salas:** quem tem a permissão **Salas** (seção **Gerenciamento do Ambiente**) ou o proprietário. Os papéis prontos **Atendente**, **Supervisor** e **Administrador** já trazem essa permissão. Mandar mensagem, reagir, responder, fixar, salvar e buscar não dependem dela.
 
   Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes).
 </Note>
@@ -71,7 +71,7 @@ Passe o mouse sobre uma sala na lista e clique em **⋯** (ou clique com o botã
 - **Mover para cima** / **Mover para baixo:** aparece quando há mais de uma sala e fica apagado sem a permissão **Salas** ou nas pontas da lista.
 - **Editar sala:** abre a janela com os dados da sala e o botão **Salvar**. Também pode ser aberta pelo link **Editar sala** abaixo das boas-vindas da sala e, em sala privada, pelo botão **Adicionar pessoas** no painel **Membros**.
 - **Clonar:** abre a janela de criação já preenchida com a mesma cor, descrição, privacidade e membros, e o nome da sala original precedido de uma indicação de cópia. As mensagens não são copiadas.
-- **Excluir sala:** pede a confirmação "Tem certeza que deseja excluir essa sala? Todas as mensagens serão perdidas." e exibe o aviso de exclusão (por exemplo, "Sala #Vendas excluída").
+- **Excluir sala:** pede a confirmação "Tem certeza que deseja excluir essa sala? Todas as mensagens serão perdidas."
 
 Se **Editar sala**, **Clonar** e **Excluir sala** não aparecerem no menu da sala, falta a permissão **Salas**. Mensagens diretas não têm esse menu no computador: não é possível editar, ordenar nem excluir uma mensagem direta.
 
@@ -98,20 +98,19 @@ A menção funciona para uma pessoa por vez: não há menção coletiva para tod
 
 ## Ações numa mensagem
 
-Passe o mouse sobre uma mensagem para abrir a barra com 👍, ❤️, 😂, **Adicionar reação**, **Responder em thread**, **Responder citando**, **Editar** (apenas nas suas mensagens de texto) e **⋯**. O menu **⋯** reúne **Responder citando**, **Responder em thread**, **Editar**, **Copiar texto**, **Fixar na sala** / **Desafixar da sala**, **Salvar para depois** / **Remover dos salvos** e **Excluir**. As ações ficam indisponíveis enquanto a mensagem está enviando ou com erro.
+Passe o mouse sobre uma mensagem para abrir a barra de ações: ela traz as reações rápidas, atalhos para as ações mais usadas e o menu **⋯**, que reúne as ações abaixo. As ações ficam indisponíveis enquanto a mensagem está enviando ou com erro.
 
-<Frame caption="Barra de ações e menu ⋯ abertos sobre uma mensagem">
-  <img src="/images/ajuda/salas/acoes-da-mensagem.webp" alt="Barra de ações de uma mensagem com emojis rápidos, adicionar reação, thread, citar, editar e três pontos, com o menu aberto mostrando Responder citando, Responder em thread, Editar, Copiar texto, Fixar na sala, Salvar para depois e Excluir" />
+<Frame caption="Barra de ações sobre uma mensagem fixada">
+  <img src="/images/ajuda/salas/acoes-da-mensagem.webp" alt="Mensagem fixada com reação de joinha e, no canto direito, a barra de ações com os emojis rápidos, adicionar reação, responder em thread, responder citando, editar e o menu de três pontos" />
 </Frame>
 
 - **Reagir:** clique em um emoji da barra ou em **Adicionar reação** para escolher outro. As reações aparecem embaixo da mensagem com a contagem; passar o mouse mostra quem reagiu, e clicar de novo no mesmo emoji tira a sua reação.
-- **Responder citando:** o campo mostra "Respondendo" com o nome e o começo da mensagem (clique em **X** ou pressione `Esc` para cancelar). A resposta entra na sala com a citação; clicar na citação leva à mensagem original.
-- **Responder em thread:** abre o painel **Thread** à direita com a mensagem original e o campo "Responder na thread…". Na sala, abaixo da mensagem original, aparece o link de respostas (como "1 resposta" e "Última resposta há…"); clique nele para abrir a thread. As respostas não aparecem soltas na sala.
+- **Responder citando:** a resposta entra na sala com a citação da mensagem original.
+- **Responder em thread:** abre o painel **Thread** à direita com a mensagem original e o campo "Responder na thread…". Na sala, abaixo da mensagem original, aparece o link de respostas (como "1 resposta" e "Última resposta há…"); clique nele para abrir a thread. As respostas não aparecem soltas na sala, e dentro da thread não há **Responder citando**.
 - **Editar:** só o autor pode editar, e só mensagens de texto (arquivos e áudios não são editáveis), sem prazo. Edite no próprio lugar e pressione `Enter` para salvar (`Shift`+`Enter` pula linha e `Esc` cancela). A mensagem ganha "(editado)".
-- **Excluir:** o autor exclui as próprias mensagens e o proprietário exclui mensagens de qualquer pessoa (ter a permissão **Salas** não permite excluir mensagens dos outros). A Kinbox pede confirmação com "Tem certeza que deseja excluir essa mensagem?" — se a mensagem tiver thread, avisa também "As respostas da thread também serão excluídas." — e mostra "Mensagem removida".
-- **Copiar texto:** copia o texto da mensagem e mostra "Copiado".
-- **Fixar na sala** / **Desafixar da sala:** qualquer membro com acesso à sala pode fixar ou desafixar. A Kinbox exibe "Mensagem fixada na sala" ou "Mensagem desafixada", e a mensagem ganha o selo **Fixada** com quem fixou. O alfinete no topo da sala mostra quantas mensagens estão fixadas e abre o painel **Mensagens fixadas** ("Nada fixado ainda" quando vazio). Também funciona em mensagens diretas.
-- **Salvar para depois** / **Remover dos salvos:** guarda a mensagem só para você e mostra "Mensagem salva. Veja em Salvos".
+- **Excluir:** o autor exclui as próprias mensagens e o proprietário exclui mensagens de qualquer pessoa (ter a permissão **Salas** não permite excluir mensagens dos outros). A Kinbox pede confirmação com "Tem certeza que deseja excluir essa mensagem?" — se a mensagem tiver thread, avisa também "As respostas da thread também serão excluídas."
+- **Fixar na sala** / **Desafixar da sala:** qualquer membro com acesso à sala pode fixar ou desafixar. A mensagem ganha o selo **Fixada** com quem fixou, e o alfinete no topo da sala mostra quantas mensagens estão fixadas e abre o painel **Mensagens fixadas**. Também funciona em mensagens diretas.
+- **Salvar para depois** / **Remover dos salvos:** guarda a mensagem só para você, na lista **Salvos**.
 
 <Warning>
   Excluir uma mensagem a remove para todos os membros (inclusive dos **Salvos**) e não tem volta. Se ela tiver thread, todas as respostas também são excluídas.
@@ -119,48 +118,50 @@ Passe o mouse sobre uma mensagem para abrir a barra com 👍, ❤️, 😂, **Ad
 
 ## Mensagens diretas
 
-Para começar uma mensagem direta, clique no nome do colega na seção **Mensagens diretas** da lista, clique no nome dele no painel **Membros** ou procure por ele na busca do topo (**Pesquisar**, `Ctrl+K` ou `⌘K`). A mensagem direta passa a existir no primeiro envio. Não é possível mandar mensagem direta para você mesmo.
+Para começar uma mensagem direta, clique no nome do colega na seção **Mensagens diretas** da lista. A mensagem direta passa a existir no primeiro envio. Não é possível mandar mensagem direta para você mesmo.
 
-A lista exibe todos os colegas que já aceitaram o convite, dos mais recentes para os mais antigos (membros inativos aparecem esmaecidos). Se o seu papel tiver a restrição **Só pode ver membros que sejam dos seus grupos nos DMs.**, só aparecem colegas com algum grupo em comum com você (veja [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos)).
+A seção traz os colegas que já aceitaram o convite, e quem conversou com você por último aparece primeiro (membros inativos aparecem esmaecidos). Se o seu papel tiver a restrição **Só pode ver membros que sejam dos seus grupos nos DMs.**, você só vê e manda mensagem direta para colegas que têm algum grupo em comum com você (veja [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos)).
 
-No topo da mensagem direta aparece o status do colega ("Online", "Online · Indisponível" ou "Offline"). Embaixo da sua última mensagem aparece "Visto" quando a outra pessoa já leu — esse indicador existe apenas em mensagens diretas. Mensagens diretas permitem fixar e buscar mensagens, mas não têm painel **Membros** nem menu **⋮**.
+Embaixo da sua última mensagem aparece "Visto" quando a outra pessoa já leu — esse indicador existe apenas em mensagens diretas. Mensagens diretas permitem fixar e buscar mensagens, mas não têm painel **Membros** nem menu **⋮**.
 
 Na lista, a mensagem direta aparece só para as duas pessoas, mas o proprietário e quem tem **Auditar mensagens diretas** podem lê-la em modo somente leitura, exceto as que envolvem o proprietário (veja [Auditar as mensagens diretas dos membros](/docs/salas/auditar-mensagens-diretas)).
 
 ## Menções, Salvos e busca
 
-- **Menções:** atalho no topo da lista que mostra "Mensagens em que você foi mencionado" em todas as salas, com sala, autor, data e texto. Clique em um item para ir à mensagem (ou abrir a thread, se for resposta). Vazio: "Nenhuma menção por aqui".
-- **Salvos:** atalho no topo da lista com "Mensagens que você guardou para ver depois". Só você vê os seus salvos. Para remover, passe o mouse e clique em **Remover dos salvos** (sem confirmação). Vazio: "Nada salvo ainda".
-- **Buscar mensagens:** clique na lupa no topo da sala para abrir **Buscar mensagens**, digite em "Buscar por texto…" e escolha **Nesta sala** (**Nesta conversa** em uma mensagem direta) ou **Todas as salas**. Clique em um resultado para ir até a mensagem. A lupa busca no texto das mensagens; já a busca do topo (**Pesquisar**, `Ctrl+K` ou `⌘K`) e o campo "Ir para sala ou pessoa…" encontram salas e pessoas.
+- **Menções:** atalho no topo da lista que mostra "Mensagens em que você foi mencionado" em todas as salas, com sala, autor, data e texto. Clique em um item para ir à mensagem (ou abrir a thread, se for resposta).
+- **Salvos:** atalho no topo da lista com "Mensagens que você guardou para ver depois". Só você vê os seus salvos. Para remover, passe o mouse e clique em **Remover dos salvos** (sem confirmação).
+- **Buscar mensagens:** clique na lupa no topo da sala para abrir **Buscar mensagens**, digite em "Buscar por texto…" e escolha **Nesta sala** (**Nesta conversa** em uma mensagem direta) ou **Todas as salas**. Clique em um resultado para ir até a mensagem. A lupa busca no texto das mensagens; já o campo "Ir para sala ou pessoa…", no topo da lista, encontra salas e colegas pelo nome.
 
 ## Não lidas e silenciar
 
-Salas com mensagens não lidas aparecem em negrito com o número na lista. Abrir a sala marca as mensagens como lidas (ou use **Marcar como lida** no menu da sala, se aparecer). Na primeira abertura, a linha vermelha **Novas** indica onde começam as não lidas; se você estiver lendo mensagens antigas, o botão de novas mensagens / "Ir para o fim" leva ao final. As mensagens são divididas por "Hoje" e "Ontem", e o histórico carrega ao rolar para cima. Texto digitado e não enviado fica salvo como rascunho no navegador (ícone de lápis "Rascunho" na lista).
+Salas com mensagens não lidas aparecem em negrito com o número na lista. Ao abrir uma sala com mensagens não lidas, elas passam a contar como lidas (ou use **Marcar como lida** no menu da sala, se aparecer). Se você estiver lendo mensagens antigas, aparece um botão no rodapé (**Ir para o fim** ou a contagem de novas mensagens) que leva ao final. O histórico carrega ao rolar para cima. Texto digitado e não enviado fica salvo como rascunho no navegador (ícone de lápis "Rascunho" na lista).
 
-Para silenciar uma sala, abra o menu dela e clique em **Silenciar sala** (para reativar, **Ativar notificações**). A Kinbox mostra "Sala silenciada: você só será notificado quando for mencionado" ou "Notificações da sala ativadas". Silenciar vale por pessoa: você continua vendo as mensagens, mas a sala deixa de somar no número do botão **Salas**, fica esmaecida com sino cortado na lista e mostra o sino cortado "Sala silenciada" no topo. No computador, menções e respostas em threads de que você participa ainda avisam; no app para celular, sala silenciada não gera push. Mensagens diretas não têm opção de silenciar no computador.
+Para silenciar uma sala, abra o menu dela e clique em **Silenciar sala** (para reativar, **Ativar notificações**). Silenciar vale por pessoa: você continua vendo as mensagens, mas a sala deixa de somar no número do botão **Salas**, fica esmaecida com sino cortado na lista e mostra o sino cortado "Sala silenciada" no topo. No computador, menções e respostas em threads de que você participa ainda avisam; no app para celular, sala silenciada não gera push. Mensagens diretas não têm opção de silenciar no computador.
 
-Com a Kinbox aberta no navegador, chega um aviso no canto da tela por 5 segundos quando o painel **Salas** está fechado (ou só o som, se o painel estiver aberto em outra sala). O som segue **Quando receber mensagem de time** em **Configurações** → **Notificações**, e o push (**Mensagem de time**) avisa menções e mensagens diretas — veja [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
+Com a Kinbox aberta no navegador, chega um aviso no canto da tela quando o painel **Salas** está fechado (ou só o som, se o painel estiver aberto em outra sala). O som segue **Quando receber mensagem de time** em **Configurações** → **Notificações**, e o push (**Mensagem de time**) avisa menções e mensagens diretas — veja [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
 
 <Tip>
-  Na lista de salas em telas grandes, use `Alt`+`↑` e `Alt`+`↓` para passar para a sala ou pessoa anterior e seguinte. Segure `Shift` junto para pular apenas entre as que têm mensagens não lidas.
+  Na lista de salas em telas grandes, use `Alt`+`↑` e `Alt`+`↓` para passar para a sala ou pessoa anterior e seguinte.
 </Tip>
 
 ## Painel Membros
 
 Em salas (não em mensagens diretas, nem no navegador do celular), o botão com o número de participantes no topo (dica "Membros") abre o painel **Membros** à direita. Em telas largas, ele abre sozinho até você fechar pelo **X**.
 
-O painel mostra "Sala pública: todos do workspace" ou a contagem de membros da sala privada, o campo **Buscar membro** e os grupos **Online** e **Offline**. Em salas privadas, se você tiver a permissão **Salas** ou for o proprietário, aparece também **Adicionar pessoas** (se não aparecer, a sala é pública ou falta essa permissão). Clique no nome de um colega para abrir uma mensagem direta com ele. Se **Nota de avaliação pública** estiver ligada em **Configurações** → **Ambiente** → **Geral**, a nota com estrela aparece ao lado de cada membro (veja [Pedir avaliação no fim do atendimento](/docs/atendimento/pesquisa-de-satisfacao)).
+O painel mostra "Sala pública: todos do workspace" ou a contagem de membros da sala privada, o campo **Buscar membro** e os grupos **Online** e **Offline**. Em salas privadas, se você tiver a permissão **Salas** ou for o proprietário, aparece também **Adicionar pessoas** (se não aparecer, a sala é pública ou falta essa permissão). Se **Nota de avaliação pública** estiver ligada em **Configurações** → **Ambiente** → **Geral**, a nota com estrela aparece ao lado de cada membro (veja [Pedir avaliação no fim do atendimento](/docs/atendimento/pesquisa-de-satisfacao)).
 
 ## Problemas comuns
 
 - **O botão Salas não aparece no topo.** O seu papel tem a restrição **Não pode acessar as salas**. Peça a quem administra o workspace para tirá-la do seu papel.
 - **Não consigo criar, editar ou excluir uma sala.** Se o lápis **Criar sala** não aparecer ou se **Editar sala** e **Excluir sala** não aparecerem no menu da sala, falta a permissão **Salas** (seção **Gerenciamento do Ambiente**) no seu papel.
-- **Não encontro um colega em Mensagens diretas.** Confira se o colega já aceitou o convite para o workspace e se o seu papel não tem a restrição **Só pode ver membros que sejam dos seus grupos nos DMs.** (com ela, só aparecem colegas que pertencem a algum grupo em comum com você). Você também não aparece na própria lista.
+- **Não consigo mandar mensagem direta para um colega.** Confira se o colega já aceitou o convite para o workspace e se o seu papel não tem a restrição **Só pode ver membros que sejam dos seus grupos nos DMs.** (com ela, você só vê e manda mensagem direta para colegas que têm algum grupo em comum com você). Não é possível mandar mensagem direta para você mesmo.
 - **Não consigo editar uma mensagem.** Apenas o autor pode editar, e apenas mensagens de texto (arquivos e áudios não podem ser editados).
 - **Aparece o aviso "Envie no máximo 10 arquivos".** Cada envio aceita até 10 arquivos; separe os arquivos em mais de um envio.
 - **Não recebo aviso das mensagens da sala.** Confira se a sala não está silenciada (sino cortado na lista e no topo) e verifique as opções de **Som** e **Push** em [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
 
-No app da Kinbox para celular, a aba **Salas** traz a maior parte dessas ações, mas recursos como reações, threads, edição de mensagem, fixar, salvar, busca e **Auditoria** ficam apenas no computador.
+## No celular
+
+No app da Kinbox para celular, a aba **Salas** traz a maior parte dessas ações. Reações, threads, edição de mensagem, fixar, salvar, busca de mensagens, **Menções**, **Salvos** e **Auditoria** não estão disponíveis no app. Pelo navegador do celular, sem o app, o painel **Salas** abre em tela cheia, uma coluna por vez.
 
 ## Veja também
 

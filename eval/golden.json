@@ -1344,10 +1344,10 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Quantos arquivos consigo mandar de uma vez numa sala?",
+    "pergunta": "Se eu silenciar uma sala, ainda fico sabendo quando algum colega me marcar com @ lá?",
     "esperado": [
-      "llm/salas/usar-salas",
-      "docs/salas/usar-salas"
+      "docs/salas/usar-salas",
+      "llm/salas/usar-salas"
     ],
     "tipo": "referencia"
   },

@@ -450,34 +450,47 @@ async function garantirRespostasRapidas(api: Api) {
  * Salas (prints da seção salas): a sala pública "Avisos" com mensagens internas fictícias da equipe,
  * uma fixada, uma com reação e uma resposta em thread, e a sala privada "Gerência". As mensagens
  * saem em nome da conta de teste (dona do workspace): os prints mascaram nome e foto do autor.
- * Salas são só da equipe: nada é enviado a contato.
+ * Salas são só da equipe: nada é enviado a contato. Cada sala é achada pelo nome e pela privacidade,
+ * e cada mensagem, fixação, reação e resposta só é criada se ainda faltar (rodar de novo não duplica).
  */
 async function garantirSalas(api: Api) {
   const salas = lista(await api.v0('GET', '/rooms'))
-  let avisos = salas.find((r) => r.name === 'Avisos' && r.type !== 'dm')
+  const acharSala = (name: string, privacy: string) => salas.find((r) => r.name === name && r.type !== 'dm' && (r.privacy || 'public') === privacy)
+  const eu = lista(await api.v0('GET', '/operators?limit=100')).find((o) => o.isOwner)
+  let avisos = acharSala('Avisos', 'public')
   if (!avisos) {
     avisos = await api.v0('POST', '/rooms', { name: 'Avisos', description: 'Comunicados para toda a equipe', privacy: 'public', color: '#3498db', memberIds: [] })
   }
-  if (!salas.some((r) => r.name === 'Gerência' && r.type !== 'dm')) {
-    const eu = lista(await api.v0('GET', '/operators?limit=100')).find((o) => o.isOwner)
+  if (!acharSala('Gerência', 'private')) {
     await api.v0('POST', '/rooms', { name: 'Gerência', description: 'Metas e escalas da semana', privacy: 'private', color: '#8e44ad', memberIds: eu ? [eu.id] : [] })
   }
   const avisosId = String(avisos.id || avisos._id)
-  const mensagens = lista(await api.v3('GET', `/rooms/${avisosId}/messages?limit=50`))
-  if (!mensagens.length) {
-    const textos = [
-      'Bom dia, equipe! A partir de segunda, o atendimento de sábado vai até as 14h.',
-      'Lembrete: antes de encerrar o dia, confiram se ficou alguma conversa sem responsável.',
-      'A nova coleção de cafés especiais chega na quinta. As fotos já estão na pasta de produtos.',
-    ]
-    const criadas: any[] = []
-    for (const text of textos) criadas.push(await api.v0('POST', `/rooms/${avisosId}/messages`, { text, type: 'text' }))
-    const [primeira, , terceira] = criadas.map((m) => String(m._id || m.id))
-    await api.v3('POST', `/rooms/${avisosId}/messages/${primeira}/pin`, {})
-    await api.v3('POST', `/rooms/${avisosId}/messages/${primeira}/reactions`, { emoji: '👍' })
-    await api.v3('POST', `/rooms/${avisosId}/messages/${terceira}/thread`, { text: 'Combinado. Vou atualizar as frases rápidas com os novos sabores.', type: 'text' })
+  const textos = [
+    'Bom dia, equipe! A partir de segunda, o atendimento de sábado vai até as 14h.',
+    'Lembrete: antes de encerrar o dia, confiram se ficou alguma conversa sem responsável.',
+    'A nova coleção de cafés especiais chega na quinta. As fotos já estão na pasta de produtos.',
+  ]
+  const resposta = 'Combinado. Vou atualizar as frases rápidas com os novos sabores.'
+  const listar = async () => lista(await api.v3('GET', `/rooms/${avisosId}/messages?limit=50`)).filter((m) => !m.threadId)
+  let mensagens = await listar()
+  for (const text of textos) {
+    if (!mensagens.some((m) => m.text === text)) await api.v0('POST', `/rooms/${avisosId}/messages`, { text, type: 'text' })
   }
-  log(`salas: "Avisos" (pública, ${mensagens.length || 3} mensagens) e "Gerência" (privada)`)
+  mensagens = await listar()
+  const [primeira, , terceira] = textos.map((text) => mensagens.find((m) => m.text === text))
+  const idDe = (m: any) => String(m._id || m.id)
+  if (!primeira.pinnedAt) await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(primeira)}/pin`, {})
+  const meuId = String(eu?.id ?? '')
+  const joinha = (primeira.reactions || []).find((r: any) => r.emoji === '👍')
+  // A rota de reação alterna: só reage se a conta ainda não reagiu com 👍
+  if (!joinha || (meuId && !(joinha.operatorIds || []).map(String).includes(meuId))) {
+    await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(primeira)}/reactions`, { emoji: '👍' })
+  }
+  const thread = await api.v3('GET', `/rooms/${avisosId}/messages/${idDe(terceira)}/thread`)
+  if (!lista(thread?.replies ?? thread).some((m) => m.text === resposta)) {
+    await api.v3('POST', `/rooms/${avisosId}/messages/${idDe(terceira)}/thread`, { text: resposta, type: 'text' })
+  }
+  log(`salas: "Avisos" (pública, ${textos.length} mensagens, fixada, reação e resposta) e "Gerência" (privada)`)
 }
 
 /** Agente de IA criado pelo mesmo caminho do onboarding. Nasce desligado e sem canal. */

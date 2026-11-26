@@ -1,7 +1,7 @@
 ---
 title: "Salas: o chat interno da equipe"
 description: O que são as Salas da Kinbox — salas públicas e privadas e mensagens diretas para a equipe conversar sem o cliente ver —, onde ficam, quem vê cada uma e quem pode criar salas.
-keywords: [salas, chat interno, chat da equipe, conversar com a equipe, mensagem direta, mensagem privada entre atendentes, sala pública, sala privada, canal interno, sala geral, o cliente vê as salas, onde ficam as salas, botão @, comunicação interna]
+keywords: [salas, chat interno, chat da equipe, bate-papo, chat entre atendentes, falar com colega, conversar com a equipe, mensagem direta, dm, mensagem privada entre atendentes, sala pública, sala privada, canal interno, sala geral, o cliente vê as salas, onde ficam as salas, botão @, comunicação interna]
 publico: humano
 tipo: conceito
 fontes:
@@ -26,7 +26,7 @@ verificado_em: 2026-11-26
   Quem pode usar no workspace (na tela, **ambiente**):
 
   - **Usar as salas:** todo membro, exceto quem tem no papel a restrição **Não pode acessar as salas** (quadro **Restrições** da seção **Outros**). O proprietário nunca é bloqueado. Se o botão **Salas** não aparecer no topo, peça a quem administra o workspace para tirar **Não pode acessar as salas** do seu papel.
-  - **Criar, editar, clonar, ordenar e excluir salas:** quem tem a permissão **Salas** (seção **Gerenciamento do Ambiente**) ou o proprietário. Os papéis prontos **Atendente** e acima já trazem essa permissão.
+  - **Criar, editar, clonar, ordenar e excluir salas:** quem tem a permissão **Salas** (seção **Gerenciamento do Ambiente**) ou o proprietário. Os papéis prontos **Atendente**, **Supervisor** e **Administrador** já trazem essa permissão.
   - **Auditar mensagens diretas:** quem tem a permissão **Auditar mensagens diretas** (seção **Outros**) ou o proprietário. Nenhum papel pronto traz essa permissão.
 
   Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes).
@@ -36,10 +36,10 @@ verificado_em: 2026-11-26
 
 As **Salas** não têm item no menu lateral nem em **Configurações**. Para abrir, clique no botão **Salas** (ícone **@**) no topo da tela, à direita. O botão mostra um número amarelo com o total de mensagens não lidas (`99+` a partir de 100); salas silenciadas não entram nessa conta.
 
-Você também pode ir direto a uma sala ou a um colega pela busca do topo (**Pesquisar**, `Ctrl+K` ou `⌘K`, descrita em [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)), nos grupos **Salas** e **Mensagens Diretas**. No computador, o painel abre por padrão na lateral, em tela maior; pelo botão no topo da lista, você alterna entre a lateral e uma janela menor presa ao botão **Salas**.
+Você também pode ir direto a uma sala pela busca do topo (**Pesquisar**, `Ctrl+K` ou `⌘K`, descrita em [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)), no grupo **Salas**. No computador, o painel abre na lateral, em tela maior.
 
-<Frame caption="Painel Salas aberto na lateral: lista à esquerda, sala Avisos no centro e painel Membros à direita">
-  <img src="/images/ajuda/salas/painel-das-salas.webp" alt="Painel Salas dividido em três colunas: à esquerda, a lista com busca, Menções, Salvos, Auditoria, as salas Avisos, Geral e Gerência e a seção Mensagens diretas; no centro, a sala pública Avisos com boas-vindas, uma mensagem fixada com reação e uma resposta em thread; à direita, o painel Membros" />
+<Frame caption="Painel Salas aberto na lateral: lista à esquerda e sala Avisos no centro">
+  <img src="/images/ajuda/salas/painel-das-salas.webp" alt="Painel Salas com a lista à esquerda (busca, Menções, Salvos, Auditoria, as salas Avisos, Geral e Gerência e a seção Mensagens diretas recolhida) e, no centro, a sala pública Avisos com boas-vindas, uma mensagem fixada com reação e o link de uma resposta em thread" />
 </Frame>
 
 O painel tem três colunas: a lista à esquerda, a sala aberta no centro e, à direita, o painel que mostra **Membros**, **Mensagens fixadas**, a busca ou a **Thread**. Na lista ficam o campo "Ir para sala ou pessoa…", os atalhos **Menções**, **Salvos** e **Auditoria** (este aparece apenas para quem tem a permissão) e as seções **Salas** e **Mensagens diretas**.
@@ -54,13 +54,13 @@ O painel tem três colunas: a lista à esquerda, a sala aberta no centro e, à d
 
 Todo workspace novo já começa com a sala pública **Geral**. Ela funciona como uma sala comum: quem tem a permissão **Salas** ou é o proprietário pode editá-la ou excluí-la.
 
-A seção **Mensagens diretas** já lista todos os colegas que você pode chamar, mesmo sem mensagem anterior. Se o seu papel tiver a restrição **Só pode ver membros que sejam dos seus grupos nos DMs.**, só aparecem colegas que compartilham algum grupo com você (veja [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos)).
+A seção **Mensagens diretas** já traz os colegas que você pode chamar, mesmo sem mensagem anterior. Se o seu papel tiver a restrição **Só pode ver membros que sejam dos seus grupos nos DMs.**, você só vê e manda mensagem direta para colegas que têm algum grupo em comum com você (veja [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos)).
 
 Não confunda as **Salas** do chat interno com as salas físicas cadastradas no Kinbox Agenda: são recursos diferentes.
 
 ## O que dá para fazer
 
-- [Criar, editar, clonar, ordenar e excluir salas](/docs/salas/usar-salas#criar-uma-sala) com nome, cor, descrição e privacidade.
+- [Criar salas](/docs/salas/usar-salas#criar-uma-sala) com nome, cor, descrição e privacidade, e [editar, clonar, ordenar ou excluir](/docs/salas/usar-salas#editar-clonar-ordenar-ou-excluir-uma-sala) as que já existem.
 - [Mandar mensagens de texto, emojis, arquivos e áudios](/docs/salas/usar-salas#mandar-mensagens-arquivos-e-áudios) em salas ou em [mensagens diretas](/docs/salas/usar-salas#mensagens-diretas).
 - [Mencionar colegas com @](/docs/salas/usar-salas#mencionar-um-colega) para destacar a mensagem e avisar a pessoa.
 - [Reagir, responder citando, responder em thread, editar, excluir, fixar e salvar mensagens](/docs/salas/usar-salas#ações-numa-mensagem).

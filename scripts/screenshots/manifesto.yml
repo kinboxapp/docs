@@ -2777,12 +2777,14 @@
     - clicar: 'button:has(i.fa-at)'
     - clicar: '.room-sidebar-scroll >> text=Avisos'
     - esperar: '[data-room-message] >> text=A nova coleção'
+    # Sem o painel Membros e com Mensagens diretas recolhida: os membros fictícios do seed não aceitaram o convite
+    - clicar: 'aside.room-panel .h-16 button.room-icon-button'
+    - clicar: '.room-sidebar-scroll button:has-text("Mensagens diretas")'
     - pausa: 800
   alvo: '.rooms-drawer .ant-drawer-content'
   mascarar:
     - '.rooms-drawer figure'
     - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
-    - '.rooms-drawer .truncate.text-sm.font-medium'
   arquivo: images/ajuda/salas/painel-das-salas.webp
   paginas:
     - docs/salas/visao-geral
@@ -2813,13 +2815,13 @@
     - clicar: 'button:has(i.fa-at)'
     - clicar: '.room-sidebar-scroll >> text=Avisos'
     - esperar: '[data-room-message] >> text=A nova coleção'
-    - passar: '[data-room-message]:has-text("A nova coleção")'
-    - clicar: '[data-room-message]:has-text("A nova coleção") .room-toolbar-button >> nth=-1'
-    - esperar: '.ant-dropdown:not(.ant-dropdown-hidden) >> text=Salvar para depois'
+    # Só a barra sobre a mensagem fixada: o menu ⋯ cobriria o texto das outras mensagens
+    - passar: '[data-room-message]:has-text("Bom dia, equipe")'
     - pausa: 600
   alvo:
-    - '[data-room-message]:has-text("A nova coleção")'
-    - '.ant-dropdown:not(.ant-dropdown-hidden) .ant-dropdown-menu'
+    - '[data-room-message]:has-text("Bom dia, equipe")'
+    - '[data-room-message]:has-text("Bom dia, equipe") .room-toolbar-button >> nth=0'
+    - '[data-room-message]:has-text("Bom dia, equipe") .room-toolbar-button >> nth=-1'
   mascarar:
     - '.rooms-drawer [data-room-message] figure'
     - '.rooms-drawer [data-room-message] span.truncate.font-semibold'
@@ -2832,9 +2834,13 @@
   passos:
     - clicar: 'button:has(i.fa-at)'
     - clicar: '.room-sidebar-scroll >> text=Auditoria'
-    - esperar: '.rooms-drawer >> text=Escolha um membro'
+    - esperar: '.rooms-drawer >> text=sem marcar nada como lido'
     - pausa: 600
-  alvo: '.rooms-drawer .ant-drawer-content'
+  # Recorte: do topo do painel até o aviso do centro, sem o branco abaixo e sem a seção Mensagens diretas
+  alvo:
+    - '.room-sidebar-scroll .room-list-item:has-text("Gerência")'
+    - '.rooms-drawer .ant-select'
+    - '.rooms-drawer >> text=sem marcar nada como lido'
   mascarar: []
   arquivo: images/ajuda/salas/auditoria.webp
   paginas:
