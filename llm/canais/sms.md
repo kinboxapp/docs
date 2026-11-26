@@ -1,5 +1,5 @@
 ---
-title: "SMS: créditos, contador de 160 caracteres, erros de envio e um canal por workspace"
+title: "SMS: créditos, contador de caracteres, erros de envio e um canal por workspace"
 description: Regras do SMS na Kinbox, com o consumo de créditos, pacotes e liberação, contador de caracteres na conversa e na campanha, mensagens de erro de envio e de compra, e um canal por workspace.
 keywords: [sms sem créditos, sem créditos disponíveis, 160 caracteres, 70 caracteres acento, contador sms, limite de envio de sms por minuto, número inválido sms, compra de sms desabilitada, pacotes de sms, 100 mil créditos, liberar créditos, um canal de sms, sms emoji, você precisa configurar um canal de sms]
 publico: llm
@@ -63,8 +63,11 @@ O contador mostra `(tamanho/limite)` e fica vermelho quando o tamanho passa do l
 
 - **Limite 160:** texto só com letras sem acento, números, pontuação comum e alguns caracteres especiais, entre eles `é`, `è`, `à`, `É` e `Ç`.
 - **Limite 70:** basta um caractere fora desse conjunto, como `ã`, `õ`, `á`, `í`, `ó`, `ú`, `â`, `ê`, `ç` (minúsculo) ou um emoji.
-- **Acima do limite:** o limite exibido muda para 153 (texto sem acento) ou 67 (com acento). Exemplo: 161 letras `a` mostram `(161/153)` em vermelho.
+- **Contam em dobro:** alguns caracteres do conjunto de 160, como `€`, contam como 2 no tamanho, sem baixar o limite para 70.
+- **Acima do limite:** o limite exibido muda para 153 (no conjunto de 160) ou 67 (no conjunto de 70). Exemplo: 161 letras `a` mostram `(161/153)` em vermelho.
 - Essa contagem é separada da regra de 160 caracteres das campanhas por SMS, que conta o tamanho do texto.
+
+### Menus do bot e arquivos
 
 - **Menu do bot por SMS:** vira texto com as opções listadas em linhas.
 - **Arquivo de frase rápida ou bot:** vai como link no texto da mensagem.
@@ -84,7 +87,7 @@ O contador mostra `(tamanho/limite)` e fica vermelho quando o tamanho passa do l
 | `"Sem créditos disponíveis"` | O workspace não tem **Créditos de SMS**; na conversa a mensagem fica com erro. | Compre créditos de SMS pelo painel **Canal de SMS** ou em **Assinatura** → **Carteira**. |
 | `"Mensagem inválida, número inválido ou você não tem permissão para enviar SMS para este número"` | O envio foi recusado pelo número de destino ou pelo conteúdo da mensagem. | Confira se o número de celular do contato está correto e revise o texto. |
 | `"Você atingiu o limite de envio de SMS por minuto"` | Muitos disparos de SMS em pouco tempo. | Aguarde um pouco e tente enviar novamente. |
-| `"Sem saldo de créditos SMS suficiente."` | Tentativa de criar campanha por SMS sem créditos disponíveis no workspace. | Compre créditos de SMS antes de criar a campanha. |
+| `"Sem saldo de créditos SMS suficiente."` | Ao criar uma campanha num canal de SMS da Kinbox, o workspace não tem nenhum crédito de SMS disponível. A criação não confere se o saldo cobre a lista inteira. | Compre créditos de SMS antes de criar a campanha. |
 
 ## Respostas
 

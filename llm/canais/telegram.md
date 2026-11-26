@@ -25,7 +25,7 @@ Detalhes de referência da página [Conectar o Telegram](/docs/canais/telegram).
 ## Token
 
 - O canal conecta um bot do Telegram criado no @BotFather, identificado pelo **Token**. Não conecta a conta pessoal de Telegram de alguém.
-- **Formato:** `número:letras`. Nos exemplos desta página, o token aparece como `<token do bot>`.
+- **Formato:** `número:letras`.
 - **Status Conectado:** o status **Conectado** não garante que o token está certo. Envie uma mensagem de teste para o bot; se não chegar, confira o token e se o bot não está ligado a outra ferramenta.
 - **Segurança:** guarde o token em local seguro, pois ele dá acesso ao bot.
 
@@ -64,8 +64,8 @@ Detalhes de referência da página [Conectar o Telegram](/docs/canais/telegram).
 
 - Clique na linha do canal. O painel abre com a **Descrição** do canal no topo e mostra **Status**, **Descrição** e **Token**.
 - No painel, você pode alterar a **Descrição** (e os campos personalizados do canal, se houver).
-- Com o **Token** alterado, o painel mostra `"Canal não encontrado"` e não salva nada.
-- Para usar outro bot ou token, conecte um canal novo com o token novo.
+- Mantenha o **Token** como está. Para usar outro bot ou token, conecte um canal novo com o token novo.
+- Se o **Token** for alterado no painel, o aviso `"Canal não encontrado"` pode aparecer ao salvar.
 
 ## Excluir e reconectar
 
