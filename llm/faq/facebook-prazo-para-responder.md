@@ -29,7 +29,7 @@ A Kinbox não mostra contador nem bloqueia a resposta por prazo no Facebook Mess
 
 As mensagens enviadas por membros saem com a etiqueta de atendimento humano da Meta; mensagens enviadas sem membro (como o [bot](/docs/bot/visao-geral)) saem sem essa etiqueta. Se a Meta recusar o envio (por exemplo, por ter passado do prazo dela), a mensagem fica com ícone de erro, o motivo devolvido pela Meta aparece ao passar o mouse e, no Messenger, também surge um aviso na tela.
 
-Não dá para iniciar uma conversa nova pelo Messenger nem pelo Instagram na Kinbox: a conversa só começa quando o contato escreve ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)). Diferente do WhatsApp oficial, onde existe contador na conversa e a necessidade de template quando a janela fecha (veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
+Não dá para iniciar uma conversa nova pelo Messenger nem pelo Instagram na Kinbox: a conversa só começa quando o contato escreve ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)). No WhatsApp oficial é diferente: existe contador na conversa e é preciso usar template quando a janela fecha (veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
 
 Veja mais em [Conectar o Facebook Messenger](/docs/canais/facebook/conectar).
 

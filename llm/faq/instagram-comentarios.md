@@ -25,7 +25,7 @@ Os comentários dos posts do Instagram entram como conversa?
 
 Não. A Kinbox não traz comentários de posts, reels ou anúncios do Instagram, e o mesmo vale para comentários em posts de páginas do Facebook.
 
-O que entra na **Caixa de entrada** são as mensagens do Direct (e do Messenger, no Facebook) e, no Instagram, respostas aos seus stories e menções em stories — desde que **Ignorar resposta de story** e **Ignorar menções** não estejam ligados nas configurações do canal ([Configurações do Instagram e do Facebook](/docs/canais/instagram/configuracoes)).
+O que entra na **Caixa de entrada** são as mensagens do Direct (e do Messenger, no Facebook) e, no Instagram, respostas aos seus stories e menções em stories, desde que **Ignorar resposta de story** e **Ignorar menções** não estejam ligados nas configurações do canal ([Configurações do Instagram e do Facebook](/docs/canais/instagram/configuracoes)).
 
 Para responder comentários, use diretamente o Instagram ou o Facebook. Veja mais em [Conectar o Instagram](/docs/canais/instagram).
 

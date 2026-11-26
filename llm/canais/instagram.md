@@ -23,6 +23,11 @@ codigo:
   - api-v0:server/routes/IntegrationsApiRoutes.js
   - api-v0:server/modules/scheduler/facebookScheduler.js
   - api-v0:server/modules/chat/auxiliary/parser.js
+  - web:src/pages/inbox/MessageDrop.tsx
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/inbox/Message.tsx
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+  - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
 ---
 
@@ -81,7 +86,7 @@ Quando a conversa é nova, a Kinbox busca o nome (ou o `@usuário`) e a foto do 
 - **Texto e foto:** enviados normalmente.
 - **Áudio:** convertido e enviado como áudio; o editor tem o botão **Áudio** para gravar.
 - **Vídeo e arquivo (documento):** chegam ao contato como link.
-- **Responder (citar) mensagem:** disponível no menu da mensagem para mensagens recebidas e para mensagens enviadas com sucesso no Instagram. Não aparece em mensagens com erro nem em notas.
+- **Responder (citar) mensagem:** disponível no menu da mensagem para citar mensagens recebidas e enviadas no Instagram. Não existe no Messenger.
 - **Iniciar conversa:** não dá para iniciar uma conversa nova pelo Instagram na Kinbox; a conversa começa quando o contato escreve ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
 - **Prazo para responder:** a Kinbox não mostra contador nem bloqueia a resposta por prazo no Instagram. A Meta ainda pode recusar o envio. Mensagens enviadas por membros saem com a etiqueta de atendimento humano da Meta (`HUMAN_AGENT`); mensagens enviadas sem membro (como o [bot](/docs/bot/visao-geral)) saem sem essa etiqueta. O prazo para responder é definido pela Meta.
 - **Erros de envio:** quando a Meta recusa uma mensagem, ela fica com ícone de erro e o motivo aparece ao passar o mouse precedido de `"#2 Error:"` (sem motivo específico, exibe `"Erro ao enviar mensagem"`). Se a recusa for por perda de acesso, o canal muda para **Desconectado** e a mensagem mostra `"Seu canal de necessita ser reconectado. Por favor acesse "Configurações -> Canais" e reconecte-o."`.

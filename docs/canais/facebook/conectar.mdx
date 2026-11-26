@@ -1,7 +1,7 @@
 ---
 title: Conectar o Facebook Messenger
 description: Como conectar uma página do Facebook à Kinbox para atender as mensagens do Messenger na Caixa de entrada.
-keywords: [facebook, messenger, conectar facebook, página do facebook, fanpage, mensagens da página, inbox do facebook, meta, novo canal facebook]
+keywords: [facebook, messenger, conectar facebook, página do facebook, fanpage, mensagens da página, inbox do facebook, meta, novo canal facebook, facebook teste grátis, seu plano atual não permite adicionar o novo canal]
 publico: humano
 tipo: guia
 fontes:
@@ -10,6 +10,7 @@ fontes:
   - api-v0:server/controllers/IntegrationsController.js
   - api-v0:server/controllers/MessengerController.js
   - api-v0:server/modules/accessRestriction/funcionalitiesAccess.js
+  - api-v0:server/modules/accessRestriction/rules.js
 codigo:
   - web:src/pages/settings/channels/AddChannel.tsx
   - web:src/pages/settings/channels/facebook/**
@@ -23,7 +24,7 @@ verificado_em: 2026-11-26
 
 O canal de Facebook traz para a [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) as mensagens que as pessoas mandam para uma página do Facebook pelo Messenger. A conexão é feita numa janela da Meta. Comentários nos posts da página não entram na Kinbox.
 
-<Note>Quem pode: o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Plano: o Facebook não usa unidade do plano pago; no teste grátis, dá para conectar uma página do Facebook por workspace.</Note>
+<Note>Quem pode: o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)) sem a restrição **Somente pode dar manutenção simples em canais**, que esconde **Novo canal**. Plano: o Facebook não usa unidade do plano pago; no teste grátis, dá para conectar uma página do Facebook por workspace.</Note>
 
 ## Antes de começar
 
@@ -52,7 +53,7 @@ O canal de Facebook traz para a [Caixa de entrada](/docs/conversas/caixa-de-entr
     De volta à Kinbox, em "Selecione a página que você deseja conectar abaixo", clique no cartão da página do Facebook. A conexão acontece na hora.
   </Step>
   <Step title="Confirme a conexão">
-    A Kinbox mostra "Conectado ao canal de Facebook" com o nome da página e volta para a lista de **Canais**.
+    A Kinbox mostra "Conectado ao canal de Facebook" com o nome do canal e volta para a lista de **Canais**.
   </Step>
 </Steps>
 
@@ -61,7 +62,7 @@ O canal de Facebook traz para a [Caixa de entrada](/docs/conversas/caixa-de-entr
 - Na lista de **Canais**, o canal aparece com o nome da página, "Página do Facebook" logo abaixo e o selo verde **Conectado**.
 - Faça um teste: mande uma mensagem para a página pelo Messenger a partir de outra conta e confira a conversa chegando na **Caixa de entrada**.
 - Não dá para iniciar uma conversa nova pelo Messenger na Kinbox: a conversa começa quando o contato escreve (veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
-- A Kinbox não mostra contador nem bloqueia o campo de resposta. Quem aceita ou recusa a mensagem é a Meta.
+- A Kinbox não mostra contador de prazo para responder nem bloqueia o campo de resposta. Quem aceita ou recusa a mensagem é a Meta.
 
 ## Problemas comuns
 
@@ -69,7 +70,7 @@ O canal de Facebook traz para a [Caixa de entrada](/docs/conversas/caixa-de-entr
 - **A página aparece desativada e não dá para clicar:** ela já é um canal ativo deste workspace, mesmo que esteja **Desconectado**.
 - **Apareceu "Esse canal já está ativado em outro ambiente":** a página já está conectada como canal ativo em outro workspace.
 - **Apareceu "Seu plano atual não permite adicionar o novo canal":** no teste grátis, o workspace já tem uma página do Facebook conectada.
-- **O canal ficou Desconectado:** não existe botão de reconectar. Siga o passo a passo de reconexão em **O canal está Desconectado**, na página de problemas comuns.
+- **O canal ficou Desconectado:** não existe botão de reconectar. Siga o passo a passo em [O canal está Desconectado](/docs/canais/instagram/problemas-comuns).
 
 <CardGroup cols={2}>
   <Card title="Configurações do Instagram e do Facebook" href="/docs/canais/instagram/configuracoes">

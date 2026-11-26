@@ -14,6 +14,7 @@ codigo:
   - web:src/pages/settings/channels/index.tsx
   - api-v0:server/controllers/KinboxDirectController.js
   - api-v0:server/controllers/IntegrationsController.js
+  - web:src/pages/inbox/MessageContent.tsx
 verificado_em: 2026-11-26
 ---
 

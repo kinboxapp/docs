@@ -34,20 +34,20 @@ Não existe um botão de reconectar para os canais de Instagram e de Facebook na
 Antes de começar:
 
 - Confirme na Meta que a conta do Facebook que você vai usar ainda tem acesso à mesma página.
-- Abra o canal e anote os grupos marcados em **Restringir visibilidade**, porque a lista de grupos volta vazia.
+- Abra o canal e veja se **Restringir visibilidade** está ligada. Se estiver, anote os grupos marcados, porque a lista de grupos volta vazia.
 
 Para reconectar:
 
 1. Em **Configurações** → **Chat** → **Canais**, abra o menu de três pontos do canal e clique em **Excluir**.
 2. Clique em **Novo canal**, escolha **Instagram** ou **Facebook** e conecte a mesma página.
-3. Abra o canal, selecione de novo os grupos em **Restringir visibilidade** e clique em **Salvar**.
+3. Se **Restringir visibilidade** estava ligada, abra o canal, selecione de novo os grupos e clique em **Salvar**.
 4. Mande uma mensagem de teste a partir de outra conta e confira se ela chega na **Caixa de entrada**.
 
 O mesmo canal volta ativo e **Conectado**, com as conversas antigas (excluir não apaga as conversas). Se a nova conexão falhar depois de excluir, as conversas continuam guardadas e você pode tentar de novo. No Instagram, a conexão passa pela checagem do plano, mas o canal excluído não entra na contagem.
 
-Se a página estiver ativa em outro workspace ("Esse canal já está ativado em outro ambiente"), é preciso excluir o canal lá e conectar neste; o histórico de conversas continua no workspace de origem.
+Se a página estiver ativa em outro workspace ("Esse canal já está ativado em outro ambiente"), é preciso excluir o canal lá e conectar neste (sem acesso ao outro workspace, peça a quem administra os canais de lá); o histórico de conversas continua no workspace de origem.
 
-Quem pode: o proprietário do workspace ou membros com a permissão **Gerenciar Canais**. Se **Excluir** ou **Novo canal** não aparecer para você, peça a uma dessas pessoas.
+Quem pode: o proprietário do workspace ou membros com a permissão **Gerenciar Canais** que não tenham a restrição **Somente pode dar manutenção simples em canais**, que esconde **Novo canal** e **Excluir**. Se esses botões não aparecerem para você, peça ao proprietário ou a quem administra os canais.
 
 Veja mais em [O Instagram ou o Facebook não conecta ou desconectou](/docs/canais/instagram/problemas-comuns).
 
@@ -55,7 +55,7 @@ Veja mais em [O Instagram ou o Facebook não conecta ou desconectou](/docs/canai
 
 - meu instagram desconectou na kinbox como reconectar
 - onde fica o botão de reconectar do facebook messenger
-- a página do facebook aparece apagada na hora de reconectar
+- a página do facebook aparece cinza na hora de reconectar
 - se eu excluir o canal de instagram para reconectar perco as conversas
 - a mensagem do instagram deu erro pedindo para reconectar o canal
 - canal do instagram desconectado não consigo clicar na página de novo

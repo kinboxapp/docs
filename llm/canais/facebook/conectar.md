@@ -1,5 +1,5 @@
 ---
-title: "Messenger: prazo para responder e mensagens com etiqueta de atendimento humano"
+title: "Messenger: páginas na conexão, teste grátis, prazo para responder, envio e reconexão"
 description: Regras do canal de Facebook Messenger na Kinbox, com o prazo para responder, a etiqueta de atendimento humano, os limites no teste grátis, os erros e o que entra e sai nas conversas.
 keywords: [messenger, facebook, prazo para responder, janela do messenger, etiqueta de atendimento humano, human agent, mensagem não enviada, teste grátis, seu plano atual não permite adicionar o novo canal]
 publico: llm
@@ -19,6 +19,10 @@ codigo:
   - api-v0:server/routes/MessengerApiRoutes.js
   - api-v0:server/modules/accessRestriction/**
   - api-v0:server/modules/scheduler/facebookScheduler.js
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/inbox/Message.tsx
+  - web:src/pages/inbox/MessageDrop.tsx
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
 verificado_em: 2026-11-26
 ---
 
@@ -44,9 +48,9 @@ Detalhes de referência da página humana [Conectar o Facebook Messenger](/docs/
 
 | Situação do workspace | Regra para páginas do Facebook |
 | --- | --- |
-| Assinatura paga atual (até 4 dias depois do vencimento) | Sem limite de páginas do Facebook. |
+| Assinatura paga atual | Sem limite de páginas do Facebook. |
 | Teste grátis | Permite conectar **1** página do Facebook ativa por workspace. Ao tentar conectar uma segunda, aparece `"Seu plano atual não permite adicionar o novo canal"`. |
-| Assinatura paga atual ou teste grátis vencidos há mais de 4 dias | A conexão é recusada com `"Sua assinatura expirou"`. |
+| Assinatura paga atual ou teste grátis vencidos, a partir do quarto dia depois do vencimento, ou workspace sem assinatura ativa | A conexão é recusada com `"Sua assinatura expirou"`. |
 | Assinatura antiga paga | Até 50 páginas do Facebook. |
 
 ## O que entra do Messenger
@@ -55,6 +59,7 @@ Detalhes de referência da página humana [Conectar o Facebook Messenger](/docs/
 - Cada anexo vira uma mensagem separada na conversa, e a Kinbox guarda uma cópia do arquivo recebido.
 - O nome e a foto do contato são buscados no perfil da Meta a cada mensagem.
 - Comentários em posts da página, reações a mensagens e cliques em anúncios sem mensagem não entram na Kinbox.
+- Respostas que a empresa manda direto pelo Facebook (fora da Kinbox) não aparecem na conversa da Kinbox.
 
 ## Envio de mensagens
 
@@ -64,7 +69,7 @@ Detalhes de referência da página humana [Conectar o Facebook Messenger](/docs/
 - **Vídeo:** chega ao contato como link.
 - **Responder (citar) mensagem:** não existe no Messenger.
 - **Iniciar conversa:** não dá para iniciar uma conversa nova pelo Messenger na Kinbox; a conversa começa quando o contato escreve ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
-- **Erros de canal ao enviar:** se o canal estiver sem acesso salvo, aparece `"Canal não conectado"`. Quando a Meta recusa o envio, inclusive por perda de acesso à página, a mensagem fica com erro e mostra o motivo devolvido pela Meta; o canal não muda de status por causa desse erro (no Facebook, só a renovação automática do acesso deixa o canal **Desconectado**).
+- **Erros de canal ao enviar:** a mensagem que não sai fica com o ícone de erro; passe o mouse para ver o motivo, quando houver (sem motivo, aparece `"Erro ao enviar mensagem"`, por exemplo quando o canal está sem acesso salvo). Quando a Meta recusa o envio, inclusive por perda de acesso à página, a mensagem fica com erro e mostra o motivo devolvido pela Meta; o canal não muda de status por causa desse erro (no Facebook, só a renovação automática do acesso deixa o canal **Desconectado**).
 
 ## Renovação do acesso, desconexão e reconexão
 
