@@ -564,7 +564,7 @@ async function garantirBot(api: Api, canal: string) {
 
 /**
  * Segundo bot de exemplo "Consulta de pedido" (prints de integração): Chamar endpoint grava o pedido no campo Json
- * `pedido` (sessão) e Executar código marca o cliente; endereços em exemplo.com. Desligado e sem canal.
+ * `pedido` (sessão) e Executar código marca o cliente; endereços em example.com. Desligado e sem canal.
  */
 function montarBotIntegracao() {
   const pos = (x: number, y: number) => ({ x, y })
@@ -575,12 +575,12 @@ function montarBotIntegracao() {
     type: 'removable_edge', animated: true, arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
   })
   const json = JSON.stringify({
-    url: 'https://exemplo.com/api/pedidos?email={{email}}',
+    url: 'https://example.com/api/pedidos?email={{email}}',
     method: 'GET',
     headers: { Authorization: 'Bearer SEU_TOKEN' },
     mapReturnToCustomField: { pedido: 'data' },
   }, null, 2)
-  const codigo = `async function run(kinbox) {\n  const { contact } = kinbox\n\n  // Consulta um sistema externo (endereço fictício)\n  const url = "https://exemplo.com/api/clientes"\n  const { data } = await axios.get(url, {\n    params: { email: contact.email },\n  })\n\n  if (data.vip) {\n    await kinbox.addTag("vip")\n  }\n\n  return data\n}`
+  const codigo = `async function run(kinbox) {\n  const { contact } = kinbox\n\n  // Consulta um sistema externo (endereço fictício)\n  const url = "https://example.com/api/clientes"\n  const { data } = await axios.get(url, {\n    params: { email: contact.email },\n  })\n\n  if (data.vip) {\n    await kinbox.addTag("vip")\n  }\n\n  return data\n}`
   const nos = [
     { id: '1', type: 'start', position: pos(-60, 200), data: { label: 'Início' }, sourcePosition: 'right' },
     no('consulta', 'integration', 260, 170, { code: 'custom', integration_description: 'Consultar pedido', script: json }),
@@ -605,6 +605,7 @@ async function garantirBotIntegracao(api: Api) {
   }
   const existente = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Consulta de pedido')
   if (!existente) await api.v0('POST', '/bot', montarBotIntegracao())
+  else await api.v0('PUT', `/bot/${existente.id}`, { id: existente.id, ...montarBotIntegracao() })
   log(`bot: "Consulta de pedido" (desligado, sem canal) e campo Json "pedido"${existente ? ' (reaproveitado)' : ''}`)
 }
 
@@ -957,6 +958,7 @@ async function garantirMarketing(api: Api) {
   const siteKey = chave?.siteKey || (await api.v3('POST', '/tracking/site-keys', { name: 'Chave do site' })).plainToken
   await api.v3('POST', '/tracking/domains', { name: 'Site da loja', origin: origem, siteKey })
   log('marketing: site "Site da loja" criado')
+}
 
 /**
  * Tarefas de exemplo (seção `tarefas-e-metas`): cinco tarefas com responsáveis fictícios, vínculos com negócios
