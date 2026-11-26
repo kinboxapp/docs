@@ -26,7 +26,7 @@ Um dashboard é um painel que reúne vários relatórios (cartões) em uma mesma
 
 <Note>Para ver os dashboards, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê).</Note>
 
-- Com a restrição **Não pode criar ou excluir Dashboard** no papel, você ainda vê os dashboards e pode atualizar os dados, mas não consegue criar, clonar, editar nem excluir dashboards. Os botões continuam na tela e, ao tentar salvar, aparece um aviso de que você não tem permissão.
+- Com a restrição **Não pode criar ou excluir Dashboard** no papel, ao tentar criar, clonar, editar ou excluir um dashboard aparece um aviso de que você não tem permissão.
 - Cartões de negociações exigem também a permissão **Gerenciar negociações** (veja [Cartões que pedem outras permissões](#cartões-que-pedem-outras-permissões)).
 
 ## Abrir os dashboards
@@ -84,12 +84,12 @@ Você pode adicionar até **100** cartões em um mesmo dashboard. Adicionar, edi
     Use a busca ou filtre pelas categorias (**Todos**, **Vendas**, **Atendimento**, **Tarefas**, **Metas** e **Do seu jeito**) e clique no modelo desejado.
   </Step>
   <Step title="Configure e salve o cartão">
-    Alguns modelos entram direto no dashboard, sem abrir formulário: **Ciclo médio de vendas**, **Pipeline Atendimento**, **Melhor horário de resposta** e **Tarefas** (cria 3 cartões: **A fazer**, **Completas** e **Atrasadas**). Os demais abrem o painel do cartão para preencher os campos; clique em **Criar** para salvar.
+    Alguns modelos entram direto no dashboard, sem abrir formulário: **Ciclo médio de vendas**, **Pipeline Atendimento**, **Melhor horário de resposta** e **Tarefas** (cria um cartão com 3 indicadores: **A fazer**, **Completas** e **Atrasadas**). Os demais abrem o painel do cartão para preencher os campos; clique em **Criar** para salvar.
 
-    O **Pipeline Atendimento** cria 5 cartões com os estados **Não atribuído**, **Em espera**, **Em atendimento**, **Pendente** e **Atribuído**, os mesmos do relatório [Visão geral](/docs/relatorios/visao-geral).
+    O **Pipeline Atendimento** cria um cartão com 5 indicadores, um para cada estado: **Não atribuído**, **Em espera**, **Em atendimento**, **Pendente** e **Atribuído**, os mesmos do relatório [Visão geral](/docs/relatorios/visao-geral).
 
-    <Frame caption="Cartões do Pipeline Atendimento em um dashboard">
-      <img src="/images/ajuda/relatorios/dashboard-pipeline.webp" alt="Grade de um dashboard com os cinco cartões do Pipeline Atendimento: Não atribuído, Em espera, Em atendimento, Pendente e Atribuído" />
+    <Frame caption="Cartão Pipeline Atendimento em um dashboard">
+      <img src="/images/ajuda/relatorios/dashboard-pipeline.webp" alt="Cartão Pipeline Atendimento em um dashboard com os cinco indicadores Não atribuído, Em espera, Em atendimento, Pendente e Atribuído" />
     </Frame>
   </Step>
   <Step title="Atualize os dados">
@@ -111,13 +111,13 @@ Cada modelo traz uma descrição curta na janela **Escolha um template...**.
 
 ## Montar um relatório Personalizado
 
-Ao escolher **Personalizado**, o painel **Relatório** pede **Nome**, **Fonte dos dados** (**Negócios**, **Sessões de conversa** ou **Tarefas**), **Período** (apenas em dashboards **Individual**), **Por propriedade** (qual data encaixa o registro no período), **Métrica**, **Agrupar por**, **Visualização** e **Condições** (os filtros do cartão). Com a fonte **Tarefas**, use no **Período** apenas **Essa semana**, **Esse mês** ou **Personalizado**.
+Ao escolher **Personalizado**, o painel **Relatório** abre os campos do cartão. Em dashboards **Compartilhados**, o período é escolhido no seletor de datas do topo do dashboard: no cartão, o campo **Período** aparece desativado com **Selecionado na dashboard**.
 
 **Exemplo:** para ver o valor total das negociações de cada vendedor no mês:
 
 <Steps>
   <Step title="Preencha o cartão">
-    Em **Nome**, escreva, por exemplo, `Valor por vendedor`. Em **Fonte dos dados**, escolha **Negócios**; em **Período**, **Esse mês**; em **Por propriedade**, **Ganho/perdido em** (ou mantenha **Data da criação** para contar pela data em que a negociação foi criada). Em **Métrica**, marque **Por valor** com **Operação** em **Soma**, selecione **Membro** em **Agrupar por** e escolha **Barras** em **Visualização**.
+    Em **Nome**, escreva, por exemplo, `Valor por vendedor`. Em **Período**, escolha **Esse mês** (em dashboards **Compartilhados**, escolha o mês no seletor de datas do topo). Em **Fonte dos dados**, escolha **Negócios**; em **Por propriedade**, **Ganho/perdido em** (ou mantenha **Data da criação** para contar pela data em que a negociação foi criada). Em **Métrica**, marque **Por valor** com **Operação** em **Soma**, selecione **Membro** em **Agrupar por** e escolha **Barras** em **Visualização**.
   </Step>
   <Step title="Salve">
     Clique em **Criar**. O cartão aparece na grade.
@@ -142,7 +142,7 @@ Se você excluir um carrossel, os relatórios que estavam dentro dele voltam par
 
 ## Atualizar os dados (snapshots)
 
-Os cartões do dashboard exibem um **snapshot** (uma foto dos dados de todos os cartões calculada em um momento) e não atualizam sozinhos. Gere um novo snapshot sempre que precisar de números atualizados. Os cartões **Tarefas** são a exceção: consultam os dados na hora, sem depender do snapshot.
+Os cartões do dashboard exibem um **snapshot** (uma foto dos dados de todos os cartões calculada em um momento) e não atualizam sozinhos. Gere um novo snapshot sempre que precisar de números atualizados. Os cartões **Tarefas** são a exceção: consultam os dados na hora.
 
 Sem nenhum snapshot gerado, os cartões ficam carregando. Em um dashboard **Compartilhado**, escolha primeiro o intervalo de datas no seletor do topo antes de atualizar: trocar as datas sem gerar um novo snapshot não altera os números exibidos.
 
@@ -154,7 +154,7 @@ Sem nenhum snapshot gerado, os cartões ficam carregando. Em um dashboard **Comp
     Na janela **Atualizar dados**, clique em **Atualizar dados**. A tela já seleciona o novo snapshot enquanto ele processa.
   </Step>
   <Step title="Aguarde a notificação">
-    O cálculo roda em segundo plano e pode levar vários minutos, conforme o tamanho do dashboard. Enquanto processa, os cartões ficam carregando e o seletor mostra um ícone girando. Quando terminar, você recebe uma notificação no ícone de sino no topo da tela para abrir os novos dados. Os cartões **Tarefas** já mostram os dados do momento, sem esperar o snapshot.
+    O cálculo roda em segundo plano e pode levar vários minutos, conforme o tamanho do dashboard. Enquanto processa, os cartões ficam carregando e o seletor mostra um ícone girando. Quando terminar, você recebe uma notificação no ícone de sino no topo da tela para abrir os novos dados. Os cartões **Tarefas** consultam os dados na hora.
   </Step>
 </Steps>
 
@@ -177,4 +177,4 @@ Clique no menu **...** no canto superior direito do dashboard:
 - **Tarefas:** nos cartões **Tarefas** e **Calendário de tarefas**, quem não pode ver tarefas de outros membros vê apenas as próprias tarefas.
 - **Metas:** os modelos **Necessidade de leads** e **Meta x Realizado** exigem uma meta cadastrada no workspace.
 
-Para ver todas as permissões e regras de exportação do módulo, consulte [Exportar relatórios e quem pode ver cada um](/docs/relatorios/exportar-e-permissoes). Para acompanhar o atendimento sem depender de snapshot, veja o [Relatório Visão geral](/docs/relatorios/visao-geral) e o [Atendimento ao vivo](/docs/relatorios/ao-vivo).
+Para as permissões e a exportação do módulo, consulte [Exportar relatórios e quem pode ver cada um](/docs/relatorios/exportar-e-permissoes). Para acompanhar o atendimento sem depender de snapshot, veja o [Relatório Visão geral](/docs/relatorios/visao-geral) e o [Atendimento ao vivo](/docs/relatorios/ao-vivo).

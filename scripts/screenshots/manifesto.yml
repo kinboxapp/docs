@@ -2983,7 +2983,7 @@
     - docs/cenarios/gatilhos-e-acoes
 
 # Seção dashboards (Relatórios › Dashboards e consumo)
-# Dashboard "Atendimento da loja" (seed, etapa dashboard): cartões do Pipeline Atendimento. Antes de capturar,
+# Dashboard "Atendimento da loja" (seed, etapa dashboard): cartão do Pipeline Atendimento. Antes de capturar,
 # o dashboard precisa de um snapshot concluído (o seed avisa quando não há); o rótulo do snapshot fica mascarado.
 # Saldo e Ligações: a Loja Exemplo não tem consumo nem ligações; os prints mostram só o topo, os cartões e os menus.
 
@@ -3008,7 +3008,6 @@
 
 - id: dashboard-pipeline
   url: /reports/dashboard
-  altura: 2000
   passos:
     - esperar: '[data-academia="dashboard-title"]'
     - clicar: '[data-academia="dashboard-title"] a'

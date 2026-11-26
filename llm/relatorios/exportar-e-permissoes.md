@@ -45,10 +45,10 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 
 | Restrição | Onde age e efeito |
 | --- | --- |
-| **Restringir relatórios ao membro** | Em [**Visão geral**](/docs/relatorios/visao-geral), [**Produtividade**](/docs/relatorios/produtividade), [**Atribuição**](/docs/relatorios/atribuicao), [**Interação**](/docs/relatorios/interacao), [**Avaliação**](/docs/relatorios/avaliacao), [**Copiloto**](/docs/relatorios/copiloto) e listas **Ver sessões**: restringe às sessões em que o membro é o responsável (na **Avaliação**, às avaliações registradas para ele). Na [**Presença**](/docs/relatorios/presenca): mostra apenas a presença do próprio membro. |
-| **Restringir relatórios aos grupos do membro** | Em **Visão geral**, **Produtividade**, **Atribuição**, **Interação**, **Avaliação**, **Copiloto** e listas **Ver sessões**: restringe às sessões dos grupos do membro (na **Atribuição**, as sessões que estão ou já estiveram nos grupos dele; no **Copiloto**, oculta as linhas **Sem atribuição** e **Sem grupo**). Se o membro não pertencer a nenhum grupo, esses relatórios não abrem e aparece um aviso de que ele não pertence a nenhum grupo. |
-| **Não pode exportar relatórios** | Desativa o botão **Exportar** da lista de sessões (**Ver sessões**). |
-| **Não pode criar ou excluir Dashboard** | Impede criar, clonar, editar (inclusive cartões e organização) e excluir dashboards. Os botões permanecem na tela e, ao tentar salvar ou excluir, aparece um aviso de que não tem permissão. Ainda permite ver os dashboards e acionar **Obter dados atualizados**. |
+| **Restringir relatórios ao membro** | Em relatórios de sessões como [**Visão geral**](/docs/relatorios/visao-geral), [**Produtividade**](/docs/relatorios/produtividade) e [**Copiloto**](/docs/relatorios/copiloto), e nas listas **Ver sessões**: mostra as sessões em que o membro é o responsável (na [**Avaliação**](/docs/relatorios/avaliacao), as avaliações registradas para ele). Na [**Presença**](/docs/relatorios/presenca): mostra a presença do próprio membro. |
+| **Restringir relatórios aos grupos do membro** | Em relatórios de sessões como **Visão geral**, **Produtividade** e **Copiloto**, e nas listas **Ver sessões**: mostra as sessões dos grupos do membro (na [**Atribuição**](/docs/relatorios/atribuicao), as sessões que estão ou já estiveram nos grupos dele; no **Copiloto**, oculta as linhas **Sem atribuição** e **Sem grupo**). Se o membro não pertencer a nenhum grupo, ao abrir esses relatórios aparece um aviso de que ele não pertence a nenhum grupo e a Kinbox volta para a tela inicial. |
+| **Não pode exportar relatórios** | Na lista **Ver sessões**, o botão **Exportar** fica desativado. |
+| **Não pode criar ou excluir Dashboard** | Ao tentar criar, clonar, editar (inclusive cartões e organização) ou excluir um dashboard, aparece um aviso de que não tem permissão. |
 
 - **Exclusividade mútua:** **Restringir relatórios ao membro** e **Restringir relatórios aos grupos do membro** não podem ficar marcadas ao mesmo tempo (marcar uma desmarca a outra; as duas podem ficar desmarcadas).
 
@@ -58,17 +58,17 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 
 | Onde | Caminho | Nome do arquivo | O que vai no arquivo |
 | --- | --- | --- | --- |
-| [**Produtividade**](/docs/relatorios/produtividade) | **...** → **Exportar** | `relatorio_produtividade` | Tabela do agrupamento atual (todas as linhas; busca por nome não filtra). |
-| [**Atribuição**](/docs/relatorios/atribuicao) | **...** → **Exportar** | `relatorio_atribuicao` | Tabela do agrupamento atual (todas as linhas; busca por nome não filtra). |
-| [**Interação**](/docs/relatorios/interacao) | **...** → **Exportar** | `relatorio_interacao` | Tabela do agrupamento atual (todas as linhas; busca por nome não filtra). |
-| [**Presença**](/docs/relatorios/presenca) | **...** → **Exportar** | `relatorio_presenca` | Tabela do agrupamento atual (todas as linhas; busca por nome não filtra). |
-| [**Avaliação**](/docs/relatorios/avaliacao) | **...** → **Exportar** | `relatorio_avaliacao` | Tabela do agrupamento atual (todas as linhas; busca por nome não filtra). |
+| [**Produtividade**](/docs/relatorios/produtividade) | **...** → **Exportar** | `relatorio_produtividade` | Tabela do agrupamento atual (a busca por nome não filtra o arquivo). |
+| [**Atribuição**](/docs/relatorios/atribuicao) | **...** → **Exportar** | `relatorio_atribuicao` | Tabela do agrupamento atual (a busca por nome não filtra o arquivo). |
+| [**Interação**](/docs/relatorios/interacao) | **...** → **Exportar** | `relatorio_interacao` | Tabela do agrupamento atual (a busca por nome não filtra o arquivo). |
+| [**Presença**](/docs/relatorios/presenca) | **...** → **Exportar** | `relatorio_presenca` | Tabela do agrupamento atual (a busca por nome não filtra o arquivo). |
+| [**Avaliação**](/docs/relatorios/avaliacao) | **...** → **Exportar** | `relatorio_avaliacao` | Tabela do agrupamento atual (a busca por nome não filtra o arquivo). |
 | [**Copiloto**](/docs/relatorios/copiloto) (cada aba) | **...** → **Exportar** | `relatorio_qualidade`, `relatorio_sentimento`, `relatorio_intencoes`, `relatorio_lead_score`, `relatorio_atendimento_automatico` | Tabela agrupada da aba atual (cartões não entram; em **Atendimento automático**, não inclui **Reaberturas evitadas**). |
-| Lista **Ver sessões** | **...** da lista → **Exportar** | `relatorio_sessoes` | Colunas selecionadas na lista para todas as sessões do filtro. Exportada em páginas (pode levar alguns instantes em períodos grandes; mostra `Exportando... N%`; erro: "Ocorreu um erro ao exportar os dados"). |
+| Lista **Ver sessões** | **...** da lista → **Exportar** | `relatorio_sessoes` | Colunas selecionadas na lista para as sessões do filtro. Exportada em páginas (pode levar alguns instantes em períodos grandes; mostra `Exportando... N%`; erro: "Ocorreu um erro ao exportar os dados"). |
 | Lista **Ver presenças** | **...** da lista → **Exportar** | `relatorio_presencas` | Grade de horários × dias com online/offline. |
-| [**Saldo**](/docs/relatorios/saldo) (extrato) | **...** → **Exportar extrato** | `relatorio_carteira` | Todos os débitos do período: ID, **Data**, Total, **Descrição**, **Carteira**, **Autor**. Mostra `Exportando... n%`; erro: "Ocorreu um erro ao exportar os dados". |
+| [**Saldo**](/docs/relatorios/saldo) (extrato) | **...** → **Exportar extrato** | `relatorio_carteira` | Débitos do período: ID, **Data**, Total, **Descrição**, **Carteira**, **Autor**. Mostra `Exportando... n%`; erro: "Ocorreu um erro ao exportar os dados". |
 | [**Saldo**](/docs/relatorios/saldo) (serviços) | **...** → **Exportar serviços** | `relatorio_saldo_servicos` | Tabela de serviços: **Serviço**, **Categoria**, **Usos**, **Valor**, **% do total**, **Período anterior**. Respeita a categoria selecionada; busca por nome não filtra. |
-| [**Ligações**](/docs/relatorios/ligacoes) | **...** → **Exportar** | `relatorio_ligacoes` | Todas as ligações do período e da origem escolhida. Compartilhe a planilha apenas com pessoas autorizadas. |
+| [**Ligações**](/docs/relatorios/ligacoes) | **...** → **Exportar** | `relatorio_ligacoes` | As ligações do período e da origem escolhida. Compartilhe a planilha apenas com pessoas autorizadas. |
 
 - **Sem exportar:** **Visão geral** (apenas via lista **Ver sessões**), **Atendimento ao vivo**, **Vendas ao vivo**, **Dashboards** e **Marketing**.
 
@@ -105,7 +105,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 
 ### Cartão Personalizado
 
-- **Campos, nesta ordem:** **Nome** (obrigatório), **Fonte dos dados**, **Período** (só em dashboards **Individual**), **Por propriedade** (obrigatório; padrão **Data da criação**), **Métrica** (e **Operação**, quando aplicável), **Agrupar por**, **Visualização** e **Condições**. Botão **Criar** (ou **Salvar** ao editar). Um cartão novo só ganha números no próximo snapshot.
+- **Campos, nesta ordem:** **Nome** (obrigatório), **Período** (em dashboards **Compartilhados**, aparece desativado com **Selecionado na dashboard**: o período vem do seletor do topo), **Fonte dos dados**, **Por propriedade** (obrigatório; padrão **Data da criação**), **Métrica** (e **Operação**, quando aplicável), **Agrupar por**, **Visualização** e **Condições**. Botão **Criar** (ou **Salvar** ao editar). Um cartão novo só ganha números no próximo snapshot.
 - **Negócios:**
   - **Por propriedade:** **Data da criação**, **Ganho/perdido em**, **Previsão de fechamento**.
   - **Métrica:** **Por quantidade**, **Por valor**, **Tempo até ganhar ou perder o negócio** (com **Operação**: **Soma**, **Média**, **Mínimo**, **Máximo**, quando aplicável).
@@ -120,7 +120,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 
 ### Campos próprios dos outros modelos de cartão
 
-- **Entram direto sem formulário:** **Ciclo médio de vendas**, **Pipeline Atendimento** (5 cartões: **Não atribuído**, **Em espera**, **Em atendimento**, **Pendente**, **Atribuído**), **Melhor horário de resposta**, **Tarefas** (3 cartões: **A fazer**, **Completas**, **Atrasadas**).
+- **Entram direto sem formulário:** **Ciclo médio de vendas**, **Pipeline Atendimento** (um cartão com 5 indicadores: **Não atribuído**, **Em espera**, **Em atendimento**, **Pendente**, **Atribuído**), **Melhor horário de resposta**, **Tarefas** (um cartão com 3 indicadores: **A fazer**, **Completas**, **Atrasadas**).
 - **Funil de vendas** e **Conversão de leads:** **Funil de vendas** (obrigatório) e **O que é o lead?**.
 - **Progressão do funil:** **Modo de análise** (**Negócios criados no período** / **Movimentações realizadas no período**) e **Funil de vendas**.
 - **Taxa de recompra:** **Janela** (30, 60 ou 90 dias), **Escopo do funil** (**Qualquer funil** / **Mesmo funil**), **Funis**, **Amostra mínima**.
@@ -195,7 +195,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 
 ## Ligações: status, gráfico e totais
 
-- **O que entra:** ligações do [WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp) e por [telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone) de todo o workspace, pela data em que cada ligação foi criada. Período padrão: últimos 15 dias, sem hoje.
+- **O que entra:** ligações do [WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp) e por [telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone), pela data em que cada ligação foi criada. Período padrão: últimos 15 dias, sem hoje.
 - **Origem:** **Todas as ligações** (padrão), **WhatsApp: feitas**, **WhatsApp: recebidas**, **Telefone (VoIP)**. Não há filtro por membro, canal ou status.
 - **Status:** **Chamando...**, **Em andamento**, **Concluída**, **Ligação falhou**, **Não atendeu**, **Recusada**. Uma ligação recebida e perdida aparece na tabela como **Não atendeu**.
 - **Gráfico por dia:** só entram as ligações **concluídas**. Seletor: **Minutagem** (título **Minutos diários**), **Média de minutos**, **Contagem de ligações**.

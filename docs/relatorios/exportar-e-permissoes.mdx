@@ -47,10 +47,10 @@ Para acessar **Relatórios**, o papel do membro precisa da permissão **Gerencia
 
 | Restrição | O que faz |
 | --- | --- |
-| **Restringir relatórios ao membro** | Nos relatórios de sessões ([**Visão geral**](/docs/relatorios/visao-geral), [**Produtividade**](/docs/relatorios/produtividade), [**Atribuição**](/docs/relatorios/atribuicao), [**Interação**](/docs/relatorios/interacao), [**Avaliação**](/docs/relatorios/avaliacao), [**Copiloto**](/docs/relatorios/copiloto) e listas **Ver sessões**), mostra apenas as sessões em que o membro é o responsável (na **Avaliação**, as avaliações registradas para ele). Na [**Presença**](/docs/relatorios/presenca), mostra apenas a presença do próprio membro. |
-| **Restringir relatórios aos grupos do membro** | Nos relatórios de sessões (**Visão geral**, **Produtividade**, **Atribuição**, **Interação**, **Avaliação**, **Copiloto** e listas **Ver sessões**), mostra apenas as sessões dos grupos do membro (na **Atribuição**, as sessões que estão ou já estiveram nos grupos dele). Se o membro não pertencer a nenhum grupo, esses relatórios não abrem e aparece um aviso de que ele não pertence a nenhum grupo. |
-| **Não pode exportar relatórios** | Desativa o botão **Exportar** da lista de sessões (**Ver sessões**). |
-| **Não pode criar ou excluir Dashboard** | Impede criar, clonar, editar (inclusive cartões e organização) e excluir dashboards. Os botões continuam visíveis na tela e, ao tentar salvar ou excluir, aparece um aviso de que não tem permissão. Ainda permite visualizar os dashboards e atualizar os dados (**Obter dados atualizados**). |
+| **Restringir relatórios ao membro** | Em relatórios de sessões como [**Visão geral**](/docs/relatorios/visao-geral) e [**Produtividade**](/docs/relatorios/produtividade), e nas listas **Ver sessões**, mostra as sessões em que o membro é o responsável (na [**Avaliação**](/docs/relatorios/avaliacao), as avaliações registradas para ele). Na [**Presença**](/docs/relatorios/presenca), mostra a presença do próprio membro. |
+| **Restringir relatórios aos grupos do membro** | Em relatórios de sessões como **Visão geral** e **Produtividade**, e nas listas **Ver sessões**, mostra as sessões dos grupos do membro (na [**Atribuição**](/docs/relatorios/atribuicao), as sessões que estão ou já estiveram nos grupos dele). Se o membro não pertencer a nenhum grupo, ao abrir esses relatórios aparece um aviso de que ele não pertence a nenhum grupo e a Kinbox volta para a tela inicial. |
+| **Não pode exportar relatórios** | Na lista **Ver sessões**, o botão **Exportar** fica desativado. |
+| **Não pode criar ou excluir Dashboard** | Ao tentar criar, clonar, editar (inclusive cartões e organização) ou excluir um dashboard, aparece um aviso de que não tem permissão. |
 
 **Restringir relatórios ao membro** e **Restringir relatórios aos grupos do membro** se excluem mutuamente: marcar uma desmarca a outra (as duas podem ficar desmarcadas).
 
@@ -60,12 +60,12 @@ Todo relatório com exportação oferece **CSV (.csv)** e **Excel (.xlsx)**, ger
 
 | Onde | Caminho | O que entra no arquivo |
 | --- | --- | --- |
-| [**Produtividade**](/docs/relatorios/produtividade), [**Atribuição**](/docs/relatorios/atribuicao), [**Interação**](/docs/relatorios/interacao), [**Presença**](/docs/relatorios/presenca) e [**Avaliação**](/docs/relatorios/avaliacao) | **...** → **Exportar** | A tabela do agrupamento atual (todas as linhas; a busca por nome não filtra o arquivo). |
+| [**Produtividade**](/docs/relatorios/produtividade), [**Atribuição**](/docs/relatorios/atribuicao), [**Interação**](/docs/relatorios/interacao), [**Presença**](/docs/relatorios/presenca) e [**Avaliação**](/docs/relatorios/avaliacao) | **...** → **Exportar** | A tabela do agrupamento atual (a busca por nome não filtra o arquivo). |
 | [**Copiloto**](/docs/relatorios/copiloto) (cada aba) | **...** → **Exportar** | A tabela agrupada da aba atual (em **Atendimento automático**, não inclui **Reaberturas evitadas**). |
-| Lista **Ver sessões** (em qualquer relatório de sessões) | **...** da lista → **Exportar** | As colunas escolhidas na lista, para todas as sessões do filtro atual. |
+| Lista **Ver sessões** (em qualquer relatório de sessões) | **...** da lista → **Exportar** | As colunas escolhidas na lista, para as sessões do filtro atual. |
 | Lista **Ver presenças** (em [**Presença**](/docs/relatorios/presenca)) | **...** da lista → **Exportar** | A grade de horários por dia com status online e offline. |
-| [**Saldo**](/docs/relatorios/saldo) | **...** → **Exportar extrato** ou **Exportar serviços** | **Exportar extrato**: todos os débitos do período. **Exportar serviços**: a tabela de serviços (respeita o filtro de categoria, não a busca por nome). |
-| [**Ligações**](/docs/relatorios/ligacoes) | **...** → **Exportar** | Todas as ligações do período e da origem escolhida. |
+| [**Saldo**](/docs/relatorios/saldo) | **...** → **Exportar extrato** ou **Exportar serviços** | **Exportar extrato**: os débitos do período. **Exportar serviços**: a tabela de serviços (respeita o filtro de categoria, não a busca por nome). |
+| [**Ligações**](/docs/relatorios/ligacoes) | **...** → **Exportar** | As ligações do período e da origem escolhida. |
 
 **Relatórios sem opção de exportar:** [**Visão geral**](/docs/relatorios/visao-geral) (exporte pela lista **Ver sessões** dela), [**Atendimento ao vivo**](/docs/relatorios/ao-vivo), [**Vendas ao vivo**](/docs/relatorios/ao-vivo), [**Dashboards**](/docs/relatorios/dashboard) e **Marketing**.
 

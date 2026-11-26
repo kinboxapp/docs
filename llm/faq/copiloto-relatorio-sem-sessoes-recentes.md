@@ -24,7 +24,7 @@ O relatório **Copiloto** (**Relatórios** → **Copiloto**) só conta sessões 
 - **Período padrão:** o relatório abre nos últimos 7 dias, **sem hoje**. Para ver as sessões resolvidas hoje, escolha o atalho **Hoje** ou um intervalo que inclua hoje.
 - **Atualização:** períodos que incluem hoje atualizam em até 5 minutos. Períodos que já terminaram ficam guardados até a meia-noite, então análises que chegam depois podem aparecer só no dia seguinte.
 - **Recurso ligado:** cada aba só aparece e só recebe dados com o recurso correspondente ligado em **Configurações** → **Automação** → **Copiloto** (veja [Analisar conversas com IA](/docs/copiloto/analises-de-ia)).
-- **Restrições do papel:** com **Restringir relatórios ao membro** ou **Restringir relatórios aos grupos do membro**, você vê só as suas sessões ou as dos seus grupos.
+- **Restrições do papel:** com **Restringir relatórios ao membro** ou **Restringir relatórios aos grupos do membro**, você vê as suas sessões ou as dos seus grupos.
 
 Veja mais em [Relatório do copiloto](/docs/relatorios/copiloto) (precisa da permissão **Gerenciar relatórios**).
 

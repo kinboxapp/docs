@@ -1,6 +1,6 @@
 ---
 title: Por que os snapshots anteriores do dashboard aparecem desativados?
-description: No seletor de snapshots do dashboard, os snapshots anteriores ficam desativados para quem não tem a permissão Atribuir no papel; essa pessoa vê sempre o mais recente e ainda pode gerar um novo.
+description: No seletor de snapshots do dashboard, os snapshots anteriores ficam desativados para quem não tem a permissão Atribuir no papel; essa pessoa vê o mais recente e pode gerar um novo.
 keywords: [snapshot desativado, snapshots anteriores, não consigo trocar de snapshot, seletor de snapshots cinza, dashboard snapshot antigo, permissão atribuir, histórico do dashboard]
 publico: llm
 tipo: faq

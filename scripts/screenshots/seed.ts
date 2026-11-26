@@ -840,7 +840,7 @@ async function garantirCenarios(api: Api, canal: string) {
 
 /**
  * Dashboard de exemplo "Atendimento da loja" (prints da seção dashboards), criado a partir do modelo
- * Pipeline Atendimento: cartões de sessões não atribuídas, em espera, em atendimento, pendentes e atribuídas.
+ * Pipeline Atendimento: um cartão com os indicadores Não atribuído, Em espera, Em atendimento, Pendente e Atribuído.
  * Sem snapshot os cartões ficam em esqueleto: se o dashboard ainda não tem nenhum, gere um pela tela
  * (Obter dados atualizados → Atualizar dados) e espere concluir antes de capturar.
  */
@@ -860,6 +860,20 @@ async function garantirDashboard(api: Api) {
   const id = existente?._id || existente?.id
   if (existente?.description !== DASHBOARD_DESCRICAO) {
     await api.v3('PATCH', `/dashboards/${id}`, { description: DASHBOARD_DESCRICAO })
+  }
+  // O preset da API cria 5 itens soltos na grade; pela tela (Adicionar relatório → Pipeline Atendimento) eles
+  // ficam num cartão só, com 5 indicadores. Agrupa do mesmo jeito (mesmos ids: o snapshot existente continua valendo).
+  const cartoes: Record<string, any> = existente?.dashboardCards || {}
+  const ids = Object.keys(cartoes).filter((c) => cartoes[c]?.template === 'pipeline_atendimento')
+  const principal = ids.includes('pipeline_atendimento_unassigned') ? 'pipeline_atendimento_unassigned' : ids[0]
+  const layout: any[] = existente?.layout || []
+  const agrupado = ids.every((c) => cartoes[c].metricContainerId === principal) && layout.length === 1 && layout[0]?.i === principal
+  if (principal && !agrupado) {
+    await api.v3('PATCH', `/dashboards/${id}`, {
+      dashboardCards: Object.fromEntries(Object.entries(cartoes).map(([c, v]) => [c, ids.includes(c) ? { ...v, metricContainerId: principal } : v])),
+      layout: [{ i: principal, x: 0, y: 0, w: 4, h: 2, minW: 4, minH: 2, maxW: 4, maxH: 2 }],
+    })
+    log(`dashboard: ${ids.length} indicadores do Pipeline Atendimento agrupados num cartão`)
   }
   const snapshots = lista(await api.v3('GET', `/dashboards/${id}/snapshots`))
   if (!snapshots.length) {
