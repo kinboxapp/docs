@@ -1,0 +1,68 @@
+---
+title: "Qual WhatsApp usar: oficial ou QR Code"
+description: Diferenças entre o WhatsApp oficial e o WhatsApp por QR Code (Express e Clássica) para escolher o tipo certo antes de conectar.
+keywords: [whatsapp oficial, qr code, api oficial, cloud api, coexistência, modo qrcode, express, clássica, não oficial, qual escolher, whatsapp business]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
+  - web:src/pages/settings/channels/AddChannel.tsx
+  - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/embed/AddWhatsappEmbedded.tsx
+  - web:src/pages/inbox/Chat/index.tsx
+  - api-v0:server/modules/wabox/WaboxSender.js
+codigo:
+  - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/embed/**
+  - web:src/pages/settings/channels/whatsappCloud/**
+  - web:src/pages/inbox/Chat/index.tsx
+  - api-v0:server/modules/wabox/WaboxSender.js
+verificado_em: 2026-11-26
+---
+
+A Kinbox conecta o WhatsApp de duas formas:
+
+- **WhatsApp oficial** (na tela, **API Oficial**): você conecta o número pelo cadastro da Meta.
+- **WhatsApp por QR Code** (na tela, **Modo QRCode**): o canal funciona como um aparelho conectado ao WhatsApp do seu celular, como o WhatsApp Web.
+
+Os dois tipos contam no mesmo limite de canais de WhatsApp do plano.
+
+## Diferenças
+
+| | WhatsApp oficial | WhatsApp por QR Code (Express) |
+| --- | --- | --- |
+| Como conecta | Pela janela da Meta que abre ao clicar em **Conectar WhatsApp**. | Lendo o QR Code no celular ou digitando um código de conexão. |
+| Templates (mensagens aprovadas pela Meta) | Sim, na **Central WhatsApp API** (**Configurações** → **Automação** → **WhatsApp API**). | Não. |
+| Responder depois de 24 horas | Passadas 24 horas da última mensagem do contato, só dá para escrever com template. Numa conversa resolvida, a Kinbox mostra "Resolvida · janela de 24h encerrada" com **Enviar template**. | Sem limite de tempo para responder. |
+| Flows e carrossel | Sim, nas abas **Flows** e **Carrossel** da **Central WhatsApp API**. | Não. |
+| Grupos de WhatsApp | Não. | Sim, com **Permitir Grupos de WhatsApp**. |
+| Ligações | Ligações pelo WhatsApp (recurso em teste, com plano de ligações). | Tocam só no celular. Não chegam na Kinbox. |
+| Usar o celular junto | Só com a coexistência da Meta: o número continua no aplicativo WhatsApp Business. | Sim, sem configurar nada. As mensagens enviadas pelo celular entram na conversa da Kinbox. |
+| Risco de bloqueio do número | As regras de qualidade e de limite são da Meta. | O WhatsApp pode bloquear o número se receber denúncias de spam. |
+
+## O que saber antes de escolher o QR Code
+
+- O QR Code não envia botões, listas nem localização. Quando o contato manda esses itens, a Kinbox mostra o conteúdo na conversa.
+- A conexão **Express** não traz as conversas antigas do celular. A **Clássica** tem **Sincronizar histórico**.
+- Para diminuir o risco de bloqueio, veja [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp).
+
+## Conexão Express × Clássica
+
+No QR Code, a conexão padrão e recomendada é a **Express**. A **Clássica** é o modo antigo:
+
+- a criação do canal pode levar até 10 minutos;
+- tem **Sincronizar histórico** e atualização de versão.
+
+Um canal **Clássica** com **Versão** **Multidevice** pode passar para a **Express** pela ação **Recriar**, sem perder as conversas. Confira a **Versão** antes: sem o seletor **Tipo de conexão** na janela, o **Recriar** não troca o tipo. Veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
+
+## Como decidir
+
+- **WhatsApp oficial**: se você precisa de templates, Flows ou carrossel, ou vai mandar campanhas para quem ainda não falou com você.
+- **WhatsApp por QR Code (Express)**: se você precisa atender grupos, responder sem limite de 24 horas ou continuar usando o aplicativo no celular (inclusive o WhatsApp comum) sem configurar a coexistência da Meta.
+
+## Próximos passos
+
+- [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app)
+- [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)
+- [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp)

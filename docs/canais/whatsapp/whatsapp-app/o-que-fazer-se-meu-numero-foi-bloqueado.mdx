@@ -1,0 +1,58 @@
+---
+title: Meu número foi bloqueado
+description: O que fazer quando a Kinbox avisa que o número do WhatsApp por QR Code possivelmente foi bloqueado pelo WhatsApp.
+keywords: [número bloqueado, número banido, whatsapp banido, conta suspensa, possivelmente bloqueado, desbloquear número, migrar conversas]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/ForwardZapModal.tsx
+  - api-v0:server/modules/wabox/WaboxEvents.js
+  - wabox:apps/docs/webhooks/instance-status.mdx
+codigo:
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/ForwardZapModal.tsx
+  - web:src/pages/settings/channels/index.tsx
+  - api-v0:server/modules/wabox/**
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+- Na lista de canais (**Configurações** → **Chat** → **Canais**), o canal fica **Desconectado**, com o alerta "Seu canal foi possivelmente bloqueado pelo WhatsApp".
+- No painel do canal aparece: "Esse número possivelmente foi bloqueado pelo WhatsApp. Veja aqui o que fazer e clique aqui para dicas de como evitar que seu número seja bloqueado."
+- Na lista de conversas, a faixa **Telefone desconectado** diz "Possivelmente seu número foi bloqueado pelo WhatsApp."
+
+## O que acontece
+
+O WhatsApp avisou que bloqueou o número. A Kinbox para de enviar por esse canal: toda mensagem fica com erro. A Kinbox não consegue desbloquear o número nem pedir o desbloqueio ao WhatsApp.
+
+## O que fazer
+
+<Steps>
+  <Step title="Veja o aviso no celular">
+    Abra o WhatsApp do número no celular. Para pedir a revisão do bloqueio, siga as instruções que o WhatsApp mostrar.
+  </Step>
+  <Step title="Conecte outro número, se for trocar">
+    Para continuar atendendo, conecte outro número como em [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
+  </Step>
+  <Step title="Leve as conversas para o canal novo">
+    Na lista de canais, abra o menu de três pontos do canal bloqueado, clique em **Migrar conversas**, escolha o canal novo em **Migrar para:** e clique em **Migrar**. O processo pode levar algumas horas. Se o canal novo for um WhatsApp oficial, as conversas migradas só aceitam template até o contato escrever de novo.
+
+    A conversa de um contato que já tem conversa no canal novo não é migrada: ela fica no canal bloqueado. Confira o histórico nos dois canais antes de excluir o canal bloqueado. Veja [Migrar conversas](/docs/canais/visao-geral#migrar-conversas).
+  </Step>
+  <Step title="Se o WhatsApp liberar o número">
+    Abra o canal na Kinbox, clique em **Reiniciar canal** e leia o QR Code de novo no celular.
+  </Step>
+</Steps>
+
+<Warning>No número novo, não repita o que levou ao bloqueio. Leia [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp) e, se for mandar campanhas, [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas).</Warning>
+
+## Ainda não resolveu?
+
+Se o número funciona no celular, mas o alerta continua na Kinbox, fale com o suporte. Informe o ID do canal (**Copiar ID**, no menu de três pontos da lista) e desde quando o alerta aparece.
+
+## Próximos passos
+
+- [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp)
+- [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte)

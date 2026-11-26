@@ -1,5 +1,130 @@
 [
   {
+    "pergunta": "Como ligo meu número de WhatsApp na Kinbox lendo o QR Code?",
+    "esperado": [
+      "docs/canais/conectar-whatsapp-app",
+      "llm/canais/conectar-whatsapp-app"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O whatsapp deslogou e o QR Code sumiu da tela do canal, o que eu faço?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte",
+      "llm/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Apareceu um aviso de que meu número possivelmente foi bloqueado pelo WhatsApp",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado",
+      "llm/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Qual a diferença entre a API oficial e o modo QR Code do WhatsApp?",
+    "esperado": [
+      "docs/canais/whatsapp/visao-geral",
+      "llm/faq/whatsapp-qual-escolher"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Meu canal ainda está no modo antigo, sem o v5. Como passo para a alternativa nova sem perder as conversas?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo",
+      "llm/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para atender as ligações do WhatsApp do QR Code pela Kinbox?",
+    "esperado": [
+      "llm/faq/whatsapp-qr-ligacoes",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Onde vejo todos os canais que estão conectados e como excluo um canal?",
+    "esperado": [
+      "docs/canais/visao-geral",
+      "llm/canais/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Para que serve a opção Apenas Receptivo no canal do WhatsApp?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/configuracoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O que eu faço para o WhatsApp não banir meu número?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Qual velocidade usar no disparo em massa pelo QR Code para não ser bloqueado?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Consigo mandar botões ou localização pelo WhatsApp do QR Code?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona",
+      "llm/faq/whatsapp-qr-botoes-e-templates",
+      "llm/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Acabei de comprar um chip novo, já posso ligar ele na Kinbox e começar a mandar mensagem?",
+    "esperado": [
+      "llm/faq/whatsapp-aquecer-numero",
+      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "As mensagens dos grupos do meu WhatsApp aparecem na Kinbox?",
+    "esperado": [
+      "llm/faq/whatsapp-grupos",
+      "docs/canais/whatsapp/whatsapp-app/configuracoes",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Conectei o WhatsApp pelo QR Code e as conversas antigas não apareceram",
+    "esperado": [
+      "llm/faq/whatsapp-qr-historico",
+      "docs/canais/whatsapp/whatsapp-app/o-que-funciona"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quantos números de WhatsApp posso conectar no meu plano?",
+    "esperado": [
+      "llm/faq/canais-limite-do-plano",
+      "docs/canais/visao-geral",
+      "llm/canais/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço backup das conversas do WhatsApp no Google Drive do meu celular?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Que diferença tem entre usar um bot e colocar um agente de IA para responder os clientes?",
     "esperado": [
       "docs/conceitos/automacao-e-ia",
