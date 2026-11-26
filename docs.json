@@ -73,6 +73,16 @@
                 ]
               },
               {
+                "group": "Ligações",
+                "pages": [
+                  "docs/canais/ligacoes/visao-geral",
+                  "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+                  "docs/canais/ligacoes/ligar-por-telefone",
+                  "docs/canais/ligacoes/configuracoes-voip",
+                  "docs/canais/ligacoes/problemas-comuns"
+                ]
+              },
+              {
                 "group": "Instagram e Facebook",
                 "pages": [
                   "docs/canais/instagram",
@@ -219,6 +229,20 @@
             "group": "Integrações e API",
             "icon": "puzzle-piece",
             "pages": [
+              {
+                "group": "Apps e CRMs",
+                "pages": [
+                  "docs/integracoes/visao-geral",
+                  "docs/integracoes/hubspot",
+                  "docs/integracoes/pipedrive",
+                  "docs/integracoes/rdstation-crm",
+                  "docs/integracoes/rdstation-marketing",
+                  "docs/integracoes/rdstation-marketing-webhook",
+                  "docs/integracoes/bitrix24",
+                  "docs/integracoes/zoho",
+                  "docs/integracoes/nectarcrm"
+                ]
+              },
               {
                 "group": "Desenvolvedores",
                 "pages": [
@@ -708,6 +732,22 @@
       "destination": "/docs/integracoes/visao-geral"
     },
     {
+      "source": "/docs/integracoes/followize",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/banco-inter",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/smarters",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes/tiny-erp",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
       "source": "/docs/primeiros-passos",
       "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
     },
@@ -786,10 +826,6 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-templates/criando-templates-no-360dialog",
       "destination": "/docs/canais/criar-templates-dentro-do-kinbox"
-    },
-    {
-      "source": "/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
-      "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
     },
     {
       "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",

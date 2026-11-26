@@ -1979,3 +1979,181 @@
   arquivo: images/ajuda/contatos/novo-campo.webp
   paginas:
     - docs/configuracoes-no-workspace/campos-personalizados-no-kinbox
+
+# Seção integracoes (Integrações e API › Apps e CRMs). Só abre os painéis, sem salvar credencial nem autorizar em
+# terceiros. Nos painéis do Bitrix24 e do Zoho os campos recebem valores fictícios digitados (nada é salvo). O botão
+# Novo da tela Apps some do print. Pipedrive e NectarCRM listam os membros do workspace: a linha do dono (conta real)
+# leva tarja.
+
+# Configurações → Integrações → Apps: título, busca, filtro e as primeiras linhas (até RD Station Marketing).
+- id: integracoes-apps-lista
+  url: /settings/apps
+  passos:
+    - esperar: 'tr:has(img[alt="RD Station Marketing"])'
+    - pausa: 800
+  alvo:
+    - '.g_static_page header'
+    - 'tr:has(img[alt="RD Station Marketing"])'
+  esconder:
+    - '.global-add-button-link'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/lista-de-apps.webp
+  paginas:
+    - docs/integracoes/visao-geral
+
+- id: integracoes-hubspot
+  url: /settings/apps/hubspot
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/hubspot.webp
+  paginas:
+    - docs/integracoes/hubspot
+
+- id: integracoes-pipedrive
+  url: /settings/apps/pipedrive
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body .ant-row:has(> .ant-col-14 > #data_tokens_5) > .ant-col-10'
+  arquivo: images/ajuda/integracoes/pipedrive.webp
+  paginas:
+    - docs/integracoes/pipedrive
+
+- id: integracoes-rdstation-crm
+  url: /settings/apps/rdstation
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/rdstation-crm.webp
+  paginas:
+    - docs/integracoes/rdstation-crm
+
+- id: integracoes-rdstation-marketing
+  url: /settings/apps/rdstation-marketing
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/rdstation-marketing.webp
+  paginas:
+    - docs/integracoes/rdstation-marketing
+
+- id: integracoes-bitrix24
+  url: /settings/apps/bitrix24
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - digitar:
+        seletor: '.ant-drawer-body #data_token_url'
+        texto: 'seu-webhook-de-leads-aqui'
+    - digitar:
+        seletor: '.ant-drawer-body #data_token_url_users'
+        texto: 'seu-webhook-de-usuarios-aqui'
+    - digitar:
+        seletor: '.ant-drawer-body #data_webhookUrl'
+        texto: 'seu-webhook-do-bot-aqui'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/bitrix24.webp
+  paginas:
+    - docs/integracoes/bitrix24
+
+# Campos com valores fictícios digitados, sem clicar em Obter token nem em Salvar.
+- id: integracoes-zoho
+  url: /settings/apps/zoho
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - digitar:
+        seletor: '.ant-drawer-body #data_org_id'
+        texto: 'org000000000'
+    - digitar:
+        seletor: '.ant-drawer-body #data_client_id'
+        texto: '1000.XXXXXXXXXXXXXXXX'
+    - digitar:
+        seletor: '.ant-drawer-body #data_client_secret'
+        texto: 'xxxxxxxxxxxxxxxxxxxx'
+    - digitar:
+        seletor: '.ant-drawer-body #data_generatedCode'
+        texto: '1000.xxxxxxxxxxxxxxxx'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar: []
+  arquivo: images/ajuda/integracoes/zoho.webp
+  paginas:
+    - docs/integracoes/zoho
+
+- id: integracoes-nectarcrm
+  url: /settings/apps/nectarcrm
+  passos:
+    - esperar: '.ant-drawer-body #isEnabled'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button[type=submit]'
+  mascarar:
+    - '.ant-drawer-body .ant-row:has(> .ant-col-14 > #data_tokens_5) > .ant-col-10'
+  arquivo: images/ajuda/integracoes/nectarcrm.webp
+  paginas:
+    - docs/integracoes/nectarcrm
+
+# Seção ligacoes (Canais › Ligações)
+#
+# A tela do VoIP vem do workspace de documentação, só com o cartão Ajustes; a descrição de cobrança de Gravar chamadas
+# leva tarja (a doc não publica preço nem cobrança). A aba Ligações (Beta) do WhatsApp oficial só existe em workspace com o recurso em teste e
+# canal oficial: vem do canal oficial de teste do workspace de testes (id 1), só leitura (o clique só troca de aba). O
+# nome do canal é trocado por um texto genérico, e as descrições de Gravar ligações e Fazer ligações levam tarja porque
+# trazem valores por minuto. Sem print do menu Ligar nem do pedido de permissão: abrir o menu pode iniciar uma ligação
+# real.
+
+- id: ligacoes-voip-ajustes
+  url: /settings/voip
+  passos:
+    - esperar: 'text=Usar SIP reserva'
+    - pausa: 1000
+  alvo: 'div.card-bordered:has-text("Usar SIP reserva")'
+  mascarar:
+    - 'div:text-is("Cobrado por minuto gravado.")'
+  arquivo: images/ajuda/ligacoes/voip-ajustes.webp
+  paginas:
+    - docs/canais/ligacoes/configuracoes-voip
+
+- id: ligacoes-whatsapp-aba
+  workspace: Kinbox
+  url: /settings/channels/2
+  passos:
+    - esperar: '.ant-drawer-body'
+    - clicar: '.ant-drawer button:has-text("Ligações")'
+    - esperar: 'text=IA atende as ligações'
+    - trocarTexto:
+        seletor: '.ant-drawer-title .truncate'
+        texto: 'Canal de WhatsApp oficial'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .flex.flex-col.gap-5'
+  mascarar:
+    - '.ant-drawer-body div.text-secondary:has-text("Grava e transcreve")'
+    - '.ant-drawer-body div.text-secondary:has-text("Atendentes podem ligar")'
+  arquivo: images/ajuda/ligacoes/aba-ligacoes-whatsapp.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp

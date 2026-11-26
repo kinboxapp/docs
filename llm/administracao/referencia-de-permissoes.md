@@ -166,7 +166,7 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 | **Bot** | Mostra **Configurações** → **Automação** → **Bot**. | — |
 | **Copiloto** | Mostra **Configurações** → **Automação** → **Copiloto**. | — |
 | **Cenários** | Mostra **Configurações** → **Automação** → **Cenários**. | — |
-| **Integrações** | Mostra **Configurações** → **Integrações** → **Apps**, **Plugins**, **API Tokens** e **MCP**, e **Configurações** → **Marketing** → **Tracking**. | — |
+| **Integrações** | Mostra **Configurações** → **Integrações** → **Apps** ([Apps e integrações: instalar e usar](/docs/integracoes/visao-geral)), **Plugins**, **API Tokens** e **MCP**, e **Configurações** → **Marketing** → **Tracking**. | — |
 | **Auditoria** | Mostra **Configurações** → **Auditoria**. | — |
 | **Funis** | Mostra **Configurações** → **CRM** → **Funis**. | — |
 | **Produtos** | Mostra **Configurações** → **CRM** → **Produtos**. | — |

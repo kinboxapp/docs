@@ -848,6 +848,129 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Quero ligar pelo WhatsApp para um cliente, mas aparece que ele ainda não deu permissão. O que faço?",
+    "esperado": [
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+      "docs/canais/ligacoes/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para ligar do navegador para o telefone fixo de um contato?",
+    "esperado": [
+      "docs/canais/ligacoes/ligar-por-telefone",
+      "docs/canais/ligacoes/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde baixo o áudio gravado de uma ligação?",
+    "esperado": [
+      "llm/faq/ligacoes-gravacao",
+      "docs/canais/ligacoes/visao-geral",
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+      "docs/canais/ligacoes/configuracoes-voip"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Meu cliente pode me ligar num número de telefone comum e eu atender pela Kinbox?",
+    "esperado": [
+      "llm/faq/voip-receber-ligacoes",
+      "docs/canais/ligacoes/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A ligação do WhatsApp do cliente não toca para o atendente, por quê?",
+    "esperado": [
+      "docs/canais/ligacoes/problemas-comuns",
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Por que a aba Ligações não aparece no meu WhatsApp oficial?",
+    "esperado": [
+      "docs/canais/ligacoes/problemas-comuns",
+      "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Consigo fazer chamada de vídeo com o cliente pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero criar o negócio no HubSpot sem sair da conversa com o cliente, como configuro?",
+    "esperado": [
+      "docs/integracoes/hubspot",
+      "llm/integracoes/hubspot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como faço os leads convertidos no RD Station Marketing virarem contato na Kinbox?",
+    "esperado": [
+      "docs/integracoes/rdstation-marketing-webhook",
+      "llm/integracoes/rdstation-marketing-webhook"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O botão para criar lead no Bitrix24 aparece cinza na conversa, o que falta?",
+    "esperado": [
+      "docs/integracoes/bitrix24",
+      "llm/integracoes/bitrix24"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Cliquei em Obter token no Zoho e o refresh token não apareceu",
+    "esperado": [
+      "docs/integracoes/zoho",
+      "llm/integracoes/zoho"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como ligo o NectarCRM para os atendentes cadastrarem contatos pela conversa?",
+    "esperado": [
+      "docs/integracoes/nectarcrm",
+      "llm/integracoes/nectarcrm"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que cada vez que crio oportunidade no RD Station CRM aparece uma empresa repetida?",
+    "esperado": [
+      "docs/integracoes/rdstation-crm",
+      "llm/integracoes/rdstation-crm"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Sumiu a integração com o Followize, onde ela foi parar?",
+    "esperado": [
+      "llm/faq/integracao-followize"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A Kinbox tem integração pronta com o Salesforce?",
+    "esperado": [
+      "llm/faq/integracao-nao-listada",
+      "docs/integracoes/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O quadro do CRM na conversa mostra o programa de fidelidade e os pontos acumulados do cliente?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Tenho uma planilha do Excel com meus clientes, como coloco todos na Kinbox de uma vez?",
     "esperado": [
       "docs/clientes/importar-contatos"
