@@ -1319,7 +1319,7 @@
             "in": "query",
             "description": "Filtra pelo CNPJ (com ou sem pontuação).",
             "schema": {
-              "example": "12.345.678/0001-95",
+              "example": "00.000.000/0000-00",
               "type": "string"
             }
           },
@@ -1759,7 +1759,7 @@
             "in": "query",
             "description": "Telefone no formato DDI+DDD+NUMERO (apenas dígitos)",
             "schema": {
-              "example": "558511112222",
+              "example": "5511900000001",
               "type": "string"
             }
           }
@@ -2631,7 +2631,7 @@
                   "type": "array",
                   "example": [
                     {
-                      "number": "5585984134352",
+                      "number": "5511900000003",
                       "placeholders": [
                         "Lucas"
                       ],
@@ -2639,7 +2639,7 @@
                       "status": "sent"
                     },
                     {
-                      "number": "558597281857",
+                      "number": "5511900000006",
                       "placeholders": [
                         "Pedro"
                       ],
@@ -3909,7 +3909,7 @@
           "phone": {
             "type": "string",
             "description": "The contact’s phone number",
-            "example": "5585997281648"
+            "example": "5511900000005"
           },
           "location": {
             "type": "string"
@@ -3948,7 +3948,7 @@
             "properties": {},
             "example": {
               "cpf": {
-                "value": "060.715.303-54"
+                "value": "000.000.000-00"
               }
             }
           },
@@ -4451,8 +4451,8 @@
           },
           "to": {
             "type": "string",
-            "example": "5585988887777",
-            "description": "Telefone com DDI+DDD+NUMERO, de qualquer país (ex: 5585988887777, 14077095273). Caracteres não numéricos são removidos. Números brasileiros sem o DDI 55 recebem o 55 quando não são válidos como número internacional. Número inválido responde 400."
+            "example": "5511900000004",
+            "description": "Telefone com DDI+DDD+NUMERO, de qualquer país (ex: 5511900000004, 14155550100). Caracteres não numéricos são removidos. Números brasileiros sem o DDI 55 recebem o 55 quando não são válidos como número internacional. Número inválido responde 400."
           },
           "message": {
             "type": "string",
@@ -5753,7 +5753,7 @@
           },
           "phone": {
             "type": "string",
-            "example": "5585988887777"
+            "example": "5511900000004"
           }
         },
         "required": [
@@ -6263,7 +6263,7 @@
           },
           "phone": {
             "type": "string",
-            "example": "5585988887777"
+            "example": "5511900000004"
           },
           "status": {
             "type": "string",
@@ -6388,7 +6388,7 @@
         "properties": {
           "phone": {
             "type": "string",
-            "example": "558511112222",
+            "example": "5511900000001",
             "description": "Telefone normalizado retornado pelo WhatsApp (quando existe)"
           },
           "canReceiveMessage": {
@@ -7557,7 +7557,7 @@
           },
           "phone": {
             "type": "string",
-            "example": "5585988887777",
+            "example": "5511900000004",
             "nullable": true
           },
           "notes": {
@@ -7607,7 +7607,7 @@
           },
           "identifier": {
             "type": "string",
-            "example": "5585988887777",
+            "example": "5511900000004",
             "description": "Identificador do contato no canal (telefone, id do Instagram etc.)"
           },
           "uniqueIdentifier": {
