@@ -940,6 +940,101 @@ async function garantirDashboard(api: Api) {
   log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length} snapshot(s)`)
 }
 
+/**
+ * Tarefas de exemplo (seção `tarefas-e-metas`): cinco tarefas com responsáveis fictícios, vínculos com negócios
+ * e contatos do seed, prioridades e prazos relativos a hoje, e uma tarefa com subtarefas. Nenhuma é do tipo
+ * "Iniciar bot". Depende de `funil`, `membros` e `crm` (responsáveis). Só cria as que faltam, pelo nome.
+ */
+async function garantirTarefas(api: Api, contatoIds: Record<string, string>) {
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  const opId = (nome: string) => {
+    const membro = MEMBROS.find((m) => m.name === nome)
+    const op = operadores.find((o) => o.email === membro?.email)
+    if (!op) throw new Error(`membro "${nome}" não encontrado: rode antes a etapa "membros"`)
+    return Number(op.operatorId || op.id)
+  }
+  const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  const negocios = vendas ? lista(await api.v3('GET', `/deals?pipelineId=${String(vendas.id || vendas._id)}&limit=100`)) : []
+  const negocio = (nome: string) => {
+    const d = negocios.find((x) => x.name === nome)
+    return d ? { id: String(d.id || d._id), name: d.name, pipelineId: String(vendas.id || vendas._id) } : undefined
+  }
+  const contato = (nome: string) => (contatoIds[nome] ? { id: Number(contatoIds[nome]), name: nome } : undefined)
+  // Prazo como a tela manda: o dia (meio-dia) e o horário em separado
+  const prazo = (dias: number, hora: string) => {
+    const d = new Date()
+    d.setDate(d.getDate() + dias)
+    d.setHours(12, 0, 0, 0)
+    return { fromDate: d.toISOString(), fromTime: hora, minutesDuration: 30, notifyMinutesBefore: 15, executionDateType: 'hour' }
+  }
+  const TAREFAS = [
+    { name: 'Ligar para confirmar o endereço de entrega', type: 'call', responsavel: 'Bruno Carvalho', priority: 'high', ...prazo(1, '10:00'),
+      description: 'Confirmar o endereço e o melhor horário para a entrega do kit.', deal: negocio('Kit presente — Ana Souza'), contact: contato('Ana Souza') },
+    { name: 'Enviar proposta de kits corporativos', type: 'mail', responsavel: 'Carla Mendes', priority: 'urgent', ...prazo(-1, '17:00'),
+      description: 'Proposta com 3 opções de kit e prazo de produção.', deal: negocio('Kits corporativos — Carlos Pereira'), contact: contato('Carlos Pereira') },
+    { name: 'Separar pedido de reposição', type: 'task', responsavel: 'Carla Mendes', priority: 'medium', inProgress: true, ...prazo(2, '09:00'),
+      description: 'Conferir o estoque e separar os itens do pedido.', deal: negocio('Reposição de estoque — Lucas Ferreira'), contact: contato('Lucas Ferreira'),
+      subtarefas: [{ name: 'Conferir o estoque de café', done: true }, { name: 'Embalar os itens' }, { name: 'Emitir a nota' }] },
+    { name: 'Reunião de alinhamento da equipe', type: 'meeting', responsavel: 'Diego Santos', priority: 'low', ...prazo(7, '14:00') },
+    { name: 'Retornar mensagem da Mariana', type: 'call', responsavel: 'Bruno Carvalho', ...prazo(3, '11:30'), contact: contato('Mariana Lima') },
+  ]
+  const existentes = lista(await api.v3('GET', '/tasks?limit=100&status=all'))
+  let criadas = 0
+  for (const { responsavel, subtarefas, ...t } of TAREFAS as any[]) {
+    let tarefa = existentes.find((x) => x.name === t.name)
+    if (!tarefa) {
+      const corpo = Object.fromEntries(Object.entries({ ...t, operatorId: opId(responsavel) }).filter(([, v]) => v !== undefined))
+      tarefa = await api.v3('POST', '/tasks', corpo)
+      criadas++
+    }
+    if (subtarefas?.length) {
+      const id = String(tarefa.id || tarefa._id)
+      const filhas = lista(await api.v3('GET', `/tasks?parentId=${id}&limit=100&status=all`))
+      for (const sub of subtarefas) {
+        if (filhas.some((x) => x.name === sub.name)) continue
+        await api.v3('POST', '/tasks', { name: sub.name, type: 'task', parentId: id, operatorId: opId(responsavel), done: !!sub.done })
+      }
+    }
+  }
+  log(`tarefas: ${criadas} criadas (${TAREFAS.length} no total)`)
+}
+
+/**
+ * Meta de exemplo (seção `tarefas-e-metas`): "Vendas do mês", valor do negócio, mês atual, com os três membros
+ * fictícios como participantes (o dono real da conta fica fora do ranking) e um milestone global. Conta os
+ * negócios ganhos do seed. Depende de `membros`. Cria se não existir; se existir, reaplica os participantes.
+ */
+async function garantirMetas(api: Api) {
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  const participantes = MEMBROS.map((m) => {
+    const op = operadores.find((o) => o.email === m.email)
+    if (!op) throw new Error(`membro "${m.name}" não encontrado: rode antes a etapa "membros"`)
+    return String(op.operatorId || op.id)
+  })
+  const meta = lista(await api.v3('GET', '/goals?limit=100')).find((m) => m.name === 'Vendas do mês')
+  if (meta) {
+    await api.v3('PATCH', `/goals/${String(meta.id || meta._id)}`, { selectBy: 'operator', operatorIds: participantes, groupIds: [] })
+    return log('metas: "Vendas do mês" já existe (participantes reaplicados)')
+  }
+  const agora = new Date()
+  const inicio = new Date(agora.getFullYear(), agora.getMonth(), 1, 0, 0, 0, 0)
+  const fim = new Date(agora.getFullYear(), agora.getMonth() + 1, 0, 23, 59, 59, 999)
+  await api.v3('POST', '/goals', {
+    name: 'Vendas do mês',
+    description: 'Meta de vendas da loja no mês. Quem passar de R$ 500 em vendas ganha um vale-presente.',
+    type: 'deal-value',
+    targetValue: 1000,
+    from: inicio.toISOString(),
+    to: fim.toISOString(),
+    selectBy: 'operator',
+    operatorIds: participantes,
+    groupIds: [],
+    productIds: [],
+    milestones: [{ name: 'Metade da meta', targetValue: 500, type: 'global' }],
+  })
+  log('metas: "Vendas do mês" criada')
+}
+
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
 // (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
 const falhas: Record<string, string> = {}
@@ -958,6 +1053,8 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['salas', () => garantirSalas(api)],
   ['cenarios', () => garantirCenarios(api, canal)],
   ['dashboard', () => garantirDashboard(api)],
+  ['tarefas', () => garantirTarefas(api, contatoIds)],
+  ['metas', () => garantirMetas(api)],
 ]
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
 // `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.
