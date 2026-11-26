@@ -1,6 +1,6 @@
 ---
 title: Como excluo minha conta pelo navegador?
-description: Pelo navegador não existe opção para excluir a conta; a exclusão é feita pelo app da Kinbox para celular ou pelo formulário público em kinbox.com.br/delete-account/.
+description: Dentro da Kinbox no navegador não há botão de excluir a conta; a exclusão é feita pelo app da Kinbox para celular ou pelo formulário público em kinbox.com.br/delete-account/.
 keywords: [excluir conta, apagar conta, deletar conta, cancelar minha conta, excluir conta pelo navegador, excluir conta web, excluir cadastro, remover conta, transferir propriedade]
 publico: llm
 tipo: faq

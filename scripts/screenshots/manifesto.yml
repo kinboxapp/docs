@@ -1171,8 +1171,8 @@
     - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail"))'
   mascarar:
     - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Imagem de perfil")) figure'
-    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Nome")) .ant-space-item > span'
-    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail")) .ant-space-item > span'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Nome")) > .ant-col:last-child .ant-space-item:first-child'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail")) > .ant-col:last-child .ant-space-item:first-child'
   arquivo: images/ajuda/conta/perfil-informacoes.webp
   paginas:
     - docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario

@@ -56,7 +56,7 @@ verificado_em: 2026-11-26
 | "A configuração expirou. Comece de novo." | Passaram mais de 15 minutos na janela de ativação | Fechar e iniciar a ativação novamente |
 | "A verificação em duas etapas já está ativa." | Tentativa de ativar quando a verificação já estava ativa | Recarregar o perfil e usar **Gerenciar** |
 | "A verificação em duas etapas não está ativa." | Tentativa de gerenciar ou desativar sem estar ativa | Recarregar o perfil |
-| "A verificação expirou. Entre novamente." | Passaram mais de 5 minutos na tela do código no login ou houve várias tentativas erradas na mesma tela | Entrar novamente com e-mail e senha (ou Google) |
+| "A verificação expirou. Entre novamente." | Passaram mais de 5 minutos na tela do código no login ou houve várias tentativas erradas na mesma tela | Entrar novamente com e-mail e senha (ou Google/Apple) |
 | "Muitas tentativas. Aguarde 15 minutos e tente novamente." | Muitos códigos errados seguidos | Aguardar 15 minutos e tentar novamente |
 | "Muitas tentativas. Aguarde alguns instantes e tente novamente." | Muitas tentativas de verificação em pouco tempo | Aguardar alguns instantes e tentar novamente |
 | "Não foi possível verificar o código. Tente novamente." | Falha ao verificar o código (por exemplo, conexão) | Tentar novamente |

@@ -36,7 +36,7 @@ Na interface da Kinbox, o workspace aparece como **ambiente**.
 | **Continuar com o Google** mostra "Você ainda não tem uma conta. Complete seu registro." e abre o cadastro | Não existe conta Kinbox com esse e-mail do Google | Entrar com o e-mail da conta Kinbox ou concluir o cadastro |
 | Tela **Verificação em duas etapas** pede código de 6 dígitos | Verificação em duas etapas (2FA) está ativa na conta | Digitar o código do app autenticador ou clicar em **Usar um código de recuperação** |
 | "Código inválido. Tente novamente." | Código de 2FA errado, já usado ou relógio do celular desajustado | Esperar o próximo código e conferir se a hora do celular está no automático |
-| "A verificação expirou. Entre novamente." e volta para e-mail e senha | A tela do código passou de 5 minutos ou teve várias tentativas erradas | Entrar novamente com e-mail e senha (ou Google) |
+| "A verificação expirou. Entre novamente." e volta para e-mail e senha | A tela do código passou de 5 minutos ou teve várias tentativas erradas | Entrar novamente com e-mail e senha (ou Google/Apple) |
 | "Muitas tentativas. Aguarde 15 minutos e tente novamente." | Muitos códigos de 2FA errados seguidos | Aguardar 15 minutos e tentar novamente |
 | Perdeu o celular e não tem os códigos de recuperação | Sem app autenticador e sem códigos, não há acesso nem desativação por conta própria | Falar com o suporte da Kinbox para redefinir a verificação (pedir a um colega ou ao proprietário se não conseguir entrar) |
 | E-mail de **Esqueci a senha** não chega | E-mail digitado é diferente do da conta (a tela confirma igual) ou caiu no spam | Conferir o e-mail da conta, procurar "[Kinbox] - Reset de senha" no spam e pedir novamente |
@@ -44,7 +44,7 @@ Na interface da Kinbox, o workspace aparece como **ambiente**.
 | Nova senha recusada | Fora da regra (mínimo de 8 caracteres, uma letra e um número) | Cumprir os requisitos exibidos na tela **Resetar senha** |
 | Recebeu convite e não consegue entrar | Ainda não concluiu o cadastro pelo link do convite (tela **Complete seu cadastro**) | Abrir o link do e-mail "Convite para se juntar ao workspace [nome]" (o link não expira) ou pedir **Reenviar convite** a quem convidou |
 | Tela **Nenhum ambiente ativo** depois de entrar | Foi desativado ou removido de todos os workspaces da conta, ou o próprio workspace foi desativado | Pedir a quem administra o workspace para reativar ou convidar novamente; não criar um workspace novo achando que recupera o antigo |
-| Workspace não aparece em **Escolha um ambiente** | Foi desativado naquele workspace ou o convite foi para outro e-mail | Falar com quem administra aquele workspace |
+| Workspace não aparece em **Escolha um ambiente** | Foi desativado naquele workspace, o próprio workspace foi desativado ou o convite foi para outro e-mail | Falar com quem administra aquele workspace |
 | "Você não tem permissão para acessar este workspace." e sai | Foi desativado nesse workspace enquanto estava com a Kinbox aberta | Falar com quem administra o workspace |
 | "Você foi deslogado por um gestor..." (sai em 3 segundos) | Alguém com a permissão **Membros** usou **Desconectar** na sua linha | Entrar novamente |
 | Voltou para a tela de entrada sem aviso | O papel foi editado ou o acesso expirou | Entrar novamente |
@@ -61,7 +61,7 @@ Na interface da Kinbox, o workspace aparece como **ambiente**.
 - **E-mail de recuperação:** assunto "[Kinbox] - Reset de senha". O link vale **2 horas** e só pode ser usado uma vez; pedir novamente gera um link novo e invalida o anterior.
 - **Confirmação neutra:** a tela mostra **Confira seu e-mail** mesmo quando o endereço digitado não tem conta.
 - **Verificação em duas etapas:** redefinir a senha não desativa a verificação em duas etapas.
-- **Senha nova mandada por quem administra:** quem tem a permissão **Pode resetar senha de membros** (ou o proprietário) usa **Resetar senha** em **Membros**; a Kinbox gera uma senha e envia por e-mail com o assunto "[Kinbox] - Redefinição de senha". Só funciona se o membro estiver ativo, já tiver aceitado o convite, não for o proprietário e participar só daquele workspace; fora disso, o próprio membro usa **Esqueceu a senha?** (veja [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros)).
+- **Senha nova mandada por quem administra:** quem tem a permissão **Pode resetar senha de membros** (ou o proprietário) usa **Resetar senha** em **Membros**; a Kinbox gera uma senha e envia por e-mail com o assunto "[Kinbox] - Redefinição de senha". Só funciona se o membro estiver ativo, já tiver aceitado o convite, não for o proprietário e não tiver vínculo com nenhum outro workspace, mesmo inativo; fora disso, o próprio membro usa **Esqueceu a senha?** (veja [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros)).
 - **Troca no perfil:** em **Configurações** → **Perfil** → **Segurança** → **Senha**, senha atual errada mostra "Senha incorreta". A senha salva é a digitada em **Nova senha**. A restrição **Não pode mudar informação de perfil** esconde o botão de editar senha (não vale para o proprietário).
 
 ## Limite de acessos abertos
@@ -70,7 +70,7 @@ Na interface da Kinbox, o workspace aparece como **ambiente**.
 - Cada navegador ou app para celular conta como um acesso aberto; abas do mesmo navegador contam juntas como um único acesso.
 - Clicar em **Sair** encerra o acesso e libera a vaga; apenas fechar a aba sem clicar em **Sair** pode manter o acesso listado.
 - Quando o limite é atingido, a tela lista os acessos abertos (data e hora de início, navegador e computador ou celular) com o botão **Desconectar** em cada um. Ao desconectar um acesso antigo, ele recebe "Você foi deslogado por outra sessão..." e o navegador atual passa a funcionar. Com mais de um workspace, a tela também permite escolher outro workspace.
-- Fora da tela de limite, não existe página para listar ou encerrar acessos abertos nem opção de sair de todos os aparelhos. Em suspeita de acesso indevido: trocar a senha, ativar a verificação em duas etapas, pedir a quem administra os membros para usar **Desconectar** na sua linha (só fica ativo com o membro **Online** e não existe para o proprietário) e falar com o suporte.
+- Fora da tela de limite, não existe página para listar ou encerrar acessos abertos nem opção de sair de todos os aparelhos. Em suspeita de acesso indevido: trocar a senha, ativar a verificação em duas etapas, pedir a quem administra os membros para usar **Desconectar** na sua linha (só fica ativo com o membro **Online** e fica desativado para o proprietário) e falar com o suporte.
 
 ## O e-mail da conta não muda pela tela
 

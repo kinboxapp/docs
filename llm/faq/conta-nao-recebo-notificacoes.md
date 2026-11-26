@@ -7,6 +7,7 @@ tipo: faq
 fontes:
   - web:src/pages/settings/profile/Notifications.tsx
   - web:src/sw.ts
+  - web:src/hooks/useSocket.tsx
   - api:src/modules/push-notifications/push-notifications.service.ts
   - mobile:src/app/notifications.tsx
 codigo:
@@ -37,9 +38,9 @@ Principais causas quando os avisos não chegam:
 - **Kinbox aberta e visível na tela:** o push do navegador não aparece enquanto alguma aba da Kinbox está visível — nessa situação, só tocam os sons.
 - **Conversa não atribuída a você:** o push de **Mensagem** e o de **Atribuído** avisam apenas o responsável pela conversa; conversa sem responsável não gera push. O push de **Mensagem de time** depende de menção numa sala ou de mensagem direta.
 - **Outro workspace:** as opções de **Push** valem só para o workspace aberto; configure também nos outros workspaces de que você participa.
-- **Som não toca:** o interruptor correspondente está desligado no cartão **Som**, a Kinbox não está aberta, você está **Indisponível** (os sons de nova mensagem e de nova conversa só tocam com você disponível) ou a conversa não está na visão ou no filtro aberto da **Caixa de entrada**. Com várias abas abertas, o som toca só em uma.
-- **No celular:** confira no app se **Receber notificações** está ligado; se **Quando receber** estiver em **Quando não estiver usando o web**, o celular não avisa enquanto você usa a Kinbox no navegador; com **Só no horário comercial** ligado, o app só avisa dentro do horário comercial.
-- **Salas bloqueadas:** membros com a restrição **Não pode acessar as salas** no papel não recebem notificações de salas.
+- **Som não toca:** o interruptor correspondente está desligado no cartão **Som**, a Kinbox não está aberta, você está **Indisponível** (manualmente, por inatividade ou por horário do papel; os sons de nova mensagem e de nova conversa só tocam com você disponível) ou a conversa não é a que está aberta nem está na visão ou no filtro selecionado da **Caixa de entrada**. Com várias abas abertas, o som toca só em uma. Depois de "Você foi desconectado por inatividade.", nenhum som toca até você clicar em **Reconectar**.
+- **No celular:** confira no app, em **Você** → **Notificações**, se **Receber notificações** está ligado (ele é independente de **Habilitar notificações de desktop**); se **Quando receber** estiver em **Quando não estiver usando o web**, o celular não avisa enquanto você usa a Kinbox no navegador (aba visível e em uso); com **Só no horário comercial** ligado, o app só avisa dentro do horário padrão do workspace. Com a conversa ou a sala aberta no app, o aviso não se repete, e salas que você silenciou não geram push no app.
+- **Salas bloqueadas:** membros com a restrição **Não pode acessar as salas** no papel não recebem push de salas no app.
 - **Não recebo novas conversas (diferente de não receber avisos):** se novas conversas não estão caindo para você pela atribuição automática, confira se você não está **Indisponível** (manualmente, por inatividade ou por horário do papel).
 
 Veja como ajustar em [Receber notificações no navegador e no celular](/docs/conta/notificacoes) e [Ficar disponível ou indisponível](/docs/conta/disponibilidade).
