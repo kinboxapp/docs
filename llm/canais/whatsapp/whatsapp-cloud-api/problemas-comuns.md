@@ -52,4 +52,4 @@ Toda vez que o painel de um canal oficial é aberto, a Kinbox consulta na Meta q
 
 ## Janela de 24 horas: detalhe raro
 
-- Ao agendar uma mensagem num canal oficial com sugestão do copiloto, se o retorno sugerido cai fora da janela e nenhum template aprovado combina, aparece o aviso `"Nenhum modelo aprovado combina com este retorno. Fora da janela de 24h do WhatsApp, escolha um modelo para enviar."` (ver [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
+- Ao agendar uma mensagem num canal oficial com sugestão do copiloto, se o retorno sugerido cai fora da janela e nenhum template aprovado combina, aparece o aviso `"Nenhum modelo aprovado combina com este retorno. Fora da janela de 24h do WhatsApp, escolha um modelo para enviar."` (ver [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas) e [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia)).

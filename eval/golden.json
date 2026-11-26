@@ -1073,6 +1073,57 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Como faço para a IA corrigir o português da minha mensagem antes de mandar para o cliente?",
+    "esperado": [
+      "docs/copiloto/usar-o-copiloto-de-ia",
+      "llm/faq/copiloto-assistente-kin"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero criar um botão de IA que reescreva o texto no jeito da minha empresa, dá para montar um comando próprio?",
+    "esperado": [
+      "docs/copiloto/comandos-personalizados"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para a IA dar uma nota de 0 a 10 para cada atendimento resolvido?",
+    "esperado": [
+      "llm/faq/ia-avalia-atendimento",
+      "docs/copiloto/analises-de-ia"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Meu saldo está caindo e não liguei nada, o copiloto cobra quando clico em Sugestões?",
+    "esperado": [
+      "llm/faq/copiloto-custo",
+      "llm/copiloto/configuracoes-de-copiloto"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Posso mandar um arquivo .md para a base de conhecimento do bot?",
+    "esperado": [
+      "llm/faq/base-de-conhecimento-markdown",
+      "docs/copiloto/base-de-conhecimento"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como eu sei quais clientes estão irritados sem precisar abrir e ler cada conversa?",
+    "esperado": [
+      "docs/copiloto/analises-de-ia"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O copiloto consegue publicar posts nas redes sociais da minha loja?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Como ligo o bot do Telegram da minha empresa na Kinbox?",
     "esperado": [
       "docs/canais/telegram"
