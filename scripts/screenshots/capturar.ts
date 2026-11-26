@@ -16,6 +16,7 @@ import { mkdir } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { chromium, type BrowserContext, type Page } from 'playwright'
+import { nomesPreparos, preparar, type Preparo } from './preparos'
 import { API_V3, DOCS_WORKSPACE_NAME, WEB_URL, WIDGET_URL, client, credentials, findDocsWorkspace, login } from './staging'
 
 type Passo =
@@ -59,6 +60,11 @@ type Item = {
    * Seletores que começam com `widget>> ` procuram dentro do chat (iframe do widget).
    */
   site?: { widget: string }
+  /**
+   * Preparo de `preparos.ts` que monta, pela API, um estado temporário que o item precisa (ex.: copiloto configurado,
+   * token de API, pedido de autorização do MCP) e o desfaz depois do print. Pode trocar marcadores da `url`.
+   */
+  preparar?: string
 }
 
 /**
@@ -149,6 +155,9 @@ async function lerManifesto(): Promise<Item[]> {
     }
     if (!/^images\/ajuda\/[^/]+\/[^/]+\.webp$/.test(item.arquivo)) {
       throw new Error(`Item ${item.id}: "arquivo" deve seguir images/ajuda/<secao>/<nome>.webp`)
+    }
+    if (item.preparar && !nomesPreparos.includes(item.preparar)) {
+      throw new Error(`Item ${item.id}: preparo desconhecido "${item.preparar}". Use: ${nomesPreparos.join(', ')}`)
     }
     if (item.workspace && item.workspace !== DOCS_WORKSPACE_NAME && !item.mascarar?.length) {
       throw new Error(`Item ${item.id}: print fora do workspace de documentação precisa de "mascarar"`)
@@ -377,9 +386,13 @@ try {
     console.log(`Tela salva em ${base}.png e ${base}.html (fora do repositório: pode ter dado real)`)
   }
   for (const item of itens) {
+    let preparo: Preparo = {}
     try {
       const alvo = telaPublica(item) && paginaPublica ? paginaPublica : page
-      const { destino, bytes } = await capturar(alvo, conversor, item).finally(() =>
+      if (item.preparar) preparo = await preparar(item.preparar)
+      let url = item.url
+      for (const [marcador, valor] of Object.entries(preparo.trocas || {})) url = url.replaceAll(marcador, valor)
+      const { destino, bytes } = await capturar(alvo, conversor, { ...item, url }).finally(() =>
         item.site ? page.unroute(`${SITE_TESTE}/**`).catch(() => {}) : undefined,
       )
       console.log(`✓ ${item.id} → ${destino.replace(RAIZ + '/', '')} (${Math.round(bytes / 1024)} KB)`)
@@ -387,6 +400,11 @@ try {
       falhas++
       console.error(`✗ ${item.id}: ${(e as Error).message}`)
       await page.screenshot({ path: join(homedir(), `.cache/kinbox-docs-screenshots/erro-${item.id}.png`) }).catch(() => {})
+    } finally {
+      await preparo.desfazer?.().catch((e) => {
+        falhas++
+        console.error(`✗ ${item.id}: não consegui desfazer o preparo "${item.preparar}": ${(e as Error).message}`)
+      })
     }
   }
 } finally {
