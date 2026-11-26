@@ -3174,10 +3174,9 @@
 
 # Seção agenda (CRM e vendas › Kinbox Agenda)
 #
-# Dados da etapa `agenda` do seed (`bun seed.ts --so agenda`): serviços, locais e agendamentos fictícios da Loja
-# Exemplo. O staging tem mudanças da Agenda que ainda não estão em produção (cores e detalhes do agendamento,
-# calendário da equipe, campo Observações): por isso só entram telas iguais às de produção, e o formulário de
-# agendamento é recortado antes do bloco de contato.
+# Serviços, locais e agendamentos de exemplo da Loja Exemplo foram cadastrados pela tela (Configurações → Agenda e
+# formulário de agendamento), com nomes, e-mails example.com e telefones +55 11 90000-00NN fictícios. Só entram telas
+# iguais às de produção; o formulário de agendamento é recortado antes do bloco de contato.
 
 - id: agenda-servicos
   url: /settings/agendas/service
@@ -3198,6 +3197,10 @@
     - clicar: 'text=Consultoria de estilo'
     - esperar: '.ant-drawer-content >> text=Duração padrão (minutos)'
     - pausa: 1500
+  # Criar e editar horário ficam na página Horários: os atalhos dentro do serviço não entram no print
+  esconder:
+    - '.ant-drawer-content button:has-text("Criar novo horário")'
+    - '.ant-drawer-content button:has-text("Editar horário")'
   alvo:
     - '.ant-drawer-header'
     - '.ant-drawer-content .ant-form-item:has(label:text-is("Status"))'
@@ -3219,22 +3222,48 @@
   arquivo: images/ajuda/agenda/local-formulario.webp
   paginas: [docs/agenda/servicos-e-locais]
 
+- id: agenda-tipo-da-tarefa
+  url: /crm/tasks/new
+  passos:
+    - clicar: '.ant-modal-content .ant-dropdown-trigger:has-text("Tarefa")'
+    - esperar: '.ant-dropdown-menu >> text=Tipo da tarefa'
+    - pausa: 800
+  manterFoco: true
+  alvo:
+    - '.ant-modal-content'
+    - '.ant-dropdown-menu'
+  mascarar: []
+  arquivo: images/ajuda/agenda/tipo-da-tarefa.webp
+  paginas: [docs/agenda/agendamentos]
+
 - id: agenda-novo-agendamento
   url: /crm/tasks/new
   altura: 1100
   passos:
-    - clicar: '.ant-dropdown-trigger:has-text("Tarefa")'
+    - clicar: '.ant-modal-content .ant-dropdown-trigger:has-text("Tarefa")'
     - clicar: '.ant-dropdown-menu-item:has-text("Agendamento")'
-    - esperar: 'label[for="context_kingenda_serviceId"]'
-    - clicar: '.ant-form-item:has(label[for="context_kingenda_serviceId"]) .ant-select-selector'
+    - esperar: '.ant-form-item:has(label[for$="_serviceId"])'
+    - clicar: '.ant-form-item:has(label[for$="_serviceId"]) .ant-select-selector'
     - clicar: '.ant-select-item-option:has-text("Consultoria de estilo")'
+    - pausa: 1500
+    # Dia de expediente: a terça-feira da segunda semana do mês seguinte (sempre depois de hoje)
+    - clicar: '.ant-form-item:has(> .ant-row > .ant-form-item-label label:text-is("Quando")) .ant-form-item-control-input *:is(button, .ant-dropdown-trigger) >> nth=0'
+    - esperar: '.small-calendar'
+    - clicar: '.small-calendar button:has(.fa-chevron-right)'
+    - pausa: 500
+    - clicar: '.small-calendar tbody tr:nth-child(2) td:nth-child(3)'
+    # Fecha o calendário clicando de novo no campo
+    - clicar: '.ant-form-item:has(> .ant-row > .ant-form-item-label label:text-is("Quando")) .ant-form-item-control-input *:is(button, .ant-dropdown-trigger) >> nth=0'
+    - pausa: 500
     - pausa: 1500
     - clicar: '.ant-form-item:has(> .ant-row > .ant-form-item-label label:has-text("Local")) .ant-select-selector'
     - clicar: '.ant-select-item-option:has-text("Provador 1")'
     - pausa: 1500
-  alvo:
-    - 'label[for="context_kingenda_serviceId"]'
-    - '.ant-form-item:has(> .ant-row > .ant-form-item-label label:has-text("Horários"))'
+  # O print vai do topo da janela até Horários: o bloco de contato e o que vem depois dele ficam fora
+  esconder:
+    - '.ant-modal-body form .ant-divider'
+    - '.ant-modal-body form .ant-divider ~ *'
+  alvo: '.ant-modal-body form'
   mascarar: []
   arquivo: images/ajuda/agenda/novo-agendamento.webp
   paginas: [docs/agenda/agendamentos]

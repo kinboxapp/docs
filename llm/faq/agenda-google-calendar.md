@@ -5,13 +5,13 @@ keywords: [google calendar, google agenda, sincronizar agenda, integrar agenda g
 publico: llm
 tipo: faq
 fontes:
-  - web:src/pages/kingenda/kingendaBookingDetails.tsx
+  - web:src/pages/settings/agendas/**
   - web:src/pages/agents/components/tools/tool.defs.tsx
   - api:src/modules/agents/flow/actions/googlecalendar-create-event.action.ts
   - api:src/modules/agents/flow/actions/agenda.helper.ts
 codigo:
-  - web:src/pages/kingenda/**
   - web:src/pages/settings/agendas/**
+  - web:src/components-old/common/BigCalendar/**
   - api:src/modules/agenda/**
 verificado_em: 2026-11-26
 ---

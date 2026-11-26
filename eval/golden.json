@@ -1507,8 +1507,7 @@
   {
     "pergunta": "Numa reserva de mesa pela agenda, qual o máximo de pessoas e quantas mesas o sistema consegue juntar para um grupo?",
     "esperado": [
-      "llm/agenda/kinbox-agenda",
-      "docs/agenda/servicos-e-locais"
+      "llm/agenda/kinbox-agenda"
     ],
     "tipo": "referencia"
   },

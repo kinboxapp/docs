@@ -1,24 +1,19 @@
 ---
 title: Criar, reagendar e cancelar agendamentos
 description: Como marcar um agendamento no Kinbox Agenda pelo calendário ou pela lista de Tarefas, escolher serviço, local, horários e contato, ver os detalhes, confirmar presença, reagendar, cancelar e filtrar o calendário.
-keywords: [criar agendamento, novo agendamento, marcar horário, agendar cliente, calendário, reagendar, remarcar, cancelar agendamento, confirmar presença, concluir agendamento, agendamento concluído, filtros do calendário, status do agendamento, data de nascimento obrigatória, horário indisponível, kinbox agenda]
+keywords: [criar agendamento, novo agendamento, marcar horário, agendar cliente, calendário, reagendar, remarcar, cancelar agendamento, desmarcar, confirmar presença, cliente faltou, não compareceu, encaixe, concluir agendamento, agendamento concluído, filtros do calendário, status do agendamento, data de nascimento obrigatória, horário indisponível, kinbox agenda]
 publico: humano
 tipo: guia
 fontes:
   - web:src/pages/crm/tasks/EditTask.tsx
   - web:src/pages/crm/tasks/TaskModal/Header.tsx
-  - web:src/pages/kingenda/kingendaBookingDetails.tsx
+  - web:src/components-old/common/BigCalendar/index.tsx
   - web:src/components-old/common/BigCalendar/CalendarToolbar.tsx
-  - web:src/components-old/common/BigCalendar/CalendarKingendaFilters.tsx
   - web:src/components-old/header/TasksHeaderItem.tsx
   - web:src/pages/crm/tasks/index.tsx
 codigo:
-  - web:src/pages/crm/tasks/EditTask.tsx
-  - web:src/pages/crm/tasks/TaskModal/**
-  - web:src/pages/crm/tasks/TaskFilters.tsx
-  - web:src/pages/kingenda/**
+  - web:src/pages/crm/tasks/**
   - web:src/components-old/common/BigCalendar/**
-  - web:src/lib/kingendaContactSync.ts
 verificado_em: 2026-11-26
 ---
 
@@ -36,14 +31,18 @@ Você precisa ter pelo menos um serviço **Ativo** com horário configurado e um
 
 Os agendamentos aparecem em dois lugares na Kinbox:
 
-- **Calendário:** clique no botão **Calendário** (ícone de calendário no topo da tela, à direita, ao lado do sino) ou use o comando **Abrir Calendário** na busca do topo (`Ctrl+K` / `⌘K`, veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O painel lateral oferece as visualizações **Mês**, **Semana**, **Dia** (padrão) e a visualização **Agenda** (lista), além dos botões **Hoje**, **Voltar** e **Próximo**. Cada agendamento aparece com o nome do serviço.
-- **Lista de Tarefas:** abra **Tarefas** no menu lateral. Os agendamentos aparecem junto às tarefas, mas os **Cancelado** e **Concluído** ficam ocultos até você filtrar por **Status do agendamento**.
+- **Calendário:** clique no botão **Calendário** (ícone de calendário no topo da tela, à direita, ao lado do sino) ou use o comando **Abrir Calendário** na busca do topo (`Ctrl+K` / `⌘K`, veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O painel lateral oferece as visualizações **Mês**, **Semana**, **Dia** (padrão) e a visualização **Agenda** (lista), além dos botões **Hoje**, **Voltar** e **Próximo**. Cada agendamento aparece com o nome do serviço e o local (por exemplo, `Consultoria de estilo - Provador 1`).
+- **Lista de Tarefas:** abra **Tarefas** no menu lateral. Os agendamentos aparecem junto às tarefas, mas só os do período escolhido: na visão padrão (**Pendente**), os do mês atual. Para ver outros meses, escolha **Próximo mês** no seletor de status da lista ou use o filtro **Período**. Os **Cancelado** e **Concluído** ficam ocultos até você filtrar por **Status do agendamento**.
 
 ## Criar um agendamento
 
 <Steps>
   <Step title="Abra o formulário e escolha Agendamento">
-    Clique em um horário vazio no **Calendário** (abre já na data clicada), clique em **Nova tarefa** na lista de **Tarefas** ou use **Adicionar Tarefa** na busca do topo (`Ctrl+K` / `⌘K`). No topo da janela, clique em **Tarefa** para abrir o menu **Tipo da tarefa** e escolha **Agendamento**. Essa opção só aparece em tarefas novas e para quem tem **Gerenciar agendamentos**.
+    Clique em um horário vazio no **Calendário** (abre já na data clicada), clique em **Nova tarefa** na lista de **Tarefas** ou use **Adicionar Tarefa** na busca do topo (`Ctrl+K` / `⌘K`). No topo da janela, clique em **Tarefa** para abrir o menu **Tipo da tarefa** e escolha **Agendamento**. Essa opção só aparece em tarefas novas e para quem tem **Gerenciar agendamentos**; se não aparecer, peça essa permissão a quem administra o workspace.
+
+    <Frame caption="Menu Tipo da tarefa aberto pelo botão Tarefa no topo da janela de nova tarefa">
+      <img src="/images/ajuda/agenda/tipo-da-tarefa.webp" alt="Janela de nova tarefa com o menu Tipo da tarefa aberto, listando Ligar, Reunião, Agendamento, Tarefa, Deadline, Almoço e E-mail" />
+    </Frame>
   </Step>
 
   <Step title="Escolha serviço, data, local e horários">
@@ -53,7 +52,7 @@ Os agendamentos aparecem em dois lugares na Kinbox:
     - **Horários** (obrigatório): selecione um ou mais horários livres. Horários ocupados aparecem riscados; sem vagas no dia, a lista mostra "Nenhum horário disponível".
 
     <Frame caption="Campos Serviço, Quando, Local e Horários no formulário de agendamento">
-      <img src="/images/ajuda/agenda/novo-agendamento.webp" alt="Formulário de agendamento com Serviço Consultoria de estilo, Quando 26 de novembro, Local Provador 1 e Horários com o texto Selecione um ou mais horários" />
+      <img src="/images/ajuda/agenda/novo-agendamento.webp" alt="Formulário de agendamento com Serviço Consultoria de estilo, um dia escolhido em Quando, Local Provador 1 e Horários com o texto Selecione um ou mais horários" />
     </Frame>
 
     <Tip>
@@ -62,7 +61,10 @@ Os agendamentos aparecem em dois lugares na Kinbox:
   </Step>
 
   <Step title="Selecione ou cadastre o contato">
-    Em **Contato**, escolha um cadastro em "Selecione um contato" ou clique em **Novo contato** para cadastrar na hora. **Nome**, **Telefone** e **Data de nascimento** são obrigatórios, assim como os campos personalizados obrigatórios do contato. O **Email** não aparece como obrigatório na tela, mas a Agenda exige e-mail do contato: preencha-o para o agendamento ser salvo. Se precisar trocar antes de salvar, clique em **Remover contato**.
+    Em **Contato**, escolha um cadastro em "Selecione um contato" ou clique em **Novo contato** para cadastrar na hora.
+
+    - **Contato existente:** para escolher outro, clique em **Trocar**.
+    - **Novo contato:** **Nome**, **Telefone** e **Data de nascimento** são obrigatórios, assim como os campos personalizados obrigatórios do contato. O **Email** não aparece como obrigatório na tela, mas a Agenda exige e-mail do contato: preencha-o para o agendamento ser salvo. Para desistir do cadastro novo, clique em **Remover contato**.
   </Step>
 
   <Step title="Salve o agendamento">
@@ -70,7 +72,7 @@ Os agendamentos aparecem em dois lugares na Kinbox:
   </Step>
 </Steps>
 
-**Dados exigidos do contato:** a Agenda exige nome, telefone, e-mail e data de nascimento do contato. Se você escolher um contato existente que ainda não tem esses dados, o formulário mostra "Esse contato ainda não tem os dados que o Kinbox Agenda exige. Preencha para continuar." e pede **Email**, **Telefone**, **Data de nascimento** e eventuais campos obrigatórios. O que você preencher fica salvo no contato; contatos já vinculados à Agenda não pedem esses dados novamente. Veja mais em [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes).
+**Dados exigidos do contato:** a Agenda exige nome, telefone, e-mail e data de nascimento do contato. Se você escolher um contato existente que ainda não tem esses dados, o formulário mostra "Esse contato ainda não tem os dados que o Kinbox Agenda exige. Preencha para continuar." e pede só os dados que faltam (**Email**, **Telefone**, **Data de nascimento** ou campos obrigatórios). O que você preencher fica salvo no contato; contatos já vinculados à Agenda não pedem esses dados novamente. Veja mais em [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes).
 
 ## Serviços com reserva de lugares
 
@@ -82,10 +84,11 @@ Clique em um agendamento no calendário ou em **Visualizar** na lista de **Taref
 
 Na janela aparecem:
 
-- **Serviço**, **Recurso** (o local escolhido) e **Localização** (quando preenchida);
-- **Cliente**, **E-mail** e **Telefone**;
-- **Preço do serviço** e **Preço do agendamento** (podem ser diferentes quando há tarifas adicionais);
-- em serviços com reserva de lugares: **Pessoas**, **Espaço** (ou **Espaços**) e **Espaço ocupado até**.
+- **Serviço**, **Recurso** (o local escolhido) e **Localização** (com "-" quando o local não tem localização);
+- os dados do cliente;
+- **Preço do serviço** e **Preço do agendamento** (podem ser diferentes quando há tarifas adicionais).
+
+Em serviços com reserva de lugares, **Pessoas** e **Espaço** (ou **Espaços**) aparecem no lugar de **Recurso**, e **Espaço ocupado até** aparece quando o serviço tem intervalo entre reservas. Nesses agendamentos com status **Confirmado**, o botão **Trocar espaços** no rodapé permite escolher outros espaços para a reserva.
 
 ## Confirmar presença
 
@@ -95,11 +98,11 @@ Marcar a caixinha muda o status para **Concluído** ("Presença confirmada."). D
 
 ## Reagendar
 
-Abra **Detalhes do agendamento** e clique em **Reagendar** no rodapé. O formulário abre com o contato somente para leitura, para você escolher novo serviço, data, local e um único horário por vez. Clique em **Reagendar** para passar o agendamento para o novo horário ("Agendamento reagendado.").
+Reagendar vale para agendamentos com status **Confirmado**. Abra **Detalhes do agendamento** e clique em **Reagendar** no rodapé. O formulário abre com o contato somente para leitura, para você escolher novo serviço, data, local e um único horário por vez. Clique em **Reagendar** para passar o agendamento para o novo horário ("Agendamento reagendado.").
 
 ## Cancelar
 
-Abra **Detalhes do agendamento**, clique em **Cancelar o agendamento** no rodapé e confirme em **Cancelar agendamento** na janela **Cancelar agendamento?** (não pede motivo). A Kinbox mostra "Agendamento cancelado.".
+Cancelar vale para agendamentos com status **Confirmado**. Abra **Detalhes do agendamento**, clique em **Cancelar o agendamento** no rodapé e confirme em **Cancelar agendamento** na janela **Cancelar agendamento?** (não pede motivo). A Kinbox mostra "Agendamento cancelado.".
 
 O agendamento não é excluído: ele permanece no calendário com o status **Cancelado** e sai da lista padrão de **Tarefas** (a menos que você filtre por status).
 
@@ -124,6 +127,8 @@ Agendamentos criados pelo agente de IA aparecem no calendário como os demais �
 - **Não aparece a opção Agendamento ou não vejo os agendamentos no calendário.** Falta a permissão **Gerenciar agendamentos** no seu papel. Peça a quem administra o workspace para liberá-la em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 - **O local aparece desabilitado com Agenda indisponível.** O local não tem horário livre no dia escolhido — pode estar todo ocupado, fora do expediente do serviço ou com status **Indisponível**.
 - **Aparece "Nenhum horário disponível".** O dia está fora do expediente do serviço ou todos os horários daquele local estão ocupados. Escolha outra data ou outro local.
+- **Marquei um agendamento e ele não aparece na lista de Tarefas.** A lista mostra só os agendamentos do período escolhido (na visão padrão, o mês atual). Para um agendamento do mês que vem, escolha **Próximo mês** no seletor de status ou use o filtro **Período**; no calendário, avance até a data.
+- **Reagendar ou cancelar dá erro.** Os botões aparecem também em agendamentos **Cancelado** ou **Concluído**, mas só funcionam em agendamentos **Confirmado**. Em um agendamento **Concluído**, desmarque **Confirmar presença** antes, se precisar reagendar ou cancelar.
 - **Pede e-mail e data de nascimento do contato.** O Kinbox Agenda exige nome, telefone, e-mail e data de nascimento para agendar. Preencha os dados no próprio formulário; eles ficam salvos no contato.
 - **O serviço não aparece na lista.** Apenas serviços com status **Ativo** podem ser agendados. Ative o serviço em **Configurações** → **Agenda** → **Serviços**.
 - **O cliente não recebeu aviso.** A Kinbox não envia confirmação nem lembrete automático ao contato. Envie uma mensagem na conversa ou use [Agendar uma mensagem](/docs/conversas/agendar-mensagem).

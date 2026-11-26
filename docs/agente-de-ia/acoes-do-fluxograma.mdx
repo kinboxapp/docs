@@ -1,6 +1,6 @@
 ---
 title: Ações do fluxograma
-description: Lista das ações que você pode usar no fluxograma do agente de IA, o que cada uma faz e quais dependem de plano ou integração.
+description: Lista das ações que você pode usar no fluxograma do agente de IA, o que cada uma faz e quais dependem de canal ou integração.
 keywords: [ações do fluxograma, blocos do agente, subagente, coletar dados, enviar mensagem, enviar template whatsapp, transferir, requisição http, buscar conhecimento, follow-up, delay, aguardar mensagem, kinbox agenda, google calendar]
 publico: humano
 tipo: referencia
@@ -96,10 +96,12 @@ Na tela, clicar em um bloco **Ação** abre a janela **Selecione uma ação** co
 
 ## Apps: Kinbox Agenda
 
+Ações que usam o [Kinbox Agenda](/docs/agenda/kinbox-agenda) do workspace.
+
 | Ação | O que faz | Requer |
 | --- | --- | --- |
 | **Consultar horários** | Consulta os horários livres de um serviço em determinada data. | Kinbox Agenda ativo no workspace |
-| **Criar agendamento** | Cria um agendamento para o contato da conversa. Exige nome, telefone, e-mail e data de nascimento: o que não estiver no contato (a data de nascimento nunca está) o agente tira da conversa. | Kinbox Agenda ativo no workspace |
+| **Criar agendamento** | Cria um agendamento para o contato da conversa. Exige nome, telefone, e-mail e data de nascimento: o que não estiver no contato o agente tira da conversa (o agente não lê o campo de data de nascimento do contato e sempre obtém essa data na conversa). | Kinbox Agenda ativo no workspace |
 | **Listar agendamentos** | Lista os agendamentos do contato da conversa. | Kinbox Agenda ativo no workspace |
 | **Reagendar** | Muda o horário de um agendamento existente do contato. | Kinbox Agenda ativo no workspace |
 | **Cancelar agendamento** | Cancela um agendamento existente do contato. | Kinbox Agenda ativo no workspace |

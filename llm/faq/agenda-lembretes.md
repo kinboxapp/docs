@@ -6,12 +6,12 @@ publico: llm
 tipo: faq
 fontes:
   - web:src/pages/settings/index.tsx
-  - web:src/pages/kingenda/kingendaBookingDetails.tsx
+  - web:src/components-old/common/BigCalendar/index.tsx
   - web:src/pages/crm/tasks/EditTask.tsx
   - api:src/modules/agents/flow/actions/agenda.operations.ts
 codigo:
   - web:src/pages/settings/agendas/**
-  - web:src/pages/kingenda/**
+  - web:src/components-old/common/BigCalendar/**
   - web:src/pages/crm/tasks/EditTask.tsx
 verificado_em: 2026-11-26
 ---

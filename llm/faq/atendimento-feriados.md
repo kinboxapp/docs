@@ -25,7 +25,7 @@ A Kinbox não tem cadastro de feriados nem de datas especiais: cada horário val
 
 Você pode contornar isso de duas formas (como proprietário ou com a opção **Horários** na seção **Gerenciamento do Ambiente** do papel, chamado na tela de **Permissão**):
 
-- **Editar o horário antes do feriado:** vá em **Configurações** → **Ambiente** → **Horários** (no workspace, chamado na tela de **ambiente**), desligue o dia do feriado e ligue novamente depois. Essa mudança afeta tudo o que usa esse horário (relatórios, bot, campanhas, permissões, chat do site, Kinbox Agenda e mensagem de fora do horário).
+- **Editar o horário antes do feriado:** vá em **Configurações** → **Ambiente** → **Horários** (no workspace, chamado na tela de **ambiente**), desligue o dia do feriado e ligue novamente depois. Essa mudança afeta tudo o que usa esse horário (relatórios, bot, campanhas, permissões, chat do site, Kinbox Agenda e mensagem de fora do horário). No Kinbox Agenda, a mudança só vale depois de abrir o serviço que usa o horário e clicar em **Salvar** de novo, tanto ao desligar quanto ao religar o dia (veja [Cadastrar serviços e locais](/docs/agenda/servicos-e-locais)).
 - **Criar um horário separado para o período:** cadastre um novo horário em **Horários** e troque apenas nos lugares desejados — por exemplo, no campo **Horários** do bot (que não vale com **Atende todos os canais**) ou no campo **Horário comercial** de uma campanha. O horário escolhido como **Horário comercial** do workspace não pode ser excluído enquanto continuar como padrão.
 
 Veja mais em [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios).

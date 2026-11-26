@@ -7,17 +7,15 @@ tipo: conceito
 fontes:
   - web:src/pages/settings/index.tsx
   - web:src/pages/settings/roles/permissionSections.tsx
-  - web:src/hooks/useKingendaEnabled.ts
-  - web:src/pages/settings/agendas/EditKingendaService.tsx
-  - web:src/pages/settings/agendas/EditKingendaResource.tsx
+  - web:src/pages/settings/agendas/**
+  - web:src/pages/settings/location/**
   - web:src/pages/crm/tasks/EditTask.tsx
   - web:src/components-old/header/TasksHeaderItem.tsx
 codigo:
-  - web:src/pages/kingenda/**
   - web:src/pages/settings/agendas/**
   - web:src/pages/settings/location/**
-  - web:src/hooks/useKingendaEnabled.ts
-  - web:src/hooks/useEnsureKingendaWorkspace.ts
+  - web:src/pages/crm/tasks/**
+  - web:src/components-old/common/BigCalendar/**
   - web:src/pages/settings/roles/permissionSections.tsx
   - api:src/modules/agenda/**
 verificado_em: 2026-11-26
@@ -25,8 +23,10 @@ verificado_em: 2026-11-26
 
 O **Kinbox Agenda** organiza atendimentos com hora marcada dentro da Kinbox: você cadastra **serviços** (com duração, preço e expediente) e **locais** (onde o atendimento acontece), e a equipe marca **agendamentos** para os contatos. Ele atende operações com hora marcada, como clínicas, consultórios, salões, aulas, consultorias e reservas de mesa, sala ou camarote.
 
+Não confunda os agendamentos do Kinbox Agenda com [Agendar uma mensagem](/docs/conversas/agendar-mensagem) (mensagem programada em uma conversa) nem com **Agendar follow-up** do agente de IA.
+
 <Note>
-  Quem pode: o proprietário do workspace (na tela, **ambiente**) tem acesso completo. Para os demais membros, o acesso depende das três permissões da seção **Agendas** do papel (na tela, **Permissão**): **Gerenciar serviços**, **Gerenciar locais** e **Gerenciar agendamentos** (inclusive para ver agendamentos no calendário). Se **Agenda** não aparecer em **Configurações** ou a opção **Agendamento** não aparecer ao criar uma tarefa, peça a permissão a quem administra o workspace — veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+  Quem pode: o proprietário do workspace (na tela, **ambiente**) tem acesso completo. Para os demais membros, o acesso depende das três permissões da seção **Agendas** do papel (na tela, **Permissão**): **Gerenciar serviços**, **Gerenciar locais** e **Gerenciar agendamentos**. Se **Agenda** não aparecer em **Configurações** ou a opção **Agendamento** não aparecer ao criar uma tarefa, peça a permissão a quem administra o workspace — veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 </Note>
 
 ## Como funciona
@@ -39,7 +39,7 @@ A Agenda trabalha com três peças principais:
 | **Local** | **Configurações** → **Agenda** → **Local** | Os serviços ativos que atende (por exemplo, sala, consultório, quadra, mesa ou profissional) |
 | **Agendamento** | Botão **Calendário** no topo da tela e lista de **Tarefas** no menu lateral | Um serviço, um local, um horário e um **contato** |
 
-O nome, a descrição e o preço de cada serviço vêm do produto vinculado em [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos). Os dias e faixas de hora vêm de um cadastro de [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) e passam a valer na Agenda quando o serviço é salvo. Para marcar um agendamento, a Agenda exige nome, telefone, e-mail e data de nascimento do contato — veja [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes).
+O nome, a descrição e o preço de cada serviço vêm do produto vinculado em [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos). Os dias e faixas de hora vêm de um horário cadastrado em [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) e passam a valer na Agenda quando o serviço é salvo. Para marcar um agendamento, a Agenda exige nome, telefone, e-mail e data de nascimento do contato — veja [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes).
 
 Cada workspace tem a sua própria Agenda, já disponível sem precisar ativar nada.
 
@@ -69,9 +69,9 @@ O proprietário do workspace tem as três permissões da seção **Agendas** do 
 | --- | --- |
 | **Gerenciar serviços** | Vê **Configurações** → **Agenda** → **Serviços** e pode cadastrar, editar, ativar e desativar serviços. |
 | **Gerenciar locais** | Vê **Configurações** → **Agenda** → **Local** e pode cadastrar, editar, ativar e desativar locais. |
-| **Gerenciar agendamentos** | Vê agendamentos no **Calendário** e na lista de **Tarefas**, tem a opção **Agendamento** ao criar tarefa, vê os filtros da Agenda no calendário e pode confirmar presença, reagendar e cancelar. |
+| **Gerenciar agendamentos** | Vê agendamentos no **Calendário** e na lista de **Tarefas** (sem ela, não vê nenhum agendamento), tem a opção **Agendamento** ao criar tarefa, vê os filtros da Agenda no calendário e pode confirmar presença, reagendar e cancelar. |
 
-Para ver os agendamentos no calendário também é preciso **Gerenciar agendamentos**. Sem **Gerenciar serviços** nem **Gerenciar locais**, a seção **Agenda** não aparece em **Configurações**. Veja a lista completa de permissões em [Referência de permissões](/docs/administracao/referencia-de-permissoes) e como editar papéis em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+Sem **Gerenciar serviços** nem **Gerenciar locais**, a seção **Agenda** não aparece em **Configurações**. Veja a lista completa de permissões em [Referência de permissões](/docs/administracao/referencia-de-permissoes) e como editar papéis em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 
 ## Como começar
 
@@ -83,8 +83,6 @@ Para ver os agendamentos no calendário também é preciso **Gerenciar agendamen
 ## Campos que a Agenda cria
 
 Ao usar o Kinbox Agenda, a Kinbox cria o campo **Data de nascimento** nos contatos (na primeira vez em que alguém com **Gerenciar agendamentos** abre o formulário de agendamento) e campos de vínculo em contatos e produtos. Em **Configurações** → **Ambiente** → **Campos personalizados**, esses campos aparecem com a marca **Obrigatório** e não podem ser excluídos — veja [Criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox).
-
-Não confunda os agendamentos do Kinbox Agenda com [Agendar uma mensagem](/docs/conversas/agendar-mensagem) (mensagem programada em uma conversa) nem com **Agendar follow-up** do agente de IA.
 
 ## Veja também
 

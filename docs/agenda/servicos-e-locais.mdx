@@ -1,23 +1,19 @@
 ---
 title: Cadastrar serviços e locais
 description: Como cadastrar no Kinbox Agenda os serviços (produto, duração, horário, tarifas adicionais e reserva de lugares) e os locais onde eles acontecem, e como ativar ou desativar cada um.
-keywords: [cadastrar serviço, novo serviço, serviços da agenda, duração do serviço, horário do serviço, tarifa adicional, preço por horário, reserva de lugares, reserva de mesa, capacidade, cadastrar local, novo local, sala, consultório, profissional, desativar serviço, excluir serviço, kinbox agenda]
+keywords: [cadastrar serviço, novo serviço, serviços da agenda, duração do serviço, horário do serviço, tarifa adicional, preço por horário, reserva de lugares, reserva de mesa, capacidade, cadastrar local, novo local, sala, consultório, profissional, desativar serviço, excluir serviço, bloquear horário, feriado, kinbox agenda]
 publico: humano
 tipo: guia
 fontes:
-  - web:src/pages/kingenda/KingendaServicesTable.tsx
-  - web:src/pages/kingenda/KingendaResourcesTable.tsx
-  - web:src/pages/settings/agendas/EditKingendaService.tsx
-  - web:src/pages/settings/agendas/EditKingendaResource.tsx
-  - web:src/lib/kingendaProductSync.ts
-  - web:src/pages/settings/businesshours/EditBusinessHours.tsx
-  - web:src/pages/settings/index.tsx
-codigo:
-  - web:src/pages/kingenda/KingendaServicesTable.tsx
-  - web:src/pages/kingenda/KingendaResourcesTable.tsx
   - web:src/pages/settings/agendas/**
   - web:src/pages/settings/location/**
-  - web:src/lib/kingendaProductSync.ts
+  - web:src/pages/settings/businesshours/EditBusinessHours.tsx
+  - web:src/pages/settings/products/ProductFormFields.tsx
+  - web:src/pages/settings/index.tsx
+  - api:src/modules/products/products.controller.ts
+codigo:
+  - web:src/pages/settings/agendas/**
+  - web:src/pages/settings/location/**
   - web:src/pages/settings/products/ProductFormFields.tsx
   - web:src/pages/settings/businesshours/**
 verificado_em: 2026-11-26
@@ -33,7 +29,7 @@ Cadastre no **Kinbox Agenda** os serviços que sua empresa oferece com hora marc
 
 Siga esta ordem para deixar tudo pronto para agendar:
 
-1. **Horário e produto:** todo serviço usa um horário de [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) e um produto ativo de [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos). Você pode cadastrá-los antes ou direto de dentro do formulário do serviço.
+1. **Horário e produto:** todo serviço usa um horário cadastrado em [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) e um produto ativo de [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos). Cadastre o horário antes; o produto pode ser cadastrado antes ou de dentro do formulário do serviço.
 2. **Serviços:** cadastre cada serviço com o produto, a duração e o horário.
 3. **Locais:** cadastre os espaços, unidades ou profissionais e vincule a cada local os serviços ativos que ele atende. Sem ao menos um local ligado ao serviço, não há **Local** disponível na hora de agendar.
 
@@ -41,7 +37,7 @@ Siga esta ordem para deixar tudo pronto para agendar:
 
 <Steps>
   <Step title="Abra a lista de serviços">
-    Vá em **Configurações** → **Agenda** → **Serviços**. A tela mostra o campo **Pesquisar por nome** (busca por nome e descrição), o filtro **Tudo** (**Tudo**, **Ativo** ou **Inativo**) e o botão **Novo serviço** (quando a lista está vazia, aparece "Nada encontrado" com o botão **Adicionar**). Clique em **Novo serviço** para abrir **Criar serviço** — ou clique em um serviço existente para abrir **Editar serviço**.
+    Vá em **Configurações** → **Agenda** → **Serviços** e clique em **Novo serviço** para abrir **Criar serviço** (ou clique em um serviço da lista para abrir **Editar serviço**).
 
     <Frame caption="Lista de serviços em Configurações → Agenda → Serviços com busca, filtro de status e botão Novo serviço">
       <img src="/images/ajuda/agenda/servicos.webp" alt="Tela Serviços com o botão Novo serviço, busca Pesquisar por nome, filtro Tudo e três serviços: Personal shopper inativo, Ajuste de roupa ativo e Consultoria de estilo ativo" />
@@ -49,18 +45,18 @@ Siga esta ordem para deixar tudo pronto para agendar:
   </Step>
 
   <Step title="Escolha o produto e a duração">
-    - **Produto** (obrigatório): selecione um produto ativo (por exemplo, `Consultoria de estilo`, de `R$ 200,00`). O nome, a descrição e o preço do serviço vêm do produto; não há campos separados de nome ou preço no serviço. Se o produto ainda não existir, clique em **Criar novo produto** (o painel **Criar produto** já abre com **Vincular ao Kinbox Agenda** ligado e travado) e salve em **Criar**. Quando um produto já está escolhido, o botão **Editar produto** aparece para ajustar o cadastro e atualizar o serviço ao salvar. Para salvar o produto por esses botões, você também precisa da permissão **Produtos** no seu papel (ou ser o proprietário); sem ela, cadastre o produto antes com quem tem a permissão.
+    - **Produto** (obrigatório): selecione um produto ativo (por exemplo, `Consultoria de estilo`). O nome, a descrição e o preço do serviço vêm do produto. Se o produto ainda não existir, clique em **Criar novo produto** e salve em **Criar**; com um produto escolhido, **Editar produto** ajusta o cadastro.
     - **Duração padrão (minutos)** (obrigatório): informe a duração de cada horário oferecido (por exemplo, `60` para 1 hora ou `30` para 30 minutos).
   </Step>
 
   <Step title="Defina o horário, tarifas opcionais e status">
-    - **Horário** (obrigatório): selecione um horário cadastrado em **Configurações** → **Ambiente** → **Horários** (por exemplo, `Atendimento com hora marcada`). Abaixo do campo aparece o resumo dos dias e da faixa de horas (por exemplo, `Dias: Seg, Ter, Qua, Qui, Sex, Sáb · 09:00 às 18:00`). Você pode clicar em **Criar novo horário** (preencha **Nome do horário** e **Horários**) ou, com um horário selecionado, usar **Editar horário** (se não aparecer, escolha primeiro um horário). O horário precisa ter pelo menos um dia da semana ativo.
+    - **Horário** (obrigatório): selecione um horário já cadastrado em [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) (por exemplo, `Atendimento com hora marcada`), com pelo menos um dia da semana ativo. Abaixo do campo aparece o resumo dos dias e da faixa de horas. Para criar ou editar um horário, use a página **Horários**.
     - **Tarifas adicionais** (opcional): clique em **Adicionar tarifa adicional** se quiser cobrar outro valor em dias e horas específicos (veja [Tarifas adicionais](#tarifas-adicionais)).
     - **Reserva de lugares** (opcional): ligue apenas para serviços reservados por quantidade de pessoas (veja [Reserva de lugares](#reserva-de-lugares)).
     - **Status:** escolha **Ativo** (padrão) ou **Inativo**.
 
     <Frame caption="Painel Editar serviço com Produto, Duração padrão (minutos), Horário, Tarifas adicionais, Reserva de lugares e Status">
-      <img src="/images/ajuda/agenda/servico-formulario.webp" alt="Painel Editar serviço com Produto Consultoria de estilo, botões Criar novo produto e Editar produto, Duração padrão 60 minutos, Horário Atendimento com hora marcada com resumo de dias e horas, Tarifas adicionais, chave Reserva de lugares desligada e Status Ativo" />
+      <img src="/images/ajuda/agenda/servico-formulario.webp" alt="Painel Editar serviço com Produto Consultoria de estilo, botões Criar novo produto e Editar produto, Duração padrão 60 minutos, Horário Atendimento com hora marcada com o resumo dos dias e horas, Tarifas adicionais, chave Reserva de lugares desligada e Status Ativo" />
     </Frame>
   </Step>
 
@@ -69,9 +65,11 @@ Siga esta ordem para deixar tudo pronto para agendar:
   </Step>
 </Steps>
 
+Para criar ou editar um produto pelos botões **Criar novo produto** e **Editar produto**, você precisa da permissão **Produtos** (ou ser o proprietário). Se você não tem acesso a **Produtos** ou **Horários**, peça a quem tem para cadastrar o produto e o horário antes.
+
 Ao salvar, o produto escolhido fica vinculado ao serviço e recebe o mesmo status (**Ativo** ou **Inativo**). Editar o produto em **Configurações** → **CRM** → **Produtos** atualiza o nome, a descrição, o preço e o status do serviço.
 
-**Mudou o horário de atendimento?** Alterar o horário em **Configurações** → **Ambiente** → **Horários** (ou pelo botão **Editar horário** dentro do serviço) não atualiza o serviço sozinho. Depois de salvar a mudança no horário, abra o serviço e clique em **Salvar** para a Agenda usar os novos dias e horas.
+**Mudou o horário de atendimento?** Alterar o horário em **Configurações** → **Ambiente** → **Horários** não atualiza o serviço sozinho. Depois de salvar a mudança no horário, abra o serviço e clique em **Salvar** para a Agenda usar os novos dias e horas.
 
 ## Tarifas adicionais
 
@@ -84,16 +82,27 @@ Ligue **Reserva de lugares** quando o serviço funciona por número de pessoas �
 Na tela, o fluxo segue três passos:
 
 1. **Cadastre os espaços em Locais:** cada mesa, sala ou camarote com quantas pessoas cabem, vinculado a este serviço.
-2. **O cliente informa quantas pessoas vão:** na reserva aparecem só os horários com espaços livres para o grupo.
+2. **Quem agenda informa quantas pessoas vão:** só os horários com espaço livre para o grupo podem ser selecionados; os outros aparecem como **Lotado**.
 3. **O sistema escolhe e bloqueia os espaços:** escolhe a combinação com menos lugares sobrando e bloqueia os espaços durante a reserva.
 
-Com a chave ligada, o formulário do serviço exibe os campos **Limite máximo de pessoas**, **Unir locais** e **Intervalo entre reservas**, além de uma linha do tempo de exemplo (**Reserva**, **Intervalo** e **Livre**). Nos locais vinculados a esse serviço, aparece o bloco **Reserva de lugares** com **Capacidade** (quantas pessoas cabem no espaço), **Ordem de uso**, **Pode ser juntado** e **Ambiente**.
+Com a chave ligada, o formulário do serviço exibe:
+
+- **Limite máximo de pessoas:** o maior grupo aceito numa reserva.
+- **Unir locais:** quantos espaços podem ser combinados para um grupo.
+- **Intervalo entre reservas:** minutos para limpar e arrumar o espaço antes da próxima reserva.
+
+Nos locais vinculados a esse serviço, aparece o bloco **Reserva de lugares**:
+
+- **Capacidade:** quantas pessoas cabem no espaço.
+- **Ordem de uso:** se o espaço sai antes, sem preferência ou só quando os outros lotarem.
+- **Pode ser juntado:** se o espaço pode ser combinado com outros para grupos maiores.
+- **Ambiente:** com **Pode ser juntado** ligado, junta só espaços do mesmo ambiente.
 
 ## Cadastrar um local
 
 <Steps>
   <Step title="Abra a lista de locais">
-    Vá em **Configurações** → **Agenda** → **Local**. A lista **Locais** mostra o campo **Pesquisar por nome** (busca por nome e localização), o filtro **Tudo** (**Tudo**, **Disponível** ou **Indisponível**), as colunas de nome, **Localização**, **Capacidade** e status, e o botão **Novo local**. Clique em **Novo local** para abrir **Criar local** — ou clique em um local existente para abrir **Editar local**.
+    Vá em **Configurações** → **Agenda** → **Local**. A lista **Locais** mostra as colunas **Nome**, **Localização**, **Capacidade** e **Status**, com o campo **Pesquisar por nome** e o filtro **Tudo** (**Tudo**, **Disponível** ou **Indisponível**). Clique em **Novo local** para abrir **Criar local** (ou clique em um local da lista para abrir **Editar local**).
   </Step>
 
   <Step title="Preencha os dados do local">
@@ -117,8 +126,8 @@ Com a chave ligada, o formulário do serviço exibe os campos **Limite máximo d
 
 Serviços e locais não têm opção de excluir nem de clonar. Para deixar de oferecer um item, abra o menu de três pontos na linha dele:
 
-- **Serviços:** clique em **Desativar** (ou **Ativar**) e confirme em **Desativar serviço** (ou **Ativar serviço**). O produto vinculado acompanha o status do serviço. Serviços **Inativo** não aparecem para novos agendamentos nem para vincular a locais.
-- **Locais:** clique em **Desativar** (ou **Ativar**) e confirme em **Desativar local** (ou **Ativar local**). Um local **Indisponível** continua na lista, mas fica sem horários livres para novos agendamentos.
+- **Serviços:** clique em **Desativar** (ou **Ativar**) e confirme em **Desativar** (ou **Ativar**) na janela **Desativar serviço** (ou **Ativar serviço**). O produto vinculado acompanha o status do serviço. Serviços **Inativo** não aparecem para novos agendamentos nem para vincular a locais.
+- **Locais:** clique em **Desativar** (ou **Ativar**) e confirme em **Desativar** (ou **Ativar**) na janela **Desativar local** (ou **Ativar local**). Um local **Indisponível** continua na lista, mas fica sem horários livres para novos agendamentos.
 
 ## Problemas comuns
 
@@ -127,8 +136,8 @@ Serviços e locais não têm opção de excluir nem de clonar. Para deixar de of
 - **Não consigo excluir um produto ou um horário.** Produtos vinculados ao Kinbox Agenda são desativados em vez de excluídos, e horários em uso por um serviço ativo não podem ser excluídos nem ficar sem nenhum dia ativo. Veja [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos) e [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios).
 - **O serviço não aparece ao criar um local ou ao agendar.** Confira se ele está **Ativo** em **Configurações** → **Agenda** → **Serviços**. Sem nenhum serviço ativo, a tela de local avisa para criar ou reativar um serviço antes de continuar.
 - **Mudei o horário e a Agenda continua com o antigo.** O serviço usa o horário que estava salvo quando ele foi gravado. Abra o serviço em **Configurações** → **Agenda** → **Serviços** e clique em **Salvar** de novo.
+- **Como fecho a agenda num feriado ou bloqueio um horário?** A Agenda não tem cadastro de feriado nem de bloqueio de horário. Desligue o dia no horário em **Configurações** → **Ambiente** → **Horários**, abra o serviço e clique em **Salvar**; depois, religue o dia e salve o serviço de novo. Para tirar um local de uso, deixe-o **Indisponível**.
 - **Não vejo Agenda em Configurações.** Faltam as permissões **Gerenciar serviços** ou **Gerenciar locais** no seu papel. Peça a quem administra o workspace para liberá-las em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
-- **Com Reserva de lugares ligada, o serviço não salva a duração.** Com **Reserva de lugares** ligada, a **Duração padrão (minutos)** precisa ser múltipla de 5 minutos (por exemplo, `30`, `45`, `60` ou `90`).
 
 ## Veja também
 
