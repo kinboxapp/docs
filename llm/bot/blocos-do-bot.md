@@ -49,7 +49,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 
 ### Agente de IA
 
-- **Campos principais:** **Agente de IA** (obrigatório; funciona mesmo se o agente estiver pausado nos canais diretos), **Base de conhecimento** (opcional; usa a base de **Configurações** → **Automação** → **Base de conhecimento**, distinta do conhecimento interno do agente), **Instruções extras** (concatenadas às instruções do agente), **Condições de saída** (até 5; cada uma com descrição em texto e modo **Sair direto** ou **Enviar mensagem e sair**), **Executar somente uma vez**, **Considerar última mensagem do contato**, **Digitação natural**.
+- **Campos principais:** **Agente de IA** (obrigatório; funciona mesmo se o agente estiver pausado nos canais diretos), **Base de conhecimento** (opcional; usa a base de **Configurações** → **Automação** → **Base de conhecimento**, distinta do conhecimento interno do agente; veja [Base de conhecimento do bot e do copiloto](/docs/copiloto/base-de-conhecimento)), **Instruções extras** (concatenadas às instruções do agente), **Condições de saída** (até 5; cada uma com descrição em texto e modo **Sair direto** ou **Enviar mensagem e sair**), **Executar somente uma vez**, **Considerar última mensagem do contato**, **Digitação natural**.
 - **Ajustes em Personalizar** (exibidos após escolher o agente):
   - **Temperatura:** 0 a 1, passo 0,05; preenchida com 0,2 ao ligar **Personalizar**.
   - **Quantidade de mensagens na memória:** 1 a 400, padrão 30.

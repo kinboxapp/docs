@@ -166,6 +166,17 @@
                   "docs/bot/usar-campo-personalizado-em-json",
                   "docs/bot/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Copiloto",
+                "pages": [
+                  "docs/copiloto/copiloto-atualizado",
+                  "docs/copiloto/usar-o-copiloto-de-ia",
+                  "docs/copiloto/comandos-personalizados",
+                  "docs/copiloto/analises-de-ia",
+                  "docs/copiloto/base-de-conhecimento",
+                  "docs/copiloto/configuracoes-de-copiloto"
+                ]
               }
             ]
           },
@@ -722,6 +733,10 @@
     {
       "source": "/docs/copiloto",
       "destination": "/docs/copiloto/copiloto-atualizado"
+    },
+    {
+      "source": "/docs/copiloto/aprendendo-a-usar-o-assistente-kin",
+      "destination": "/docs/copiloto/usar-o-copiloto-de-ia"
     },
     {
       "source": "/docs/desenvolvedor",
