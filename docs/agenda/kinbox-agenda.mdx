@@ -1,0 +1,94 @@
+---
+title: "Kinbox Agenda: visão geral"
+description: O que é o Kinbox Agenda — serviços, locais e agendamentos com hora marcada dentro da Kinbox —, como as peças se ligam a produtos, horários e contatos, quem pode usar e o que ele não faz.
+keywords: [kinbox agenda, agenda, agendamento, agendar horário, marcar horário, hora marcada, agenda de serviços, agenda de consultas, clínica, consultório, salão, reserva, serviços, locais, calendário, permissões da agenda]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/index.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - web:src/pages/settings/agendas/**
+  - web:src/pages/settings/location/**
+  - web:src/pages/crm/tasks/EditTask.tsx
+  - web:src/components-old/header/TasksHeaderItem.tsx
+codigo:
+  - web:src/pages/settings/agendas/**
+  - web:src/pages/settings/location/**
+  - web:src/pages/crm/tasks/**
+  - web:src/components-old/common/BigCalendar/**
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - api:src/modules/agenda/**
+verificado_em: 2026-11-26
+---
+
+O **Kinbox Agenda** organiza atendimentos com hora marcada dentro da Kinbox: você cadastra **serviços** (com duração, preço e expediente) e **locais** (onde o atendimento acontece), e a equipe marca **agendamentos** para os contatos. Ele atende operações com hora marcada, como clínicas, consultórios, salões, aulas, consultorias e reservas de mesa, sala ou camarote.
+
+Não confunda os agendamentos do Kinbox Agenda com [Agendar uma mensagem](/docs/conversas/agendar-mensagem) (mensagem programada em uma conversa) nem com **Agendar follow-up** do agente de IA.
+
+<Note>
+  Quem pode: o proprietário do workspace (na tela, **ambiente**) tem acesso completo. Para os demais membros, o acesso depende das três permissões da seção **Agendas** do papel (na tela, **Permissão**): **Gerenciar serviços**, **Gerenciar locais** e **Gerenciar agendamentos**. Se **Agenda** não aparecer em **Configurações** ou a opção **Agendamento** não aparecer ao criar uma tarefa, peça a permissão a quem administra o workspace — veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+</Note>
+
+## Como funciona
+
+A Agenda trabalha com três peças principais:
+
+| Peça | Onde fica | Liga com |
+| --- | --- | --- |
+| **Serviço** | **Configurações** → **Agenda** → **Serviços** | Um **produto** (nome, descrição e preço) e um **horário** (dias e faixas de hora) |
+| **Local** | **Configurações** → **Agenda** → **Local** | Os serviços ativos que atende (por exemplo, sala, consultório, quadra, mesa ou profissional) |
+| **Agendamento** | Botão **Calendário** no topo da tela e lista de **Tarefas** no menu lateral | Um serviço, um local, um horário e um **contato** |
+
+O nome, a descrição e o preço de cada serviço vêm do produto vinculado em [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos). Os dias e faixas de hora vêm de um horário cadastrado em [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) e passam a valer na Agenda quando o serviço é salvo. Para marcar um agendamento, a Agenda exige nome, telefone, e-mail e data de nascimento do contato — veja [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes).
+
+Cada workspace tem a sua própria Agenda, já disponível sem precisar ativar nada.
+
+## O que dá para fazer
+
+- Cadastrar serviços com duração, expediente e preços especiais por dia e hora ([Cadastrar um serviço](/docs/agenda/servicos-e-locais#cadastrar-um-serviço) e [Tarifas adicionais](/docs/agenda/servicos-e-locais#tarifas-adicionais)).
+- Configurar reserva por quantidade de pessoas para o sistema escolher os espaços livres ([Reserva de lugares](/docs/agenda/servicos-e-locais#reserva-de-lugares)).
+- Cadastrar locais e vincular cada um aos serviços que ele atende ([Cadastrar um local](/docs/agenda/servicos-e-locais#cadastrar-um-local)).
+- Criar agendamentos, inclusive vários horários de uma vez, pelo calendário ou pela lista de **Tarefas** ([Criar um agendamento](/docs/agenda/agendamentos#criar-um-agendamento)).
+- Confirmar presença, reagendar e cancelar agendamentos ([Confirmar presença](/docs/agenda/agendamentos#confirmar-presença), [Reagendar](/docs/agenda/agendamentos#reagendar) e [Cancelar](/docs/agenda/agendamentos#cancelar)).
+- Filtrar o calendário por local, serviço e status ([Filtrar o calendário](/docs/agenda/agendamentos#filtrar-o-calendário)).
+- Deixar o agente de IA consultar horários e agendar sozinho na conversa — veja [Dar ferramentas ao agente: Agenda, Google Calendar e HubSpot](/docs/agente-de-ia/ferramentas) e [Ações do fluxograma](/docs/agente-de-ia/acoes-do-fluxograma).
+
+## O que o Kinbox Agenda não faz
+
+- **Não envia lembrete nem aviso automático ao contato:** criar, reagendar, cancelar ou confirmar presença não manda mensagem nem e-mail ao cliente. Se quiser avisar, mande uma mensagem na conversa ou use [Agendar uma mensagem](/docs/conversas/agendar-mensagem).
+- **Não sincroniza com o Google Calendar nem exporta calendário:** agendamentos da Agenda não vão para o Google Calendar nem vêm dele, e não há exportação `.ics` (iCal).
+- **Não tem link público para o cliente marcar sozinho:** os agendamentos são feitos pela equipe dentro da Kinbox ou pelo agente de IA.
+- **Não faz cobrança no agendamento:** o preço do serviço serve como referência nos detalhes do agendamento.
+- **Não exclui serviços, locais nem agendamentos:** serviços e locais são desativados, e agendamentos são cancelados.
+
+## Quem pode usar
+
+O proprietário do workspace tem as três permissões da seção **Agendas** do papel (em **Configurações** → **Ambiente** → **Permissões**). Para os demais membros, cada opção libera uma parte:
+
+| Permissão (seção **Agendas**) | O que a pessoa vê e faz na prática |
+| --- | --- |
+| **Gerenciar serviços** | Vê **Configurações** → **Agenda** → **Serviços** e pode cadastrar, editar, ativar e desativar serviços. |
+| **Gerenciar locais** | Vê **Configurações** → **Agenda** → **Local** e pode cadastrar, editar, ativar e desativar locais. |
+| **Gerenciar agendamentos** | Vê agendamentos no **Calendário** e na lista de **Tarefas** (sem ela, não vê nenhum agendamento), tem a opção **Agendamento** ao criar tarefa, vê os filtros da Agenda no calendário e pode confirmar presença, reagendar e cancelar. |
+
+Sem **Gerenciar serviços** nem **Gerenciar locais**, a seção **Agenda** não aparece em **Configurações**. Veja a lista completa de permissões em [Referência de permissões](/docs/administracao/referencia-de-permissoes) e como editar papéis em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+
+## Como começar
+
+1. Libere as permissões da seção **Agendas** nos papéis de quem vai configurar ou agendar em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+2. Cadastre os serviços com produto e horário em [Cadastrar serviços e locais](/docs/agenda/servicos-e-locais#cadastrar-um-serviço).
+3. Cadastre os locais e vincule os serviços que cada um atende em [Cadastrar serviços e locais](/docs/agenda/servicos-e-locais#cadastrar-um-local).
+4. Crie e acompanhe os agendamentos pelo calendário ou pela lista de **Tarefas** em [Criar, reagendar e cancelar agendamentos](/docs/agenda/agendamentos).
+
+## Campos que a Agenda cria
+
+Ao usar o Kinbox Agenda, a Kinbox cria o campo **Data de nascimento** nos contatos (na primeira vez em que alguém com **Gerenciar agendamentos** abre o formulário de agendamento) e campos de vínculo em contatos e produtos. Em **Configurações** → **Ambiente** → **Campos personalizados**, esses campos aparecem com a marca **Obrigatório** e não podem ser excluídos — veja [Criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox).
+
+## Veja também
+
+- [Cadastrar serviços e locais](/docs/agenda/servicos-e-locais)
+- [Criar, reagendar e cancelar agendamentos](/docs/agenda/agendamentos)
+- [Criar e acompanhar tarefas](/docs/tarefas/criando-e-gerenciando-tarefas)
+- [Funis e negociações: visão geral](/docs/crm/visao-geral)
+- [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)
+- [Glossário](/docs/conceitos/glossario)

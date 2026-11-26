@@ -264,6 +264,14 @@
                   "docs/metas/criando-metas-no-kinbox",
                   "docs/metas/como-as-metas-sao-calculadas"
                 ]
+              },
+              {
+                "group": "Kinbox Agenda",
+                "pages": [
+                  "docs/agenda/kinbox-agenda",
+                  "docs/agenda/servicos-e-locais",
+                  "docs/agenda/agendamentos"
+                ]
               }
             ]
           },

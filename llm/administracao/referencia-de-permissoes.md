@@ -56,7 +56,7 @@ Um workspace (na tela, **ambiente**) novo vem com papéis prontos definidos pela
 - **Avisos do editor:**
   - Fechar sem salvar: `"Fechar sem salvar?"` / `"Você vai perder as alterações se não salvar primeiro."` / **Prosseguir**.
   - Ao criar ou salvar: `"Permissão criado."` / `"Permissão salvo."`.
-  - Sincronização com Kinbox Agenda: salvar o papel atualiza as permissões da Agenda dos membros que o usam; em caso de falha, aparece `"A permissão foi salva, mas não foi possível sincronizar o Kinbox Agenda para todos os membros."`.
+  - Kinbox Agenda: se ao salvar aparecer `"A permissão foi salva, mas não foi possível sincronizar o Kinbox Agenda para todos os membros."`, salve o papel de novo.
 - **Editar um papel encerra a sessão de quem o usa:** na próxima vez que o membro abrir ou atualizar a Kinbox, a sessão termina e ele precisa entrar novamente (a aba já aberta continua com as permissões antigas até atualizar). O proprietário não é afetado.
 - **Clonar:** abre **Criar permissão** com `"Cópia de {nome}"` e as mesmas opções.
 - **Excluir:** confirmação `"Tem certeza que deseja excluir essa permissão?"`. Papel em uso não pode ser excluído: `"Não é possível excluir uma permissão que está sendo usada por um membro."` (troque antes o papel dos membros).
@@ -177,9 +177,9 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |
-| **Gerenciar agendamentos** | Permite criar, editar, reagendar, cancelar e excluir agendamentos do Kinbox Agenda (visualizar é liberado a qualquer membro). | — |
-| **Gerenciar locais** | Permite gerenciar locais e recursos do Kinbox Agenda e mostra **Configurações** → **Agenda** → **Local** quando a Agenda está liberada. | — |
-| **Gerenciar serviços** | Permite gerenciar serviços do Kinbox Agenda e mostra **Configurações** → **Agenda** → **Serviços** quando a Agenda está liberada. | — |
+| **Gerenciar agendamentos** | Permite ver agendamentos do Kinbox Agenda no calendário e na lista de **Tarefas** e criar, reagendar e cancelar agendamentos; sem ela, a pessoa não vê agendamentos ([Kinbox Agenda: visão geral](/docs/agenda/kinbox-agenda#quem-pode-usar)). | — |
+| **Gerenciar locais** | Permite cadastrar, editar, ativar e desativar locais do Kinbox Agenda e mostra **Configurações** → **Agenda** → **Local**. | — |
+| **Gerenciar serviços** | Permite cadastrar, editar, ativar e desativar serviços do Kinbox Agenda e mostra **Configurações** → **Agenda** → **Serviços**. | — |
 
 ### Copiloto
 
@@ -236,7 +236,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 | **Configurações** → **Automação** → **Agentes de IA**, **Automações**, **Bot**, **Copiloto**, **Cenários** | **Agentes de IA**, **Automações**, **Bot**, **Copiloto**, **Cenários** |
 | **Configurações** → **Integrações** → **Apps**, **Plugins**, **API Tokens**, **MCP**; **Configurações** → **Marketing** → **Tracking** | **Integrações** |
 | **Configurações** → **CRM** → **Funis** e **Produtos** | **Funis** e **Produtos** |
-| **Configurações** → **Agenda** → **Local** e **Serviços** | **Gerenciar locais** e **Gerenciar serviços** (com Kinbox Agenda liberado) |
+| **Configurações** → **Agenda** → **Local** e **Serviços** | **Gerenciar locais** e **Gerenciar serviços** |
 | **Funis** no menu lateral | **Gerenciar negociações** |
 | **Clientes** no menu lateral | **Gerenciar Contatos** ou **Gerenciar Organizações** |
 | **Relatórios** no menu lateral | **Gerenciar relatórios** |
