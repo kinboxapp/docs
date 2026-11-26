@@ -153,7 +153,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 - **Tipo de espera:**
   - **Intervalo de tempo:** **Segundos de espera** (padrão 10; de 1 a 604.800 = 7 dias).
   - **Envio de mensagem pelo cliente:** aguarda nova mensagem do contato.
-  - **Recebimento de webhook:** aguarda requisição POST externa no **Endereço do webhook** exibido na gaveta.
+  - **Recebimento de webhook:** aguarda requisição POST externa no **Endereço do webhook** exibido na gaveta (formato da chamada em [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot)).
   - **Randomizar delay:** sorteia entre **Tempo mínimo entre envios** e **Tempo máximo entre envios** na **Unidade** escolhida (**Segundos**, **Minutos**, **Horas** ou **Dias**, até 7 dias).
 - **Tempo máximo de espera:** disponível para **Envio de mensagem pelo cliente** e **Recebimento de webhook** (**Duração** e **Unidade** em **Minutos**, **Horas** ou **Dias**); cria saída de tempo esgotado. Mínimo efetivo de 60 segundos (valores menores viram 60 s); sem duração preenchida, usa 1 dia. Resposta do contato cancela a contagem.
 - **Regras de borda:** em esperas de até 20 segundos, se a conversa for resolvida ou o bot sair da conversa durante a espera, o bot para com `"Execução de delay cancelada: conversa já resolvida"`. Em esperas maiores, se a conversa for resolvida, aparece `"Execução do bot cancelada, conversa já resolvida"`; se outro bot começar, `"Execução do bot cancelada, outro bot já está em execução"`. Bloco sem saída ligada encerra o bot ali.

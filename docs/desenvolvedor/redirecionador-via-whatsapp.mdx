@@ -1,0 +1,91 @@
+---
+title: Redirecionador de WhatsApp
+description: Como usar o link de redirecionamento da Kinbox no botão de WhatsApp do seu site para saber de qual campanha veio cada cliente, inclusive no celular, com o código de rastreio.
+keywords: [redirecionador de whatsapp, link de whatsapp, rastrear campanha, utm, gclid, código de rastreio, ref, origem do lead, botão de whatsapp no site, google ads, meta ads, nextSessionReferral]
+publico: humano
+tipo: guia
+fontes:
+  - api:src/modules/tracking/tracking.controller.ts
+  - api:src/modules/tracking/tracking.helper.ts
+  - api:src/modules/reports/session-summary/session-summary.consumer.ts
+  - api:src/modules/contacts/contacts.service.ts
+  - web:src/pages/settings/widget/Tweaks.tsx
+codigo:
+  - api:src/modules/tracking/**
+  - api:src/modules/contacts/contacts.service.ts
+  - web:src/pages/settings/widget/Tweaks.tsx
+  - widget:src/app.tsx
+verificado_em: 2026-11-26
+---
+
+O redirecionador de WhatsApp é um link da Kinbox para o botão de WhatsApp do seu site que registra de qual campanha o cliente veio (por parâmetros como `utm_campaign` e `gclid`) e abre o WhatsApp com uma mensagem pronta. Com o código de rastreio ligado, a mensagem recebe no fim um código curto, como `(ref: K7F2Q9)`, que a Kinbox lê para gravar a campanha na sessão, inclusive quando o cliente abre o WhatsApp pelo celular.
+
+## Escolha a opção
+
+| Opção | Quando usar |
+| --- | --- |
+| **Pelo Widget da Kinbox** | Você já usa o balão de WhatsApp do Widget no seu site. |
+| **Com link próprio** | Você tem seu próprio botão ou link de WhatsApp no site. |
+| **Pela API de contatos** | Seu sistema já captura os parâmetros da campanha antes do contato chamar no WhatsApp. |
+
+## Opção 1: pelo Widget
+
+1. Nas configurações do Widget, abra a aba **Ajustes**.
+2. Ligue **Habilitar balão de WhatsApp**, preencha **Número** e **Texto padrão** e marque **Usar somente WhatsApp** e **Capturar informações de campanha**.
+3. Com **Capturar informações de campanha** marcada, aparece a opção **Enviar código de rastreio na mensagem**: marque-a e salve as alterações.
+
+Com **Capturar informações de campanha** e **Enviar código de rastreio na mensagem** marcadas, o balão passa pelo redirecionador com código **apenas quando a página do site tem parâmetros de campanha no endereço**. Sem parâmetros de campanha na página, o botão abre o WhatsApp diretamente, sem código.
+
+## Opção 2: link próprio
+
+Monte o link no formato abaixo:
+
+```text
+https://api4.kinbox.com.br/v3/tracking/whatsapp/<número>?text=<mensagem>&origin=<endereço do site>&tracking_code=1&<parâmetros da campanha>
+```
+
+| Parte do link | O que informar |
+| --- | --- |
+| `<número>` | Obrigatório. Telefone apenas com dígitos, incluindo DDI e DDD (por exemplo, `5511900000001`). Um número inválido retorna `"Número de WhatsApp inválido"` (HTTP 400). |
+| `text` | Opcional. Mensagem pronta para o cliente enviar (codificada para URL). |
+| `origin` | Opcional. Endereço do seu site (aparece como **Origem** nos detalhes da sessão). |
+| `tracking_code` | Opcional. Envie `1` (ou `true`) para incluir o código de rastreio na mensagem pronta. |
+| `<parâmetros da campanha>` | Qualquer outro parâmetro de campanha (como `utm_source`, `utm_campaign`, `gclid`), até 40 parâmetros (`text`, `phone` e `tracking_code` não entram nessa contagem). |
+
+O código de rastreio só é acrescentado quando o link tem **pelo menos um parâmetro de campanha**. Sem nenhum parâmetro de campanha, o link abre o WhatsApp apenas com a mensagem, sem código. O link aceita até 30 cliques por minuto por visitante (acima disso retorna erro).
+
+Exemplo em JavaScript para montar o link aproveitando os parâmetros de campanha da página atual:
+
+```js
+const numero = "5511900000001";
+const params = new URLSearchParams(window.location.search);
+params.set("text", "Olá, quero saber mais.");
+params.set("origin", "https://www.exemplo.com.br");
+params.set("tracking_code", "1");
+
+const urlWhatsApp = `https://api4.kinbox.com.br/v3/tracking/whatsapp/${numero}?${params.toString()}`;
+```
+
+## O código de rastreio
+
+- Tem o formato `(ref: XXXXXX)`, com 6 letras ou números (sem `0`, `O`, `1` ou `I`).
+- Vale por **7 dias** e funciona **uma única vez**: depois de usado ou vencido, não identifica mais a campanha.
+- Se o cliente apagar o código da mensagem antes de enviar, a campanha não é identificada.
+- Se a sessão já tiver uma origem registrada, o código é descartado e não substitui a origem atual.
+
+## Onde ver a campanha
+
+- **Na conversa:** no painel **Detalhes** da [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), a sessão mostra a origem como **Google Ads**, **Meta Ads** ou **Campanha**; passe o mouse para ver os detalhes (como **Origem**).
+- **Nos filtros:** você pode filtrar sessões usando **Criado por Google Ads** e **Criado por Meta Ads** (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)).
+
+## Registrar a origem pela API
+
+Ao [criar um contato](/api-reference/contacts/create-a-contact) ou [atualizar um contato](/api-reference/contacts/update-a-contact) pela API pública (com um [token de API](/docs/desenvolvedor/tokens-de-api)), envie `nextSessionReferral` com os parâmetros da campanha. A **próxima sessão aberta pelo contato** naquele telefone, em até 7 dias, recebe essa origem (vale uma vez; sessões iniciadas por um membro em chat ativo não recebem).
+
+O contato precisa ter um telefone válido — caso contrário a API responde `"Informe um telefone válido para usar nextSessionReferral"` (HTTP 400). Ao atualizar um contato sem informar novo telefone, a API usa o telefone já cadastrado. Veja também os endpoints de contatos em [Listar contatos](/api-reference/contacts/list-all-contacts).
+
+## Problemas comuns
+
+- **A mensagem abriu sem código `(ref: ...)`.** O link (ou a página do site, no Widget) não tinha parâmetros de campanha no endereço, ou `tracking_code=1` não foi enviado.
+- **A campanha não apareceu na sessão.** O cliente apagou o código antes de enviar, passaram-se mais de 7 dias desde a geração do código, o código já tinha sido usado ou a sessão já possuía uma origem registrada.
+- **Apareceu "Número de WhatsApp inválido".** Revise o número no link: use apenas dígitos, com DDI e DDD (por exemplo, `5511900000001`).

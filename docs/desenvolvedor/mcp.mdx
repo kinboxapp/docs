@@ -1,0 +1,196 @@
+---
+title: Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)
+description: Como ligar o Claude, o ChatGPT, o Codex, o Cursor ou outro assistente de IA ao seu workspace pelo MCP, escolher as permissões, acompanhar e revogar as conexões.
+keywords: [mcp, claude, chatgpt, codex, cursor, conector, servidor mcp, model context protocol, assistente de ia, conectar ia, conexões ativas, revogar conexão, oauth]
+publico: humano
+tipo: guia
+fontes:
+  - KIN-7851
+  - web:src/pages/settings/mcp/index.tsx
+  - web:src/pages/oauth/McpConsent.tsx
+  - api:src/modules/mcp/oauth/mcp-oauth.service.ts
+  - api:src/modules/mcp/mcp-server.factory.ts
+  - api:src/modules/mcp/mcp-rate-limit.service.ts
+codigo:
+  - web:src/pages/settings/mcp/**
+  - web:src/pages/oauth/McpConsent.tsx
+  - api:src/modules/mcp/**
+  - api:src/modules/api-tokens/api-token-scopes.ts
+verificado_em: 2026-11-26
+---
+
+Com o MCP, você liga o Claude, o ChatGPT, o Codex, o Cursor e outros agentes de IA de fora ao seu workspace para ler conversas, atualizar contatos, mover negócios e até responder seus clientes, escolhendo as permissões na hora de conectar e podendo revogar quando quiser.
+
+Não confunda o MCP com o [Agente de IA](/docs/agente-de-ia/visao-geral) da Kinbox: o Agente de IA atende seus contatos dentro da plataforma, enquanto o MCP conecta um assistente de IA seu, de fora, ao workspace.
+
+<Note>
+  Quem pode: para ver a tela **MCP** e a lista de conexões, você precisa da permissão **Integrações** ou ser o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). A IA age sempre em nome de quem autorizou, com o papel dessa pessoa (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)), e a conexão vale para o workspace aberto no navegador na hora de autorizar.
+</Note>
+
+## Antes de começar
+
+- Tenha uma conta em um aplicativo de IA que aceite conectores ou servidores MCP.
+- Esteja logado na Kinbox, no navegador, no **workspace certo**. Se você participa de mais de um workspace, troque para o workspace desejado antes de autorizar (veja [Trocar de workspace ou criar outro](/docs/conta/trocar-de-workspace)).
+
+## Onde fica
+
+Vá em **Configurações** → **Integrações** → **MCP**. O cartão **Como conectar** traz as abas **Claude**, **ChatGPT**, **Codex**, **Cursor** e **Outros**, e logo abaixo fica o cartão **Conexões ativas**.
+
+<Frame caption="Tela MCP em Configurações → Integrações → MCP com o cartão Como conectar e Conexões ativas">
+  <img src="/images/ajuda/desenvolvedores/mcp-tela.webp" alt="Tela MCP com o cartão Conecte agentes de IA ao seu workspace, Como conectar com as abas Claude, ChatGPT, Codex, Cursor e Outros, botão Instalar conector e cartão Conexões ativas abaixo" />
+</Frame>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Escolha o aplicativo na tela MCP">
+    Em **Configurações** → **Integrações** → **MCP**, selecione a aba do aplicativo que você quer conectar (**Claude**, **ChatGPT**, **Codex**, **Cursor** ou **Outros**).
+  </Step>
+
+  <Step title="Instale o conector e siga o passo a passo">
+    Nas abas **Claude**, **ChatGPT**, **Codex** e **Cursor**, clique em **Instalar conector** para abrir o **Passo a passo** daquele aplicativo. O endereço do servidor MCP é sempre `https://mcp.kinbox.com.br/mcp`.
+
+    <Tabs>
+      <Tab title="Claude">
+        1. No Claude, abra **Configurações › Conectores** e clique em **Adicionar conector personalizado**.
+        2. Cole a URL do servidor MCP (`https://mcp.kinbox.com.br/mcp`) e salve.
+        3. Você será levado ao Kinbox para escolher as permissões e autorizar.
+
+        Se preferir usar o terminal (**Claude Code**), execute:
+
+        ```bash
+        claude mcp add --transport http kinbox https://mcp.kinbox.com.br/mcp
+        ```
+
+        <Frame caption="Janela Conector do Claude · Passo a passo (use a URL e o comando exibidos no texto acima)">
+          <img src="/images/ajuda/desenvolvedores/mcp-passo-a-passo-claude.webp" alt="Janela Conector do Claude com os 3 passos de instalação e a seção Prefere o terminal? Claude Code com os blocos de URL e comando" />
+        </Frame>
+      </Tab>
+
+      <Tab title="ChatGPT">
+        1. No ChatGPT, abra **Configurações › Conectores** e escolha **Criar conector**.
+        2. Cole a URL do servidor MCP (`https://mcp.kinbox.com.br/mcp`). Mantenha a autenticação em OAuth e salve.
+        3. Você será levado ao Kinbox para escolher as permissões e autorizar.
+      </Tab>
+
+      <Tab title="Codex">
+        1. No Codex, abra **Configurações › Plugins › MCPs** e clique em **Add**.
+        2. Escolha o tipo **Streamable HTTP**, cole a URL do servidor (`https://mcp.kinbox.com.br/mcp`) e salve. Deixe o token em branco.
+        3. O navegador abrirá o Kinbox para escolher as permissões e autorizar.
+      </Tab>
+
+      <Tab title="Cursor">
+        1. No Cursor, abra **Settings › MCP** e clique em **Add new global MCP server**.
+        2. Cole a configuração abaixo e salve:
+
+        ```json
+        {
+          "mcpServers": {
+            "kinbox": {
+              "url": "https://mcp.kinbox.com.br/mcp"
+            }
+          }
+        }
+        ```
+
+        3. Clique em conectar. O navegador abrirá o Kinbox para autorizar.
+      </Tab>
+
+      <Tab title="Outros">
+        Para conectar qualquer aplicativo de IA com suporte a servidores MCP via OAuth, adicione a configuração abaixo:
+
+        ```json
+        {
+          "mcpServers": {
+            "kinbox": {
+              "url": "https://mcp.kinbox.com.br/mcp"
+            }
+          }
+        }
+        ```
+
+        Se o aplicativo não tiver suporte a OAuth, crie um token em [Criar um token de API](/docs/desenvolvedor/tokens-de-api) e envie no cabeçalho `Authorization`:
+
+        ```json
+        {
+          "mcpServers": {
+            "kinbox": {
+              "url": "https://mcp.kinbox.com.br/mcp",
+              "headers": {
+                "Authorization": "Bearer kb_live_<seu_token>"
+              }
+            }
+          }
+        }
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Escolha as permissões e autorize o acesso">
+    Depois de salvar o conector, o navegador abre a tela **Autorizar acesso** da Kinbox (se não estiver logado, faça login antes). Confira qual workspace aparece no título ("... quer acessar o ...") e a conta em "Conectado como": a conexão vale para o **workspace aberto no navegador** naquele momento.
+
+    | Permissão | O que a tela diz | Padrão |
+    | --- | --- | --- |
+    | **Ver conversas, contatos e negócios** | "Ler conversas, mensagens, contatos, negócios e configurações do workspace" | Sempre marcada (obrigatória) |
+    | **Alterar conversas, contatos e negócios** | "Alterar tags, atribuições, grupos, contatos e negócios (não envia mensagens)" | Marcada |
+    | **Enviar mensagens aos seus clientes** | "Enviar mensagens aos seus clientes em seu nome" | Desmarcada |
+
+    Em workspaces de parceiro, membros com a permissão **Pode inspecionar clientes** no papel também veem a opção **Acessar os ambientes clientes do parceiro** (desmarcada por padrão).
+
+    <Frame caption="Tela Autorizar acesso com o workspace, as permissões e o botão Autorizar">
+      <img src="/images/ajuda/desenvolvedores/mcp-autorizar.webp" alt="Tela Autorizar acesso mostrando Claude quer acessar o Loja Exemplo, permissões Ver marcada e bloqueada, Alterar marcada, Enviar desmarcada e botões Autorizar e Cancelar" />
+    </Frame>
+
+    <Warning>
+      Ao marcar **Enviar mensagens aos seus clientes**, o assistente de IA poderá mandar mensagens aos seus contatos em seu nome. Marque essa opção apenas se quiser liberar envios pela IA.
+    </Warning>
+
+    Clique em **Autorizar** para concluir (ou em **Cancelar** para recusar sem criar conexão).
+  </Step>
+
+  <Step title="Volte ao aplicativo">
+    Depois de clicar em **Autorizar**, o navegador retorna ao aplicativo de IA, que passa a mostrar a Kinbox como conectada.
+  </Step>
+</Steps>
+
+## O que a IA consegue fazer
+
+O assistente de IA só enxerga as ferramentas das permissões que você marcou, e cada ação respeita o papel de quem autorizou:
+
+- **Com Ver conversas, contatos e negócios:** buscar e ler conversas e mensagens, ver relatórios de atendimento (até 92 dias por pedido), contatos, organizações, negociações, funis, produtos, tarefas, campanhas, canais, equipe, bots, agentes, cenários, automações, assinatura (exige a permissão **Assinatura** no papel) e a central de ajuda.
+- **Com Alterar conversas, contatos e negócios:** organizar conversas (resolver, reabrir, atribuir, mover de grupo, tags, nota interna, pendência, seguir, campos, iniciar/parar bot, agendar mensagem, bloquear contato), gerenciar contatos, organizações, negociações, tarefas, campanhas, configurações (tags, frases rápidas, campos personalizados, grupos e horários), equipe (membros, papéis e regras de atribuição), criar canal de WhatsApp por QR Code e gerenciar bots, agentes, cenários e automações.
+- **Com Enviar mensagens aos seus clientes:** responder com texto e mídia, iniciar conversas por telefone (WhatsApp ou SMS), reagir, encaminhar e apagar mensagens, além de ligar bots, agentes, cenários ou automações que podem rodar.
+
+Ações que não têm volta (como excluir contato, negociação, campanha, tarefa, tag, grupo ou papel, remover ou desativar membro, ou apagar mensagem) só acontecem depois que a IA confirma com você.
+
+O que a IA não faz pelo MCP: não cancela nem troca o plano da assinatura, não envia mensagens em conversas resolvidas há mais de 30 dias e, no WhatsApp oficial fora da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas), envia apenas templates aprovados. Há também limites de uso para chamadas e envios.
+
+## Conexões ativas e revogar
+
+Em **Configurações** → **Integrações** → **MCP**, abra o cartão **Conexões ativas** para ver as conexões OAuth de todo o workspace, com **Aplicativo**, **Permissões** (**Leitura**, **Escrita** e **Envio**), **Conectado em**, **Ultimo uso** e **Revogar**. Use **Atualizar** para recarregar a lista.
+
+Para encerrar uma conexão, clique em **Revogar** e confirme a mensagem `Revogar a conexão "..."? O aplicativo perderá o acesso imediatamente.` Se o membro que autorizou for desativado ou sair do workspace, a conexão também para de funcionar. Para conectar de novo depois, refaça o passo a passo.
+
+<Warning>
+  Revogar uma conexão corta o acesso do aplicativo imediatamente.
+</Warning>
+
+## Quanto dura a conexão
+
+A conexão OAuth se renova sozinha: o acesso vale 1 hora e é renovado automaticamente enquanto estiver em uso. Se ficar 30 dias sem renovar, ela expira e você precisa conectar o aplicativo novamente.
+
+## Usar um token de API em vez de OAuth
+
+Para aplicativos sem suporte a OAuth, use a aba **Outros** com um token criado em [Criar um token de API](/docs/desenvolvedor/tokens-de-api). Conexões feitas por token de API não aparecem em **Conexões ativas** — para desligá-las, revogue o token em **API Tokens**.
+
+## Onde ver o que a IA fez
+
+Cada chamada bem-sucedida da IA pelo MCP fica registrada em **Configurações** → **Auditoria** (exige a permissão **Auditoria**) em nome do membro que conectou, na entidade **MCP**. Os registros ficam salvos por 30 dias, ou por 180 dias para ações sem volta e chamadas feitas por parceiros.
+
+## Problemas comuns
+
+- **A opção MCP não aparece no menu.** Você precisa da permissão **Integrações** (ou ser o proprietário do workspace) para abrir a tela **MCP**.
+- **Aparece "Autorização indisponível" ou pedido expirado.** O pedido de autorização vale 15 minutos e só pode ser respondido uma vez. Volte ao aplicativo de IA e inicie a conexão novamente.
+- **A IA conectou no workspace errado.** A autorização usa sempre o workspace aberto no navegador naquele momento. Revogue a conexão em **Conexões ativas**, troque para o workspace certo na Kinbox e refaça a conexão.
+- **A IA recusa executar ações por restrições do papel.** Se o seu papel tiver restrições de visualização ou de envio, o MCP pode recusar o uso e pedir que o proprietário do workspace use o MCP ou ajuste o seu papel.

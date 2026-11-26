@@ -1,0 +1,50 @@
+---
+title: Abrir conversas por campo personalizado no link
+description: Como montar o link de busca por campo personalizado da Kinbox, o que ele faz hoje e como achar conversas por um campo na Caixa de entrada.
+keywords: [pesquisar por campo personalizado, link de busca, cfPlaceHolder, cfValue, buscar por cpf, abrir conversa pelo cpf, filtro por campo personalizado]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/inbox/SearchByCustomfield/index.tsx
+  - web:src/components-old/header/SearchHeader/index.tsx
+  - web:src/pages/inbox/Conversations/index.tsx
+  - api-v0:server/services/CustomerPlatformService.js
+codigo:
+  - web:src/routes/inbox.routes.ts
+  - web:src/pages/inbox/SearchByCustomfield/**
+  - web:src/components-old/header/SearchHeader/**
+  - api-v0:server/services/CustomerPlatformService.js
+verificado_em: 2026-11-26
+---
+
+O link de busca por campo personalizado permite abrir a Kinbox a partir de outro sistema informando a chave e o valor de um campo personalizado do contato.
+
+<Note>
+  **Hoje**, o link `/search?cfPlaceHolder=...&cfValue=...` abre a janela **Pesquisar conversas** sem aplicar o filtro pelo campo personalizado. Para encontrar conversas por um campo personalizado agora, use o filtro **Campo personalizado** ou o campo **Pesquisar** na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox).
+</Note>
+
+## Formato do link
+
+Use o mesmo endereço em que você abre a Kinbox (é preciso estar logado no navegador):
+
+```text
+https://app.kinbox.com.br/search?cfPlaceHolder=<chave_do_campo>&cfValue=<valor>
+```
+
+| Parâmetro | O que informa |
+| --- | --- |
+| `cfPlaceHolder` | Chave reservada do campo personalizado do contato. |
+| `cfValue` | Valor procurado no campo. |
+| `base64` | Opcional. JSON com `cfPlaceHolder` e `cfValue` codificado em Base64 (apenas outra forma de escrever os parâmetros na URL; não esconde os dados). |
+| `workspaceId` | Opcional. Troca para o workspace indicado antes de abrir a busca, se você participa de mais de um. |
+
+Ao abrir o link, a Kinbox mostra a janela **Pesquisar conversas** com o resultado; quando há apenas uma conversa na lista, ela abre diretamente.
+
+## Como achar conversas por campo personalizado hoje
+
+Na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), você tem duas opções:
+
+- **Filtro na lista:** clique no filtro **Campo personalizado**, escolha o campo, digite o valor na janela "Filtrar por ..." e clique em **Filtrar**.
+- **Pesquisa geral:** digite o valor no campo **Pesquisar** no topo da tela para encontrar o contato pelo campo personalizado e abrir as conversas dele.
+
+Se você tiver o telefone do contato no seu sistema, use [Abrir uma conversa por link (conversa em um clique)](/docs/usando-o-kinbox/conversa-em-um-clique). Para salvar listas por condições, veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa).

@@ -1,0 +1,88 @@
+---
+title: Criar um token de API
+description: Como criar, copiar, revogar e usar um token de API da Kinbox, o que cada permissão do token libera e o que são os tokens legados.
+keywords: [token de api, api token, criar token, chave de api, kb_live, revogar token, permissões do token, bearer, autenticação api, token v0, token legado, envio legado]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/api/index.tsx
+  - api:src/modules/api-tokens/api-tokens.service.ts
+  - api:src/modules/api-tokens/api-token-scopes.ts
+  - api:src/modules/auth/guards/api-token-auth.guard.ts
+codigo:
+  - web:src/pages/settings/api/**
+  - api:src/modules/api-tokens/**
+  - api:src/modules/auth/guards/api-token-auth.guard.ts
+  - api:src/decorators/v1-access.decorator.ts
+verificado_em: 2026-11-26
+---
+
+Crie um token de API (`kb_live_...`) em **Configurações** → **Integrações** → **API Tokens** para autenticar o seu sistema na API pública da Kinbox ou conectar um assistente de IA pelo MCP sem OAuth.
+
+<Note>
+  Quem pode: membros com a permissão **Integrações** ou o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). A lista mostra os tokens ativos de todo o workspace, não apenas os seus.
+</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a tela API Tokens">
+    Vá em **Configurações** → **Integrações** → **API Tokens** e clique em **Criar token**.
+  </Step>
+
+  <Step title="Dê um nome e escolha as permissões">
+    Na janela **Criar token de API**, preencha **Nome do token** (obrigatório, máximo de 100 caracteres, como "Integração ERP") e marque ao menos uma opção em **Permissões**. Por padrão, **Ler dados** e **Alterar dados** vêm marcadas e **Enviar mensagens** vem desmarcada.
+
+    | Permissão | O que libera |
+    | --- | --- |
+    | **Ler dados (conversas, contatos, negócios, relatórios)** | Lê dados do workspace pela API e pelo MCP. |
+    | **Alterar dados (contatos, negócios, tags, campanhas)** | Cria, edita e altera dados do workspace. |
+    | **Enviar mensagens ao cliente final** | Envia mensagens ao contato e dispara ou retoma campanhas. |
+
+    Em workspaces de parceiro (revenda ou multinível), quem tem **Pode inspecionar clientes (Básico)** ou **(Avançado)** no papel também vê a opção **Acessar os ambientes clientes do parceiro pelo MCP (com as permissões acima)**, que tem efeito apenas no MCP.
+
+    A janela avisa: "O token também respeita o papel de quem o criou. Enviar mensagens inclui disparar e retomar campanhas."
+
+    <Frame caption="Janela Criar token de API com Nome do token e Permissões">
+      <img src="/images/ajuda/desenvolvedores/criar-token.webp" alt="Janela Criar token de API preenchida com o nome Integração ERP, permissões Ler dados e Alterar dados marcadas, Enviar mensagens ao cliente final desmarcada e botões Cancelar e Criar" />
+    </Frame>
+  </Step>
+
+  <Step title="Crie e copie o token">
+    Clique em **Criar**. Na janela **Token criado com sucesso**, aparece o aviso "Este token nao sera mostrado novamente. Copie e guarde em local seguro." Clique no botão de copiar (surge "Token copiado para area de transferencia"), salve o valor em um local seguro e clique em **Entendi**.
+  </Step>
+</Steps>
+
+<Warning>
+  O token completo só aparece uma vez, na janela de criação. Se você perder o valor, não há como vê-lo de novo: crie outro token e revogue o antigo.
+</Warning>
+
+## Usar o token
+
+- **Na API pública:** envie o token no cabeçalho HTTP `Authorization: Bearer <token>`, por exemplo `Authorization: Bearer kb_live_<seu_token>`. Consulte os endpoints e exemplos em [Autenticação](/api-reference/authentication).
+- **No MCP sem OAuth:** o mesmo token pode ser usado na aba **Outros** da tela **MCP** (veja [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp)).
+- **Ligação com quem criou:** o token está ligado ao membro que o criou e age em nome dessa pessoa (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Se quem criou o token sair do workspace ou for desativado, o token para de funcionar e será preciso criar outro.
+
+## Acompanhar a lista de tokens
+
+Em **Tokens de API Publica**, a tabela exibe os tokens ativos do workspace do mais novo para o mais antigo, com as colunas **Nome**, **Token** (apenas os 16 primeiros caracteres seguidos de `...`), **Permissões** (**Ler**, **Alterar**, **Enviar** e **Parceiro**), **Criado em**, **Ultimo uso** (data ou **Nunca**) e o botão **Revogar**. Quando ainda não há tokens, a tela exibe "Nenhum token criado ainda. Crie um token para comecar a usar a API."
+
+<Frame caption="Lista Tokens de API Publica com um token ativo e o botão Mostrar tokens legados">
+  <img src="/images/ajuda/desenvolvedores/api-tokens-lista.webp" alt="Tela Tokens de API Publica com o botão Criar token, tabela listando Integração ERP com permissões Ler e Alterar, Criado em, Ultimo uso Nunca, botão Revogar e o botão Mostrar tokens legados na parte inferior" />
+</Frame>
+
+## Revogar um token
+
+Para desligar um token, clique em **Revogar** na linha dele e confirme a mensagem `Tem certeza que deseja revogar o token "..."? Esta acao nao pode ser desfeita.` O aviso "Token revogado com sucesso" aparece e o token some da lista.
+
+<Warning>
+  Revogar um token não tem volta: toda integração que usar esse token deixa de funcionar.
+</Warning>
+
+## Envio legado
+
+Tokens antigos, criados antes de existir a permissão **Enviar**, podem exibir a etiqueta laranja **Envio legado**, indicando que ainda enviam mensagens e disparam campanhas pela API sem essa permissão (isso não vale para o MCP). Para encerrar esse comportamento, clique na etiqueta e confirme em **Remover envio legado**; tokens novos nunca nascem com envio legado.
+
+## Tokens legados
+
+Clique em **Mostrar tokens legados** no fim da página para ver e copiar o **Token v0** (um por workspace, sem botão de troca ou revogação na tela). Ele não serve para a API pública atual, mas é o token usado em [Integrar seu sistema como canal customizado (API)](/docs/desenvolvedor/criando-canal-customizado) e em [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot).
