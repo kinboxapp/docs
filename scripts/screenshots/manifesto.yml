@@ -3503,7 +3503,7 @@
 # Seção programa-de-parceiros (Parceiros › Programa de parceiros)
 #
 # Telas do painel de parceria no workspace de documentação (Loja Exemplo), sem clientes, comissões nem dados reais.
-# O link de convite do staging é trocado pelo formato de produção com um identificador fictício.
+# O link de convite do staging é trocado por um endereço example.com com um identificador fictício.
 
 - id: parceiros-painel
   url: /partner/workspaces
@@ -3513,7 +3513,7 @@
   alvo:
     - 'div.group\/section:text-is("Parceria")'
     - 'a:has-text("Templates")'
-    - '.ant-card:has(> .ant-card-body > div:text-is("Prev. de Comissão"))'
+    - '.ant-card:has(> .ant-card-body > div:text-is("Trial"))'
   mascarar: []
   arquivo: images/ajuda/programa-de-parceiros/painel.webp
   paginas:
@@ -3524,7 +3524,7 @@
   passos:
     - esperar: 'text=Url de convite'
     - pausa: 1000
-    - trocarTexto: { seletor: '.ant-form-item:has-text("Url de convite") input', texto: 'https://www.kinbox.com.br/user/register?partnerId=12345' }
+    - trocarTexto: { seletor: '.ant-form-item:has-text("Url de convite") input', texto: 'https://www.example.com/user/register?partnerId=00000' }
   alvo: '.ant-card:has-text("Convite por URL")'
   mascarar: []
   arquivo: images/ajuda/programa-de-parceiros/convidar-cliente.webp

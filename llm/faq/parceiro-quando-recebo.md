@@ -21,7 +21,7 @@ Quando recebo as comissões?
 
 ## Resposta
 
-A tela **Comissões** informa que "Os recebimentos são efetuados normalmente no dia 5 de cada mês.". A comissão de cada mês é lançada pela Kinbox no mês seguinte com o status **Pendente** e muda para **Recebido** quando a Kinbox paga, liberando o recibo em **Ver recibo** (ou em **Baixar recibo**, no detalhe da comissão).
+A tela **Comissões** informa que "Os recebimentos são efetuados normalmente no dia 5 de cada mês.". A comissão de cada mês é lançada pela Kinbox no mês seguinte com o status **Pendente** e muda para **Recebido** quando a Kinbox paga. Se a Kinbox anexar o recibo, ele fica em **Ver recibo** (ou em **Baixar recibo**, no detalhe da comissão); sem recibo, **Ver recibo** fica desabilitado.
 
 Cada comissão reúne as faturas pagas pelos workspaces dos seus clientes (na tela, **ambientes**) naquele mês. Você acompanha os lançamentos e o saldo no cartão **A receber** em **Parceria** → **Comissões**.
 

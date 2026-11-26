@@ -210,7 +210,7 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 
 ### Parceria
 
-Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (Básico)**, **Pode inspecionar clientes (Avançado)** e **Pode resetar senha de membros** (de clientes) aparecem apenas para parceiros que podem inspecionar clientes; **Básico** e **Avançado** se excluem entre si. Detalhes do painel em [Painel do parceiro: visão geral](/docs/programa-de-parceiros/visao-geral) e [Inspecionar o workspace de um cliente](/docs/programa-de-parceiros/inspecionar-cliente).
+Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (Básico)**, **Pode inspecionar clientes (Avançado)** e **Pode resetar senha de membros** (de clientes) aparecem apenas quando a parceria não é só de indicação; **Básico** e **Avançado** se excluem entre si. Detalhes do painel em [Painel do parceiro: visão geral](/docs/programa-de-parceiros/visao-geral) e [Inspecionar o workspace de um cliente](/docs/programa-de-parceiros/inspecionar-cliente).
 
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |

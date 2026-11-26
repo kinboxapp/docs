@@ -7,14 +7,14 @@ tipo: guia
 fontes:
   - web:src/pages/partner/PartnerTemplates/index.tsx
   - web:src/pages/partner/PartnerTemplates/EditPartnerTemplate.tsx
-  - web:src/pages/partner/PartnerWorkspaces/SelectTemplateModal.tsx
+  - web:src/pages/partner/PartnerWorkspaces/**
   - web:src/pages/partner/ApplyTemplate/ApplyTemplateModal.tsx
   - web:src/pages/partner/ApplyTemplate/applyTemplateService.ts
   - api:src/modules/partner-templates/**
 codigo:
   - web:src/pages/partner/PartnerTemplates/**
   - web:src/pages/partner/ApplyTemplate/**
-  - web:src/pages/partner/PartnerWorkspaces/SelectTemplateModal.tsx
+  - web:src/pages/partner/PartnerWorkspaces/**
   - api:src/modules/partner-templates/**
 verificado_em: 2026-11-26
 ---
@@ -39,7 +39,7 @@ Um **template de workspace** é um workspace modelo (na tela, **ambiente**) que 
     Na tela **Template**, clique em **Abrir ambiente template** (você também pode abrir depois pelo menu **⋯** da lista, em **Abrir ambiente do template**). Configure no workspace modelo tudo o que deseja copiar para os clientes.
   </Step>
   <Step title="Preencha a descrição (opcional)">
-    Na tela **Template**, escreva a **Descrição**. Esse texto aparece abaixo do nome do modelo como ajuda para quem for aplicar o template.
+    Na tela **Template**, escreva a **Descrição**. Na hora de aplicar, esse texto aparece como dica de ajuda ao lado do nome do modelo.
   </Step>
   <Step title="Adicione variáveis para textos que mudam por cliente (opcional)">
     Em **Variáveis**, clique em **Variável**. Na janela **Editar variável**, preencha **Nome**, confira a **Chave (placeholder)** (gerada automaticamente a partir do nome), adicione uma **Descrição** para orientar quem preencher, marque **Obrigatório** se o campo não puder ficar vazio e clique em **Salvar**.
@@ -48,6 +48,9 @@ Um **template de workspace** é um workspace modelo (na tela, **ambiente**) que 
   </Step>
   <Step title="Escolha as etapas a aplicar">
     Em **Etapas a aplicar**, marque o que o template deve copiar ou clique em **Selecionar todos**. Pelo menos uma etapa precisa estar marcada.
+  </Step>
+  <Step title="Salve o template">
+    Clique em **Salvar**. Se você fechar a tela sem salvar, as alterações se perdem; a tela pede confirmação antes de fechar.
   </Step>
 </Steps>
 
@@ -71,7 +74,7 @@ Canais, contatos, conversas, membros, assinatura e saldo não são copiados. A a
 Você pode aplicar um template em um cliente que já está na carteira se a opção **Aplicar template** aparecer no menu do cliente. Se ela não aparecer, a sua parceria naquele cliente é só de indicação ou o seu papel não tem a permissão **Pode inspecionar clientes (Básico)** ou **(Avançado)** (veja [Inspecionar o workspace de um cliente](/docs/programa-de-parceiros/inspecionar-cliente)).
 
 <Warning>
-  Aplicar um template cria itens no workspace do cliente e não tem como desfazer pela tela. Aplicar o mesmo template de novo repete os itens já existentes (apenas **Grupos** com o mesmo nome não se repetem), enquanto **Widget** e **Configurações gerais** substituem a configuração atual. Confira bots, agentes de IA, automações e cenários no cliente depois de aplicar.
+  Aplicar um template cria itens no workspace do cliente e não tem como desfazer pela tela. Aplicar de novo repete os itens. Um grupo com nome igual a um que já existe no cliente também é criado, com um código entre parênteses no fim do nome. **Widget** e **Configurações gerais** substituem a configuração atual. Confira bots, agentes de IA, automações e cenários no cliente depois de aplicar.
 </Warning>
 
 <Steps>
@@ -85,7 +88,7 @@ Você pode aplicar um template em um cliente que já está na carteira se a opç
     Informe o valor de cada variável para aquele cliente e clique em **Aplicar**.
   </Step>
   <Step title="Acompanhe e conclua">
-    Acompanhe o andamento das etapas em **Aplicando template...**. Quando aparecer **Template aplicado!**, clique em **Concluir**.
+    Acompanhe o andamento das etapas em **Aplicando template...**. Se uma etapa falhar, ela fica marcada com a mensagem de erro e as outras continuam. Ao final, o título muda para **Template aplicado!**, com ou sem erro: confira a lista de etapas antes de clicar em **Concluir**. Sem erro, **Concluir** recarrega a página do cliente.
   </Step>
 </Steps>
 

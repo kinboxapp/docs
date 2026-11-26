@@ -1655,11 +1655,11 @@
     "tipo": "faq"
   },
   {
-    "pergunta": "Quero mandar para o meu cliente um link para ele pagar a assinatura. O painel de parceiro gera isso?",
+    "pergunta": "Sou parceiro da Kinbox. Onde no painel eu consulto quanto de comissão ganho em cada cliente?",
     "esperado": [
-      "llm/faq/parceiro-link-de-checkout"
+      "docs/programa-de-parceiros/niveis-do-programa-de-comissionamento"
     ],
-    "tipo": "faq"
+    "tipo": "guia"
   },
   {
     "pergunta": "O item Parceria não aparece no meu menu lateral. Por quê?",
