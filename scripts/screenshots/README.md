@@ -39,7 +39,8 @@ O seed encontra o workspace pelo nome e só cria o que falta, então pode rodar 
 - 3 respostas rápidas;
 - o agente de IA `Lia`, desligado e sem canal;
 - o bot `Atendimento inicial`, desligado, com o widget em **Canais que atende**;
-- o bot `Consulta de pedido` (blocos de integração com endereços `exemplo.com`), desligado e sem canal, e o campo personalizado Json `pedido` (sessão).
+- o bot `Consulta de pedido` (blocos de integração com endereços `exemplo.com`), desligado e sem canal, e o campo personalizado Json `pedido` (sessão);
+- o widget de exemplo `Site da loja`, já configurado (cores, textos, formulário, chamada para ação, balão de WhatsApp com número fictício e **Restringir domínio** = `https://www.example.com`), usado pelos prints da seção do widget. As configurações são reaplicadas a cada execução; se o canal existir sem as configurações do widget, ele é desativado e o widget é criado de novo.
 
 Se um print precisa de um dado que o seed não tem, acrescente o dado no `seed.ts` antes de capturar.
 
@@ -54,7 +55,11 @@ bun capturar.ts --explorar /settings/channels/new/whatsapp/web --clicar 'text=Op
                                    # (aceita --workspace <nome>), para achar seletores antes de escrever o item
 ```
 
-Passos aceitos no item: `esperar`, `clicar`, `digitar` ({seletor, texto}), `tecla`, `pausa` (ms), `passar` (passa o mouse sobre o seletor) e `arrastar` ({de, para, x, y}: arrasta um elemento até outro; `x`/`y` soltam num ponto dentro de `para`, útil para puxar a seta de um bloco do fluxograma e soltar no vazio).
+Passos aceitos no item: `esperar`, `clicar`, `digitar` ({seletor, texto}), `tecla`, `pausa` (ms), `passar` (passa o mouse sobre o seletor), `arrastar` ({de, para, x, y}: arrasta um elemento até outro; `x`/`y` soltam num ponto dentro de `para`, útil para puxar a seta de um bloco do fluxograma e soltar no vazio) e `trocarTexto` ({seletor, texto}: troca o texto do elemento antes do print, ex.: o código de instalação do widget, que no staging traz endereços do staging, pelo formato de produção com identificação fictícia).
+
+### Chat do site num site de teste (`site:`)
+
+Um item com `site: { widget: <nome do widget> }` abre, em vez de uma tela do app, uma página fictícia da "Loja Exemplo" com o código de instalação daquele widget do workspace de documentação. O HTML da página é servido pelo próprio Playwright em `https://www.example.com` (domínio reservado para exemplos; nenhum site real é aberto e a rota é desfeita ao fim do item), mas o script e as configurações do chat vêm do staging, como num site de verdade. Seletores com o prefixo `widget>> ` procuram dentro do chat (o iframe do widget), ex.: `widget>> #widget-button`. Para recortar o chat, use `alvo: '.kinbox-widget-container'` (`body` não inclui o que fica fixo no canto da tela).
 
 Seletores que costumam funcionar no app:
 

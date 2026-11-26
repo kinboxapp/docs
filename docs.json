@@ -80,6 +80,15 @@
                   "docs/canais/instagram/configuracoes",
                   "docs/canais/instagram/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Chat do site (widget)",
+                "pages": [
+                  "docs/canais/widget",
+                  "docs/canais/widget/personalizar",
+                  "docs/canais/widget/configuracoes",
+                  "docs/canais/widget/problemas-comuns"
+                ]
               }
             ]
           },
@@ -706,10 +715,6 @@
     },
     {
       "source": "/docs/canais/telegram",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
-      "source": "/docs/canais/widget",
       "destination": "/docs/canais/visao-geral"
     },
     {

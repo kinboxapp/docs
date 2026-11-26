@@ -206,7 +206,7 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 | **Somente pode ver frases rápidas na lista se estiver no grupo da frase rápida** *(Restrições)* | Mostra na lista apenas frases rápidas com restrição de visibilidade de grupos aos quais o membro pertence. | — |
 | **Não marca como lido ao abrir uma conversa** *(Restrições)* | Evita marcar a conversa como lida automaticamente ao abri-la. | — |
 | **Não mostrar aviso de ambiente expirando.** *(Restrições)* | Oculta o banner de aviso no topo da tela quando o workspace está prestes a expirar. | — |
-| **Não pode gerenciar widget.** *(Restrições)* | Oculta o widget de **Adicionar canal** e redireciona a tela do widget para **Canais**. | — |
+| **Não pode gerenciar widget.** *(Restrições)* | Esconde o cartão **Widget** em **Conectar novo canal**, os widgets da lista de **Canais** e a tela do widget (abrir a tela volta para **Canais**). Veja [Instalar o chat no seu site](/docs/canais/widget). | — |
 
 ### Parceria
 
@@ -245,7 +245,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 | **Metas** no menu lateral | **Metas** |
 | **Parceria** no menu lateral | **Pode acessar painel de parceria** (em workspace de parceiro) |
 | Ícone **Salas** | Remover a restrição **Não pode acessar as salas** (criar/excluir salas exige **Salas**) |
-| **Widget** em **Adicionar canal** | Remover a restrição **Não pode gerenciar widget.** |
+| **Widget** em **Conectar novo canal** | Remover a restrição **Não pode gerenciar widget.** |
 
 ## Membros: convite, edição, exclusão e senha
 

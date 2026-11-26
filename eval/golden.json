@@ -697,6 +697,54 @@
     "tipo": "faq"
   },
   {
+    "pergunta": "Como coloco o chat da Kinbox no site da minha empresa para falar com quem está navegando?",
+    "esperado": [
+      "docs/canais/widget"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero trocar a cor do botão de chat e pedir nome e e-mail antes da pessoa começar a conversar",
+    "esperado": [
+      "docs/canais/widget/personalizar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Qual o tamanho máximo de arquivo que o visitante consegue mandar pelo chat do site?",
+    "esperado": [
+      "llm/canais/widget",
+      "docs/canais/widget/problemas-comuns"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Tem plugin da Kinbox para instalar o chat no WordPress?",
+    "esperado": [
+      "llm/faq/widget-wordpress-wix"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como coloco um botão do WhatsApp no meu site junto com o chat?",
+    "esperado": [
+      "docs/canais/widget/configuracoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Dá para colar o mesmo código do chat em duas lojas virtuais diferentes?",
+    "esperado": [
+      "llm/faq/widget-varios-sites"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo fazer chamada de vídeo com o visitante pelo chat do site?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Como faço para as conversas novas serem divididas entre os vendedores em rodízio?",
     "esperado": [
       "docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",

@@ -1,0 +1,105 @@
+---
+title: Instalar o chat no seu site
+description: Como criar um widget de chat na Kinbox, copiar o código e instalar no seu site para receber as conversas dos visitantes na Caixa de entrada.
+keywords: [widget, chat do site, chat no site, chat para site, webchat, chat ao vivo, live chat, chat online, atendimento no site, botão de chat no site, instalar widget, código do widget, copiar código, body, wordpress, wix, landing page, novo canal widget]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/channels/widget/AddWidget.tsx
+  - web:src/pages/settings/widget/index.tsx
+  - web:src/pages/settings/widget/RenameWidgetModal.tsx
+  - api:src/modules/channels/widget/widget.service.ts
+  - widget:src/widget.ts
+codigo:
+  - web:src/pages/settings/channels/widget/**
+  - web:src/pages/settings/channels/AddChannel.tsx
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/settings/widget/index.tsx
+  - web:src/pages/settings/widget/RenameWidgetModal.tsx
+  - api:src/modules/channels/widget/widget.service.ts
+  - api:src/modules/channels/widget/widget.controller.ts
+  - widget:src/widget.ts
+verificado_em: 2026-11-26
+---
+
+O widget é um chat instalado no seu site: o visitante clica no botão, escreve e a conversa chega na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) identificada pelo nome do widget. Você pode criar um widget para cada site ou landing page, cada um com código de instalação, aparência e textos próprios.
+
+<Note>
+  **Quem pode:** o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista de canais e a tela do widget. A restrição **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir** (quem tem essa restrição não cria nem exclui widgets). O widget não entra na cobrança do plano nem tem limite de quantidade.
+</Note>
+
+## Antes de começar
+
+- Tenha acesso ao código do seu site ou contato com a pessoa que cuida dele, porque o código de instalação precisa ser colado antes da tag `</body>` em todas as páginas.
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a tela de canais">
+    Vá em **Configurações** → **Chat** → **Canais** e clique em **Novo canal**.
+
+    Se **Novo canal** não aparecer, peça ao proprietário do workspace para verificar se você tem a permissão **Gerenciar Canais** e se está sem a restrição **Somente pode dar manutenção simples em canais**.
+  </Step>
+  <Step title="Escolha Widget">
+    Em **Conectar novo canal**, clique no cartão **Widget**.
+
+    Se o cartão **Widget** não aparecer, peça ao proprietário para tirar a restrição **Não pode gerenciar widget.** do seu papel.
+  </Step>
+  <Step title="Dê um nome e crie o widget">
+    No painel **Adicionar Widget**, preencha **Nome** (obrigatório) e clique em **Criar widget**. Esse nome aparece para a equipe como o canal das conversas: use, por exemplo, o nome do site ou da landing page.
+
+    <Frame caption="Painel Adicionar Widget com o campo Nome preenchido">
+      <img src="/images/ajuda/widget/adicionar-widget.webp" alt="Painel Adicionar Widget com a descrição para criar um widget por site ou landing page e o campo obrigatório Nome preenchido com Site da loja" />
+    </Frame>
+
+    A Kinbox mostra "Widget criado." e abre a tela do novo widget. Ele já nasce com o nome do workspace em **Nome de exibição** e com a foto do workspace como foto do chat.
+  </Step>
+  <Step title="Copie o código de instalação">
+    No cartão **Instalação**, clique em **Copiar código** (clicar na caixa do código também copia). A tela mostra o aviso "Copiado para o clipboard".
+
+    <Frame caption="Cartão Instalação com o botão Copiar código">
+      <img src="/images/ajuda/widget/instalacao.webp" alt="Cartão Instalação com o título Instale o chat widget manualmente, a instrução para colar o código antes da tag body em todas as páginas e o botão Copiar código" />
+    </Frame>
+  </Step>
+  <Step title="Cole o código no seu site">
+    Cole o código copiado antes da tag `</body>` em todas as páginas do seu site. Se você não tem acesso ao código do site, envie o código copiado para a pessoa que cuida dele.
+
+    A Kinbox não tem plugin nem aplicativo para WordPress, Wix ou outras plataformas de site. Nelas, use a opção da própria plataforma para acrescentar código ao site (por exemplo, no rodapé), de forma que ele carregue em todas as páginas. O widget só pode ser instalado se a plataforma aceitar código personalizado.
+  </Step>
+  <Step title="Publique e teste">
+    Publique o site e abra uma página: o botão redondo do chat aparece no canto de baixo (à direita por padrão). Clique no botão. Se o formulário aparecer, preencha os campos obrigatórios e clique em **Iniciar**. Envie uma mensagem de teste e confirme que a conversa chega na **Caixa de entrada** com o nome do widget.
+
+    <Frame caption="Exemplo de widget já personalizado (cor, textos e formulário) aberto num site fictício">
+      <img src="/images/ajuda/widget/chat-no-site.webp" alt="Janela do chat aberta no canto de um site fictício mostrando cabeçalho verde com Loja Exemplo, mensagem Vamos te responder assim que possível, descrição e formulário com Nome, E-mail, Celular e botão Iniciar" />
+    </Frame>
+  </Step>
+</Steps>
+
+## Depois de instalar
+
+- **Personalização:** mude cores, posição, textos, mensagem inicial e formulário pré-chat em [Personalizar a aparência, os textos e o formulário do widget](/docs/canais/widget/personalizar).
+- **Configurações:** restrinja domínios, controle a exibição no celular, ative o horário comercial e adicione o balão de WhatsApp em [Configurações do widget](/docs/canais/widget/configuracoes).
+- **Atualizações no site:** mudanças salvas na Kinbox aparecem no site quando a página é aberta ou recarregada.
+- **Bot e agente de IA:** o widget funciona como canal para o [bot](/docs/bot/aprender-a-usar-o-bot) e para o [agente de IA](/docs/agente-de-ia/conectar-canais).
+- **Como a conversa começa:** não dá para iniciar uma conversa pelo widget a partir da Kinbox; a conversa começa quando o visitante escreve ou envia o formulário pré-chat com a mensagem automática ligada (veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
+- **Histórico no navegador:** a conversa fica guardada no navegador do visitante: ele a vê de novo no mesmo site e widget, no mesmo navegador. Em outro navegador, outro aparelho ou janela anônima, começa uma conversa nova.
+
+## Mais de um site
+
+Você pode criar um widget para cada site ou landing page: não há limite de quantidade nem cobrança no plano. Assim cada site tem aparência e textos próprios, e você identifica na **Caixa de entrada** de qual site cada conversa veio.
+
+O mesmo código também funciona em vários sites (desde que **Restringir domínio** não bloqueie), mas todas as conversas chegam agrupadas com o nome daquele único widget.
+
+## Renomear e excluir
+
+- **Renomear:** abra o widget em **Configurações** → **Chat** → **Canais**, clique no lápis **Editar nome** ao lado do título, altere o **Nome** na janela **Editar nome do widget** e clique em **Salvar** (aviso "Nome atualizado").
+- **Ações na lista de canais:** em **Configurações** → **Chat** → **Canais**, o widget aparece com o nome dele e "Chat no site" abaixo. No menu de três pontos ficam **Editar**, **Copiar ID** e, se aparecer, **Excluir** (ele não aparece para quem tem a restrição **Somente pode dar manutenção simples em canais**). Veja [Canais: conectar e gerenciar](/docs/canais/visao-geral).
+
+<Warning>
+  **Excluir** um widget desativa o canal, apaga as configurações dele e remove o chat de todos os sites onde aquele código está instalado. Não é possível desfazer: um novo widget gera um código novo, que precisa ser instalado no site no lugar do antigo. As conversas já registradas não são apagadas.
+</Warning>
+
+## Problemas comuns
+
+- **O chat não aparece no site ou as mudanças não entram:** confira se o código foi colado antes de `</body>` em todas as páginas publicadas, se **Restringir domínio** inclui o endereço exato e se a página foi recarregada. Veja todas as causas em [O chat não aparece no meu site](/docs/canais/widget/problemas-comuns).
+- **O cartão Widget não aparece ou a tela volta para Canais:** confira se o seu papel tem a permissão **Gerenciar Canais** e está sem a restrição **Não pode gerenciar widget.** Peça ao proprietário para ajustar em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).

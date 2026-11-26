@@ -118,7 +118,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 - **Saídas:** 1 saída por opção + saída extra de tempo (quando **Esperar tempo** está ligado).
 - **Apresentação por canal:**
   - **WhatsApp oficial:** até 3 opções, todas com nome de até 20 caracteres, são enviadas como botões; com mais de 3 opções ou com algum nome acima de 20 caracteres (mesmo com até 3 opções), vão como lista com o botão **Opções** e o título `"Escolha uma opção"` (nomes acima de 24 caracteres são cortados no título e exibidos inteiros na descrição).
-  - **Chat do site (widget):** o texto do menu traz as opções numeradas, e o widget mostra as opções como botões clicáveis enquanto o menu for a última mensagem da conversa.
+  - **Chat do site (widget):** o texto do menu traz as opções numeradas, e o widget mostra as opções como botões clicáveis enquanto o menu for a última mensagem da conversa. Clicar numa opção envia o nome dela como mensagem do visitante (veja [Instalar o chat no seu site](/docs/canais/widget)).
   - **WhatsApp por QR Code** (Express e Clássica): enviados como texto, uma opção por linha no formato `"número - nome"`.
   - **Esconder opções:** envia apenas o **Texto**, sem lista e sem botões.
 - **Valores especiais e regras:**
