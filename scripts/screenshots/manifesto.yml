@@ -14,6 +14,8 @@
 # manterFoco (opcional) true para não tirar o foco antes do print (lista suspensa aberta, que fecha ao perder o foco)
 # workspace (opcional) workspace do print; padrão: o de documentação. Outro workspace só para telas
 #           que o de documentação não tem (ex.: canal de WhatsApp) e sempre com `mascarar`
+# preparar  (opcional) preparo de `preparos.ts` que monta pela API um estado temporário que o item precisa (copiloto
+#           configurado, token, pedido do MCP...) e o desfaz depois do print; pode trocar marcadores da `url`
 
 - id: tags-lista
   url: /settings/tags
@@ -114,9 +116,11 @@
 
 # Painel do código de conexão (Express) ANTES de gerar o código: só campo, botão e link, sem código na tela.
 # Precisa de um canal Express do workspace de testes no status "Necessário ler QR-Code" (canal 251, de QA, com número
-# fictício). Se ele não estiver aguardando leitura, use Reiniciar canal nele antes. Nunca capture QR Code nem código.
+# fictício). Se ele não estiver aguardando leitura, o preparo `canal-aguardando-qr` reinicia o canal e espera o
+# status. Nunca capture QR Code nem código.
 - id: whatsapp-qr-codigo-de-conexao
   workspace: Kinbox
+  preparar: canal-aguardando-qr
   url: /settings/channels/251
   passos:
     - esperar: '.ant-drawer-body button:has-text("Conectar com número de telefone")'
@@ -314,11 +318,13 @@
     - docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns
 
 # Editor de uma conversa do canal oficial de teste (workspace 1) com a janela aberta: contador no canto.
-# Só o editor entra no recorte (sem nome, número nem mensagens do contato). A conversa precisa ter
-# recebido mensagem do contato nas últimas 24 h; se a janela fechar, troque o id por outra conversa aberta.
+# Só o editor entra no recorte (sem nome, número nem mensagens do contato). A janela de cada conversa fecha sozinha
+# 24 h depois da última mensagem do contato: o preparo `conversa-janela-aberta` escolhe na hora uma conversa aberta do
+# canal oficial com a janela aberta e troca CONVERSA_JANELA_ABERTA pelo id dela.
 - id: whatsapp-oficial-janela-aberta
   workspace: Kinbox
-  url: /inbox/all/3313
+  preparar: conversa-janela-aberta
+  url: /inbox/all/CONVERSA_JANELA_ABERTA
   passos:
     - esperar: '.g_chat_countdown'
     - pausa: 1000
@@ -921,13 +927,14 @@
   paginas:
     - docs/canais/criar-flows-dentro-do-kinbox
 
-# Janela "Enviar mensagem" numa conversa do canal oficial de QA (workspace 1, conversa 3418, janela fechada), com o
+# Janela "Enviar mensagem" numa conversa do canal oficial de QA (workspace 1, conversa 4248, a mesma de
+# whatsapp-oficial-janela-encerrada: o contato nunca respondeu, então a janela não abre), com o
 # template aprovado de teste "status_com_imagem" ({{1}} e {{2}} no corpo). Não clica em Enviar. Número sob tarja; o canal
 # aparece com o nome de teste "Oficial Teste" (fictício), porque o passo da página aponta para o campo Canal.
 - id: whatsapp-templates-enviar-mensagem
   workspace: Kinbox
   altura: 1300
-  url: /inbox/all/3418
+  url: /inbox/all/4248
   passos:
     - esperar: 'button:has-text("Enviar template")'
     - clicar: 'button:has-text("Enviar template")'
@@ -1395,11 +1402,12 @@
 
 # Seção desenvolvedores (Integrações e API › Desenvolvedores)
 #
-# Tokens de API: antes de capturar a lista, crie um token temporário "Integração ERP (exemplo)" (Ler e Alterar) no
-# workspace de documentação e revogue logo depois. O prefixo do token (coluna Token) leva tarja. Nunca capture a janela
+# Tokens de API: o preparo `token-temporario` cria um token "Integração ERP (exemplo)" (Ler e Alterar) no workspace de
+# documentação antes da lista e o revoga logo depois (o valor do token não é guardado). O prefixo do token (coluna Token) leva tarja. Nunca capture a janela
 # "Token criado com sucesso".
 
 - id: dev-api-tokens-lista
+  preparar: token-temporario
   url: /settings/api
   passos:
     - esperar: 'tr:has-text("Integração ERP")'
@@ -1448,10 +1456,12 @@
   paginas:
     - docs/desenvolvedor/mcp
 
-# Tela Autorizar acesso. Precisa de um pedido de autorização pendente (vale 15 min), criado ao conectar um aplicativo
-# de teste pela tela MCP; troque PEDIDO_PENDENTE pelo pedido. A conta de teste vê uma opção interna que o cliente não vê:
+# Tela Autorizar acesso. Precisa de um pedido de autorização pendente (vale 15 min): o preparo `pedido-mcp` registra um
+# aplicativo de teste chamado "Claude" (retorno em example.com), abre o pedido, troca PEDIDO_PENDENTE por ele e nega o
+# pedido depois do print. A conta de teste vê uma opção interna que o cliente não vê:
 # ela fica escondida no print. O "Conectado como" leva tarja.
 - id: dev-mcp-autorizar
+  preparar: pedido-mcp
   url: /oauth/consent?request=PEDIDO_PENDENTE
   passos:
     - esperar: 'h1:has-text("quer acessar")'
@@ -2348,15 +2358,16 @@
   paginas:
     - docs/canais/e-mail/outlook
 
-# Seção copiloto. Antes de capturar, o copiloto do workspace de documentação é configurado só durante a captura
-# (script fora do repo) e volta a ficar vazio depois. Os itens "galeria", "comandos-personalizados" e "intencao"
-# foram capturados com Sugestões automáticas, Comandos de chat (com 2 comandos personalizados fictícios), Análise de
-# sentimento, Aviso ao resolver, Classificação de intenção e Lead score ligadas; o item "funcoes" com 4 delas, sem
-# Sugestões automáticas; o item "menu-conversa" só com Comandos de chat (sem sugestões automáticas, para abrir a
-# conversa sem gastar saldo).
+# Seção copiloto. O copiloto do workspace de documentação é configurado só durante o item (preparos `copiloto-*` de
+# `preparos.ts`) e volta a ficar vazio depois. Os itens "galeria", "comandos-personalizados" e "intencao" usam
+# `copiloto-completo`: Sugestões automáticas, Comandos de chat (com 2 comandos personalizados fictícios), Análise de
+# sentimento, Aviso ao resolver, Classificação de intenção e Lead score ligadas; o item "funcoes" usa
+# `copiloto-quatro-funcoes` (4 delas, sem Sugestões automáticas); o item "menu-conversa" usa `copiloto-comandos` (só
+# Comandos de chat, sem sugestões automáticas, para abrir a conversa sem gastar saldo).
 # Tela do Copiloto com 4 funções adicionadas (Comandos de chat, Análise de sentimento, Classificação de intenção e
 # Lead score; sem Sugestões automáticas) e o bloco Adicionar função, sem o cabeçalho do app.
 - id: copiloto-funcoes
+  preparar: copiloto-quatro-funcoes
   url: /settings/copilot
   altura: 1500
   passos:
@@ -2372,6 +2383,7 @@
 
 # Galeria "Escolha uma função..." aberta pelo bloco Adicionar função.
 - id: copiloto-galeria
+  preparar: copiloto-completo
   url: /settings/copilot
   passos:
     - esperar: 'text=Adicionar função'
@@ -2386,6 +2398,7 @@
 
 # Janela da função Comandos de chat, rolada até Comandos personalizados (2 comandos fictícios) e Adicionar comando.
 - id: copiloto-comandos-personalizados
+  preparar: copiloto-completo
   url: /settings/copilot
   altura: 1800
   passos:
@@ -2404,6 +2417,7 @@
 
 # Janela da função Classificação de intenção com as 5 intenções padrão e Outro.
 - id: copiloto-intencao
+  preparar: copiloto-completo
   url: /settings/copilot
   altura: 1800
   passos:
@@ -2420,6 +2434,7 @@
 # Menu do Copiloto aberto no editor de uma conversa do seed (última mensagem do membro: sem sugestão automática).
 # Recorte só do menu e do botão; os comandos personalizados fictícios aparecem no topo.
 - id: copiloto-menu-conversa
+  preparar: copiloto-comandos
   url: /inbox/all/4392
   passos:
     - esperar: '.chat-actions-box textarea'
@@ -2466,8 +2481,10 @@
     - docs/copiloto/usar-o-copiloto-de-ia
 
 # Lista de bases com uma base fictícia em Aguardando processamento e o menu de três pontos aberto (Editar,
-# Processar, Excluir). A base é criada sem processar só para a captura e apagada depois. Não clica em Processar.
+# Processar, Excluir). O preparo `base-aguardando` cria a base sem processar só para a captura e a apaga depois. Não
+# clica em Processar.
 - id: copiloto-bases-lista
+  preparar: base-aguardando
   url: /settings/knowledge-bases
   passos:
     - esperar: 'text=Políticas de troca e de'

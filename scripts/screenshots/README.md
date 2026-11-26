@@ -7,6 +7,7 @@ Ferramentas para tirar os prints da central de ajuda no staging, sempre no works
 | `seed.ts` | Cria ou completa o workspace de documentação (`Loja Exemplo`) |
 | `manifesto.yml` | Um item por print: `id`, `url`, `passos`, `alvo`, `mascarar`, `arquivo`, `paginas` e, opcionais, `workspace`, `largura` (janela mais estreita para telas que ficam largas demais), `altura` (janela mais alta para modais que passam da tela) e `manterFoco` (não tira o foco antes do print, para listas suspensas abertas, que fecham ao perder o foco) |
 | `capturar.ts` | Abre o staging com Playwright e gera os WebP em `images/ajuda/<secao>/<nome>.webp` |
+| `preparos.ts` | Estados temporários que um item precisa e o seed não deixa prontos (copiloto configurado, token de API, pedido de autorização do MCP, canal aguardando QR Code, conversa com a janela de 24 h aberta): montados pela API antes do item e desfeitos depois |
 | `staging.ts` | Login e chamadas às APIs do staging, usado pelos dois scripts |
 
 ## Antes de tudo
@@ -59,6 +60,10 @@ bun capturar.ts --explorar /settings/channels/new/whatsapp/web --clicar 'text=Op
 ```
 
 Passos aceitos no item: `esperar`, `clicar`, `digitar` ({seletor, texto}), `tecla`, `pausa` (ms), `passar` (passa o mouse sobre o seletor), `arrastar` ({de, para, x, y}: arrasta um elemento até outro; `x`/`y` soltam num ponto dentro de `para`, útil para puxar a seta de um bloco do fluxograma e soltar no vazio) e `trocarTexto` ({seletor, texto}: troca o texto do elemento antes do print, ex.: o código de instalação do widget, que no staging traz endereços do staging, pelo formato de produção com identificação fictícia; num campo de formulário, troca o valor se ele estiver preenchido e, se estiver vazio, o texto de exemplo) e `enviar` ({seletor, arquivo}: envia um arquivo fictício de `scripts/screenshots/arquivos/` num `input[type=file]`, ex.: a planilha da importação de contatos; o item para antes de concluir a importação).
+
+### Estado temporário (`preparar:`)
+
+Um item com `preparar: <nome>` roda o preparo de mesmo nome de `preparos.ts` antes do print e o desfaz depois, com ou sem erro (falha ao desfazer conta como falha do item). Use para o que não pode ficar no workspace entre capturas (mudaria outros prints) ou que expira sozinho. O preparo pode trocar marcadores da `url`: `pedido-mcp` troca `PEDIDO_PENDENTE` pelo pedido criado na hora, e `conversa-janela-aberta` troca `CONVERSA_JANELA_ABERTA` por uma conversa do canal oficial de teste que recebeu mensagem do contato nas últimas 24 h (se nenhuma tiver, o item falha pedindo uma mensagem nova do número de teste).
 
 ### Chat do site num site de teste (`site:`)
 
