@@ -122,9 +122,9 @@ Nos modos **Nova página** e **Popup**, nada disso acontece: a página abre só 
   | --- | --- |
   | `Kinbox.on("conversation", fn)` | Recebe os dados da conversa aberta (também `"no_conversation"` e `"callback"`). |
   | `Kinbox.loading(true)` / `Kinbox.loading(false)` | Mostra ou tira o carregamento sobre o plugin. |
-  | `Kinbox.toast(tipo, texto)` | Mostra um aviso (`success`, `error`, `info` ou `warning`). |
+  | `Kinbox.toast(tipo, texto)` | Mostra um aviso (`success`, `error`, `info`, `warning` ou `loading`). |
   | `Kinbox.dialog("confirm", { title, description, okText, cancelText }, fn)` | Pede confirmação; `fn` recebe `true` ou `false`. |
-  | `Kinbox.setProperty({ key, type, contactId, fields })` | Grava campos personalizados do contato (`type: "contact"`) ou da sessão (`type: "session"`, com `sessionId`); a resposta chega no evento `callback`. |
+  | `Kinbox.setProperty({ key, type, contactId \| sessionId, fields })` | Grava campos personalizados do contato (`type: "contact"`, com `contactId`) ou da sessão (`type: "session"`, com `sessionId`); a resposta chega no evento `callback`. |
   | `Kinbox.assignTo(idDoMembro)` | Atribui a conversa aberta ao membro. |
   | `Kinbox.moveToGroup(idDoGrupo)` | Move a conversa aberta para o grupo. |
   | `Kinbox.addTag(idDaTag)` / `Kinbox.removeTag(idDaTag)` | Põe ou tira a tag da conversa aberta. |
@@ -139,7 +139,7 @@ Em **Configurações** → **Integrações** → **Plugins** (com busca **Pesqui
 ## Problemas comuns
 
 - **Plugins não aparece no menu.** O seu papel não tem a permissão **Integrações**.
-- **O plugin não aparece na conversa.** Confira se a opção **Visível para** inclui você ou um dos seus grupos.
+- **O plugin não aparece na conversa.** Confira se a opção **Visível para** inclui você ou um dos seus [grupos](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos).
 - **O plugin abre em branco.** Teste o endereço em uma aba do navegador: a página precisa estar acessível na internet, usar `https://` e permitir ser aberta dentro de outra página.
 - **`{{chave}}` no Endpoint não é trocado.** A troca de campos personalizados no endereço só funciona nos modos **Nova página** e **Popup**.
 - **O plugin não recebe a conversa ou as funções não fazem nada.** Confira o modo: em **Nova página** e **Popup**, a página abre sem a biblioteca da Kinbox funcionar.

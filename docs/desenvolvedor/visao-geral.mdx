@@ -32,7 +32,7 @@ Veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api).
 
 ### MCP
 
-Ligue o Claude, o ChatGPT, o Codex, o Cursor ou outro assistente de IA de fora ao seu workspace para consultar dados, organizar o atendimento e enviar mensagens. A tela fica em **Configurações** → **Integrações** → **MCP** (exige a permissão **Integrações** ou ser proprietário); a IA age com o papel de quem autorizou no workspace da conexão (nos workspaces clientes de um parceiro, a IA age como proprietário do cliente, dentro das permissões de parceiro) e a conexão vale para o workspace aberto no navegador na hora da autorização.
+Ligue o Claude, o ChatGPT, o Codex, o Cursor ou outro assistente de IA de fora ao seu workspace para consultar dados, organizar o atendimento e enviar mensagens. A tela fica em **Configurações** → **Integrações** → **MCP** (exige a permissão **Integrações** ou ser proprietário). A IA age em nome de quem autorizou, com o papel dessa pessoa.
 
 Veja [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp).
 
@@ -50,7 +50,7 @@ Veja [Integrar seu sistema como canal customizado (API)](/docs/desenvolvedor/cri
 
 ### Bot integrado ao seu sistema
 
-- **Webhook para continuar o bot:** pausa o fluxo no bloco **Esperar um tempo** (**Recebimento de webhook**) até o seu sistema enviar uma chamada para retomar a execução (editar o bot exige a permissão **Bot** ou ser proprietário). Veja [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot).
+- **Webhook para continuar o bot:** pausa o fluxo no bloco **Esperar um tempo** (**Recebimento de webhook**, com **Tempo máximo de espera** desligado) até o seu sistema enviar uma chamada para retomar a execução (editar o bot exige a permissão **Bot** ou ser proprietário). Veja [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot).
 - **Chamar endpoint e Executar código:** permite que o bot consulte ou envie dados para o seu sistema no meio da conversa, pelo bloco **Integração** (exige a permissão **Bot** ou ser proprietário). Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot) e [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo).
 
 ### Cenários

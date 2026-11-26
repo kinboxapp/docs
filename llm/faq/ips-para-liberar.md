@@ -26,7 +26,7 @@ Quais IPs da Kinbox libero no meu firewall?
 
 A Kinbox não publica uma lista de IPs fixos de saída para liberação em firewall.
 
-Para proteger o endereço do seu sistema que recebe chamadas da Kinbox, autentique as requisições usando um cabeçalho próprio (como uma chave ou token no `headers`): o bloco **Chamar endpoint** do bot aceita cabeçalhos personalizados (`headers`) e **Cenários** também enviam requisições HTTP com cabeçalhos. Quando o seu sistema envia mensagens **para a Kinbox** pelo canal customizado e na chamada do webhook para continuar o bot, quem inicia a requisição é o seu próprio sistema; essas chamadas não dependem de liberar IPs da Kinbox.
+Nas chamadas que você configura no bloco **Chamar endpoint** do bot e nos **Cenários**, proteja o endereço do seu sistema exigindo um cabeçalho de autenticação próprio (como uma chave ou token em `headers`): os dois aceitam cabeçalhos personalizados. Quando o seu sistema envia mensagens **para a Kinbox** pelo canal customizado e na chamada do webhook para continuar o bot, quem inicia a requisição é o seu próprio sistema; essas chamadas não dependem de liberar IPs da Kinbox.
 
 Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot) e [Para desenvolvedores: API, plugins, MCP e links](/docs/desenvolvedor/visao-geral).
 

@@ -80,6 +80,16 @@ curl -X POST "https://api.kinbox.com.br/api/v1/channels/<identificador>/messages
   }'
 ```
 
+Para enviar um arquivo, informe o tipo e a URL do arquivo em `content`:
+
+```json
+{
+  "sender": "5511900000001",
+  "type": "image",
+  "content": "https://exemplo.com/foto.png"
+}
+```
+
 Mensagens de erro retornadas pela API quando há algum problema:
 
 - `Identifier é obrigatório` — identificador ausente na URL.
@@ -131,3 +141,9 @@ Quando a conversa é resolvida, a Kinbox envia o evento `call_end`:
 ```
 
 Responda rápido com status HTTP de sucesso (2xx) no seu endereço: se o `POST` falhar, a Kinbox não tenta reenviar a mensagem.
+
+## Problemas comuns
+
+- **A resposta do membro não chega ao seu sistema.** Confira o **Endpoint para o Kinbox enviar mensagem e atualização de status** no canal e se o seu endereço responde com sucesso. Se o envio falhar, a Kinbox não tenta de novo.
+- **A API responde `Identificador inválido`.** O canal foi desativado ou o endereço usado não é o **Endpoint para receber mensagens** desse canal.
+- **A API responde `api_token inválido`.** Envie no cabeçalho `x-api-token` o **Token v0** (em **API Tokens** → **Mostrar tokens legados**), não o token de API `kb_live_`.

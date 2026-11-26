@@ -76,7 +76,7 @@ Pause um fluxo de bot enquanto o seu sistema processa uma ação fora da Kinbox 
 
 O bot continua a execução a partir do bloco ligado logo depois de **Esperar um tempo**. Os campos personalizados da sessão gravados por `customFieldsList` podem ser usados nos blocos seguintes — por exemplo, em um bloco **Decisão** (veja [Blocos do bot](/docs/bot/blocos-do-bot)). Se você gravar um campo do tipo **Json**, veja como ler suas propriedades em [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
 
-Chame o endereço uma única vez para cada vez que o bot chegar ao bloco **Esperar um tempo**: chamar de novo faz o bot repetir o trecho a partir desse bloco.
+Chame o endereço uma única vez para cada vez que o bot chegar ao bloco **Esperar um tempo**: chamar de novo pode repetir esse trecho se a sessão continuar aberta e a espera ainda estiver registrada.
 
 ## Quando a chamada não faz nada ou retorna erro
 

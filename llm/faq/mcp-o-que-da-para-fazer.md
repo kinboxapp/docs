@@ -22,7 +22,7 @@ O que consigo fazer na Kinbox pelo Claude ou ChatGPT?
 
 ## Resposta
 
-Pelo MCP, o Claude ou o ChatGPT podem consultar dados da Kinbox e, conforme as permissões que você marca ao conectar, também alterar registros e enviar mensagens aos clientes — usando o papel de quem conectou, no workspace aberto no navegador na hora de autorizar (nos workspaces clientes de um parceiro, a IA age como proprietário do cliente, dentro das permissões de parceiro).
+Pelo MCP, o Claude ou o ChatGPT podem consultar dados da Kinbox e, conforme as permissões que você marca ao conectar, também alterar registros e enviar mensagens aos clientes. A IA age em nome de quem autorizou, com o papel dessa pessoa. A conexão vale para o workspace aberto no navegador na hora de autorizar. Nos workspaces clientes de um parceiro, a IA age como proprietário do cliente, dentro das permissões de parceiro.
 
 O que fica liberado depende das permissões escolhidas na conexão:
 
