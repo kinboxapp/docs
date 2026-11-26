@@ -8,12 +8,8 @@ fontes:
   - api-v0:server/modules/wabox/WaboxEvents.js
   - web:src/lib/groupMentions.ts
 codigo:
-  - api-v0:server/modules/wabox/WaboxSender.js
   - api-v0:server/modules/wabox/WaboxEvents.js
-  - api-v0:server/modules/wabox/WaboxClient.js
-  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
-  - wabox:apps/docs/resources/limitations.mdx
-  - wabox:apps/engine/internal/wa/whatsmeow/**
+  - web:src/lib/groupMentions.ts
 verificado_em: 2026-11-26
 ---
 
@@ -23,12 +19,12 @@ Por que o contato aparece sem número de telefone?
 
 ## Resposta
 
-No WhatsApp por QR Code, isso acontece em dois casos: em conversas de grupo (em que o contato representa o próprio grupo, sem telefone) ou quando o WhatsApp fornece apenas um identificador de privacidade em vez do número do contato.
+No WhatsApp por QR Code, isso acontece em dois casos:
 
-- **Grupos**: o contato da conversa é o grupo e não tem telefone associado; o nome de quem enviou aparece na própria mensagem. Em menções, quando o WhatsApp oculta o número de um participante, ele aparece como `"Participante (final do identificador)"`.
-- **Identificador de privacidade do WhatsApp**: em alguns casos o WhatsApp troca o número por esse identificador. Nessas conversas sem número, mensagens que você enviar pelo celular não entram na Kinbox.
+- **Conversa de grupo**: o contato da conversa é o próprio grupo, que não tem telefone. Quem escreveu aparece em cada mensagem. Numa menção, o participante cujo número o WhatsApp esconde aparece como "Participante" seguido do final do identificador.
+- **Contato que o WhatsApp mostra sem número**: em alguns casos o WhatsApp troca o número por um identificador de privacidade. Nessas conversas, o que você manda pelo celular não entra na Kinbox.
 
-Veja mais detalhes em [O que funciona e o que não funciona no WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona). Para o caso de contatos sem número no WhatsApp oficial, consulte a página específica do WhatsApp oficial.
+Veja "O que funciona e o que não funciona no WhatsApp por QR Code" (`/docs/canais/whatsapp/whatsapp-app/o-que-funciona`). O caso do WhatsApp oficial é tratado na seção do WhatsApp oficial.
 
 ## Variações
 

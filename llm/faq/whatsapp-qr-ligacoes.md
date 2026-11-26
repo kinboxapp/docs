@@ -1,5 +1,5 @@
 ---
-title: As ligações do WhatsApp QR Code chegam na Kinbox?
+title: As ligações do WhatsApp por QR Code chegam na Kinbox?
 description: Não, no WhatsApp por QR Code as ligações tocam apenas no celular e não entram na Kinbox; ligações pela Kinbox existem apenas no WhatsApp oficial.
 keywords: [ligações whatsapp, chamadas whatsapp, atender ligação na kinbox, chamada de voz, qr code, whatsapp oficial]
 publico: llm
@@ -7,26 +7,25 @@ tipo: faq
 fontes:
   - api-v0:server/modules/wabox/WaboxClient.js
   - api-v0:server/modules/wabox/WaboxEvents.js
-  - web:src/pages/settings/channels/whatsapp/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - wabox:packages/database/src/schema/instances.ts
 codigo:
-  - api-v0:server/modules/wabox/WaboxSender.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
   - api-v0:server/modules/wabox/WaboxClient.js
-  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
-  - wabox:apps/docs/resources/limitations.mdx
-  - wabox:apps/engine/internal/wa/whatsmeow/**
+  - api-v0:server/modules/wabox/WaboxEvents.js
+  - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
+  - wabox:packages/database/src/schema/instances.ts
 verificado_em: 2026-11-26
 ---
 
 ## Pergunta
 
-As ligações do WhatsApp QR Code chegam na Kinbox?
+As ligações do WhatsApp por QR Code chegam na Kinbox?
 
 ## Resposta
 
 Não. No WhatsApp por QR Code não existe fazer nem receber ligações pela Kinbox.
 
-As chamadas tocam apenas no celular do número, não são recusadas automaticamente e nenhum aviso de chamada aparece na conversa. Para atender ou fazer ligações de WhatsApp pela Kinbox, é preciso usar o WhatsApp oficial (recurso em teste que exige plano de ligações). Veja mais em [O que funciona e o que não funciona no WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
+As chamadas tocam apenas no celular do número, não são recusadas automaticamente e nenhum aviso de chamada aparece na conversa. Para atender ou fazer ligações de WhatsApp pela Kinbox, é preciso usar o WhatsApp oficial (recurso em teste que exige plano de ligações). Veja mais em [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
 
 ## Variações
 

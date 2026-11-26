@@ -26,11 +26,11 @@
                     "group": "QR Code (Express e Clássica)",
                     "pages": [
                       "docs/canais/conectar-whatsapp-app",
+                      "docs/canais/whatsapp/whatsapp-app/o-que-funciona",
+                      "docs/canais/whatsapp/whatsapp-app/configuracoes",
+                      "docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo",
                       "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp",
                       "docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas",
-                      "docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo",
-                      "docs/canais/whatsapp/whatsapp-app/configuracoes",
-                      "docs/canais/whatsapp/whatsapp-app/o-que-funciona",
                       "docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte",
                       "docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado"
                     ]

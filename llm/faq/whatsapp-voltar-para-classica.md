@@ -24,9 +24,14 @@ Posso voltar da conexão Express para a Clássica?
 
 ## Resposta
 
-Não existe opção para voltar da conexão **Express** para a **Clássica** pelo botão **Recriar** — o seletor **Tipo de conexão** na janela de recriação só aparece em canais que ainda estão na **Clássica**.
+Não pelo **Recriar**: num canal **Express**, a janela de **Recriar** não mostra o seletor **Tipo de conexão**, que só aparece em canais **Clássica** (**Multidevice**).
 
-Como contorno, excluir o canal e criar novamente com o mesmo número escolhendo **Clássica** em **Opções avançadas** reaproveita o canal antigo (mesmo ID e conversas), mas a Kinbox recomenda manter a conexão **Express**, que é o padrão. Veja mais em [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
+O único contorno é excluir o canal e criar de novo com o mesmo número, escolhendo **Clássica** em **Opções avançadas**. O canal antigo volta com o mesmo ID e as conversas, mas:
+
+- excluir um canal **Express** tira o canal de todos os bots que o usavam: é preciso ligar o canal aos bots de novo;
+- o número fica sem enviar e receber pela Kinbox até você ler o QR Code no canal novo (a **Clássica** pode levar até 10 minutos para mostrar o QR Code).
+
+A Kinbox recomenda a **Express**. Veja "Migrar da conexão Clássica para a Express" (`/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo`).
 
 ## Variações
 

@@ -1,17 +1,17 @@
 [
   {
     "pergunta": "Como ligo meu número de WhatsApp na Kinbox lendo o QR Code?",
-    "esperado": ["docs/canais/conectar-whatsapp-app"],
+    "esperado": ["docs/canais/conectar-whatsapp-app", "llm/canais/conectar-whatsapp-app", "llm/faq/whatsapp-numero-fixo-ou-internacional"],
     "tipo": "guia"
   },
   {
-    "pergunta": "O canal do WhatsApp ficou desconectado e o QR Code sumiu da tela, o que eu faço?",
-    "esperado": ["docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"],
+    "pergunta": "O whatsapp deslogou e o QR Code sumiu da tela do canal, o que eu faço?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte", "llm/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte", "llm/faq/whatsapp-mensagens-nao-chegam"],
     "tipo": "solucao-de-problema"
   },
   {
     "pergunta": "Apareceu um aviso de que meu número possivelmente foi bloqueado pelo WhatsApp",
-    "esperado": ["docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado"],
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado", "llm/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"],
     "tipo": "solucao-de-problema"
   },
   {
@@ -20,14 +20,39 @@
     "tipo": "conceito"
   },
   {
-    "pergunta": "Meu canal ainda está na conexão Clássica, como passo para a Express sem perder as conversas?",
-    "esperado": ["docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo"],
+    "pergunta": "Meu canal ainda está no modo antigo, sem o v5. Como passo para a alternativa nova sem perder as conversas?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo", "llm/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo", "llm/faq/whatsapp-voltar-para-classica"],
     "tipo": "guia"
   },
   {
     "pergunta": "Dá para atender as ligações do WhatsApp do QR Code pela Kinbox?",
     "esperado": ["llm/faq/whatsapp-qr-ligacoes", "docs/canais/whatsapp/whatsapp-app/o-que-funciona"],
     "tipo": "faq"
+  },
+  {
+    "pergunta": "Onde vejo todos os canais que estão conectados e como excluo um canal?",
+    "esperado": ["docs/canais/visao-geral", "llm/canais/visao-geral"],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Para que serve a opção Apenas Receptivo no canal do WhatsApp?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/configuracoes"],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O que eu faço para o WhatsApp não banir meu número?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp", "llm/faq/whatsapp-aquecer-numero"],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Qual velocidade usar no disparo em massa pelo QR Code para não ser bloqueado?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas"],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Consigo mandar botões ou localização pelo WhatsApp do QR Code?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/o-que-funciona", "llm/faq/whatsapp-qr-botoes-e-templates", "llm/canais/whatsapp/whatsapp-app/o-que-funciona"],
+    "tipo": "referencia"
   },
   {
     "pergunta": "Como faço backup das conversas do WhatsApp no Google Drive do meu celular?",

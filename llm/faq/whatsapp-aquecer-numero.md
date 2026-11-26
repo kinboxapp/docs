@@ -24,9 +24,18 @@ Posso começar a usar um número novo logo de cara?
 
 ## Resposta
 
-Não é recomendado. Conectar um número novo ou disparar mensagens logo nos primeiros dias aumenta o risco de o WhatsApp confundir a conta com spam e bloquear o número.
+Não é recomendado. A tela da Kinbox avisa que usar uma conta nova pode levar ao bloqueio do número, porque o WhatsApp pode confundi-la com spam, e recomenda "aquecer" o número por pelo menos uma semana, trocando mensagens todos os dias com contatos conhecidos.
 
-A tela da Kinbox recomenda aquecer o número por pelo menos uma semana, trocando mensagens diariamente com contatos conhecidos, com foto, nome e recado preenchidos, aumentando o volume de envios aos poucos ao longo de semanas. Em alguns workspaces com recursos em teste, existe também a opção **Aquecedor** na tela do canal (com os perfis **Padrão** — 10 a 20 mensagens/dia para contas novas —, **Moderado** — 50 a 60 até 200 a 300/dia —, **Ultra** — 90 a 100 até 200 a 300/dia — e **Personalizado**, com duração padrão de 30 dias nos perfis prontos e selo **Aquecendo** na lista), mas esse recurso pode não aparecer no seu workspace. Veja mais em [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp).
+Na prática: use o número normalmente por alguns dias, em conversas reais, com foto, nome e recado, e aumente o volume aos poucos, ao longo de semanas. Não comece com campanhas.
+
+Em alguns workspaces com recursos em teste, o painel do canal tem o **Aquecedor**, com quatro perfis:
+
+- **Padrão**: para contas novas; começa com 10 a 20 mensagens por dia.
+- **Moderado**: para contas já em uso; começa com 50 a 60 e sobe até 200 a 300 mensagens por dia.
+- **Ultra**: para contas ativas; começa com 90 a 100 e sobe mais rápido até 200 a 300 mensagens por dia.
+- **Personalizado**: usa o mesmo volume do **Moderado** e deixa escolher os **Tipos de envio** (Texto, Imagem, Áudio, Vídeo, Status).
+
+Os perfis prontos duram 30 dias. Durante o aquecimento, a lista de canais mostra o selo **Aquecendo**. O **Aquecedor** pode não aparecer no seu workspace. Veja "Como evitar que o número seja bloqueado" (`/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp`).
 
 ## Variações
 

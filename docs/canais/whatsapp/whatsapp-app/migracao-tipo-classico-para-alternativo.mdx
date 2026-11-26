@@ -19,55 +19,64 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Troque um canal de WhatsApp por QR Code da conexão **Clássica** para a **Express** direto pelo próprio canal, mantendo o mesmo ID, as conversas e as configurações. Se você conhece a conexão pelo nome antigo "Alternativa", ela hoje se chama **Express**.
+Passe um canal de WhatsApp por QR Code da conexão **Clássica** para a **Express** pelo próprio canal. O canal continua o mesmo: mesmo ID, mesmas conversas e mesmas configurações. "Alternativa" era o nome antigo da **Express**.
 
-<Note>Quem pode: membros com a permissão **Gerenciar Canais** (o dono do workspace tem acesso). A ação **Recriar** continua disponível mesmo com a restrição **Somente pode dar manutenção simples em canais**.</Note>
+<Note>Quem pode: membros com a permissão **Gerenciar Canais**. O dono do workspace sempre pode. **Recriar** continua liberado com a restrição **Somente pode dar manutenção simples em canais**.</Note>
 
-<Warning>O número fica sem receber nem enviar mensagens pela Kinbox desde o clique em **Recriar** até você ler o novo QR Code. Faça a migração fora do horário de pico de atendimento.</Warning>
+<Warning>Do clique em **Recriar** até você ler o QR Code novo, o número não recebe nem envia mensagens pela Kinbox. Faça a troca fora do horário de pico.</Warning>
 
-## Como saber se o canal usa a conexão Clássica
+## Antes de começar
 
-- Na tela do canal, o campo **Versão** mostra **Multidevice** (ou **Versão antiga**) e o canal não exibe o selo **v5**.
-- Somente canais na conexão **Clássica** mostram a ação **Sincronizar histórico** e podem exibir **Atualizado** ou **Atualização disponível** ao lado do status.
+Abra o canal em **Configurações** → **Chat** → **Canais** e olhe o campo **Versão**:
+
+- **Multidevice**: o canal é **Clássica** e pode passar para a **Express** com este guia.
+- **Versão antiga**: a janela de **Recriar** não oferece a **Express**. Fale com o suporte.
+- **v5**: o canal já é **Express**.
 
 ## Passo a passo
 
 <Steps>
-  <Step title="Abra o canal na lista">
-    Vá em **Configurações** → **Chat** → **Canais** e clique no canal **Clássica** que você quer migrar. Você também pode clicar no menu de três pontos da linha e escolher **Recriar**.
+  <Step title="Abra o canal">
+    Em **Configurações** → **Chat** → **Canais**, clique no canal **Multidevice**. Você também pode usar o menu de três pontos da linha e escolher **Recriar**.
   </Step>
-  <Step title="Inicie a recriação">
-    Na tela do canal, vá ao bloco **Ações** e clique em **Recriar**.
+  <Step title="Clique em Recriar">
+    No painel do canal, no bloco **Ações**, clique em **Recriar**.
   </Step>
   <Step title="Escolha Express e confirme">
-    Na janela **Por favor, confirme**, deixe **Express** marcado em **Tipo de conexão** (ele já vem selecionado) e clique em **Recriar**.
+    Na janela **Por favor, confirme**, deixe **Express** marcado em **Tipo de conexão** (ele já vem marcado) e clique em **Recriar**.
 
-    O texto da janela menciona até 10 minutos, mas a criação na conexão **Express** é rápida. Se a criação falhar, o canal **Clássica** continua funcionando como estava.
+    A janela fala em até 10 minutos, mas a criação na **Express** é rápida.
 
-    <Frame caption="Janela de confirmação do Recriar em um canal Clássica">
-      <img src="/images/ajuda/whatsapp/recriar-classica-para-express.webp" alt="Janela Por favor, confirme exibindo Tipo de conexão com Express (Recomendada) marcado acima de Clássica (Modo antigo), o texto de confirmação e os botões Cancelar e Recriar" />
+    <Frame caption="Janela de confirmação do Recriar num canal Clássica">
+      <img src="/images/ajuda/whatsapp/recriar-classica-para-express.webp" alt="Janela Por favor, confirme com Tipo de conexão: Express (Recomendada) marcado e Clássica (Modo antigo), o texto de confirmação e os botões Cancelar e Recriar" />
     </Frame>
   </Step>
-  <Step title="Leia o novo QR Code">
-    O canal passa para **Desconectado** e logo pede um novo QR Code. Leia o QR Code no celular ou use **Conectar com número de telefone** (disponível na **Express**), seguindo [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
+  <Step title="Leia o QR Code novo">
+    O canal fica **Desconectado** e logo pede o QR Code. Leia o QR Code no celular ou use **Conectar com número de telefone**, como em [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
   </Step>
 </Steps>
 
-## Como conferir a migração
+Se o seletor **Tipo de conexão** não aparecer na janela, cancele e fale com o suporte.
 
-- O canal passa a exibir o selo **v5** ao lado do nome e o valor **v5** no campo **Versão**.
-- O ID do canal (em **Copiar ID**) permanece igual.
+## Como conferir
 
-## O que muda depois de migrar
+- O canal mostra o selo **v5**, e o campo **Versão** mostra **v5**.
+- O ID do canal (em **Copiar ID**) é o mesmo de antes.
+- Se o status ficar `pending_review` ou `error`, a troca não terminou. Fale com o suporte, com o ID do canal.
 
-- A ação **Sincronizar histórico** deixa de aparecer.
-- A ação **Recriar** passa a apenas reiniciar a sessão do canal.
-- O canal ganha a opção **Conectar com número de telefone** (código de pareamento sem câmera).
-- Depois de conectar, o campo **Número** pode ser atualizado para o número confirmado pelo WhatsApp.
-- Em campanhas, você não pode misturar canais **Express** e **Clássica** na mesma campanha.
+## O que muda depois
 
-Para ver todas as opções do canal depois da troca, consulte [Configurações do WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes).
+- **Sincronizar histórico** deixa de existir.
+- **Recriar** passa a só reiniciar a conexão.
+- O canal ganha **Conectar com número de telefone** (conexão por código, sem câmera).
+- Depois de conectar, o campo **Número** pode mudar para o número confirmado pelo WhatsApp.
+- Não dá para usar canais **Express** e **Clássica** na mesma campanha.
 
 ## Voltar para a Clássica
 
-Não existe caminho para voltar da conexão **Express** para a **Clássica** pelo botão **Recriar** — o seletor **Tipo de conexão** só aparece em canais **Clássica**.
+O **Recriar** de um canal **Express** não oferece a **Clássica**. Veja as opções do canal em [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes).
+
+## Próximos passos
+
+- [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes)
+- [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)

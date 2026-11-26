@@ -43,25 +43,28 @@ Detalhes de referência sobre a conexão **Clássica**, complementares à págin
 ## Recriar na Clássica e migração para Express
 
 - A janela **Por favor, confirme** mostra o texto: `"Tem certeza que deseja recriar esse canal? Esse processo demora até 10 minutos, seu canal ficará indisponível durante esse tempo e você deverá ler o QRCode novamente no final do processo."`
-- Em canais **Clássica**, a janela traz o seletor **Tipo de conexão** com **Express** marcado por padrão e **Clássica** como opção.
-  - **Migrando para Express**: converte o mesmo registro do canal (mesmo ID, conversas e configurações). Se a criação na **Express** falhar, o canal **Clássica** permanece como estava; o ambiente antigo só é desligado depois. Em seguida, o canal fica **Desconectado** até pedir o novo QR Code.
+- Só em canais **Clássica** com **Versão** = **Multidevice** a janela traz o seletor **Tipo de conexão** (**Express** marcado por padrão, **Clássica** como opção). Canal com **Versão antiga** não vê o seletor: não dá para passar para a **Express** pelo **Recriar**; orientar a falar com o suporte.
+  - **Migrando para Express**: converte o mesmo registro do canal (mesmo ID, conversas e configurações). O ambiente antigo só é desligado depois que a **Express** foi criada. Se a criação falhar, o canal pode ficar como estava ou com o status cru `pending_review`: conferir o status e, se aparecer `pending_review` ou `error`, falar com o suporte com o ID do canal. Em seguida, o canal fica **Desconectado** até pedir o novo QR Code.
   - **Recriando como Clássica**: o canal entra em **Criando...** (até 10 minutos) e pede leitura de QR Code novamente.
 - Se o canal ainda estiver em criação ao tentar recriar, exibe: `"Este canal ainda se encontra em processamento. Por favor tente novamente em instantes."`
 - **Recriar** não passa pela checagem de limite de canais do plano.
-- Em canais **Express**, **Recriar** apenas reinicia a sessão do número (equivalente a **Reiniciar canal**), não exibe o seletor **Tipo de conexão** e não atualiza a data de **Última vez recriado**.
+- Em canais **Express**, **Recriar** apenas reinicia a conexão do número (equivalente a **Reiniciar canal**), não exibe o seletor **Tipo de conexão** e não atualiza a data de **Última vez recriado**.
 - "Alternativa" / "Alternativo" era o nome antigo da conexão **Express**.
 
 ## Recomendado recriar canal e `recreate_required`
 
-- Canais **Clássica** criados antes de 09/01/2023 exibem **Recomendado recriar canal** na lista.
+- Canais **Clássica** criados ou recriados pela última vez antes de 09/01/2023 (data de **Última vez recriado**) exibem **Recomendado recriar canal** na lista.
 - Quando o canal exige recriação (`recreate_required`), tentar **Reiniciar canal** exibe `"Necessário recriar o canal para reiniciar"` (na tela do canal) ou `"Necessário recriar o canal e ler o QRcode para reiniciar"` (na lista de canais).
 
 ## Campanhas com Clássica antiga
 
-- Canais **Clássica** criados até 27/01/2024 não podem ser usados em campanhas; a tela exibe `"Necessário recriar esse canal para usar as campanhas."`
+- Canais **Clássica** criados ou recriados pela última vez até 27/01/2024 (data de **Última vez recriado**) não podem ser usados em campanhas; a tela exibe `"Necessário recriar esse canal para usar as campanhas."`
 - Campanhas com vários canais de QR Code exigem que todos sejam do mesmo tipo (todos **Express** ou todos **Clássica**).
 
 ## Voltar da Express para a Clássica
 
-- Não existe opção para voltar para a **Clássica** pelo botão **Recriar** (o seletor não aparece em canais **Express**).
-- Contorno técnico existente: excluir o canal e criar novamente com o mesmo número escolhendo **Clássica** em **Opções avançadas**. O canal excluído é reaproveitado com o mesmo ID e as conversas voltam juntas. Esse contorno não é recomendado, pois a Kinbox recomenda a conexão **Express**.
+- Não existe pelo **Recriar** (o seletor não aparece em canais **Express**).
+- Contorno que o código permite: excluir o canal e criar de novo com o mesmo número escolhendo **Clássica** em **Opções avançadas**. O canal volta com o mesmo ID e as conversas, mas:
+  - excluir um canal **Express** tira o canal de todos os bots; é preciso ligar o canal aos bots de novo;
+  - o número fica sem enviar e receber pela Kinbox até ler o QR Code (até 10 minutos de **Criando...** na **Clássica**).
+- A Kinbox recomenda a **Express**; não sugerir o contorno sem a pessoa pedir.

@@ -8,13 +8,12 @@ fontes:
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
   - web:src/pages/settings/channels/whatsapp/SyncZapHistoryModal.tsx
   - api-v0:server/controllers/WppController.js
+  - api-v0:server/services/WorkspacePlatformService.js
 codigo:
-  - api-v0:server/modules/wabox/WaboxSender.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
-  - api-v0:server/modules/wabox/WaboxClient.js
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
-  - wabox:apps/docs/resources/limitations.mdx
-  - wabox:apps/engine/internal/wa/whatsmeow/**
+  - web:src/pages/settings/channels/whatsapp/SyncZapHistoryModal.tsx
+  - api-v0:server/controllers/WppController.js
+  - api-v0:server/services/WorkspacePlatformService.js
 verificado_em: 2026-11-26
 ---
 
@@ -26,7 +25,7 @@ A Kinbox traz as conversas antigas do meu WhatsApp?
 
 Na conexão **Express** (padrão do WhatsApp por QR Code), não: a Kinbox não importa conversas antigas do celular e passa a receber apenas as mensagens trocadas a partir da conexão.
 
-Somente canais na conexão **Clássica** (conectados) têm a ação **Sincronizar histórico**, que permite importar de 10 a 10.000 conversas mais recentes (padrão 500), com 20 (padrão) ou 40 mensagens por conversa, podendo não trazer todo o histórico. Se um número já teve um canal excluído na Kinbox e você criar outro canal com o mesmo número, as conversas que já estavam na Kinbox voltam junto. Veja mais em [O que funciona e o que não funciona no WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
+Somente canais na conexão **Clássica** (conectados) têm a ação **Sincronizar histórico**, que permite importar de 10 a 10.000 conversas mais recentes (padrão 500), com 20 (padrão) ou 40 mensagens por conversa, podendo não trazer todo o histórico. Se um número já teve um canal excluído na Kinbox e você criar outro canal com o mesmo número, as conversas que já estavam na Kinbox voltam junto. Veja mais em [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
 
 ## Variações
 

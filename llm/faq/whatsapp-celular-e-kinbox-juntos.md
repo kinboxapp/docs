@@ -33,7 +33,7 @@ Pontos importantes desse uso conjunto:
 - **Leitura**: a Kinbox não marca automaticamente as mensagens como lidas no celular.
 - **Manutenção no celular**: abra o WhatsApp no celular de tempos em tempos para manter o aparelho principal ativo.
 
-Veja todos os detalhes em [O que funciona e o que não funciona no WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
+Veja todos os detalhes em [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
 
 ## Variações
 

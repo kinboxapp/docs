@@ -31,19 +31,27 @@ Observação importante: na tela de canais, a dica do status **Desconectado** se
 | --- | --- | --- | --- |
 | **Desconectado** | Volta sozinho para **Conectado** depois de alguns instantes | Queda temporária (internet do celular, celular off-line/desligado por muito tempo ou manutenção) | Aguardar e conferir a internet do celular; se não voltar, clicar em **Reiniciar canal**. |
 | **Desconectado** | Logo depois de criar ou reiniciar (~13 min sem ler), sem QR na tela, ou aviso `"QRCode expirou, necessário reiniciar o canal."` | O QR Code da conexão **Express** expirou | Clicar em **Reiniciar canal** para gerar novo QR e ler no celular. |
-| **Desconectado** | Não volta sozinho e não há alerta de bloqueio | Aparelho removido em **Dispositivos conectados** no celular, sessão expirada ou ação **Desconectar** | Clicar em **Desconectar** (na **Express** já reinicia e pede novo QR) ou **Reiniciar canal**, e ler o QR. |
-| **Desconectado** | Ícone vermelho `"Seu canal foi possivelmente bloqueado pelo WhatsApp"`, alerta na tela do canal ou faixa `"Possivelmente seu número foi bloqueado pelo WhatsApp."` | Número banido pelo WhatsApp | Conferir no celular (revisão é pelo próprio WhatsApp). Para manter o histórico em outro número, conectar novo canal e usar **Migrar conversas**. Ver "Meu número foi bloqueado" (`/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado`). |
+| **Desconectado** | Não volta sozinho e não há alerta de bloqueio | Várias causas possíveis (celular sem internet, aparelho removido no celular, conexão expirada). O status sozinho não diz qual | 1. Pedir para conferir no WhatsApp do celular, em **Dispositivos conectados**, se a Kinbox ainda está lá. 2. Clicar em **Reiniciar canal**. 3. Se a Kinbox saiu da lista do celular ou o canal pedir QR Code, ler o QR Code de novo. **Desconectar** só quando for conectar do zero: na **Express**, ele encerra a conexão e pede QR Code novo. |
+| **Desconectado** | Ícone vermelho `"Seu canal foi possivelmente bloqueado pelo WhatsApp"`, alerta na tela do canal ou faixa `"Possivelmente seu número foi bloqueado pelo WhatsApp."` | Número banido pelo WhatsApp | Conferir no celular (revisão é pelo próprio WhatsApp). Para levar as conversas a outro número, conectar novo canal e usar **Migrar conversas** (conversas de contatos que já existem no canal novo não são migradas; conferir os dois canais antes de excluir o bloqueado). Ver "Meu número foi bloqueado" (`/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado`). |
 | **Necessário ler QR-Code** | QR Code visível na tela do canal | Aguardando pareamento (QR Code ou código de pareamento) | Abrir o canal e ler o QR Code ou usar **Conectar com número de telefone** (**Express**). |
 | `starting` ou `connecting` (cru, em vermelho) | Canal **Express** | Canal carregando ou reconectando | Aguardar alguns instantes. |
 | `pending_review` ou `error` (cru, em vermelho) | Logo após criar canal **Express** | Falha ou pendência na criação do canal | Acionar o suporte com o ID do canal (**Copiar ID**); não há ação na tela. |
 | **Necessário reiniciar canal** | Canal **Clássica** | Sessão precisa reiniciar | Clicar em **Reiniciar canal**. Se avisar `"Necessário recriar o canal para reiniciar"` (tela do canal) ou `"Necessário recriar o canal e ler o QRcode para reiniciar"` (lista), usar **Recriar**. |
 | **Recomendado recriar canal** | Canal **Clássica** (por exemplo, criado antes de 09/01/2023) | Canal desatualizado | Usar **Recriar** (preferencialmente escolhendo **Express**). |
 | **Criando...** ou **Reiniciando...** | — | Operação em andamento (até 10 min criando na **Clássica**; até 5 min reiniciando) | Aguardar a conclusão. |
+| **Criando...** | Canal **Clássica** há mais de 10 minutos | Criação travada | Suporte, com o ID do canal. |
 
-## Envio com o canal fora do ar
+## Envio com o canal fora do ar (Express)
 
-- Quando um canal **Express** está desconectado ou bloqueado, a Kinbox recusa o envio imediatamente: a mensagem fica com erro e não entra em fila para reenvio automático quando o canal voltar.
-- O motivo do erro aparece ao passar o mouse sobre o aviso na mensagem.
+- Quando um canal **Express** está desconectado ou bloqueado, a Kinbox recusa o envio imediatamente: a mensagem fica com erro e não entra em fila para reenvio automático quando o canal voltar. Reenviar depois que o canal conectar.
+- O motivo do erro aparece ao passar o mouse sobre o aviso da mensagem. Os avisos que a Kinbox mostra hoje (o texto traz um nome interno do sistema, que a doc não reproduz):
+
+| O aviso diz, em resumo | Significa |
+| --- | --- |
+| que o canal não está conectado | Canal **Express** desconectado ou bloqueado no momento do envio |
+| que template ainda não é suportado | Tentativa de mandar template pelo QR Code |
+| que o formato de mensagem ainda não é suportado | Tentativa de mandar botões, listas, menu interativo ou localização |
+| que o identificador do destinatário é incompatível | Contato com identificador que o QR Code não aceita (raro) |
 
 ## Códigos de erro exibidos no aviso da mensagem
 

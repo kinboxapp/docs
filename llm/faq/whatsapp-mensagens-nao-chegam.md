@@ -36,7 +36,7 @@ Não há uma única causa: mesmo com o canal **Conectado**, o motivo varia confo
   - **Arquivo maior que 25 MB**: na conexão **Express**, arquivos recebidos acima de 25 MB falham no download e a mensagem inteira (incluindo legenda) não chega na Kinbox, sem aviso na conversa.
   - **Mensagem enviada pelo celular em conversa só com identificador de privacidade**: quando o WhatsApp não informa o número do contato, mensagens enviadas pelo celular nessa conversa são descartadas.
 
-Se o canal também alternar para fora do ar ou mostrar avisos de conexão, veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte) e [O que funciona e o que não funciona no WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
+Se o canal também alternar para fora do ar ou mostrar avisos de conexão, veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte) e [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
 
 ## Variações
 

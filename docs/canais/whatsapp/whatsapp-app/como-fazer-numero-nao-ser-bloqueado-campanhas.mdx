@@ -1,5 +1,5 @@
 ---
-title: Enviar campanhas pelo QR Code sem bloquear o número
+title: Enviar campanhas pelo QR Code com menos risco de bloqueio
 description: Como configurar uma campanha no WhatsApp por QR Code para reduzir o risco de bloqueio do número.
 keywords: [campanha whatsapp, disparo em massa, envio em massa, bloqueio campanha, velocidade de envio, lote, frase aleatória, qr code]
 publico: humano
@@ -19,55 +19,62 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Configure a velocidade, o horário e as variações de texto da sua campanha no WhatsApp por QR Code para reduzir o risco de bloqueio do número.
+As campanhas ficam no menu **Mais** → **Campanhas** → **Nova campanha**. Esta página mostra, na ordem da tela, as opções que reduzem o risco de o WhatsApp bloquear o número de uma campanha pelo QR Code.
 
 ## Antes de disparar
 
-- Envie apenas para contatos que deram permissão (opt-in) e ofereça uma forma simples de sair (por exemplo, "responda SAIR").
-- Use um número dedicado a campanhas, nunca o número principal da empresa. Para volumes maiores, divida o disparo em vários números.
-- Não dispare em um número novo nos primeiros dias; aqueça o número e aumente o volume aos poucos.
-- Personalize o texto e evite links encurtados. Para campanhas frias, prefira o WhatsApp oficial com templates (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
+- Mande só para quem deu permissão para receber suas mensagens. Isso vale no QR Code e no WhatsApp oficial.
+- Use um número só para campanhas, já aquecido. As boas práticas estão em [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp).
 
-## Configurações da campanha que reduzem o risco
+## Canais de disparo
 
-### Envio das mensagens
+Em **Canais de disparo**, escolha um ou mais canais. Os envios são divididos entre os canais escolhidos.
 
-Escolha o ritmo de disparo e as pausas entre lotes. Reduzir demais os intervalos acelera a campanha, mas aumenta a chance de banimento automático; intervalos muito longos podem dar mais tempo para os contatos denunciarem o número como spam.
+- O canal precisa estar **Conectado**. Senão, a Kinbox avisa "O canal de disparo escolhido está desconectado.".
+- Vários canais de QR Code só se todos forem do mesmo tipo de conexão: todos **Express** ou todos **Clássica**.
+- Canais com **Apenas Receptivo** não aparecem.
+- Se a Kinbox avisar "Necessário recriar esse canal para usar as campanhas.", recrie o canal antes. Veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
 
-| Opção | Como envia |
-| --- | --- |
-| **Lento** | Envia 1 mensagem a cada 60 segundos. Lote de 30 mensagens. Pausa de 30 minutos a cada lote enviado. |
-| **Moderado** (padrão) | Envia 1 mensagem a cada 20 segundos. Lote de 100 mensagens. Pausa de 15 minutos a cada lote enviado. |
-| **Rápido** | Envia 1 mensagem a cada 8 segundos. Lote de 200 mensagens. Pausa de 10 minutos a cada lote enviado. |
-| **Personalizado** | Define **Tamanho do lote** (1 a 500), **Tempo entre lotes (seg)** e **Tempo entre mensagens (seg)** (mínimo 1). |
+## Conteúdo
+
+Use **Frase aleatória** (ícone de dado no campo da mensagem) para variar o texto:
+
+1. Clique no ícone. Abre **Adicionar frase aleatória**.
+2. Cadastre as variações em **Frase** e clique em **Adicionar**.
+
+A Kinbox põe as opções no texto no formato `{{opção 1|opção 2}}` e escolhe uma delas em cada envio. Assim, nem todo contato recebe a mesma frase.
+
+No QR Code, a mensagem da campanha também pode ter anexo.
+
+## Controle de tempo
 
 ### Horário comercial
 
-Escolha um horário em **Horário comercial** para que as mensagens sejam enviadas apenas dentro desse horário. Fora desse horário, a campanha é pausada e retomada no próximo horário comercial.
+Escolha um horário em **Horário comercial** para enviar só dentro dele. Fora do horário, a campanha pausa e volta no próximo horário comercial.
 
-### Frase aleatória
+### Envio das mensagens
 
-Clique no ícone de dado (**Frase aleatória**) no campo da mensagem para abrir **Adicionar frase aleatória** e cadastrar variações em **Frase**. A Kinbox insere `{{opção1|opção2|...}}` no texto e escolhe uma das opções ao enviar, ajudando a evitar mensagens idênticas. Você também pode enviar anexos em campanhas pelo QR Code.
+Escolha o ritmo de envio:
 
-## Regras dos canais na campanha
+| Opção | Como envia |
+| --- | --- |
+| **Lento** | 1 mensagem a cada 60 segundos. Lote de 30 mensagens. Pausa de 30 minutos a cada lote. |
+| **Moderado** (padrão) | 1 mensagem a cada 20 segundos. Lote de 100 mensagens. Pausa de 15 minutos a cada lote. |
+| **Rápido** | 1 mensagem a cada 8 segundos. Lote de 200 mensagens. Pausa de 10 minutos a cada lote. |
+| **Personalizado** | Você define **Tamanho do lote** (1 a 500), **Tempo entre lotes (seg)** e **Tempo entre mensagens (seg)**. |
 
-- O canal selecionado precisa estar **Conectado**; se estiver fora do ar, a Kinbox avisa "O canal de disparo escolhido está desconectado.".
-- Você pode usar mais de um canal de QR Code na mesma campanha, desde que todos tenham o mesmo tipo de conexão (todos **Express** ou todos **Clássica**).
-- Canais com **Apenas Receptivo** marcado não aparecem na lista de canais da campanha.
-- Canais na conexão **Clássica** criados até 27/01/2024 precisam ser recriados antes de serem usados em campanhas.
+Tempos curtos terminam a campanha mais rápido, mas aumentam o risco de bloqueio automático. Tempos muito longos dão mais tempo para os contatos denunciarem o número como spam.
 
-## O que a Kinbox faz sozinha no envio
+## O que a Kinbox faz sozinha na Express
 
-Na conexão **Express**, durante uma campanha a Kinbox:
-
-- Exibe "digitando..." por 2 segundos antes de cada mensagem.
-- Confere se o número da lista tem WhatsApp (e se usa ou não o nono dígito) antes de enviar; números sem WhatsApp falham sem envio.
+- Mostra "digitando..." por 2 segundos antes de cada mensagem.
+- Confere se o número da lista tem WhatsApp antes de enviar. Número sem WhatsApp falha, sem envio.
 
 ## Durante a campanha
 
-Acompanhe o andamento dos envios. Se notar muitas mensagens sem chegar, queda nas respostas ou aumento de bloqueios, pause a campanha.
+Se muitas mensagens não forem entregues, se as respostas caírem ou se os bloqueios aumentarem, pause a campanha.
 
-## Veja também
+## Próximos passos
 
 - [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp)
 - [Meu número foi bloqueado](/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado)

@@ -56,7 +56,7 @@ Seletores que costumam funcionar no app:
 
 - Painel lateral (drawer): `alvo` com `.ant-drawer-header` e um elemento do fim do conteúdo; o recorte vai do topo do painel até ele, sem o espaço vazio.
 - Janela de confirmação: `.ant-modal-confirm .ant-modal-content`.
-- Campos de formulário do antd têm `id` igual ao nome do campo (`#description`, `#phone`): bons para `mascarar`.
+- Campos de formulário do antd têm `id` igual ao nome do campo (`#description`, `#phone`): bons para `mascarar`. A máscara é uma tarja sólida desenhada por cima de tudo (inclusive de modais): em print de modal, mascare só o que fica fora do recorte.
 
 A captura faz login no staging web, entra no workspace de documentação e tira cada print com viewport de 1440×900 e `deviceScaleFactor: 2`. A sessão fica em `~/.cache/kinbox-docs-screenshots/`, fora do repositório. Se um item falhar, o print da tela inteira vai para a mesma pasta, como `erro-<id>.png`.
 
@@ -66,5 +66,5 @@ Depois de capturar, abra cada imagem e confira que ela mostra o que o item descr
 
 - Este repositório é público. Só entram prints do workspace de documentação, com dados fictícios.
 - O staging pode mostrar elementos que só existem lá (ex.: um cartão "WhatsApp Cloud API" de teste na escolha do WhatsApp). Confira a tela inteira antes de escolher o recorte.
-- Telas que o workspace de documentação não tem (canal de WhatsApp) podem vir do workspace de testes com `workspace: Kinbox` no item. Nesse caso `mascarar` é obrigatório (a captura recusa o item sem ele): borre nome do canal, número e qualquer nome de pessoa.
+- Telas que o workspace de documentação não tem (canal de WhatsApp) podem vir do workspace de testes com `workspace: Kinbox` no item. Nesse caso `mascarar` é obrigatório (a captura recusa o item sem ele) e cada seletor precisa achar um elemento (senão o item falha): cubra nome do canal, número e qualquer nome de pessoa, e recorte só o bloco que a página usa.
 - O dono do workspace é uma conta real: o nome e a foto dele aparecem no cabeçalho, nas respostas das conversas e na lista de membros. Recorte fora dessas áreas ou ponha o seletor em `mascarar`.
