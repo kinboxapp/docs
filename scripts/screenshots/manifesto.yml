@@ -1153,6 +1153,103 @@
   paginas:
     - docs/campanhas/acompanhar-resultados
 
+# Seção conta (Sua conta e app › Sua conta)
+#
+# A conta de teste é a dona do workspace de documentação: nome, e-mail, celular e foto dela aparecem no perfil e no
+# menu do usuário. Os valores do cartão Informações levam tarja; no menu, nome e foto. O staging tem itens que ainda
+# não estão em produção (Passkeys e preferências do proprietário no perfil, "Menção em conversa" no push, "Abrir no
+# Admin" no menu): os recortes param antes deles. O print da verificação em duas etapas abre só a janela de conectar
+# (não confirma código) e cobre o QR Code e a chave com tarja.
+
+- id: conta-perfil-informacoes
+  url: /settings/account/profile
+  passos:
+    - esperar: 'text=Seu nome e sobrenome'
+    - pausa: 1500
+  alvo:
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Imagem de perfil"))'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail"))'
+  mascarar:
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Imagem de perfil")) figure'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Nome")) > .ant-col:last-child .ant-space-item:first-child'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail")) > .ant-col:last-child .ant-space-item:first-child'
+  arquivo: images/ajuda/conta/perfil-informacoes.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario
+
+- id: conta-perfil-seguranca
+  url: /settings/account/profile
+  altura: 1400
+  passos:
+    - esperar: 'text=Peça um código do app autenticador ao entrar.'
+    - pausa: 1000
+  alvo: 'div.ant-row-space-between:has(> .ant-col > div:text-is("Verificação em duas etapas"))'
+  mascarar: []
+  arquivo: images/ajuda/conta/perfil-seguranca.webp
+  paginas:
+    - docs/conta/verificacao-em-duas-etapas
+
+- id: conta-2fa-conectar
+  url: /settings/account/profile
+  altura: 1400
+  passos:
+    - esperar: 'text=Peça um código do app autenticador ao entrar.'
+    - clicar: 'div.ant-row-space-between:has(> .ant-col > div:text-is("Verificação em duas etapas")) button:has-text("Ativar")'
+    - esperar: '.ant-modal-content >> text=Conecte seu app autenticador'
+    - esperar: '.two-factor-connect-qr svg'
+    - pausa: 800
+  alvo:
+    - '.two-factor-connect div.font-medium:has-text("2. Digite o código")'
+    - '.ant-modal-content .ant-modal-footer'
+  mascarar: []
+  arquivo: images/ajuda/conta/2fa-conectar-app.webp
+  paginas:
+    - docs/conta/verificacao-em-duas-etapas
+
+- id: conta-alterar-senha
+  url: /settings/account/profile
+  altura: 1400
+  passos:
+    - esperar: 'text=Peça um código do app autenticador ao entrar.'
+    - clicar: 'div.ant-row-space-between:has(> .ant-col > div:text-is("Senha")) button'
+    - esperar: '.ant-modal-content >> text=Confirme nova senha'
+    - pausa: 500
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/conta/alterar-senha.webp
+  paginas:
+    - docs/conta/senha-e-sessoes
+
+- id: conta-menu-disponivel
+  url: /settings/account/profile
+  passos:
+    - esperar: '.g_user_avatar'
+    - clicar: '.g_user_avatar'
+    - esperar: '[class*="user_menu_availability"]'
+    - pausa: 600
+  alvo:
+    - '[class*="user_menu_identity"]'
+    - '.ant-dropdown-menu-item:has-text("Perfil")'
+  mascarar:
+    - '[class*="user_menu_name"]'
+    - '[class*="user_menu_identity"] figure'
+  arquivo: images/ajuda/conta/menu-disponivel.webp
+  paginas:
+    - docs/conta/disponibilidade
+
+- id: conta-notificacoes-desktop
+  url: /settings/account/notifications
+  passos:
+    - esperar: 'text=Habilitar notificações de desktop'
+    - pausa: 1000
+  alvo:
+    - 'div.text-xl:text-is("Push")'
+    - 'div.rounded-xl.bg-selected-lighter'
+  mascarar: []
+  arquivo: images/ajuda/conta/notificacoes-desktop.webp
+  paginas:
+    - docs/conta/notificacoes
+
 # Seção instagram-e-facebook (Canais › Instagram e Facebook)
 #
 # A conexão abre a janela de login da Meta e só funciona com conta real: nada é conectado, desconectado nem excluído.

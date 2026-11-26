@@ -594,5 +594,56 @@
     "pergunta": "Dá para publicar posts e agendar stories do Instagram pela Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como coloco autenticação de dois fatores com o Google Authenticator na minha conta?",
+    "esperado": [
+      "docs/conta/verificacao-em-duas-etapas",
+      "llm/conta/verificacao-em-duas-etapas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Apareceu que atingi o limite de sessões ativas no ambiente, como libero?",
+    "esperado": [
+      "docs/conta/senha-e-sessoes",
+      "llm/conta/problemas-de-acesso"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "As notificações da Kinbox não aparecem no meu navegador, por quê?",
+    "esperado": [
+      "llm/faq/conta-nao-recebo-notificacoes",
+      "docs/conta/notificacoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Esqueci a senha do meu e-mail pessoal do Gmail, como recupero?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como mudo minha foto e meu nome que aparecem para a equipe na Kinbox?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como passo de um ambiente para outro sem precisar sair da minha conta?",
+    "esperado": [
+      "docs/conta/trocar-de-workspace"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Fiquei indisponível e parou de tocar o som de mensagem nova, é normal?",
+    "esperado": [
+      "docs/conta/disponibilidade",
+      "llm/faq/conta-nao-recebo-notificacoes"
+    ],
+    "tipo": "guia"
   }
 ]

@@ -1,0 +1,102 @@
+---
+title: Não consigo entrar na Kinbox
+description: O que fazer quando a Kinbox recusa sua senha, pede um código que você não tem, mostra que nenhum ambiente está ativo ou tira você da conta sem aviso.
+keywords: [não consigo entrar, não consigo logar, login, senha incorreta, credenciais, esqueci a senha, código inválido, perdi o celular, verificação expirou, muitas tentativas, nenhum ambiente ativo, deslogado, saiu sozinho, limite de sessões, convite, conta bloqueada]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/auth/Login.tsx
+  - web:src/pages/auth/TwoFactorStep.tsx
+  - web:src/pages/auth/SelectWorkspace.tsx
+  - api-v0:server/controllers/OperatorController.js
+  - api-v0:server/security/loginBruteForceGuard.js
+  - api:src/modules/operators/two-factor/two-factor.service.ts
+codigo:
+  - web:src/pages/auth/**
+  - web:src/components-old/SessionLimitReached.tsx
+  - web:src/components/feedback/BusinessHoursAccessLocked.tsx
+  - web:src/hooks/useSocket.tsx
+  - web:src/hooks/useSocketV2.ts
+  - api-v0:server/controllers/OperatorController.js
+  - api-v0:server/security/loginBruteForceGuard.js
+  - api:src/modules/operators/two-factor/**
+  - api:src/modules/events/events.gateway.ts
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+Você tenta entrar na Kinbox e sua senha é recusada, o login com o Google pede para concluir um cadastro, a tela solicita um código que você não tem, seu workspace (na tela, **ambiente**) não aparece ou a Kinbox tira você da conta sem aviso.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="Senha ou e-mail recusados, ou bloqueio depois de várias tentativas">
+    - **"Verifique suas credenciais e tente novamente":** o e-mail não tem conta ou a senha está errada (a mensagem é igual nos dois casos). Confira o e-mail digitado e, se não lembrar a senha, use **Esqueceu a senha?** em [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes).
+    - **A Kinbox não entra depois de várias tentativas erradas, mesmo com a senha certa:** a Kinbox recusa novas tentativas por um tempo. Aguarde 15 minutos; se continuar (por exemplo, numa rede compartilhada com outras pessoas), espere até 1 hora sem tentar. Se não tiver certeza da senha, use **Esqueceu a senha?**.
+    - **Continuar com o Google mostra "Você ainda não tem uma conta. Complete seu registro.":** não existe conta Kinbox com esse e-mail do Google. Entre com o e-mail da sua conta ou conclua o cadastro se você ainda não tiver conta.
+  </Accordion>
+
+  <Accordion title="O e-mail de redefinição não chega ou o link expirou">
+    - **O e-mail de Esqueci a senha não chegou:** a tela confirma o envio mesmo quando o e-mail digitado não tem conta. Confira o e-mail da sua conta, procure no spam o assunto "[Kinbox] - Reset de senha" e peça novamente.
+    - **"Token inválido ou expirado.":** o link de redefinição vale por **2 horas** e funciona uma única vez. Peça outro link em **Esqueceu a senha?**.
+    - **Nova senha recusada:** a senha precisa ter no mínimo **8 caracteres**, com pelo menos **uma letra** e **um número**. Siga a lista de requisitos que fica verde na tela **Resetar senha** (veja [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes)).
+  </Accordion>
+
+  <Accordion title="Problema com o código da verificação em duas etapas">
+    - **A Kinbox pede um código de 6 dígitos:** a verificação em duas etapas (2FA) está ativa na sua conta. Abra o app autenticador no celular ou clique em **Usar um código de recuperação**.
+    - **"Código inválido. Tente novamente.":** o código foi digitado errado, acabou de ser usado (cada código só vale uma vez) ou o relógio do celular está diferente da hora certa. Espere o próximo código e confira se a hora do celular está configurada no automático.
+    - **"A verificação expirou. Entre novamente.":** a tela do código passou de **5 minutos** ou teve várias tentativas erradas. Entre com e-mail e senha novamente.
+    - **"Muitas tentativas. Aguarde 15 minutos e tente novamente.":** muitos códigos errados seguidos bloqueiam o acesso por **15 minutos**. Aguarde 15 minutos e tente de novo. Veja mais em [Ativar a verificação em duas etapas](/docs/conta/verificacao-em-duas-etapas).
+  </Accordion>
+
+  <Accordion title="Perdi o celular e não tenho os códigos de recuperação">
+    Sem o app autenticador e sem nenhum código de recuperação, você não consegue entrar nem desativar a verificação sozinho, e quem administra o workspace também não consegue redefini-la.
+
+    Peça a um colega do workspace ou ao proprietário para acionar o suporte da Kinbox e pedir a redefinição (veja [Ativar a verificação em duas etapas](/docs/conta/verificacao-em-duas-etapas)).
+  </Accordion>
+
+  <Accordion title="Recebi um convite e não consigo entrar">
+    Você ainda não concluiu o cadastro pelo link do convite. Procure no seu e-mail a mensagem com o assunto "Convite para se juntar ao workspace [nome]" e abra o link para preencher a tela **Complete seu cadastro**.
+
+    O link do convite não expira. Se não achar o e-mail, peça a quem convidou para usar **Reenviar convite**. Quem administra os membros encontra mais causas em [O convite não chegou ou o membro não consegue entrar](/docs/administracao/problemas-com-membros).
+  </Accordion>
+
+  <Accordion title="Nenhum ambiente ativo ou workspace não aparece na lista">
+    - **Tela "Nenhum ambiente ativo":** você foi desativado ou removido de todos os workspaces da sua conta, ou o próprio workspace foi desativado. Peça a quem administra o workspace para reativar seu acesso ou convidar você de novo — não crie um ambiente novo achando que ele recupera o antigo.
+    - **Um workspace não aparece em Escolha um ambiente:** você foi desativado nele, o próprio workspace foi desativado ou o convite foi enviado para outro e-mail. Fale com quem administra aquele workspace.
+    - **"Você não tem permissão para acessar este workspace.":** seu acesso foi desativado enquanto você estava usando o workspace. Fale com quem administra o workspace. Veja mais em [Trocar de workspace ou criar outro](/docs/conta/trocar-de-workspace).
+  </Accordion>
+
+  <Accordion title="Atingi o limite de acessos abertos">
+    Se aparecer **"Você atingiu o limite de sessões ativas no ambiente [nome]."**, você passou do limite de acessos abertos ao mesmo tempo nesse workspace (em geral, 3 por pessoa, mas esse número pode ser diferente no seu workspace).
+
+    No navegador, escolha um acesso antigo na lista e clique em **Desconectar**, ou escolha outro workspace. No app para celular, aparece **Limite de sessões** e o app encerra o acesso: libere um acesso pelo navegador e entre de novo no app. Veja detalhes em [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes).
+  </Accordion>
+
+  <Accordion title="A Kinbox me tirou da conta sem aviso ou avisou que fui desconectado">
+    - **"Você foi deslogado por um gestor...":** alguém com a permissão **Membros** usou **Desconectar** na sua linha. Entre novamente.
+    - **"Você foi deslogado por outra sessão...":** outro aparelho seu desconectou este navegador na tela de limite de acessos. Entre novamente; se não foi você quem desconectou, troque sua senha (veja [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes)) e ative a [verificação em duas etapas](/docs/conta/verificacao-em-duas-etapas).
+    - **Voltou para a tela de entrada sem aviso:** seu papel foi editado ou seu acesso expirou. Entre novamente.
+  </Accordion>
+
+  <Accordion title="Tela Fora do horário de acesso ou desconexão por inatividade">
+    - **Tela "Fora do horário de acesso":** seu papel tem a restrição **Limitar horário de acesso ao ambiente**. Você só entra dentro dos dias e horários exibidos na tela. Aguarde o horário liberado, escolha outro workspace (se participar de mais de um) ou fale com quem administra o workspace.
+    - **Aviso de desconexão por inatividade:** o workspace usa a configuração de inatividade para pausar a atualização em tempo real. Clique no botão **Reconectar** para voltar.
+  </Accordion>
+
+  <Accordion title="Consigo entrar, mas o campo de mensagem sumiu ou há aviso de assinatura">
+    A assinatura ou o teste grátis do workspace venceu. Isso não impede você de entrar na Kinbox, mas bloqueia o envio de mensagens e outras ações após o prazo de carência. Veja como regularizar em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Dentro da Kinbox, fale com o suporte clicando na sua foto, no canto superior direito → **Ajuda e documentação** → **Falar com o suporte no WhatsApp**.
+
+Se você não consegue entrar na Kinbox, peça a um colega do workspace ou ao proprietário para acionar o suporte. Informe:
+
+- O e-mail da sua conta.
+- A mensagem exata que aparece na tela.
+- Se a verificação em duas etapas está ativa.
+- Se o problema acontece no navegador ou no app para celular.
