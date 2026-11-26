@@ -26,6 +26,8 @@ codigo:
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/controllers/RolesController.js
   - api-v0:server/middlewares/MiddlewaresService.js
+  - web:src/pages/reports/useReports.tsx
+  - web:src/pages/reports/ReportOverview/IndividualSummaries.tsx
 verificado_em: 2026-11-26
 ---
 
@@ -124,7 +126,7 @@ O menu lateral **Tarefas** aparece para todos os membros.
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |
 | **Gerenciar relatórios** | Mostra **Relatórios** no menu lateral e libera a opção **Dashboard** na seção **Home**. | — |
-| **Não pode exportar relatórios** | Desativa o botão de exportar nos relatórios. | — |
+| **Não pode exportar relatórios** | Desativa o botão **Exportar** da lista de sessões dos relatórios (**Ver sessões**). | — |
 | **Não pode criar ou excluir Dashboard** | "Membro fica impossibilitado de criar ou excluir dashboards." | — |
 | **Restringir relatórios aos grupos do membro** | Mostra nos relatórios apenas dados relativos aos grupos do membro (exclui **Restringir relatórios ao membro**). | — |
 | **Restringir relatórios ao membro** | Mostra nos relatórios apenas dados relativos ao próprio membro (exclui **Restringir relatórios aos grupos do membro**). | — |
