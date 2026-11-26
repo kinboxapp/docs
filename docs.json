@@ -109,6 +109,14 @@
                   "docs/canais/widget/configuracoes",
                   "docs/canais/widget/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Telegram, SMS e canal customizado",
+                "pages": [
+                  "docs/canais/telegram",
+                  "docs/canais/sms",
+                  "docs/canais/canal-customizado"
+                ]
               }
             ]
           },
@@ -830,18 +838,6 @@
     {
       "source": "/docs/changelog",
       "destination": "/novidades"
-    },
-    {
-      "source": "/docs/canais/canal-customizado",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
-      "source": "/docs/canais/sms",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
-      "source": "/docs/canais/telegram",
-      "destination": "/docs/canais/visao-geral"
     },
     {
       "source": "/docs/canais/whatsapp/whatsapp-business-api/inscricao-para-uma-conta-comercial-oficial",

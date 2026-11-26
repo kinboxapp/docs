@@ -9,7 +9,7 @@ fontes:
   - web:src/components-old/inbox/NewMessageModal/NewMessageTemplate.tsx
   - web:src/pages/inbox/Conversations/index.tsx
   - api-v0:server/controllers/CallController.js
-  - api-v0:server/controllers/SmsController.js
+  - api-v0:server/controllers/**
 codigo:
   - web:src/components-old/inbox/NewMessageModal/**
   - web:src/pages/inbox/Conversations/index.tsx

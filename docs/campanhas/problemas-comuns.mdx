@@ -17,7 +17,7 @@ codigo:
   - api:src/modules/campaigns/**
   - api:src/shared/utils/helper.ts
   - api-v0:server/controllers/CampaignController.js
-  - api-v0:server/controllers/SmsController.js
+  - api-v0:server/controllers/**
 verificado_em: 2026-11-26
 ---
 
@@ -37,7 +37,7 @@ Você não encontra **Campanhas** no menu, não consegue clicar em **Criar**, re
       - *"Necessário recriar esse canal para usar as campanhas."* (só no WhatsApp por QR Code na conexão **Clássica** criada ou recriada até 27/01/2024): recrie o canal — veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
       - *"Você não tem permissão para criar campanhas de WhatsApp."*: seu papel tem a restrição **Proibir criar campanha de WhatsApp** (SMS continua liberado).
       - *"Mensagem de SMS não pode conter mais de 160 caracteres."* ou *"Mensagem não pode conter emojis."* (só no SMS): encurte o texto ou remova emojis.
-      - *"Sem saldo de créditos SMS suficiente."* (só nos canais de SMS da Kinbox): compre **Créditos de SMS** antes de criar, pelo botão **Comprar créditos** na tela do canal de SMS (se aparecer) ou pela **Carteira** (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
+      - *"Sem saldo de créditos SMS suficiente."* (só nos canais de SMS da Kinbox): compre **Créditos de SMS** antes de criar, pelo botão **Comprar créditos** na tela do canal de SMS (se aparecer; veja [Usar SMS: criar o canal e comprar créditos](/docs/canais/sms)) ou pela **Carteira** (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
       - *"Necessário escolher um anexo"* (só no WhatsApp oficial): anexe a mídia exigida pelo cabeçalho do template (veja [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)).
   </Accordion>
 
