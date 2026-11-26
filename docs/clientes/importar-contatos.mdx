@@ -31,13 +31,13 @@ Importe uma planilha CSV ou Excel (`.xlsx`) para cadastrar vários contatos de u
 
 ## Antes de começar: prepare a planilha
 
-- **Permissões:** sem **Gerenciar Organizações**, os campos de organização não aparecem no mapeamento, a planilha modelo sai sem essas colunas e o passo de revisão de organizações não aparece. Se o item **Clientes** não aparecer no menu lateral, peça ao proprietário para dar **Gerenciar Contatos** ao seu papel (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)).
+- **Permissões:** sem **Gerenciar Organizações**, os campos de organização não aparecem no mapeamento, a planilha modelo sai sem essas colunas e o passo de revisão de organizações não aparece.
 - **Formato e tamanho:** arquivo `.csv` (separado por vírgula ou ponto e vírgula, em UTF-8) ou Excel `.xlsx` de até **10 MB**. No Excel, a Kinbox lê apenas a **primeira aba**.
 - **Cabeçalho:** coloque o nome de cada coluna na **primeira linha**. Dê a cada coluna que você vai usar um cabeçalho preenchido e diferente dos outros, e confira a prévia depois de enviar o arquivo. Linhas vazias são ignoradas.
 - **Identificação obrigatória:** cada linha precisa ter ao menos **telefone** ou **e-mail** — são eles que identificam contatos já cadastrados.
 - **Telefones:** números de outro país devem começar com `+` e o código do país. Números do Brasil podem ir com ou sem o `55` (por exemplo, `+55 11 90000-0001` ou `11 90000-0001`).
 - **Números longos no Excel:** formate as colunas de **telefone** e **CNPJ** como **texto** para evitar que o Excel converta os números em notação científica e apague os últimos dígitos (ou envie o arquivo em `.xlsx`).
-- **Campos personalizados:** a importação grava o texto da célula como está, sem conferir formato nem lista de opções. Use exatamente as opções cadastradas nos campos de seleção e o formato de data ou número que a tela usa (veja [Tipos de campo e validações](/docs/clientes/tipos-de-campo)).
+- **Campos personalizados:** a importação grava o texto da célula (sem os espaços do início e do fim), sem conferir formato nem lista de opções. Use exatamente as opções cadastradas nos campos de seleção e o formato de data ou número que a tela usa (veja [Tipos de campo e validações](/docs/clientes/tipos-de-campo)).
 - **Planilha modelo:** no primeiro passo da tela, clique em **Baixar planilha modelo** para baixar um `.csv` com as colunas prontas (**Nome**, **Telefone**, **E-mail**, **Notas**, seus campos personalizados de contato e, com **Gerenciar Organizações**, **Organização**, **CNPJ** e **Cargo**).
 
 ## Passo a passo
@@ -57,7 +57,7 @@ Importe uma planilha CSV ou Excel (`.xlsx`) para cadastrar vários contatos de u
     Associe cada coluna da planilha a um campo da Kinbox na coluna **Campo** (ou mantenha **Não importar**). A Kinbox reconhece sozinha cabeçalhos comuns como "Nome", "Celular", "E-mail", "Empresa", "CNPJ" e "Cargo", além dos nomes e chaves dos seus campos personalizados.
 
     - Mapeie ao menos a coluna de **Telefone** ou de **E-mail** para liberar o botão **Próximo**.
-    - Se aparecer o aviso de números longos em notação científica, volte à planilha, formate a coluna como texto e envie novamente (ou use `.xlsx`), porque essas linhas dão erro.
+    - Se aparecer o aviso de números longos em notação científica, essas linhas vão dar erro. Recupere os números completos na fonte original (formatar a célula como texto depois não traz de volta os dígitos perdidos), deixe a coluna como texto e envie o arquivo de novo.
     - Para vincular organizações (com **Gerenciar Organizações**), mapeie **Nome da organização** ou **CNPJ**. Sem um dos dois, as demais colunas da organização (como **Cargo do contato**, **Site** ou **Segmento**) são ignoradas.
 
     Clique em **Próximo**.
@@ -79,14 +79,16 @@ Importe uma planilha CSV ou Excel (`.xlsx`) para cadastrar vários contatos de u
     Quando só parte das empresas precisa de revisão, aparecem as abas **Para revisar** e **Todas**. Organizações já existentes não têm seus dados alterados pela planilha, e a empresa importada entra como secundária para contatos que já têm uma organização principal. Clique em **Próximo**.
 
     <Frame caption="Passo Revise as organizações mostrando empresas existentes a vincular e novas a criar">
-      <img src="/images/ajuda/contatos/importar-organizacoes.webp" alt="Tela Revise as organizações com resumo de 1 vincular a existentes, 1 criar e 0 não vincular, abas Para revisar e Todas e a empresa fictícia Mercado Exemplo marcada como Não encontrada com a ação Criar Mercado Exemplo" />
+      <img src="/images/ajuda/contatos/importar-organizacoes.webp" alt="Tela Revise as organizações com resumo de 1 vincular a existentes, 1 criar e 0 não vincular, abas Para revisar e Todas e a empresa fictícia Mercearia Exemplo marcada como Não encontrada com a ação Criar Mercearia Exemplo" />
     </Frame>
   </Step>
 
   <Step title="Confirme a importação">
     Confira o **Resumo da importação** (total de linhas, colunas mapeadas, organizações a vincular ou criar e colunas não mapeadas que serão ignoradas).
 
-    Em **Opções de importação**, escolha se deixa marcada **Atualizar contatos existentes com os dados da planilha** (vem marcada por padrão) e clique em **Finalizar**.
+    Em **Opções de importação**, escolha se deixa marcada **Atualizar contatos existentes com os dados da planilha** (vem marcada por padrão).
+
+    Antes de clicar em **Finalizar**, confira se alguma linha tem o telefone de um contato e o e-mail de outro: a importação usa um só contato por linha, então corrija essas linhas na planilha antes. Depois, clique em **Finalizar**.
 
     <Frame caption="Passo Confirme a importação com resumo, opção de atualizar contatos existentes e botão Finalizar">
       <img src="/images/ajuda/contatos/importar-confirmar.webp" alt="Tela Confirme a importação exibindo o Resumo da importação, a opção Atualizar contatos existentes com os dados da planilha marcada e o botão Finalizar" />
@@ -96,9 +98,7 @@ Importe uma planilha CSV ou Excel (`.xlsx`) para cadastrar vários contatos de u
 
 ## Contatos que já existem
 
-A Kinbox reconhece que um contato já existe quando a linha traz o mesmo telefone (com ou sem o `55` e o nono dígito) ou o mesmo e-mail (sem diferenciar maiúsculas). Se o telefone da linha é de um contato e o e-mail é de outro, corrija a linha antes de clicar em **Finalizar**: a importação usa um só contato por linha.
-
-Veja o efeito da opção **Atualizar contatos existentes com os dados da planilha**:
+A Kinbox reconhece que um contato já existe quando a linha traz o mesmo telefone (com ou sem o `55` e o nono dígito) ou o mesmo e-mail (sem diferenciar maiúsculas). Veja o efeito da opção **Atualizar contatos existentes com os dados da planilha**:
 
 | Dado na planilha | Opção marcada (padrão) | Opção desmarcada |
 | --- | --- | --- |
@@ -122,11 +122,13 @@ No topo da tela **Importar contatos**, clique em **Histórico** para ver o **His
 
 Clique em uma importação para abrir **Detalhes da importação**, com a aba **Resumo** e a aba **Erros** (mostra o número aproximado da linha na planilha, o erro e os dados da linha). Os três motivos mais comuns de erro por linha são:
 
-- **Telefone ou CNPJ em notação científica:** formate a coluna como texto na planilha e exporte novamente (ou envie em `.xlsx`).
+- **Telefone ou CNPJ em notação científica:** recupere os dígitos na fonte original dos dados; formatar a célula como texto ou salvar em `.xlsx` não recupera o que o Excel já perdeu.
 - **Telefone inválido** (sem e-mail na linha): confira o código do país, o DDD e se o número tem ao menos 8 dígitos.
 - **Linha sem telefone ou e-mail:** preencha ao menos um dos dois dados.
 
 Para corrigir, ajuste apenas as linhas com erro em um novo arquivo e importe somente elas — se você reenviar a planilha inteira, os contatos que já entraram serão tratados como contatos existentes.
+
+Outros casos em [Problemas com contatos, importação e campos personalizados](/docs/clientes/problemas-comuns).
 
 Para importar contatos da agenda do seu telefone, use o app da Kinbox para celular.
 

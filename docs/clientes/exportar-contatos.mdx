@@ -20,7 +20,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Exporte sua base de contatos ou de organizações em arquivo CSV ou Excel (`.xlsx`), levando a busca e os filtros aplicados na tela.
+Exporte sua base de contatos ou de organizações em arquivo CSV ou Excel (`.xlsx`), levando a busca e os filtros aplicados na tela (no modo **Contatos** e em **Organizações**). No modo **Por conversa**, a busca é interpretada de outro jeito e a ordem da tela não é seguida.
 
 <Note>
   Quem pode: membros que acessam a lista (**Gerenciar Contatos** para contatos; **Gerenciar Organizações** para organizações) e **não** têm a restrição **Não pode exportar contatos**. O proprietário do workspace sempre pode exportar. Se o item **Clientes** não aparecer no menu lateral, peça ao proprietário para dar a permissão correspondente ao seu papel.
@@ -44,14 +44,14 @@ Exporte sua base de contatos ou de organizações em arquivo CSV ou Excel (`.xls
 
 ## Contatos × Por conversa
 
-Use **Contatos** para ter os dados completos de cada contato e **Por conversa** para ter os dados de atendimento. No modo **Por conversa**, use a busca e os filtros de data para recortar as linhas; não use o filtro **Organização**.
+Use **Contatos** para ter os dados completos de cada contato e **Por conversa** para ter os dados de atendimento. No modo **Por conversa**, use a busca e os filtros de data para recortar as linhas; o filtro **Organização** não vale neste modo.
 
 | Modo | Como as linhas vêm | Colunas incluídas |
 | --- | --- | --- |
 | **Contatos** | Uma linha por contato, seguindo a busca, os filtros e a ordem da tela. | **ID**, **Nome**, **Criado em**, **Criado por**, **E-mail**, **Celular**, **Organização** (a principal), campos personalizados de contato (se algum tiver o mesmo nome de uma coluna fixa, ganha " (campo)" no fim), **Facebook**, **Instagram**, **Telegram**, **ID Externo** e **Notas**. As colunas **Membro** e **Tags** também existem, mas vêm vazias neste modo. |
-| **Por conversa** | Uma linha por conversa (o mesmo contato pode aparecer em várias linhas). A ordem não segue a da tela. | **ID** (da conversa), **Nome**, **E-mail**, **Celular**, **Criado em**, **Membro**, **Tags**, campos personalizados de contato, **Grupo**, **Chat Ativo** (Sim/Não), **E-mail do membro**, **Protocolo**, **Resolvida em**, data e hora da primeira e da última mensagem do membro e do contato na sessão, **Sessão criada em** e campos personalizados de sessão. |
+| **Por conversa** | Uma linha por conversa (o mesmo contato pode aparecer em várias linhas). A ordem não segue a da tela. | **ID** (da conversa), **Nome**, **E-mail**, **Celular**, **Criado em**, **Membro**, **Tags**, campos personalizados de contato, **Grupo**, **Chat Ativo** (**Sim** quando a conversa começou por chat ativo; nos outros casos, **Não** ou vazio) e, quando houver, **E-mail do membro**, **Protocolo**, **Resolvida em**, data e hora da primeira e da última mensagem do membro e do contato na sessão, **Sessão criada em** e campos personalizados de sessão. As outras colunas do modo **Contatos** também aparecem no arquivo, mas não são preenchidas neste modo. |
 
-Se o seu papel tiver a restrição **Restringir relatórios aos grupos do membro**, a exportação inclui apenas os contatos visíveis na sua lista.
+Se o seu papel tiver a restrição **Restringir relatórios aos grupos do membro**, os dois modos trazem só o que é dos seus grupos: em **Contatos**, os contatos que aparecem na sua lista; em **Por conversa**, as conversas dos seus grupos.
 
 ## Contatos privados
 
@@ -70,6 +70,8 @@ Colunas incluídas:
 ## Se as opções estiverem apagadas
 
 Se as opções de exportar estiverem apagadas e não houver outra exportação em andamento, seu papel tem a restrição **Não pode exportar contatos**. Peça ao proprietário ou a quem gerencia papéis para remover essa restrição em **Configurações** → **Ambiente** → **Permissões** (o workspace aparece na tela como **ambiente**; veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+
+Outros casos em [Problemas com contatos, importação e campos personalizados](/docs/clientes/problemas-comuns).
 
 ## Outras exportações
 

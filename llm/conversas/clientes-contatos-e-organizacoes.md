@@ -35,7 +35,7 @@ O menu lateral **Clientes** aparece para quem tem **Gerenciar Contatos** ou **Ge
 | **Alterar propriedades do contato** | Contatos | "Pode alterar as informações dos contatos." Sem ela, o botão **Salvar** do formulário fica desativado (inclusive ao criar) e os campos do perfil ficam somente leitura. |
 | **Ver telefone de contatos privados** | Contatos | "Pode ver telefone de contatos marcados como privado." Libera a chave **Contato privado** no formulário e a exibição de telefone e e-mail de contatos privados. |
 | **Não pode exportar contatos** *(restrição)* | Contatos | Desativa as opções de exportar contatos em **Contatos** e oculta o menu **⋯** de exportação em **Organizações**. |
-| **Esconder telefone** *(restrição)* | Contatos | "Esconde o telefone do contato do membro". Oculta o número na lista de contatos, mostra `*******` no perfil e remove o campo **Celular** do formulário. |
+| **Esconder telefone** *(restrição)* | Contatos | "Esconde o telefone do contato do membro". Esconde o telefone nestas telas: lista, perfil (`*******`) e formulário de contatos, contato na negociação, lista de conversas e painel da conversa. |
 | **Proibir alterar celular** *(restrição)* | Contatos | "Membro fica proibido de alterar o celular do contato". Bloqueia a edição do campo **Celular** no formulário e no perfil. |
 | **Campos** | Gerenciamento do Ambiente | "Ver, adicionar, editar e excluir campos customizados." Libera **Configurações** → **Ambiente** → **Campos personalizados**. Sem ela, abrir o endereço exibe "Você não tem permissão para acessar essa página". |
 
@@ -73,7 +73,7 @@ Efeito por local para quem **não** tem **Ver telefone de contatos privados**:
 ## Cadastro
 
 - **Obrigatoriedade:** nenhum campo é obrigatório em **Criar contato**, exceto quando **Vincular ao Kinbox Agenda** está ligado.
-- **Vincular ao Kinbox Agenda** (só com o app Kinbox Agenda ativo): com a chave ligada, **E-mail** ("Campo obrigatório") e o campo de data de nascimento (quando existir no workspace) passam a ser obrigatórios para salvar. Concluir o vínculo também exige **Celular**: sem celular, o contato é salvo, mas não fica vinculado. Se o vínculo falhar depois de salvar, aparece "Contato salvo, mas não foi possível sincronizar com o Kinbox Agenda.".
+- **Vincular ao Kinbox Agenda** (só com o app Kinbox Agenda ativo): com a chave ligada, **E-mail** ("Campo obrigatório") e o campo de data de nascimento (quando existir no workspace) passam a ser obrigatórios para salvar. Criar ou refazer o vínculo também exige **Celular**: sem celular, o contato é salvo, mas o vínculo não é criado. Se o vínculo falhar depois de salvar, aparece "Contato salvo, mas não foi possível sincronizar com o Kinbox Agenda.".
 - **Foto:** até 2 MB (erro "Erro ao fazer upload. O tamanho máximo deve ser 2MB.").
 - **Telefone e e-mail repetidos:** o telefone é salvo com o código do país escolhido na bandeira. Se já existe contato com exatamente o mesmo telefone, retorna "Já existe um contato cadastrado com esse telefone". E-mail repetido não é recusado.
 - **Avisos ao salvar:** "Contato criado." ou "Contato salvo.". Se alguma organização escolhida na criação falhar ao vincular: "Contato criado, mas {{count}} organização(ões) não foram vinculadas.".

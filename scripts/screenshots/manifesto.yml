@@ -1851,6 +1851,7 @@
     - pausa: 800
   alvo: '.g_settings_simple_page >> visible=true'
   mascarar: []
+  altura: 720
   arquivo: images/ajuda/contatos/importar-arquivo.webp
   paginas:
     - docs/clientes/importar-contatos

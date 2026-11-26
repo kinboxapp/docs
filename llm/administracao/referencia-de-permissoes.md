@@ -117,7 +117,7 @@ O menu lateral **Tarefas** aparece para todos os membros.
 | **Mesclar contatos** | "Pode mesclar dois contatos." | — |
 | **Ver telefone de contatos privados** | Em contatos marcados como **Contato privado**, sem essa opção o telefone e o e-mail ficam ocultos. | — |
 | **Alterar propriedades do contato** | Sem ela, os campos do contato no painel da conversa ficam somente leitura. | — |
-| **Esconder telefone** | Esconde o telefone do contato na lista e no formulário de contatos, na lista de conversas, no painel da conversa e na exportação de conversas. | — |
+| **Esconder telefone** | Esconde o telefone nestas telas: lista, perfil e formulário de contatos, contato na negociação, lista de conversas e painel da conversa. | — |
 | **Proibir alterar celular** | Desativa o campo de celular na edição e no painel do contato. | — |
 | **Pode ligar para o contato** | Libera o botão de ligar para o contato. | — |
 
