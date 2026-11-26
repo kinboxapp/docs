@@ -3170,3 +3170,71 @@
   arquivo: images/ajuda/relatorios/permissoes-relatorios.webp
   paginas:
     - docs/relatorios/exportar-e-permissoes
+
+
+# Seção agenda (CRM e vendas › Kinbox Agenda)
+#
+# Dados da etapa `agenda` do seed (`bun seed.ts --so agenda`): serviços, locais e agendamentos fictícios da Loja
+# Exemplo. O staging tem mudanças da Agenda que ainda não estão em produção (cores e detalhes do agendamento,
+# calendário da equipe, campo Observações): por isso só entram telas iguais às de produção, e o formulário de
+# agendamento é recortado antes do bloco de contato.
+
+- id: agenda-servicos
+  url: /settings/agendas/service
+  passos:
+    - esperar: 'text=Consultoria de estilo'
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/agenda/servicos.webp
+  paginas: [docs/agenda/servicos-e-locais]
+
+- id: agenda-servico-formulario
+  url: /settings/agendas/service
+  altura: 1250
+  passos:
+    - esperar: 'text=Consultoria de estilo'
+    - clicar: 'text=Consultoria de estilo'
+    - esperar: '.ant-drawer-content >> text=Duração padrão (minutos)'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-content .ant-form-item:has(label:text-is("Status"))'
+  mascarar: []
+  arquivo: images/ajuda/agenda/servico-formulario.webp
+  paginas: [docs/agenda/servicos-e-locais]
+
+- id: agenda-local-formulario
+  url: /settings/location
+  passos:
+    - esperar: 'text=Provador 1'
+    - clicar: 'text=Provador 1'
+    - esperar: '.ant-drawer-content >> text=Serviços vinculados'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-content .ant-form-item:has(label:text-is("Status"))'
+  mascarar: []
+  arquivo: images/ajuda/agenda/local-formulario.webp
+  paginas: [docs/agenda/servicos-e-locais]
+
+- id: agenda-novo-agendamento
+  url: /crm/tasks/new
+  altura: 1100
+  passos:
+    - clicar: '.ant-dropdown-trigger:has-text("Tarefa")'
+    - clicar: '.ant-dropdown-menu-item:has-text("Agendamento")'
+    - esperar: 'label[for="context_kingenda_serviceId"]'
+    - clicar: '.ant-form-item:has(label[for="context_kingenda_serviceId"]) .ant-select-selector'
+    - clicar: '.ant-select-item-option:has-text("Consultoria de estilo")'
+    - pausa: 1500
+    - clicar: '.ant-form-item:has(> .ant-row > .ant-form-item-label label:has-text("Local")) .ant-select-selector'
+    - clicar: '.ant-select-item-option:has-text("Provador 1")'
+    - pausa: 1500
+  alvo:
+    - 'label[for="context_kingenda_serviceId"]'
+    - '.ant-form-item:has(> .ant-row > .ant-form-item-label label:has-text("Horários"))'
+  mascarar: []
+  arquivo: images/ajuda/agenda/novo-agendamento.webp
+  paginas: [docs/agenda/agendamentos]

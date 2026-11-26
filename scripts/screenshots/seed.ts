@@ -9,7 +9,7 @@
  *
  * Todos os nomes, e-mails (`example.com`) e telefones (`+55 11 90000-00NN`) são fictícios.
  */
-import { API_V0, DOCS_WORKSPACE_NAME, client, findDocsWorkspace, login, sleep, type LoginWorkspace } from './staging'
+import { API_V0, DOCS_WORKSPACE_NAME, WEB_URL, client, findDocsWorkspace, login, sleep, type LoginWorkspace } from './staging'
 
 // ---------------------------------------------------------------------------------------------------------
 // Cenário
@@ -940,6 +940,125 @@ async function garantirDashboard(api: Api) {
   log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length} snapshot(s)`)
 }
 
+/**
+ * Kinbox Agenda (prints da seção `agenda`): o horário `Atendimento com hora marcada`, os produtos e serviços
+ * `Consultoria de estilo` e `Ajuste de roupa` (ativos) e `Personal shopper` (inativo), os locais `Provador 1`,
+ * `Ateliê` e `Provador 2` (indisponível) e agendamentos de contatos fictícios na semana seguinte (um cancelado).
+ * A Agenda é um serviço à parte: o endereço dele é lido do próprio app do staging (nada de host no repositório).
+ * Nenhum lembrete é enviado (a tela de lembretes está desligada) e os contatos usam `example.com` e `+55 11 90000-00NN`.
+ */
+async function enderecoAgenda() {
+  const html = await (await fetch(WEB_URL + '/')).text()
+  const js = html.match(/src="(\/assets\/index-[^"]+\.js)"/)?.[1]
+  if (!js) throw new Error('não achei o bundle do app do staging para ler o endereço da Agenda')
+  const bundle = await (await fetch(WEB_URL + js)).text()
+  const base = bundle.match(/kingendaUrl:"([^"]+)",key:"staging"/)?.[1]
+  if (!base) throw new Error('não achei o endereço da Agenda no app do staging')
+  return base
+}
+
+async function garantirAgenda(api: Api, token: string, contatoIds: Record<string, string>) {
+  const base = await enderecoAgenda()
+  const agenda = async (method: string, path: string, body?: unknown) => {
+    const res = await fetch(base + path, {
+      method,
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'Accept-Language': 'pt-BR' },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    })
+    const text = await res.text()
+    if (!res.ok) throw new Error(`Agenda ${method} ${path} → ${res.status}: ${text.slice(0, 300)}`)
+    return text ? JSON.parse(text) : null
+  }
+  const me = await agenda('GET', '/workspaces/me').catch(() => null)
+  if (!me?.exists) throw new Error('o workspace ainda não existe na Agenda: abra o app uma vez com a conta proprietária')
+
+  // Horário dos serviços (segunda a sexta, 9h às 18h; sábado, 9h às 13h)
+  const NOME_HORARIO = 'Atendimento com hora marcada'
+  let horario = lista(await api.v0('GET', '/business-hours')).find((h) => h.name === NOME_HORARIO)
+  const util = { active: true, hours: [['09:00', '18:00']] }
+  const sabado = { active: true, hours: [['09:00', '13:00']] }
+  if (!horario) {
+    horario = await api.v0('POST', '/business-hours', {
+      name: NOME_HORARIO, mon: util, tue: util, wed: util, thu: util, fri: util, sat: sabado, sun: { active: false, hours: [] },
+    })
+    horario = lista(await api.v0('GET', '/business-hours')).find((h) => h.name === NOME_HORARIO) || horario
+  }
+  // Mesmo formato que a tela manda (espelho do horário: mon..sun com active/hours)
+  const DIAS = [1, 2, 3, 4, 5, 6]
+  const semana = { mon: util, tue: util, wed: util, thu: util, fri: util, sat: sabado, sun: { active: false } }
+
+  // Produtos e serviços
+  const SERVICOS = [
+    { name: 'Consultoria de estilo', description: 'Sessão com uma consultora para montar looks.', price: 200, minutos: 60, ativo: true },
+    { name: 'Ajuste de roupa', description: 'Prova e marcação de ajustes na peça.', price: 50, minutos: 30, ativo: true },
+    { name: 'Personal shopper', description: 'Acompanhamento de compras na loja.', price: 300, minutos: 90, ativo: false },
+  ]
+  const produtos = lista(await api.v3('GET', '/products?limit=100'))
+  const servicos = lista(await agenda('GET', '/services?limit=100'))
+  for (const s of SERVICOS) {
+    let produto = produtos.find((p) => p.name === s.name)
+    if (!produto) produto = await api.v3('POST', '/products', { name: s.name, description: s.description, price: s.price, isActive: s.ativo })
+    const existente = servicos.find((x) => x.name === s.name)
+    if (existente) {
+      if (existente.availableDaysOfWeek?.length !== DIAS.length) await agenda('PATCH', `/services/${existente._id}`, { availableDaysOfWeek: DIAS })
+      continue
+    }
+    servicos.push(
+      await agenda('POST', '/services', {
+        name: s.name, description: s.description, price: String(s.price * 100), defaultDurationMinutes: s.minutos,
+        status: s.ativo ? 'active' : 'inactive', weeklySchedule: semana, availableDaysOfWeek: DIAS, businessHoursExternalId: String(horario.id ?? horario._id),
+        productExternalId: String(produto.id), priceTiers: [], generatePaymentLink: false,
+      }),
+    )
+  }
+  const servico = (nome: string) => servicos.find((x) => x.name === nome)
+
+  // Locais
+  const LOCAIS = [
+    { name: 'Provador 1', location: 'Loja Centro', servicos: ['Consultoria de estilo', 'Ajuste de roupa'], status: 'available' },
+    { name: 'Ateliê', location: 'Bloco A', servicos: ['Ajuste de roupa'], status: 'available' },
+    { name: 'Provador 2', location: 'Loja Centro', servicos: ['Consultoria de estilo'], status: 'unavailable' },
+  ]
+  const locais = lista(await agenda('GET', '/resources?limit=100'))
+  for (const l of LOCAIS) {
+    if (locais.some((x) => x.name === l.name)) continue
+    locais.push(
+      await agenda('POST', '/resources', {
+        name: l.name, location: l.location, services: l.servicos.map((n) => servico(n)?._id).filter(Boolean),
+        status: l.status, sortOrder: 0, capacity: 1, allocationPriority: 5, combinable: true,
+      }),
+    )
+  }
+  const local = (nome: string) => locais.find((x) => x.name === nome)
+
+  // Agendamentos na semana seguinte (horário literal, sem fuso, como a tela grava)
+  const AGENDAMENTOS = [
+    { contato: 'Ana Souza', servico: 'Consultoria de estilo', local: 'Provador 1', dia: 1, inicio: '10:00', fim: '11:00' },
+    { contato: 'Mariana Lima', servico: 'Ajuste de roupa', local: 'Ateliê', dia: 1, inicio: '14:00', fim: '14:30' },
+    { contato: 'Juliana Rocha', servico: 'Consultoria de estilo', local: 'Provador 1', dia: 2, inicio: '15:00', fim: '16:00' },
+    { contato: 'Rafael Martins', servico: 'Ajuste de roupa', local: 'Ateliê', dia: 3, inicio: '11:00', fim: '11:30', cancelar: true },
+  ]
+  const segunda = new Date()
+  segunda.setDate(segunda.getDate() + ((8 - segunda.getDay()) % 7 || 7))
+  const dia = (n: number) => {
+    const d = new Date(segunda)
+    d.setDate(d.getDate() + n - 1)
+    return d.toISOString().slice(0, 10)
+  }
+  const existentes = lista(await agenda('GET', '/bookings?limit=100'))
+  if (existentes.length) return log(`agenda: ${servicos.length} serviços, ${locais.length} locais, ${existentes.length} agendamentos já existiam`)
+  for (const a of AGENDAMENTOS) {
+    const c = CONTATOS.find((x) => x.name === a.contato)!
+    const reserva = await agenda('POST', '/bookings', {
+      startDateTime: `${dia(a.dia)}T${a.inicio}:00.000Z`, endDateTime: `${dia(a.dia)}T${a.fim}:00.000Z`,
+      serviceId: servico(a.servico)?._id, resourceId: local(a.local)?._id,
+      user: { name: c.name, email: c.email, phone: c.phone, birthDate: '1990-05-10T00:00:00.000Z', contactExternalId: String(contatoIds[c.name]) },
+    })
+    if (a.cancelar) await agenda('PATCH', `/bookings/${reserva._id ?? reserva.id}`, { status: 'cancelled' })
+  }
+  log(`agenda: ${servicos.length} serviços, ${locais.length} locais, ${AGENDAMENTOS.length} agendamentos criados`)
+}
+
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
 // (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
 const falhas: Record<string, string> = {}
@@ -958,6 +1077,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['salas', () => garantirSalas(api)],
   ['cenarios', () => garantirCenarios(api, canal)],
   ['dashboard', () => garantirDashboard(api)],
+  ['agenda', () => garantirAgenda(api, workspace.token, contatoIds)],
 ]
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
 // `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.

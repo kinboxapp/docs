@@ -256,6 +256,14 @@
                   "docs/crm/criar-e-gerenciar-produtos",
                   "docs/crm/motivos-de-perda-e-regras"
                 ]
+              },
+              {
+                "group": "Kinbox Agenda",
+                "pages": [
+                  "docs/agenda/kinbox-agenda",
+                  "docs/agenda/servicos-e-locais",
+                  "docs/agenda/agendamentos"
+                ]
               }
             ]
           },
