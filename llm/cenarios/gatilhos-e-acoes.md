@@ -53,13 +53,14 @@ Complemento técnico de [Gatilhos e ações dos cenários](/docs/cenarios/gatilh
 
 - Recebe requisições apenas com método **POST** e corpo em **JSON** (`Content-Type: application/json`), sem token nem cabeçalho de autenticação. Parâmetros de URL chegam em **Query**.
 - Tamanho máximo do corpo: **20 MB**.
-- Com o cenário ligado e publicado, enviar uma amostra enquanto a janela **Webhook de Recebimento** está aberta também inicia uma execução real do cenário.
+- Abrir a janela **Webhook de Recebimento** (botão **Determinar estrutura**) ativa a captura da estrutura por **10 minutos**, contados a partir da abertura; fechar a janela não encerra a captura, e abrir de novo reinicia a contagem.
+- Com o cenário ligado e publicado, uma amostra enviada para capturar a estrutura também inicia uma execução real do cenário.
 
 | Situação | Resposta do endereço |
 | --- | --- |
 | Cenário ligado e publicado | `{"success": true}` na hora; o cenário roda em seguida por conta própria (a resposta não contém o resultado dos passos). |
-| Cenário desligado ou ainda não publicado, com a janela **Webhook de Recebimento** aberta | `success: false` com a mensagem `"Estrutura determinada mas cenário não foi publicado ainda."` |
-| Cenário desligado, excluído, gatilho trocado ou endereço incorreto, com a janela **Webhook de Recebimento** fechada | Erro **404** (`"Inbound Webhook not found"`). |
+| Cenário que não está ligado e publicado (desligado, não publicado, excluído ou com o gatilho trocado), com a captura da estrutura ativa | Amostra reconhecida, sem iniciar execução: `success: false` com a mensagem `"Estrutura determinada mas cenário não foi publicado ainda."` |
+| Mesmos casos sem captura ativa (passados os 10 minutos), ou endereço incorreto | Endereço não encontrado: erro **404** (`"Inbound Webhook not found"`). |
 
 - Variáveis do grupo **Webhook**:
   - **Url**: URL do webhook de recebimento.
@@ -110,7 +111,9 @@ Fora de um **Loop sobre itens da lista**, o mesmo passo pode rodar no máximo **
 - **Executar bot**: roda o bot mesmo que ele esteja desligado; com **Reabrir conversa** marcada, reabre conversas encerradas. Sem bot: `"Bot não informado."`.
 - **Enviar mensagem**: apenas canais de WhatsApp (o campo **Canal** fica travado quando a conversa escolhida já define um único canal). No WhatsApp oficial exige **Template oficial** (**Modelo de mensagem** aprovado); no WhatsApp por QR Code usa **Texto livre**. A mensagem sai como mensagem de bot. Se o envio falhar, a execução falha com a mensagem do erro ou `"Erro ao enviar mensagem."`. Outros erros: `"Template não informado para envio de mensagem."`, `"Mensagem não informada para envio."`, `"Canal não informado para envio de mensagem."`.
 - **Atribuir para membro**:
-  - **Cíclico**: distribui em rodízio entre membros ou grupos participantes que caibam na **Capacidade** configurada (`0` ou vazio = sem limite de conversas abertas).
+  - Campos: **Conversa**, **Tipo** (**Cíclico**, **Cíclico com fila**, **Membro** ou **Último membro que atendeu a conversa**) e **Condições de elegibilidade**. No tipo **Membro**, escolha o membro no campo **Membro**.
+  - Em **Cíclico** e **Cíclico com fila**, o painel **Membros participantes** tem **Selecionar por** (**Membro** ou **Grupo**): com **Membro**, monte a lista de **Membros participantes**; com **Grupo**, a lista de **Grupos participantes**. Cada item da lista tem **Capacidade** (máximo de outras conversas abertas para o membro receber a conversa; `0` ou vazio = ilimitado).
+  - **Cíclico**: distribui em rodízio entre os membros participantes (ou os membros dos grupos participantes) que caibam na **Capacidade**.
   - **Cíclico com fila**: põe a conversa numa fila até alguém ter vaga, verificando a cada **30 segundos**; o cenário segue para o próximo passo logo depois de colocar a conversa na fila (não aguarda a atribuição). Esse tipo não tem a saída **Nenhum membro elegível**.
   - **Último membro que atendeu a conversa**: busca o último membro das sessões anteriores dessa conversa.
   - **Condições de elegibilidade** (**Membro deve estar disponível**, **Membro deve estar online**) aplicam-se a **Membro**, **Cíclico**, **Cíclico com fila** e **Último membro que atendeu a conversa**.
@@ -128,8 +131,12 @@ As ações de negócio agem sobre as negociações dos funis (veja [Funis e nego
 - **Buscar negócio**:
   - **Um negócio**: exige ID, contato ou conversa (`"Necessário informar id ou contato ou conversa para buscar negócio."`).
   - **Todos por funil**: exige **Funil** (`"Necessário informar funil para buscar negócios."`). Retorna até **500** negociações do funil, ordenadas das mais novas para as mais antigas. Campos do resultado: `data` (lista para o **Loop**), `totalCount`, `count` e `truncated`. Lista vazia segue pela saída **Não encontrado**.
-- **Criar negócio**: **Funil** e **Etapa** obrigatórios; precisa de nome ou contato (`"Necessário informar nome do negócio ou contato."`).
-- **Atualizar negócio**: sem negociação referenciada, falha com `"Negócio não encontrado."`.
+- **Criar negócio**:
+  - Campos: **Contato**, **Conversa**, **Funil** e **Etapa** (obrigatórios), **Tags**, **Produtos** (escolhidos do cadastro), **Produtos por variável** (cada item com **Produto (ID, ID externo ou nome)**, **Quantidade** — padrão 1 — e **Preço unitário** — padrão: preço cadastrado no produto), **Nome**, **Status** (**Aberto**, **Ganho** ou **Perdido**), **Responsável**, **Grupo**, **Valor** e os campos personalizados de negociação.
+  - Precisa de nome ou contato (`"Necessário informar nome do negócio ou contato."`).
+- **Atualizar negócio**:
+  - Campos: **Negócio** (referência, obrigatório) e, na lista **Campos**: **Adicionar tags**, **Remover tags**, **Mudar etapa** (com **Funil** e **Etapa**), **Adicionar produto** (do cadastro), **Adicionar produto por variável**, **Nome**, **Status**, **Responsável**, **Grupo**, **Valor** e os campos personalizados de negociação.
+  - Sem negociação referenciada, falha com `"Negócio não encontrado."`.
 
 ### Produto
 
@@ -141,7 +148,7 @@ As ações de produto usam o cadastro de produtos (veja [Cadastrar produtos](/do
 
 ### Controle
 
-- **Requisição HTTP**: aceita apenas URLs `https://`. Tamanho máximo da resposta: **50 MB**. Se o sistema externo responder com erro ou não responder, o cenário **segue** para o próximo passo sem os campos da resposta (a execução não falha por isso). Erros que fazem falhar: `"URL ou método não setado."` e `"Erro ao parsear o corpo da requisição."` (quando o JSON do **Body** fica inválido após a substituição das variáveis).
+- **Requisição HTTP**: use um endereço `https://` (a tela orienta: "Apenas links https são permitidos"). Tamanho máximo da resposta: **50 MB**. Se o sistema externo responder com erro ou não responder, o cenário **segue** para o próximo passo sem os campos da resposta (a execução não falha por isso). Erros que fazem falhar: `"URL ou método não setado."` e `"Erro ao parsear o corpo da requisição."` (quando o JSON do **Body** fica inválido após a substituição das variáveis).
 - **Esperar um tempo**: sem duração ou unidade, falha com `"Duração ou unidade não setada."`. Durante a pausa, a execução fica em **Aguardando** (no detalhe: `"Aguardando delay..."`).
 - **Decisão**: 10 operadores (**é igual a**, **não é igual a**, **é maior que**, **é menor que**, **contém**, **não contém**, **é vazio**, **não é vazio**, **começa com**, **não começa com**). A comparação **diferencia maiúsculas de minúsculas**. Sem campo ou operador: `"Faltando campo ou operador."`.
 - **Loop sobre itens da lista**:
@@ -167,7 +174,7 @@ As ações de produto usam o cadastro de produtos (veja [Cadastrar produtos](/do
 
 | Mensagem | Causa |
 | --- | --- |
-| `Ação não encontrada.` | O cenário foi excluído, ou publicado sem nenhum passo, enquanto a execução estava em andamento. (Apagar só um passo faz a execução terminar no passo anterior, como **Executado**.) |
+| `Ação não encontrada.` | O gatilho (cartão **Quando...**) não está ligado à primeira ação, ou o cenário foi excluído ou publicado sem nenhum passo enquanto a execução estava em andamento. |
 | `Limite de loop excedido.` | Um mesmo passo rodou mais de 6 vezes na mesma execução fora de um **Loop**. |
 | `Limite máximo de iterações excedido.` | A lista do **Loop sobre itens da lista** excedeu o **Limite máximo de repetições** configurado. |
 | `Lista do loop não configurada.` | Campo **Lista** do **Loop sobre itens da lista** está vazio. |

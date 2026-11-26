@@ -758,7 +758,7 @@ async function garantirCenarios(api: Api, canal: string) {
   const existentes = lista(await api.v3('GET', '/workflows'))
   const nomes = ['Lead do site', 'Pedidos do dia para o ERP', 'Bot na nova sessão']
   const ligados = existentes.filter((w) => nomes.includes(w.name) && w.active).map((w) => w.name)
-  if (ligados.length) throw new Error(`cenário de exemplo ligado (${ligados.join(', ')}): desligue na tela e rode de novo; nada foi alterado`)
+  if (ligados.length) throw new Error(`cenário de exemplo ligado (${ligados.join(', ')}): desligue na tela e rode de novo; nenhum cenário foi alterado`)
   const criados: string[] = []
   const atualizados: string[] = []
   for (const cenario of montarCenarios({ canal, botId: String(bot.id), pipelineId: String(funil.id ?? funil._id) })) {

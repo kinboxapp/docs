@@ -51,11 +51,11 @@ Este exemplo monta o cenário **Lead do site**, que recebe dados de um formulár
     Clique em **Determinar estrutura**. A janela **Webhook de Recebimento** abre exibindo o **Endereço Url**, o aviso de que a Kinbox está ouvindo os dados e, em **Estrutura**, o status "Aguardando recebimento de dados...".
   </Step>
   <Step title="Envie uma amostra com a janela aberta">
-    Com a janela **Webhook de Recebimento** aberta, envie uma amostra de dados usando **POST** com corpo em JSON para o **Endereço Url**. A captura funciona mesmo antes de clicar em **Publicar**.
-
     <Warning>
       **Enviar amostra com o cenário ligado executa o fluxo.** Se o cenário estiver ligado e publicado, a amostra também faz o cenário rodar e pode criar ou alterar registros com esses dados. Antes de enviar, confirme que o selo ao lado do interruptor, no topo do editor, mostra **Inativo**. Se mostrar **Live**, desligue o interruptor e clique em **Publicar**.
     </Warning>
+
+    Com o selo em **Inativo** e a janela **Webhook de Recebimento** aberta, envie uma amostra de dados usando **POST** com corpo em JSON para o **Endereço Url**. A captura funciona mesmo antes de clicar em **Publicar** e fica ativa por 10 minutos a partir da abertura da janela; se a amostra não aparecer, feche e abra a janela de novo antes de reenviar.
   </Step>
   <Step title="Confira os campos recebidos e salve">
     A amostra aparece em **Estrutura**, dividida em **Body** (dados do corpo) e/ou **Query** (parâmetros da URL). Clique em **Salvar** — o botão fica desabilitado até chegar uma amostra.
@@ -105,7 +105,7 @@ curl -X POST "SEU_ENDERECO_DO_WEBHOOK" \
 </Note>
 
 - **Quando o endereço muda**: o **Endereço Url** muda se você excluir e recriar o gatilho, importar o cenário ou clonar o cenário (a cópia vem sem gatilho). Nesses casos, atualize o endereço no sistema de origem. Excluir o cenário desativa o endereço definitivamente.
-- **Quando o formato dos dados muda**: se o sistema externo passar a enviar novos campos, desligue o cenário (o selo deve mostrar **Inativo**), abra **Determinar estrutura** novamente, envie uma nova amostra, clique em **Salvar**, ligue o interruptor de novo e clique em **Publicar**. Sem determinar a estrutura, os campos não aparecem para escolha nas variáveis.
+- **Quando o formato dos dados muda**: se o sistema externo passar a enviar novos campos, desligue o cenário (no editor, desligar o interruptor só vale depois de clicar em **Publicar**; o selo deve mostrar **Inativo**), abra **Determinar estrutura** novamente, envie uma nova amostra, clique em **Salvar**, ligue o interruptor de novo e clique em **Publicar**. Sem determinar a estrutura, os campos não aparecem para escolha nas variáveis.
 - **Evite duplicar contatos**: prefira usar **Buscar contato** antes de **Criar contato**. O passo **Criar contato** já reaproveita um contato com o mesmo telefone, mas buscar antes permite atualizar os dados do contato existente.
 
 ## Veja também

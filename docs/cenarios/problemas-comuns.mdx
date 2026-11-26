@@ -52,7 +52,7 @@ Abra o cenário pelo computador e clique no botão **Analítico** no topo do edi
 
   <Accordion title="Concluiu, mas não fez tudo">
     - **Parou em uma saída sem caminho ligado**: nos passos **Buscar contato**, **Buscar negócio**, **Buscar produto**, **Decisão** (saída **Não**) e **Atribuir para membro** (saída **Nenhum membro elegível**), se a saída extra não estiver ligada a outro passo, a execução termina ali como concluída (**Executado**), sem erro. Abra a execução no **Analítico** para conferir a última descrição (como "Contato não encontrado.") e ligue a saída extra se quiser tratar esse caso.
-    - **Requisição HTTP sem os dados da resposta**: se o sistema externo responder com erro ou não responder, o cenário segue para o próximo passo sem os campos da resposta. Clique no passo no **Analítico** para ver o que voltou em **Saída**. Use um endereço `https://` (a tela orienta: "Apenas links https são permitidos").
+    - **Requisição HTTP sem os dados da resposta**: se o sistema externo responder com erro ou não responder, o cenário segue para o próximo passo sem os campos da resposta. Clique no passo no **Analítico** para ver o que voltou em **Saída**.
     - **Decisão seguiu pelo caminho inesperado**: a comparação da **Decisão** diferencia maiúsculas de minúsculas.
     - **Contato duplicado**: use **Buscar contato** antes de **Criar contato** e ligue a saída **Não encontrado** ao **Criar contato**. O passo **Criar contato** já reaproveita um contato com o mesmo telefone, mas buscar antes permite atualizar o contato existente.
   </Accordion>
@@ -67,7 +67,7 @@ Abra o cenário pelo computador e clique no botão **Analítico** no topo do edi
     | **Erro ao enviar mensagem.** (ou outra mensagem do envio) | **Enviar mensagem** não conseguiu enviar. Esse passo não tem saída para falha: confira o canal (só WhatsApp) e, no WhatsApp oficial, use um [**Modelo de mensagem**](/docs/canais/whatsapp/whatsapp-templates/enviar-template) aprovado. |
     | **Limite máximo de iterações excedido.** | A lista do **Loop sobre itens da lista** tem mais itens que o **Limite máximo de repetições** (padrão 300, máximo 1000). Aumente esse limite — por exemplo, **Buscar negócio** com **Todos por funil** retorna até 500 itens. |
     | **Limite de loop excedido.** | Um caminho voltou para um passo anterior e repetiu o mesmo passo vezes demais na mesma execução. Use o passo **Loop sobre itens da lista** em vez de ligar caminhos em círculo. |
-    | **Ação não encontrada.** | O cenário foi excluído, ou publicado sem nenhum passo, enquanto a execução estava em andamento. Se você só apagou um passo, a execução termina no passo anterior como **Executado**, sem esse erro. |
+    | **Ação não encontrada.** | Abra o cenário e confira se o cartão **Quando...** está ligado à primeira ação; se não estiver, ligue e clique em **Publicar**. O erro também aparece quando o cenário foi excluído, ou publicado sem nenhum passo, enquanto a execução estava em andamento. |
     | **Erro ao parsear o corpo da requisição.** | O **Body** da **Requisição HTTP** deixou de ser um JSON válido depois da troca das variáveis (por exemplo, aspas faltando em volta de uma variável de texto). Confira na **Pré-visualização (Exemplo)**. |
     | **Execução travou por mais de uma hora.** | A execução ficou parada sem avançar por mais de uma hora e pode ser marcada como **Falhou** na verificação diária. |
     | **Necessário informar…** / **…não informado.** | Um campo obrigatório do passo ficou vazio ou a variável usada veio vazia. Veja o que chegou em **Entrada** do passo no **Analítico**. |
@@ -81,7 +81,7 @@ Abra o cenário pelo computador e clique no botão **Analítico** no topo do edi
   <Accordion title="Desliguei e continuou rodando">
     Desligar o cenário impede **novas** execuções, mas as que já começaram (inclusive as que estão em **Esperar um tempo**) continuam rodando e passam a usar os passos da versão publicada mais recente.
 
-    Não dá para interromper uma execução em andamento. Se precisar impedir que um passo rode nas execuções já iniciadas, desligue o cenário, remova ou altere o passo e clique em **Publicar**: a execução que ainda não chegou ao passo removido termina no passo anterior, como **Executado**.
+    Não dá para interromper uma execução em andamento, e alterar ou remover um passo não garante que ele deixe de rodar nas execuções já iniciadas. Acompanhe no **Analítico** as execuções em **Executando**, **Aguardando** ou **Pendente** e, se um passo já tiver feito algo indesejado, corrija o registro diretamente (contato, conversa, negociação ou produto).
   </Accordion>
 </AccordionGroup>
 
