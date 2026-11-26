@@ -1,0 +1,131 @@
+---
+title: "Minha automação não disparou"
+description: Por que uma automação da Kinbox não roda, roda só em parte ou atrasa, e como resolver em cada caso.
+keywords: [automação não funciona, automação não disparou, automação não roda, automação atrasada, automação não enviou mensagem, automação parou, gatilho não funcionou, automação em conversa da api]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/automations/EditAutomations.tsx
+  - api-v0:server/controllers/AutomationEventsController.js
+  - api-v0:server/controllers/CallController.js
+  - api-v0:server/modules/scheduler/schedulerManager.js
+codigo:
+  - web:src/pages/settings/automations/**
+  - web:src/components-old/forms/ActionsInput/**
+  - web:src/components-old/forms/ConditionsInput/**
+  - web:src/pages/settings/index.tsx
+  - api-v0:server/controllers/AutomationController.js
+  - api-v0:server/controllers/AutomationEventsController.js
+  - api-v0:server/modules/EventsEnum.js
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+A automação está criada, mas não fez nada, executou só parte das ações, rodou na hora errada ou a tela **Automações** não aparece em **Configurações**.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="A automação está desligada">
+    Automações desligadas não rodam — inclusive se uma automação de tempo for desligada antes da hora de disparar. Embora toda automação nova nasça com **Ativo** ligado, alguém pode ter desligado antes de salvar ou pela lista.
+
+    Vá em **Configurações** → **Automação** → **Automações** (exige a permissão **Automações** ou ser o proprietário), use o filtro **Inativos** para conferir e ligue o interruptor da linha.
+  </Accordion>
+
+  <Accordion title="As condições não bateram">
+    Revise os dois blocos em **Condições**: no primeiro precisam bater **todas** as linhas; no segundo, **qualquer** uma delas; quando os dois estão preenchidos, precisam bater todas do primeiro **e** pelo menos uma do segundo.
+
+    Nos gatilhos de tempo, as condições são conferidas na hora de disparar — não quando a contagem começa. Para testar se o problema está no filtro, desligue **Condições** (**Sem condições**), salve e teste em uma conversa.
+  </Accordion>
+
+  <Accordion title="Existe outra automação ligada com o mesmo gatilho de tempo">
+    Só **uma** automação ligada vale por gatilho de tempo. Se você tiver duas ou mais automações ligadas usando o mesmo gatilho de tempo (por exemplo, duas com **Tempo sem nova mensagem**), as demais nunca disparam, mesmo com condições diferentes.
+
+    Deixe apenas uma automação ligada por gatilho de tempo e junte nela todas as ações desejadas.
+  </Accordion>
+
+  <Accordion title="A sessão foi aberta pela API ou por uma integração">
+    Nos gatilhos **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**, marque a caixa **Habilitar para sessões geradas por API ou Integração** para que a automação também rode nessas sessões. Essa caixa só aparece nesses dois gatilhos; se não aparecer, confira o gatilho escolhido.
+
+    Já os gatilhos **Nova conversa ou sessão** e **Nova conversa ou sessão iniciada pelo membro** não disparam em sessões abertas pela API ou por integrações.
+  </Accordion>
+
+  <Accordion title="O gatilho escolhido não corresponde ao caso">
+    Confira se o gatilho cobre exatamente o evento esperado:
+
+    - **Nova conversa ou sessão** só dispara quando o contato abre a sessão; quando um membro envia a primeira mensagem, o gatilho é **Nova conversa ou sessão iniciada pelo membro**.
+    - **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo pendente** não contam em sessões iniciadas pelo membro e param assim que um membro responde. Para agir quando o contato para de responder depois da nossa mensagem, use **Tempo sem nova mensagem**.
+    - **Tempo sem nova mensagem** dispara apenas uma vez por sessão.
+    - **Ao resolver uma conversa** não roda quando a sessão tinha sido reaberta: para esse caso, o gatilho é **Ao resolver uma conversa reaberta**.
+    - **Tempo para expirar a Janela de 24h** funciona apenas em canais de WhatsApp oficial (veja [Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
+
+    Veja todos os gatilhos em [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes).
+  </Accordion>
+
+  <Accordion title="O evento aconteceu antes de salvar ou ligar a automação">
+    As automações não são retroativas: elas só reagem a eventos que acontecem depois de salvas e ligadas.
+
+    Para testar, abra uma sessão nova na conversa depois de salvar e ligar a automação (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)).
+  </Accordion>
+
+  <Accordion title="A conversa foi resolvida antes do tempo">
+    Resolver a conversa para as contagens de tempo daquela conversa. Se um membro ou outra automação resolveu a sessão antes de completar os minutos configurados, o gatilho de tempo não dispara.
+  </Accordion>
+
+  <Accordion title="A automação disparou alguns minutos depois">
+    Nos gatilhos de tempo, a própria tela avisa "Pode haver atraso de até 3 minutos.". Além disso, mensagens criadas por **Agendar mensagem** e **Agendar mensagem template** saem em ciclos de até 3 minutos.
+
+    Conte sempre com até 3 minutos a mais ao configurar prazos ou testar.
+  </Accordion>
+
+  <Accordion title="A mensagem, o bot agendado ou a avaliação não saiu">
+    Confira as regras de cada ação:
+
+    - **Enviar mensagem:** envia apenas texto e o campo **Canal** não lista o WhatsApp oficial (deixe vazio para enviar na própria conversa). No WhatsApp oficial fora da janela de 24 horas, texto livre não é entregue — use **Agendar mensagem template** em uma conversa do canal oficial ([Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)).
+    - **Agendar mensagem template:** o template sai pelo canal da conversa em que a automação rodou, não pelo **Canal** escolhido, e templates com mídia no cabeçalho não funcionam nesta ação.
+    - **Agendar execução de bot:** funciona apenas em conversas de WhatsApp.
+    - **Avaliar atendimento:** veja em quais casos a pesquisa de satisfação não é enviada em [Pedir avaliação no fim do atendimento](/docs/atendimento/pesquisa-de-satisfacao).
+  </Accordion>
+
+  <Accordion title="Só parte das ações rodou">
+    Há duas causas principais:
+
+    - **Uma ação falhou:** quando uma ação falha, as seguintes continuam rodando. Abra a automação e confira se algum item escolhido na ação que falhou (bot, regra de atribuição, grupo ou canal) foi apagado ou alterado.
+    - **Mais de 10 ações no mesmo evento:** quando uma ou mais automações disparam no mesmo evento (gatilhos que não são de tempo), só as **10 primeiras** ações somadas rodam. Reduza o total de ações ou divida em eventos diferentes.
+  </Accordion>
+
+  <Accordion title="A automação parou de rodar numa conversa depois de várias vezes">
+    Existe um limite de repetição na mesma sessão para evitar repetições sem fim: quando ele é atingido, a automação para de rodar naquela sessão e a conversa mostra uma mensagem começando por `"Limite de execução de automação atingido"`.
+
+    Revise se há automações que disparam umas às outras em cadeia — por exemplo, uma automação com a ação **Adicionar tag** disparando outra com o gatilho **Ao adicionar tag**.
+  </Accordion>
+
+  <Accordion title="A ação de integração não faz nada">
+    O efeito da ação **Integração** depende do app conectado ao workspace. Se você usa a integração com o HubSpot, confira quais ações funcionam e os requisitos de vínculo em [Integrar com o HubSpot](/docs/integracoes/hubspot).
+  </Accordion>
+
+  <Accordion title="Tempo sem conversa ao criar contato não iniciou a conversa">
+    Verifique dois pontos:
+
+    - Se o contato já tinha qualquer conversa em algum canal, a automação pula esse contato.
+    - Só **uma** automação ligada vale para **Tempo sem conversa ao criar contato**: se houver outra automação ligada com esse gatilho, esta não roda.
+  </Accordion>
+
+  <Accordion title="Não vejo Automações em Configurações">
+    Ver, criar, editar e excluir automações exige a permissão **Automações** (na seção **Gerenciamento do Ambiente** do papel, chamado na tela de **Permissão**) ou ser o proprietário do workspace (na tela, **ambiente**).
+
+    Peça ao proprietário ou a quem administra os papéis para liberar a permissão **Automações** (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes) e [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)).
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte da Kinbox informando:
+
+- O nome da automação.
+- O gatilho escolhido.
+- A conversa (link ou protocolo).
+- O horário em que o evento aconteceu.
+
+Veja também [Automações: visão geral](/docs/automacao/visao-geral), [Criar uma automação](/docs/automacao/configurando-automacoes) e [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes).

@@ -63,7 +63,7 @@ Detalhes de referência de [Cadências: tarefas automáticas por etapa](/docs/cr
 
 ## Gatilhos, saída, retorno e alterações
 
-- **O que dispara a cadência:** toda criação de negociação (na etapa inicial) e toda mudança de etapa — pela tela, por [Importar negociações](/docs/crm/importar-negociacoes), por **Mover todos os negócios** em [Ações em lote no funil](/docs/crm/acoes-em-lote) e por automações. Reenviar a mesma etapa não dispara.
+- **O que dispara a cadência:** toda criação de negociação (na etapa inicial) e toda mudança de etapa — pela tela, por [Importar negociações](/docs/crm/importar-negociacoes), por **Mover todos os negócios** em [Ações em lote no funil](/docs/crm/acoes-em-lote) e por [automações](/docs/automacao/gatilhos-e-acoes) (ação **Mudar etapa da negociação**). Reenviar a mesma etapa não dispara.
 - **Conferências antes de criar tarefas agendadas:** a Kinbox verifica se a negociação ainda está na etapa, se o modelo ainda existe naquela etapa, se a negociação está **Aberta** (ou se a regra de criar após encerramento está ligada) e se a negociação ainda não recebeu tarefa daquele modelo.
 - **Saída da etapa:** as tarefas pendentes criadas pelos modelos da etapa que a negociação deixou são **concluídas automaticamente** (não excluídas nem canceladas), e tarefas agendadas que ainda não nasceram não são mais criadas.
 - **Voltar para a etapa:** a negociação não recebe novamente tarefas de **Ao entrar** ou **Dias depois** de modelos que ela já recebeu naquela etapa (mesmo que já tenham sido concluídas). Se sair e voltar antes do dia N de uma tarefa agendada, a tarefa mantém a data original da primeira entrada. Apenas modelos **Todo mês** continuam criando uma tarefa por mês enquanto a negociação permanecer na etapa.

@@ -109,7 +109,7 @@ Vários números separados por vírgula na janela **Enviar mensagem**: o limite 
 ## Campanhas, automações, bot e canal Apenas Receptivo
 
 - **Campanhas**: usa um único canal oficial por campanha. Quando a Meta recusa o disparo de um destinatário, a coluna **Detalhes** exibe o motivo retornado pela Meta ou `"Falha interna ao enviar a mensagem"`. A conversa só é criada quando o contato responde, já trazendo o balão do template disparado.
-- **Automações**: nas ações **Agendar mensagem template** e **Iniciar conversa**, use templates sem mídia no cabeçalho. Validações de configuração: `"Informe o template"` e `"Informe a mensagem (ou o template no canal oficial)"`.
+- **Automações**: nas ações **Agendar mensagem template** e **Iniciar conversa**, use templates sem mídia no cabeçalho (veja [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes)). Validações de configuração: `"Informe o template"` e `"Informe a mensagem (ou o template no canal oficial)"`.
 - **Bot (bloco Notificar)**: com carrossel exige canal e template (`"Template e canal são obrigatórios para notificação de carrossel"`). O envio registra a nota `"Template [nome] enviado"` na conversa.
 - **Canal Apenas Receptivo**: não aparece na lista de canais de **Enviar mensagem** e o envio é recusado com `"Esse canal não tem permissão para chat ativo"`. Em uma conversa desse canal com a janela de 24 horas fechada, não é possível enviar template.
 - **Onde não existe seletor de template**: ações de automação **Enviar mensagem** e **Agendar mensagem** (texto) e ação de criar conversa nos Cenários.

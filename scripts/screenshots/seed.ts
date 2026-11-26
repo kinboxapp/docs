@@ -601,6 +601,56 @@ async function garantirOrganizacao(api: Api) {
   log('organização: grupos Vendas e Suporte, horário "Atendimento da loja", regra "Distribuir entre Vendas" (inativa), automação "Pedir avaliação" (desligada)')
 }
 
+/**
+ * Automações de exemplo (prints da seção `automacao`), todas desligadas: nenhuma envia mensagem nem muda conversa.
+ * Usa o grupo Vendas, a tag Orçamento e o horário "Atendimento da loja" da etapa "organização do atendimento".
+ */
+async function garantirAutomacoes(api: Api) {
+  const vendas = lista(await api.v0('GET', '/group')).find((g) => g.name === 'Vendas')
+  const orcamento = lista(await api.v3('GET', '/tags')).find((t) => t.name === 'Orçamento')
+  const horario = lista(await api.v0('GET', '/business-hours')).find((h) => h.name === 'Atendimento da loja')
+  if (!vendas || !orcamento || !horario) throw new Error('rode antes a etapa "organização do atendimento" (grupo Vendas, tag Orçamento, horário)')
+  const exemplos = [
+    {
+      name: 'Encerrar conversas paradas',
+      trigger: 'trigger:conversation:time-without-reply',
+      minutes: 1440,
+      conditions_active: false,
+      actions: [
+        { type: 'action:conversation:send-message', value: 'Como não tivemos retorno, vamos encerrar este atendimento. Se precisar, é só mandar uma nova mensagem.' },
+        { type: 'action:conversation:resolve' },
+      ],
+    },
+    {
+      name: 'Lembrete de orçamento',
+      trigger: 'trigger:conversation:time-without-reply',
+      minutes: 120,
+      conditions_active: true,
+      conditions: { all: [{ field: 'chat:tags', operator: 'contains', value: String(orcamento.id) }], any: null },
+      actions: [{ type: 'action:conversation:send-message', value: 'Oi! Conseguiu ver o orçamento que enviamos? Se tiver alguma dúvida, estamos por aqui.' }],
+    },
+    {
+      name: 'Aviso fora do horário',
+      trigger: 'trigger:conversation:new-conversation',
+      conditions_active: true,
+      conditions: { all: [{ field: 'chat:business-hours', operator: 'is_not_in', value: horario.id }], any: null },
+      actions: [{ type: 'action:conversation:send-message', value: 'Recebemos sua mensagem! Nosso horário é de segunda a sexta, das 9h às 18h, e aos sábados, das 9h às 13h. Respondemos assim que voltarmos.' }],
+    },
+    {
+      name: 'Orçamento para Vendas',
+      trigger: 'trigger:conversation:tagged',
+      conditions_active: true,
+      conditions: { all: [{ field: 'chat:tags', operator: 'contains', value: String(orcamento.id) }], any: null },
+      actions: [{ type: 'action:conversation:move-to-group', value: 'group', groupId: vendas.id }],
+    },
+  ]
+  const existentes = lista(await api.v0('GET', '/automations'))
+  for (const a of exemplos) {
+    if (!existentes.some((x) => x.name === a.name)) await api.v0('POST', '/automations', { ...a, active: false })
+  }
+  log(`automações: ${exemplos.map((a) => `"${a.name}"`).join(', ')} (desligadas)`)
+}
+
 /** Widget de exemplo da seção "Chat do site": já configurado, para os prints da tela e do chat no site de teste. */
 const WIDGET_EXEMPLO = 'Site da loja'
 const WIDGET_EXEMPLO_CONFIG = {
@@ -793,6 +843,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['bot', () => garantirBot(api, canal)],
   ['bot de integração', () => garantirBotIntegracao(api)],
   ['organização do atendimento', () => garantirOrganizacao(api)],
+  ['automacoes', () => garantirAutomacoes(api)],
   ['widget de exemplo', () => garantirWidgetExemplo(api)],
   ['clientes', () => garantirClientes(api, contatoIds)],
   ['crm', () => garantirCrm(api, contatoIds)],

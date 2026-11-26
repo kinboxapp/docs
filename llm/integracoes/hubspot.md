@@ -77,7 +77,7 @@ Disponíveis no bloco **Integração**, grupo **Outros** (veja [Chamar um sistem
 
 ## Ações nas automações
 
-Na ação **Integração** das automações:
+Na ação **Integração** das [automações](/docs/automacao/gatilhos-e-acoes):
 
 - **Mudar etapa do negócio no Hubspot:** a opção aparece na lista, mas não altera a etapa do negócio. Para mudar a etapa, use a ação do bot **Atualiza negócio no HubSpot**.
 - **Atualizar responsável do negócio:** campo **Novo responsável** (vazio usa o responsável atual da conversa). Altera o responsável do negócio aberto do contato e registra `"Proprietário atualizado no Hubspot"`.
