@@ -23,7 +23,7 @@ Como baixo o histórico de todas as conversas?
 
 Você pode exportar o histórico de duas formas na Caixa de entrada:
 
-- **Várias conversas de um filtro (em lote):** abra a visão ou o filtro desejado, clique em **Mais opções** → **Executar ação...** → **Exportar conversas**, escolha um **Período** de até **93 dias** (limite de **10.000 conversas** por exportação) e clique em **Executar**, mantendo a aba aberta até o download do CSV começar.
+- **Várias conversas de um filtro (em lote):** entram as conversas da visão ou do filtro, abertas e resolvidas, que tiveram mensagens no período (exportar a partir de **Abertos** também traz as resolvidas). Abra a visão ou o filtro desejado, clique em **Mais opções** → **Executar ação...** → **Exportar conversas**, escolha um **Período** de até **93 dias** (limite de **10.000 conversas** por exportação) e clique em **Executar**, mantendo a aba aberta até o download do CSV começar.
 - **Uma única conversa:** abra a conversa e clique em **Mais ações** → **Exportar para CSV** (até 9.999 mensagens).
 
 Para baixar um período maior que 93 dias, divida a exportação em partes. Não existe backup automático nem exportação completa de todo o workspace em uma única ação (os relatórios do workspace também têm exportações próprias). Veja o passo a passo em [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar).

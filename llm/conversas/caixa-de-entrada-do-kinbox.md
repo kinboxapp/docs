@@ -13,6 +13,7 @@ fontes:
   - api-v0:server/controllers/CallController.js
   - api-v0:server/modules/scheduler/scheduleCallMessagesScheduler.js
   - web:src/pages/settings/profile/Profile.tsx
+  - api-v0:server/services/CustomerPlatformService.js
 codigo:
   - web:src/pages/settings/roles/permissionSections.tsx
   - web:src/lib/inboxUtils.ts
@@ -22,10 +23,11 @@ codigo:
   - web:src/pages/inbox/MessageDrop.tsx
   - api-v0:server/controllers/CallController.js
   - api-v0:server/modules/scheduler/scheduleCallMessagesScheduler.js
+  - api-v0:server/services/CustomerPlatformService.js
 verificado_em: 2026-11-26
 ---
 
-Referência complementar das páginas humanas da Caixa de entrada, atendimento, atribuição, agendamento e solução de problemas.
+Referência complementar de [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox), [Atender uma conversa: responder, notas, resolver e reabrir](/docs/conversas/gerenciar-conversas), [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir), [Agendar uma mensagem](/docs/conversas/agendar-mensagem), [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
 
 ## Visões, contadores e pesquisa
 
@@ -36,45 +38,46 @@ Referência complementar das páginas humanas da Caixa de entrada, atendimento, 
 
 ## Acesso as Conversas
 
-Configurado em **Configurações** → **Ambiente** → **Permissões** (uma opção por papel).
+Configurado em **Configurações** → **Ambiente** → **Permissões** (uma opção por papel). A regra abaixo é a que a Kinbox aplica ao montar a lista de conversas, olhando o membro responsável e o grupo da sessão atual. Exemplo: Ana está no grupo Vendas.
 
-| Opção | Descrição na tela |
-| --- | --- |
-| **Global** | "Pode ver todas as conversas." |
-| **Por Grupo ou sem Grupo** | "Pode ver as conversas de seus grupos ou sem grupo ou atribuídas a ele." |
-| **Por Grupo** | "Pode ver apenas as conversas de seus grupos ou atribuídas a ele." |
-| **Por Grupo Limitado** | "Pode ver apenas as conversas de seus grupos atribuídas a ele ou sem atribuição." |
-| **Limitado** | "Ver apenas as conversas atribuídas a ele ou seguindo ou sem atribuição." |
-| **Restrito** | "Pode ver apenas as conversas atribuídas a ele ou seguindo." |
+| Opção | O membro vê na lista | Exemplo |
+| --- | --- | --- |
+| **Global** | Todas as conversas | Ana vê tudo |
+| **Por Grupo ou sem Grupo** | As conversas dos grupos dele, as sem grupo e as atribuídas a ele | Ana vê as de Vendas, as sem grupo e as dela em qualquer grupo; não vê as de Suporte |
+| **Por Grupo** | As conversas dos grupos dele e as atribuídas a ele | Ana vê as de Vendas e as dela; não vê as sem grupo |
+| **Por Grupo Limitado** | As atribuídas a ele (mesmo fora dos grupos dele) e as sem responsável dos grupos dele | Ana vê as dela e as de Vendas sem responsável; não vê as de Vendas atribuídas a Bruno |
+| **Limitado** | As atribuídas a ele e as sem responsável, desde que sem grupo ou de um grupo dele | Ana vê as dela e as sem responsável de Vendas ou sem grupo; não vê nada de Suporte, nem as dela que estejam em Suporte |
+| **Restrito** | Só as atribuídas a ele | Ana vê só as dela |
 
-- Regra de visibilidade: o proprietário do workspace, quem tem **Global**, quem está atribuído à conversa, quem segue a conversa e quem recebeu a conversa compartilhada sempre conseguem visualizá-la.
-- Sem acesso, ao tentar abrir a conversa ela fecha com o aviso: "Você não tem permissão para ver essa conversa".
+- Seguir uma conversa **não** a traz para a lista: as descrições da tela de **Limitado** e **Restrito** falam em "seguindo", mas o que vale é a tabela acima. A visão **Seguindo** mostra só as conversas seguidas que o membro já vê pelo acesso dele.
+- Abrir uma conversa (por link, notificação ou pesquisa) é outra regra: abre para o proprietário do workspace, para quem tem **Global**, para o responsável, para quem segue a conversa e para quem recebeu as conversas compartilhadas. Fora disso, a conversa fecha com "Você não tem permissão para ver essa conversa".
 - Proprietário do workspace: tem todas as permissões e não é afetado pelas restrições da seção.
+- Página de conceito sobre papéis: "Workspace, membros e papéis" (link a costurar).
 
 ## Permissões da seção Conversas
 
-| Permissão | Efeito quando falta na tela | Mensagem exata |
+| Permissão | Sem ela | Mensagem exata |
 | --- | --- | --- |
 | **Resolver** | O botão **Resolver** some do cabeçalho da conversa. | — |
-| **Responder** | A tela não deixa enviar mensagem ao contato. | "Você não possui permissão para enviar essa mensagem." |
-| **Enviar notas privadas** | A tela não deixa enviar nota no modo **Nota pro time**. | "Você não possui permissão para enviar notas." |
-| **Deletar mensagens de outros membros** | Não libera **Excluir** para mensagens de outros membros. | — |
-| **Deletar própria mensagem** | Não libera **Excluir** para mensagens enviadas pelo próprio membro. | — |
+| **Responder** | O membro não consegue enviar mensagem ao contato. | "Você não possui permissão para enviar essa mensagem." |
+| **Enviar notas privadas** | O membro não consegue enviar nota no modo **Nota pro time**. | "Você não possui permissão para enviar notas." |
+| **Deletar mensagens de outros membros** | O membro não consegue excluir mensagens de outros membros. | — |
+| **Deletar própria mensagem** | O membro não consegue excluir as próprias mensagens. | — |
 | **Iniciar chat ativo** | O botão **Enviar mensagem** (lápis) não aparece na lista. | — |
-| **Reabrir** | A tela não deixa reabrir uma conversa resolvida. | "Você não tem permissão para reabrir conversas." |
+| **Reabrir** | O membro não consegue reabrir uma conversa resolvida. | "Você não tem permissão para reabrir conversas." |
 | **Atribuir** | Os itens do seletor **Atribuir** ficam desativados. | "Você não tem permissão para atribuir conversas." |
-| **Mover para grupo** | A tela não deixa mover para outro grupo. | "Você não tem permissão para mover conversas para grupos." |
-| **Iniciar Bot** | A tela não deixa iniciar bot em **Executar bot**. | "Você não tem permissão para iniciar bots." |
+| **Mover para grupo** | O membro não consegue mover a conversa para outro grupo. | "Você não tem permissão para mover conversas para grupos." |
+| **Iniciar Bot** | O membro não consegue iniciar bot em **Executar bot**. | "Você não tem permissão para iniciar bots." |
 | **Agendar mensagem** | O item **Agendar mensagem** fica desativado em **Mais ações**. | — |
 | **Transferir conversa** | O item **Transferir para outro canal** fica desativado em **Mais ações**. | — |
 | **Ficar invisível quando visualizar conversa** | Quando ativa, outros membros não veem que a pessoa está visualizando a conversa. | — |
 
 ## Restrições da seção Conversas
 
-| Restrição | Efeito na tela | Mensagem exata |
+| Restrição | Com ela | Mensagem exata |
 | --- | --- | --- |
-| **Responder apenas conversas dele** | A tela só deixa responder conversas atribuídas ao membro. | "Você não possui permissão para enviar essa mensagem." |
-| **Limitar horário que pode responder** | Bloqueia envio fora do horário escolhido (se falhar a checagem com "Erro ao verificar horário de atendimento", a mensagem segue). | "Você não pode enviar mensagens esse horário" |
+| **Responder apenas conversas dele** | O membro só responde conversas atribuídas a ele. | "Você não possui permissão para enviar essa mensagem." |
+| **Limitar horário que pode responder** | O membro só envia mensagens dentro do horário escolhido no papel. | "Você não pode enviar mensagens esse horário" |
 | **Limitar canais que pode responder** | Bloqueia envio em canais fora da lista selecionada. | "Você não pode enviar mensagens para esse canal" |
 | **Impedir envio de palavras proibidas** | Bloqueia envio quando o texto contém alguma palavra da lista. | "Você não pode enviar palavras proibidas: {{word}}" |
 | **Somente pode iniciar chat ativo com conversa não atribuída a outro membro.** | Bloqueia chat ativo se o número já tem conversa aberta no canal com outro membro. | "{número} - Em atendimento" / "Você não tem permissão para realizar chat ativo para conversas em atendimento" |
@@ -118,6 +121,7 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 
 - **Responder** (citar uma mensagem): só no WhatsApp e no Instagram, em mensagens que passaram pelo canal (têm ID do canal). Em canais de Instagram ligados por uma conexão antiga, feita por integração de terceiro, o item não aparece.
 - Anexos: cada arquivo vai como uma mensagem; até 100 MB por arquivo e 20 por vez; áudio gravado até 25 MB.
+- Botão **Áudio** do editor (gravar): só no WhatsApp, Instagram, Facebook, Widget e Telegram; não aparece no SMS nem no e-mail.
 
 - **Excluir mensagem**:
   - Onde existe: o item **Excluir** só aparece em conversas de WhatsApp por QR Code e de Telegram. Não existe no WhatsApp oficial nem nos outros canais.
@@ -126,9 +130,8 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
   - Confirmação: "Tem certeza que deseja excluir essa mensagem? Essa operação não poderá ser desfeita.".
 - **Transcrever áudio**:
   - Usa o saldo da carteira do workspace; limite de 1 MB ("O tamanho do arquivo de áudio excede o limite de 1 MB").
-  - Quando não há saldo suficiente, o servidor retorna "Saldo insuficiente" mas a tela apenas encerra o carregamento sem mostrar aviso.
+  - Sem saldo suficiente, a transcrição não é feita (hoje a tela não mostra aviso).
   - Restrição: com **Não pode transcrever áudio**, o membro não transcreve áudios.
-  - Onde fica: botão **Transcrever áudio** ao lado do áudio e item **Transcrever** no menu da mensagem.
 - **Bloquear contato**:
   - **Mais ações** → **Bloquear** / **Desbloquear**.
   - Confirmação ao bloquear: "Tem certeza que deseja bloquear essa conversa? Seu ambiente não receberá novas mensagens dessa conversa." → aviso "Você bloqueou essa conversa.".
@@ -152,7 +155,7 @@ O proprietário do workspace não sofre restrições de papel.
 
 | Se o usuário vê | Causa | O que orientar |
 | --- | --- | --- |
-| Editor sumiu, faixa "Essa conversa foi encerrada." e botão **Reabrir conversa** | Conversa resolvida | Clicar em **Reabrir conversa** (exige permissão **Reabrir**; sem ela: "Você não tem permissão para reabrir conversas."). |
+| Editor sumiu, faixa "Essa conversa foi encerrada." e botão **Reabrir conversa** | Conversa resolvida (fora do caso do WhatsApp oficial com janela fechada, abaixo) | Clicar em **Reabrir conversa** (exige permissão **Reabrir**; sem ela: "Você não tem permissão para reabrir conversas."). |
 | "Você não possui permissão para enviar essa mensagem." | Sem permissão **Responder**, ou com **Responder apenas conversas dele** em conversa não atribuída ao membro | Pedir atribuição da conversa ou pedir ao administrador para ajustar o papel. |
 | "Você não possui permissão para enviar notas." | Sem permissão **Enviar notas privadas** | Pedir a permissão ao administrador. |
 | "Você não pode enviar mensagens para esse canal" | Restrição **Limitar canais que pode responder** sem incluir esse canal | Administrador incluir o canal no papel. |
@@ -160,9 +163,10 @@ O proprietário do workspace não sofre restrições de papel.
 | "Você não pode enviar palavras proibidas: {{word}}" | Restrição **Impedir envio de palavras proibidas** | Reescrever a mensagem sem a palavra indicada. |
 | "Necessário ser atribuído à conversa para visualizar as mensagens" (com ou sem **Aceitar conversa**) | Restrição **Esconder mensagens se não atribuído.** ou **...com botão de aceitar.** | Clicar em **Aceitar conversa** (se ninguém atende; se já houver atendente aparece "Já existe um membro atendendo esse contato.") ou pedir atribuição. |
 | "Você não tem acesso ao canal desta conversa" | Canal com **Restringir visibilidade** e membro fora dos grupos permitidos | Administrador adicionar o membro a um dos grupos do canal. |
-| Conversa abre e fecha com "Você não tem permissão para ver essa conversa" | **Acesso as Conversas** do papel não inclui a conversa | Pedir atribuição ou ajuste no papel (seguir não resolve sozinho porque exige abrir antes). |
-| Conversa não aparece na lista | Está em outra visão (ex.: **Arquivados**), fora do filtro atual ou fora do **Acesso as Conversas** | Buscar na pesquisa geral (`Ctrl+K` / `⌘K`) ou conferir **Arquivados**. |
-| WhatsApp oficial: "A janela de tempo para respostas foi encerrada." (ou "Resolvida · janela de 24h encerrada") e botões **Enviar template** / **Enviar nota de time** | Passaram 24 h desde a última mensagem do contato | Enviar um template aprovado pela Meta (notas internas continuam disponíveis). |
+| Conversa abre e fecha com "Você não tem permissão para ver essa conversa" | **Acesso as Conversas** do papel não inclui a conversa | Pedir a atribuição da conversa ou ajuste do **Acesso as Conversas** no papel. |
+| Conversa não aparece na lista | Está em outra visão (ex.: **Arquivados**), fora do filtro atual ou fora do **Acesso as Conversas** (seguir não traz a conversa para a lista) | Buscar na pesquisa geral (`Ctrl+K` / `⌘K`) ou conferir **Arquivados**; se for o acesso, pedir a atribuição ou ajuste do papel. |
+| WhatsApp oficial, conversa **aberta**: faixa "A janela de tempo para respostas foi encerrada." e, no lugar do editor, **Enviar template** e **Enviar nota de time** | Passaram 24 h desde a última mensagem do contato, ou ele nunca escreveu | Enviar um template aprovado pela Meta. O texto livre só volta quando o contato responder. |
+| WhatsApp oficial, conversa **resolvida**: "Resolvida · janela de 24h encerrada", **Enviar template** como botão principal e **Reabrir conversa** / **Enviar nota de time** no menu ao lado | Mesma causa, com a conversa resolvida | Enviar um template. Reabrir a conversa não devolve o texto livre: só a resposta do contato. |
 | Faixa **Telefone desconectado** no topo da lista (some com **Não pode ver notificações de canal**) | Canal de WhatsApp por QR Code desconectado | Quem tem permissão de gerenciar canais precisa reconectar o aparelho nas configurações do canal. |
 | Mensagem marcada com erro ("Erro ao enviar mensagem" ou descrição; "Tentando reenviar... (Tentativa N/4)") | O canal recusou o envio | Passar o mouse ou usar **Copiar erro** no menu da mensagem; a Kinbox faz até 4 tentativas de envio (a tela mostra "Tentativa N/4"). |
 | Ícone **Bloqueado** no cabeçalho e contato não envia novas mensagens | Conversa bloqueada naquele canal | **Mais ações** → **Desbloquear**. |

@@ -19,7 +19,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência complementar de `docs/conversas/acoes-em-lote-e-exportar`.
+Referência complementar de [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar).
 
 ## Ações em lote: regras gerais
 
@@ -30,22 +30,22 @@ Referência complementar de `docs/conversas/acoes-em-lote-e-exportar`.
 - **Resolver** em lote deixa como estão as conversas já resolvidas (elas contam como feitas) e pula as que têm campo personalizado obrigatório vazio ou que esbarram na restrição **Esconder mensagens se não atribuído.** numa conversa de outra pessoa ("Você não tem permissão para resolver essa conversa"). O motivo individual de cada conversa pulada não é exibido.
 - **Atribuir** e **Mover para grupo** em lote aplicam as mesmas regras de grupo e bot (atribuir a quem não está no grupo remove o grupo; mover para grupo sem o responsável remove a atribuição; ambos desligam o bot).
 
-| Ação | Campo extra | Aviso no fim | Permissão / restrição verificada na tela |
+| Ação | Campo extra | Aviso no fim | Permissão / restrição |
 | --- | --- | --- | --- |
 | **Resolver** | — | "{{total}} conversas foram resolvidas" | — |
 | **Atribuir** | **Membro** (obrigatório) | "{{total}} conversas foram atribuídas" | Permissão **Atribuir** (item desativado sem ela). |
 | **Mover para grupo** | **Grupo** (obrigatório) | "{{total}} conversas foram movidas para o grupo" | Permissão **Mover para grupo** (item desativado sem ela). |
 | **Adicionar Tag** | **Tag** (obrigatório) | "{{total}} conversas tiveram tags adicionadas" | — |
 | **Remover Tag** | **Tag** (obrigatório) | "{{total}} conversas tiveram tags removidas" | — |
-| **Exportar conversas** | **Período** (obrigatório) | "{{calls}} atendimentos e {{messages}} mensagens exportados" | Bloqueada com **Não pode exportar para CSV** ou **Não pode executar ações em lote** (conferidas também no servidor). |
+| **Exportar conversas** | **Período** (obrigatório) | "{{calls}} atendimentos e {{messages}} mensagens exportados" | Indisponível com **Não pode exportar para CSV** ou **Não pode executar ações em lote**. |
 
 ## Exportar conversas (em lote)
 
 - **Período padrão:** mês passado inteiro.
 - **Limite de período:** máximo de **93 dias** por exportação.
 - **Limite de conversas:** máximo de **10.000 conversas** no período.
-- **Escopo:** entram conversas abertas e resolvidas do filtro atual que tiveram mensagens no período e que o membro pode ver.
-- **Visibilidade e privacidade (conferidas no servidor):**
+- **Escopo:** diferente das outras ações em lote (que valem só para a lista que está na tela), a exportação consulta a visão ou o filtro duas vezes, uma para conversas abertas e outra para resolvidas, e mantém os outros critérios. Exemplo: exportar a partir de **Abertos** ou de **Arquivados** traz as abertas e as resolvidas que tiveram mensagens no período. A visão **Compartilhados** é a exceção: segue a lista como ela está. Só entram conversas que o membro pode ver.
+- **Visibilidade e privacidade:**
   - Somente atendimentos dentro do acesso do membro são exportados.
   - Com **Esconder mensagens se não atribuído.** ou **Esconder mensagens se não atribuído, com botão de aceitar.**, entram apenas atendimentos atribuídos ao próprio membro.
   - Com **Esconder telefone**, a coluna **Telefone/identificador** sai vazia.

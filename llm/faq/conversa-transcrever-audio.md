@@ -26,7 +26,7 @@ Algumas regras:
 
 - A transcrição usa o saldo da carteira do workspace.
 - O limite é de **1 MB** por arquivo de áudio (acima disso aparece "O tamanho do arquivo de áudio excede o limite de 1 MB").
-- A restrição **Não pode transcrever áudio** esconde o botão **Transcrever áudio** que fica ao lado do áudio.
+- Com a restrição **Não pode transcrever áudio**, o membro não transcreve áudios.
 
 Veja mais em [Atender uma conversa](/docs/conversas/gerenciar-conversas).
 

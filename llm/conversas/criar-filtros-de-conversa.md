@@ -24,7 +24,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência complementar de `docs/conversas/criar-filtros-de-conversa`.
+Referência complementar de [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa).
 
 ## Todos os 17 estados
 
@@ -46,7 +46,7 @@ O bloco **Estados** fica sempre visível no painel (o item **Estado** dentro do 
 | **Sem tags** | Conversas sem nenhuma tag aplicada. |
 | **Nunca respondidos** | Conversas sem nenhuma mensagem de membro, considerando apenas conversas criadas após `22/11/2022`. |
 | **Sessão sem resposta de operador** | Sessão atual ainda sem resposta de membro. |
-| **Janela de resposta expirado** | Apenas conversas de WhatsApp com contato individual (exclui grupos); inclui conversas sem data de janela registrada. |
+| **Janela de resposta expirado** | Apenas conversas de WhatsApp com contato individual (exclui grupos), com a janela vencida ou sem data de janela registrada. Por isso também pega conversas do WhatsApp por QR Code: para listar só o oficial, combine com **Canais**. |
 | **Janela de resposta aberta** | Apenas conversas de WhatsApp com contato individual (exclui grupos) com janela aberta. |
 | **Sessão com erro de envio de mensagem** | Sessão marcada com erro de envio. |
 

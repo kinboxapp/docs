@@ -19,17 +19,17 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Um filtro de conversa é uma visão salva da [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) que se atualiza sozinha sempre que uma conversa passa a atender ou deixa de atender às condições definidas.
+Um filtro de conversa é uma lista salva da [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) que se atualiza sozinha sempre que uma conversa passa a atender ou deixa de atender às condições definidas.
 
 <Note>
-  Quem pode: para criar ou editar filtros pelo navegador, você precisa da permissão **Filtros** (configurada em **Configurações** → **Ambiente** → **Permissões**).
+  Quem pode: para criar ou editar filtros, você precisa da permissão **Filtros** (configurada em **Configurações** → **Ambiente** → **Permissões**).
 </Note>
 
 ## Passo a passo
 
 <Steps>
   <Step title="Abra Gerenciar Filtros">
-    Na barra lateral da **Caixa de entrada**, vá até **Filtros** e clique em **Adicionar filtro**. O painel **Gerenciar Filtros** abre com as visões **Padrões** (só informativas; nessa tela, **Abertos** aparece como **Caixa de entrada**) e a seção **Personalizados**.
+    Na barra lateral da **Caixa de entrada**, vá até **Filtros** e clique em **Adicionar filtro**. O painel **Gerenciar Filtros** abre com a seção **Padrões** (só informativas; nessa tela, **Abertos** aparece como **Caixa de entrada**) e a seção **Personalizados**.
 
     <Frame caption="Painel Gerenciar Filtros com Padrões e Personalizados">
       <img src="/images/ajuda/conversas/gerenciar-filtros.webp" alt="Painel Gerenciar Filtros mostrando os filtros Padrões e a seção Personalizados com os botões Novo filtro e Nova pasta" />
@@ -57,7 +57,7 @@ Um filtro de conversa é uma visão salva da [Caixa de entrada](/docs/conversas/
 
 Condições de campos diferentes precisam acontecer ao mesmo tempo, enquanto vários itens marcados no mesmo campo (**Grupos**, **Atribuídos**, **Canais** ou **Seguidores**) trazem conversas que atendam a qualquer um deles. Em **Tags**, a conversa entra ao ter qualquer uma das tags escolhidas — marque **Deve conter todas as tags** se ela precisar ter todas, ou use **Tags ausentes** (**Não contém nenhuma das tags**) para excluir conversas com determinadas tags.
 
-Os estados **Janela de resposta aberta** e **Janela de resposta expirado** são para conversas do WhatsApp oficial, que tem a janela de 24 horas.
+Os estados **Janela de resposta aberta** e **Janela de resposta expirado** foram feitos para a janela de 24 horas do WhatsApp oficial. **Janela de resposta expirado** também pega conversas individuais de WhatsApp sem data de janela, inclusive do WhatsApp por QR Code: para ver só o oficial, combine com **Canais** e escolha os canais oficiais.
 
 ## Mostrar o filtro para a equipe
 
@@ -81,12 +81,12 @@ Em **Gerenciar Filtros**, clique em um filtro para abrir as opções **Esconder*
 
 ## Contadores
 
-O número ao lado de cada filtro conta só as conversas abertas. Para atualizar os números, clique em **Atualizar contadores** ao lado do título **Filtros**.
+O número ao lado de cada filtro conta só as conversas abertas. Para atualizar os números, clique em **Atualizar contadores** (ícone de atualizar) ao lado do título **Filtros**.
 
-Você também pode criar e editar filtros pelo aplicativo de celular da Kinbox.
+O aplicativo de celular da Kinbox também mostra e edita os filtros.
 
 ## Problemas comuns
 
 - **O filtro não aparece na barra lateral de outro membro.** Novos filtros ficam ocultos para quem não os criou. A pessoa precisa abrir **Gerenciar Filtros** e clicar em **Mostrar** no menu do filtro, além de estar incluída em **Quem tem acesso?**.
 - **Uma conversa não aparece no filtro.** O filtro respeita o acesso do seu papel e nunca mostra conversas fora do que você pode ver (veja [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns)). Verifique também se **Aberto** não está marcado quando você quer ver conversas resolvidas, ou se alguma outra condição excluiu a conversa.
-- **O contador mostra "—" ou 0 com Resolvido marcado.** Como os contadores somam apenas conversas abertas, um filtro com **Resolvido** sempre mostra `0`. Já o traço "—" aparece quando o cálculo demora ou há conversas demais para contar naquele instante.
+- **O contador mostra 0 num filtro com Resolvido marcado.** Os contadores somam só conversas abertas.

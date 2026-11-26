@@ -19,7 +19,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência complementar de `docs/conversas/iniciar-conversa`.
+Referência complementar de [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa).
 
 ## Canais aceitos e excluídos
 
@@ -45,7 +45,7 @@ Referência complementar de `docs/conversas/iniciar-conversa`.
   - **4 a 10 números sem a permissão Campanhas:** bloqueado com "Você não tem permissão para enviar mensagem ativa para mais de um número ao mesmo tempo. Necessário a permissão de Gerenciar campanhas.".
   - **4 a 10 números com a permissão Campanhas:** exibe confirmação **Tem certeza?** com o texto "Enviar a mesma mensagem para muitos números em um curto intervalo de tempo pode gerar bloqueio do seu número pelo WhatsApp, tem certeza que deseja continuar?" (botão **Sim**).
   - **Mais de 10 números:** bloqueado com "Proibido. Para enviar para mais de 10 números crie uma campanha.".
-- **WhatsApp oficial e SMS:** a tela não aplica esse limite de quantidade de números separados por vírgula (envia um disparo por número). Para envios em volume, orientar **Campanhas**.
+- O limite de 3/10 números e a exigência de **Campanhas** valem só para o WhatsApp por QR Code. Para enviar a mesma mensagem a muitos contatos em qualquer canal, o caminho é **Campanhas**.
 
 ## WhatsApp oficial e campos obrigatórios
 
