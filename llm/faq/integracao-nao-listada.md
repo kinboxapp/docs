@@ -12,7 +12,7 @@ codigo:
   - web:src/pages/settings/integrations/AppsAldeia.tsx
   - web:src/pages/settings/integrations/EditAppAldeia.tsx
   - web:src/pages/settings/integrations/EditIntegration.tsx
-  - web:src/components-old/chat/side/ContactDetails/index.tsx
+  - web:src/components-old/chat/side/ContactDetails/**
   - web:src/features/marketing-apps/**
   - api:src/modules/apps/**
 verificado_em: 2026-11-26

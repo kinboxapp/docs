@@ -6,16 +6,16 @@ publico: llm
 tipo: referencia
 fontes:
   - web:src/pages/settings/integrations/EditPipedrive.tsx
-  - web:src/components-old/chat/side/integrationApps/PipedriveApp/index.tsx
+  - web:src/components-old/chat/side/integrationApps/PipedriveApp/**
   - web:src/components-old/chat/side/integrationApps/PipedriveApp/Actions.tsx
-  - api-v0:server/services/PipedriveService.js
+  - api-v0:server/services/**
   - api-v0:server/modules/chat/**
   - api-v0:server/auxiliary/BotIntegrations.js
 codigo:
   - web:src/pages/settings/integrations/EditPipedrive.tsx
   - web:src/components-old/chat/side/integrationApps/PipedriveApp/**
-  - api-v0:server/services/PipedriveService.js
-  - api-v0:server/controllers/IntegrationsController.js
+  - api-v0:server/services/**
+  - api-v0:server/controllers/**
   - api-v0:server/modules/chat/**
 verificado_em: 2026-11-26
 ---

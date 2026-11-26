@@ -8,7 +8,7 @@ fontes:
   - web:src/pages/settings/integrations/AppsAldeia.tsx
   - web:src/pages/settings/integrations/Apps.tsx
   - web:src/pages/settings/integrations/EditIntegration.tsx
-  - web:src/components-old/chat/side/ContactDetails/index.tsx
+  - web:src/components-old/chat/side/ContactDetails/**
   - web:src/pages/settings/index.tsx
   - api-v0:server/auxiliary/BotIntegrations.js
   - web:src/components-old/chat/side/integrationApps/NectarCRMApp/Actions.tsx
@@ -18,7 +18,7 @@ codigo:
   - web:src/pages/settings/integrations/AppsAldeia.tsx
   - web:src/pages/settings/integrations/EditAppAldeia.tsx
   - web:src/pages/settings/integrations/EditIntegration.tsx
-  - web:src/components-old/chat/side/ContactDetails/index.tsx
+  - web:src/components-old/chat/side/ContactDetails/**
   - web:src/features/marketing-apps/**
   - api:src/modules/apps/**
   - web:src/components-old/chat/side/integrationApps/NectarCRMApp/**

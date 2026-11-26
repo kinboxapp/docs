@@ -6,7 +6,7 @@ publico: llm
 tipo: referencia
 fontes:
   - web:src/pages/settings/integrations/**
-  - web:src/components-old/chat/side/integrationApps/Bitrix24App/index.tsx
+  - web:src/components-old/chat/side/integrationApps/Bitrix24App/**
   - web:src/pages/settings/bot/drawers/integration/ConsultaDealBitrix.tsx
   - web:src/pages/settings/bot/drawers/integration/FieldMapBitrix.tsx
   - api-v0:server/modules/**

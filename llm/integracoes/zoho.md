@@ -5,10 +5,10 @@ keywords: [zoho, zoho crm, obter token, refresh token, renovação de token, lay
 publico: llm
 tipo: referencia
 fontes:
-  - web:src/pages/settings/integrations/zoho/EditZoho.tsx
+  - web:src/pages/settings/integrations/zoho/**
   - web:src/pages/settings/integrations/zoho/EditZohoSettings.tsx
   - web:src/components-old/chat/side/integrationApps/ZohoApp/index.tsx
-  - web:src/components-old/chat/side/integrationApps/ZohoApp/Service.ts
+  - web:src/components-old/chat/side/integrationApps/ZohoApp/**
   - web:src/components-old/chat/side/integrationApps/ZohoApp/ZohoFieldsSection.tsx
 codigo:
   - web:src/pages/settings/integrations/zoho/**
@@ -29,8 +29,8 @@ Complemento técnico de [Integrar com o Zoho CRM](/docs/integracoes/zoho).
 
 ## Renovação do token
 
-- **Renovação automática:** quando o token de acesso expira durante o uso do quadro, a Kinbox renova o token usando o **Refresh Token**, salva a atualização na integração e sincroniza o novo token para os demais membros conectados no workspace.
-- **Quando a renovação falha:** sem **Refresh Token** válido (por exemplo, se **Client Secret** foi alterado ou o acesso foi revogado no Zoho), o quadro mostra `"Erro ao buscar informações de contato do Zoho."`. Para restabelecer, gere um novo código no Zoho, clique em **Obter token** e clique em **Salvar**.
+- **Renovação automática:** quando o acesso ao Zoho expira durante o uso do quadro, a Kinbox tenta renovar o acesso sozinha, sem você precisar fazer nada.
+- **Quando a renovação falha** (por exemplo, se o **Client Secret** foi alterado ou o acesso foi revogado no Zoho), o quadro mostra `"Erro ao buscar informações de contato do Zoho."`. Para reconectar: abra **Configurações** → **Integrações** → **Apps** → **Zoho CRM**, gere um código novo no Zoho, cole em **Código gerado**, clique em **Obter token** e depois em **Salvar** (precisa da permissão **Integrações** ou ser o proprietário).
 
 ## Regras de busca, formulários e limites
 

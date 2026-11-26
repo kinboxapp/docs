@@ -6,15 +6,13 @@ publico: llm
 tipo: referencia
 fontes:
   - web:src/pages/settings/integrations/**
-  - web:src/pages/settings/integrations/callbacks/RdMarketingCallback.tsx
-  - web:src/components-old/chat/side/integrationApps/RDStationMarketingApp/index.tsx
+  - web:src/components-old/chat/side/integrationApps/RDStationMarketingApp/**
   - api-v0:server/modules/chat/**
   - api-v0:server/services/RdStationService.js
   - api-v0:server/modules/**
 codigo:
   - web:src/pages/settings/integrations/**
   - web:src/pages/settings/integrations/rdstation-marketing/**
-  - web:src/pages/settings/integrations/callbacks/RdMarketingCallback.tsx
   - web:src/components-old/chat/side/integrationApps/RDStationMarketingApp/**
   - web:src/pages/settings/bot/drawers/integration/UpdateContactRDMarketing.tsx
   - api-v0:server/services/RdStationService.js

@@ -7,7 +7,7 @@ tipo: referencia
 fontes:
   - web:src/pages/settings/integrations/hubspot/**
   - web:src/pages/settings/integrations/hubspot/EditHubspotSettings.tsx
-  - web:src/components-old/chat/side/integrationApps/HubspotApp/index.tsx
+  - web:src/components-old/chat/side/integrationApps/HubspotApp/**
   - web:src/components-old/chat/side/integrationApps/HubspotApp/modals/AddDealModal.tsx
   - api-v0:server/controllers/**
   - api-v0:server/services/HubSpotGeneralService.js

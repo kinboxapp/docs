@@ -5,11 +5,11 @@ keywords: [webhook rd station, rd station marketing webhook, receber leads do rd
 publico: humano
 tipo: guia
 fontes:
-  - api:src/modules/webhooks/webhooks.controller.ts
+  - api:src/modules/webhooks/**
   - api:src/modules/webhooks/rdstation/rdstation-webhook.consumer.ts
   - api:src/modules/contacts/contacts.repository.ts
 codigo:
-  - api:src/modules/webhooks/webhooks.controller.ts
+  - api:src/modules/webhooks/**
   - api:src/modules/webhooks/rdstation/**
   - api:src/modules/contacts/contacts.repository.ts
 verificado_em: 2026-11-26
@@ -20,7 +20,7 @@ O webhook de leads permite que o RD Station Marketing envie uma conversão para 
 Se você quer o caminho inverso — enviar contatos e conversões da Kinbox para o RD — veja [Integrar com o RD Station Marketing](/docs/integracoes/rdstation-marketing).
 
 <Note>
-  O endereço do webhook leva uma credencial que não aparece nas telas da Kinbox. Para obter o endereço pronto para o seu workspace, fale com o suporte da Kinbox.
+  Para obter o endereço do webhook pronto para o seu workspace, fale com o suporte da Kinbox.
 </Note>
 
 ## Como configurar
