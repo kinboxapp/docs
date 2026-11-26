@@ -374,7 +374,7 @@
 # Seção assinatura (Administração › Assinatura e cobrança)
 #
 # Só telas que não disparam cobrança: nenhum item clica em Continuar, Alterar Plano, Contratar, Salvar nem confirma
-# o cancelamento. Preços, saldo, valor sugerido da recarga e limite do alerta saem com tarja (o guia não publica valores).
+# o cancelamento. Só os preços do plano saem com tarja (o guia não publica preços).
 
 - id: assinatura-seu-plano
   url: /settings/billing
@@ -407,6 +407,20 @@
   paginas:
     - docs/assinatura/assinar-ou-mudar-plano
 
+- id: assinatura-carteira
+  url: /settings/billing
+  passos:
+    - esperar: 'text=Adicionar crédito'
+    - clicar: 'h3:has-text("Faturas")'
+    - pausa: 800
+  alvo:
+    - 'h3:has-text("Carteira")'
+    - 'a:has-text("Adicionar crédito")'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/carteira.webp
+  paginas:
+    - docs/assinatura/adicionar-saldo
+
 - id: assinatura-adicionar-saldo
   url: /settings/billing
   passos:
@@ -415,8 +429,7 @@
     - esperar: '.ant-modal-content >> text=Valor a adicionar'
     - pausa: 800
   alvo: '.ant-modal-content'
-  mascarar:
-    - '.ant-modal-content .ant-input-number-input'
+  mascarar: []
   arquivo: images/ajuda/assinatura/adicionar-saldo.webp
   paginas:
     - docs/assinatura/adicionar-saldo
@@ -430,8 +443,7 @@
     - 'text=Histórico de recargas'
     - 'button:has-text("Adicionar Saldo")'
     - 'button:has-text("Ver relatório de uso")'
-  mascarar:
-    - 'button:has-text("Alerta de saldo") > span'
+  mascarar: []
   arquivo: images/ajuda/assinatura/historico-de-recargas.webp
   paginas:
     - docs/assinatura/alerta-de-saldo
@@ -444,9 +456,7 @@
     - esperar: '.ant-modal-content >> text=Avisar quando o saldo ficar abaixo de'
     - pausa: 800
   alvo: '.ant-modal-content'
-  mascarar:
-    - '.ant-modal-content .ant-input-number-input'
-    - '.ant-modal-content .bg-base-200'
+  mascarar: []
   arquivo: images/ajuda/assinatura/alerta-de-saldo.webp
   paginas:
     - docs/assinatura/alerta-de-saldo

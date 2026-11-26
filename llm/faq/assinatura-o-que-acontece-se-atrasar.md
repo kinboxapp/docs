@@ -26,12 +26,12 @@ O que acontece se eu atrasar o pagamento?
 
 ## Resposta
 
-Você tem **3 dias** de carência depois do vencimento com acesso normal; passado esse prazo, o campo de mensagem some das conversas e não dá para adicionar membros nem canais, e **7 dias** depois do vencimento os canais de WhatsApp por QR Code são desconectados e excluídos da lista.
+Depois do vencimento há **3 dias** de carência; passado esse prazo, o campo de mensagem some das conversas e não dá para convidar membros nem criar canais de WhatsApp ou Instagram. **7 dias** depois do vencimento, os canais de WhatsApp por QR Code são desconectados e saem da lista de canais (exceto em workspaces de parceiros).
 
-- Pagar a fatura em **Configurações** → **Assinatura** → **Faturas** atualiza a data em **Expira em** e devolve o acesso ao workspace.
-- A Kinbox não envia e-mail automático avisando que a assinatura venceu; o aviso aparece na faixa no topo do app.
-- Quando a assinatura é no cartão de crédito e a cobrança falha, a Kinbox não tenta cobrar de novo sozinha — use **Tentar pagar novamente** na fatura.
-- A exclusão após 7 dias vale apenas para canais de WhatsApp por QR Code (o WhatsApp oficial não entra nessa rotina). Depois de regularizar o pagamento, é preciso conectar o número novamente em [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
+- Pagar a fatura em **Configurações** → **Assinatura** → **Faturas** atualiza a data em **Expira em** e tira essas restrições.
+- A Kinbox não envia e-mail avisando que a assinatura venceu; o aviso aparece na faixa no topo do app.
+- Se a cobrança no cartão falhou, a Kinbox não tenta cobrar de novo sozinha. Se a opção **Tentar pagar novamente** aparecer na fatura, use-a; se não aparecer, fale com o suporte.
+- A saída da lista depois de 7 dias vale só para canais de WhatsApp por QR Code; o WhatsApp oficial não entra nessa regra. Depois de regularizar o pagamento, conecte o número de novo em [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
 
 Veja como regularizar em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
 

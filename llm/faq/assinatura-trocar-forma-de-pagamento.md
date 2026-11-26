@@ -25,10 +25,10 @@ Como troco o cartão ou a forma de pagamento?
 
 ## Resposta
 
-Para trocar a forma de pagamento (por exemplo, de boleto ou Pix para cartão de crédito) ou mudar o cartão das próximas cobranças fora de uma mudança de plano, fale com o suporte; se a cobrança no cartão falhou em uma fatura, você pode escolher outro cartão direto pela fatura usando **Tentar pagar novamente**.
+Para trocar a forma de pagamento (por exemplo, de boleto ou Pix para cartão de crédito) ou mudar o cartão das próximas cobranças fora de uma mudança de plano, fale com o suporte. Se a cobrança no cartão falhou e a opção **Tentar pagar novamente** aparecer na fatura, você pode escolher outro cartão por ali.
 
-- **Cartão recusado em uma fatura:** vá em **Configurações** → **Assinatura** → **Faturas**, abra o menu **...** da fatura com status **Falha ao pagar** (a mais recente do período atual) e clique em **Tentar pagar novamente**. Escolha outro cartão salvo ou clique em **Adicionar novo cartão** e confirme o pagamento. Se for aprovado, esse cartão passa a ser usado automaticamente nas próximas cobranças.
-- **Trocar a forma de pagamento ou os dados de cobrança fora de uma falha:** não existe uma tela própria na Kinbox para alterar só o método de pagamento ou os dados de cobrança sem alterar o plano, então fale com o suporte para fazer a troca com segurança.
+- **Cartão recusado em uma fatura:** vá em **Configurações** → **Assinatura** → **Faturas**, abra o menu **...** da fatura com status **Falha ao pagar** e, se a opção aparecer, clique em **Tentar pagar novamente**. Ela só aparece na mensalidade recusada mais recente do período atual, com a assinatura **PRO** ativa no cartão. Escolha outro cartão salvo ou clique em **Adicionar novo cartão** e confirme o pagamento. Se for aprovado, esse cartão passa a ser usado nas próximas cobranças. Se a opção não aparecer, fale com o suporte.
+- **Trocar a forma de pagamento ou os dados de cobrança fora de uma falha:** não há uma tela própria para trocar só a forma de pagamento ou os dados de cobrança. Fale com o suporte.
 
 Veja mais em [Faturas, boletos e nota fiscal](/docs/assinatura/faturas) e [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
 

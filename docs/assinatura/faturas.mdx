@@ -30,7 +30,7 @@ Acompanhe as faturas da mensalidade do seu workspace, emita a segunda via do bol
 
 ## Onde ficam
 
-Vá em **Configurações** → **Assinatura** e role até **Faturas**. A seção lista as 3 faturas de mensalidade mais recentes, com **Data de pagamento**, **Data de expiração**, valor e status.
+Vá em **Configurações** → **Assinatura** e role até **Faturas**. A seção lista as 3 faturas de mensalidade mais recentes, com **Data de pagamento**, **Data de expiração**, valor e status. Para abrir uma fatura, passe o mouse na linha e clique em **Ver**.
 
 Clique em **Ver tudo** para abrir a página **Faturas**, onde você pode filtrar pelas abas **Tudo**, **Pago** e **Não pago**, pesquisar por ID e clicar na linha para abrir a fatura.
 
@@ -43,41 +43,41 @@ A seção **Faturas** mostra apenas mensalidades da assinatura. Recargas de sald
 | **Pago** | Pagamento confirmado. |
 | **Não pago** | Fatura em aberto, aguardando pagamento. |
 | **Falha ao pagar** | A cobrança no cartão de crédito foi recusada. Clique no status para ver o erro retornado. |
-| **Cancelado** | Fatura cancelada por alteração ou cancelamento da assinatura. |
+| **Cancelado** | Mensalidade cancelada porque o plano mudou ou a assinatura foi cancelada. Enquanto a assinatura está cancelada, toda fatura não paga aparece assim. |
 
 ## Segunda via do boleto ou Pix
 
-No menu **...** da fatura, escolha a opção da sua forma de pagamento:
+Quando a fatura tem boleto, Pix, nota fiscal ou uma nova tentativa de pagamento, aparece o menu **...** na linha dela. Nele, escolha a opção da sua forma de pagamento:
 
-- **Boleto:** clique em **Ver Boleto**, **Visualizar boleto** ou **Copiar código do boleto**.
+- **Boleto:** **Ver Boleto** abre o boleto; quando o boleto ainda não foi gerado, a opção é **Visualizar boleto**. **Copiar código do boleto** copia a linha digitável.
 - **Pix:** clique em **Ver QR code** para abrir o QR Code e copiar o código Pix.
 
 ## Comprovante e nota fiscal
 
-No menu **...** da fatura:
-
-- **Ver fatura:** abre o detalhamento completo da cobrança em uma nova aba, com número, datas, período, método de pagamento, dados de cobrança e resumo. Você pode usar essa página como comprovante e imprimi-la pelo navegador.
-- **Baixar nota fiscal:** aparece quando a nota fiscal da fatura estiver disponível. Se a opção não aparecer e você precisar do documento, fale com o suporte para pedir a nota fiscal.
+- **Comprovante:** **Ver** (ao passar o mouse na linha) ou **Ver fatura** (no menu **...**) abre a fatura numa aba nova, com número, datas, período, método de pagamento, dados de cobrança e resumo. Você pode usar essa página como comprovante e imprimi-la pelo navegador.
+- **Nota fiscal:** a opção **Baixar nota fiscal** aparece no menu **...** quando o PDF da nota estiver disponível. Quando não aparecer, fale com o suporte para pedir a nota fiscal.
 
 ## Quando a fatura sai
 
 A fatura da mensalidade é gerada automaticamente **5 dias** antes da data em **Expira em** e enviada para os **E-mails de cobrança** cadastrados.
 
 - No **Cartão de crédito**, a cobrança é feita automaticamente no cartão da assinatura.
-- No **Boleto** e no **Pix**, enquanto a fatura do mês ainda não foi gerada, a seção **Faturas** exibe o botão **Gerar boleto agora** (para boleto) ou **Pagar agora** (para Pix) caso você queira emitir antes do prazo.
+- No **Boleto** e no **Pix**, enquanto a fatura do mês ainda não foi gerada, a seção **Faturas** pode mostrar o botão **Gerar boleto agora** (boleto) ou **Pagar agora** (Pix) para emitir antes. O botão só aparece com a assinatura **PRO** ativa e sem fatura do período paga ou aguardando pagamento. Se ele não aparecer e a fatura não estiver na lista, fale com o suporte.
+
+Se a fatura não for paga até o vencimento, há 3 dias de carência antes das restrições (veja [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida)).
 
 Para trocar a forma de pagamento das próximas cobranças (por exemplo, mudar de boleto para cartão), fale com o suporte.
 
 ## Pagamento recusado no cartão
 
-Quando uma cobrança no cartão falha, a Kinbox não tenta cobrar de novo sozinha. Você pode tentar pagar novamente com o mesmo cartão ou escolher outro:
+Quando uma cobrança no cartão falha, a Kinbox não tenta cobrar de novo sozinha. Na mensalidade recusada mais recente do período atual, com a assinatura **PRO** ativa no cartão, aparece a opção de tentar de novo com o mesmo cartão ou com outro:
 
 <Steps>
   <Step title="Confira o motivo da recusa">
     Em **Configurações** → **Assinatura** → **Faturas**, clique no status **Falha ao pagar** para abrir a janela com o erro retornado pela cobrança.
   </Step>
   <Step title="Abra uma nova tentativa de pagamento">
-    No menu **...** da fatura mais recente do período atual, clique em **Tentar pagar novamente** (na página **Faturas**, também há o link **Pagar novamente** na coluna **Data de pagamento**).
+    No menu **...** da fatura, clique em **Tentar pagar novamente** (na página **Faturas**, também há o link **Pagar novamente** na coluna **Data de pagamento**). Se a opção não aparecer, fale com o suporte.
   </Step>
   <Step title="Escolha o cartão e confirme">
     Na janela **Tentar pagar novamente**, selecione o cartão em **Cartão** (ou clique em **Adicionar novo cartão**) e clique no botão de pagar. Se o pagamento for aprovado, esse cartão passa a ser usado nas próximas cobranças.
