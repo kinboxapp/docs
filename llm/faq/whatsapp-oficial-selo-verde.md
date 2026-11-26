@@ -15,6 +15,7 @@ codigo:
   - api-v0:server/controllers/WbaCloudController.js
   - api-v0:server/modules/meta/CloudApiClient.js
   - api-v0:server/controllers/NewPaymentController.js
+  - web:src/pages/settings/channels/index.tsx
 verificado_em: 2026-11-26
 ---
 

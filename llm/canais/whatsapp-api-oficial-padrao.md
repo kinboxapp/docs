@@ -33,7 +33,7 @@ Quando você conclui o cadastro na janela da Meta, a aba da Kinbox recebe os ide
 3. No modo padrão (sem coexistência), registra o número na API da Meta. No modo de coexistência, pula essa etapa de registro.
 4. Lê os dados do número na Meta para preencher **Descrição** (nome verificado) e **Número** (telefone exibido).
 
-Se ocorrer uma falha depois da etapa 2, a Kinbox desfaz automaticamente a ligação do recebimento de mensagens da conta.
+Se ocorrer uma falha depois da etapa 1, a Kinbox tenta desligar o recebimento de mensagens da conta do WhatsApp Business inteira (não só do número). Se a mesma conta tem outros números conectados na Kinbox e eles estavam funcionando, falar com o suporte antes de repetir a conexão, e testar se esses outros números continuam recebendo.
 
 ## Permissões pedidas na janela da Meta
 

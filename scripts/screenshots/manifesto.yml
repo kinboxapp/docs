@@ -180,34 +180,22 @@
   paginas:
     - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas
 
-# Rodapé de uma conversa do canal oficial de teste (workspace 1) com a janela de 24 h encerrada.
-# Só os dois botões entram no recorte.
+# Conversa do canal oficial de teste (workspace 1) com a janela de 24 h encerrada e poucas mensagens:
+# aviso do topo, área vazia e o rodapé com os dois botões. A única mensagem (e o nome de quem enviou)
+# fica coberta; o cabeçalho com o nome do contato fica fora do recorte.
 - id: whatsapp-oficial-janela-encerrada
   workspace: Kinbox
-  url: /inbox/all/3418
+  url: /inbox/all/4248
   passos:
     - esperar: '.finished-chat-footer:visible >> text=Enviar nota de time'
-    - pausa: 1000
-  alvo: '.finished-chat-footer:visible'
-  mascarar:
-    - '.message-box'
-  arquivo: images/ajuda/whatsapp-oficial/janela-encerrada.webp
-  paginas:
-    - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas
-
-# Topo da mesma conversa: cabeçalho borrado (nome e foto do contato, canal) e o aviso
-# "A janela de tempo para respostas foi encerrada.".
-- id: whatsapp-oficial-janela-encerrada-aviso
-  workspace: Kinbox
-  url: /inbox/all/3418
-  passos:
     - esperar: '.closed-conversation-banner'
     - pausa: 1000
   alvo:
-    - '.g_chat_header_inner'
     - '.closed-conversation-banner'
+    - '.finished-chat-footer:visible'
   mascarar:
+    - '.message:not(.system)'
     - '.g_chat_header_inner'
-  arquivo: images/ajuda/whatsapp-oficial/janela-encerrada-aviso.webp
+  arquivo: images/ajuda/whatsapp-oficial/janela-encerrada.webp
   paginas:
     - docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas

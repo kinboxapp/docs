@@ -30,7 +30,7 @@ A Kinbox não tem uma tela própria de migração: o número entra pelo mesmo ca
 
 Alguns pontos importantes ao trazer um número de outra plataforma:
 
-- Se o outro provedor continuar ligado à mesma conta do WhatsApp Business, o painel do canal na Kinbox mostra o aviso `"Canal com mais de um App conectado. Uma ação é necessária para evitar indisponibilidade do canal."`. Remova o acesso da outra plataforma à conta para evitar falhas.
+- Se o outro provedor continuar ligado à mesma conta do WhatsApp Business, o painel do canal na Kinbox pode mostrar o aviso `"Canal com mais de um App conectado. Uma ação é necessária para evitar indisponibilidade do canal."`. Remova o acesso da outra plataforma à conta. O aviso sumir (ou não aparecer) não prova que só a Kinbox ficou ligada: confira na Meta qual integração ficou e teste o recebimento mandando uma mensagem de outro celular para o número.
 - Se a Meta recusar o registro do número durante a conexão, a Kinbox exibe o erro na tela; nesse caso, fale com o suporte.
 - Conversas antigas mantidas no outro provedor não vêm para a Kinbox.
 
