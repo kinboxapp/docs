@@ -28,7 +28,7 @@ Como inicio um bot numa conversa aberta?
 
 ## Resposta
 
-Abra a conversa na Caixa de entrada, clique em **Mais ações** (ícone de três pontos no cabeçalho), selecione **Executar bot** e escolha o nome do bot desejado (veja [Atender uma conversa](/docs/conversas/gerenciar-conversas) e [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
+Abra a conversa na **Caixa de entrada**, clique em **Mais ações** (ícone de três pontos no cabeçalho), selecione **Executar bot** e escolha o nome do bot desejado (veja [Atender uma conversa](/docs/conversas/gerenciar-conversas) e [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
 
 O que você precisa saber sobre essa ação:
 

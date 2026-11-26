@@ -54,7 +54,7 @@ O bloco tem **uma única saída**: tanto em caso de sucesso quanto em caso de fa
     | `method` | Método HTTP, como `GET` ou `POST`. Se omitido, usa `GET`. |
     | `headers` | Cabeçalhos da requisição, como autenticação e `Content-Type`. |
     | `body` | Corpo enviado na requisição (por exemplo, em `POST` ou `PUT`). |
-    | `params` | Parâmetros adicionados à query string da URL. |
+    | `params` | Parâmetros adicionados à query string da URL. Use `params` ou a query na própria `url`, não os dois. |
     | `mapReturnToCustomField` | Mapeia caminhos da resposta para campos do contato ou da sessão, usando a **Chave reservada** sem `{{}}` (por exemplo, `"pedido": "data"`). |
 
     Exemplo fictício que consulta o pedido pelo e-mail do contato e salva o objeto retornado em `data` no campo personalizado `pedido`:

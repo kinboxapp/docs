@@ -51,7 +51,7 @@ Crie um fluxo de atendimento automático, configure em quais canais e horários 
     - **Nome** e **Cor:** identificam o bot na lista e no editor.
     - **Horários:** limita o início automático do bot aos horários escolhidos (vazio = qualquer horário).
     - **Canais que atende** ou **Atende todos os canais:** define em quais canais o bot pode iniciar sozinho.
-    - **Atende grupos do WhatsApp:** permite iniciar automaticamente em conversas de grupo de WhatsApp (o canal de WhatsApp por QR Code também precisa estar com **Permitir Grupos de WhatsApp** ativo; veja [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes)).
+    - **Atende grupos do WhatsApp:** permite iniciar automaticamente em conversas de grupo de WhatsApp (o canal de WhatsApp por QR Code também precisa estar com **Permitir Grupos de WhatsApp** ligado e o grupo selecionado; veja [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes)).
     - **Expirar Sessão:** define um tempo em horas e minutos sem resposta do contato para encerrar a sessão com **Mensagem ao expirar** ou transferir com **Executar bot ao expirar**.
     - **Reabrir conversa:** quando o bot é executado manualmente ou por automação em uma sessão já resolvida, ele reabre a conversa automaticamente.
 
@@ -82,7 +82,7 @@ Crie um fluxo de atendimento automático, configure em quais canais e horários 
     Nem tudo funciona igual na simulação: o bloco **Agente de IA** não responde no simulador, e os blocos **Notificar** e **Ação de CRM** são pulados sem executar ações reais.
 
     <Warning>
-      Na simulação, os blocos **Integração** fazem a chamada externa e executam o código de verdade. Se você não quiser disparar requisições para o seu sistema durante o teste, abra **Ver dados do contato** e ligue **Pular integrações**.
+      Na simulação, **Chamar endpoint** chama o endereço de verdade e as chamadas externas (`axios`) em **Executar código** também acontecem de verdade. As integrações prontas do grupo **Outros** são puladas. Se você não quiser disparar requisições para o seu sistema durante o teste, abra **Ver dados do contato** e ligue **Pular integrações**.
     </Warning>
   </Step>
 
@@ -103,7 +103,7 @@ Crie um fluxo de atendimento automático, configure em quais canais e horários 
     Todo bot novo, clonado ou importado entra no fim da lista. Quando mais de um bot ligado atende ao mesmo canal, a Kinbox percorre a lista de cima para baixo e inicia o primeiro que serve — arraste as linhas pela alça à esquerda para mudar a prioridade.
 
     <Note>
-      Bots gerenciados por agentes de IA entram no topo da lista quando criados. Se você arrastar um bot comum ativo do mesmo canal para cima de um agente de IA, o bot comum atende primeiro e o agente não entra.
+      Bots gerenciados por agentes de IA entram no topo da lista quando criados. Se você arrastar um bot comum ativo do mesmo canal para cima de um agente de IA, o bot comum atende primeiro e o agente não entra (veja [O agente não responde ou responde errado](/docs/agente-de-ia/problemas-comuns)).
     </Note>
   </Step>
 </Steps>
@@ -116,33 +116,21 @@ O bot ligado começa sozinho quando o contato abre uma sessão nova num canal do
 
 ### Testar em uma conversa real
 
-Para validar um bot em uma conversa real — inclusive blocos que não rodam no simulador — abra a conversa na Caixa de entrada e clique em **Mais ações** → **Executar bot** → nome do bot (veja [Atender uma conversa](/docs/conversas/gerenciar-conversas)). É preciso ter a permissão **Iniciar Bot** (ou ser proprietário).
+Para validar um bot em uma conversa real — inclusive blocos que não rodam no simulador — abra a conversa na **Caixa de entrada** e clique em **Mais ações** → **Executar bot** → nome do bot (veja [Atender uma conversa](/docs/conversas/gerenciar-conversas)). É preciso ter a permissão **Iniciar Bot** (ou ser proprietário). Em conversas do Mercado Livre, **Executar bot** fica desativado. Para testar em grupo de WhatsApp por QR Code, o canal precisa estar com **Permitir Grupos de WhatsApp** ligado e o grupo selecionado.
 
 A ação **Executar bot** roda o bot mesmo se ele estiver desligado e ignora canais e horários configurados. A conversa registra a mensagem de sistema indicando que o membro executou o bot. O mesmo vale quando o bot é disparado por automações, cenários, ações em lote de funil ou agentes de IA.
 
-### Expirar Sessão
-
-Com **Expirar Sessão** ligado, o prazo conta desde a última mensagem do bot sem resposta do contato. Ao expirar, a Kinbox envia a **Mensagem ao expirar** e resolve a sessão, ou inicia o bot de **Executar bot ao expirar** (nesse caso, sem enviar a mensagem e sem resolver).
-
 ### Gerenciar bots na lista
 
-Pelo menu de três pontos de cada linha (e pelo menu de três pontos acima da lista, à direita, para importar), você pode:
-
-- **Editar:** abre o fluxo no editor.
-- **Clonar:** cria uma cópia desligada no fim da lista, com os mesmos canais e a mesma senha (se bloqueado).
-- **Exportar:** baixa o fluxo em um arquivo `.json`.
-- **Importar:** cria um bot desligado no fim da lista a partir de um `.json` exportado da Kinbox.
-- **Excluir:** apaga o bot e os vínculos com canais e horários; as conversas que estavam com ele ficam sem esse bot.
+No menu de três pontos de cada linha, **Editar** abre o fluxo e **Excluir** apaga o bot e os vínculos com canais e horários (as conversas que estavam com ele ficam sem esse bot). **Clonar**, **Exportar**, **Importar** (no menu de três pontos acima da lista, à direita), o histórico de publicações e o bloqueio com senha estão em [Histórico de publicações, clonar, exportar e bloquear um bot](/docs/bot/versoes-e-bloqueio).
 
 <Warning>
   Excluir um bot não avisa se outro bot (em **Fim do bot** ou **Executar bot ao expirar**), automação ou cenário aponta para ele. Confira esses vínculos antes de confirmar a exclusão.
 </Warning>
 
-Para abrir versões anteriores no histórico de publicações ou proteger o bot com senha, veja [Histórico de publicações, clonar, exportar e bloquear um bot](/docs/bot/versoes-e-bloqueio).
-
 ## Problemas comuns
 
-- **Erro `Necessário que todos os caminhos acabem no nó "Fim do Bot"...`:** o **Início do fluxo** não está ligado a nenhum bloco. Ligue-o ao primeiro bloco do fluxo.
+- **Erro `Necessário que todos os caminhos acabem no nó "Fim do Bot"...` ao ligar, ou Publicar que só seleciona o Início do fluxo:** o **Início do fluxo** não está ligado a nenhum bloco. Ligue-o ao primeiro bloco do fluxo.
 - **Erro `Loop inválido detectado.`:** existe uma volta no fluxo formada só por blocos que não esperam o contato. Coloque um bloco que espera (**Menu**, **Entrada de dados**, **Esperar um tempo** ou **Agente de IA**) na volta ou desfaça a ligação.
 - **Mudei o bot e nada mudou nas conversas:** clique em **Publicar** no editor. Salvar um bloco ou clicar em **Salvar** nas **Configurações do bot** não publica as alterações.
 

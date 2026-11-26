@@ -71,7 +71,7 @@ Aceita chaves reservadas (`{{...}}`) trocadas pelos dados do contato e da conver
 
 ### Agente de IA
 
-Escolhe um agente do workspace (**Agente de IA** obrigatório) para responder cada mensagem do contato enquanto o fluxo estiver nesse bloco; ele funciona mesmo que o agente esteja pausado nos canais diretos (veja [Bot, automações, cenários e agentes de IA](/docs/conceitos/automacao-e-ia)). Você pode vincular uma **Base de conhecimento** opcional (de **Configurações** → **Automação** → **Base de conhecimento**), adicionar **Instruções extras**, ligar **Digitação natural** e definir até 5 **Condições de saída** (**Sair direto** ou **Enviar mensagem e sair**).
+Escolhe um agente do workspace (**Agente de IA** obrigatório) para responder cada mensagem do contato enquanto o fluxo estiver nesse bloco; ele funciona mesmo que o agente esteja pausado nos canais diretos (veja [Ligar o agente aos canais e passar para um humano](/docs/agente-de-ia/conectar-canais)). Você pode vincular uma **Base de conhecimento** opcional (de **Configurações** → **Automação** → **Base de conhecimento**), adicionar **Instruções extras**, ligar **Digitação natural** e definir até 5 **Condições de saída** (**Sair direto** ou **Enviar mensagem e sair**).
 
 - **Saídas fixas:** ligue sempre **Sem saldo** e **Erro** para evitar que o contato fique parado sem resposta no bloco.
 - **Executar somente uma vez:** faz o agente responder uma única vez e seguir pela **Saída normal**.
@@ -92,10 +92,14 @@ Configure **Texto**, a lista de **Opções** (valor e **Nome da opção**) e **M
 
 - **Como as opções aparecem:**
   - **WhatsApp oficial:** com até 3 opções e todos os nomes com até 20 caracteres, aparecem como botões; com mais opções ou com algum nome maior, aparecem como lista.
-  - **Chat do site (widget):** as opções aparecem como botões clicáveis abaixo da última mensagem de menu.
+  - **Chat do site (widget):** as opções aparecem como botões clicáveis enquanto o menu for a última mensagem da conversa; o texto também traz as opções numeradas.
   - **WhatsApp por QR Code:** as opções vão como texto, uma por linha (veja [O que funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)).
   - **Esconder opções** envia apenas o **Texto**, sem lista e sem botões.
-- **Recursos extras:** **Validar similaridade** aceita respostas parecidas com uma opção; **Esperar tempo** cria uma saída extra se o contato não responder no prazo (até 7 dias); **Transcrever áudio** transcreve áudios enviados pelo contato para comparar com as opções (gasta saldo); **Considerar última mensagem do contato** usa a mensagem enviada antes do menu como resposta, sem enviar o texto do menu.
+- **Recursos extras:**
+  - **Validar similaridade** aceita respostas parecidas com uma opção.
+  - **Esperar tempo** cria uma saída extra se o contato não responder no prazo (até 7 dias).
+  - **Transcrever áudio** transcreve áudios enviados pelo contato para comparar com as opções (gasta saldo).
+  - **Considerar última mensagem do contato** usa a mensagem enviada antes do menu como resposta, sem enviar o texto do menu.
 
 <Frame caption="Gaveta do bloco Menu com Texto, Opções, Mensagem se resposta for inválida e interruptores">
   <img src="/images/ajuda/bot/bloco-menu.webp" alt="Gaveta Menu com o texto Como podemos ajudar, três opções numeradas, o botão Opção, a Mensagem se resposta for inválida preenchida com Resposta inválida. Digite 1, 2 ou 3. e os interruptores Validar similaridade, Esconder opções e Esperar tempo" />
@@ -108,7 +112,7 @@ Desvia o fluxo conforme condições (horário, tags, dados do contato, da conver
 - **Horário** dentro do horário comercial → **Sim** vai para o **Menu**; **Não** manda uma mensagem de fora do horário.
 - **Janela de resposta** = **Fechado** no WhatsApp oficial → segue para um bloco **Notificar** que envia um template aprovado (veja [Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
 
-Com a opção "Cada condição do tipo **qualquer** deve virar uma opção", cada condição ganha uma saída própria, mais **Nenhum**. Para condições com campos do tipo **Json**, veja [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
+Para condições com campos do tipo **Json**, veja [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
 
 ### Integração
 
@@ -143,8 +147,21 @@ Encerra o fluxo no ponto escolhido (você pode usar mais de um bloco **Fim do bo
 
 ### Notificar
 
-Envia uma mensagem usando um canal escolhido em **Do canal** (WhatsApp, e-mail, SMS do workspace ou e-mail de envio da Kinbox), para o contato atual ou para outra pessoa:
+Envia uma mensagem por um canal escolhido em **Do canal**, para o contato da conversa ou para outra pessoa. Casos comuns:
 
-- **WhatsApp oficial:** selecione um template aprovado (com anexo, se exigido pelo template; veja [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox)). **Para celular** é opcional (com código do país e DDD); em branco, envia para o contato em atendimento.
-- **WhatsApp por QR Code** e **SMS:** exige **Para celular** (com código do país e DDD) e **Texto** (no SMS, limite de 160 caracteres).
-- **E-mail:** exige **Para e-mail**, **Assunto** e **Texto**.
+- Avisar o time num WhatsApp por QR Code: preencha **Para celular** (com código do país e DDD) e **Texto**.
+- Mandar um template aprovado pelo WhatsApp oficial ao contato: escolha o template (veja [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox)) e deixe **Para celular** em branco.
+
+## Próximos passos
+
+<CardGroup cols={3}>
+  <Card title="Criar e publicar um bot" href="/docs/bot/aprender-a-usar-o-bot">
+    Monte o fluxo com os blocos, simule e publique.
+  </Card>
+  <Card title="Chamar um sistema externo no bot" href="/docs/bot/integracoes-do-bot">
+    Use o bloco Integração para consultar outro sistema.
+  </Card>
+  <Card title="O bot não ativa, travou ou repete mensagens" href="/docs/bot/problemas-comuns">
+    Causas e soluções dos problemas mais comuns.
+  </Card>
+</CardGroup>

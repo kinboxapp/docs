@@ -28,12 +28,12 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 ## Regras gerais do editor e da execução
 
 - **Ordem dos blocos na barra (17):** **Mensagem**, **Agente de IA**, **Mídia**, **Entrada de dados**, **Definir campo**, **Adicionar tag**, **Atendimento**, **Pendência**, **Menu**, **Palavra-chave**, **Decisão**, **Integração**, **Esperar um tempo**, **Ação de CRM**, **Fim do bot**, **Notificar**, **Split**.
-- **Ligações:** cada saída aceita apenas uma ligação (`"Só pode haver um caminho saindo de cada nó."`); um bloco não pode se ligar a si mesmo. Ao publicar, ligações que saíam de opções apagadas (opção de menu, palavra-chave, condição de saída ou condição de **Decisão**) são descartadas; as saídas são salvas com números primeiro, depois em ordem alfabética e a saída de tempo do **Menu** por último.
+- **Ligações:** cada saída aceita apenas uma ligação (`"Só pode haver um caminho saindo de cada nó."`); um bloco não pode se ligar a si mesmo. Ao publicar, ligações que saíam de opções apagadas (opção de menu, palavra-chave, condição de saída ou condição de **Decisão**) são descartadas.
 - **Exclusão de blocos:** o botão **Excluir** e a tecla `Delete` apagam o bloco selecionado sem confirmação (reversível com **Desfazer**). **Início do fluxo** não pode ser apagado.
 - **Intervalo entre blocos:** o bot aguarda cerca de 1 segundo antes de executar cada bloco que não espera o contato.
 - **Blocos que esperam:** **Entrada de dados**, **Menu**, **Agente de IA** e **Esperar um tempo**. Os demais executam e avançam imediatamente.
 - **Validação ao publicar ou ligar:**
-  - Verifica se há ligação saindo de **Início do fluxo**; sem ligação, exibe `'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar esse Bot.'` (na lista) ou `'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar ou salvar esse Bot.'` (no editor).
+  - Verifica se há ligação saindo de **Início do fluxo**. Sem ligação: **Publicar** no editor não salva e seleciona o **Início do fluxo**, sem mensagem; o interruptor do editor mostra `'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar ou salvar esse Bot.'` e volta para desligado; o interruptor da lista mostra `'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar esse Bot.'` sem abrir o editor.
   - Rejeita ciclos fechados apenas entre blocos que não esperam o contato com `"Loop inválido detectado."`.
   - Um bloco sem saída ligada encerra o bot ali e a conversa permanece aberta (exceto **Agente de IA** e **Decisão**, detalhados abaixo).
 
@@ -51,7 +51,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 
 - **Campos principais:** **Agente de IA** (obrigatório; funciona mesmo se o agente estiver pausado nos canais diretos), **Base de conhecimento** (opcional; usa a base de **Configurações** → **Automação** → **Base de conhecimento**, distinta do conhecimento interno do agente), **Instruções extras** (concatenadas às instruções do agente), **Condições de saída** (até 5; cada uma com descrição em texto e modo **Sair direto** ou **Enviar mensagem e sair**), **Executar somente uma vez**, **Considerar última mensagem do contato**, **Digitação natural**.
 - **Ajustes em Personalizar** (exibidos após escolher o agente):
-  - **Temperatura:** 0 a 1, passo 0,05; preenchido com 0,2 ao ativar **Personalizar** (só é aplicada com **Personalizar** ligado).
+  - **Temperatura:** 0 a 1, passo 0,05; preenchida com 0,2 ao ligar **Personalizar**.
   - **Quantidade de mensagens na memória:** 1 a 400, padrão 30.
   - **Considerar mensagens do sistema.**
   - **Considerar apenas mensagens da sessão atual.**
@@ -118,7 +118,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 - **Saídas:** 1 saída por opção + saída extra de tempo (quando **Esperar tempo** está ligado).
 - **Apresentação por canal:**
   - **WhatsApp oficial:** até 3 opções, todas com nome de até 20 caracteres, são enviadas como botões; com mais de 3 opções ou com algum nome acima de 20 caracteres (mesmo com até 3 opções), vão como lista com o botão **Opções** e o título `"Escolha uma opção"` (nomes acima de 24 caracteres são cortados no título e exibidos inteiros na descrição).
-  - **Chat do site (widget):** o texto do menu vai com as opções, e o widget mostra as opções como botões clicáveis abaixo da última mensagem de menu.
+  - **Chat do site (widget):** o texto do menu traz as opções numeradas, e o widget mostra as opções como botões clicáveis enquanto o menu for a última mensagem da conversa.
   - **WhatsApp por QR Code** (Express e Clássica): enviados como texto, uma opção por linha no formato `"número - nome"`.
   - **Esconder opções:** envia apenas o **Texto**, sem lista e sem botões.
 - **Valores especiais e regras:**
@@ -156,7 +156,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
   - **Recebimento de webhook:** aguarda requisição POST externa no **Endereço do webhook** exibido na gaveta.
   - **Randomizar delay:** sorteia entre **Tempo mínimo entre envios** e **Tempo máximo entre envios** na **Unidade** escolhida (**Segundos**, **Minutos**, **Horas** ou **Dias**, até 7 dias).
 - **Tempo máximo de espera:** disponível para **Envio de mensagem pelo cliente** e **Recebimento de webhook** (**Duração** e **Unidade** em **Minutos**, **Horas** ou **Dias**); cria saída de tempo esgotado. Mínimo efetivo de 60 segundos (valores menores viram 60 s); sem duração preenchida, usa 1 dia. Resposta do contato cancela a contagem.
-- **Regras de borda:** se a conversa for resolvida durante a espera, o bot cancela com `"Execução do bot cancelada, conversa já resolvida"`; se outro bot começar, cancela com `"Execução do bot cancelada, outro bot já está em execução"`. Bloco sem saída ligada encerra o bot ali.
+- **Regras de borda:** em esperas de até 20 segundos, se a conversa for resolvida ou o bot sair da conversa durante a espera, o bot para com `"Execução de delay cancelada: conversa já resolvida"`. Em esperas maiores, se a conversa for resolvida, aparece `"Execução do bot cancelada, conversa já resolvida"`; se outro bot começar, `"Execução do bot cancelada, outro bot já está em execução"`. Bloco sem saída ligada encerra o bot ali.
 
 ### Ação de CRM
 
@@ -197,10 +197,12 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 | `"Atendente {membro} executou o bot {bot}"` | Membro inicia um bot manualmente por **Executar bot**. |
 | `"{Automação nome} executou o bot {bot}"` | Uma automação dispara o bot. |
 | `"Bot [nome] não está mais ativo na conversa"` | Outro bot assumiu a conversa antes de o fluxo iniciar. |
-| `"Execução do bot cancelada, conversa já resolvida"` | A conversa foi resolvida durante uma espera ou antes da resposta do bloco **Agente de IA**. |
-| `"Execução do bot cancelada, outro bot já está em execução"` | Outro bot começou durante uma espera. |
+| `"Execução de delay cancelada: conversa já resolvida"` | Num **Esperar um tempo** de até 20 segundos, a conversa foi resolvida ou o bot saiu da conversa durante a espera. |
+| `"Execução do bot cancelada, conversa já resolvida"` | A conversa foi resolvida durante uma espera de mais de 20 segundos ou antes da resposta do bloco **Agente de IA**. |
+| `"Execução do bot cancelada, outro bot já está em execução"` | Outro bot começou durante uma espera de mais de 20 segundos. |
 | `"Número máximo de respostas inválidas excedido"` | Mais de 15 respostas inválidas seguidas em **Menu** ou **Entrada de dados**; o bot é encerrado. |
 | `"Bot interrompido por detecção de loop"` | Mais de 200 blocos executados seguidos sem passar por **Menu**, **Entrada de dados** ou **Fim do bot** sem transferência; o bot sai da conversa. O contador zera quando um membro manda mensagem, executa um bot ou resolve a conversa. |
+| (nenhuma mensagem) | Depois de 200 blocos executados no total desde que o bot começou na conversa (contando todas as voltas, mesmo com **Menu** ou **Entrada de dados** no caminho), o bot para de avançar sozinho, sem aviso. Para continuar, inicie o bot de novo com **Mais ações** → **Executar bot**. |
 | `"Essa sessão expirou e foi finalizada"` | Sessão encerrada por **Expirar Sessão** sem **Executar bot ao expirar**. |
 
 ## Quando o bot começa e quando sai

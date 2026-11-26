@@ -27,9 +27,9 @@ Ele serve para fazer o primeiro contato, coletar informações dos contatos e di
 
 ## Bot e agente de IA
 
-O bot segue exatamente o fluxo de blocos que você desenha, enquanto o agente de IA conversa com o contato usando inteligência artificial e as próprias palavras. Os dois podem trabalhar juntos quando você adiciona o bloco **Agente de IA** em um ponto do fluxo do bot — veja a comparação completa em [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia).
+O bot segue exatamente o fluxo de blocos que você desenha, enquanto o agente de IA conversa com o contato usando inteligência artificial e as próprias palavras. Os dois podem trabalhar juntos quando você adiciona o bloco **Agente de IA** em um ponto do fluxo do bot — veja a comparação completa em [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia) e o que os agentes fazem em [Agentes de IA: visão geral](/docs/agente-de-ia/visao-geral).
 
-Quando você conecta um agente de IA diretamente a canais, ele também aparece na lista de bots com a etiqueta **Agente de IA** e o interruptor travado; para ligar, desligar ou editar esse atendimento, abra o próprio agente.
+Quando você conecta um agente de IA diretamente a canais, ele também aparece na lista de bots com a etiqueta **Agente de IA** e o interruptor travado; para ligar, desligar ou editar esse atendimento, abra o próprio agente (veja [Ligar o agente aos canais e passar para um humano](/docs/agente-de-ia/conectar-canais)).
 
 ## Onde fica
 
@@ -52,7 +52,7 @@ Acesse **Configurações** → **Automação** → **Bot** para ver a lista de b
 
 Um bot começa sozinho apenas quando o **contato** envia a mensagem que abre uma [sessão](/docs/conceitos/conversas-e-sessoes) nova em um canal atendido pelo bot, com o bot ligado. Ele não começa sozinho em sessões já abertas ou reabertas (inclusive dentro do **Tempo de tolerância ao resolver conversa**), em mensagens enviadas pelo celular do número nem em conversas iniciadas por um membro.
 
-Quando mais de um bot ligado serve à mesma conversa, a Kinbox percorre a lista de cima para baixo e inicia o **primeiro bot ligado** que atende ao canal, ao horário e ao tipo de conversa; você muda a prioridade arrastando as linhas na lista. Para usar **Horários** ou controlar **Atende grupos do WhatsApp**, escolha os canais em **Canais que atende** em vez de ligar **Atende todos os canais**, pois com **Atende todos os canais** ligado o bot inicia também fora dos horários e em grupos.
+Quando mais de um bot ligado serve à mesma conversa, a Kinbox percorre a lista de cima para baixo e inicia o **primeiro bot ligado** que atende ao canal, ao horário e ao tipo de conversa; você muda a prioridade arrastando as linhas na lista. Com **Atende todos os canais** ligado, o bot inicia também fora dos **Horários** e em grupos do WhatsApp. Para usar **Horários** ou controlar **Atende grupos do WhatsApp**, escolha os canais em **Canais que atende**.
 
 Você também pode iniciar um bot manualmente em uma conversa por **Mais ações** → **Executar bot** (veja [Atender uma conversa](/docs/conversas/gerenciar-conversas)), ou automaticamente por automações, cenários, ações em lote de funil e agentes de IA. Nesses casos, o bot roda mesmo se estiver desligado e sem depender dos canais ou horários configurados nele.
 

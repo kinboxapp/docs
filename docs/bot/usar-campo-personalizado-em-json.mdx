@@ -23,7 +23,7 @@ verificado_em: 2026-11-26
 Guarde o objeto JSON devolvido por uma integração em um campo personalizado do tipo **Json** e leia cada propriedade desse objeto nas mensagens e nas condições do bloco **Decisão**.
 
 <Note>
-  Quem pode: para criar o campo personalizado, permissão **Campos** (seção **Gerenciamento do Ambiente**) ou proprietário do workspace (na tela, o workspace se chama **ambiente**). Para configurar o bot, permissão **Bot** ou proprietário.
+  Quem pode: para criar o campo personalizado, permissão **Campos** (seção **Gerenciamento do Ambiente**) ou proprietário do workspace. Para configurar o bot, permissão **Bot** ou proprietário.
 </Note>
 
 ## Passo a passo
@@ -65,6 +65,8 @@ Guarde o objeto JSON devolvido por uma integração em um campo personalizado do
 
   <Step title="Use as propriedades em uma mensagem">
     Nos campos de texto do bot (como no bloco **Mensagem**), use a sintaxe `{{json:<chave>.<caminho>}}`. Ela aceita propriedades aninhadas com ponto e índices de lista, como `{{json:pedido.itens[0].nome}}`.
+
+    Caminhos com índice de lista, como `[0]`, e valores `0` ou falso (`false`) podem aparecer de um jeito diferente no **Simular bot**. Confira esses casos numa conversa de teste, com dados fictícios, usando **Executar bot**.
 
     Seguindo o exemplo anterior:
 

@@ -32,7 +32,7 @@ Se você precisa de comportamentos diferentes no mesmo canal, existem três cami
 
 - Usar um único agente de texto com o [Fluxograma](/docs/agente-de-ia/fluxograma-e-etapas), dividindo o atendimento em blocos de **Subagente** ou chamando o fluxo de outro agente com **Executar outro agente**.
 - Em agentes que já possuem etapas configuradas, usar **Etapas** para alternar instruções, conhecimento e ferramentas.
-- Montar um fluxo em **Bot** e chamar agentes diferentes pelo bloco **Agente de IA** conforme a escolha do contato.
+- Montar um fluxo em **Bot** e chamar agentes diferentes pelo bloco **Agente de IA** conforme a escolha do contato (veja [Blocos do bot](/docs/bot/blocos-do-bot)).
 
 Atenção: ter um bot comum e um agente de IA ativos no mesmo canal não divide o atendimento entre eles — em cada sessão nova, entra apenas o primeiro bot ativo da lista de bots cujas condições batam com o canal.
 

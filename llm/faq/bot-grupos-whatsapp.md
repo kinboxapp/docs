@@ -1,7 +1,7 @@
 ---
 title: O bot responde em grupos de WhatsApp?
 description: Sim, se Atende grupos do WhatsApp estiver ligado no bot e o canal de WhatsApp por QR Code estiver em Canais que atende com o grupo ativado em Permitir Grupos de WhatsApp.
-keywords: [bot em grupo, bot grupo whatsapp, atende grupos do whatsapp, permitir grupos de whatsapp, bot respondeu no grupo, atende todos os canais grupo]
+keywords: [bot em grupo, bot grupo whatsapp, atende grupos do whatsapp, permitir grupos de whatsapp, bot respondeu no grupo, atende todos os canais grupo, chatbot, robô]
 publico: llm
 tipo: faq
 fontes:
@@ -37,7 +37,7 @@ Atenção a estas regras:
 
 - **Quando Atende todos os canais está ligado:** o bot começa também em grupos de WhatsApp mesmo com **Atende grupos do WhatsApp** desligado (e também fora dos **Horários**). Para impedir o bot de responder em grupos — ou para escolher em quais canais ele entra — desligue **Atende todos os canais**, selecione os canais em **Canais que atende** e ajuste **Atende grupos do WhatsApp** (veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot) e [O bot não ativa, travou ou repete mensagens](/docs/bot/problemas-comuns)).
 - **Quando o bot inicia:** assim como nas conversas individuais, o bot só começa sozinho quando uma nova sessão é aberta no grupo, com o bot ligado e sendo o primeiro bot ativo da lista que serve ao canal.
-- **Agente de IA direto no canal:** um agente de IA conectado diretamente ao canal não atende grupos de WhatsApp.
+- **Agente de IA direto no canal:** um agente de IA conectado diretamente ao canal não atende grupos de WhatsApp (veja [Ligar o agente aos canais e passar para um humano](/docs/agente-de-ia/conectar-canais)).
 
 ## Variações
 

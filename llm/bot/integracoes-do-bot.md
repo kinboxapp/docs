@@ -50,7 +50,7 @@ Referência técnica das integrações do bot e de campos personalizados **Json*
 | `method` | Método HTTP, como `GET` ou `POST`. Padrão: `GET` quando omitido. |
 | `headers` | Objeto de cabeçalhos HTTP. |
 | `body` | Corpo enviado na requisição. |
-| `params` | Objeto convertido em query string na URL; a troca de chaves em `params` usa apenas dados do contato. |
+| `params` | Objeto convertido em query string e acrescentado à `url` com `?`; a troca de chaves em `params` usa apenas dados do contato. Use `params` ou a query na própria `url`, não os dois. |
 | `mapReturnToCustomField` | Objeto `{ "<chave_do_campo>": "<caminho_na_resposta>" }` que salva partes do corpo da resposta em campos do contato ou da sessão. |
 
 - **JSON inválido:** se o conteúdo do campo **Json** não for um JSON válido, o bloco não faz a chamada e segue para o próximo bloco.
@@ -61,7 +61,7 @@ Referência técnica das integrações do bot e de campos personalizados **Json*
 - **Resposta e `mapReturnToCustomField`:**
   - A extração lê o corpo da resposta usando caminhos com pontos e índices (ex.: `result.id`, `itens[0].nome`).
   - A chave de destino é a **Chave reservada** do campo personalizado sem `{{}}` (de **Contato** ou **Sessão de conversa**) ou os campos `name` e `email` do contato. Chaves que não correspondem a um campo existente são ignoradas.
-  - Valores vazios, `null` ou ausentes não são gravados.
+  - Valores vazios, `null` ou ausentes não são gravados. Na conversa real, `0` e `false` são gravados; no **Simular bot**, `0` e `false` não são gravados.
   - Valores do tipo objeto são gravados como texto JSON (compatível com campos do tipo **Json**).
   - Sempre informe um caminho preenchido em `mapReturnToCustomField`: um caminho vazio (`""`) não grava nada na conversa real (embora no simulador salve a resposta inteira).
 - **Chave `text` na resposta:** se o corpo da resposta contiver a propriedade `text`, o bot envia esse conteúdo como mensagem ao contato.
@@ -121,7 +121,7 @@ async function run(kinbox) {
 
 - **Cadastro:** em **Configurações** → **Ambiente** → **Campos personalizados** (permissão **Campos**, na seção **Gerenciamento do Ambiente**, ou proprietário), com **Tipo de campo** = **Json**. A **Chave reservada** é gerada sem acentos, em minúsculas e com `_` no lugar de espaços e pontos (`{{chave}}`).
 - **Entidades:** escolha **Contato** ou **Sessão de conversa** para gravar e ler no bot. Apenas campos de **Contato** e **Sessão de conversa** são lidos em mensagens e no bloco **Decisão**. Na gravação pelo bot, campos de **Sessão de conversa** gravam na sessão atual e campos de **Negociação** gravam na negociação aberta da conversa (se houver).
-- **Sintaxe em textos e no Chamar endpoint:** `{{json:<chave>.<caminho>}}`, com suporte a propriedades aninhadas e índices de lista (ex.: `{{json:pedido.numero}}`, `{{json:pedido.itens[0].nome}}`). Funciona em mensagens, no JSON do **Chamar endpoint** e no **Simular bot**.
+- **Sintaxe em textos e no Chamar endpoint:** `{{json:<chave>.<caminho>}}`, com suporte a propriedades aninhadas e índices de lista (ex.: `{{json:pedido.numero}}`, `{{json:pedido.itens[0].nome}}`). Funciona em mensagens, no JSON do **Chamar endpoint** e no **Simular bot**. No **Simular bot**, chaves com índice de lista (como `{{json:pedido.itens[0].nome}}`) aparecem como texto literal, sem a troca; na conversa real a troca acontece. Para conferir índices, `0` e `false`, use uma conversa de teste com dados fictícios e **Executar bot**.
 - **Seletor de chaves:** no botão `{}` (**Chaves reservadas**), o campo aparece como `{{json:<chave>}}` e insere `{{json:<chave>.key_name}}`.
 - **Valores vazios:** usar `{{<chave>}}` sem o prefixo `json:` em um campo **Json** resulta em texto vazio. Propriedade inexistente no objeto também resulta em texto vazio.
 - **Bloco Decisão:** campos de contato aparecem no grupo **Contato** e campos de sessão em **Conversa/Sessão**. Exige o campo extra `json path (e.g: a[0].b)` com o caminho interno (sem o nome do campo e sem `json:`; vazio retorna `"Faltando caminho do JSON"`). Operadores disponíveis: **é igual a**, **não é igual a**, **é maior que**, **é menor que**, **é vazio**, **não é vazio**, **contém** e **não contém**.
