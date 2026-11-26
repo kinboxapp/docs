@@ -371,6 +371,100 @@
   paginas:
     - docs/conceitos/visao-geral
 
+# Seção assinatura (Administração › Assinatura e cobrança)
+#
+# Só telas que não disparam cobrança: nenhum item clica em Continuar, Alterar Plano, Contratar, Salvar nem confirma
+# o cancelamento. Só os preços do plano saem com tarja (o guia não publica preços).
+
+- id: assinatura-seu-plano
+  url: /settings/billing
+  passos:
+    - esperar: 'text=Mudar plano'
+    - pausa: 1000
+  alvo: '.card-bordered:has(h1:has-text("PRO"))'
+  mascarar:
+    - 'span:has-text("por R$")'
+    - 'div.text-lg.font-semibold:has-text("R$")'
+  arquivo: images/ajuda/assinatura/seu-plano.webp
+  paginas:
+    - docs/assinatura/visao-geral
+
+- id: assinatura-alterar-plano
+  url: /settings/billing/subscription
+  passos:
+    - esperar: '.billing-space .right >> text=Resumo da fatura'
+    - esperar: '.billing-total-value'
+    - pausa: 1500
+  alvo:
+    - '.billing-space .left .billing-box'
+    - '.billing-space .left .billing-box >> nth=1'
+    - '.billing-space .right .billing-box'
+  mascarar:
+    - '.billing-total-per-user'
+    - '.billing-item-value'
+    - '.billing-total-value'
+  arquivo: images/ajuda/assinatura/alterar-plano.webp
+  paginas:
+    - docs/assinatura/assinar-ou-mudar-plano
+
+- id: assinatura-carteira
+  url: /settings/billing
+  passos:
+    - esperar: 'text=Adicionar crédito'
+    - clicar: 'h3:has-text("Faturas")'
+    - pausa: 800
+  alvo:
+    - 'h3:has-text("Carteira")'
+    - 'a:has-text("Adicionar crédito")'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/carteira.webp
+  paginas:
+    - docs/assinatura/adicionar-saldo
+
+- id: assinatura-adicionar-saldo
+  url: /settings/billing
+  passos:
+    - esperar: 'text=Adicionar saldo'
+    - clicar: 'text=Adicionar saldo'
+    - esperar: '.ant-modal-content >> text=Valor a adicionar'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/adicionar-saldo.webp
+  paginas:
+    - docs/assinatura/adicionar-saldo
+
+- id: assinatura-historico-de-recargas
+  url: /settings/billing/recharges-history
+  passos:
+    - esperar: 'button:has-text("Alerta de saldo")'
+    - pausa: 800
+  alvo:
+    - 'text=Histórico de recargas'
+    - 'button:has-text("Adicionar Saldo")'
+    - 'button:has-text("Ver relatório de uso")'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/historico-de-recargas.webp
+  paginas:
+    - docs/assinatura/alerta-de-saldo
+
+- id: assinatura-alerta-de-saldo
+  url: /settings/billing/recharges-history
+  passos:
+    - esperar: 'button:has-text("Alerta de saldo")'
+    - clicar: 'button:has-text("Alerta de saldo")'
+    - esperar: '.ant-modal-content >> text=Avisar quando o saldo ficar abaixo de'
+    - pausa: 800
+  # Recorte até a linha "Saldo atual": a previsão depende do consumo do workspace de documentação e muda.
+  alvo:
+    - '.ant-modal-content .ant-modal-title'
+    - '.ant-modal-content .ant-modal-close'
+    - '.ant-modal-content .bg-base-200 > div:first-child'
+  mascarar: []
+  arquivo: images/ajuda/assinatura/alerta-de-saldo.webp
+  paginas:
+    - docs/assinatura/alerta-de-saldo
+
 # ── Seção whatsapp-templates (Templates, Flows e carrossel) ──────────────────────────────────────────
 # A Central WhatsApp API só abre com um canal oficial: o workspace de documentação não tem, então os prints vêm do
 # workspace de testes (id 1, canal oficial de QA "Oficial Teste"). Nenhum print mostra lista de templates (os nomes

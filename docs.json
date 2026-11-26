@@ -107,6 +107,18 @@
                   "docs/administracao/referencia-de-permissoes",
                   "docs/administracao/problemas-com-membros"
                 ]
+              },
+              {
+                "group": "Assinatura e cobrança",
+                "pages": [
+                  "docs/assinatura/visao-geral",
+                  "docs/assinatura/assinar-ou-mudar-plano",
+                  "docs/assinatura/adicionar-saldo",
+                  "docs/assinatura/alerta-de-saldo",
+                  "docs/assinatura/faturas",
+                  "docs/assinatura/cancelar",
+                  "docs/assinatura/assinatura-vencida"
+                ]
               }
             ]
           }
