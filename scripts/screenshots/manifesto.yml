@@ -1810,6 +1810,177 @@
   paginas:
     - docs/canais/widget/configuracoes
 
+# Seção contatos (CRM e vendas › Contatos, organizações e campos personalizados)
+#
+# Dados do seed (garantirClientes): campos "Tipo de cliente" e "Data de aniversário", organizações "Escritório
+# Exemplo" e "Padaria Exemplo". A planilha dos prints de importação é fictícia (arquivos/contatos-exemplo.csv).
+
+- id: contatos-lista
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'text=Mostrando'
+    - pausa: 1000
+  alvo:
+    - 'h1:has-text("Contatos")'
+    - 'button[aria-label="Mais opções"]'
+    - 'text=Mostrando'
+  mascarar: []
+  arquivo: images/ajuda/contatos/lista-de-contatos.webp
+  paginas:
+    - docs/conversas/clientes-contatos-e-organizacoes
+
+- id: contatos-criar
+  url: /crm/contacts/people/new
+  passos:
+    - esperar: '.ant-drawer-content >> text=Contato privado'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content'
+  mascarar: []
+  arquivo: images/ajuda/contatos/criar-contato.webp
+  paginas:
+    - docs/conversas/clientes-contatos-e-organizacoes
+
+- id: contatos-importar-arquivo
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - pausa: 800
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  altura: 720
+  arquivo: images/ajuda/contatos/importar-arquivo.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-importar-colunas
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - enviar: { seletor: 'input[type=file]', arquivo: arquivos/contatos-exemplo.csv }
+    - pausa: 2000
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Associe as colunas'
+    - pausa: 1000
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/contatos/importar-colunas.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-importar-organizacoes
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - enviar: { seletor: 'input[type=file]', arquivo: arquivos/contatos-exemplo.csv }
+    - pausa: 2000
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Associe as colunas'
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Confira a qual organização'
+    - pausa: 2500
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/contatos/importar-organizacoes.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-importar-confirmar
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'button[aria-label="Mais opções"]'
+    - clicar: 'button[aria-label="Mais opções"]'
+    - clicar: 'text=Importar contatos'
+    - esperar: 'text=Baixar planilha modelo'
+    - enviar: { seletor: 'input[type=file]', arquivo: arquivos/contatos-exemplo.csv }
+    - pausa: 2000
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Associe as colunas'
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Confira a qual organização'
+    - pausa: 2500
+    - clicar: 'button:has-text("Próximo")'
+    - esperar: 'text=Total para importar'
+    - pausa: 1000
+  alvo: '.g_settings_simple_page >> visible=true'
+  mascarar: []
+  altura: 1150
+  arquivo: images/ajuda/contatos/importar-confirmar.webp
+  paginas:
+    - docs/clientes/importar-contatos
+
+- id: contatos-perfil
+  url: /crm/contacts/people
+  passos:
+    - esperar: 'text=Ana Souza'
+    - clicar: 'text=Ana Souza'
+    - esperar: 'text=Campos personalizados'
+    - pausa: 2500
+  alvo: 'div[class*="max-w-[1200px]"] >> visible=true'
+  mascarar: []
+  arquivo: images/ajuda/contatos/perfil-do-contato.webp
+  paginas:
+    - docs/conversas/clientes-contatos-e-organizacoes
+
+- id: organizacoes-perfil
+  url: /crm/contacts/organizations
+  passos:
+    - esperar: 'text=Padaria Exemplo'
+    - clicar: 'text=Padaria Exemplo'
+    - esperar: 'text=Cliente desde'
+    - pausa: 2500
+  alvo: 'div[class*="max-w-[1200px]"] >> visible=true'
+  mascarar: []
+  altura: 958
+  arquivo: images/ajuda/contatos/perfil-da-organizacao.webp
+  paginas:
+    - docs/clientes/organizacoes
+
+- id: campos-lista
+  url: /settings/custom-fields
+  passos:
+    - esperar: 'text=Tipo de cliente'
+    - pausa: 1000
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/contatos/campos-personalizados.webp
+  paginas:
+    - docs/configuracoes-no-workspace/campos-personalizados-no-kinbox
+
+- id: campos-novo
+  url: /settings/custom-fields
+  passos:
+    - esperar: 'button:has-text("Novo campo")'
+    - clicar: 'button:has-text("Novo campo")'
+    - esperar: '.ant-drawer-content #name'
+    - digitar: { seletor: '.ant-drawer-content #name', texto: 'Forma de pagamento' }
+    - digitar: { seletor: '.ant-drawer-content #description', texto: 'Como o cliente prefere pagar' }
+    - clicar: '.ant-drawer-content .ant-select:has(#type)'
+    - clicar: '.ant-select-item-option[title="Seleção"]'
+    - esperar: '.ant-drawer-content >> text=Valores do campo'
+    - clicar: '.ant-drawer-content button:has-text("Opção")'
+    - digitar: { seletor: '.ant-drawer-content input[placeholder="Valor"] >> nth=0', texto: 'Pix' }
+    - clicar: '.ant-drawer-content button:has-text("Opção")'
+    - digitar: { seletor: '.ant-drawer-content input[placeholder="Valor"] >> nth=1', texto: 'Cartão' }
+    - pausa: 800
+  alvo: '.ant-drawer-content'
+  mascarar: []
+  altura: 1320
+  arquivo: images/ajuda/contatos/novo-campo.webp
+  paginas:
+    - docs/configuracoes-no-workspace/campos-personalizados-no-kinbox
+
 # Seção integracoes (Integrações e API › Apps e CRMs). Só abre os painéis, sem salvar credencial nem autorizar em
 # terceiros. Nos painéis do Bitrix24 e do Zoho os campos recebem valores fictícios digitados (nada é salvo). O botão
 # Novo da tela Apps some do print. Pipedrive e NectarCRM listam os membros do workspace: a linha do dono (conta real)

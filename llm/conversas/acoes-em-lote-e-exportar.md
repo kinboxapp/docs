@@ -48,7 +48,6 @@ Referência complementar de [Ações em lote e exportar conversas](/docs/convers
 - **Visibilidade e privacidade:**
   - Somente atendimentos dentro do acesso do membro são exportados.
   - Com **Esconder mensagens se não atribuído.** ou **Esconder mensagens se não atribuído, com botão de aceitar.**, entram apenas atendimentos atribuídos ao próprio membro.
-  - Com **Esconder telefone**, a coluna **Telefone/identificador** sai vazia.
 - **Formato do arquivo:** `conversas_AAAA-MM-DD_a_AAAA-MM-DD.csv`, separado por ponto e vírgula (`;`), codificação UTF-8 com BOM (abre no Excel mantendo acentos).
 - **Execução:** ocorre no navegador; a aba precisa permanecer aberta até o download iniciar (estimativa da tela: cerca de 1 minuto para 2.000 conversas).
 - **Caso de 20.000 mensagens:** internamente o navegador solicita lotes menores (até 100 conversas por pedido) e divide o lote sozinho se passar de 20.000 mensagens; o erro de limite só aparece para o usuário se **uma única conversa** tiver mais de 20.000 mensagens no período.

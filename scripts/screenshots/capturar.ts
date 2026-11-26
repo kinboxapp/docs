@@ -30,6 +30,8 @@ type Passo =
   | { arrastar: { de: string; para: string; x?: number; y?: number } }
   /** Troca o texto do elemento antes do print (ex.: código de instalação do staging pelo formato de produção, com dados fictícios) */
   | { trocarTexto: { seletor: string; texto: string } }
+  /** Envia um arquivo fictício (caminho relativo a `scripts/screenshots/`) num `input[type=file]` */
+  | { enviar: { seletor: string; arquivo: string } }
 
 type Item = {
   id: string
@@ -217,6 +219,9 @@ async function executarPasso(page: Page, passo: Passo) {
       return els.length
     }, passo.trocarTexto.texto)
     if (!total) throw new Error(`trocarTexto: o seletor não achou nenhum elemento: ${passo.trocarTexto.seletor}`)
+  }
+  else if ('enviar' in passo) {
+    await page.locator(passo.enviar.seletor).first().setInputFiles(resolve(import.meta.dir, passo.enviar.arquivo), { timeout: 30_000 })
   }
   else throw new Error(`Passo desconhecido: ${JSON.stringify(passo)}`)
 }

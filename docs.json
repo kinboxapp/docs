@@ -170,6 +170,25 @@
             ]
           },
           {
+            "group": "CRM e vendas",
+            "icon": "handshake",
+            "pages": [
+              {
+                "group": "Contatos, organizações e campos personalizados",
+                "pages": [
+                  "docs/conversas/clientes-contatos-e-organizacoes",
+                  "docs/clientes/organizacoes",
+                  "docs/clientes/importar-contatos",
+                  "docs/clientes/exportar-contatos",
+                  "docs/clientes/mesclar-contatos",
+                  "docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
+                  "docs/clientes/tipos-de-campo",
+                  "docs/clientes/problemas-comuns"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Campanhas e marketing",
             "icon": "bullhorn",
             "pages": [
@@ -807,14 +826,6 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-templates/criando-templates-no-360dialog",
       "destination": "/docs/canais/criar-templates-dentro-do-kinbox"
-    },
-    {
-      "source": "/docs/conversas/clientes-contatos-e-organizacoes",
-      "destination": "/docs/conceitos/contatos-e-negocios"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
     },
     {
       "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",

@@ -540,6 +540,55 @@ async function garantirWidgetExemplo(api: Api) {
   log(`widget de exemplo: "${WIDGET_EXEMPLO}" (canal ${canal.id}), configurado`)
 }
 
+/** Campos personalizados de contato e organizações com contatos vinculados (prints da seção Contatos). */
+const CAMPOS_CONTATO = [
+  {
+    name: 'Tipo de cliente',
+    placeholder: 'tipo_de_cliente',
+    type: 'select',
+    entity: 'contact',
+    description: 'Como o cliente costuma comprar na loja',
+    options: ['Pessoa física', 'Empresa', 'Revenda'].map((value) => ({ value, label: value })),
+  },
+  { name: 'Data de aniversário', placeholder: 'data_de_aniversario', type: 'day', entity: 'contact', description: 'Para mandar parabéns e cupons' },
+]
+const VALORES_CONTATO: Record<string, { tipo_de_cliente?: string; notes?: string }> = {
+  'Ana Souza': { tipo_de_cliente: 'Pessoa física', notes: 'Prefere receber mensagens à tarde.' },
+  'Carlos Pereira': { tipo_de_cliente: 'Empresa' },
+  'Lucas Ferreira': { tipo_de_cliente: 'Revenda' },
+}
+const ORGANIZACOES = [
+  { name: 'Escritório Exemplo', segment: 'Serviços', website: 'https://www.example.com', contatos: [{ nome: 'Carlos Pereira', role: 'Compras' }] },
+  { name: 'Padaria Exemplo', segment: 'Alimentação', contatos: [{ nome: 'Lucas Ferreira', role: 'Gerente' }, { nome: 'Juliana Rocha', role: 'Financeiro' }] },
+]
+
+async function garantirClientes(api: Api, contatoIds: Record<string, string>) {
+  const campos = lista(await api.v0('GET', '/custom-fields'))
+  for (const campo of CAMPOS_CONTATO) {
+    if (!campos.some((c) => c.placeholder === campo.placeholder)) await api.v0('POST', '/custom-fields', campo)
+  }
+  for (const [nome, valores] of Object.entries(VALORES_CONTATO)) {
+    const id = contatoIds[nome]
+    if (!id) continue
+    await api.v3('PATCH', `/contacts/${id}`, {
+      ...(valores.notes ? { notes: valores.notes } : {}),
+      ...(valores.tipo_de_cliente ? { customFields: { tipo_de_cliente: { value: valores.tipo_de_cliente, type: 'select' } } } : {}),
+    })
+  }
+  const existentes = lista(await api.v3('GET', '/organizations?limit=100'))
+  for (const org of ORGANIZACOES) {
+    const { contatos, ...dados } = org
+    let o = existentes.find((x) => x.name === org.name)
+    if (!o) o = await api.v3('POST', '/organizations', dados)
+    const vinculados = lista(await api.v3('GET', `/organizations/${o.id}/contacts`)).map((l: any) => String(l.contactId ?? l.contact?.id))
+    for (const contato of contatos) {
+      const contactId = contatoIds[contato.nome]
+      if (contactId && !vinculados.includes(contactId)) await api.v3('POST', `/organizations/${o.id}/contacts`, { contactId, role: contato.role })
+    }
+  }
+  log(`clientes: ${CAMPOS_CONTATO.length} campos de contato e ${ORGANIZACOES.length} organizações`)
+}
+
 const workspace = await garantirWorkspace()
 const api = client(workspace.token)
 await pularOnboarding(api)
@@ -559,6 +608,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['bot de integração', () => garantirBotIntegracao(api)],
   ['organização do atendimento', () => garantirOrganizacao(api)],
   ['widget de exemplo', () => garantirWidgetExemplo(api)],
+  ['clientes', () => garantirClientes(api, contatoIds)],
 ]
 for (const [nome, etapa] of etapas) {
   try {
