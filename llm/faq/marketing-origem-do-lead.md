@@ -39,16 +39,18 @@ Cada sessão guarda uma única origem (uma nova não substitui a anterior), enqu
 **Como a Kinbox classifica o canal (nesta ordem):**
 
 1. Com `utm_source` preenchido (exceto `whatsapp` e `kinbox`, que não dizem de onde veio o clique): `google` → **Google Ads**; valores da Meta (como `facebook`, `instagram`, `fb`, `ig`, `meta`) → **Meta Ads**; qualquer outro valor → **Campanha**.
-2. Sem `utm_source` (ou com `whatsapp`/`kinbox`): identificadores da Meta (como `fbclid` ou o ID do anúncio no link) → **Meta Ads**; identificadores de clique do Google (`gclid`, `gbraid`, `wbraid`) ou `utm_campaign` sozinho → **Google Ads**; anúncio de clique para o WhatsApp sem parâmetros → **Meta Ads**.
+2. Sem `utm_source` (ou com `whatsapp`/`kinbox`): identificadores da Meta no link (como `fbclid` ou o ID do anúncio da Meta) → **Meta Ads**, com prioridade.
+3. Sem identificadores da Meta: identificadores de clique do Google (`gclid`, `gbraid`, `wbraid`), `utm_campaign` sozinho ou `utm_source` igual a `whatsapp`/`kinbox` → **Google Ads**.
+4. Por último, sem nada disso: anúncio de clique para o WhatsApp (ID do anúncio de origem, `source_id`) → **Meta Ads**.
 
 Exemplo: um link com `utm_campaign` e sem `utm_source` mostra o selo **Google Ads** e entra no filtro **Criado por Google Ads**, mas não aparece na aba **Atribuição no Kinbox**, que exige um identificador de clique do Google.
 
 **Filtros, negociações e relatórios:**
 
 - Use os filtros **Criado por Meta Ads** e **Criado por Google Ads** nas conversas (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)) e no funil de vendas.
-- **Origem da negociação:** ao criar a negociação, ou ao ligá-la a uma conversa se ela ainda não tiver origem, a Kinbox busca a origem nas sessões dos últimos 90 dias (exceto negociações importadas ou de funil operacional). Só chega à negociação a origem com identificação do anúncio da Meta (ID do anúncio, `ctwa_clid` ou `fbclid`) ou do clique do Google (`gclid`, `gbraid` ou `wbraid`); UTM sozinha não basta. Com essa origem, a negociação entra no filtro **Criado por Meta Ads** ou **Criado por Google Ads** do funil.
+- **Origem da negociação:** ao criar a negociação, ou ao ligá-la a uma conversa se ela ainda não tiver origem, a Kinbox busca a origem nas sessões dos 90 dias anteriores à criação da negociação (exceto negociações importadas ou de funil operacional). Só chega à negociação a origem com identificação do anúncio da Meta (ID do anúncio, `ctwa_clid` ou `fbclid`) ou do clique do Google (`gclid`, `gbraid` ou `wbraid`); UTM sozinha não basta. Com essa origem, a negociação entra no filtro **Criado por Meta Ads** ou **Criado por Google Ads** do funil.
 - **Bloco Conversão e Pipeline - Meta Ads:** só conta negociações com o ID do anúncio de clique para o WhatsApp de um anúncio da conta (e da campanha, se filtrada) escolhida no relatório. `fbclid` ou `ctwa_clid` sozinhos dão a origem Meta Ads à negociação, mas ela não entra nesse bloco.
-- **Aba Atribuição no Kinbox (Google Ads):** lista as conversas do período com `gclid`, `gbraid` ou `wbraid`, mesmo sem negociação; quando há negociação ligada, a linha aparece como **Negócio**. O relatório Google Ads não tem leads, CPL nem métricas de funil e pipeline.
+- **Aba Atribuição no Kinbox (Google Ads):** lista as conversas do período com `gclid`, `gbraid` ou `wbraid`, mesmo sem negociação; quando uma negociação recebeu a origem Google Ads daquela sessão, a linha aparece como **Negócio**. O relatório Google Ads não tem leads, CPL nem métricas de funil e pipeline.
 - Ver os relatórios em **Relatórios** → **Marketing** exige a permissão **Gerenciar relatórios**; ativar e conectar apps em **Configurações** → **Integrações** → **Apps** exige **Integrações** (se o app não aparecer em **Apps**, fale com o suporte; o proprietário pode tudo).
 
 **Quando não é possível identificar a origem:**

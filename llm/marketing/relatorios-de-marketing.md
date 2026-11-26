@@ -1,7 +1,7 @@
 ---
 title: "Relatórios de Meta Ads e Google Ads: consultas, contas, métricas, atribuição e mensagens"
-description: Detalhes dos relatórios e conexões de Meta Ads e Google Ads para consulta — limite de consultas, foto salva, troca de conta, cálculo das métricas, origem das negociações, sugestões do Google e mensagens de erro.
-keywords: [limite de consultas meta ads, limite google ads, foto salva, atualizado em, leads gerados meta, faturamento meta, roas, funil meta ads, atribuição no kinbox, gclid, sugestões google ads, autorização expirou, ads_read]
+description: Detalhes dos relatórios e conexões de Meta Ads e Google Ads para consulta — limite de consultas, dados salvos, troca de conta, cálculo das métricas, origem das negociações, sugestões do Google e mensagens de erro.
+keywords: [limite de consultas meta ads, limite google ads, dados salvos, atualizado em, leads gerados meta, faturamento meta, roas, funil meta ads, atribuição no kinbox, gclid, sugestões google ads, autorização expirou, ads_read]
 publico: llm
 tipo: referencia
 fontes:
@@ -27,15 +27,15 @@ Condições gerais:
 - Limites diários de consultas por workspace: **Meta Ads** = 10 consultas/dia; **Google Ads** = 3 consultas/dia; **Tracking** = sem limite (e só conta visitantes com consentimento de analytics, sem identificar o contato).
 - O relatório **Google Ads** não tem leads, CPL nem métricas de funil e pipeline; as negociações aparecem só como tipo **Negócio** na aba **Atribuição no Kinbox**.
 
-## Consultas e foto salva
+## Consultas e dados salvos
 
-- Os relatórios **Meta Ads** e **Google Ads** exibem uma foto salva dos dados ("Atualizado em DD/MM HH:mm").
+- Os relatórios **Meta Ads** e **Google Ads** exibem os dados salvos da última busca ("Atualizado em DD/MM HH:mm").
 - A cota diária é por workspace e separada por app, renovada à meia-noite (horário de Brasília):
   - **Meta Ads:** 10 consultas por dia; intervalo mínimo de 5 minutos entre dois cliques em **Atualizar**.
   - **Google Ads:** 3 consultas por dia; intervalo mínimo de 15 minutos entre dois cliques em **Atualizar**.
-- **Consome 1 consulta:** primeira abertura de uma conta ou período; período ainda não coberto por nenhuma foto salva; foto salva com mais de 48 horas (renovada automaticamente ao abrir; se falhar ou sem cota, exibe a foto antiga); clique em **Atualizar**; e troca para outra conta que ainda não tenha foto salva.
-- **Não consome consulta:** selecionar um período contido dentro de uma foto já salva da conta; consultas que falham (a consulta é devolvida à cota). O intervalo mínimo de 5 ou 15 minutos vale apenas para **Atualizar**, não para abrir um período novo.
-- **Validade da foto:** expira automaticamente após 30 dias sem atualização. **Desconectar** apaga todas as fotos salvas daquele app no workspace.
+- **Consome 1 consulta:** primeira abertura de uma conta ou período; período ainda não coberto por dados salvos; dados salvos há mais de 48 horas (renovados automaticamente ao abrir; se falhar ou sem cota, exibe os dados antigos); clique em **Atualizar**; e troca para outra conta que ainda não tenha dados salvos.
+- **Não consome consulta:** selecionar um intervalo dentro de um período já consultado da conta, quando a Kinbox reaproveita os dados salvos sem renová-los; consultas que falham (a consulta é devolvida à cota). O intervalo mínimo de 5 ou 15 minutos vale apenas para **Atualizar**, não para abrir um período novo.
+- **Validade dos dados salvos:** expiram automaticamente após 30 dias sem atualização. **Desconectar** apaga todos os dados salvos daquele app no workspace.
 - **Tooltips do botão Atualizar:**
   - `"{{remaining}} de {{limit}} consultas disponíveis hoje."`
   - `"Próxima atualização disponível às {{time}}."`
@@ -52,7 +52,7 @@ Condições gerais:
 - Atalhos: **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**. Padrão de abertura: últimos 30 dias até ontem (no Google Ads, no fuso da conta).
 - **Limites:** máximo de 366 dias (períodos maiores são cortados no início sem aviso); datas futuras e anteriores a `03/06/2022` ficam bloqueadas.
 - No **Meta Ads**, cada seção tem seu seletor de datas independente; ao abrir ou trocar de conta, todas voltam ao padrão.
-- **Aviso de recorte de foto maior:** em blocos que não têm detalhamento diário (Campanhas, Criativos, Regiões e Demografia no Meta Ads; Palavras-chave, Regiões e abas Palavras-chave, Anúncios e Termos de busca no Google Ads), quando o período selecionado é recortado de uma foto maior, aparece `"Mostrando o período completo já consultado (DD/MM a DD/MM): a Meta não calcula estes dados por dia."` ou `"...: o Google Ads não calcula estes dados por dia."`.
+- **Aviso de recorte de período maior:** em blocos que não têm detalhamento diário (Campanhas, Criativos, Regiões e Demografia no Meta Ads; Palavras-chave, Regiões e abas Palavras-chave, Anúncios e Termos de busca no Google Ads), quando o período selecionado é recortado de um período maior já consultado, aparece `"Mostrando o período completo já consultado (DD/MM a DD/MM): a Meta não calcula estes dados por dia."` ou `"...: o Google Ads não calcula estes dados por dia."`.
 - No **Google Ads**, quando o período inclui hoje, aparece `"Os dados de hoje ainda são parciais."`
 
 ## Contas
@@ -89,7 +89,7 @@ Condições gerais:
 ## Meta Ads: de onde vêm as negociações
 
 - Cliques, leads, gasto, alcance, **Faturamento (Meta)** e **ROAS** vêm da Meta. Da Kinbox vêm **Negócios**, **Ganhos**, **Perdidos**, **Valor em negociação**, **Negócios em aberto** e **Tempo médio no funil**.
-- **Origem da negociação:** ao criar uma negociação, a Kinbox procura a sessão mais recente do contato com origem nos últimos 90 dias. Ao ligar uma negociação existente sem origem a uma conversa, a Kinbox busca a origem nas sessões dessa conversa. A origem é Meta Ads quando a sessão tem ID do anúncio (`source_id`), `ctwa_clid` ou `fbclid` (UTM sozinha não atribui ao Meta Ads); essa origem vale para o filtro **Criado por Meta Ads**. Negociações importadas e de funil operacional não recebem origem.
+- **Origem da negociação:** ao criar uma negociação, a Kinbox procura a sessão mais recente do contato com origem nos últimos 90 dias. Ao ligar uma negociação existente sem origem a uma conversa, a Kinbox busca a origem nas sessões dessa conversa dos 90 dias anteriores à criação da negociação. A origem é Meta Ads quando a sessão tem ID do anúncio (`source_id`), `ctwa_clid` ou `fbclid` (UTM sozinha não atribui ao Meta Ads); essa origem vale para o filtro **Criado por Meta Ads**. Negociações importadas e de funil operacional não recebem origem.
 - **Regras do bloco Conversão e Pipeline - Meta Ads:** conta só negociações com o ID do anúncio (`source_id`, que vem de anúncios de clique para o WhatsApp) de um anúncio da conta/campanha selecionada (considerando anúncios que rodaram até 90 dias antes do início do período), criadas no período (no fuso da conta de anúncios). Negociações com origem Meta Ads só por `fbclid` ou `ctwa_clid` não entram no bloco. O status em **Status dos negócios** (**Em andamento**, **Ganhos**, **Perdidos**) é o status atual; **Tempo médio no funil** é a média de dias desde a criação das negociações ainda abertas.
 - **Funil de Vendas e Conversão:** **Cliques** → **Leads** → **Negócios** → **Ganhos**, com cada percentual calculado sobre a etapa imediatamente anterior.
 
@@ -140,8 +140,8 @@ Condições gerais:
 - **Colunas:** **Click ID** (mascarado: 7 primeiros + `••••` + 4 últimos e tipo), **Campanha** (com grupo e palavra-chave), **Entidade Kinbox** (**Conversa** ou **Negócio**), **Motivo do vínculo**, **Confiança** (`Alta`), **Status** (`Vinculado`) e **Registrado em**.
 - **Limites:** lê até 1.000 sessões mais recentes do workspace no período e exibe até 200 linhas.
 - **Confirmação no Google Ads:** para `gclid`, consulta até 32 dias distintos mais recentes por carregamento (o Google mantém 90 dias de histórico de cliques); `gbraid` e `wbraid` não são confirmados no Google. Quando não confirma, a linha continua com a campanha por `utm_campaign` ou `—`. Quando o Google confirma que o clique pertence a outra conta do workspace e não há UTM compatível, a linha sai da lista.
-- **Frequência:** a atribuição é recalculada no máximo 1 vez por dia por foto salva (clicar em **Atualizar** no mesmo dia mantém as linhas).
-- **Conversas e negociações:** a aba lista as conversas do período com `gclid`, `gbraid` ou `wbraid`, mesmo sem negociação (tipo **Conversa**); quando uma negociação recebeu a origem daquela sessão, a linha aparece como **Negócio**. A negociação recebe a origem Google Ads ao ser criada (sessão mais recente do contato nos últimos 90 dias) ou ao ser ligada a uma conversa, se ainda não tiver origem; negociações importadas ou de funil operacional não recebem origem.
+- **Frequência:** a atribuição é recalculada no máximo 1 vez por dia para os mesmos dados salvos (clicar em **Atualizar** no mesmo dia mantém as linhas).
+- **Conversas e negociações:** a aba lista as conversas do período com `gclid`, `gbraid` ou `wbraid`, mesmo sem negociação (tipo **Conversa**); quando uma negociação recebeu a origem daquela sessão, a linha aparece como **Negócio**. A negociação recebe a origem Google Ads ao ser criada (sessão mais recente do contato nos 90 dias anteriores) ou ao ser ligada a uma conversa, se ainda não tiver origem (sessões dos 90 dias anteriores à criação da negociação); negociações importadas ou de funil operacional não recebem origem.
 
 ## Google Ads: conexão e mensagens
 

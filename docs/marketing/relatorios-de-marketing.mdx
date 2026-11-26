@@ -35,7 +35,7 @@ Nos relatórios **Meta Ads** e **Google Ads**, a Kinbox exibe os dados salvos da
 - Abrir dados salvos há mais de 48 horas;
 - Clicar no botão **Atualizar**.
 
-Escolher um período dentro de um período já consultado não gasta consulta. A cota vira à meia-noite (horário de Brasília), e passar o mouse sobre **Atualizar** mostra quantas consultas restam hoje.
+Escolher um intervalo dentro de um período já consultado não gasta consulta quando a Kinbox reaproveita os dados salvos sem renová-los. A cota vira à meia-noite (horário de Brasília), e passar o mouse sobre **Atualizar** mostra quantas consultas restam hoje.
 
 | Relatório | Consultas por dia (por workspace) | Intervalo mínimo entre dois Atualizar |
 | --- | --- | --- |
@@ -74,7 +74,7 @@ Abaixo dos cartões, o gráfico mostra **Leads**, **Investimento** ou **Faturame
 
 ### Conversão e Pipeline - Meta Ads
 
-Este bloco acompanha as negociações da Kinbox criadas no período a partir de conversas que vieram de anúncios de clique para o WhatsApp desta conta (só entram as negociações com o ID do anúncio; `fbclid` sozinho não basta) (veja [Visão geral do CRM](/docs/crm/visao-geral)).
+Este bloco acompanha as negociações da Kinbox criadas no período a partir de conversas que vieram de anúncios de clique para o WhatsApp desta conta (só entram as negociações com o ID do anúncio; `fbclid` sozinho não basta). Veja [Visão geral do CRM](/docs/crm/visao-geral).
 
 - **Funil de Vendas e Conversão:** mostra **Cliques** → **Leads** → **Negócios** → **Ganhos**, com cada percentual calculado sobre a etapa anterior. **Cliques** e **Leads** vêm da Meta; **Negócios** e **Ganhos** vêm da Kinbox.
 - **Resumo do Pipeline:** traz **Valor em negociação**, **Negócios em aberto** e **Tempo médio no funil**.
@@ -113,7 +113,7 @@ O bloco **Sugestões em Destaque** compara campanhas, palavras-chave e termos de
 
 ### Atribuição no Kinbox
 
-Na seção **Mídia e atribuição**, a aba **Atribuição no Kinbox** lista as conversas do período que chegaram com um identificador de clique do Google (`gclid`, `gbraid` ou `wbraid`), mesmo sem negociação, com o identificador mascarado, a campanha e o motivo do vínculo. Quando há negociação ligada, a linha aparece como **Negócio**; senão, como **Conversa**.
+Na seção **Mídia e atribuição**, a aba **Atribuição no Kinbox** lista as conversas do período que chegaram com um identificador de clique do Google (`gclid`, `gbraid` ou `wbraid`), mesmo sem negociação, com o identificador mascarado, a campanha e o motivo do vínculo. Quando uma negociação recebeu a origem Google Ads daquela sessão, a linha aparece como **Negócio**; senão, como **Conversa**. A negociação recebe essa origem ao ser criada ou, se ainda não tiver origem, ao ser ligada a uma conversa; nos dois casos, vale a sessão de anúncio dos 90 dias anteriores à criação da negociação.
 
 Se a aba aparecer vazia, confira se o identificador do clique (`gclid`) está chegando até a conversa (veja a dica em [Conectar o Google Ads](/docs/marketing/google-ads)). Você também pode filtrar conversas vindas do Google Ads usando [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa).
 
@@ -139,8 +139,6 @@ No topo, use o seletor **Site:** para ver um site específico ou **Todos os site
 ### Mapa de calor
 
 Na aba **Mapa de calor**, escolha a página em **Selecione uma página**, a versão do layout e **Desktop** ou **Mobile**. A tela mostra os cartões **Cliques**, **Sessões**, **Profundidade média** e **Atenção por sessão**, seguidos de **Mapa de cliques**, **Elementos mais clicados** e **Scroll e atenção**.
-
-Clique em **Recapturar** para descartar a foto atual da página e gerar uma nova na próxima visita consentida; os cliques já registrados não são apagados.
 
 ### Retenção dos dados
 

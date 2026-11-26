@@ -28,11 +28,11 @@ Cada workspace tem um limite diário de consultas às plataformas de anúncios �
 **O que gasta consulta:**
 
 - Primeira abertura de uma conta ou de um período ainda não consultado;
-- Reabertura de uma foto salva com mais de 48 horas;
+- Reabertura de dados salvos há mais de 48 horas (a Kinbox os renova ao abrir);
 - Clique no botão **Atualizar**;
-- Trocar para outra conta de anúncios que ainda não tenha foto salva.
+- Trocar para outra conta de anúncios que ainda não tenha dados salvos.
 
-**O que não gasta consulta:** escolher um período que já esteja dentro de uma foto consultada da mesma conta, ou consultas que falham (a consulta volta para a cota).
+**O que não gasta consulta:** escolher um intervalo dentro de um período já consultado da mesma conta, quando a Kinbox reaproveita os dados salvos sem renová-los, ou consultas que falham (a consulta volta para a cota).
 
 **Mensagens que podem aparecer:**
 

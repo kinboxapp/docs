@@ -53,7 +53,7 @@ Condições gerais:
 | `page_view` | — (automático) | **Pageview** | Não |
 | `form_submitted` | `form_id`, `form_name` | **Formulário enviado** | Sim |
 | `widget_opened` | `widget_id`, `widget_name` | **Widget aberto** | Sim |
-| `whatsapp_link_clicked` | `link_url` (só origem e caminho, sem query nem hash), `label` | **Link do WhatsApp clicado** | Sim |
+| `whatsapp_link_clicked` | `link_url`, `label` | **Link do WhatsApp clicado** | Sim |
 | `conversation_requested` | `channel`, `source` | **Conversa solicitada** | Sim |
 | `consent_updated` | `status` (automático) | **Consentimento atualizado** | Não |
 | `source_captured` | `source` (automático) | **Origem capturada** | Não |
@@ -85,7 +85,7 @@ A identidade anônima é gerada no navegador somente depois de `consent granted`
 - **Edição:** alterar o domínio ou a chave de um site volta o status para **Aguardando instalação** e limpa o último sinal e o último teste.
 - **Status Com erro:** só aparece quando uma sessão de teste falha antes de o site ficar **Ativo**; um site já **Ativo** não é rebaixado por falha de teste.
 - **Revogar chave:** ação definitiva; os sites vinculados deixam de enviar eventos e continuam listados. Para substituir uma chave: crie outra em **Configurações**, edite cada site que usa a chave antiga para selecionar a nova em **Chave existente**, publique e teste o novo snippet em **todos** esses sites e só então revogue a antiga.
-- **Copiar snippet em chave antiga:** se a chave do site foi criada antes de o snippet poder ser recuperado, **Copiar snippet** abre "Regenerar chave de Tracking?" ("Esta chave foi criada antes do snippet poder ser recuperado. A chave anterior deixará de funcionar e uma nova será gerada para este site."). Ao clicar em **Regenerar e abrir snippet**, a chave anterior deixa de funcionar e o snippet novo é copiado; todos os sites que usavam a chave anterior precisam do snippet novo.
+- **Copiar snippet em chave antiga:** se a chave do site foi criada antes de o snippet poder ser recuperado, **Copiar snippet** abre "Regenerar chave de Tracking?" ("Esta chave foi criada antes do snippet poder ser recuperado. A chave anterior deixará de funcionar e uma nova será gerada para este site."). Ao clicar em **Regenerar e abrir snippet**, a chave é substituída no lugar: a anterior deixa de funcionar na hora, em todos os sites que a usam, e o snippet novo é copiado. Os sites continuam associados à mesma chave (não é preciso reassociar cada site), mas todos precisam do snippet novo instalado.
 - **Excluir site:** apaga permanentemente eventos, mapa de calor e testes do site; a chave não é apagada.
 
 ## Mapa de calor
@@ -99,7 +99,7 @@ A identidade anônima é gerada no navegador somente depois de `consent granted`
   - `data-kbq-id`: dá nome ao elemento em **Elementos mais clicados** (aceita letras, números e `_.:-`; exibe com a primeira letra maiúscula e mantém o hífen).
 - **Dispositivo:** **Mobile** para largura de janela abaixo de 768 px; **Desktop** para 768 px ou mais.
 - **Versões da página:** novas versões surgem quando muda a estrutura do layout (exibe até 5 versões por página).
-- **Foto da página:** campos de formulário, mídia, iframes e áreas com `data-kbq-private` aparecem mascarados. Largura máxima de 1.600 px, altura máxima de 12.000 px (marca **Captura parcial** quando cortada) e tamanho máximo de 5 MB. Limite de 200 fotos novas por site a cada 24 horas; em caso de falha, nova tentativa automática após 1 hora. O botão **Recapturar** descarta a foto atual para gerar outra na próxima visita consentida, sem apagar os cliques.
+- **Foto da página:** campos de formulário, mídia, iframes e áreas com `data-kbq-private` aparecem mascarados. Largura máxima de 1.600 px, altura máxima de 12.000 px (marca **Captura parcial** quando cortada) e tamanho máximo de 5 MB. Limite de 200 fotos novas por site a cada 24 horas; em caso de falha, nova tentativa automática após 1 hora.
 - **Mensagens de estado no relatório:**
   - `"Aguardando interações consentidas para gerar o mapa de calor."`
   - `"A captura visual está sendo preparada. Os cliques já estão disponíveis."`
