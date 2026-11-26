@@ -143,12 +143,14 @@
   {
     "pergunta": "O cliente voltou a escrever depois que resolvi e apareceu outro número de protocolo. Por quê?",
     "esperado": [
-      "docs/conceitos/conversas-e-sessoes"
+      "docs/conceitos/conversas-e-sessoes",
+      "docs/conversas/gerenciar-conversas",
+      "llm/faq/conversa-protocolo"
     ],
     "tipo": "conceito"
   },
   {
-    "pergunta": "Como faço para um atendente ver só as conversas do grupo dele?",
+    "pergunta": "Quero que um atendente veja as conversas do grupo dele e as que forem atribuídas a ele, e nada de outros grupos. Qual acesso escolho?",
     "esperado": [
       "docs/conceitos/workspace-membros-e-papeis"
     ],

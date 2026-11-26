@@ -179,13 +179,14 @@ Termos fixos. Os rótulos exatos vêm sempre do i18n do `web`; esta lista é com
 | Use | Não use | O que é |
 | --- | --- | --- |
 | Kinbox | KinBox, kinbox | O produto |
-| workspace (na tela: **ambiente**) | empresa, conta, tenant | O espaço de uma empresa na Kinbox, com canais, membros, dados, plano e saldo próprios. A tela quase sempre diz **ambiente** (**Adicionar ambiente**, seção **Ambiente**): na primeira menção de cada página, diga "o workspace (na tela, **ambiente**)" |
+| workspace (na tela: **ambiente**) | empresa, conta, tenant | O espaço de uma empresa na Kinbox, com canais, membros, dados, plano e saldo próprios. A tela quase sempre diz **ambiente** (**Adicionar ambiente**, seção **Ambiente**). Diga "o workspace (na tela, **ambiente**)" só na primeira menção de páginas que citam um rótulo com "ambiente" (ex.: **Configurações** → **Ambiente**) |
 | membro | usuário, atendente, operador | Pessoa com acesso ao workspace. "Atendente" só quando o texto fala do papel de atender |
 | contato | cliente, lead | A pessoa ou empresa com quem o workspace conversa |
 | conversa | chat, atendimento, ticket | Troca de mensagens com um contato **num canal** (uma conversa por canal). Cada atendimento dentro dela é uma sessão |
 | canal | conexão, integração | WhatsApp, Instagram, e-mail etc. ligados ao workspace |
 | **Caixa de entrada** | inbox | Tela onde se atendem as conversas |
-| **Funis** / negociação | card, oportunidade, deal, lead | O CRM: funis com etapas e negociações. A tela diz **negociação** e também "negócio". "Cartão" só para descrever como a negociação aparece no funil |
+| visão | aba, pasta, segmento | Lista padrão de conversas da **Caixa de entrada** (**Abertos**, **Meus**, **Seguindo**, **Arquivados**). Os que a pessoa cria são **Filtros** |
+| **Funis** / negociação | card, oportunidade, deal | O CRM: funis com etapas e negociações. A tela diz **negociação** e também "negócio". "Cartão" só para descrever como a negociação aparece no funil |
 | agente de IA | robô, IA, chatbot | Agente com IA (Configurações → Automação → **Agentes de IA**) que responde ou age sozinho nas conversas |
 | bot | robô, chatbot, agente | Fluxo de bot montado em **Bot** (menus, perguntas, desvios). Não é agente de IA: não use um termo pelo outro |
 | **Salas** | chat interno | Conversas internas do time |

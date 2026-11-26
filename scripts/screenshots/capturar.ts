@@ -32,6 +32,8 @@ type Item = {
   /** Seletor do recorte. Uma lista recorta o retângulo que cobre todos eles. */
   alvo: string | string[]
   mascarar?: string[]
+  /** Seletores escondidos (display: none) antes do print: elementos que o cliente não vê (ex.: menu Admin da conta de teste, selo de staging). */
+  esconder?: string[]
   arquivo: string
   paginas?: string[]
   /** Largura da janela (px) só para este item, para telas largas demais. Padrão: 1440. Abaixo de 768 o app usa o layout antigo. */
@@ -189,6 +191,13 @@ async function capturar(page: Page, conversor: Page, item: Item) {
   await page.waitForLoadState('networkidle').catch(() => {})
   await page.addStyleTag({ content: CSS_ESTAVEL })
   for (const passo of item.passos || []) await executarPasso(page, passo)
+
+  // Elementos que o cliente nunca vê (só da conta de teste ou do staging) somem do print em vez de levar tarja
+  for (const seletor of item.esconder || []) {
+    await page.locator(seletor).evaluateAll((els) => {
+      for (const el of els) (el as HTMLElement).style.setProperty('display', 'none', 'important')
+    })
+  }
 
   // Tarja sólida (opaca) por cima de cada elemento: borrão pode ser revertido ou deixar o texto legível.
   // Seletor que não acha nada faz o item falhar, para um dado real não sair no print por engano.

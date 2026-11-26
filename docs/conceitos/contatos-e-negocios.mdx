@@ -11,6 +11,8 @@ fontes:
   - web:src/pages/settings/pipelines/wizard/PipelineWizardSteps.tsx
   - api:src/modules/deals/deal.schema.ts
   - api-v0:server/services/CustomerService.js
+  - web:src/pages/crm/deals/AddDeal/index.tsx
+  - api:src/modules/deals/deals.service.ts
 codigo:
   - web:src/pages/crm/contacts/index.tsx
   - web:src/pages/crm/contacts/EditContact.tsx
@@ -20,6 +22,8 @@ codigo:
   - api:src/modules/deals/deal.schema.ts
   - api-v0:server/services/CustomerService.js
   - api-v0:server/services/CustomerPlatformService.js
+  - web:src/pages/crm/deals/AddDeal/**
+  - api:src/modules/deals/deals.service.ts
 verificado_em: 2026-11-26
 ---
 
@@ -27,9 +31,9 @@ Na Kinbox, **contatos** são as pessoas com quem o workspace conversa, **organiz
 
 ## Contato
 
-O contato é a pessoa com quem o workspace (na tela, **ambiente**) conversa. A lista fica no menu **Clientes** → **Contatos**.
+O contato é a pessoa com quem o workspace conversa. A lista fica no menu **Clientes** → **Contatos**.
 
-Quando alguém envia a primeira mensagem em um canal, a Kinbox cria o contato e a conversa automaticamente. Antes de criar um novo cadastro, ela procura no workspace um contato com o mesmo telefone (com e sem o dígito 9), o mesmo e-mail ou o mesmo identificador externo e reaproveita o contato já existente. Você também pode criar contatos manualmente ou importar uma planilha.
+Quando alguém envia a primeira mensagem em um canal, a Kinbox cria o contato e a conversa automaticamente. Se já existe no workspace um contato com o mesmo telefone ou e-mail, a Kinbox usa esse contato em vez de criar outro. Você também pode criar contatos manualmente ou importar uma planilha.
 
 Um mesmo contato pode ter várias conversas, uma por canal — veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes).
 
@@ -58,7 +62,7 @@ Uma **negociação** (que na tela também aparece como "negócio") é uma venda 
 
 O **funil** é o quadro com etapas em colunas, acessível no menu **Funis**. Você cria e edita funis em **Configurações** → **CRM** → **Funis**.
 
-Cada negociação reúne nome, valor, produtos, status, um contato, uma organização (opcional), uma conversa, o membro responsável, o grupo, o funil e a etapa, além de **Campos personalizados**.
+Toda negociação tem um contato. A organização é opcional, e a conversa também: a negociação fica ligada a uma conversa quando nasce dela ou quando você associa as duas. Ela guarda ainda nome, valor, produtos, status, o membro responsável, o grupo, o funil, a etapa e **Campos personalizados**.
 
 Os status padrão de uma negociação são **Aberto**, **Ganho** e **Perdido**. A Kinbox oferece dois tipos de funil:
 
@@ -71,7 +75,7 @@ Os status padrão de uma negociação são **Aberto**, **Ganho** e **Perdido**. 
 | --- | --- | --- |
 | Contato | Conversas | Uma conversa por canal |
 | Contato | Organizações | Um contato pode estar ligado a uma ou mais organizações |
-| Negociação | Contato, organização e conversa | Liga um contato, uma conversa e, se quiser, uma organização |
+| Negociação | Contato, organização e conversa | Sempre tem um contato; organização e conversa são opcionais |
 | Negociação | Funil e etapa | Fica em uma etapa de um funil |
 
 Veja também [Como a Kinbox funciona](/docs/conceitos/visao-geral) e o [Glossário](/docs/conceitos/glossario).

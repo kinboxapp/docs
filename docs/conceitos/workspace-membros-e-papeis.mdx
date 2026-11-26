@@ -11,6 +11,7 @@ fontes:
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/WorkspaceController.js
   - api:src/modules/workspace-defaults/workspace-defaults.constants.ts
+  - api-v0:server/services/CustomerPlatformService.js
 codigo:
   - web:src/components-old/header/WorkspaceDrop.tsx
   - web:src/components-old/header/AddWorkspaceModal.tsx
@@ -20,96 +21,79 @@ codigo:
   - api-v0:server/controllers/WorkspaceController.js
   - api-v0:server/routes/OperatorsApiRoutes.js
   - api:src/modules/workspace-defaults/**
+  - api-v0:server/services/CustomerPlatformService.js
 verificado_em: 2026-11-26
 ---
 
-O **workspace** (na tela, **ambiente**) é o espaço da sua empresa na Kinbox, onde ficam os canais, os membros, os papéis de permissão, os grupos e os dados de atendimento.
+O **workspace** (na tela, **ambiente**) é o espaço da sua empresa na Kinbox. Nele ficam os canais, os membros, os papéis de permissão, os grupos e os dados de atendimento.
 
 ## Workspace
 
-Cada workspace tem seus próprios canais, membros, contatos, conversas, plano, carteira com saldo e token de API.
+Cada workspace tem os próprios canais, membros, contatos, conversas, plano e carteira de saldo. Nada disso passa de um workspace para outro.
 
-Você pode participar de vários workspaces usando o mesmo login. Para alternar entre eles, clique no botão com o nome do ambiente no topo da tela e escolha outro ambiente da lista.
-
-Na mesma lista, a opção **Adicionar ambiente** abre a janela **Criar novo ambiente**, onde você informa o **Nome do ambiente** (obrigatório, até 128 caracteres) e clica em **Criar**. A Kinbox entra no novo ambiente na hora. Quem cria vira o proprietário, e o ambiente nasce com papéis padrão, uma sala padrão, um plano de teste próprio e uma carteira própria com saldo de cortesia.
-
-O **Nome do ambiente** e a **Imagem do ambiente** ficam em **Configurações** → **Ambiente** → **Geral**.
+Uma pessoa pode participar de vários workspaces com o mesmo login. Para trocar, clique no botão com o nome do ambiente, no topo da tela, e escolha outro na lista. Na mesma lista, **Adicionar ambiente** cria um workspace novo: quem cria vira o proprietário, e o workspace novo começa com plano de teste e carteira próprios.
 
 ## Proprietário
 
-Cada workspace tem um único proprietário, identificado como **Proprietário** na coluna **Permissão** da lista de membros.
+Cada workspace tem um único proprietário, que aparece como **Proprietário** na lista de membros.
 
-- Ele passa em todas as permissões do workspace, exceto nas permissões **restritivas** (que tiram acesso em vez de liberar).
-- Somente o proprietário vê **Excluir ambiente** e **Tornar proprietário** (para transferir a propriedade).
-- Não é possível excluir nem desativar o proprietário do ambiente.
-
-<Warning>
-  **Transferir propriedade** para outro membro exige a sua senha atual e é uma ação irreversível.
-</Warning>
+- Ele tem todas as permissões, e nenhuma restrição vale para ele.
+- Só ele pode excluir o workspace e transferir a propriedade para outro membro. A transferência não tem volta.
+- O proprietário não pode ser excluído nem desativado.
 
 ## Membros
 
-Membros são as pessoas com acesso ao workspace. Eles são gerenciados em **Configurações** → **Ambiente** → **Membros**.
+Membros são as pessoas com acesso ao workspace. Eles entram por convite, em **Configurações** → **Ambiente** → **Membros**: a pessoa recebe um e-mail com o link de cadastro e aparece como **Convidado** até aceitar.
 
-Ao usar **Convidar membro**, você define **Nome**, **E-mail**, **Permissão** e as opções **Disponível** e **Ativo**. A pessoa recebe um e-mail com o link de cadastro no ambiente.
+Dois estados controlam o que acontece com o membro:
 
-Na lista de membros, cada pessoa aparece com sua situação: **Online**, o tempo desde a última vez online, **Convidado** (convite enviado por e-mail, mas ainda não aceito) ou **Inativo**. Você pode filtrar a lista por **Tudo**, **Ativo**, **Inativo** e **Convite enviado**.
+- **Ativo**: só membros ativos conseguem entrar na Kinbox. Membro desativado aparece como **Inativo**.
+- **Disponível**: só membros disponíveis recebem notificações e novos atendimentos pela **Atribuição automática**.
 
-Dois estados controlam o funcionamento do membro:
-
-- **Ativo**: somente membros ativos conseguem fazer login na Kinbox.
-- **Disponível**: somente membros disponíveis recebem notificações e podem receber novos atendimentos pela **Atribuição automática**.
-
-Cada membro tem um papel (**Permissão**) e pode participar de vários **Grupos**.
+Cada membro tem um papel (na tela, **Permissão**) e pode participar de vários grupos.
 
 ## Licenças
 
-Cada membro ativo ocupa uma licença de membro do plano, inclusive quem foi convidado e ainda não aceitou o convite. Desativar um membro libera a licença ocupada por ele. Quando todas as licenças do plano estão em uso, a Kinbox mostra um aviso de limite e não permite enviar novos convites.
+Cada membro ativo ocupa uma licença do plano, inclusive quem foi convidado e ainda não aceitou. Desativar um membro libera a licença. Quando todas as licenças estão em uso, a Kinbox avisa que o limite foi atingido e não deixa convidar mais ninguém.
 
 ## Papéis
 
-Nesta central de ajuda, chamamos de **papel** o conjunto de permissões atribuído a um membro. Na tela da Kinbox, esse conjunto aparece com o nome **Permissão** (na lista **Configurações** → **Ambiente** → **Permissões**, no botão **Nova permissão** e no campo **Permissão** de cada membro). Usamos "permissão" no texto para cada opção marcada dentro de um papel.
+Nesta central, **papel** é o conjunto de permissões dado a um membro. Na tela, esse conjunto se chama **Permissão**: a lista fica em **Configurações** → **Ambiente** → **Permissões**, e o membro recebe uma **Permissão** no convite. No texto, "permissão" sozinha é cada opção marcada dentro do papel.
 
-Cada membro tem apenas um papel, e um papel em uso por algum membro não pode ser excluído.
+Cada membro tem um papel só. Um papel em uso por algum membro não pode ser excluído.
 
-Um workspace novo vem com papéis prontos definidos pela Kinbox, que você pode editar ou complementar criando outros em **Nova permissão**:
+Um workspace novo vem com papéis prontos, definidos pela Kinbox, que você pode editar. Em geral são **Administrador** (acesso total, inclusive cobrança), **Supervisor** (acompanha a equipe e os relatórios) e **Atendente** (atende conversas e cuida de negociações). Você também pode criar outros papéis com **Nova permissão**.
 
-- **Administrador**: acesso total, inclusive cobrança e configurações.
-- **Supervisor**: acompanha a equipe, relatórios e filas.
-- **Atendente**: atende conversas e gerencia negociações.
-
-Dentro de um papel, as opções se dividem nas seções **Acesso as Conversas**, **Conversas**, **Negociações**, **Tarefas**, **Contatos**, **Relatórios**, **Canais**, **Agendas**, **Copiloto** e **Outros** (além de **Home**, para quem vê relatórios).
-
-Algumas opções são **permissões restritivas**: em vez de liberar uma ação, elas retiram um acesso específico (por exemplo, limitar o início de chat ativo). Essas restrições não se aplicam ao proprietário.
+Dentro de um papel, as opções se dividem por área: acesso às conversas, conversas, negociações, tarefas, contatos, relatórios, canais e outras. Algumas opções são **restritivas**: em vez de liberar uma ação, elas tiram um acesso (por exemplo, impedir de iniciar conversa com quem já está com outro membro). Nenhuma restrição vale para o proprietário.
 
 ### Acesso as Conversas
 
-Em cada papel, você escolhe uma das seis opções de **Acesso as Conversas** para definir quais atendimentos o membro pode visualizar na **Caixa de entrada** (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)):
+Em cada papel, você escolhe uma das seis opções de **Acesso as Conversas**. Ela define quais conversas o membro vê na **Caixa de entrada**, olhando para o membro responsável e o grupo da sessão atual de cada conversa (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)):
 
-| Opção | O que o membro vê |
-| --- | --- |
-| **Global** | Pode ver todas as conversas. |
-| **Por Grupo ou sem Grupo** | Pode ver as conversas de seus grupos ou sem grupo ou atribuídas a ele. |
-| **Por Grupo** | Pode ver apenas as conversas de seus grupos ou atribuídas a ele. |
-| **Por Grupo Limitado** | Pode ver apenas as conversas de seus grupos atribuídas a ele ou sem atribuição. |
-| **Limitado** | Ver apenas as conversas atribuídas a ele ou seguindo ou sem atribuição. |
-| **Restrito** | Pode ver apenas as conversas atribuídas a ele ou seguindo. |
+| Opção | O membro vê | Exemplo: Ana está no grupo Vendas |
+| --- | --- | --- |
+| **Global** | Todas as conversas | Ana vê tudo |
+| **Por Grupo ou sem Grupo** | As conversas dos grupos dele, as sem grupo e as atribuídas a ele | Ana vê as de Vendas, as sem grupo e as dela em qualquer grupo; não vê as de Suporte |
+| **Por Grupo** | As conversas dos grupos dele e as atribuídas a ele | Ana vê as de Vendas e as dela; não vê as sem grupo |
+| **Por Grupo Limitado** | As conversas atribuídas a ele e as sem responsável dos grupos dele | Ana vê as dela e as de Vendas sem responsável; não vê as de Vendas atribuídas a Bruno |
+| **Limitado** | As conversas atribuídas a ele e as sem responsável, desde que sem grupo ou de um grupo dele | Ana vê as dela e as sem responsável de Vendas ou sem grupo; não vê nada de Suporte, nem as dela que estejam em Suporte |
+| **Restrito** | Só as conversas atribuídas a ele | Ana vê só as dela |
+
+<Note>As descrições da tela de **Limitado** e **Restrito** também falam em conversas que o membro está "seguindo". Seguir uma conversa não libera a visualização: o que vale é a tabela acima.</Note>
 
 ## Grupos
 
-Grupos organizam os membros em equipes, como Vendas ou Suporte, e ficam em **Configurações** → **Ambiente** → **Grupos** (botão **Novo grupo**).
+Grupos organizam os membros em equipes, como Vendas ou Suporte. Ficam em **Configurações** → **Ambiente** → **Grupos**.
 
-Eles servem para direcionar conversas para uma equipe específica, filtrar atendimentos e limitar quem enxerga cada conversa quando combinados com **Acesso as Conversas**.
-
-Cada grupo guarda **Nome do grupo**, **Descrição**, **Membros** e **Cor ou emoji**. Um membro pode participar de vários grupos; a lista de grupos do membro é editada nas configurações de grupo do ambiente.
+Eles servem para direcionar conversas para uma equipe, filtrar atendimentos e, junto com **Acesso as Conversas**, limitar quem vê cada conversa. Um membro pode estar em vários grupos.
 
 ## Como as peças se ligam
 
 | Peça | O que é | O que define |
 | --- | --- | --- |
-| Workspace (**Ambiente**) | O espaço da empresa na Kinbox | Canais, dados, plano e saldo |
+| Workspace (na tela, **ambiente**) | O espaço da empresa na Kinbox | Canais, dados, plano e saldo |
 | Membro | Uma pessoa com acesso ao workspace | Quem atende e usa a plataforma |
-| Papel (**Permissão**) | Um conjunto de permissões | O que o membro pode ver e fazer |
+| Papel (na tela, **Permissão**) | Um conjunto de permissões | O que o membro pode ver e fazer |
 | Grupo | Uma equipe de membros | Para onde vão as conversas e quem pode vê-las |
 
 Veja também [Como a Kinbox funciona](/docs/conceitos/visao-geral) e o [Glossário](/docs/conceitos/glossario).

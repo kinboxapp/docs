@@ -41,7 +41,7 @@ O consumo do saldo se divide nestas categorias:
 
 **O que não gasta saldo**: envios de SMS (usam **Créditos de SMS**), templates do WhatsApp oficial (não descontam da carteira), bots sem o bloco **Agente de IA**, **Automações**, **Cenários** e **Atribuição automática**.
 
-Quando o saldo fica em R$ 1,00 ou menos, o agente de IA para de responder (no teste do agente aparece **Saldo Insuficiente**). O copiloto passa a mostrar **Seus créditos acabaram** (nas telas do copiloto, "créditos" é o saldo da carteira) e as ligações por telefone são encerradas se o saldo acabar. Em agentes gerenciados por um parceiro, o consumo pode sair da carteira do parceiro em vez da carteira do workspace.
+Quando o saldo fica muito baixo, perto de zero, o agente de IA para de responder (no teste do agente aparece **Saldo Insuficiente**). O copiloto passa a mostrar **Seus créditos acabaram** (nas telas do copiloto, "créditos" é o saldo da carteira) e as ligações por telefone são encerradas se o saldo acabar. Em agentes gerenciados por um parceiro, o consumo pode sair da carteira do parceiro em vez da carteira do workspace.
 
 Para acompanhar os gastos, consulte **Relatórios** → **Saldo** (por categoria) e o **Extrato do saldo**. A recarga é feita por **Pix** em **Configurações** → **Assinatura** → **Carteira** → **Adicionar saldo** (**Assinatura** só aparece para quem tem acesso ao financeiro).
 
