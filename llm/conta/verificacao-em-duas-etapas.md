@@ -19,6 +19,8 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
+Referência complementar de [Ativar a verificação em duas etapas](/docs/conta/verificacao-em-duas-etapas).
+
 ## O que é e onde vale
 
 - A verificação em duas etapas (2FA) exige um código TOTP de **6 dígitos** gerado por um app autenticador no celular (como Google Authenticator, Microsoft Authenticator, 1Password ou outro compatível). Não usa SMS nem e-mail como segundo fator.

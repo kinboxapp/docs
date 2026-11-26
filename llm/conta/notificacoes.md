@@ -25,6 +25,8 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
+Referência complementar de [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
+
 ## Push no navegador e no app
 
 - As opções de **Push** em **Configurações** → **Notificações** valem só para o workspace (na tela, **ambiente**) aberto. Só os três tipos de aviso (tabela abaixo) são compartilhados com o app para celular: alterar em um lugar altera no outro. **Habilitar notificações de desktop** (navegador) e **Receber notificações** (app) são independentes.

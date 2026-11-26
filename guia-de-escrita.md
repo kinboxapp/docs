@@ -193,7 +193,7 @@ Termos fixos. Os rótulos exatos vêm sempre do i18n do `web`; esta lista é com
 | sessão | atendimento, chamado, ticket | Um atendimento dentro da conversa, do início até ser resolvido, com **protocolo** próprio (faixa **Nova sessão** na conversa). Não use para a conexão do WhatsApp (ver "aparelho conectado") |
 | papel (na tela: **Permissão**) | perfil, cargo, função | Conjunto de permissões dado a um membro (**Configurações** → **Ambiente** → **Permissões**). "Permissão" sozinha, no texto, é cada opção dentro do papel |
 | grupo | departamento, setor, time | Equipe de membros (**Configurações** → **Ambiente** → **Grupos**). "Equipe" só para explicar |
-| proprietário | dono, admin | O dono do workspace (um por workspace). "Administrador" é o nome de um papel padrão |
+| proprietário | dono, admin | O dono do workspace (um por workspace). "Administrador" é o nome de um papel pronto |
 | saldo (da carteira) | créditos | Reais na carteira para IA e ligações. "Créditos" só em **Créditos de SMS** ou ao citar um rótulo da tela (o copiloto chama o saldo de "créditos") |
 | ticket | — | Só a negociação de um **Funil Operacional**. Nunca como sinônimo de conversa ou sessão |
 | copiloto | assistente, Assistente Kin | Assistente de IA do membro (**Configurações** → **Automação** → **Copiloto**). Não atende o contato sozinho. Exceção: o botão **Assistente Kin** dos editores **Código** e **Json** do bloco de integração do bot mantém esse nome na tela; cite-o assim. Para o recurso antigo da conversa, escreva "o antigo Assistente Kin **da conversa**" |

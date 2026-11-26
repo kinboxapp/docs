@@ -84,7 +84,7 @@ O contador mostra `(tamanho/limite)` e fica vermelho quando o tamanho passa do l
 
 | Mensagem | Causa | O que fazer |
 | --- | --- | --- |
-| `"Sem créditos disponíveis"` | O workspace não tem **Créditos de SMS**; na conversa a mensagem fica com erro. | Compre créditos de SMS pelo painel **Canal de SMS** ou em **Assinatura** → **Carteira**. |
+| `"Sem créditos disponíveis"` | O workspace não tem **Créditos de SMS**; na conversa a mensagem fica com erro. | Compre créditos de SMS pelo painel **Canal de SMS** ou em **Configurações** → **Assinatura** (seção **Carteira**). |
 | `"Mensagem inválida, número inválido ou você não tem permissão para enviar SMS para este número"` | O envio foi recusado pelo número de destino ou pelo conteúdo da mensagem. | Confira se o número de celular do contato está correto e revise o texto. |
 | `"Você atingiu o limite de envio de SMS por minuto"` | Muitos disparos de SMS em pouco tempo. | Aguarde um pouco e tente enviar novamente. |
 | `"Sem saldo de créditos SMS suficiente."` | Ao criar uma campanha num canal de SMS da Kinbox, o workspace não tem nenhum crédito de SMS disponível. A criação não confere se o saldo cobre a lista inteira. | Compre créditos de SMS antes de criar a campanha. |
