@@ -111,6 +111,24 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Administração",
+            "icon": "gear",
+            "pages": [
+              {
+                "group": "Assinatura e cobrança",
+                "pages": [
+                  "docs/assinatura/visao-geral",
+                  "docs/assinatura/assinar-ou-mudar-plano",
+                  "docs/assinatura/adicionar-saldo",
+                  "docs/assinatura/alerta-de-saldo",
+                  "docs/assinatura/faturas",
+                  "docs/assinatura/cancelar",
+                  "docs/assinatura/assinatura-vencida"
+                ]
+              }
+            ]
           }
         ]
       },

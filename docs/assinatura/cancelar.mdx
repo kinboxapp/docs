@@ -1,0 +1,48 @@
+---
+title: Cancelar a assinatura
+description: Como cancelar a assinatura da Kinbox, o que acontece com o acesso e as faturas depois, e como voltar a assinar.
+keywords: [cancelar assinatura, cancelar plano, encerrar contrato, parar de pagar, cancelamento, reativar, voltar a assinar]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/scheduler/deleteChannelsScheduler.js
+codigo:
+  - web:src/pages/settings/billing/BillingV2.tsx
+  - web:src/stores/sessionStore.jsx
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/scheduler/NewPaymentScheduler.js
+  - api-v0:server/modules/scheduler/deleteChannelsScheduler.js
+verificado_em: 2026-11-26
+---
+
+Cancele a assinatura quando quiser interromper a renovação mensal do seu workspace (na tela, **ambiente**).
+
+<Note>Só quem tem a permissão **Assinatura** (ou é o proprietário do workspace) vê o botão **Cancelar assinatura**. Ele aparece quando a assinatura é **PRO** e não está cancelada, mesmo com o selo **Expirado**. Não aparece no teste grátis nem quando o plano é gerenciado por um parceiro.</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a página de assinatura">
+    Vá em **Configurações** → **Assinatura**.
+  </Step>
+  <Step title="Clique em Cancelar assinatura">
+    No cartão do plano, clique no link vermelho **Cancelar assinatura**.
+  </Step>
+  <Step title="Confirme o cancelamento">
+    Na janela **Cancelar plano**, clique em **Cancelar plano** para confirmar. O status do plano muda para **Cancelado**.
+  </Step>
+</Steps>
+
+## O que acontece depois
+
+- **Mensalidades em aberto são canceladas:** as mensalidades que aguardam pagamento são canceladas. Enquanto a assinatura está cancelada, toda fatura não paga aparece como **Cancelado** em [Faturas, boletos e nota fiscal](/docs/assinatura/faturas).
+- **Nenhuma nova cobrança:** a Kinbox para de gerar faturas mensais e não faz novas cobranças no cartão de crédito.
+- **Confirmação por e-mail:** um e-mail de cancelamento é enviado para os **E-mails de cobrança** cadastrados.
+- **Acesso até o vencimento e a carência:** logo após cancelar, a página **Assinatura** exibe o aviso "Sua assinatura foi cancelada. Atualize seu plano para voltar a usar o sistema.", mas o acesso continua até a data em **Expira em** mais **3 dias** de carência. Depois desse prazo, valem as restrições descritas em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
+- **O workspace não é excluído:** cancelar a assinatura não apaga o workspace nem os dados cadastrados. Excluir o workspace é uma ação separada do cancelamento.
+
+## Voltar a assinar
+
+Para reativar o plano, vá em **Configurações** → **Assinatura**, clique em **Assinar um plano** e siga o passo a passo de [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano). Se o botão não aparecer porque o plano é gerenciado por um parceiro, fale com o parceiro ou com o suporte.
