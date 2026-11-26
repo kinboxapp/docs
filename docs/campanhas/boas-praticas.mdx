@@ -1,0 +1,74 @@
+---
+title: Boas práticas de campanha
+description: Como escolher o canal, montar a lista, escrever a mensagem e acompanhar uma campanha na Kinbox para ter mais respostas e menos falhas e bloqueios.
+keywords: [boas práticas campanha, dicas de campanha, evitar bloqueio campanha, campanha sem ser bloqueado, opt-in, lista de contatos, personalizar campanha, qual canal usar campanha, campanha whatsapp oficial ou qr code]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/crm/campaigns/AddCampaign/index.tsx
+  - web:src/pages/crm/campaigns/AddCampaign/LeadsSource.tsx
+  - api:src/modules/campaigns/chunks/chunk.worker.ts
+  - api:src/shared/utils/helper.ts
+  - wabox:apps/docs/guides/best-practices.mdx
+codigo:
+  - web:src/pages/crm/campaigns/AddCampaign/**
+  - api:src/modules/campaigns/chunks/chunk.worker.ts
+  - api:src/shared/utils/helper.ts
+  - wabox:apps/docs/guides/best-practices.mdx
+verificado_em: 2026-11-26
+---
+
+Orientações práticas para escolher o canal, preparar a lista, escrever a mensagem e acompanhar campanhas na Kinbox com menos falhas e menor risco de bloqueio.
+
+## Escolha o canal certo
+
+- **WhatsApp oficial:** use para falar com contatos que ainda não conversaram com você, utilizando um template aprovado pela Meta.
+- **WhatsApp por QR Code:** use para falar com contatos que já conversam com você; há risco de o WhatsApp bloquear o número.
+- **SMS:** sem risco de bloqueio do número como no WhatsApp; aceita texto curto (até 160 caracteres, sem emoji) e, nos canais de SMS da Kinbox, consome **Créditos de SMS** (veja [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms)).
+
+Para comparar os dois tipos de WhatsApp, veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral).
+
+## Envie só para quem deu permissão e ofereça saída
+
+Mande campanhas apenas para contatos que deram permissão para receber suas mensagens. Isso vale no WhatsApp por QR Code e no WhatsApp oficial.
+
+No WhatsApp por QR Code, inclua uma instrução clara para o contato pedir para sair da lista (por exemplo, "Responda SAIR para não receber mais mensagens").
+
+## Use um número separado e comece devagar com número novo (só no WhatsApp por QR Code)
+
+<Warning>
+  No WhatsApp por QR Code, usar o número principal da operação para disparar campanhas coloca todo o atendimento em risco caso o WhatsApp bloqueie o número.
+</Warning>
+
+- Use um número separado para campanhas, nunca o número principal. Quando precisar dividir o volume, escolha vários canais de WhatsApp por QR Code do mesmo tipo (todos **Express** ou todos **Clássica**) em **Canais de disparo**.
+- Com um número novo no WhatsApp por QR Code, use o número normalmente por alguns dias antes de disparar e aumente o volume aos poucos, ao longo de semanas.
+
+Veja os detalhes em [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp) e [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas).
+
+## Personalize e varie o texto
+
+- Use as variáveis de coluna (`{{2}}`, `{{3}}`...) para personalizar a mensagem com os dados de cada contato e use **Frase aleatória** (`{{opção 1|opção 2}}`) para variar saudações e trechos do texto.
+- No WhatsApp por QR Code, enviar a mesma frase para muitos contatos cria um padrão fácil de detectar: varie o texto e evite links encurtados (prefira o endereço do seu próprio site).
+
+## Revise a lista antes de criar
+
+- Remova a linha de título da planilha, separe as colunas com vírgula e comece números de fora do Brasil com `+`.
+- Escreva todos os números do mesmo jeito: o mesmo número escrito de formas diferentes (com e sem `+`) pode receber a campanha mais de uma vez.
+- Deixe **Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável** marcada quando a lista tiver números brasileiros sem DDI ou nono dígito; desmarque se a lista já estiver formatada ou trouxer números fixos.
+- Não deixe células vazias nas colunas usadas na mensagem: no WhatsApp por QR Code e no SMS, uma célula vazia faz a variável sair como o número da coluna (por exemplo, `Olá 2`).
+- Confira os contadores **Erros** e **Duplicados** em **Público alvo** antes de clicar em **Criar** (veja [Criar uma campanha](/docs/campanhas/campanhas-no-kinbox)).
+
+## Defina o Horário comercial e equilibre a velocidade
+
+- Se quiser que as mensagens saiam apenas dentro do expediente, escolha um **Horário comercial** em **Controle de tempo**: fora do horário, a campanha pausa e retoma sozinha.
+- No WhatsApp (QR Code e oficial), tempos curtos demais aumentam a probabilidade de bloqueio automático, enquanto intervalos muito longos dão mais tempo para os contatos denunciarem o número como spam. Veja as opções em [Velocidade de envio e horário comercial](/docs/campanhas/velocidade-e-horario).
+
+## Planeje a fila do canal
+
+Apenas uma campanha envia por vez em cada canal principal. Antes de programar vários disparos para o mesmo canal, confira a **Duração** prevista para evitar que novas campanhas fiquem aguardando na fila.
+
+## Acompanhe o início e pause se necessário
+
+- Monitore o painel da campanha nas primeiras horas, conferindo o cartão **Falhas** e a coluna **Detalhes** (veja [Acompanhar os resultados da campanha](/docs/campanhas/acompanhar-resultados)).
+- No WhatsApp por QR Code, se muitas mensagens ficarem em **Enviado** sem confirmar **Recebido**, se as respostas caírem ou se os bloqueios aumentarem, clique em **Pausar**. Em caso de bloqueio, consulte [Meu número foi bloqueado](/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado).
+- No WhatsApp por QR Code na conexão **Express**, se o canal desconectar durante a campanha, clique em **Pausar** e use **Resumir** depois de reconectar: as mensagens enviadas com o canal desconectado falham na hora e não são reenviadas.

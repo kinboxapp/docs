@@ -1031,3 +1031,124 @@
   arquivo: images/ajuda/membros-e-permissoes/acesso-as-conversas.webp
   paginas:
     - docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios
+
+# Seção campanhas (Campanhas e marketing › Campanhas)
+#
+# Nenhuma campanha é criada nem enviada: os prints mostram só a tela Criar Campanha antes do botão Criar, o menu de
+# ações da lista e os cartões de resultado de uma campanha de teste já concluída. O workspace de documentação não tem
+# canal de WhatsApp nem de SMS, então as telas de Conteúdo e o detalhe vêm do workspace de testes (Kinbox), recortadas
+# só no bloco usado; o nome do canal escolhido (fora do recorte) leva tarja.
+- id: campanha-criar-secoes
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: 'text=Controle de tempo'
+    - clicar: '.ant-collapse-header:has-text("Controle de tempo")'
+    - esperar: 'text=Envio das mensagens'
+    - pausa: 800
+  alvo:
+    - 'header:has-text("Criar Campanha")'
+    - '.ant-collapse-item-active'
+  mascarar: []
+  arquivo: images/ajuda/campanhas/criar-campanha.webp
+  paginas:
+    - docs/campanhas/campanhas-no-kinbox
+
+- id: campanha-publico-alvo
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: 'text=Público alvo'
+    - clicar: '.ant-collapse-header:has-text("Público alvo")'
+    - esperar: 'text=Arraste e solte seu arquivo .csv aqui'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active'
+  mascarar: []
+  arquivo: images/ajuda/campanhas/publico-alvo.webp
+  paginas:
+    - docs/campanhas/campanhas-no-kinbox
+
+- id: campanha-tempo-personalizado
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: 'text=Controle de tempo'
+    - clicar: '.ant-collapse-header:has-text("Controle de tempo")'
+    - esperar: 'text=Envio das mensagens'
+    - clicar: '.ant-collapse-item-active >> text=Personalizado'
+    - esperar: 'text=Tempo entre mensagens (seg)'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active'
+  mascarar: []
+  arquivo: images/ajuda/campanhas/controle-de-tempo-personalizado.webp
+  paginas:
+    - docs/campanhas/velocidade-e-horario
+
+- id: campanha-conteudo-qr
+  workspace: Kinbox
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: '#channelIds'
+    - clicar: '#channelIds'
+    - clicar: '.ant-select-item-option >> text=[QA] KIN-7637 v5 padrão'
+    - tecla: Escape
+    - clicar: '.ant-collapse-header:has-text("Conteúdo")'
+    - esperar: '.ant-collapse-item-active textarea.text-editor-area'
+    - digitar:
+        seletor: '.ant-collapse-item-active textarea.text-editor-area'
+        texto: '{{Oi!|Olá!}} Nossa promoção de natal começa amanhã. Responda SAIR para não receber mais mensagens.'
+    - pausa: 1000
+  alvo: '.ant-collapse-item-active'
+  mascarar:
+    - '.ant-select-selection-item'
+  arquivo: images/ajuda/campanhas/conteudo-qr-code.webp
+  paginas:
+    - docs/campanhas/campanhas-no-kinbox
+
+- id: campanha-conteudo-sms
+  workspace: Kinbox
+  url: /crm/campaigns/v2/new
+  passos:
+    - esperar: '#channelIds'
+    - clicar: '#channelIds'
+    - clicar: '.ant-select-item-option >> text=/^SMS$/'
+    - tecla: Escape
+    - clicar: '.ant-collapse-header:has-text("Conteúdo")'
+    - esperar: '.ant-collapse-item-active textarea.text-editor-area'
+    - digitar:
+        seletor: '.ant-collapse-item-active textarea.text-editor-area'
+        texto: 'Loja Exemplo: lembrete da sua consulta de sexta, 10h. Responda SAIR para sair da lista.'
+    - pausa: 1000
+  alvo: '.ant-collapse-item-active'
+  mascarar:
+    - '.ant-select-selection-item'
+  arquivo: images/ajuda/campanhas/conteudo-sms.webp
+  paginas:
+    - docs/campanhas/campanha-de-sms
+
+- id: campanha-menu-acoes
+  workspace: Kinbox
+  url: /crm/campaigns/v2
+  passos:
+    - esperar: 'tbody tr.ant-table-row'
+    - clicar: 'tbody tr.ant-table-row >> nth=0 >> .ant-dropdown-trigger'
+    - esperar: '.ant-dropdown-menu >> text=Visualizar'
+    - pausa: 800
+  alvo: '.ant-dropdown:visible .ant-dropdown-menu'
+  mascarar:
+    - 'tbody tr.ant-table-row >> nth=0 >> td >> nth=0'
+  arquivo: images/ajuda/campanhas/menu-de-acoes.webp
+  paginas:
+    - docs/campanhas/acompanhar-resultados
+
+- id: campanha-resultados
+  workspace: Kinbox
+  url: /crm/campaigns/v2
+  passos:
+    - esperar: 'text=KIN-7809 campanha envi'
+    - clicar: 'text=KIN-7809 campanha envi'
+    - esperar: '.ant-drawer-body .g-total-report-row >> text=Respondido'
+    - pausa: 1500
+  alvo: '.ant-drawer-body .g-total-report-row'
+  mascarar:
+    - '.ant-drawer-title'
+  arquivo: images/ajuda/campanhas/resultados-da-campanha.webp
+  paginas:
+    - docs/campanhas/acompanhar-resultados
