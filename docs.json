@@ -73,6 +73,16 @@
                 ]
               },
               {
+                "group": "Ligações",
+                "pages": [
+                  "docs/canais/ligacoes/visao-geral",
+                  "docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
+                  "docs/canais/ligacoes/ligar-por-telefone",
+                  "docs/canais/ligacoes/configuracoes-voip",
+                  "docs/canais/ligacoes/problemas-comuns"
+                ]
+              },
+              {
                 "group": "Instagram e Facebook",
                 "pages": [
                   "docs/canais/instagram",
@@ -767,10 +777,6 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-templates/criando-templates-no-360dialog",
       "destination": "/docs/canais/criar-templates-dentro-do-kinbox"
-    },
-    {
-      "source": "/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp",
-      "destination": "/docs/canais/requisitos-para-se-ter-uma-api-oficial"
     },
     {
       "source": "/docs/conversas/clientes-contatos-e-organizacoes",
