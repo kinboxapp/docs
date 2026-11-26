@@ -14,6 +14,18 @@
         "tab": "Central de ajuda",
         "groups": [
           {
+            "group": "Primeiros passos",
+            "icon": "rocket",
+            "pages": [
+              "docs/primeiros-passos/criar-seu-workspace-no-kinbox",
+              "docs/primeiros-passos/configurar-com-o-kin",
+              "docs/primeiros-passos/convidar-sua-equipe",
+              "docs/primeiros-passos/conectar-o-primeiro-canal",
+              "docs/primeiros-passos/atender-a-primeira-conversa",
+              "docs/primeiros-passos/videos-para-comecar"
+            ]
+          },
+          {
             "group": "Conceitos",
             "icon": "lightbulb",
             "pages": [
@@ -1078,6 +1090,26 @@
     {
       "source": "/docs/usando-o-kinbox/pesquisar-customfield",
       "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/primeiros-passos/adicionando-canais-a-sua-caixa-de-entrada",
+      "destination": "/docs/primeiros-passos/conectar-o-primeiro-canal"
+    },
+    {
+      "source": "/docs/primeiros-passos/convidando-sua-equipe",
+      "destination": "/docs/primeiros-passos/convidar-sua-equipe"
+    },
+    {
+      "source": "/docs/primeiros-passos/criando-uma-conta-trial",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/primeiros-passos/videos-tutoriais",
+      "destination": "/docs/primeiros-passos/videos-para-comecar"
     }
   ]
 }

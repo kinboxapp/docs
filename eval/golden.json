@@ -1769,5 +1769,61 @@
     "pergunta": "Como faço para o WhatsApp do meu celular fazer backup automático das conversas no Google Drive?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero testar a Kinbox antes de pagar: quantos dias eu tenho e preciso colocar cartão?",
+    "esperado": [
+      "llm/faq/teste-gratis",
+      "docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Fiz o cadastro mas o código de 6 dígitos nunca chegou no meu e-mail, o que eu faço?",
+    "esperado": [
+      "llm/faq/nao-recebi-o-codigo-de-confirmacao",
+      "docs/primeiros-passos/criar-seu-workspace-no-kinbox",
+      "llm/primeiros-passos/criar-seu-workspace-no-kinbox"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Cliquei em pular na configuração guiada do Kin sem querer, como volto para ela?",
+    "esperado": [
+      "llm/faq/pular-onboarding",
+      "docs/primeiros-passos/configurar-com-o-kin",
+      "llm/primeiros-passos/configurar-com-o-kin"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Acabei de criar a conta: como coloco meus atendentes para dentro do workspace?",
+    "esperado": [
+      "docs/primeiros-passos/convidar-sua-equipe",
+      "docs/configuracoes-no-workspace/gerenciar-membros"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como meu time tira o certificado de Operador Certificado da Academia e como eu cobro um prazo deles?",
+    "esperado": [
+      "llm/faq/academia-certificado",
+      "docs/primeiros-passos/videos-para-comecar",
+      "llm/primeiros-passos/videos-para-comecar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Que tags e funil o onboarding com o Kin cria para uma loja de varejo?",
+    "esperado": [
+      "llm/primeiros-passos/configurar-com-o-kin",
+      "docs/primeiros-passos/configurar-com-o-kin"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "A Kinbox oferece um curso presencial com certificado reconhecido pelo MEC?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
