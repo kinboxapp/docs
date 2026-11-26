@@ -307,6 +307,16 @@
                 ]
               },
               {
+                "group": "Workspace",
+                "pages": [
+                  "docs/configuracoes-no-workspace/configuracoes-gerais",
+                  "docs/administracao/mensagens-automaticas",
+                  "docs/administracao/auditoria",
+                  "docs/administracao/acesso-do-parceiro",
+                  "docs/administracao/excluir-workspace"
+                ]
+              },
+              {
                 "group": "Assinatura e cobrança",
                 "pages": [
                   "docs/assinatura/visao-geral",
@@ -864,10 +874,6 @@
     {
       "source": "/docs/canais/whatsapp/whatsapp-templates/criando-templates-no-360dialog",
       "destination": "/docs/canais/criar-templates-dentro-do-kinbox"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
     },
     {
       "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",

@@ -2633,3 +2633,71 @@
   arquivo: images/ajuda/funis/negociacoes-na-conversa.webp
   paginas:
     - docs/crm/gerenciando-funil-de-vendas
+
+# Seção workspace (Administração › Configurações do workspace e auditoria)
+#
+# Nada é salvo: os itens abrem seletores, ligam chaves e digitam textos de exemplo, mas nunca clicam em
+# "Salvar mudanças" nem confirmam a exclusão. Nome, fuso, idioma e logo do workspace não mudam.
+# Na Auditoria, a coluna Autor mostra o nome da conta de teste (pessoa real): leva tarja.
+
+- id: workspace-geral-preferencias
+  url: /settings/account/workspace
+  altura: 1500
+  passos:
+    - esperar: 'div.text-md:text-is("Fuso horário")'
+    - pausa: 800
+    # O workspace de documentação não tem fuso nem moeda escolhidos: o print mostra a tela como está
+    # (campos vazios) e o texto da página explica que valem Brasília e real.
+  alvo:
+    - 'h3:text-is("Preferências")'
+    - 'div.card-bordered:has(div.text-md:text-is("Fuso horário"))'
+  mascarar: []
+  arquivo: images/ajuda/workspace/geral-preferencias.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configuracoes-gerais
+
+- id: workspace-mensagens-automaticas
+  url: /settings/account/workspace
+  passos:
+    - esperar: 'div.text-md:text-is("Mensagem quando fora do horário comercial")'
+    - clicar: '#settings_sendMessageWhenOutsideOfBusinessHours'
+    - esperar: '#settings_messageOutsideOfBusinessHoursText'
+    - digitar:
+        seletor: '#settings_messageOutsideOfBusinessHoursText'
+        texto: 'Olá! Nosso atendimento funciona de segunda a sexta, das 9h às 18h. Respondemos assim que voltarmos.'
+    - pausa: 800
+  alvo:
+    - 'h3:text-is("Caixa de Entrada")'
+    - 'div.py-6:has(div.text-md:text-is("Mensagem quando membro indisponível"))'
+  mascarar: []
+  arquivo: images/ajuda/workspace/mensagens-automaticas.webp
+  paginas:
+    - docs/administracao/mensagens-automaticas
+
+- id: workspace-excluir-modal
+  url: /settings/account/workspace
+  passos:
+    - esperar: 'div.text-md:text-is("Excluir ambiente")'
+    - clicar: 'button:has-text("Excluir ambiente")'
+    - esperar: '.ant-modal-content'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/workspace/excluir-ambiente.webp
+  paginas:
+    - docs/administracao/excluir-workspace
+
+- id: auditoria-lista
+  url: /settings/audit
+  passos:
+    - esperar: 'tbody.ant-table-tbody tr:nth-child(6)'
+    - pausa: 800
+  # O cabeçalho do cartão vai até a borda direita do cartão: o recorte não corta a tabela seco à direita.
+  alvo:
+    - '.ant-card-head'
+    - 'tbody.ant-table-tbody tr:nth-child(6)'
+  mascarar:
+    - 'tbody.ant-table-tbody tr td:first-child > div'
+  arquivo: images/ajuda/workspace/auditoria-lista.webp
+  paginas:
+    - docs/administracao/auditoria
