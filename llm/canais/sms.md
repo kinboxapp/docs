@@ -40,7 +40,7 @@ Detalhes de referência da página [Usar SMS: criar o canal e comprar créditos]
 - **Separado do saldo da carteira:** **Créditos de SMS** são separados do saldo em reais da carteira; o saldo da carteira não compra créditos de SMS. Veja [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos).
 - **Dois caminhos de compra (mesmo saldo de créditos):**
   - **Pelo canal:** **Configurações** → **Chat** → **Canais** → linha **SMS** → **Comprar créditos** (se o botão aparecer). Se o botão **Comprar créditos** não aparecer, fale com quem gerencia o seu plano (ou, se a opção estiver disponível para você, compre pela **Assinatura**).
-  - **Pela assinatura:** **Configurações** → **Assinatura** → **Carteira** → **Adicionar crédito** (exige a permissão **Assinatura** ou ser proprietário). Veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
+  - **Pela assinatura:** **Configurações** → **Assinatura** (seção **Carteira**) → **Adicionar crédito** (exige a permissão **Assinatura** ou ser proprietário). Veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo).
 - **Pacotes e pagamento:** pacotes de 1 mil a 1 milhão de créditos (1.000, 3.000, 5.000, 10.000, 15.000, 20.000, 30.000, 50.000, 75.000, 100.000, 500.000 e 1.000.000; padrão 1.000), pagos via **Pix** (**Comprar com PIX**). Com o painel aberto, a Kinbox confere o pagamento a cada 10 segundos e exibe **Pago** sobre o QR Code ao confirmar.
 - **Acima de 100 mil créditos e liberação:** a lista vai até 1 milhão, mas o aviso do painel pede falar com o suporte em compras acima de 100 mil créditos. Após a confirmação do pagamento, os créditos podem levar até **1 dia útil** para liberar.
 - **Histórico pelo canal:** **Ver histórico** abre **Histórico de transações de SMS** com **Status** (como **Aguardando pagamento** e **Aprovada**), **Créditos**, **Valor**, **Data**, ação **Ver QRCode** no menu da linha e **Carregar mais**.
@@ -62,7 +62,7 @@ Detalhes de referência da página [Usar SMS: criar o canal e comprar créditos]
 O contador mostra `(tamanho/limite)` e fica vermelho quando o tamanho passa do limite.
 
 - **Limite 160:** texto só com letras sem acento, números, pontuação comum e alguns caracteres especiais, entre eles `é`, `è`, `à`, `É` e `Ç`.
-- **Limite 70:** basta um caractere fora desse conjunto, como `ã`, `õ`, `á`, `í`, `ó`, `ú`, `â`, `ê`, `ç` (minúsculo) ou um emoji.
+- **Limite 70:** um único caractere fora desse conjunto já baixa o limite para 70, como `ã`, `õ`, `á`, `í`, `ó`, `ú`, `â`, `ê`, `ç` (minúsculo) ou um emoji.
 - **Contam em dobro:** alguns caracteres do conjunto de 160, como `€`, contam como 2 no tamanho, sem baixar o limite para 70.
 - **Acima do limite:** o limite exibido muda para 153 (no conjunto de 160) ou 67 (no conjunto de 70). Exemplo: 161 letras `a` mostram `(161/153)` em vermelho.
 - Essa contagem é separada da regra de 160 caracteres das campanhas por SMS, que conta o tamanho do texto.
@@ -84,7 +84,7 @@ O contador mostra `(tamanho/limite)` e fica vermelho quando o tamanho passa do l
 
 | Mensagem | Causa | O que fazer |
 | --- | --- | --- |
-| `"Sem créditos disponíveis"` | O workspace não tem **Créditos de SMS**; na conversa a mensagem fica com erro. | Compre créditos de SMS pelo painel **Canal de SMS** ou em **Assinatura** → **Carteira**. |
+| `"Sem créditos disponíveis"` | O workspace não tem **Créditos de SMS**; na conversa a mensagem fica com erro. | Compre créditos de SMS pelo painel **Canal de SMS** ou em **Configurações** → **Assinatura** (seção **Carteira**). |
 | `"Mensagem inválida, número inválido ou você não tem permissão para enviar SMS para este número"` | O envio foi recusado pelo número de destino ou pelo conteúdo da mensagem. | Confira se o número de celular do contato está correto e revise o texto. |
 | `"Você atingiu o limite de envio de SMS por minuto"` | Muitos disparos de SMS em pouco tempo. | Aguarde um pouco e tente enviar novamente. |
 | `"Sem saldo de créditos SMS suficiente."` | Ao criar uma campanha num canal de SMS da Kinbox, o workspace não tem nenhum crédito de SMS disponível. A criação não confere se o saldo cobre a lista inteira. | Compre créditos de SMS antes de criar a campanha. |

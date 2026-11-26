@@ -87,7 +87,7 @@ Acima do limite de canais (exceto Instagram), aparece "Seu plano atual não perm
 ## O que o cadastro cria
 
 - O workspace com o nome informado em **Nome da empresa** e a pessoa cadastrada como proprietário.
-- Os três papéis padrão: **Administrador**, **Supervisor** e **Atendente**.
+- Os três papéis prontos: **Administrador**, **Supervisor** e **Atendente**.
 - A sala **Geral**, com o proprietário incluído.
 - O período de teste grátis com saldo inicial de cortesia.
 - Canais, grupos, tags e frases rápidas não são criados no cadastro — eles são configurados depois no onboarding com o Kin ou nas telas de configuração.

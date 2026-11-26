@@ -4,14 +4,12 @@
 //      bun scripts/check-sensivel.ts <arquivo> [<arquivo> ...]
 import { arquivosAlvo, encerrar, ler, type Falha } from './lib'
 
-// Gerados e com dados de exemplo da própria API
-const FORA = [/^openapi\.json$/, /^api-reference\//, /^scripts\/check-sensivel\.ts$/, /\.(png|webp|jpe?g|gif|svg|ico|woff2?)$/i, /(^|\/)bun\.lockb?$/]
+// Páginas geradas da referência da API (só apontam para o openapi.json, que é checado) e binários
+const FORA = [/^api-reference\//, /^scripts\/check-sensivel\.ts$/, /\.(png|webp|jpe?g|gif|svg|ico|woff2?)$/i, /(^|\/)bun\.lockb?$/]
 
 // Exceções: o 0800 e o WhatsApp do suporte, e os telefones fictícios do workspace de documentação (+55 11 90000-00xx)
 const TELEFONES_PERMITIDOS = [/8001151777$/, /^(55)?119000000\d\d$/]
 const EMAILS_PERMITIDOS = [/@example\.(com|org|net)$/i, /@exemplo\.com(\.br)?$/i]
-// Links de staging só nos scripts de prints, que existem para capturar as telas
-const STAGING_PERMITIDO = [/^scripts\/screenshots\//]
 
 type Regra = { nome: string; padrao: RegExp; valida?: (trecho: string, arquivo: string) => boolean }
 
@@ -44,8 +42,9 @@ const REGRAS: Regra[] = [
     padrao: /(?:\+\s?55[\s-]?\(?\d{2}\)?[\s-]?9?\d{4}[\s-]?\d{4})|(?:\(\d{2}\)\s?9?\d{4}[\s-]?\d{4})|(?:\b\d{2}\s9\d{4}-\d{4}\b)|(?:\b55\d{10,11}\b)|(?:\b0800[\s-]?\d{3}[\s-]?\d{4}\b)/g,
     valida: (t) => !TELEFONES_PERMITIDOS.some((r) => r.test(digitos(t))),
   },
-  { nome: 'CPF', padrao: /\b\d{3}\.\d{3}\.\d{3}-\d{2}\b/g },
-  { nome: 'CNPJ', padrao: /\b\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}\b/g },
+  // O CPF e o CNPJ zerados são os exemplos fictícios da referência da API
+  { nome: 'CPF', padrao: /\b\d{3}\.\d{3}\.\d{3}-\d{2}\b/g, valida: (t) => t !== '000.000.000-00' },
+  { nome: 'CNPJ', padrao: /\b\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}\b/g, valida: (t) => t !== '00.000.000/0000-00' },
   {
     nome: 'número de cartão',
     padrao: /\b[3-6]\d{3}(?:[\s-]?\d{4}){2,3}(?:[\s-]?\d{1,3})?\b/g,
@@ -67,9 +66,9 @@ const REGRAS: Regra[] = [
   },
   { nome: 'pendência (TODO/FIXME)', padrao: /\b(?:TODO|FIXME|XXX)\b/g },
   {
+    // Qualquer host com "staging" no nome, em qualquer pasta: os scripts de prints leem os endereços de fora do repositório
     nome: 'link de staging',
-    padrao: /\b(?:staging[\w.-]*\.kinbox\.com\.br|[\w.-]*-staging\.kinbox\.com\.br|staging\.aldeia\.so|[\w-]*staging[\w-]*\.ondigitalocean\.app|kinbox-[\w-]*staging[\w-]*\.vercel\.app)\b/g,
-    valida: (_t, arquivo) => !STAGING_PERMITIDO.some((r) => r.test(arquivo)),
+    padrao: /\b[\w-]*staging[\w-]*(?:\.[\w-]+)*\.(?:com|br|so|app|io|net|dev|cloud)\b/gi,
   },
 ]
 
@@ -87,6 +86,14 @@ for (const arquivo of arquivos) {
       }
     }
   })
+}
+
+// A referência pública da API só publica `/v1`: o spec que a API serve tem rotas internas, que não podem entrar
+if (arquivos.includes('openapi.json')) {
+  const spec = JSON.parse(ler('openapi.json'))
+  for (const caminho of Object.keys(spec.paths ?? {})) {
+    if (!caminho.startsWith('/v1/') && caminho !== '/v1') falhas.push({ arquivo: 'openapi.json', mensagem: `caminho fora de /v1 ("${caminho}")` })
+  }
 }
 
 encerrar(`dados sensíveis (${arquivos.length} arquivos)`, falhas)

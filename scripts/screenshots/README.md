@@ -12,7 +12,12 @@ Ferramentas para tirar os prints da central de ajuda no staging, sempre no works
 
 ## Antes de tudo
 
-As credenciais do staging ficam fora do repositório. Os scripts leem `KINBOX_STAGING_EMAIL` e `KINBOX_STAGING_PASSWORD` do ambiente ou, se elas não estiverem definidas, do arquivo `~/.config/kinbox/staging.env`. Nunca escreva o e-mail ou a senha num comando.
+Os endereços e as credenciais do staging ficam fora do repositório:
+
+- **Endereços:** `KINBOX_STAGING_API_V0`, `KINBOX_STAGING_API_V3`, `KINBOX_STAGING_WEB` e `KINBOX_STAGING_WIDGET`. Os scripts leem do ambiente ou, se faltar alguma, do arquivo `~/.config/kinbox/docs-staging.env` (uma linha `CHAVE=valor` por endereço, com permissão `600`). Sem valor padrão: se faltar um endereço, o script para e diz qual.
+- **Credenciais:** `KINBOX_STAGING_EMAIL` e `KINBOX_STAGING_PASSWORD`, do ambiente ou do arquivo `~/.config/kinbox/staging.env`. Nunca escreva o e-mail ou a senha num comando.
+
+Não escreva endereço de staging em arquivo do repositório: o `check-sensivel.ts` barra em qualquer pasta.
 
 ```bash
 cd scripts/screenshots
@@ -40,7 +45,7 @@ O seed encontra o workspace pelo nome e só cria o que falta, então pode rodar 
 - 3 respostas rápidas;
 - o agente de IA `Lia`, desligado e sem canal;
 - o bot `Atendimento inicial`, desligado, com o widget em **Canais que atende**;
-- o bot `Consulta de pedido` (blocos de integração com endereços `exemplo.com`), desligado e sem canal, e o campo personalizado Json `pedido` (sessão);
+- o bot `Consulta de pedido` (blocos de integração com endereços `example.com`), desligado e sem canal, e o campo personalizado Json `pedido` (sessão);
 - os campos de contato `Tipo de cliente` (seleção) e `Data de aniversário` e as organizações `Escritório Exemplo` e `Padaria Exemplo`, com contatos vinculados;
 - as automações de exemplo `Encerrar conversas paradas`, `Lembrete de orçamento`, `Aviso fora do horário` e `Orçamento para Vendas` (etapa `automacoes`, todas desligadas; usa o grupo, a tag e o horário da etapa `organização do atendimento`: rode `bun seed.ts --so "organização do atendimento,automacoes"`). Se encontrar uma automação de exemplo ligada, a etapa `automacoes` falha sem alterar as automações de exemplo; nas existentes, só acerta as condições e a caixa de condições ligadas;
 - o widget de exemplo `Site da loja`, já configurado (cores, textos, formulário, chamada para ação, balão de WhatsApp com número fictício e **Restringir domínio** = `https://www.example.com`), usado pelos prints da seção do widget. As configurações são reaplicadas a cada execução; se o canal existir sem as configurações do widget, ele é desativado e o widget é criado de novo.

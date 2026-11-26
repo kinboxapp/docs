@@ -1,7 +1,7 @@
 ---
 title: Onde ficaram as mensagens agendadas "Individual" e "Por API"?
 description: As abas Individual e Por API só existem no layout antigo da tela de campanhas; no layout atual os agendamentos ficam na conversa.
-keywords: [individual, por api, mensagens agendadas, aba sumiu, agendamentos campanha]
+keywords: [onde foram parar as mensagens agendadas, sumiu a aba individual das campanhas, cadê a aba por api das campanhas, onde vejo as mensagens agendadas antigas]
 publico: llm
 tipo: faq
 fontes:

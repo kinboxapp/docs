@@ -8,7 +8,7 @@ fontes:
   - web:src/pages/settings/channels/whatsapp/RecreateWhatsAppConfirm.tsx
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
   - api-v0:server/controllers/IntegrationsController.js
-  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/controllers
   - web:src/pages/settings/channels/whatsapp/SyncZapHistoryModal.tsx
   - web:src/pages/settings/channels/whatsapp/ChannelVersionUpdate.tsx
 codigo:
@@ -17,12 +17,12 @@ codigo:
   - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
   - web:src/pages/settings/channels/whatsapp/ChannelVersionUpdate.tsx
   - api-v0:server/controllers/IntegrationsController.js
-  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/controllers/**
   - web:src/pages/settings/channels/whatsapp/SyncZapHistoryModal.tsx
 verificado_em: 2026-11-26
 ---
 
-Detalhes de referência sobre a conexão **Clássica**, complementares à página humana "Migrar da conexão Clássica para a Express" (`/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo`).
+Detalhes de referência sobre a conexão **Clássica**, complementares à página humana [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
 
 ## Sincronizar histórico (somente Clássica)
 
@@ -49,7 +49,7 @@ Detalhes de referência sobre a conexão **Clássica**, complementares à págin
 - Na troca para **Express**, o número salvo no canal precisa ter de 10 a 15 dígitos (com DDI); senão, a troca falha com `"Número inválido"` e o canal continua **Clássica**. Orientar a falar com o suporte.
 - Canal **Clássica** sem data de **Última vez recriado** também cai nas verificações por data: mostra **Recomendado recriar canal** e não pode ser usado em campanhas até ser recriado.
 - Se o canal ainda estiver em criação ao tentar recriar, exibe: `"Este canal ainda se encontra em processamento. Por favor tente novamente em instantes."`
-- **Recriar** não passa pela checagem de limite de canais do plano.
+- **Recriar** não consome uma linha nova do plano.
 - Em canais **Express**, **Recriar** apenas reinicia a conexão do número (equivalente a **Reiniciar canal**), não exibe o seletor **Tipo de conexão** e não atualiza a data de **Última vez recriado**.
 - "Alternativa" / "Alternativo" era o nome antigo da conexão **Express**.
 

@@ -32,7 +32,7 @@ Detalhes de referência da seção Assinatura. Páginas para pessoas: [Assinatur
 ## Quem pode acessar e alterar
 
 - **Permissão:** **Assinatura** ("Contratar e alterar planos de assinatura."), na seção **Gerenciamento do Ambiente** das permissões. Sem ela, o item **Assinatura** some do menu e o endereço da página volta para **Configurações**.
-- **Proprietário e papéis padrão:** o proprietário do workspace sempre tem acesso. O papel padrão **Administrador** já vem com a permissão **Assinatura**; **Supervisor** e **Atendente** não.
+- **Proprietário e papéis prontos:** o proprietário do workspace sempre tem acesso. O papel pronto **Administrador** já vem com a permissão **Assinatura**; **Supervisor** e **Atendente** não.
 - **Busca global:** atalho **Ir para Assinatura**.
 - **Inspeção de parceiro:** o parceiro que inspeciona um workspace só vê **Assinatura** no modo de inspeção avançado.
 - **Plano gerenciado pelo parceiro:** em alguns workspaces de clientes de parceiros, o plano é gerenciado pelo parceiro: os botões **Mudar plano**, **Assinar um plano** e **Cancelar assinatura** e os valores não aparecem.
@@ -128,7 +128,7 @@ A faixa da carência da assinatura **PRO** não aparece para membros com a restr
 - **Onde:** a seção **Faturas** da página **Assinatura** mostra as 3 mensalidades mais recentes. **Ver tudo** abre a lista completa, com as abas **Tudo**, **Pago** e **Não pago** e a busca por ID. Não aparece no teste grátis. Recargas de saldo ficam no **Histórico de recargas**; compras de SMS, no **Histórico SMS**.
 - **Status:** **Pago**, **Não pago**, **Falha ao pagar** e **Cancelado**. Enquanto a assinatura está cancelada, toda fatura não paga aparece como **Cancelado**.
 - **Erro do cartão:** clicar em **Falha ao pagar** abre a janela com "Erro retornado ao gerar a cobrança:" e o motivo, ou "Não foi possível identificar a mensagem de erro desta cobrança.".
-- **Abrir a fatura:** **Ver** aparece ao passar o mouse na linha da fatura, na página **Assinatura**; na lista de **Faturas**, basta clicar na linha. A fatura abre numa aba nova e pode ser vista ou impressa, inclusive quando ainda não foi paga (o campo **Valor pago** mostra um traço). Use como comprovante de pagamento só quando constar como **Pago**.
+- **Abrir a fatura:** **Ver** aparece ao passar o mouse na linha da fatura, na página **Assinatura**; na lista de **Faturas**, clique na linha. A fatura abre numa aba nova e pode ser vista ou impressa, inclusive quando ainda não foi paga (o campo **Valor pago** mostra um traço). Use como comprovante de pagamento só quando constar como **Pago**.
 - **Menu ...:** só aparece quando a fatura tem boleto, Pix, nota fiscal ou a opção de nova tentativa. Opções possíveis: **Ver fatura**, **Ver Boleto** (abre o boleto; quando o boleto ainda não foi gerado, a opção é **Visualizar boleto**), **Copiar código do boleto**, **Ver QR code**, **Baixar nota fiscal** e **Tentar pagar novamente**. Fatura paga no cartão e sem nota fiscal não tem esse menu, só **Ver**.
 - **Nota fiscal:** a opção **Baixar nota fiscal** aparece na fatura quando o PDF estiver disponível. Quando não aparecer, fale com o suporte para pedir a nota fiscal.
 - **Geração:** a mensalidade é gerada 5 dias antes de **Expira em**, para assinatura **PRO** não cancelada. Paga a fatura, **Expira em** avança um mês a partir do vencimento anterior, não da data do pagamento.

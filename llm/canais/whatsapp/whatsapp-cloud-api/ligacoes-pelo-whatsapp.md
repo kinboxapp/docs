@@ -42,7 +42,7 @@ Detalhes de referência da página [Fazer e receber ligações pelo WhatsApp ofi
 | Canal | Apenas **WhatsApp oficial** sem [coexistência](/docs/canais/whatsapp-api-oficial-coexistente). O WhatsApp por QR Code não tem ligações pela Kinbox (veja [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)). |
 | Plano | Plano **Ligações WhatsApp** contratado em **Configurações** → **Assinatura** por quem cuida da assinatura ([Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)). |
 | Franquia ou saldo | Franquia de minutos sobrando no plano **ou** saldo de pelo menos **R$ 0,50** na carteira ([Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)). |
-| Permissões | Configurar a aba **Ligações**, desativar SIP e criar o template pela janela da conversa exigem **Gerenciar Canais** ou proprietário ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Atender exige **Responder** ou proprietário. O membro na conversa pode ligar pelo WhatsApp (a permissão **Pode ligar para o contato** vale apenas para o VoIP). |
+| Permissões | Configurar a aba **Ligações**, desativar SIP e criar o template pela janela da conversa exigem **Gerenciar Canais** ou proprietário ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Atender exige **Responder** ou proprietário. Ligar pelo WhatsApp exige a opção **Fazer ligações** ligada no canal e que o contato tenha permitido receber ligações. |
 | Microfone | Liberado no navegador de quem faz ou atende ligações. Sem acesso ao microfone: `"Ative o microfone para fazer ligações"` ou `"Ative o microfone para receber ligações"`. |
 
 ## Opções da aba Ligações e efeitos

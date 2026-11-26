@@ -8,13 +8,13 @@ fontes:
   - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
   - web:src/pages/settings/channels/warmbox/warmbox.helper.ts
   - web:src/pages/settings/channels/warmbox/WarmboxSettings.tsx
-  - wabox:apps/docs/guides/best-practices.mdx
+  - motor-qr:apps/docs/guides/best-practices.mdx
 codigo:
   - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
   - web:src/pages/settings/channels/warmbox/**
-  - api-v0:server/modules/wabox/WaboxClient.js
-  - wabox:apps/docs/guides/best-practices.mdx
+  - api-v0:server/modules/**
+  - motor-qr:apps/docs/guides/best-practices.mdx
 verificado_em: 2026-11-26
 ---
 

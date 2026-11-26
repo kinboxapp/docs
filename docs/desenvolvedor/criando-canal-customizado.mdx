@@ -26,28 +26,7 @@ O canal customizado liga um chat seu (app, site ou sistema próprio) à [Caixa d
 
 ## Criar o canal
 
-<Steps>
-  <Step title="Abra a tela de novo canal">
-    Vá em **Configurações** → **Chat** → **Canais**, clique em **Novo canal** e, na tela **Conectar novo canal**, escolha **Customizado** (o que muda para quem administra e atende está em [Criar um canal customizado](/docs/canais/canal-customizado)).
-  </Step>
-
-  <Step title="Preencha os dados e os endereços">
-    No painel **Conectar Canal Customizado**:
-
-    - Envie uma imagem opcional (`JPEG/PNG - Min. 100x100px`).
-    - Preencha **Descrição** (obrigatório, por exemplo "App da loja").
-    - Copie o **Endpoint para receber mensagens** (`https://api.kinbox.com.br/api/v1/channels/<identificador>/messages`), que já vem gerado. É para essa URL que o seu sistema enviará as mensagens do cliente.
-    - Preencha **Endpoint para enviar mensagem e atualização de status** com a URL do seu sistema que recebe as mensagens de saída (respostas dos membros) e o evento de resolução da conversa.
-
-    <Frame caption="Painel Conectar Canal Customizado com Descrição e os endpoints de entrada e saída">
-      <img src="/images/ajuda/desenvolvedores/canal-customizado.webp" alt="Painel Conectar Canal Customizado preenchido com Descrição App da loja, Endpoint para receber mensagens com tarja e Endpoint para enviar mensagem e atualização de status preenchido com https://exemplo.com/kinbox/webhook" />
-    </Frame>
-  </Step>
-
-  <Step title="Conclua a criação">
-    Clique em **Conectar canal**. Quando aparecer o aviso "Canal customizado criado.", o canal já estará pronto para uso.
-  </Step>
-</Steps>
+Crie o canal na tela, como explica [Criar um canal customizado](/docs/canais/canal-customizado): em **Configurações** → **Chat** → **Canais** → **Novo canal**, escolha **Customizado**, preencha a **Descrição** e o **Endpoint para enviar mensagem e atualização de status** (a URL do seu sistema que recebe as respostas dos membros e o evento de resolução da conversa) e clique em **Conectar canal**. Copie o **Endpoint para receber mensagens** (`https://api.kinbox.com.br/api/v1/channels/<identificador>/messages`), que já vem gerado: é para essa URL que o seu sistema enviará as mensagens do cliente.
 
 Depois de criado, ao abrir o canal para edição, o painel **Canal customizado** mostra **Status**, **Imagem**, **Descrição**, **Endpoint para o Kinbox receber mensagens** e **Endpoint para o Kinbox enviar mensagem e atualização de status**.
 

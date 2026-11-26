@@ -8,20 +8,20 @@ fontes:
   - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
   - web:src/pages/settings/channels/whatsapp/WhatsappPairingCode.tsx
-  - api-v0:server/controllers/WaboxController.js
-  - wabox:apps/docs/webhooks/instance-status.mdx
+  - api-v0:server/controllers
+  - motor-qr:apps/docs/webhooks/instance-status.mdx
 codigo:
   - web:src/pages/settings/channels/whatsapp/**
-  - api-v0:server/controllers/WaboxController.js
-  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/**
+  - api-v0:server/modules/**
   - api-v0:server/controllers/IntegrationsController.js
   - web:src/pages/settings/channels/AddChannel.tsx
   - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
-  - wabox:apps/engine/internal/config/config.go
+  - motor-qr:apps/engine/internal/config/config.go
 verificado_em: 2026-11-26
 ---
 
-Detalhes técnicos de referência da página humana "Conectar o WhatsApp pelo QR Code" (`/docs/canais/conectar-whatsapp-app`).
+Detalhes técnicos de referência da página humana [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
 
 ## Tempos do QR Code e da criação
 

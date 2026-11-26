@@ -25,6 +25,8 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
+Referência complementar de [Não consigo entrar na Kinbox](/docs/conta/problemas-de-acesso) e [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes).
+
 ## Matriz de diagnóstico
 
 Na interface da Kinbox, o workspace aparece como **ambiente**.

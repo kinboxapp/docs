@@ -55,17 +55,15 @@ After every push to `main` touching content, `indexar.yml` asks api-v2 (`/v3/hel
 
 ## Regenerating the API reference
 
-The endpoint pages under `api-reference/<resource>/` (`contacts`, `messages`, `sessions`, ...) are **machine-generated from the OpenAPI spec — do not hand-edit those files.** The source of truth is `openapi.json` at the repo root (the full Kinbox API spec). Regeneration is driven from the API repo by the `kinbox-deploy-api-reference` skill (`kinbox-workspace/api/.claude/skills/kinbox-deploy-api-reference`, available in sessions opened in `api/`), which opens a PR with auto-merge (never a direct push to `main`):
+The endpoint pages under `api-reference/<resource>/` (`contacts`, `messages`, `sessions`, ...) are **machine-generated from the OpenAPI spec — do not hand-edit those files.** The source of truth is `openapi.json` at the repo root (the public `/v1` part of the Kinbox API spec: only `/v1` paths and the components they reference). Regeneration is driven from the API repo by the `kinbox-deploy-api-reference` skill (`kinbox-workspace/api/.claude/skills/kinbox-deploy-api-reference`, available in sessions opened in `api/`), which opens a PR with auto-merge (never a direct push to `main`):
 
 1. `fetch-openapi.sh` pulls `/docs-json` from a running API into `openapi.json`.
 2. `scrape-openapi.sh` runs `@mintlify/scraping` into a temp dir and copies only the `v1*` tag folders into `api-reference/<resource>/` (tag `v1Messages` → folder `messages`, mapping function `public_dir` in the script).
 3. `check-docs-nav.ts` reports generated pages missing from `docs.json` and listed pages without a file.
 
-Note: `api-reference/openapi.json` is a small leftover sample and is **not** the spec used for the site — the root `openapi.json` is.
-
 ## How navigation works (important)
 
-Only the stable public **v1** API is published. Internal `/v3/*` routes exist in `openapi.json` but never get pages in the repo. **The site only exposes what is explicitly listed in `docs.json`**, so publishing a new endpoint is a two-step process:
+Only the stable public **v1** API is published. `openapi.json` keeps only `/v1` paths: `check-sensivel.ts` fails if any other path shows up (the spec the API serves also has internal routes, which must be filtered out before the file is written). **The site only exposes what is explicitly listed in `docs.json`**, so publishing a new endpoint is a two-step process:
 1. Regenerate the pages (see above).
 2. Add the page path to the appropriate `group.pages` array in `docs.json`. A generated file that isn't referenced in `docs.json` simply won't appear on the site.
 

@@ -14,7 +14,7 @@ codigo:
   - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
   - web:src/pages/settings/channels/whatsapp/ChannelVersionUpdate.tsx
   - api-v0:server/controllers/IntegrationsController.js
-  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/controllers/**
 verificado_em: 2026-11-26
 ---
 

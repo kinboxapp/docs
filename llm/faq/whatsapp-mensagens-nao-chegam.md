@@ -5,17 +5,17 @@ keywords: [mensagens não chegam, canal conectado não recebe, canal conectado n
 publico: llm
 tipo: faq
 fontes:
-  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
-  - wabox:apps/docs/guides/best-practices.mdx
+  - motor-qr:apps/docs/guides/best-practices.mdx
 codigo:
   - web:src/pages/settings/channels/whatsapp/**
-  - api-v0:server/controllers/WaboxController.js
-  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/**
+  - api-v0:server/modules/**
   - api-v0:server/controllers/IntegrationsController.js
   - web:src/pages/settings/channels/index.tsx
   - web:src/pages/inbox/Conversations/index.tsx
-  - wabox:apps/docs/webhooks/instance-status.mdx
+  - motor-qr:apps/docs/webhooks/instance-status.mdx
 verificado_em: 2026-11-26
 ---
 

@@ -28,6 +28,8 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
+Referência complementar de [App da Kinbox para celular: o que dá para fazer](/docs/app/visao-geral), [Atender conversas pelo app](/docs/app/atender-pelo-celular), [Notificações no app](/docs/app/notificacoes-no-app) e [Excluir sua conta pelo app](/docs/app/excluir-conta).
+
 ## Plataformas e onde baixar
 
 - O app da Kinbox para celular está disponível para iPhone (iOS 16.4 ou mais novo; "Somente para iPhone" na App Store) e celular Android (Google Play). É grátis e feito para quem já tem conta na Kinbox.

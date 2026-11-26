@@ -35,7 +35,7 @@ O item **Tarefas** no menu lateral é aberto a todos os membros (não existe per
 | **Pode gerenciar as tarefas da conversa.** | libera | Exibe a seção **Tarefas** no painel **Detalhes** da conversa. |
 | **Pode ver tarefas atribuídas a outros.** | libera | Exibe na lista de **Tarefas** as tarefas atribuídas a outros membros e o filtro **Membro**. Sem ela, você só vê as tarefas em que é o responsável e o filtro **Membro** não aparece. |
 | **Transferir tarefas em massa** | libera | Exibe **Executar ação...** no menu **⋯** do topo da lista, liberando as duas ações em lote (**Atribuir todas as tarefas para um membro** e **Resolver todas as tarefas**). |
-| **Proibir excluir tarefas** | restringe | Remove **Excluir** da lista, da janela da tarefa e das subtarefas e impede a exclusão (`"Você não tem permissão para excluir tarefas."`). Nunca se aplica ao proprietário do workspace e não impede excluir comentários ou anexos. |
+| **Proibir excluir tarefas** | restringe | Remove **Excluir** da lista, da janela da tarefa e das subtarefas e impede a exclusão (`"Você não tem permissão para excluir tarefas."`). O proprietário do workspace sempre pode excluir tarefas. |
 
 Os recursos ligados ao **Kinbox Agenda** (tipo **Agendamento**, agendamentos na lista e filtros **Serviço**, **Local** e **Status do agendamento**) aparecem apenas para quem tem a permissão **Gerenciar agendamentos** (seção **Agendas** do papel) ou é o proprietário.
 
