@@ -33,7 +33,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 ## Acesso e restrições de relatório
 
 - **Permissão base:** **Gerenciar relatórios** ("Ver e gerar relatórios."), configurada no workspace (na tela, **ambiente**) em **Configurações** → **Ambiente** → **Permissões** → papel → seção **Relatórios** ([Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Sem ela, o item **Relatórios** não aparece no menu lateral.
-- **Proprietário e papéis padrão:** o proprietário do workspace sempre vê todos os relatórios e não sofre restrições. **Administrador** e **Supervisor** já vêm com **Gerenciar relatórios**; **Atendente** não.
+- **Proprietário e papéis padrão:** o proprietário não precisa dessa permissão no papel. As condições de cada relatório continuam valendo. **Administrador** e **Supervisor** já vêm com **Gerenciar relatórios**; **Atendente** não.
 - **Condições extras por relatório:**
   - [**Dashboards**](/docs/relatorios/dashboard): cada dashboard define em **Visível para** quem o encontra na lista de dashboards (menu do título, **Mudar dashboard**): **Todos**, **Grupos** ou **Apenas para mim**; cartões de negociações exigem **Gerenciar negociações**.
   - [**Atendimento ao vivo**](/docs/relatorios/ao-vivo): o mapa e a fila seguem o **Acesso as Conversas** do papel.
@@ -105,7 +105,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 
 ### Cartão Personalizado
 
-- **Campos, nesta ordem:** **Nome** (obrigatório), **Período** (em dashboards **Compartilhados**, aparece desativado com **Selecionado na dashboard**: o período vem do seletor do topo), **Fonte dos dados**, **Por propriedade** (obrigatório; padrão **Data da criação**), **Métrica** (e **Operação**, quando aplicável), **Agrupar por**, **Visualização** e **Condições**. Botão **Criar** (ou **Salvar** ao editar). Um cartão novo só ganha números no próximo snapshot.
+- **Campos, nesta ordem:** **Nome** (obrigatório), **Período** (em dashboards **Compartilhados**, aparece desativado com **Selecionado na dashboard**: o período vem do seletor do topo), **Fonte dos dados**, **Por propriedade** (obrigatório; padrão **Data da criação**), **Métrica** (e **Operação**, quando aplicável), **Agrupar por**, **Visualização** e **Condições**. Botão **Criar** (ou **Salvar** ao editar). Cartões novos que usam snapshot só ganham números no próximo snapshot; os de **Tarefas** consultam os dados na hora, mas podem ficar carregando enquanto o snapshot selecionado é processado.
 - **Negócios:**
   - **Por propriedade:** **Data da criação**, **Ganho/perdido em**, **Previsão de fechamento**.
   - **Métrica:** **Por quantidade**, **Por valor**, **Tempo até ganhar ou perder o negócio** (com **Operação**: **Soma**, **Média**, **Mínimo**, **Máximo**, quando aplicável).
@@ -164,7 +164,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 
 ## Saldo: categorias, registros e colunas
 
-- **O que entra:** só débitos do [saldo da carteira](/docs/conceitos/saldo-e-creditos). Recargas (compras de saldo) ficam no **Histórico de recargas**; créditos de SMS usam outro saldo e não aparecem. O relatório mostra o consumo do workspace inteiro.
+- **O que entra:** só débitos do [saldo da carteira](/docs/conceitos/saldo-e-creditos). Recargas (compras de saldo) ficam no **Histórico de recargas**; créditos de SMS usam outro saldo e não aparecem.
 - **Período:** padrão últimos 15 dias, sem hoje. Os dias são contados no horário de Brasília. O **período anterior** (comparação do **Total consumido** e da tabela) tem a mesma duração e termina logo antes do início do período escolhido.
 - **Outro caminho:** **Configurações** → **Assinatura** → **Saldo disponível** → **Ver relatório de uso**, se o botão aparecer (precisa de **Gerenciar relatórios**).
 
@@ -190,7 +190,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 - **Tabela Serviços:** colunas **Serviço**, **Categoria**, **Usos** (quantas vezes o serviço foi usado no período), **Valor**, **% do total** e **Tendência** (valor por dia no período; ordena pela variação contra o período anterior). Padrão: **Valor**, do maior para o menor; clique no cabeçalho para ordenar; **Buscar serviço** filtra pelo nome.
 - **Detalhe do serviço** (linha da tabela ou cartão **Maior gasto**): cartões **Valor no período**, **Usos** (com a quantidade de registros), **Custo por uso** e **Período anterior**; gráfico **Valor por dia**; lista **Registros**, carregada 30 por vez ao rolar.
 - **Detalhe de um registro:** painel **Detalhe** com **Descrição**, **Data**, **Valor consumido (R$)**, **ID da transação** e, quando existem, **Membro**, **ID do Contato**, **ID da Conversa** (botão **Ver conversa**), **ID da Sessão**, **Minuto**, **Destino** e **ID da Chamada de Voz**.
-- **Ver extrato:** abre o painel **Extrato do saldo** com todos os débitos do período.
+- **Ver extrato:** abre o painel **Extrato do saldo** com os débitos do período.
 - **Colunas exportadas:** **Exportar extrato**: ID, **Data**, Total, **Descrição**, **Carteira**, **Autor**. **Exportar serviços**: **Serviço**, **Categoria**, **Usos**, **Valor**, **% do total**, **Período anterior**.
 
 ## Ligações: status, gráfico e totais

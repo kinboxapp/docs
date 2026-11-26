@@ -194,6 +194,16 @@
                 ]
               },
               {
+                "group": "Automações",
+                "pages": [
+                  "docs/automacao/visao-geral",
+                  "docs/automacao/configurando-automacoes",
+                  "docs/automacao/exemplos",
+                  "docs/automacao/gatilhos-e-acoes",
+                  "docs/automacao/problemas-comuns"
+                ]
+              },
+              {
                 "group": "Cenários",
                 "pages": [
                   "docs/cenarios/visao-geral",

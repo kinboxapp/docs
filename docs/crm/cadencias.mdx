@@ -76,7 +76,7 @@ Os botões **Adicionar à etapa** e **Salvar modelo** guardam o modelo apenas na
 Regras importantes sobre a criação das tarefas:
 
 - **Dias corridos e fuso:** a contagem é sempre em dias corridos (sábados, domingos e feriados contam), e os horários seguem o fuso configurado no workspace.
-- **Qualquer entrada na etapa:** a cadência vale para toda negociação que entra na etapa — inclusive as criadas na etapa inicial, importadas por planilha ou movidas em lote.
+- **Qualquer entrada na etapa:** a cadência vale para toda negociação que entra na etapa — inclusive as criadas na etapa inicial, importadas por planilha, movidas em lote ou movidas pela ação **Mudar etapa da negociação** de uma [automação](/docs/automacao/gatilhos-e-acoes).
 - **Saída da etapa:** se a negociação sair da etapa antes do dia previsto, a tarefa agendada não nasce. As tarefas pendentes criadas pelos modelos da etapa que ela deixou são **concluídas automaticamente**.
 - **Voltar para a etapa:** se a negociação sair e voltar para a mesma etapa, ela não recebe de novo as tarefas de **Ao entrar** ou **Dias depois** que já recebeu ali (modelos **Todo mês** continuam criando uma tarefa por mês enquanto ela estiver na etapa).
 - **Alterações na cadência:** como avisa o rodapé da janela, `"Vale só para os próximos negócios que entrarem na etapa. Tarefas já criadas não mudam."` (modelos **Todo mês** também se aplicam às negociações que já estão na etapa).

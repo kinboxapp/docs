@@ -36,7 +36,7 @@ Trocar o período atualiza juntos os cartões, os gráficos e a tabela. Os dias 
 
 | Cartão | O que mostra |
 | --- | --- |
-| **Total consumido** | Soma dos débitos no período. Abaixo, mostra a variação percentual (se subiu ou caiu) e o valor gasto no período anterior, quando houve consumo no período anterior. |
+| **Total consumido** | Soma dos débitos no período. Abaixo, mostra o valor gasto no período anterior (**R$ 0,00 no período anterior** quando não houve consumo) e, quando esse valor é maior que zero, a variação percentual (se subiu ou caiu). |
 | **Média por dia** | Total consumido dividido pela quantidade de dias do período. |
 | **Maior gasto** | Serviço que mais consumiu no período, com valor e porcentagem do total (`-` quando não há consumo). Clicar no cartão abre o detalhe desse serviço. |
 
@@ -64,7 +64,7 @@ Ligações por telefone (VoIP) e minutos além da franquia do plano de ligaçõe
 A tabela **Serviços** lista o consumo de cada serviço no período, com a quantidade de usos, o valor e a participação no total. Clique em um cabeçalho para mudar a ordenação ou use **Buscar serviço** para filtrar pelo nome.
 
 - **Detalhe de um serviço:** clique em uma linha da tabela (ou no cartão **Maior gasto**) para abrir o painel do serviço com os cartões **Valor no período**, **Usos** (com a quantidade de registros), **Custo por uso** e **Período anterior**, o gráfico **Valor por dia** e a lista **Registros** (carregada aos poucos conforme você rola).
-- **Extrato completo:** clique em **Ver extrato** acima da tabela para abrir o painel **Extrato do saldo**, com todos os débitos do período.
+- **Extrato completo:** clique em **Ver extrato** acima da tabela para abrir o painel **Extrato do saldo**, com os débitos do período.
 - **Detalhe de um registro:** clique em um item de **Registros** para abrir o painel **Detalhe**, com a descrição, a data, o valor e os identificadores ligados ao débito. Quando o débito vem de uma conversa, o botão **Ver conversa** abre a conversa.
 
 Análises de custo muito pequeno são agrupadas antes de virar um débito na carteira. Por isso, **Usos** pode ser maior que a quantidade de registros e parte do consumo de um dia pode aparecer no dia seguinte.
@@ -73,7 +73,7 @@ Análises de custo muito pequeno são agrupadas antes de virar um débito na car
 
 Clique no menu **...** no canto superior direito e escolha entre **Exportar extrato** e **Exportar serviços**, nos formatos **CSV (.csv)** ou **Excel (.xlsx)**:
 
-- **Exportar extrato:** baixa todos os débitos do período.
+- **Exportar extrato:** baixa os débitos do período.
 - **Exportar serviços:** baixa a tabela de serviços, com o valor do período anterior. Se você filtrou por uma categoria em **Por categoria**, o arquivo respeita esse filtro; a busca por nome não filtra o arquivo.
 
 <Frame caption="Topo do relatório Saldo com seletor de período, os cartões Total consumido, Média por dia e Maior gasto e o menu ... aberto com Exportar extrato e Exportar serviços">

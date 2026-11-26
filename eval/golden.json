@@ -1380,6 +1380,56 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Fiz uma automação para lembrar o cliente do orçamento depois de 2 horas e outra para encerrar a conversa depois de 24 horas sem mensagem, mas só uma delas funciona. O que está errado?",
+    "esperado": [
+      "docs/automacao/problemas-comuns",
+      "llm/automacao/gatilhos-e-acoes"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Quero que a Kinbox mande sozinha uma mensagem cobrando quem recebeu orçamento e sumiu. Como eu monto isso?",
+    "esperado": [
+      "docs/automacao/exemplos"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "As conversas que o nosso sistema abre pela API não disparam a automação de tempo sem nova mensagem. Tem alguma configuração para isso?",
+    "esperado": [
+      "llm/faq/automacao-sessoes-por-api",
+      "docs/automacao/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Coloquei 10 minutos na automação e a mensagem só saiu uns 13 minutos depois. Isso é normal?",
+    "esperado": [
+      "llm/faq/automacao-atraso"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Que ação eu consigo colocar numa automação que roda quando um atendente fica online?",
+    "esperado": [
+      "docs/automacao/gatilhos-e-acoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Onde eu crio uma automação nova e quem da equipe pode mexer nas automações?",
+    "esperado": [
+      "docs/automacao/configurando-automacoes",
+      "docs/automacao/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para criar uma automação que publica um post no Facebook da loja toda segunda-feira?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Montei um painel com os números de vendas, mas ele continua mostrando os valores de manhã. Como faço os cartões puxarem os dados de agora?",
     "esperado": [
       "docs/relatorios/dashboard",
