@@ -5,15 +5,13 @@ keywords: [ligações whatsapp, chamadas whatsapp, atender ligação na kinbox, 
 publico: llm
 tipo: faq
 fontes:
-  - api-v0:server/modules/wabox/WaboxClient.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules
   - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
-  - wabox:packages/database/src/schema/instances.ts
+  - motor-qr:packages/database/src/schema/instances.ts
 codigo:
-  - api-v0:server/modules/wabox/WaboxClient.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules/**
   - web:src/pages/settings/channels/whatsappCloud/WhatsappCallingChannelSettings.tsx
-  - wabox:packages/database/src/schema/instances.ts
+  - motor-qr:packages/database/src/schema/instances.ts
 verificado_em: 2026-11-26
 ---
 

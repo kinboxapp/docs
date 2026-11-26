@@ -57,7 +57,7 @@ Um workspace (na tela, **ambiente**) novo vem com papéis prontos definidos pela
   - Fechar sem salvar: `"Fechar sem salvar?"` / `"Você vai perder as alterações se não salvar primeiro."` / **Prosseguir**.
   - Ao criar ou salvar: `"Permissão criado."` / `"Permissão salvo."`.
   - Kinbox Agenda: se ao salvar aparecer `"A permissão foi salva, mas não foi possível sincronizar o Kinbox Agenda para todos os membros."`, salve o papel de novo.
-- **Editar um papel encerra a sessão de quem o usa:** na próxima vez que o membro abrir ou atualizar a Kinbox, a sessão termina e ele precisa entrar novamente (a aba já aberta continua com as permissões antigas até atualizar). O proprietário não é afetado.
+- **Editar um papel encerra a sessão de quem o usa:** na próxima vez que o membro abrir ou atualizar a Kinbox, a sessão termina e ele entra novamente já com as permissões novas. O proprietário não é afetado.
 - **Clonar:** abre **Criar permissão** com `"Cópia de {nome}"` e as mesmas opções.
 - **Excluir:** confirmação `"Tem certeza que deseja excluir essa permissão?"`. Papel em uso não pode ser excluído: `"Não é possível excluir uma permissão que está sendo usada por um membro."` (troque antes o papel dos membros).
 
@@ -117,7 +117,7 @@ O menu lateral **Tarefas** aparece para todos os membros.
 | **Mesclar contatos** | "Pode mesclar dois contatos." | — |
 | **Ver telefone de contatos privados** | Em contatos marcados como **Contato privado**, sem essa opção o telefone e o e-mail ficam ocultos. | — |
 | **Alterar propriedades do contato** | Sem ela, os campos do contato no painel da conversa ficam somente leitura. | — |
-| **Esconder telefone** | Esconde o telefone nestas telas: lista, perfil e formulário de contatos, contato na negociação, lista de conversas e painel da conversa. | — |
+| **Esconder telefone** | Oculta o telefone do contato nas telas de atendimento, contatos e negociações. | — |
 | **Proibir alterar celular** | Desativa o campo de celular na edição e no painel do contato. | — |
 | **Pode ligar para o contato** | Libera o botão de ligar para o contato. | — |
 
@@ -128,10 +128,10 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |
 | **Gerenciar relatórios** | Mostra **Relatórios** no menu lateral e libera a opção **Dashboard** na seção **Home**. | — |
-| **Não pode exportar relatórios** | Desativa o botão **Exportar** da lista de sessões dos relatórios (**Ver sessões**). | — |
+| **Não pode exportar relatórios** | Impede exportar a lista de sessões dos relatórios. | — |
 | **Não pode criar ou excluir Dashboard** | "Membro fica impossibilitado de criar ou excluir dashboards." | — |
-| **Restringir relatórios aos grupos do membro** | Na **Visão geral**, **Produtividade**, **Interação** e **Avaliação**, mostra só as sessões dos grupos do membro; na **Atribuição**, as sessões que estão ou já estiveram nos grupos dele (exclui **Restringir relatórios ao membro**). Detalhes em [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam). | Sem grupo, o relatório não abre e aparece um aviso de que o membro não pertence a nenhum grupo. |
-| **Restringir relatórios ao membro** | Na **Visão geral**, **Produtividade**, **Atribuição** e **Interação**, mostra só as sessões em que o membro é o responsável atual; na **Avaliação**, só as avaliações registradas para ele; na **Presença**, só a presença dele (exclui **Restringir relatórios aos grupos do membro**). Detalhes em [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam). | — |
+| **Restringir relatórios aos grupos do membro** | Em relatórios de sessões como **Visão geral** e **Produtividade**, mostra só as sessões dos grupos do membro; na **Atribuição**, as sessões que estão ou já estiveram nos grupos dele (exclui **Restringir relatórios ao membro**). Detalhes em [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam). | Sem grupo, o relatório não abre e aparece um aviso de que o membro não pertence a nenhum grupo. |
+| **Restringir relatórios ao membro** | Em relatórios de sessões como **Visão geral** e **Produtividade**, mostra só as sessões em que o membro é o responsável atual; na **Avaliação**, só as avaliações registradas para ele; na **Presença**, só a presença dele (exclui **Restringir relatórios aos grupos do membro**). Detalhes em [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam). | — |
 
 ### Canais
 
@@ -272,7 +272,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 - **Desconectar, desativar, reativar e excluir:**
   - **Desconectar** (desativada se offline ou proprietário): `"Tem certeza que deseja desconectar esse membro do ambiente? Ele poderá logar-se novamente."`. O membro vê `"Você foi deslogado por um gestor..."` e sai em 3 segundos.
   - **Desativar** (proprietário: `"Você não pode desativar o proprietário do ambiente."`): abre **Desativar membro** com `"Antes de excluir o membro {nome}, você deseja realizar alguma ação com as atribuições dele?"`, **Excluir agendamentos** (`"Os agendamentos de mensagens ainda não enviadas serão excluídos."`) e **Transferir atribuições** (`"As conversas e negociações abertas atribuídas a este membro serão transferidas para os membros selecionados de forma cíclica."`, dica `"Deixar em branco apenas retira a atribuição"`). Aviso: `"O membro {nome} foi desativado no ambiente!"`. Desligar **Ativo** em **Editar membro** não oferece essas opções.
-  - Sessão do membro desativado: a aba aberta não cai na hora; quando o membro abre ou atualiza a página, exibe `"Você não tem permissão para acessar este workspace."` e encerra a sessão. Ao entrar sem outro workspace ativo, vê **Nenhum ambiente ativo** (`"Os ambientes da sua conta foram desativados ou seu acesso foi removido. Crie um novo ambiente para continuar."` / `"Esperava ver um ambiente aqui? Peça ao administrador da sua empresa para te convidar de novo."`).
+  - Sessão do membro desativado: quando o membro abre ou atualiza a página, a Kinbox exibe `"Você não tem permissão para acessar este workspace."` e encerra a sessão. Ao entrar sem outro workspace ativo, vê **Nenhum ambiente ativo** (`"Os ambientes da sua conta foram desativados ou seu acesso foi removido. Crie um novo ambiente para continuar."` / `"Esperava ver um ambiente aqui? Peça ao administrador da sua empresa para te convidar de novo."`).
   - **Reativar**: `"Tem certeza que deseja reativar esse membro no ambiente? Ele poderá logar-se novamente."` → `"O membro {nome} foi reativado no ambiente!"`. Com assinatura vencida, falha com `"Sua assinatura expirou"`. Pode falhar também quando não há licença livre: `"Seu plano atual não permite ativar ou adicionar agentes."`.
   - **Excluir** (proprietário: `"Você não pode excluir o proprietário do ambiente."`): mesmas opções de **Excluir agendamentos** e **Transferir atribuições** (progresso `"Excluindo agendamentos"`, `"Transferindo conversas"`, `"Transferindo negócios"`; cancelar mostra `"Ação abortada durante execução"`; cancelar não desfaz o que já foi feito: agendamentos já excluídos e atribuições já transferidas continuam assim, e o membro não é desativado nem excluído). Remove o membro do workspace e dos grupos, apaga convite pendente e tira o membro do histórico de todas as sessões do workspace, inclusive as resolvidas. A conta na Kinbox permanece ativa para outros workspaces.
 - **Resetar senha:**
@@ -309,7 +309,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 | Membro vê **Nenhum ambiente ativo** ao entrar | Foi desativado ou excluído do workspace e não tem outro ativo | Conferir a lista com filtro **Tudo**: se **Inativo**, **Reativar**; se excluído, convidar novamente. |
 | Membro vê `"Você foi deslogado por um gestor..."` | Alguém usou **Desconectar** | Entrar novamente. |
 | Membro precisa entrar de novo depois de uma alteração | O papel dele foi editado ou a propriedade foi transferida | Entrar novamente para aplicar as novas permissões. |
-| Membro desativado continua usando a aba aberta | Desativar não encerra a aba imediatamente (`"Você não tem permissão para acessar este workspace."` aparece quando ele abre ou atualiza a página) | Usar **Desconectar** para encerrar a sessão na hora. |
+| Encerrar na hora a sessão de um membro desativado | `"Você não tem permissão para acessar este workspace."` aparece quando ele abre ou atualiza a página | Usar **Desconectar** (membro **Online**) para encerrar a sessão na hora. |
 | Membro vê **Fora do horário de acesso** | Papel tem **Limitar horário de acesso ao ambiente** | Aguardar o horário permitido (fuso do workspace) ou ajustar o horário/papel. |
 | Membro não vê tela de **Configurações** ou item do menu | Falta a permissão correspondente no papel | Marcar a opção conforme o mapa acima e pedir ao membro para entrar de novo. |
 | Membro não vê conversas esperadas | **Acesso as Conversas**, grupos do membro ou grupo/responsável da conversa | Revisar **Acesso as Conversas**, grupos em **Grupos** e atribuição; consultar [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns). |

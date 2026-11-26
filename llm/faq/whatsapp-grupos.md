@@ -7,12 +7,12 @@ tipo: faq
 fontes:
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
   - web:src/pages/settings/channels/whatsapp/WhatsappGroups.tsx
-  - api-v0:server/modules/wabox/WaboxEvents.js
-  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/modules
+  - api-v0:server/controllers
 codigo:
   - web:src/pages/settings/channels/whatsapp/**
-  - api-v0:server/controllers/WaboxController.js
-  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/**
+  - api-v0:server/modules/**
   - api-v0:server/controllers/IntegrationsController.js
   - web:src/pages/settings/channels/warmbox/**
   - web:src/pages/settings/channels/index.tsx

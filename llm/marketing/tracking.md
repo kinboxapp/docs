@@ -61,7 +61,7 @@ Condições gerais:
 ## Origem: UTMs e IDs de clique
 
 - Parâmetros lidos da URL: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, `gclid`, `gbraid`, `wbraid` e `ctwa_clid`. Outros parâmetros são descartados; valores são cortados em 500 caracteres.
-- **Orientação da tela para campanhas:** "Nas campanhas, use utm_campaign=<campaignId> e utm_content=<adId>; apenas UTMs padronizadas e click IDs são armazenados." Exemplo de link: `utm_source=instagram&utm_medium=paid_social&utm_campaign=black-friday`.
+- **Orientação da tela para campanhas:** `"Nas campanhas, use utm_campaign=<campaignId> e utm_content=<adId>; apenas UTMs padronizadas e click IDs são armazenados."` Exemplo de link: `utm_source=instagram&utm_medium=paid_social&utm_campaign=black-friday`.
 - **Primeira e última origem:** a primeira origem é gravada uma vez e nunca substituída; a última origem só muda quando chega uma nova origem não direta e diferente (tráfego direto não apaga a última origem).
 - **Herança de origem:** eventos disparados em páginas internas sem UTM na URL herdam a última origem guardada do visitante, por isso entram na tabela **Campanhas** do relatório.
 - **Referrer e página:** guarda apenas a origem (host) do referrer e o caminho da página (sem parâmetros de query).

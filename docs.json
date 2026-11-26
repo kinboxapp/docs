@@ -12,7 +12,8 @@
     "tabs": [
       {
         "tab": "Central de ajuda",
-        "groups": [
+        "pages": [
+          "docs/inicio",
           {
             "group": "Primeiros passos",
             "icon": "rocket",
@@ -333,7 +334,7 @@
                 ]
               },
               {
-                "group": "Dashboards e consumo",
+                "group": "Dashboards e outros relatórios",
                 "pages": [
                   "docs/relatorios/dashboard",
                   "docs/relatorios/saldo",
@@ -348,10 +349,10 @@
             "group": "Integrações e API",
             "icon": "puzzle-piece",
             "pages": [
+              "docs/integracoes/visao-geral",
               {
                 "group": "Apps e CRMs",
                 "pages": [
-                  "docs/integracoes/visao-geral",
                   "docs/integracoes/hubspot",
                   "docs/integracoes/pipedrive",
                   "docs/integracoes/rdstation-crm",
@@ -821,7 +822,7 @@
     },
     {
       "source": "/docs/assistente",
-      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+      "destination": "/docs/inicio"
     },
     {
       "source": "/docs/authentication",
@@ -921,7 +922,7 @@
     },
     {
       "source": "/docs/usando-o-kinbox",
-      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
+      "destination": "/docs/inicio"
     },
     {
       "source": "/docs/v0",
@@ -1093,7 +1094,7 @@
     },
     {
       "source": "/docs",
-      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+      "destination": "/docs/inicio"
     },
     {
       "source": "/docs/primeiros-passos/adicionando-canais-a-sua-caixa-de-entrada",

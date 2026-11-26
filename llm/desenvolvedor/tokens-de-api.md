@@ -68,9 +68,9 @@ Mensagens que a API pode devolver, conforme a rota e a situação:
 
 ## Envio legado
 
-Tokens antigos, criados antes de existir a permissão **Enviar**, podem exibir a etiqueta laranja **Envio legado**, com a dica: `"Token antigo: ainda envia mensagens e dispara campanhas pela API sem a permissão de envio. Não vale para o MCP. Clique para remover."`.
+A etiqueta laranja **Envio legado** marca tokens criados antes de existir a permissão **Enviar**.
 
-Ao clicar na etiqueta, surge a confirmação `'O token "<nome>" deixa de enviar mensagens e disparar campanhas pela API. Para voltar a enviar, crie um token com a permissão de envio.'` com o botão **Remover envio legado** (retorna `"Envio legado removido"`). Tokens novos nunca nascem com envio legado.
+Para regularizar o token, clique na etiqueta e confirme em **Remover envio legado** (a tela mostra `"Envio legado removido"`). Se o token precisar enviar mensagens ou disparar campanhas pela API, crie um token novo com a permissão **Enviar**. Tokens novos nunca nascem com a etiqueta.
 
 ## Token v0 (tokens legados)
 

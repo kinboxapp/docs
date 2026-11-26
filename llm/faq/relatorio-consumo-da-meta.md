@@ -1,7 +1,7 @@
 ---
 title: Onde vejo quantas conversas a Meta me cobrou?
 description: A Kinbox não mostra quantas conversas ou mensagens a Meta cobrou; o consumo e a cobrança ficam na sua conta do WhatsApp na Meta.
-keywords: [fatura do whatsapp oficial, gasto com templates, conversas cobradas meta, consumo meta, fatura whatsapp oficial, quantas conversas meta cobrou, relatório whatsapp api oficial, gasto templates meta, cobrança meta]
+keywords: [conversas cobradas meta, consumo meta, quantas conversas meta cobrou, relatório whatsapp api oficial, gasto templates meta, relatório não bate com a meta, onde vejo a fatura da meta]
 publico: llm
 tipo: faq
 fontes:
@@ -32,7 +32,7 @@ Onde vejo quantas conversas a Meta me cobrou?
 
 A Kinbox não mostra quantas conversas ou mensagens a Meta cobrou; o consumo e a cobrança do WhatsApp oficial ficam direto na sua conta do WhatsApp na Meta.
 
-A Kinbox não cobra nem repassa os envios do WhatsApp oficial, e templates do WhatsApp oficial não descontam da carteira do workspace. O [Relatório de saldo](/docs/relatorios/saldo) (**Relatórios** → **Saldo**; seu papel precisa da permissão **Gerenciar relatórios**, e o proprietário do workspace sempre vê) mostra apenas o consumo do saldo da Kinbox (como recursos de IA e ligações), e não a fatura da Meta.
+Os números da Kinbox não batem com os da Meta porque medem outras coisas. O [Relatório de saldo](/docs/relatorios/saldo) (**Relatórios** → **Saldo**; seu papel precisa da permissão **Gerenciar relatórios**, e o proprietário do workspace sempre vê) mostra apenas o consumo do saldo da Kinbox (como recursos de IA e ligações), e não a fatura da Meta.
 
 Para acompanhar o volume de atendimentos de um número oficial dentro da Kinbox, abra **Relatórios** → **Produtividade** (exige a permissão **Gerenciar relatórios**; o proprietário do workspace sempre vê), clique em **Filtrar**, escolha o **Canal** do número e clique em **Aplicar filtros** para consultar sessões novas e resolvidas. Esse volume mede sessões da Kinbox e não corresponde às conversas cobradas pela Meta.
 
@@ -44,5 +44,6 @@ Veja também [Relatório de produtividade](/docs/relatorios/produtividade), [Ant
 - onde ver gasto de templates do whatsapp oficial na kinbox
 - quantas mensagens a meta cobrou esse mês
 - tem relatório de cobrança da api oficial do whatsapp
+- por que o número de conversas da kinbox não bate com a meta
 - por que o relatório saldo não mostra a cobrança da meta
 - como acompanhar o consumo de mensagens do whatsapp oficial

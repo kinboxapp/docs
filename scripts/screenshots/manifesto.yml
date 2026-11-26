@@ -429,7 +429,7 @@
     - docs/bot/aprender-a-usar-o-bot
 
 # Bot de exemplo "Consulta de pedido" (desligado, sem canal; criado por garantirBot no seed.ts): gaveta Integração do bloco
-# "Consultar pedido" com Tipo de integração = Chamar endpoint e o Json fictício (exemplo.com, mapReturnToCustomField → pedido).
+# "Consultar pedido" com Tipo de integração = Chamar endpoint e o Json fictício (example.com, mapReturnToCustomField → pedido).
 - id: bot-integracao-endpoint
   url: /settings/bots/1187
   passos:
@@ -511,8 +511,10 @@
     - docs/agente-de-ia/criando-seu-agente-de-ia
 
 - id: agente-editor
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - pausa: 1000
   alvo:
@@ -524,8 +526,10 @@
     - docs/agente-de-ia/criando-seu-agente-de-ia
 
 - id: agente-configuracoes
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
     - esperar: '.ant-drawer-content >> text=Comportamento'
@@ -538,8 +542,10 @@
     - docs/agente-de-ia/criando-seu-agente-de-ia
 
 - id: agente-configuracoes-perfil
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
     - esperar: '.ant-drawer-content >> text=Informações básicas do agente'
@@ -553,8 +559,10 @@
     - docs/agente-de-ia/criando-seu-agente-de-ia
 
 - id: agente-conectar-canal
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: 'button.group\/stack'
     - esperar: '.ant-modal-content >> text=Gerenciar canais'
@@ -571,8 +579,10 @@
 # seta do bloco e soltar no vazio cria o bloco ligado e abre "Selecione uma ação". Os blocos novos recebem os ids
 # 1, 2 e 3; no fim, "Enquadrar" (último botão da barra inferior) mostra o desenho inteiro.
 - id: agente-fluxograma
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
     - esperar: '#side-panel .react-flow__node-start'
@@ -630,8 +640,10 @@
 
 # Janela "Selecione uma ação", aberta ao puxar a seta do Início e soltar no vazio (nada é publicado).
 - id: agente-selecionar-acao
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
     - esperar: '#side-panel .react-flow__node-start'
@@ -650,8 +662,10 @@
     - docs/agente-de-ia/acoes-do-fluxograma
 
 - id: agente-adicionar-conhecimento
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#side-panel header:has-text("Conhecimento") a:has-text("Adicionar")'
     - esperar: '.ant-modal-content >> text=Cole texto'
@@ -663,8 +677,10 @@
     - docs/agente-de-ia/conhecimento
 
 - id: agente-selecionar-ferramenta
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#side-panel >> text=Canais conectados'
     - clicar: '#side-panel header:has-text("Ferramentas") a:has-text("Adicionar")'
     - esperar: '.ant-modal-content >> text=Selecione uma ferramenta'
@@ -678,8 +694,10 @@
 # Chat de teste com uma pergunta (a resposta é gerada na hora e gasta saldo de cortesia do staging). O histórico do
 # teste fica no navegador da captura (perfil fora do repositório).
 - id: agente-testar
-  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  url: /settings/agents
   passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+    - clicar: '.g_table_wrapper >> text=Lia'
     - esperar: '#preview-panel textarea'
     - digitar:
         seletor: '#preview-panel textarea'
@@ -872,8 +890,10 @@
 - id: whatsapp-templates-flow-editor
   workspace: Kinbox
   largura: 1120
-  url: /settings/whatsapp-api/flows/6ae33a5f867e51f3160c5358
+  url: /settings/whatsapp-api/flows
   passos:
+    - esperar: 'text=Formulario'
+    - clicar: 'text=Formulario'
     - esperar: '.react-flow__node-wa-screen'
     # Corrige o acento do nome só na tela (renomear não grava sem Salvar; o print não salva)
     - clicar: 'h2:has-text("Formulario")'
@@ -1214,21 +1234,6 @@
   paginas:
     - docs/relatorios/ao-vivo
 
-- id: relatorios-avaliacao-configurar
-  url: /reports/rating
-  passos:
-    - esperar: 'button:has-text("Configurar")'
-    - clicar: 'button:has-text("Configurar")'
-    - esperar: '.ant-drawer-body >> text=Texto de agradecimento'
-    - pausa: 1000
-  alvo:
-    - '.ant-drawer-header'
-    - '.ant-drawer-content button:has-text("Salvar")'
-  mascarar: []
-  arquivo: images/ajuda/relatorios/configurar-avaliacao.webp
-  paginas:
-    - docs/relatorios/avaliacao
-
 # Seção conta (Sua conta e app › Sua conta)
 #
 # A conta de teste é a dona do workspace de documentação: nome, e-mail, celular e foto dela aparecem no perfil e no
@@ -1472,7 +1477,7 @@
   passos:
     - esperar: '#endpoint'
     - digitar: { seletor: '#name', texto: 'Ficha do cliente' }
-    - digitar: { seletor: '#endpoint', texto: 'https://exemplo.com/ficha-do-cliente' }
+    - digitar: { seletor: '#endpoint', texto: 'https://example.com/ficha-do-cliente' }
     - pausa: 600
   alvo:
     - '.ant-drawer-content:has-text("Criar plugin") .ant-drawer-header'
@@ -1493,7 +1498,7 @@
     - clicar: 'text=Customizado'
     - esperar: '#hashIdentifier'
     - digitar: { seletor: '#description', texto: 'App da loja' }
-    - digitar: { seletor: '#hashIdentifier', texto: 'https://exemplo.com/kinbox/webhook' }
+    - digitar: { seletor: '#hashIdentifier', texto: 'https://example.com/kinbox/webhook' }
     - pausa: 600
   alvo:
     - '.ant-form-item:has(#description)'
@@ -1502,7 +1507,7 @@
     - '.ant-form-item:has(input[disabled]) input'
   arquivo: images/ajuda/desenvolvedores/canal-customizado.webp
   paginas:
-    - docs/desenvolvedor/criando-canal-customizado
+    - docs/canais/canal-customizado
 
 # Link de conversa em um clique com um número que não tem conversa: abre Enviar mensagem com nome, número e texto do link.
 - id: dev-link-enviar-mensagem
@@ -1643,8 +1648,10 @@
 
 # Automação fictícia "Pedir avaliação" (desligada): Ativo desligado, Gatilho = Ao resolver uma conversa, Sem condições e a ação Avaliar atendimento com Configurar.
 - id: avaliacao-automacao
-  url: /settings/automations/6b07eb7f0793c0000e0197ee
+  url: /settings/automations
   passos:
+    - esperar: 'tr:has-text("Pedir avaliação")'
+    - clicar: 'text=Pedir avaliação'
     - esperar: '.ant-drawer >> text=Avaliar atendimento'
     - pausa: 800
   alvo:
@@ -1657,8 +1664,10 @@
 
 # Configurar da ação Avaliar atendimento: painel Configurar Avaliação com Pergunta, Opções (Nota e Texto), Opção, Texto de agradecimento e Salvar (texto do bot de avaliação que o workspace recebe ao ser criado).
 - id: avaliacao-configurar
-  url: /settings/automations/6b07eb7f0793c0000e0197ee
+  url: /settings/automations
   passos:
+    - esperar: 'tr:has-text("Pedir avaliação")'
+    - clicar: 'text=Pedir avaliação'
     - esperar: '.ant-drawer button:has-text("Configurar")'
     - clicar: '.ant-drawer button:has-text("Configurar")'
     - esperar: '.ant-drawer-title >> text=Configurar Avaliação'
@@ -1835,6 +1844,8 @@
   url: /crm/contacts/people/new
   passos:
     - esperar: '.ant-drawer-content >> text=Contato privado'
+    # O texto de exemplo do e-mail usa um domínio real: troca por um domínio reservado
+    - trocarTexto: { seletor: '.ant-drawer-content input[placeholder*="@"]', texto: 'nome@example.com' }
     - pausa: 800
   alvo:
     - '.ant-drawer-content'

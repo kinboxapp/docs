@@ -31,7 +31,7 @@ Como escondo o telefone do contato de alguns atendentes?
 
 Há dois jeitos, e cada um fica num lugar diferente:
 
-1. **Esconder o telefone de todos os contatos para certos membros:** em **Configurações** → **Ambiente** → **Permissões**, no papel desses membros, marque a restrição **Esconder telefone** (seção **Contatos**). Quem pode mudar papéis é o proprietário do workspace ou quem tem a permissão **Permissões**. A restrição esconde o telefone nestas telas: lista, perfil (como `*******`) e formulário de contatos, contato na negociação, lista de conversas e painel da conversa.
+1. **Esconder o telefone de todos os contatos para certos membros:** em **Configurações** → **Ambiente** → **Permissões**, no papel desses membros, marque a restrição **Esconder telefone** (seção **Contatos**). Quem pode mudar papéis é o proprietário do workspace ou quem tem a permissão **Permissões**. A restrição oculta o telefone do contato nas telas de atendimento, contatos e negociações.
 2. **Esconder telefone e e-mail só de alguns contatos:** abra o formulário do contato (**Clientes** → **Contatos** → **Novo contato** ou **Editar**) e ligue **Contato privado** na seção **Configurações**. A chave aparece só para o proprietário e para quem tem **Ver telefone de contatos privados**. Quem não tem essa permissão não vê o telefone nem o e-mail desse contato, e esses dados saem em branco na exportação de contatos.
 
 Se o membro não deve baixar listas de contatos, marque **Não pode exportar contatos** no papel dele: as opções de exportação ficam desativadas para ele.

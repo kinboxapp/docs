@@ -5,17 +5,14 @@ keywords: [usar celular junto, whatsapp no celular e na kinbox, notificações p
 publico: llm
 tipo: faq
 fontes:
-  - api-v0:server/controllers/WaboxController.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
-  - api-v0:server/modules/wabox/WaboxClient.js
-  - wabox:apps/docs/resources/limitations.mdx
+  - api-v0:server/controllers
+  - api-v0:server/modules
+  - motor-qr:apps/docs/resources/limitations.mdx
 codigo:
-  - api-v0:server/modules/wabox/WaboxSender.js
-  - api-v0:server/modules/wabox/WaboxEvents.js
-  - api-v0:server/modules/wabox/WaboxClient.js
+  - api-v0:server/modules/**
   - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
-  - wabox:apps/docs/resources/limitations.mdx
-  - wabox:apps/engine/internal/wa/whatsmeow/**
+  - motor-qr:apps/docs/resources/limitations.mdx
+  - motor-qr:apps/engine/internal/wa/**
 verificado_em: 2026-11-26
 ---
 

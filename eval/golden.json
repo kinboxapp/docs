@@ -211,6 +211,13 @@
     "tipo": "faq"
   },
   {
+    "pergunta": "Dá para pagar as mensagens da Meta junto com a mensalidade da Kinbox?",
+    "esperado": [
+      "llm/faq/whatsapp-oficial-preco-das-mensagens"
+    ],
+    "tipo": "faq"
+  },
+  {
     "pergunta": "Como cadastro o cartão de crédito no Gerenciador de Anúncios do Facebook para impulsionar posts?",
     "esperado": [],
     "tipo": "negativo"

@@ -69,7 +69,7 @@ Com **Capturar informações de campanha** e **Enviar código de rastreio na men
     | `<parâmetros da campanha>` | Qualquer outro parâmetro do link conta como dado de campanha (como `utm_source`, `utm_campaign`, `gclid`). O link lê até 40 parâmetros, contando `origin` e `source_url`; `text`, `phone` e `tracking_code` não contam. |
     | `source_url` | Opcional. Endereço completo da página de origem; também conta como dado de campanha. |
 
-    O código de rastreio só é acrescentado quando o link tem **pelo menos um parâmetro de campanha** ou `source_url`. `origin` sozinho não basta: sem parâmetro de campanha nem `source_url`, o link abre o WhatsApp apenas com a mensagem, sem código. O link aceita até 30 cliques por minuto por visitante (acima disso retorna erro).
+    O código de rastreio só é acrescentado quando o link tem **pelo menos um parâmetro de campanha** ou `source_url`. `origin` sozinho não é suficiente: sem parâmetro de campanha nem `source_url`, o link abre o WhatsApp apenas com a mensagem, sem código. O link aceita até 30 cliques por minuto por visitante (acima disso retorna erro).
 
     Exemplo em JavaScript para montar o link com os parâmetros de campanha da página atual (só os que você escolher):
 
@@ -119,6 +119,6 @@ Com **Capturar informações de campanha** e **Enviar código de rastreio na men
 ## Problemas comuns
 
 - **A mensagem abriu sem código `(ref: ...)` pelo Widget.** Confira se **Capturar informações de campanha** e **Enviar código de rastreio na mensagem** estão marcadas e se o endereço da página tinha algum parâmetro.
-- **A mensagem abriu sem código `(ref: ...)` pelo link próprio.** Confira se o link tem `tracking_code=1` (ou `true`) e pelo menos um parâmetro de campanha ou `source_url` (só `origin` não basta).
+- **A mensagem abriu sem código `(ref: ...)` pelo link próprio.** Confira se o link tem `tracking_code=1` (ou `true`) e pelo menos um parâmetro de campanha ou `source_url` (só `origin` não é suficiente).
 - **A campanha não apareceu na sessão.** O cliente apagou o código antes de enviar, passaram-se mais de 7 dias desde a geração do código, o código já tinha sido usado ou a sessão já possuía uma origem registrada.
 - **Apareceu "Número de WhatsApp inválido".** Revise o número no link: use apenas dígitos, com DDI e DDD (por exemplo, `5511900000001`).

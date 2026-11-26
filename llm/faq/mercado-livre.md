@@ -1,7 +1,7 @@
 ---
 title: A Kinbox atende o Mercado Livre?
 description: "Em parte: a Kinbox recebe e responde só as perguntas feitas nos seus anúncios do Mercado Livre, e a tela atual de canais não oferece mais a conexão."
-keywords: [mercado livre, atender mercado livre, perguntas do anúncio, responder mercado livre, pós-venda mercado livre, conectar mercado livre, marketplace]
+keywords: [como atender o mercado livre na kinbox, a kinbox responde perguntas do anúncio do mercado livre, dá para conectar o mercado livre, mercado livre não aparece nos canais, como fazer o pós-venda do mercado livre pela kinbox]
 publico: llm
 tipo: faq
 fontes:

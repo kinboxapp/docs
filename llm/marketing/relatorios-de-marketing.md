@@ -77,7 +77,7 @@ Condições gerais:
 | **Leads Gerados** | Resultados das campanhas da Meta no período, contados pelo evento de conversão do objetivo de cada campanha. | Conta lead, conversa, registro, contato, agendamento, solicitação e resultado personalizado; alcance, impressões, cliques, engajamento, vídeo e compras não entram. |
 | **Custo por Lead** | Investimento dividido pela quantidade de leads gerados. | Investimento ÷ leads (0 sem leads). Único cartão em que subir é negativo. |
 | **ROAS** | Faturamento (Meta) dividido pelo investimento em mídia. | Faturamento (Meta) ÷ investimento, formato `1,5x`. |
-| **Faturamento (Meta)** | Valor de compras registrado pelo pixel da Meta. Não inclui negócios do Kinbox. | Valor de compras informado pela Meta. |
+| **Faturamento (Meta)** | Valor de compras registrado pelo pixel da Meta. Não inclui negócios da Kinbox. | Valor de compras informado pela Meta. |
 
 - **Comparação:** cada cartão compara com o período anterior de mesmo tamanho; sem dado anterior, mostra `-` com `"Sem dados do período anterior para comparar."`
 - **Gráfico:** **Leads**, **Investimento** ou **Faturamento (Meta)** por dia; o filtro de campanha (até 100 campanhas) altera apenas o gráfico.
