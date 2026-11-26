@@ -20,14 +20,14 @@ Como a Kinbox trata os dados dos meus clientes (LGPD)?
 
 ## Resposta
 
-As regras de como a Kinbox trata dados pessoais estão na Política de Privacidade da Kinbox, em `https://www.kinbox.com.br/privacy`.
+As regras de como a Kinbox trata dados pessoais estão na [Política de Privacidade](https://www.kinbox.com.br/privacy) da Kinbox.
 
 Dentro do seu workspace (na tela, **ambiente**), você conta com controles diretos para gerenciar o acesso e os dados:
 
 - **Papéis e permissões:** defina quem pode ver e alterar cada área em [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes).
 - **Excluir um contato:** excluir um contato apaga o cadastro, os campos personalizados e todas as conversas dele, sem volta (veja [Contatos: encontrar, cadastrar, editar e excluir](/docs/conversas/clientes-contatos-e-organizacoes)).
 - **Exportar contatos:** gere um arquivo com os dados cadastrados em [Exportar contatos](/docs/clientes/exportar-contatos).
-- **Histórico de alterações:** acompanhe quem criou, alterou ou excluiu itens nos últimos 30 dias em [Ver o histórico de alterações (Auditoria)](/docs/administracao/auditoria) (precisa da permissão **Auditoria** no papel ou ser o proprietário).
+- **Histórico de alterações:** acompanhe quem criou, alterou ou excluiu itens nos últimos 30 dias (ações de parceiro pelo MCP ficam guardadas por mais tempo) em [Ver o histórico de alterações (Auditoria)](/docs/administracao/auditoria) (precisa da permissão **Auditoria** no papel ou ser o proprietário).
 - **Acesso de um parceiro às conversas:** se o seu workspace for ligado a um parceiro que pode inspecioná-lo, o cartão **Parceria** em **Configurações** → **Ambiente** → **Geral** traz a opção **Permitir que o parceiro veja as conversas** (precisa da permissão **Workspace** no papel ou ser o proprietário). Veja o que muda em [Controlar o que o parceiro vê no seu workspace](/docs/administracao/acesso-do-parceiro).
 
 Sobre encerrar o workspace na tela (só o proprietário), veja [Excluir o workspace](/docs/administracao/excluir-workspace). Para pedir que os dados do workspace sejam apagados de vez ou para dúvidas jurídicas sobre LGPD, fale com o suporte da Kinbox.
