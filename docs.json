@@ -258,6 +258,14 @@
                 ]
               },
               {
+                "group": "Tarefas e metas",
+                "pages": [
+                  "docs/tarefas/criando-e-gerenciando-tarefas",
+                  "docs/metas/criando-metas-no-kinbox",
+                  "docs/metas/como-as-metas-sao-calculadas"
+                ]
+              },
+              {
                 "group": "Kinbox Agenda",
                 "pages": [
                   "docs/agenda/kinbox-agenda",
