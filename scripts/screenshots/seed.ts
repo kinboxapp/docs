@@ -785,9 +785,8 @@ async function garantirCenarios(api: Api, canal: string) {
 /**
  * Dashboard de exemplo "Atendimento da loja" (prints da seção dashboards), criado a partir do modelo
  * Pipeline Atendimento: cartões de sessões não atribuídas, em espera, em atendimento, pendentes e atribuídas.
- * Sem snapshot os cartões ficam em esqueleto: gera um só se o dashboard ainda não tem nenhum
- * (o snapshot só avisa, dentro do app, a conta que o pediu; não envia nada a contato nem gasta saldo).
- * O autor exibido no seletor de snapshots é um membro fictício.
+ * Sem snapshot os cartões ficam em esqueleto: se o dashboard ainda não tem nenhum, gere um pela tela
+ * (Obter dados atualizados → Atualizar dados) e espere concluir antes de capturar.
  */
 const DASHBOARD_EXEMPLO = 'Atendimento da loja'
 // Os números do dashboard vêm do snapshot: a descrição não pode prometer "tempo real"
@@ -808,9 +807,9 @@ async function garantirDashboard(api: Api) {
   }
   const snapshots = lista(await api.v3('GET', `/dashboards/${id}/snapshots`))
   if (!snapshots.length) {
-    await api.v3('POST', `/dashboards/${id}/snapshots`, { dashboardId: id, authorName: 'Carla Mendes', dashboardName: DASHBOARD_EXEMPLO })
+    log(`dashboard: "${DASHBOARD_EXEMPLO}" sem snapshot — gere um pela tela (Obter dados atualizados) antes de capturar`)
   }
-  log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length || 'novo'} snapshot(s)`)
+  log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length} snapshot(s)`)
 }
 
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras

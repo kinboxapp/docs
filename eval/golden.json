@@ -1354,7 +1354,8 @@
   {
     "pergunta": "Preciso baixar a gravação das chamadas que a equipe fez por telefone na semana passada e mandar a lista para a diretoria em planilha.",
     "esperado": [
-      "docs/relatorios/ligacoes"
+      "docs/relatorios/ligacoes",
+      "llm/faq/ligacoes-gravacao"
     ],
     "tipo": "guia"
   },

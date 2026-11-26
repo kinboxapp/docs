@@ -48,6 +48,8 @@ type Item = {
   largura?: number
   /** Altura da janela (px) só para este item, para modais altos que passam da tela. Padrão: 900. */
   altura?: number
+  /** Não tira o foco antes do print: um seletor aberto (antd Select) fecha ao perder o foco. */
+  manterFoco?: boolean
   /** Workspace onde o print é tirado. Padrão: o workspace de documentação. Outro workspace só para telas que ele não tem (ex.: WhatsApp), sempre com `mascarar`. */
   workspace?: string
   /**
@@ -316,7 +318,7 @@ async function capturar(page: Page, conversor: Page, item: Item) {
   }
 
   // Tira o foco de campos com autofocus, que sairiam com a borda de foco no print
-  await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur?.())
+  if (!item.manterFoco) await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur?.())
 
   const png = await page.screenshot({ clip: await recorte(page, item.alvo), animations: 'disabled', caret: 'hide' })
   const webp = await pngParaWebp(conversor, png)

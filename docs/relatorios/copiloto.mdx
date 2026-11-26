@@ -18,8 +18,6 @@ verificado_em: 2026-11-26
 
 O relatório do **Copiloto** reúne os resultados das análises de IA feitas nas sessões resolvidas do workspace em até cinco abas: **Qualidade**, **Sentimento**, **Intenções**, **Lead score** e **Atendimento automático**.
 
-O relatório **Copiloto** reúne o que as análises de IA do copiloto registraram nas sessões resolvidas: qualidade do atendimento, sentimento, intenções, lead score e clientes presos no bot.
-
 <Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê), e o item **Copiloto** só aparece em **Relatórios** quando pelo menos um recurso correspondente está ligado. Se o seu papel tiver **Restringir relatórios ao membro**, você vê só as sessões em que é o responsável; se tiver **Restringir relatórios aos grupos do membro**, você vê só as sessões dos seus grupos.</Note>
 
 ## Quando cada aba aparece
@@ -34,7 +32,7 @@ No menu lateral, vá em **Relatórios** → **Copiloto**. O relatório abre na p
 | **Lead score** | **Lead score** |
 | **Atendimento automático** | **Cliente preso no bot** ou **Não reabrir por agradecimento** |
 
-Se nenhum desses recursos estiver ligado, a tela avisa que é preciso ativar um recurso do copiloto em **Configurações** → **Copiloto** para ver os relatórios. Desligar um recurso esconde a aba, mas não apaga os dados; ao ligar de novo, o histórico volta a aparecer.
+Se nenhum desses recursos estiver ligado, a tela avisa que é preciso ligar um recurso do copiloto (em **Configurações** → **Automação** → **Copiloto**) para ver os relatórios. Desligar um recurso esconde a aba, mas não apaga os dados; ao ligar de novo, o histórico volta a aparecer.
 
 ## Quais sessões entram
 
@@ -61,7 +59,7 @@ Exibe o título **Qualidade do atendimento**, com nota, resolução do problema 
 | **Precisam de atenção** | Sessões com nota até 6. |
 | **Ponto a melhorar mais comum** | Ponto a melhorar mais frequente no período. |
 
-As notas aparecem agrupadas nas faixas **Crítico (0–4)**, **Atenção (5–6)**, **Adequado (7–8)** e **Excelente (9–10)**. Quando existem avaliadores com critério próprio, a área **Seus critérios** mostra um cartão para cada um.
+As notas aparecem agrupadas em faixas, de **Crítico** a **Excelente**. Quando existem avaliadores com critério próprio, a área **Seus critérios** mostra um cartão para cada um.
 
 A tabela traz as colunas **Distribuição da nota**, **Sessões**, **Nota média**, **Resolvido** e **Ponto a melhorar mais comum**.
 
@@ -73,8 +71,8 @@ Exibe o título **Sentimento dos clientes**, classificando as sessões em **Irri
 | --- | --- |
 | **Sessões analisadas** | Total de sessões com análise de sentimento no período. |
 | **Terminaram negativas** | Sessões encerradas como **Irritado** ou **Impaciente**. |
-| **Recuperadas** | Sessões que passaram de negativo para **Satisfeito** ou **Encantado**. |
-| **Pioraram** | Sessões que não começaram negativas e terminaram negativas. |
+| **Recuperadas** | Sessões em que o cliente começou negativo e terminou satisfeito. |
+| **Pioraram** | Sessões em que o cliente ficou negativo ao longo da conversa. |
 | **Sentimento médio** | Média de sentimento das sessões no período. |
 
 A tabela traz essas mesmas métricas por agrupamento, junto com a coluna **Distribuição**.
@@ -111,4 +109,4 @@ Mostra quantos contatos ficaram presos nos bots e agentes de IA e quantas reaber
 
 Abaixo dos cartões, aparecem a lista por bot (**Bot**, **Clientes presos**, **Sessões com bot** e **Presos**) e a tabela por agrupamento. A tabela e a exportação não incluem **Reaberturas evitadas**.
 
-Consultar este relatório não consome saldo, mas as análises do copiloto saem do saldo da carteira e aparecem na categoria **Análises** do [Relatório de saldo](/docs/relatorios/saldo). Para ativar ou ajustar esses recursos, veja [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto).
+Consultar este relatório não consome saldo, mas as análises do copiloto saem do saldo da carteira. No [Relatório de saldo](/docs/relatorios/saldo), sentimento, intenção, lead score e cliente preso no bot aparecem na categoria **Análises**; os **Avaliadores do copiloto**, que alimentam a aba **Qualidade**, aparecem na categoria **Copiloto**. Para ativar ou ajustar esses recursos, veja [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto).

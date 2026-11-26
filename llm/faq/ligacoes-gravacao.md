@@ -26,7 +26,7 @@ Onde ficam as gravações das ligações?
 
 ## Resposta
 
-As gravações ficam primeiro na mensagem da ligação dentro da conversa (**Ligação de voz**, **Ligação recebida pelo WhatsApp** ou **Ligação feita pelo WhatsApp**): clique nela para abrir o painel **Ligação de voz**, com o áudio e **Baixar áudio**. Quem tem a permissão **Gerenciar relatórios** também encontra as gravações em **Relatórios** → **Ligações** ([Relatório de ligações](/docs/relatorios/ligacoes); opções **Baixar** e **Ver**; na exportação, a coluna **Gravação** traz o link).
+As gravações ficam primeiro na mensagem da ligação dentro da conversa (**Ligação de voz**, **Ligação recebida pelo WhatsApp** ou **Ligação feita pelo WhatsApp**): clique nela para abrir o painel **Ligação de voz**, com o áudio e **Baixar áudio**. Quem tem a permissão **Gerenciar relatórios** também encontra as gravações em **Relatórios** → **Ligações** ([Relatório de ligações](/docs/relatorios/ligacoes); opções **Baixar** e **Ver**).
 
 - **Quando a gravação existe:** apenas quando a opção já estava ligada antes da ligação — **Gravar ligações** na aba **Ligações** do canal de WhatsApp oficial (recurso em teste com plano **Ligações WhatsApp**) ou **Gravar chamadas** em **Configurações** → **Chat** → **Voip** (no VoIP).
 - **Quando não há gravação:** se a opção estava desligada; no WhatsApp oficial, se o navegador de quem atendeu falhou ao enviar o áudio no fim (`"Não foi possível enviar a gravação da ligação"`); no VoIP, quando **Usar SIP reserva** está ligada.
@@ -40,5 +40,4 @@ Veja mais em [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/li
 - onde baixar o áudio de uma chamada voip
 - onde encontrar gravações das ligações do whatsapp
 - por que minha ligação não tem gravação disponível
-- como exportar links das gravações de chamadas
 - onde fica a transcrição e o resumo da ligação

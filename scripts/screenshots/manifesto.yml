@@ -2903,45 +2903,54 @@
     - docs/cenarios/gatilhos-e-acoes
 
 # Seção dashboards (Relatórios › Dashboards e consumo)
-# Dashboard "Atendimento da loja" (seed, etapa dashboard): cartões do Pipeline Atendimento e um snapshot com autor fictício.
-# Saldo e Ligações: a Loja Exemplo não tem consumo nem ligações; os prints mostram só a barra do topo e os menus.
+# Dashboard "Atendimento da loja" (seed, etapa dashboard): cartões do Pipeline Atendimento. Antes de capturar,
+# o dashboard precisa de um snapshot concluído (o seed avisa quando não há); o rótulo do snapshot fica mascarado.
+# Saldo e Ligações: a Loja Exemplo não tem consumo nem ligações; os prints mostram só o topo, os cartões e os menus.
 
 - id: dashboard-topo
   url: /reports/dashboard
   passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
     - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
-    - esperar: 'button:has-text("by Carla Mendes")'
+    - esperar: 'button:has-text(" by ")'
     - pausa: 1500
   alvo:
     - 'div.flex.justify-between:has([data-academia="dashboard-title"])'
-    - 'button:has-text("by Carla Mendes")'
+    - 'button:has-text(" by ")'
     - '.ant-picker-range'
-  mascarar: []
+  mascarar:
+    - 'button:has-text(" by ") span.font-medium'
   arquivo: images/ajuda/relatorios/dashboard-topo.webp
   paginas:
     - docs/relatorios/dashboard
 
-- id: dashboard-criar
+- id: dashboard-pipeline
   url: /reports/dashboard
+  altura: 2000
   passos:
-    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: '[data-academia="dashboard-title"]'
     - clicar: '[data-academia="dashboard-title"] a'
-    - esperar: 'text=Adicionar dashboard'
-    - clicar: 'text=Adicionar dashboard'
-    - esperar: '.ant-drawer >> text=Visível para'
-    - pausa: 800
-  alvo:
-    - '.ant-drawer-header'
-    - '.ant-drawer .ant-form-item:has-text("Visível para")'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
+    - esperar: '.react-grid-item >> text=Atribuído'
+    - pausa: 1500
+  alvo: '.react-grid-layout'
   mascarar: []
-  arquivo: images/ajuda/relatorios/dashboard-criar.webp
+  arquivo: images/ajuda/relatorios/dashboard-pipeline.webp
   paginas:
     - docs/relatorios/dashboard
 
 - id: dashboard-modelos
   url: /reports/dashboard
   passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
     - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
     - clicar: '[data-academia="dashboard-add-report"] button'
     - esperar: 'text=Escolha um template...'
     - pausa: 1200
@@ -2960,7 +2969,8 @@
     - pausa: 800
   alvo:
     - '.ant-picker-range'
-    - 'span:has-text("Maior gasto")'
+    - 'div.rounded-xl:has(> span:has-text("Total consumido"))'
+    - 'div.rounded-xl:has(> span:has-text("Maior gasto"))'
     - '.ant-dropdown-menu'
   mascarar: []
   arquivo: images/ajuda/relatorios/saldo-exportar.webp
@@ -2969,12 +2979,16 @@
 
 - id: ligacoes-filtro
   url: /reports/voip
+  manterFoco: true
   passos:
     - esperar: 'text=Minutos diários'
+    - clicar: '.ant-select:has-text("Todas as ligações")'
+    - esperar: '.ant-select-dropdown >> text=Telefone (VoIP)'
     - pausa: 800
   alvo:
+    - '.g-card-box-space div:text-is("Ligações")'
     - '.ant-picker-range'
-    - '.ant-select:has-text("Todas as ligações")'
+    - '.ant-select-dropdown:not(.ant-select-dropdown-hidden)'
   mascarar: []
   arquivo: images/ajuda/relatorios/ligacoes-filtro.webp
   paginas:

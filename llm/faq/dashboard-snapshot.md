@@ -30,8 +30,8 @@ Um **snapshot** é uma foto dos dados de todos os cartões de um dashboard calcu
 - **Quando fica pronto:** o cálculo roda em segundo plano, numa fila, sem prazo fixo — pode levar vários minutos, dependendo do tamanho do dashboard. Enquanto processa, os cartões ficam carregando e o seletor mostra um ícone girando. Quando termina, você recebe uma notificação no sino no topo da tela para abrir o snapshot pronto.
 - **Qual snapshot abre e como ver anteriores:** ao abrir o dashboard, a Kinbox carrega sempre o snapshot mais recente. No seletor abaixo do título (no formato `DD/MM/YYYY HH:mm by <nome>`), você pode consultar snapshots anteriores. Se os snapshots anteriores aparecerem desativados no seletor, peça ao administrador a permissão **Atribuir** no seu papel.
 - **Se falhar:** em caso de erro no processamento, os cartões exibem um aviso de falha e o botão **Tentar novamente**, que gera um novo snapshot.
-- **Atualização e retenção:** o dashboard não atualiza sozinho nem tem agendamento, e os snapshots não expiram nem podem ser excluídos pela tela.
-- **Dashboard Compartilhado e exceções:** em dashboards com **Período dos relatórios** definido como **Compartilhado**, escolha as datas no seletor do topo antes de atualizar, pois o snapshot usa esse intervalo. Os cartões **Tarefas** (e **Calendário de tarefas**, para quem só vê as próprias tarefas) são exceção: consultam os dados na hora.
+- **Atualização:** o dashboard não atualiza sozinho nem tem agendamento: gere um novo snapshot sempre que precisar de números atualizados.
+- **Dashboard Compartilhado e exceções:** em dashboards com **Período dos relatórios** definido como **Compartilhado**, escolha as datas no seletor do topo antes de atualizar, pois o snapshot usa esse intervalo. Os cartões **Tarefas** são exceção: consultam os dados na hora.
 
 Veja mais em [Criar dashboards](/docs/relatorios/dashboard) e [Exportar relatórios e quem pode ver cada um](/docs/relatorios/exportar-e-permissoes).
 

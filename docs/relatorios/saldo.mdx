@@ -19,14 +19,12 @@ verificado_em: 2026-11-26
 
 O relatório de **Saldo** mostra quanto do [saldo da carteira](/docs/conceitos/saldo-e-creditos) foi consumido no período escolhido, dividido por categoria, por dia e por serviço, até cada registro de débito. Compras e recargas de saldo não entram aqui: elas ficam no **Histórico de recargas**.
 
-O relatório **Saldo** mostra quanto do [saldo da carteira](/docs/conceitos/saldo-e-creditos) foi consumido no período, por categoria, por dia e por serviço, até cada registro. As recargas (compras de saldo) não aparecem aqui: ficam no **Histórico de recargas**.
-
 <Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê).</Note>
 
 ## Onde fica
 
 - No menu lateral, vá em **Relatórios** → **Saldo**.
-- Você também pode abrir o relatório em **Configurações** → **Assinatura** → clique em **Saldo disponível** para acessar o **Histórico de recargas** → clique em **Ver relatório de uso** (veja [Adicionar saldo](/docs/assinatura/adicionar-saldo)).
+- Outro caminho: **Configurações** → **Assinatura** → **Saldo disponível** (abre o **Histórico de recargas**) → **Ver relatório de uso**, se o botão aparecer (precisa de **Gerenciar relatórios**; veja [Adicionar saldo](/docs/assinatura/adicionar-saldo)). Se ele não aparecer, use o menu **Relatórios**.
 
 ## Período
 
@@ -51,23 +49,23 @@ O **período anterior** tem a mesma duração do período escolhido e termina im
 
 ## Categorias
 
-| Categoria | Serviços incluídos |
+| Categoria | Exemplos de serviços |
 | --- | --- |
-| **Copiloto** | **Uso do copilot**, **Uso do copilot (chat)**, **Uso de Assistente IA**, **Avaliadores do copiloto**, **Revisor de mensagens** |
-| **Agente de IA** | **Uso do agente de IA**, **Processamento da base de conhecimento** |
-| **Análises** | **Análise de sentimento**, **Lead score**, **Classificação de intenção**, **Cliente preso no bot**, **Sugestão de retorno**, **Aviso de pendência ao resolver**, **Mensagem de encerramento**, **Rascunho de retorno** |
-| **Voz e áudio** | **Ligação atendida por IA**, **Transcrição de chamada de voz**, **Resumo da transcrição de chamada de voz**, **Transcrição de áudio**, **Ligação do WhatsApp**, **Gravação de ligação do WhatsApp** |
-| **Outros** | Débitos sem categoria própria, exibidos pela descrição — inclui minutos de **Voip** e **Excedente do plano de ligações do WhatsApp** |
+| **Copiloto** | Sugestões e chat do copiloto, **Avaliadores do copiloto** (usados na aba **Qualidade** do [Relatório do copiloto](/docs/relatorios/copiloto)) e **Revisor de mensagens** |
+| **Agente de IA** | Uso do agente de IA e processamento da base de conhecimento |
+| **Análises** | **Análise de sentimento**, **Lead score**, **Classificação de intenção**, **Cliente preso no bot** e outros avisos e sugestões automáticos |
+| **Voz e áudio** | Ligações e gravações do WhatsApp, transcrições e resumos de chamadas, transcrição de áudio e ligações atendidas por IA |
+| **Outros** | Débitos sem categoria própria, exibidos pela descrição |
 
 Ligações por telefone (VoIP) e minutos além da franquia do plano de ligações do WhatsApp aparecem em **Outros**. Créditos de SMS usam outro saldo e não entram neste relatório.
 
 ## Serviços, detalhe e extrato
 
-A tabela **Serviços** lista o consumo por serviço com as colunas **Serviço**, **Categoria**, **Usos**, **Valor**, **% do total** e **Tendência** (evolução diária, ordenável pela variação contra o período anterior). Por padrão, a tabela vem ordenada por **Valor**, do maior para o menor; clique em um cabeçalho para mudar a ordenação ou use **Buscar serviço** para filtrar pelo nome.
+A tabela **Serviços** lista o consumo de cada serviço no período, com a quantidade de usos, o valor e a participação no total. Clique em um cabeçalho para mudar a ordenação ou use **Buscar serviço** para filtrar pelo nome.
 
 - **Detalhe de um serviço:** clique em uma linha da tabela (ou no cartão **Maior gasto**) para abrir o painel do serviço com os cartões **Valor no período**, **Usos** (com a quantidade de registros), **Custo por uso** e **Período anterior**, o gráfico **Valor por dia** e a lista **Registros** (carregada aos poucos conforme você rola).
 - **Extrato completo:** clique em **Ver extrato** acima da tabela para abrir o painel **Extrato do saldo**, com todos os débitos do período.
-- **Detalhe de um registro:** clique em um item de **Registros** para abrir o painel **Detalhe** com **Descrição**, **Data**, **Valor consumido (R$)**, **ID da transação** e, quando disponíveis, **Membro**, **ID do Contato**, **ID da Conversa** (com o botão **Ver conversa**), **ID da Sessão**, **Minuto**, **Destino** e **ID da Chamada de Voz**.
+- **Detalhe de um registro:** clique em um item de **Registros** para abrir o painel **Detalhe**, com a descrição, a data, o valor e os identificadores ligados ao débito. Quando o débito vem de uma conversa, o botão **Ver conversa** abre a conversa.
 
 Análises de custo muito pequeno são agrupadas antes de virar um débito na carteira. Por isso, **Usos** pode ser maior que a quantidade de registros e parte do consumo de um dia pode aparecer no dia seguinte.
 
@@ -75,11 +73,11 @@ Análises de custo muito pequeno são agrupadas antes de virar um débito na car
 
 Clique no menu **...** no canto superior direito e escolha entre **Exportar extrato** e **Exportar serviços**, nos formatos **CSV (.csv)** ou **Excel (.xlsx)**:
 
-- **Exportar extrato:** baixa todos os débitos do período (ID, **Data**, Total, **Descrição**, **Carteira** e **Autor**).
-- **Exportar serviços:** baixa a tabela de serviços (**Serviço**, **Categoria**, **Usos**, **Valor**, **% do total** e **Período anterior**). Se você filtrou por uma categoria em **Por categoria**, o arquivo respeita esse filtro; a busca por nome não filtra o arquivo.
+- **Exportar extrato:** baixa todos os débitos do período.
+- **Exportar serviços:** baixa a tabela de serviços, com o valor do período anterior. Se você filtrou por uma categoria em **Por categoria**, o arquivo respeita esse filtro; a busca por nome não filtra o arquivo.
 
-<Frame caption="Topo do relatório Saldo com seletor de período, início dos cartões e o menu ... aberto com Exportar extrato e Exportar serviços">
-  <img src="/images/ajuda/relatorios/saldo-exportar.webp" alt="Parte superior do relatório Saldo mostrando o seletor de período de 15 dias, os títulos dos cartões Total consumido, Média por dia e Maior gasto e o menu de opções aberto com Exportar extrato e Exportar serviços" />
+<Frame caption="Topo do relatório Saldo com seletor de período, os cartões Total consumido, Média por dia e Maior gasto e o menu ... aberto com Exportar extrato e Exportar serviços">
+  <img src="/images/ajuda/relatorios/saldo-exportar.webp" alt="Parte superior do relatório Saldo mostrando o seletor de período, os cartões Total consumido, Média por dia e Maior gasto zerados e o menu de opções aberto com Exportar extrato e Exportar serviços" />
 </Frame>
 
 Para acompanhar a minutagem e o histórico das chamadas, veja o [Relatório de ligações](/docs/relatorios/ligacoes). Para receber aviso antes de o saldo acabar, configure o [Alerta de saldo](/docs/assinatura/alerta-de-saldo), e para ver quais análises do copiloto consomem saldo, consulte [Analisar conversas com IA](/docs/copiloto/analises-de-ia).

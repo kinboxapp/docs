@@ -22,21 +22,23 @@ O relatório de **Ligações** mostra a minutagem, os status e a lista das liga�
 
 <Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê).</Note>
 
-## Período e origem
+## Onde fica
 
-No menu lateral, vá em **Relatórios** → **Ligações**.
+No menu lateral, vá em **Relatórios** → **Ligações**. O relatório mostra as ligações de todo o workspace.
+
+## Período e origem
 
 - **Período:** abre nos últimos 15 dias, sem hoje, considerando a data em que cada ligação foi criada. Clique nas datas para escolher outro intervalo (com data e hora) ou use os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**.
 - **Origem:** ao lado do período, filtre por **Todas as ligações** (padrão), **WhatsApp: feitas**, **WhatsApp: recebidas** ou **Telefone (VoIP)**. Não há filtro por membro, canal ou status.
 
-<Frame caption="Barra de filtros do relatório Ligações com seletor de período e filtro de origem">
-  <img src="/images/ajuda/relatorios/ligacoes-filtro.webp" alt="Topo do relatório Ligações exibindo o seletor de período de 15 dias e o seletor de origem em Todas as ligações" />
+<Frame caption="Topo do relatório Ligações com o seletor de período e o filtro de origem aberto">
+  <img src="/images/ajuda/relatorios/ligacoes-filtro.webp" alt="Topo do relatório Ligações com o título, o seletor de período e o filtro de origem aberto com as opções Todas as ligações, WhatsApp: feitas, WhatsApp: recebidas e Telefone (VoIP)" />
 </Frame>
 
 ## Gráfico e totais
 
 - **Gráfico por dia:** considera apenas as ligações **concluídas**. Use o seletor do gráfico para alternar entre **Minutagem** (título **Minutos diários**), **Média de minutos** e **Contagem de ligações**.
-- **Cartões de totais:** ficam abaixo do gráfico e respeitam o filtro de origem. Exibem **Minutos** e **Média de minutos** (das ligações concluídas), **Concluídas** e um cartão para cada outro status que apareceu no período. Quando não há ligações, aparece apenas **Média de minutos** zerado.
+- **Cartões de totais:** ficam abaixo do gráfico, respeitam o filtro de origem e mostram os minutos e a média das ligações concluídas e quantas ligações houve em cada status.
 
 ## Lista de ligações
 
@@ -58,7 +60,8 @@ Clicar sobre a linha não abre os detalhes: passe o mouse na linha para exibir o
 - **Ver:** abre o painel **Ligação de voz**.
   - Quando existe gravação, o painel exibe o player de áudio e o botão **Baixar áudio**.
   - Quando existe transcrição e resumo, aparecem **Resumo** (com o sentimento: **Positivo**, **Negativo** ou **Neutro**) e **Transcrição** dividida por falante — clicar em uma fala pula o áudio para aquele momento.
-  - Quando há gravação sem transcrição, aparece o botão **Transcrever**. Transcrever uma ligação sai do [saldo da carteira](/docs/conceitos/saldo-e-creditos) e aparece como **Transcrição de chamada de voz** no [Relatório de saldo](/docs/relatorios/saldo).
+  - Quando há gravação sem transcrição, aparece o botão **Transcrever**. Clicar nele gasta [saldo da carteira](/docs/conceitos/saldo-e-creditos) (aparece como **Transcrição de chamada de voz** no [Relatório de saldo](/docs/relatorios/saldo)).
+  - Nas ligações gravadas do WhatsApp oficial com o plano **Ligações WhatsApp**, a transcrição é automática e pode chegar alguns minutos depois do áudio; enquanto isso, o painel mostra **Transcrever**. Aguarde alguns minutos e abra o painel de novo antes de clicar: o clique gasta saldo mesmo com o plano.
   - Se o painel avisar que não há gravação disponível, confira se a gravação está ativada nas [Configurações de ligações (VoIP)](/docs/canais/ligacoes/configuracoes-voip).
 - **Baixar:** baixa o áudio da gravação direto da lista. O botão aparece em todas as linhas; se a ligação não tiver gravação, a tela avisa que não há gravação disponível.
 
@@ -70,4 +73,4 @@ Este relatório não mostra valores em reais. Para acompanhar quanto as ligaçõ
 
 Clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
 
-O arquivo traz todas as ligações do período e da origem escolhida, incluindo **Destino**, **Status**, **Data**, **Minutos**, **Membro**, **ID da Conversa**, **Iniciado por**, **Sentimento**, **Gravação** (link do áudio) e **Resumo**. Como o arquivo exportado leva o link da gravação e o resumo da chamada, compartilhe-o apenas com quem deve ter acesso a esse conteúdo.
+O arquivo traz todas as ligações do período e da origem escolhida. Compartilhe a planilha apenas com pessoas autorizadas.
