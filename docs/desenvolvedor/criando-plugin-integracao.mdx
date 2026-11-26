@@ -1,7 +1,7 @@
 ---
 title: Criar um plugin para o painel da conversa
 description: Como cadastrar um plugin (uma página sua que abre dentro da conversa), escolher o modo de exibição e usar a biblioteca da Kinbox para ler a conversa e agir nela.
-keywords: [plugin, criar plugin, iframe, painel da conversa, página dentro da kinbox, kinboxjs, sdk, biblioteca, modo de exibição, auth secret, campos personalizados no plugin, integração com sistema próprio]
+keywords: [plugin, criar plugin, iframe, painel da conversa, página dentro da kinbox, kinboxjs, sdk, biblioteca, modo de exibição, campos personalizados no plugin, integração com sistema próprio]
 publico: humano
 tipo: guia
 fontes:
@@ -41,11 +41,11 @@ Um plugin é uma página sua (em um endereço HTTPS) que abre dentro da Kinbox, 
     | **Endpoint** | Obrigatório. Endereço da sua página (use um endereço `https://`, por exemplo `https://exemplo.com/ficha-do-cliente`). |
     | **Modo de exibição** | Como o plugin abre (padrão: **Normal**). Veja os modos na seção abaixo. |
     | **Altura em pixels** ou **Largura em pixels** | Altura (de 200 a 800, padrão 400) nos modos **Normal** e **Modal**; largura (de 200 a 1600, padrão 400) nos modos **Painel lateral** e **Página lateral**. Não aparece em **Nova página**, **Popup** e **Tela inteira**. |
-    | **Auth Secret** | Gerado automaticamente e somente leitura; enviado no endereço para identificar o plugin (não use como senha). |
+    | **Auth Secret** | Preenchido pela Kinbox; você não edita. Não use esse campo para autenticação. |
     | **Visível para** | **Todos** (padrão), **Grupos** (com o campo **Grupos**) ou **Apenas para mim**. |
 
     <Frame caption="Painel Criar plugin com Nome do plugin, Endpoint, Modo de exibição, Altura em pixels, Auth Secret e Visível para">
-      <img src="/images/ajuda/desenvolvedores/criar-plugin.webp" alt="Painel Criar plugin preenchido com Nome do plugin Ficha do cliente, Endpoint https://exemplo.com/ficha-do-cliente, Modo de exibição Normal, Altura em pixels 400, Auth Secret gerado, Visível para Todos e botão Salvar" />
+      <img src="/images/ajuda/desenvolvedores/criar-plugin.webp" alt="Painel Criar plugin preenchido com Nome do plugin Ficha do cliente, Endpoint https://exemplo.com/ficha-do-cliente, Modo de exibição Normal, Altura em pixels 400, Auth Secret com tarja, Visível para Todos e botão Salvar" />
     </Frame>
   </Step>
 
@@ -107,7 +107,7 @@ Para conversar com a Kinbox, carregue a biblioteca `kinboxjs.js` no `<head>` da 
 
 ## O que o plugin recebe
 
-- **No endereço (query string):** `auth_secret` (o **Auth Secret** do plugin), `dark_mode` (`true` ou `false`, conforme o tema do membro) e `operator_id` (ID do membro logado).
+- **No endereço (query string):** `dark_mode` (`true` ou `false`, conforme o tema do membro) e `operator_id` (ID do membro logado).
 - **No evento `conversation`:** os objetos `contact` (nome, e-mail, telefone, foto e `customFields`), `conversation` (ID, canal, responsável, grupo, tags e link), `session` (ID e `customFields`) e `user` (dados do membro logado). O evento chega de novo sempre que o membro troca de conversa.
 - **Sem conversa aberta:** o plugin recebe o evento `no_conversation` com `user`.
 

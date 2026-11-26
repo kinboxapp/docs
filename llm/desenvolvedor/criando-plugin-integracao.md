@@ -1,7 +1,7 @@
 ---
-title: "Plugins: modos de exibição, placeholders no endpoint e Auth Secret"
+title: "Plugins: modos de exibição, placeholders no endpoint e biblioteca kinboxjs"
 description: Referência dos plugins da Kinbox — campos e limites do cadastro, comportamento de cada modo, troca de campos no endereço, parâmetros e dados que o plugin recebe e funções da biblioteca kinboxjs.
-keywords: [plugin não aparece, plugin em branco, modo tela inteira, placeholder no endpoint, auth_secret, dark_mode, operator_id, kinbox.on conversation, setProperty, sendForm, getWorkspaceInfo, assignTo, moveToGroup, addTag, callback]
+keywords: [plugin não aparece, plugin em branco, modo tela inteira, placeholder no endpoint, dark_mode, operator_id, kinbox.on conversation, setProperty, sendForm, getWorkspaceInfo, assignTo, moveToGroup, addTag, callback]
 publico: llm
 tipo: referencia
 fontes:
@@ -29,7 +29,7 @@ Referência técnica dos plugins da Kinbox, complementando [Criar um plugin para
   - **Modo de exibição:** padrão **Normal**.
   - **Altura em pixels:** exibido em **Normal** e **Modal**, de `200` a `800` (padrão `400`).
   - **Largura em pixels:** exibido em **Painel lateral** e **Página lateral**, de `200` a `1600` (padrão `400`).
-  - **Auth Secret:** gerado automaticamente, somente leitura; enviado no endereço para identificar o plugin (não é senha).
+  - **Auth Secret:** preenchido pela Kinbox, sem edição. Não deve ser usado para autenticação.
   - **Visível para:** **Todos** (padrão), **Grupos** (abre o campo **Grupos**) ou **Apenas para mim**.
 
 ## Modos de exibição
@@ -52,7 +52,7 @@ Referência técnica dos plugins da Kinbox, complementando [Criar um plugin para
 
 ## Parâmetros no endereço e verificação de origem
 
-- **Query string acrescentada pela Kinbox:** `auth_secret` (valor de **Auth Secret**), `dark_mode` (`true` ou `false`), `app_plugin_type` (`inbox`), `operator_id` (ID do membro logado) e, no modo **Tela inteira**, `display_mode=fullscreen`.
+- **Query string acrescentada pela Kinbox:** `dark_mode` (`true` ou `false`), `app_plugin_type` (`inbox`), `operator_id` (ID do membro logado) e, no modo **Tela inteira**, `display_mode=fullscreen`.
 - **Mesma origem:** a Kinbox só aceita mensagens vindas da mesma origem do **Endpoint** cadastrado; mensagens de outra origem são ignoradas. Se o plugin redirecionar para outro domínio, as funções da biblioteca param de responder.
 
 ## Biblioteca `kinboxjs.js`

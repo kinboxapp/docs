@@ -1480,7 +1480,8 @@
   paginas:
     - docs/desenvolvedor/mcp
 
-# Painel Criar plugin preenchido com dados fictícios (não salva).
+# Painel Criar plugin preenchido com dados fictícios (não salva). O valor gerado do Auth Secret leva tarja e a ajuda
+# do campo some do print (a página não ensina a usar o campo).
 - id: dev-plugin-novo
   url: /settings/plugins/new
   passos:
@@ -1491,7 +1492,10 @@
   alvo:
     - '.ant-drawer-content:has-text("Criar plugin") .ant-drawer-header'
     - '.ant-drawer-content:has-text("Criar plugin") button:has-text("Salvar")'
-  mascarar: []
+  mascarar:
+    - '#authSecret'
+  esconder:
+    - '#authSecret_help'
   arquivo: images/ajuda/desenvolvedores/criar-plugin.webp
   paginas:
     - docs/desenvolvedor/criando-plugin-integracao
