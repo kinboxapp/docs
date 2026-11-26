@@ -9,6 +9,8 @@ fontes:
   - api-v0:server/controllers/WbaCloudController.js
   - api-v0:server/modules/meta/CloudApiClient.js
   - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
+  - api-v0:server/auxiliary/walletDefaults.js
+  - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
 codigo:
   - web:src/pages/reports/index.tsx
   - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
@@ -16,6 +18,9 @@ codigo:
   - api-v0:server/controllers/WbaCloudController.js
   - api-v0:server/modules/meta/CloudApiClient.js
   - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/auxiliary/walletDefaults.js
+  - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/embed/**
 verificado_em: 2026-11-26
 ---
 

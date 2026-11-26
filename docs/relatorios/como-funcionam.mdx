@@ -46,7 +46,7 @@ No menu lateral, clique em **Relatórios**.
 | [**Vendas ao vivo**](/docs/relatorios/ao-vivo) | Mapa animado das negociações abertas de um funil (exige também a permissão **Gerenciar negociações**) | Tempo real |
 | [**Produtividade**](/docs/relatorios/produtividade) | TME, TMP, TMA, sessões novas, resolvidas, leads e mensagens | Período |
 | [**Atribuição**](/docs/relatorios/atribuicao) | Quantas vezes cada membro ou grupo recebeu uma sessão por dia | Período |
-| [**Interação**](/docs/relatorios/interacao) | Em quantas sessões cada membro mandou mensagem por dia | Período |
+| [**Interação**](/docs/relatorios/interacao) | Em quantas sessões cada membro interagiu por dia (mensagem ou ação na conversa) | Período |
 | [**Presença**](/docs/relatorios/presenca) | Quanto tempo cada membro ficou online por dia | Período |
 | [**Avaliação**](/docs/relatorios/avaliacao) | Nota média dada pelos contatos aos atendimentos | Período |
 
@@ -62,7 +62,7 @@ Os relatórios de atendimento contam **sessões**, e não conversas nem contatos
 | **TMP** | Tempo médio pós-atribuição | Primeira atribuição a um membro | Primeira resposta de um membro |
 | **TMA** | Tempo médio de atendimento | Primeira resposta de um membro | Resolução da sessão |
 
-- **Tempo com o bot:** apenas mensagens enviadas por um membro marcam a primeira resposta; mensagens do bot e mensagens automáticas do sistema não contam. Por isso, o tempo em que a sessão fica com o [bot](/docs/bot/visao-geral) entra no **TME**, e não no **TMP** nem no **TMA**.
+- **Primeira resposta e bot:** apenas mensagens enviadas por um membro marcam a primeira resposta; mensagens do [bot](/docs/bot/visao-geral) e mensagens automáticas do sistema não contam. Os tempos são medidos entre duas datas: o tempo antes da primeira atribuição fica fora do **TMP**, e o tempo antes da primeira resposta fica fora do **TMA**. O tempo com o bot costuma cair nesses trechos, mas não é descontado à parte: se o bot atuar dentro do intervalo de uma métrica, esse tempo entra nela.
 - **Sessões fora dos tempos:** sessões iniciadas pela equipe pelo botão **Enviar mensagem** (veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)) ficam fora do **TME** e do **TMP**. Sessões resolvidas sem nenhuma resposta de membro não têm nenhum dos três tempos.
 - **Horário comercial:** quando o workspace (na tela, **ambiente**) tem um **Horário comercial** escolhido em **Configurações** → **Ambiente** → **Geral**, os três tempos contam apenas os minutos dentro desse horário. Sem horário escolhido, contam todos os minutos corridos.
 - **Responsável atual:** ao agrupar por membro ou por grupo na **Visão geral** e na **Produtividade**, a sessão inteira conta para quem é o responsável atual (ou era ao ser resolvida). Uma sessão transferida (veja [Atribuir e transferir](/docs/conversas/atribuir-e-transferir)) conta para o último responsável; para ver quem recebeu a sessão antes, use o relatório de [Atribuição](/docs/relatorios/atribuicao).
@@ -108,7 +108,7 @@ Além da permissão **Gerenciar relatórios**, o papel do membro em **Configura�
     Acompanhe quantas vezes cada membro ou grupo recebeu sessões por dia, incluindo transferências.
   </Card>
   <Card title="Relatório de interação" href="/docs/relatorios/interacao">
-    Veja, dia a dia, em quantas sessões cada membro enviou mensagem.
+    Veja, dia a dia, em quantas sessões cada membro interagiu.
   </Card>
   <Card title="Relatório de presença" href="/docs/relatorios/presenca">
     Consulte quanto tempo cada membro ficou online por dia e em quais horários esteve conectado.

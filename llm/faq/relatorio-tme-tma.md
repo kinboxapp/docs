@@ -31,7 +31,7 @@ Há também o **TMP** (tempo médio pós-atribuição), contado da primeira atri
 
 Principais regras que afetam os cálculos:
 
-- **Bot e primeira resposta:** mensagens do bot e mensagens automáticas do sistema não contam como primeira resposta, então o tempo com o bot entra no **TME** (e não no **TMP** nem no **TMA**). Uma **nota interna** enviada por um membro também conta como primeira resposta.
+- **Bot e primeira resposta:** mensagens do bot e mensagens automáticas do sistema não contam como primeira resposta, então o tempo com o bot até a primeira resposta entra no **TME**. O tempo antes da primeira atribuição fica fora do **TMP**, e o tempo antes da primeira resposta fica fora do **TMA**; o bot não é descontado à parte dentro desses intervalos. Uma **nota interna** enviada por um membro também conta como primeira resposta.
 - **Sessões fora das médias:** sessões iniciadas pela equipe pelo botão **Enviar mensagem** ficam fora do **TME** e do **TMP**. Sessões resolvidas sem nenhuma resposta de membro não têm TME, TMP nem TMA.
 - **Quais sessões entram:** a **Produtividade** só considera sessões criadas ou resolvidas no período. Dentro delas, o **TME** e o **TMP** usam as que tiveram a primeira resposta no período, e o **TMA** usa as resolvidas no período com atendimento de pelo menos **1 minuto**.
 - **Horário comercial:** quando o workspace (na tela, **ambiente**) tem um **Horário comercial** escolhido em **Configurações** → **Ambiente** → **Geral**, os três tempos contam apenas os minutos dentro desse horário. Uma sessão cuja espera ou atendimento ficou inteira fora do horário fica com tempo zero e não entra na média.

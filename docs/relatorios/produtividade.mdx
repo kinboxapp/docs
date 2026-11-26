@@ -41,10 +41,12 @@ O relatório de **Produtividade** mostra os tempos médios de espera e atendimen
     Clique em **Filtrar** para recortar por estado, membro, grupo, tag, canal, tipo de canal, campanha, bot, atribuição automática, automação, datas ou campos personalizados, e clique em **Aplicar filtros**. Para remover todos, clique em **Limpar filtros**.
   </Step>
   <Step title="Troque o agrupamento">
-    Clique em **Por Dia** (padrão) para mudar para **Por Membro**, **Por Grupo**, **Por Tag** ou **Por Canal**. Em **Por Dia**, a tabela lista os dias em ordem; nos outros agrupamentos, aparecem primeiro as linhas com mais sessões novas. A primeira coluna muda conforme o agrupamento (**Período**, **Atendente**, **Grupo**, **Tag** ou **Canal**), e sessões sem vínculo aparecem em **Sem atribuição**, **Sem grupo** ou **Sem tag**.
+    Clique em **Por Dia** (padrão) para mudar para **Por Membro**, **Por Grupo**, **Por Tag** ou **Por Canal**. Em **Por Dia**, a tabela lista os dias do mais recente para o mais antigo; nos outros agrupamentos, aparecem primeiro as linhas com mais sessões novas. A primeira coluna muda conforme o agrupamento (**Período**, **Atendente**, **Grupo**, **Tag** ou **Canal**), e sessões sem vínculo aparecem em **Sem atribuição**, **Sem grupo** ou **Sem tag**.
   </Step>
   <Step title="Abra a lista de sessões">
-    Clique em **Ver sessões** para listar as sessões do relatório. Para ver os detalhes de um número, clique no cartão ou na célula da tabela: a lista abre com as sessões daquele indicador. A coluna **Mensagens** só abre a lista no agrupamento **Por Membro**.
+    Clique em **Ver sessões** para listar as sessões do relatório.
+
+    Para investigar um número, clique no cartão ou na célula da tabela: abre a lista de sessões filtrada para aquele indicador. A coluna **Mensagens** só abre a lista no agrupamento **Por Membro**.
   </Step>
   <Step title="Exporte o relatório">
     Clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**. O arquivo sai com as linhas do agrupamento atual.
@@ -66,6 +68,6 @@ O relatório de **Produtividade** mostra os tempos médios de espera e atendimen
 | **Leads** | Sessões novas de contatos criados junto com a sessão. |
 | **Mensagens** (coluna) | Mensagens das sessões do período. Em **Por Membro**, as mensagens de membros nas sessões em que ele é o responsável atual; nos outros agrupamentos, o total, e o mouse mostra a divisão entre membros, bots e contatos. |
 
-Quando não há dado para um indicador, a tela mostra `-`. Os tempos seguem o **Horário comercial** do workspace, se houver um escolhido, e cada sessão conta para o responsável atual nos agrupamentos **Por Membro** e **Por Grupo**: veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
+O relatório considera as sessões criadas ou resolvidas no período. Quando não há dado para um indicador, a tela mostra `-`. Os tempos seguem o **Horário comercial** do workspace, se houver um escolhido, e cada sessão conta para o responsável atual nos agrupamentos **Por Membro** e **Por Grupo**: veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
 
-Para ver quem recebeu cada sessão ao longo do período, use o [Relatório de atribuição](/docs/relatorios/atribuicao); para ver em quantas sessões cada membro respondeu, use o [Relatório de interação](/docs/relatorios/interacao).
+Para ver quem recebeu cada sessão ao longo do período, use o [Relatório de atribuição](/docs/relatorios/atribuicao); para ver em quantas sessões cada membro interagiu, use o [Relatório de interação](/docs/relatorios/interacao).
