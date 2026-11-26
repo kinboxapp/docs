@@ -1,7 +1,7 @@
 ---
 title: "Canais: conectar e gerenciar"
 description: O que são os canais da Kinbox, onde conectar um novo canal, o que significa cada status e quantos canais o plano permite.
-keywords: [canais, conectar canal, adicionar canal, novo canal, excluir canal, migrar conversas, status do canal, desconectado, limite de canais, whatsapp, instagram, widget]
+keywords: [canais, conectar canal, adicionar canal, novo canal, excluir canal, migrar conversas, status do canal, desconectado, limite de canais, whatsapp, instagram, facebook, widget, teste grátis, limite facebook]
 publico: humano
 tipo: conceito
 fontes:
@@ -9,6 +9,7 @@ fontes:
   - web:src/pages/settings/channels/AddChannel.tsx
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/accessRestriction/rules.js
 codigo:
   - web:src/pages/settings/channels/index.tsx
   - web:src/pages/settings/channels/AddChannel.tsx
@@ -17,6 +18,7 @@ codigo:
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/routes/IntegrationsApiRoutes.js
+  - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
 ---
 
@@ -27,10 +29,10 @@ Um canal é uma conta de mensagem ligada ao seu workspace. As conversas dos cana
 Em **Conectar novo canal**, você pode conectar:
 
 - **WhatsApp**
-- **Facebook**
+- **Facebook** ([Conectar o Facebook Messenger](/docs/canais/facebook/conectar))
 - **Telegram**
 - **E-mail**
-- **Instagram**
+- **Instagram** ([Conectar o Instagram](/docs/canais/instagram))
 - **SMS**
 - **Widget** (chat no site)
 - **Customizado**
@@ -106,10 +108,19 @@ Confira o histórico nos dois canais antes de excluir o canal de origem.
 
 ## Limite de canais do plano
 
-O plano define quantos canais de WhatsApp você pode ter, somando os oficiais e os por QR Code. O Instagram tem limite próprio. Os outros tipos não têm limite de quantidade, menos o **SMS**: um por workspace. Para aumentar a quantidade, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
+O plano define quantos canais você pode ter:
+
+- **WhatsApp:** a soma dos canais oficiais e por QR Code conta contra as linhas de WhatsApp do plano.
+- **Instagram:** limite próprio, pelas unidades de **Instagram Direct**. Não pode ser conectado no teste grátis. Veja [Conectar o Instagram](/docs/canais/instagram).
+- **SMS:** um por workspace.
+- **Teste grátis:** até 1 página do Facebook, 1 canal de Telegram e 3 canais de e-mail.
+
+Na assinatura paga atual, os outros tipos não têm limite de quantidade. Contas mais antigas podem ter outros limites. Para aumentar a quantidade, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
 
 ## Próximos passos
 
 - [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)
 - [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao)
 - [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app)
+- [Conectar o Instagram](/docs/canais/instagram)
+- [Conectar o Facebook Messenger](/docs/canais/facebook/conectar)
