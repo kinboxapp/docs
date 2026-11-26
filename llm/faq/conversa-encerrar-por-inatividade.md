@@ -25,7 +25,7 @@ Use uma automação com o gatilho **Tempo sem nova mensagem** e a ação **Resol
 
 Não existe um botão de "encerrar por inatividade" dentro da Caixa de entrada. Os caminhos disponíveis são:
 
-- **Automações** (**Configurações** → **Automação** → **Automações**): crie uma automação com o gatilho **Tempo sem nova mensagem** (ou **Tempo sem nenhuma resposta do membro na sessão nova**), defina **Minutos sem resposta** (pode haver atraso de até 3 minutos) e adicione a ação **Resolver conversa**. Há também a opção **Habilitar para sessões geradas por API ou Integração**. Veja o modelo pronto em [Exemplos de automação: follow-up, encerrar por inatividade e avaliação](/docs/automacao/exemplos#2-encerrar-conversas-paradas-inatividade).
+- **Automações** (**Configurações** → **Automação** → **Automações**): crie uma automação com o gatilho **Tempo sem nova mensagem** (ou **Tempo sem nenhuma resposta do membro na sessão nova**), defina **Minutos sem resposta** (pode haver atraso de até 3 minutos) e adicione a ação **Resolver conversa**. Há também a opção **Habilitar para sessões geradas por API ou Integração**. Veja o modelo pronto em [Exemplos de automação](/docs/automacao/exemplos#2-encerrar-conversas-paradas-inatividade).
 - **Bot:** configure **Expirar Sessão** (horas e minutos, **Mensagem ao expirar** e **Executar bot ao expirar**) para finalizar automaticamente enquanto o bot atende (a conversa recebe o aviso "Essa sessão expirou e foi finalizada").
 - **Para encerrar várias conversas já paradas agora:** crie um [filtro de conversa](/docs/conversas/criar-filtros-de-conversa) com a condição **Tempo** → **Minutos desde última mensagem** e execute **Resolver** em [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar).
 
