@@ -541,5 +541,60 @@
     "pergunta": "Consigo criar um bot que responde pelo Telegram pessoal do meu celular, sem cadastrar canal na Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Esqueci minha senha da Kinbox e o link do e-mail diz que o token é inválido, o que faço?",
+    "esperado": [
+      "docs/conta/senha-e-sessoes",
+      "docs/conta/problemas-de-acesso",
+      "llm/conta/problemas-de-acesso"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como coloco autenticação de dois fatores com o Google Authenticator na minha conta?",
+    "esperado": [
+      "docs/conta/verificacao-em-duas-etapas",
+      "llm/conta/verificacao-em-duas-etapas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Troquei de celular e perdi o app autenticador e os códigos de recuperação, como volto a entrar?",
+    "esperado": [
+      "docs/conta/verificacao-em-duas-etapas",
+      "llm/conta/verificacao-em-duas-etapas",
+      "docs/conta/problemas-de-acesso"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Apareceu que atingi o limite de sessões ativas no ambiente, como libero?",
+    "esperado": [
+      "docs/conta/senha-e-sessoes",
+      "llm/conta/problemas-de-acesso"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como paro de receber conversas da distribuição automática quando vou almoçar?",
+    "esperado": [
+      "docs/conta/disponibilidade",
+      "llm/conta/notificacoes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "As notificações da Kinbox não aparecem no meu navegador, por quê?",
+    "esperado": [
+      "llm/faq/conta-nao-recebo-notificacoes",
+      "docs/conta/notificacoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Esqueci a senha do meu e-mail pessoal do Gmail, como recupero?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

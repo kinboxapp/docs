@@ -1,0 +1,76 @@
+---
+title: Entrar em outro workspace
+description: Como escolher o workspace ao entrar, trocar de um para outro pelo botão do topo, criar um workspace novo e o que muda quando você troca.
+keywords: [trocar de ambiente, mudar de ambiente, outro workspace, vários workspaces, escolher ambiente, adicionar ambiente, criar ambiente, nova empresa, duas empresas, não vejo o ambiente, nenhum ambiente ativo]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/components-old/header/WorkspaceDrop.tsx
+  - web:src/components-old/header/AddWorkspaceModal.tsx
+  - web:src/pages/auth/SelectWorkspace.tsx
+  - web:src/stores/sessionStore.jsx
+  - api-v0:server/controllers/WorkspaceController.js
+codigo:
+  - web:src/components-old/header/WorkspaceDrop.tsx
+  - web:src/components-old/header/AddWorkspaceModal.tsx
+  - web:src/pages/auth/SelectWorkspace.tsx
+  - web:src/stores/sessionStore.jsx
+  - api-v0:server/controllers/WorkspaceController.js
+  - api-v0:server/controllers/OperatorController.js
+verificado_em: 2026-11-26
+---
+
+Você pode participar de vários workspaces (na tela, **ambiente**) usando o mesmo login. Cada workspace tem canais, membros, conversas, plano e saldo próprios — veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis). Você entra em um workspace por convite ou criando um novo.
+
+## Ao entrar na Kinbox
+
+- Se a sua conta participa de apenas um workspace, você entra direto nele.
+- Se você participa de vários workspaces, aparece a tela **Escolha um ambiente** com um cartão para cada workspace (mostrando o nome, seu papel ou **Proprietário**, e **Teste grátis** quando for o caso). O último workspace usado aparece primeiro, com o selo **Último acesso** (ou **Atual**, se você já estiver nele), seguido pelos demais em ordem alfabética.
+- Com mais de 6 workspaces, aparece o campo **Buscar ambiente**. A mesma tela também oferece **Criar novo ambiente** e **Sair**.
+- Se todos os workspaces da sua conta foram desativados ou seu acesso foi removido de todos eles, aparece **Nenhum ambiente ativo**. Peça a quem administra seu workspace para reativar seu acesso ou convidar você novamente — não crie um ambiente novo achando que ele recupera o antigo.
+
+## Trocar sem sair
+
+<Steps>
+  <Step title="Abra a lista de workspaces">
+    Clique no botão com o nome do workspace atual, no topo da tela (com o ícone de prédio).
+  </Step>
+  <Step title="Escolha o outro workspace">
+    Clique no workspace desejado na lista. A Kinbox recarrega já dentro dele.
+  </Step>
+</Steps>
+
+<Note>
+  Todas as abas da Kinbox abertas no mesmo navegador recarregam e passam para o workspace escolhido. Para usar dois workspaces ao mesmo tempo, abra o segundo em outro navegador ou em outro perfil do navegador.
+</Note>
+
+## Criar outro workspace
+
+<Steps>
+  <Step title="Abra a criação de ambiente">
+    Clique no botão com o nome do workspace atual, no topo da tela, e escolha **Adicionar ambiente** (na tela **Escolha um ambiente**, clique em **Criar novo ambiente**).
+  </Step>
+  <Step title="Informe o nome e crie">
+    Na janela **Criar novo ambiente**, preencha **Nome do ambiente** (até 128 caracteres) e clique em **Criar**; aparece "Ambiente criado.". Na tela de escolha, preencha **Nome da empresa** e clique em **Criar ambiente**. Nos dois casos, a Kinbox entra no workspace novo.
+  </Step>
+</Steps>
+
+Quem cria o workspace vira o **proprietário** dele. O novo workspace é independente (não traz canais, membros nem conversas de outro workspace) e começa no período de teste grátis — veja os detalhes em [Assinatura: como o plano é montado](/docs/assinatura/visao-geral).
+
+## O que muda quando você troca
+
+**Mudam de um workspace para outro:**
+
+- Seu papel e suas permissões ou restrições.
+- Sua [disponibilidade](/docs/conta/disponibilidade).
+- As opções de **Push** em [Notificações](/docs/conta/notificacoes).
+- O compartilhamento de conversas e o fundo das conversas.
+
+**Continuam iguais em todos os workspaces:**
+
+- Foto, nome, celular, senha e verificação em duas etapas.
+- Idioma, tema e sons de [Notificações](/docs/conta/notificacoes).
+
+## Não vejo um workspace
+
+A lista mostra apenas os workspaces em que você está ativo. Se um workspace não aparecer, você pode ter sido desativado nele ou o convite foi enviado para outro e-mail — fale com quem administra aquele workspace. Para outros casos, veja [Não consigo entrar na Kinbox](/docs/conta/problemas-de-acesso).

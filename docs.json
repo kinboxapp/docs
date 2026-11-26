@@ -173,6 +173,24 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Sua conta e app",
+            "icon": "user",
+            "pages": [
+              {
+                "group": "Sua conta",
+                "pages": [
+                  "docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario",
+                  "docs/conta/disponibilidade",
+                  "docs/conta/notificacoes",
+                  "docs/conta/verificacao-em-duas-etapas",
+                  "docs/conta/senha-e-sessoes",
+                  "docs/conta/trocar-de-workspace",
+                  "docs/conta/problemas-de-acesso"
+                ]
+              }
+            ]
           }
         ]
       },
@@ -703,10 +721,6 @@
     },
     {
       "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",
-      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
-    },
-    {
-      "source": "/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario",
       "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
     },
     {
