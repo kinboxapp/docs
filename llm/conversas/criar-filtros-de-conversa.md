@@ -1,7 +1,7 @@
 ---
 title: "Filtros de conversa: estados, combinação das condições, quem vê e contadores"
 description: Referência dos filtros da Caixa de entrada da Kinbox, com todos os estados, como as condições se combinam, quem vê cada filtro, pastas, contadores e mensagens.
-keywords: [estados do filtro, nunca respondidos, sessão sem resposta de operador, janela de resposta, tags ausentes, deve conter todas as tags, minutos desde última mensagem, contador de filtro, mais de 999, mostrar filtro, pasta de filtros, permissão filtros]
+keywords: [estados do filtro, nunca respondidos, sessão sem resposta de operador, janela de resposta, tags ausentes, deve conter todas as tags, minutos desde última mensagem, contador de filtro, mais de 999, mostrar filtro, pasta de filtros, permissão filtros, não atribuído, conversas sem responsável, aba de conversas]
 publico: llm
 tipo: referencia
 fontes:

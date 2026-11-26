@@ -152,7 +152,8 @@
   {
     "pergunta": "Quero que um atendente veja as conversas do grupo dele e as atribuídas a ele, mesmo em outro grupo, mas não as demais de outros grupos. Qual acesso escolho?",
     "esperado": [
-      "docs/conceitos/workspace-membros-e-papeis"
+      "docs/conceitos/workspace-membros-e-papeis",
+      "llm/conversas/caixa-de-entrada-do-kinbox"
     ],
     "tipo": "conceito"
   },
@@ -160,7 +161,8 @@
     "pergunta": "O que é ticket no funil operacional? É a mesma coisa que conversa?",
     "esperado": [
       "docs/conceitos/contatos-e-negocios",
-      "docs/conceitos/glossario"
+      "docs/conceitos/glossario",
+      "docs/crm/visao-geral"
     ],
     "tipo": "referencia"
   },
@@ -358,7 +360,8 @@
   {
     "pergunta": "Como coloco um colega novo da equipe para usar a Kinbox comigo?",
     "esperado": [
-      "docs/configuracoes-no-workspace/gerenciar-membros"
+      "docs/configuracoes-no-workspace/gerenciar-membros",
+      "docs/primeiros-passos/convidar-sua-equipe"
     ],
     "tipo": "guia"
   },
@@ -367,7 +370,8 @@
     "esperado": [
       "docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios",
       "docs/administracao/referencia-de-permissoes",
-      "docs/conceitos/workspace-membros-e-papeis"
+      "docs/conceitos/workspace-membros-e-papeis",
+      "llm/conversas/caixa-de-entrada-do-kinbox"
     ],
     "tipo": "guia"
   },
@@ -397,8 +401,10 @@
   },
   {
     "pergunta": "Como sincronizo os membros da Kinbox com o Active Directory da minha empresa?",
-    "esperado": [],
-    "tipo": "negativo"
+    "esperado": [
+      "llm/faq/conta-sso"
+    ],
+    "tipo": "faq"
   },
   {
     "pergunta": "Liguei a IA no WhatsApp mas ela não responde ninguém, o que pode ser?",
@@ -546,8 +552,11 @@
   },
   {
     "pergunta": "Consigo criar um bot que responde pelo Telegram pessoal do meu celular, sem cadastrar canal na Kinbox?",
-    "esperado": [],
-    "tipo": "negativo"
+    "esperado": [
+      "docs/canais/telegram",
+      "llm/canais/telegram"
+    ],
+    "tipo": "conceito"
   },
   {
     "pergunta": "Como faço para as DMs do Instagram da minha loja caírem na Kinbox?",
@@ -593,7 +602,8 @@
     "pergunta": "No teste grátis consigo conectar duas páginas do Facebook?",
     "esperado": [
       "llm/faq/canais-limite-do-plano",
-      "llm/canais/facebook/conectar"
+      "llm/canais/facebook/conectar",
+      "docs/canais/facebook/conectar"
     ],
     "tipo": "faq"
   },
@@ -670,8 +680,10 @@
   },
   {
     "pergunta": "Dá para ver na Kinbox o NPS do atendimento calculado automaticamente com promotores e detratores?",
-    "esperado": [],
-    "tipo": "negativo"
+    "esperado": [
+      "llm/atendimento/pesquisa-de-satisfacao"
+    ],
+    "tipo": "referencia"
   },
   {
     "pergunta": "Onde vejo a nota que os clientes deram para cada atendente?",
@@ -683,7 +695,8 @@
   {
     "pergunta": "Quantas conversas estão esperando atendimento agora, sem ninguém responder?",
     "esperado": [
-      "docs/relatorios/visao-geral"
+      "docs/relatorios/visao-geral",
+      "docs/relatorios/ao-vivo"
     ],
     "tipo": "guia"
   },
@@ -793,7 +806,8 @@
   {
     "pergunta": "Como separo a equipe em setores, tipo vendas e suporte?",
     "esperado": [
-      "docs/configuracoes-no-workspace/criar-e-gerenciar-grupos"
+      "docs/configuracoes-no-workspace/criar-e-gerenciar-grupos",
+      "docs/atendimento/visao-geral"
     ],
     "tipo": "guia"
   },
@@ -1134,7 +1148,8 @@
     "pergunta": "Arrasto o card para a próxima coluna do funil e ele volta sozinho, o que está travando?",
     "esperado": [
       "llm/faq/funil-negociacao-nao-muda-de-etapa",
-      "docs/crm/gerenciando-funil-de-vendas"
+      "docs/crm/gerenciando-funil-de-vendas",
+      "llm/crm/gerenciando-funil-de-vendas"
     ],
     "tipo": "faq"
   },
@@ -1483,8 +1498,10 @@
   },
   {
     "pergunta": "Dá para agendar o envio do dashboard em PDF por e-mail toda segunda-feira para os gestores?",
-    "esperado": [],
-    "tipo": "negativo"
+    "esperado": [
+      "llm/relatorios/exportar-e-permissoes"
+    ],
+    "tipo": "referencia"
   },
   {
     "pergunta": "Quero ver na Kinbox quanto gastei e quantos leads vieram dos meus anúncios do Facebook e do Instagram. Como ligo a conta de anúncios?",
@@ -1535,8 +1552,10 @@
   },
   {
     "pergunta": "Consigo acompanhar os resultados dos meus anúncios do TikTok dentro da Kinbox?",
-    "esperado": [],
-    "tipo": "negativo"
+    "esperado": [
+      "docs/marketing/visao-geral"
+    ],
+    "tipo": "conceito"
   },
   {
     "pergunta": "Quem vê o ícone Meta atual no topo da tela? Um vendedor que não participa da meta também vê?",
@@ -1583,7 +1602,8 @@
     "pergunta": "Quero oferecer consulta de 40 minutos de segunda a sexta na agenda da Kinbox. Onde cadastro esse serviço e o horário dele?",
     "esperado": [
       "docs/agenda/servicos-e-locais",
-      "llm/agenda/kinbox-agenda"
+      "llm/agenda/kinbox-agenda",
+      "docs/agenda/kinbox-agenda"
     ],
     "tipo": "guia"
   },
@@ -1829,6 +1849,86 @@
   },
   {
     "pergunta": "A Kinbox oferece um curso presencial com certificado reconhecido pelo MEC?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a velocidade da luz no vácuo?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a capital da Austrália?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço um bolo de cenoura com cobertura de chocolate?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quem ganhou a Copa do Mundo de 2002?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como trocar o óleo do carro?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a fórmula de Bhaskara?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quanto tempo leva para cozinhar arroz integral?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual a melhor época para visitar o Japão?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para tirar o passaporte brasileiro?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como configuro uma VPN no meu roteador?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para abrir uma conta no Nubank?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como edito um vídeo no CapCut?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para renovar a minha CNH vencida?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual o melhor adubo para plantar tomate em vaso?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como mudo o toque de chamada do meu iPhone?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Qual o horário de funcionamento dos Correios no sábado?",
     "esperado": [],
     "tipo": "negativo"
   }
