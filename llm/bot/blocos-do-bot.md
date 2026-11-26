@@ -10,6 +10,8 @@ fontes:
   - web:src/pages/settings/bot/drawers/EditNodeLLMDrawer.tsx
   - web:src/pages/settings/bot/drawers/EditNodeEndDrawer.tsx
   - api-v0:server/modules/chat/botFlowV2.js
+  - api-v0:server/controllers/WbaCloudController.js
+  - widget:src/chat/chat-message-menu-options.tsx
 codigo:
   - web:src/pages/settings/bot/panels/MidLeftPanel.tsx
   - web:src/pages/settings/bot/drawers/**
@@ -17,6 +19,7 @@ codigo:
   - web:src/pages/settings/bot/BotCanvas.tsx
   - web:src/components-old/forms/ConditionsInput/index.tsx
   - api-v0:server/modules/chat/botFlowV2.js
+  - widget:src/chat/chat-message.tsx
 verificado_em: 2026-11-26
 ---
 
@@ -32,7 +35,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 - **Validação ao publicar ou ligar:**
   - Verifica se há ligação saindo de **Início do fluxo**; sem ligação, exibe `'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar esse Bot.'` (na lista) ou `'Necessário que todos os caminhos acabem no nó "Fim do Bot" para ativar ou salvar esse Bot.'` (no editor).
   - Rejeita ciclos fechados apenas entre blocos que não esperam o contato com `"Loop inválido detectado."`.
-  - Um bloco sem saída ligada não bloqueia a publicação: em execução, o bot encerra ali e a conversa permanece aberta (exceto **Agente de IA** e **Decisão**, detalhados abaixo).
+  - Um bloco sem saída ligada encerra o bot ali e a conversa permanece aberta (exceto **Agente de IA** e **Decisão**, detalhados abaixo).
 
 ## Detalhes por bloco
 
@@ -42,7 +45,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 - **Saídas:** 1 saída.
 - **Nota de time e menções:** com **Enviar como nota de time** ligado, menções com `@` notificam os membros mencionados. Se o texto contém menção com a opção desligada, a gaveta exibe: `'Para notificar os membros mencionados, ligue "Enviar como nota de time". Sem isso, o cliente recebe o texto da menção.'`.
 - **Digitação natural:** simula digitação a cerca de 5 palavras por segundo (300 por minuto), com teto de 25 segundos.
-- **Usar prompt:** gera o texto por IA e consome saldo; se não houver saldo ou ocorrer erro da IA, envia o **Texto** padrão. O campo **Temperatura** (0 a 1, passo 0,05, preenchido com 0,7 ao ligar) não altera a resposta gerada neste bloco.
+- **Usar prompt:** gera o texto por IA e consome saldo; se não houver saldo ou ocorrer erro da IA, envia o **Texto** padrão.
 
 ### Agente de IA
 
@@ -114,8 +117,9 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 - **Campos:** **Texto**, **Opções** (valor e **Nome da opção**), **Mensagem se resposta for inválida:**, **Validar similaridade** (padrão 20%, de 0 a 100%), **Esconder opções**, **Esperar tempo** (**Duração** padrão 10; **Unidade** em **Segundos**, **Minutos**, **Horas** ou **Dias**, padrão **Segundos**; máximo de 7 dias = 604.800 s, 10.080 min, 168 h ou 7 dias), **Transcrever áudio**, **Considerar última mensagem do contato**, **Usar prompt**, **Prompt**, **Temperatura**.
 - **Saídas:** 1 saída por opção + saída extra de tempo (quando **Esperar tempo** está ligado).
 - **Apresentação por canal:**
-  - **WhatsApp oficial:** até 3 opções com nome de até 20 caracteres são enviadas como botões; acima disso, como lista com o botão **Opções** e o título `"Escolha uma opção"` (nomes acima de 24 caracteres são cortados no título e exibidos inteiros na descrição).
-  - **WhatsApp por QR Code** (Express e Clássica) e demais canais: enviados como texto, uma opção por linha no formato `"número - nome"`.
+  - **WhatsApp oficial:** até 3 opções, todas com nome de até 20 caracteres, são enviadas como botões; com mais de 3 opções ou com algum nome acima de 20 caracteres (mesmo com até 3 opções), vão como lista com o botão **Opções** e o título `"Escolha uma opção"` (nomes acima de 24 caracteres são cortados no título e exibidos inteiros na descrição).
+  - **Chat do site (widget):** o texto do menu vai com as opções, e o widget mostra as opções como botões clicáveis abaixo da última mensagem de menu.
+  - **WhatsApp por QR Code** (Express e Clássica): enviados como texto, uma opção por linha no formato `"número - nome"`.
   - **Esconder opções:** envia apenas o **Texto**, sem lista e sem botões.
 - **Valores especiais e regras:**
   - O valor `timeout` é reservado (`"Valor reservado para rota de timeout."`).
@@ -123,7 +127,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
   - **Esperar tempo:** resposta do contato cancela a contagem.
   - **Transcrever áudio:** consome saldo; sem saldo, o áudio não é transcrito e conta como resposta inválida.
   - **Considerar última mensagem do contato:** avalia a mensagem anterior do contato como resposta do menu, sem enviar o texto do menu.
-  - **Usar prompt:** consome saldo; sem saldo, envia o texto padrão. **Temperatura** não altera a resposta gerada.
+  - **Usar prompt:** consome saldo; sem saldo, envia o texto padrão.
   - Mais de 15 respostas inválidas seguidas encerram o bot com `"Número máximo de respostas inválidas excedido"`.
   - Se a opção escolhida não tiver saída ligada, o bot encerra ali.
 
@@ -152,14 +156,14 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
   - **Recebimento de webhook:** aguarda requisição POST externa no **Endereço do webhook** exibido na gaveta.
   - **Randomizar delay:** sorteia entre **Tempo mínimo entre envios** e **Tempo máximo entre envios** na **Unidade** escolhida (**Segundos**, **Minutos**, **Horas** ou **Dias**, até 7 dias).
 - **Tempo máximo de espera:** disponível para **Envio de mensagem pelo cliente** e **Recebimento de webhook** (**Duração** e **Unidade** em **Minutos**, **Horas** ou **Dias**); cria saída de tempo esgotado. Mínimo efetivo de 60 segundos (valores menores viram 60 s); sem duração preenchida, usa 1 dia. Resposta do contato cancela a contagem.
-- **Regras de borda:** esperas acima de 20 segundos vão para fila; se a conversa for resolvida durante a espera, o bot cancela com `"Execução do bot cancelada, conversa já resolvida"`; se outro bot começar, cancela com `"Execução do bot cancelada, outro bot já está em execução"`. Bloco sem saída ligada encerra o bot ali.
+- **Regras de borda:** se a conversa for resolvida durante a espera, o bot cancela com `"Execução do bot cancelada, conversa já resolvida"`; se outro bot começar, cancela com `"Execução do bot cancelada, outro bot já está em execução"`. Bloco sem saída ligada encerra o bot ali.
 
 ### Ação de CRM
 
 - **Rótulos:** bloco **Ação de CRM**, gaveta **Ações de CRM**.
 - **Ação:** **Criar negócio** (funil, etapa, nome com chaves `{{...}}`, valor/produtos, **Responsável** com **Mesmo da conversa**, **Grupo** com **Algum grupo do membro**, **Tags**, campos personalizados com suporte a `{{operator}}`) ou **Atualizar negócio** (**Que negócios serão afetados**: **Todos os negócios abertos da conversa**, **Todos os negócios abertos da conversa de determinado funil** + **Funil de vendas**, **Todos os negócios abertos do contato**; altera produtos, tags, **Status** **Aberto**/**Ganho**/**Perdido**, **Motivo de perda**, responsável, grupo ou etapa).
 - **Saídas:** 1 saída.
-- **Mensagens de sistema:** registra `"Criar negócio"` ou `"Atualizar negócio"` ao enfileirar a operação (ou `"Erro ao criar negócio"` em falha imediata). Como a gravação roda em segundo plano, a mensagem permanece mesmo se a gravação falhar depois.
+- **Mensagens de sistema:** registra `"Criar negócio"` ou `"Atualizar negócio"` ao executar o bloco (ou `"Erro ao criar negócio"` em falha imediata). Depois de executar o bloco, confira no funil o negócio criado ou atualizado.
 
 ### Fim do bot
 
@@ -193,8 +197,8 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 | `"Atendente {membro} executou o bot {bot}"` | Membro inicia um bot manualmente por **Executar bot**. |
 | `"{Automação nome} executou o bot {bot}"` | Uma automação dispara o bot. |
 | `"Bot [nome] não está mais ativo na conversa"` | Outro bot assumiu a conversa antes de o fluxo iniciar. |
-| `"Execução do bot cancelada, conversa já resolvida"` | A conversa foi resolvida durante uma espera (> 20 s) ou antes da resposta do bloco **Agente de IA**. |
-| `"Execução do bot cancelada, outro bot já está em execução"` | Outro bot começou enquanto havia uma espera (> 20 s) agendada. |
+| `"Execução do bot cancelada, conversa já resolvida"` | A conversa foi resolvida durante uma espera ou antes da resposta do bloco **Agente de IA**. |
+| `"Execução do bot cancelada, outro bot já está em execução"` | Outro bot começou durante uma espera. |
 | `"Número máximo de respostas inválidas excedido"` | Mais de 15 respostas inválidas seguidas em **Menu** ou **Entrada de dados**; o bot é encerrado. |
 | `"Bot interrompido por detecção de loop"` | Mais de 200 blocos executados seguidos sem passar por **Menu**, **Entrada de dados** ou **Fim do bot** sem transferência; o bot sai da conversa. O contador zera quando um membro manda mensagem, executa um bot ou resolve a conversa. |
 | `"Essa sessão expirou e foi finalizada"` | Sessão encerrada por **Expirar Sessão** sem **Executar bot ao expirar**. |
@@ -204,7 +208,7 @@ Detalhes técnicos de campos, valores padrão, saídas, limites e regras de bord
 - **Início automático:** ocorre apenas quando o **contato** envia a mensagem que abre uma sessão nova em um canal atendido pelo bot, com o bot ligado. Não inicia em sessão aberta ou reaberta (inclusive dentro do **Tempo de tolerância ao resolver conversa**), em mensagem enviada pelo celular do número nem em conversa iniciada por um membro.
 - **Prioridade:** a Kinbox percorre os bots ligados na ordem da lista (de cima para baixo) e usa o primeiro que atende ao canal, horário (fuso do workspace) e tipo de conversa. Bot novo, clonado ou importado entra no fim da lista; bot gerenciado por agente de IA entra no topo.
 - **Atende todos os canais × Horários e grupos:** **Horários** e **Atende grupos do WhatsApp** só são aplicados quando os canais são escolhidos em **Canais que atende**. Com **Atende todos os canais** ligado, o bot também começa fora dos **Horários** e em grupos do WhatsApp (mesmo com **Atende grupos do WhatsApp** desligado). Para usar horários ou controlar grupos, desligue **Atende todos os canais** e selecione os canais em **Canais que atende**.
-- **Início manual ou por automações:** **Mais ações** → **Executar bot** (permissão **Iniciar Bot**; indisponível no Mercado Livre), automações, cenários, ações em lote de funil e agentes de IA executam o bot mesmo desligado e ignorando canais e horários. Se a última sessão estiver resolvida, o bot só a reabre com **Reabrir conversa** ligado.
+- **Início manual ou por automações:** **Mais ações** → **Executar bot** (permissão **Iniciar Bot** ou proprietário; opção desativada em conversas do Mercado Livre), automações, cenários, ações em lote de funil e agentes de IA executam o bot mesmo desligado e ignorando canais e horários. Se a última sessão estiver resolvida, o bot só a reabre com **Reabrir conversa** ligado.
 - **Saída do bot:** o bot sai da conversa quando um membro envia mensagem comum (nota pro time não para; se a conversa não tinha responsável, o membro vira responsável), quando um membro atribui ou move para grupo pela conversa, por **Executar bot** → **Atendimento manual** ou troca para outro bot, ao chegar a **Fim do bot** ou a um bloco sem saída, ao expirar a sessão, ao ultrapassar 15 respostas inválidas seguidas ou ao atingir a detecção de loop (200 blocos). Veja também [O bot não ativa, travou ou repete mensagens](/docs/bot/problemas-comuns).
 
 ## Expirar Sessão

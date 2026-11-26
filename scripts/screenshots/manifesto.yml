@@ -397,6 +397,7 @@
 # → Mensagem/Atendimento → Fim.
 - id: bot-editor
   url: /settings/bots/1186
+  altura: 1120
   passos:
     - esperar: '.react-flow__node-menu'
     - clicar: 'button:has(.fa-expand)'
@@ -437,7 +438,7 @@
     - esperar: '.ant-drawer-content:has-text("Tipo de integração")'
     - pausa: 1500
   alvo:
-    - '.ant-drawer-content:has-text("Tipo de integração") label:has-text("Tipo de integração")'
+    - '.ant-drawer-content:has-text("Tipo de integração") .ant-drawer-header'
     - '.ant-drawer-content:has-text("Tipo de integração") .ace_editor'
     - '.ant-drawer-content:has-text("Tipo de integração") button:has-text("Salvar")'
   mascarar: []
@@ -455,7 +456,7 @@
     - esperar: '.ant-drawer-content:has-text("Tipo de integração")'
     - pausa: 1500
   alvo:
-    - '.ant-drawer-content:has-text("Tipo de integração") label:has-text("Tipo de integração")'
+    - '.ant-drawer-content:has-text("Tipo de integração") .ant-drawer-header'
     - '.ant-drawer-content:has-text("Tipo de integração") .ace_editor'
     - '.ant-drawer-content:has-text("Tipo de integração") button:has-text("Salvar")'
   mascarar: []

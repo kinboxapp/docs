@@ -1,7 +1,7 @@
 ---
 title: Blocos do bot
 description: O que faz cada bloco do bot da Kinbox (Mensagem, Menu, Entrada de dados, Decisão, Agente de IA, Integração, Fim do bot e os demais) e quais saídas cada um tem.
-keywords: [blocos do bot, mensagem, menu, entrada de dados, decisão, palavra-chave, agente de ia no bot, esperar um tempo, fim do bot, notificar, split, ação de crm, atendimento, pendência, definir campo, adicionar tag, mídia]
+keywords: [blocos do bot, mensagem, menu, entrada de dados, decisão, palavra-chave, agente de ia no bot, esperar um tempo, fim do bot, notificar, split, ação de crm, atendimento, pendência, definir campo, adicionar tag, mídia, chatbot, menu automático, menu de opções, atendimento automático]
 publico: humano
 tipo: referencia
 fontes:
@@ -10,6 +10,8 @@ fontes:
   - web:src/pages/settings/bot/drawers/EditNodeLLMDrawer.tsx
   - web:src/pages/settings/bot/drawers/EditNodeEndDrawer.tsx
   - api-v0:server/modules/chat/botFlowV2.js
+  - api-v0:server/controllers/WbaCloudController.js
+  - widget:src/chat/chat-message-menu-options.tsx
 codigo:
   - web:src/pages/settings/bot/panels/MidLeftPanel.tsx
   - web:src/pages/settings/bot/drawers/**
@@ -17,6 +19,7 @@ codigo:
   - web:src/pages/settings/bot/BotCanvas.tsx
   - web:src/components-old/forms/ConditionsInput/index.tsx
   - api-v0:server/modules/chat/botFlowV2.js
+  - widget:src/chat/chat-message.tsx
 verificado_em: 2026-11-26
 ---
 
@@ -24,7 +27,7 @@ Referência dos 17 blocos disponíveis no editor de bot, o que cada um faz e qua
 
 ## Como os blocos funcionam
 
-- **Adicionar blocos:** no computador, arraste qualquer um dos 17 blocos da barra à esquerda para a área do fluxo. Todo bot novo nasce com **Início do fluxo** (que não pode ser apagado) e **Fim do bot**.
+- **Adicionar blocos:** no computador, arraste qualquer um dos 17 blocos da barra à esquerda para a área do fluxo (a barra rola para mostrar todos; passe o mouse num ícone para ver o nome). Todo bot novo nasce com **Início do fluxo** (que não pode ser apagado) e **Fim do bot**.
 - **Ligar blocos:** arraste da bolinha de saída de um bloco até a entrada do próximo. Cada saída aceita apenas **uma** ligação, e um bloco não pode se ligar a si mesmo.
 - **Editar e gerenciar um bloco:** clique duas vezes no bloco para abrir a configuração, ou selecione-o para exibir a barra com **Editar**, **Executar** (abre o simulador a partir daquele bloco), **Clonar** (cria uma cópia sem as ligações) e **Excluir**.
 - **Salvar não publica:** o botão **Salvar** da gaveta guarda a configuração apenas no editor; para valer nas conversas, clique em **Publicar** (veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
@@ -76,26 +79,36 @@ Escolhe um agente do workspace (**Agente de IA** obrigatório) para responder ca
 
 ### Entrada de dados
 
-Preencha **Pergunta** e escolha o campo de destino em **Tipo da resposta**, nos grupos **Contato** (**Nome**, **Email**, **Celular**, **Notas** e campos personalizados), **Sessão** (**Checkpoint**, **Avaliação de atendimento**, **Motivo da avaliação** e campos personalizados) ou **Negócio** (campos personalizados de negociação).
+Faz uma **Pergunta**, espera a resposta e grava no campo escolhido em **Tipo da resposta** (do contato, da sessão ou da negociação); com **Validar resposta**, confere o formato antes de gravar e repete a pergunta com a **Mensagem se resposta for inválida:**. Exemplos:
 
-Campos de lista/múltipla escolha e **Avaliação de atendimento** exibem **Opções**, **Validar similaridade** e **Esconder opções**. Ligue **Validar resposta** para conferir o formato antes de gravar — campos personalizados de texto aceitam **Tipo de validação** (**Celular**, **Email**, **CPF**, **Máscara** ou **Expressão regular**), enquanto **Nome**, **Email** e **Celular** usam validação própria. Quando a resposta não passa na validação, o bot envia **Mensagem se resposta for inválida:** e pergunta novamente. Este bloco não tem tempo limite próprio: use **Expirar Sessão** nas configurações do bot se quiser encerrar por falta de resposta.
+- Perguntar "Qual seu e-mail?" e gravar em **Email**, com **Validar resposta** ligado.
+- Pedir o CPF e gravar num campo personalizado do contato, com o **Tipo de validação** **CPF**.
+
+Este bloco não tem tempo limite próprio: para encerrar quando o contato não responde, use **Expirar Sessão** nas configurações do bot.
 
 ### Menu
 
 Configure **Texto**, a lista de **Opções** (valor e **Nome da opção**) e **Mensagem se resposta for inválida:**. O contato pode responder pelo número ou pelo nome da opção (sem diferença entre maiúsculas e minúsculas).
 
-- **Como as opções aparecem:** no **WhatsApp oficial**, até 3 opções com nome curto aparecem como botões e, acima disso, como lista interativa; no **WhatsApp por QR Code** e nos outros canais, as opções são enviadas como texto, uma por linha (veja [O que funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)). **Esconder opções** envia apenas o **Texto**.
+- **Como as opções aparecem:**
+  - **WhatsApp oficial:** com até 3 opções e todos os nomes com até 20 caracteres, aparecem como botões; com mais opções ou com algum nome maior, aparecem como lista.
+  - **Chat do site (widget):** as opções aparecem como botões clicáveis abaixo da última mensagem de menu.
+  - **WhatsApp por QR Code:** as opções vão como texto, uma por linha (veja [O que funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)).
+  - **Esconder opções** envia apenas o **Texto**, sem lista e sem botões.
 - **Recursos extras:** **Validar similaridade** aceita respostas parecidas com uma opção; **Esperar tempo** cria uma saída extra se o contato não responder no prazo (até 7 dias); **Transcrever áudio** transcreve áudios enviados pelo contato para comparar com as opções (gasta saldo); **Considerar última mensagem do contato** usa a mensagem enviada antes do menu como resposta, sem enviar o texto do menu.
 
 <Frame caption="Gaveta do bloco Menu com Texto, Opções, Mensagem se resposta for inválida e interruptores">
-  <img src="/images/ajuda/bot/bloco-menu.webp" alt="Gaveta do bloco Menu preenchida com o texto Como podemos ajudar e três opções numeradas, campo Mensagem se resposta for inválida e os interruptores Validar similaridade, Esconder opções e Esperar tempo" />
+  <img src="/images/ajuda/bot/bloco-menu.webp" alt="Gaveta Menu com o texto Como podemos ajudar, três opções numeradas, o botão Opção, a Mensagem se resposta for inválida preenchida com Resposta inválida. Digite 1, 2 ou 3. e os interruptores Validar similaridade, Esconder opções e Esperar tempo" />
 </Frame>
 
 ### Decisão
 
-Avalia condições organizadas em "Quando **todas** as condições são verdadeiras" e "E quando **qualquer** das condições são verdadeiras", com saídas **Sim** e **Não** — mantenha as duas saídas ligadas para garantir o desvio correto. Ao ligar "Cada condição do tipo **qualquer** deve virar uma opção", cada item da lista "qualquer" ganha uma saída própria, seguindo pela primeira verdadeira ou por **Nenhum**.
+Desvia o fluxo conforme condições (horário, tags, dados do contato, da conversa, da negociação ou do membro), pelas saídas **Sim** e **Não**; mantenha as duas ligadas. Exemplos:
 
-As condições cobrem **Contexto** (horário, tag), **Contato** (tipo de contato, dados, negócios abertos e campos personalizados), **Conversa/Sessão** (estado, origem, grupo, atribuído, campanha, **Janela de resposta**, UTMs, tags, canal, avaliação e anúncios), **Negócio** e **Membro**. A condição **Janela de resposta** verifica o prazo de 24 horas no WhatsApp oficial, Instagram e Facebook Messenger (veja [Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)). Para condições usando campos do tipo **Json**, veja [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
+- **Horário** dentro do horário comercial → **Sim** vai para o **Menu**; **Não** manda uma mensagem de fora do horário.
+- **Janela de resposta** = **Fechado** no WhatsApp oficial → segue para um bloco **Notificar** que envia um template aprovado (veja [Janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
+
+Com a opção "Cada condição do tipo **qualquer** deve virar uma opção", cada condição ganha uma saída própria, mais **Nenhum**. Para condições com campos do tipo **Json**, veja [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
 
 ### Integração
 
@@ -114,7 +127,10 @@ Em **Envio de mensagem pelo cliente** e **Recebimento de webhook**, ligar **Temp
 
 ### Ação de CRM
 
-Em **Ação**, escolha **Criar negócio** (define funil, etapa, nome com chaves `{{...}}`, valor ou produtos, **Responsável** com opção **Mesmo da conversa**, **Grupo** com **Algum grupo do membro**, **Tags** e campos personalizados) ou **Atualizar negócio** (define **Que negócios serão afetados** — todos os abertos da conversa, os de determinado funil ou todos do contato — e atualiza produtos, tags, **Status**, **Motivo de perda**, responsável, grupo ou etapa).
+Em **Ação**, escolha **Criar negócio** ou **Atualizar negócio** para mexer nas negociações do contato sem sair do bot. Exemplos:
+
+- **Criar negócio** no funil de vendas, na primeira etapa, com o nome do contato (`{{name}}`) e o **Responsável** **Mesmo da conversa**.
+- **Atualizar negócio** de **Todos os negócios abertos do contato** para mudar a etapa depois que o contato escolhe uma opção do **Menu**.
 
 ### Fim do bot
 
@@ -129,6 +145,6 @@ Encerra o fluxo no ponto escolhido (você pode usar mais de um bloco **Fim do bo
 
 Envia uma mensagem usando um canal escolhido em **Do canal** (WhatsApp, e-mail, SMS do workspace ou e-mail de envio da Kinbox), para o contato atual ou para outra pessoa:
 
-- **WhatsApp oficial:** selecione um template aprovado (com anexo, se exigido pelo template). **Para celular** é opcional (com código do país e DDD); em branco, envia para o contato em atendimento.
+- **WhatsApp oficial:** selecione um template aprovado (com anexo, se exigido pelo template; veja [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox)). **Para celular** é opcional (com código do país e DDD); em branco, envia para o contato em atendimento.
 - **WhatsApp por QR Code** e **SMS:** exige **Para celular** (com código do país e DDD) e **Texto** (no SMS, limite de 160 caracteres).
 - **E-mail:** exige **Para e-mail**, **Assunto** e **Texto**.

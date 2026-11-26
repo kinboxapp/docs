@@ -23,7 +23,7 @@ verificado_em: 2026-11-26
 Guarde o objeto JSON devolvido por uma integração em um campo personalizado do tipo **Json** e leia cada propriedade desse objeto nas mensagens e nas condições do bloco **Decisão**.
 
 <Note>
-  Quem pode: para criar o campo personalizado, permissão **Campos personalizados** ou proprietário do workspace (na tela, **ambiente**). Para configurar o bot, permissão **Bot** ou proprietário.
+  Quem pode: para criar o campo personalizado, permissão **Campos** (seção **Gerenciamento do Ambiente**) ou proprietário do workspace (na tela, o workspace se chama **ambiente**). Para configurar o bot, permissão **Bot** ou proprietário.
 </Note>
 
 ## Passo a passo
@@ -96,3 +96,7 @@ Guarde o objeto JSON devolvido por uma integração em um campo personalizado do
 ## Depois de configurar
 
 Clique em **Salvar** em cada bloco editado, teste no **Simular bot** para conferir se as propriedades são preenchidas corretamente na mensagem e se a **Decisão** segue pelo caminho esperado, e clique em **Publicar**.
+
+<Warning>
+  No **Simular bot**, o bloco **Integração** chama o seu sistema de verdade, a não ser que **Pular integrações** esteja ligado em **Ver dados do contato**. Para testar sem efeito no seu sistema, use um endereço ou dados de teste.
+</Warning>

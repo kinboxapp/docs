@@ -1,7 +1,7 @@
 ---
 title: Criar e publicar um bot
 description: Passo a passo para criar um bot na Kinbox, configurar canais e horários, montar o fluxo com blocos, simular, publicar e ligar.
-keywords: [criar bot, novo bot, publicar bot, ativar bot, ligar bot, simular bot, configurações do bot, canais que atende, horários do bot, expirar sessão, executar bot, importar bot]
+keywords: [criar bot, novo bot, publicar bot, ativar bot, ligar bot, simular bot, configurações do bot, canais que atende, horários do bot, expirar sessão, executar bot, importar bot, chatbot, menu automático, menu de opções, atendimento automático]
 publico: humano
 tipo: guia
 fontes:
@@ -42,7 +42,7 @@ Crie um fluxo de atendimento automático, configure em quais canais e horários 
   <Step title="Crie um novo bot">
     Vá em **Configurações** → **Automação** → **Bot** e clique em **Novo Bot**.
 
-    O editor abre desligado, com o nome inicial "Meu chatbot" e dois blocos na tela: **Início do fluxo** e **Fim do Bot**. Um bot novo só passa a existir na lista depois do primeiro **Publicar**.
+    O editor abre desligado, com o nome inicial "Meu chatbot" e dois blocos na tela: **Início do fluxo** e **Fim do bot**. Um bot novo só passa a existir na lista depois do primeiro **Publicar**.
   </Step>
 
   <Step title="Configure canais, horários e expiração">
@@ -71,8 +71,8 @@ Crie um fluxo de atendimento automático, configure em quais canais e horários 
 
     Na barra do editor você também encontra **Desfazer**, **Refazer** e **Pesquisar ação** (lupa para localizar um bloco pelo tipo, número ou texto). Ao selecionar vários blocos de uma vez, aparecem **Clonar selecionados** e **Excluir selecionados**.
 
-    <Frame caption="Editor do bot com barra superior, painel de blocos à esquerda e fluxo ligado do Início do fluxo ao Fim do Bot">
-      <img src="/images/ajuda/bot/editor-do-bot.webp" alt="Editor do bot mostrando barra superior com nome, interruptor desligado, desfazer, refazer, Publicar, simular, configurações, histórico e pesquisa; painel vertical de ícones de blocos à esquerda; fluxo de exemplo com Início do fluxo, Mensagem, Menu com três opções, duas Mensagens, Atendimento e Fim do Bot" />
+    <Frame caption="Editor do bot: barra superior, barra de blocos à esquerda (ela rola para mostrar todos os 17) e um fluxo do Início do fluxo ao Fim do bot">
+      <img src="/images/ajuda/bot/editor-do-bot.webp" alt="Editor do bot com barra superior (nome, interruptor desligado, desfazer, refazer, Publicar, simular, configurações, histórico e pesquisa), barra vertical de ícones de blocos à esquerda e fluxo de exemplo com Início do fluxo, Mensagem, Menu com três opções e mensagem de resposta inválida, duas Mensagens, Atendimento e Fim do bot" />
     </Frame>
   </Step>
 
@@ -110,9 +110,9 @@ Crie um fluxo de atendimento automático, configure em quais canais e horários 
 
 ## Depois de publicar
 
-### Quando o bot começa sozinho
+### Quando o bot começa e quando sai
 
-O bot inicia sozinho apenas quando o **contato** manda a mensagem que abre uma [sessão](/docs/conceitos/conversas-e-sessoes) nova em um canal atendido pelo bot, com o bot ligado, sendo o primeiro bot ativo da lista que serve àquele canal, horário e tipo de conversa. Ele não começa sozinho em sessões já abertas ou reabertas (inclusive dentro do **Tempo de tolerância ao resolver conversa**), em mensagens enviadas pelo celular do número nem em conversas iniciadas por um membro.
+O bot ligado começa sozinho quando o contato abre uma sessão nova num canal do bot e ele é o primeiro bot ligado da lista que serve àquela conversa; ele sai quando um membro responde ou atribui a conversa, quando o fluxo termina ou quando a sessão expira. Veja todas as regras em [Bot: visão geral](/docs/bot/visao-geral).
 
 ### Testar em uma conversa real
 
@@ -120,15 +120,9 @@ Para validar um bot em uma conversa real — inclusive blocos que não rodam no 
 
 A ação **Executar bot** roda o bot mesmo se ele estiver desligado e ignora canais e horários configurados. A conversa registra a mensagem de sistema indicando que o membro executou o bot. O mesmo vale quando o bot é disparado por automações, cenários, ações em lote de funil ou agentes de IA.
 
-### O que tira o bot da conversa
+### Expirar Sessão
 
-O bot para quando um membro envia uma mensagem comum ao contato (notas com **Nota pro time** não param o bot), quando um membro atribui a conversa ou move para um grupo (veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir)), quando alguém escolhe **Executar bot** → **Atendimento manual** ou inicia outro bot, quando o fluxo chega ao **Fim do bot** (ou a um bloco sem saída ligada), quando a sessão expira ou quando atinge o limite de respostas inválidas ou de loop.
-
-### Como funciona o Expirar Sessão
-
-O prazo de **Expirar Sessão** começa quando o bot inicia, zera quando o contato responde e recomeça a cada mensagem que o bot envia — ou seja, conta o tempo desde a última mensagem do bot sem resposta, enquanto o bot estiver ativo na conversa. A Kinbox verifica as sessões expiradas a cada minuto.
-
-Ao atingir o prazo, se houver um bot em **Executar bot ao expirar**, a Kinbox inicia esse outro bot na mesma sessão, sem enviar a **Mensagem ao expirar** e sem resolver a sessão. Sem bot de destino, a Kinbox envia a **Mensagem ao expirar** (se preenchida) e resolve a sessão com o aviso "Essa sessão expirou e foi finalizada".
+Com **Expirar Sessão** ligado, o prazo conta desde a última mensagem do bot sem resposta do contato. Ao expirar, a Kinbox envia a **Mensagem ao expirar** e resolve a sessão, ou inicia o bot de **Executar bot ao expirar** (nesse caso, sem enviar a mensagem e sem resolver).
 
 ### Gerenciar bots na lista
 

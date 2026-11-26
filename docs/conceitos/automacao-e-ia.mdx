@@ -31,7 +31,7 @@ A Kinbox reúne diferentes ferramentas de automação e inteligência artificial
 
 | Ferramenta | O que é | Com quem conversa | Onde fica | Gasta saldo? |
 | --- | --- | --- | --- | --- |
-| **Bot** | Fluxo montado com blocos (mensagens, menus, perguntas, decisões e integrações) | O contato, com respostas previstas | **Configurações** → **Automação** → **Bot** | Só no bloco **Agente de IA** |
+| **Bot** | Fluxo montado com blocos (mensagens, menus, perguntas, decisões e integrações) | O contato, com respostas previstas | **Configurações** → **Automação** → **Bot** | Só nos recursos de IA: bloco **Agente de IA**, **Usar prompt**, **Transcrever áudio** e **Assistente Kin** |
 | **Agentes de IA** | Agente com IA que conversa com as próprias palavras, segue etapas e usa ferramentas e conhecimento | O contato, por texto (e por voz no **Agente de voz**, em teste) | **Configurações** → **Automação** → **Agentes de IA** | Sim |
 | **Automações** | Regras do tipo gatilho → condições → ações dentro da Kinbox | Ninguém diretamente | **Configurações** → **Automação** → **Automações** | Não (só o bot com IA que ela executar) |
 | **Cenários** | Fluxos de passos para integrar sistemas externos e manipular dados | Ninguém diretamente | **Configurações** → **Automação** → **Cenários** | Não (só o bot com IA que ele executar) |
@@ -42,7 +42,7 @@ A Kinbox reúne diferentes ferramentas de automação e inteligência artificial
 
 O **Bot** (**Configurações** → **Automação** → **Bot**, botão **Novo Bot**) conduz o contato por um fluxo montado com blocos e respostas previstas, como **Mensagem**, **Menu**, **Entrada de dados**, **Decisão**, **Atendimento**, **Ação de CRM** e **Integração**.
 
-Ele começa sozinho quando o contato abre uma sessão nova num canal do bot. Você escolhe os canais em **Canais que atende**, com **Horários** e grupos do WhatsApp (**Atende grupos do WhatsApp**) se quiser, ou liga **Atende todos os canais**; com essa opção ligada, o bot também começa fora dos horários e em grupos do WhatsApp. Para ligar um bot, o **Início do fluxo** precisa estar ligado a um bloco, e cada caminho deve terminar num **Fim do bot**. Um bot sem bloco de IA não consome saldo. Veja [Bot: visão geral](/docs/bot/visao-geral).
+Ele começa sozinho quando o contato abre uma sessão nova num canal do bot. Você escolhe os canais em **Canais que atende**, com **Horários** e grupos do WhatsApp (**Atende grupos do WhatsApp**) se quiser, ou liga **Atende todos os canais**; com essa opção ligada, o bot também começa fora dos horários e em grupos do WhatsApp. Para ligar um bot, o **Início do fluxo** precisa estar ligado a um bloco, e cada caminho deve terminar num **Fim do bot**. O fluxo por si só não consome saldo; consomem o bloco **Agente de IA** (a cada resposta), a opção **Usar prompt** nos blocos **Mensagem** e **Menu**, **Transcrever áudio** no **Menu** e o botão **Assistente Kin** dos blocos de integração. Veja [Bot: visão geral](/docs/bot/visao-geral).
 
 ## Agentes de IA
 
@@ -72,7 +72,7 @@ A **Atribuição automática** (**Configurações** → **Automação** → **At
 
 ## Como elas se combinam
 
-- **Bot + Agente de IA**: dentro de um fluxo de bot, o bloco **Agente de IA** chama um agente (e, se quiser, uma **Base de conhecimento**) naquele ponto da conversa. Apenas esse bloco consome saldo.
+- **Bot + Agente de IA**: dentro de um fluxo de bot, o bloco **Agente de IA** chama um agente (e, se quiser, uma **Base de conhecimento**) naquele ponto da conversa. Esse bloco consome saldo a cada resposta (os outros recursos de IA do bot estão em [Bot: visão geral](/docs/bot/visao-geral)).
 - **Agente conectado aos canais**: ao conectar um agente de IA diretamente a canais, a Kinbox cria um bot gerenciado por esse agente (ele aparece na lista de bots com o aviso de que deve ser ativado ou desativado no próprio agente).
 - **Automações e cenários**: uma automação pode usar a ação **Executar bot**, e cenários também incluem passos de conversa.
 

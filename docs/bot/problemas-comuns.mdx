@@ -31,7 +31,7 @@ Você tenta ligar ou publicar um bot e recebe um erro, o bot está ativo mas nã
 
 <AccordionGroup>
   <Accordion title='Erro Necessário que todos os caminhos acabem no nó "Fim do Bot" ao ligar ou publicar'>
-    **Como confirmar:** ao tentar publicar ou ativar o bot, o editor centraliza e seleciona o bloco **Início do fluxo**. Apesar do texto da mensagem falar de todos os caminhos, o que a Kinbox valida nesse aviso é se o **Início do fluxo** tem uma ligação saindo dele.
+    **Como confirmar:** ao tentar publicar ou ativar o bot, o editor centraliza e seleciona o bloco **Início do fluxo**. Esse aviso aparece quando o **Início do fluxo** não está ligado a nenhum bloco.
 
     **O que fazer:** ligue a bolinha de saída do **Início do fluxo** ao primeiro bloco do seu bot e clique em **Publicar** novamente.
   </Accordion>
@@ -100,7 +100,7 @@ Você tenta ligar ou publicar um bot e recebe um erro, o bot está ativo mas nã
   <Accordion title="O bloco Integração não faz nada ou não grava os dados">
     **Como confirmar:** falhas em **Chamar endpoint**, **Executar código** ou integrações prontas não exibem erro na conversa e o bot segue pela saída única.
 
-    **O que fazer:** teste o fluxo no **Simular bot** com **Pular integrações** desligado em **Ver dados do contato** e observe a caixa **Resultado da integração** (erros aparecem destacados em vermelho). Em **Chamar endpoint**, confira se o JSON é válido e se cada chave em `mapReturnToCustomField` tem um caminho preenchido e corresponde à **Chave reservada** de um campo existente (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot) e [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo)). Para integrações prontas de **Outros**, teste em uma conversa real com **Executar bot**, pois o simulador as pula.
+    **O que fazer:** teste o fluxo no **Simular bot** com **Pular integrações** desligado em **Ver dados do contato** e observe a caixa **Resultado da integração** (erros aparecem destacados em vermelho). Com **Pular integrações** desligado, a simulação chama o sistema externo de verdade: use um endereço de teste ou dados de teste se a chamada criar ou alterar algo no seu sistema. Em **Chamar endpoint**, confira se o JSON é válido e se cada chave em `mapReturnToCustomField` tem um caminho preenchido e corresponde à **Chave reservada** de um campo existente (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot) e [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo)). Para integrações prontas de **Outros**, teste em uma conversa real com **Executar bot**, pois o simulador as pula.
   </Accordion>
 
   <Accordion title="O bot pede senha para abrir ou o interruptor está travado">

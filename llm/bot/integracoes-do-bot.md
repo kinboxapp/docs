@@ -57,7 +57,7 @@ Referência técnica das integrações do bot e de campos personalizados **Json*
 - **Chaves reservadas no JSON:**
   - `{{chave}}`: substituída em todo o texto do JSON (URL, cabeçalhos e corpo) pelos dados do contato, da sessão e dos campos personalizados; chave sem valor vira texto vazio.
   - `{{json:<chave>.<caminho>}}`: lê propriedade de um campo personalizado do tipo **Json**.
-  - `{{integrations.<tipo>.<chave>}}`: lê um dado salvo em uma integração instalada no workspace (apenas o primeiro tipo de integração citado no JSON é resolvido).
+  - `{{integrations.<tipo>.<chave>}}`: lê um dado salvo em uma integração instalada no workspace; use chaves de um só tipo de integração em cada JSON.
 - **Resposta e `mapReturnToCustomField`:**
   - A extração lê o corpo da resposta usando caminhos com pontos e índices (ex.: `result.id`, `itens[0].nome`).
   - A chave de destino é a **Chave reservada** do campo personalizado sem `{{}}` (de **Contato** ou **Sessão de conversa**) ou os campos `name` e `email` do contato. Chaves que não correspondem a um campo existente são ignoradas.
@@ -115,11 +115,11 @@ async function run(kinbox) {
 - **No editor Código (Executar código):** grupo **Código** com **Analisar e corrigir**, **Explicar**, **Refatorar** e **Gerar código** (abre **Instruções** com o campo **O que você gostaria de fazer?**).
 - **No editor Json (Chamar endpoint):** grupo **JSON** com **Analisar e corrigir**, **Explicar** e **Gerar JSON** (sem **Refatorar**).
 - **Saída:** o resultado é exibido abaixo do editor na área **Resultado** e não substitui o conteúdo automaticamente.
-- **Saldo:** consome saldo da carteira (veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)). Quando o saldo está em R$ 0,10 ou menos, as opções ficam desativadas com a dica `(Pouco ou nenhum crédito restante)` e aparecem **Seus créditos acabaram** e **Comprar créditos** (para quem tem permissão financeira; para os demais, `"Fale com um administrador para colocar créditos no ambiente."`).
+- **Saldo:** consome saldo da carteira (veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)). Quando o saldo está em R$ 0,10 ou menos, as opções ficam desativadas com a dica `(Pouco ou nenhum crédito restante)` e aparecem **Seus créditos acabaram** e **Comprar créditos** para qualquer membro. Ao clicar em **Comprar créditos**, quem tem a permissão **Assinatura** (ou o proprietário) vai para a tela de saldo; os demais veem `"Fale com um administrador para colocar créditos no ambiente."`.
 
 ## Campo personalizado do tipo Json
 
-- **Cadastro:** em **Configurações** → **Ambiente** → **Campos personalizados** (permissão **Campos personalizados** ou proprietário), com **Tipo de campo** = **Json**. A **Chave reservada** é gerada sem acentos, em minúsculas e com `_` no lugar de espaços e pontos (`{{chave}}`).
+- **Cadastro:** em **Configurações** → **Ambiente** → **Campos personalizados** (permissão **Campos**, na seção **Gerenciamento do Ambiente**, ou proprietário), com **Tipo de campo** = **Json**. A **Chave reservada** é gerada sem acentos, em minúsculas e com `_` no lugar de espaços e pontos (`{{chave}}`).
 - **Entidades:** escolha **Contato** ou **Sessão de conversa** para gravar e ler no bot. Apenas campos de **Contato** e **Sessão de conversa** são lidos em mensagens e no bloco **Decisão**. Na gravação pelo bot, campos de **Sessão de conversa** gravam na sessão atual e campos de **Negociação** gravam na negociação aberta da conversa (se houver).
 - **Sintaxe em textos e no Chamar endpoint:** `{{json:<chave>.<caminho>}}`, com suporte a propriedades aninhadas e índices de lista (ex.: `{{json:pedido.numero}}`, `{{json:pedido.itens[0].nome}}`). Funciona em mensagens, no JSON do **Chamar endpoint** e no **Simular bot**.
 - **Seletor de chaves:** no botão `{}` (**Chaves reservadas**), o campo aparece como `{{json:<chave>}}` e insere `{{json:<chave>.key_name}}`.

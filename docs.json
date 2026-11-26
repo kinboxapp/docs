@@ -103,11 +103,11 @@
                 "pages": [
                   "docs/bot/visao-geral",
                   "docs/bot/aprender-a-usar-o-bot",
+                  "docs/bot/blocos-do-bot",
+                  "docs/bot/versoes-e-bloqueio",
                   "docs/bot/integracoes-do-bot",
                   "docs/bot/usando-integracao-execucao-codigo",
                   "docs/bot/usar-campo-personalizado-em-json",
-                  "docs/bot/versoes-e-bloqueio",
-                  "docs/bot/blocos-do-bot",
                   "docs/bot/problemas-comuns"
                 ]
               }

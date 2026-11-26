@@ -346,7 +346,8 @@ async function garantirAgente(api: Api) {
  */
 function montarBotExemplo(grupoId: string, canalId: string) {
   const pos = (x: number, y: number) => ({ x, y })
-  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { action } })
+  const cores: Record<string, string> = { message: '#686de0', menu: '#0984e3', assign: '#38ada9', integration: '#000' }
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { backgroundColor: cores[type], action } })
   const aresta = (source: string, sourceHandle: string, target: string) => ({
     id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
     type: 'removable_edge', animated: true, arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
@@ -357,7 +358,7 @@ function montarBotExemplo(grupoId: string, canalId: string) {
     no('menu', 'menu', 560, 150, {
       text: 'Como podemos ajudar? Digite o número da opção:',
       menu_options: [{ value: '1', name: 'Acompanhar meu pedido' }, { value: '2', name: 'Trocas e devoluções' }, { value: '3', name: 'Falar com a equipe' }],
-      input_validate_text: 'Resposta inválida. Tente novamente.', similarity_rate: 20,
+      menu_validate_text: 'Resposta inválida. Digite 1, 2 ou 3.', similarity_rate: 20,
       menu_response_timeout_value: 10, menu_response_timeout_unit: 'seconds',
     }),
     no('pedido', 'message', 940, -120, { text: 'Para acompanhar o pedido, acesse Minha conta > Pedidos no site.' }),
@@ -398,7 +399,8 @@ async function garantirBot(api: Api, canal: string) {
  */
 function montarBotIntegracao() {
   const pos = (x: number, y: number) => ({ x, y })
-  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { action } })
+  const cores: Record<string, string> = { message: '#686de0', menu: '#0984e3', assign: '#38ada9', integration: '#000' }
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: pos(x, y), data: { backgroundColor: cores[type], action } })
   const aresta = (source: string, sourceHandle: string, target: string) => ({
     id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
     type: 'removable_edge', animated: true, arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
