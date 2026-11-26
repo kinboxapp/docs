@@ -72,7 +72,7 @@ verificado_em: 2026-11-26
 | **Quando ganhar uma negociação** | Ao marcar uma negociação como ganha (som de caixa registradora e aplausos) |
 | **Quando receber notificação de outro ambiente** | Essa opção não toca som e não altera os sons acima; para acompanhar outro workspace, troque para ele (veja [Trocar de workspace ou criar outro](/docs/conta/trocar-de-workspace)) |
 
-- **Recursos em teste (podem não aparecer em todos os workspaces):** **Quando receber ligação do WhatsApp** ("Toca e mostra o aviso para atender em qualquer tela") e **Quando receber ligação do WhatsApp em conversa sem responsável** ("Desligado, a ligação aparece só na lista de conversas"). Essas duas valem só para o workspace aberto (ficam junto das opções de push).
+- **Recursos em teste (podem não aparecer em todos os workspaces):** **Quando receber ligação do WhatsApp** ("Toca e mostra o aviso para atender em qualquer tela") e **Quando receber ligação do WhatsApp em conversa sem responsável** ("Desligado, a ligação aparece só na lista de conversas"). Essas duas valem só para o workspace aberto (ficam junto das opções de push). Sem o aviso, quem pode atender ainda atende pela mensagem da ligação na conversa (veja [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp)).
 
 ## Disponibilidade, inatividade e horário
 
