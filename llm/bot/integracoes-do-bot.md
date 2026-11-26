@@ -39,6 +39,8 @@ verificado_em: 2026-11-26
 
 Referência técnica das integrações do bot e de campos personalizados **Json**, complementando [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot), [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo) e [Usar um campo personalizado JSON no bot](/docs/bot/usar-campo-personalizado-em-json).
 
+Para o bot pausar no bloco **Esperar um tempo** (**Recebimento de webhook**, com **Tempo máximo de espera** desligado) e continuar quando o seu sistema chamar, veja [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot).
+
 ## Chamar endpoint
 
 - **Saída e tempo antes de rodar:** o bloco **Integração** tem uma única saída e aguarda cerca de 1 segundo antes de executar.

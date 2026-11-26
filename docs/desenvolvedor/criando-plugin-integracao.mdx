@@ -1,0 +1,146 @@
+---
+title: Criar um plugin para o painel da conversa
+description: Como cadastrar um plugin (uma página sua que abre dentro da conversa), escolher o modo de exibição e usar a biblioteca da Kinbox para ler a conversa e agir nela.
+keywords: [plugin, criar plugin, iframe, painel da conversa, página dentro da kinbox, kinboxjs, sdk, biblioteca, modo de exibição, campos personalizados no plugin, integração com sistema próprio]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/plugins/EditPlugin.tsx
+  - web:src/pages/settings/plugins/index.tsx
+  - web:src/components-old/chat/side/SidePlugin/SidePluginContainer.tsx
+  - web:src/components-old/chat/side/SidePlugin/index.tsx
+  - api-v0:server/controllers/PluginController.js
+codigo:
+  - web:src/pages/settings/plugins/**
+  - web:src/components-old/chat/side/SidePlugin/**
+  - web:src/components-old/chat/side/ContactDetails/index.tsx
+  - api-v0:server/routes/PluginApiRoutes.js
+  - api-v0:server/controllers/PluginController.js
+verificado_em: 2026-11-26
+---
+
+Um plugin é uma página sua (em um endereço HTTPS) que abre dentro da Kinbox, no contexto da conversa aberta, para mostrar dados do seu sistema ou executar ações no atendimento. Diferente dos **Apps** (integrações prontas em **Configurações** → **Integrações** → **Apps**), o plugin é criado e hospedado por você.
+
+<Note>
+  Quem pode: membros com a permissão **Integrações** ou o proprietário do workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a tela Plugins">
+    Vá em **Configurações** → **Integrações** → **Plugins** e clique em **Novo plugin**.
+  </Step>
+
+  <Step title="Preencha os dados do plugin">
+    No painel **Criar plugin**, configure os campos abaixo:
+
+    | Campo | O que preencher |
+    | --- | --- |
+    | **Nome do plugin** | Obrigatório. Nome exibido no painel da conversa. |
+    | **Endpoint** | Obrigatório. Endereço da sua página (use um endereço `https://`, por exemplo `https://exemplo.com/ficha-do-cliente`). |
+    | **Modo de exibição** | Como o plugin abre (padrão: **Normal**). Veja os modos na seção abaixo. |
+    | **Altura em pixels** ou **Largura em pixels** | Altura (de 200 a 800, padrão 400) nos modos **Normal** e **Modal**; largura (de 200 a 1600, padrão 400) nos modos **Painel lateral** e **Página lateral**. Não aparece em **Nova página**, **Popup** e **Tela inteira**. |
+    | **Auth Secret** | Preenchido pela Kinbox; você não edita. Não use esse campo para autenticação. |
+    | **Visível para** | **Todos** (padrão), **Grupos** (com o campo **Grupos**) ou **Apenas para mim**. |
+
+    <Frame caption="Painel Criar plugin com Nome do plugin, Endpoint, Modo de exibição, Altura em pixels, Auth Secret e Visível para">
+      <img src="/images/ajuda/desenvolvedores/criar-plugin.webp" alt="Painel Criar plugin preenchido com Nome do plugin Ficha do cliente, Endpoint https://exemplo.com/ficha-do-cliente, Modo de exibição Normal, Altura em pixels 400, Auth Secret com tarja, Visível para Todos e botão Salvar" />
+    </Frame>
+  </Step>
+
+  <Step title="Defina a visibilidade e salve">
+    Escolha quem poderá ver o plugin em **Visível para** e clique em **Salvar**.
+
+    <Tip>
+      Enquanto testa a sua página, deixe **Visível para** em **Apenas para mim** para que o plugin apareça só na sua conta.
+    </Tip>
+  </Step>
+
+  <Step title="Abra o plugin na conversa">
+    Entre na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) e abra uma conversa. No painel **Detalhes** (à direita), os plugins liberados para você aparecem abaixo de **Contato**, **Negociações** e **Tarefas**. Clique no nome do plugin para abri-lo.
+  </Step>
+</Steps>
+
+## Modos de exibição
+
+| Modo | Como o plugin abre |
+| --- | --- |
+| **Normal** | Dentro do painel **Detalhes**, com a altura configurada. |
+| **Modal** | Em uma janela no meio da tela, com o nome do plugin no título e a altura configurada. |
+| **Painel lateral** | Em um painel à direita com título, na largura configurada. |
+| **Página lateral** | Em um painel à direita sem título, na largura configurada. |
+| **Nova página** | Em uma nova aba do navegador, só com o endereço (sem a biblioteca da Kinbox funcionar). |
+| **Popup** | Em uma janela separada do navegador, só com o endereço (sem a biblioteca da Kinbox funcionar). |
+| **Tela inteira** | Cobre a tela inteira, sem botão de fechar da Kinbox. |
+
+Nos modos **Nova página** e **Popup**, a Kinbox só abre o endereço: a página não recebe os dados da conversa e as funções `Kinbox.*` não têm efeito. Use esses modos para abrir um sistema seu; para mostrar dados da conversa ou agir nela, use os outros modos.
+
+<Warning>
+  O modo **Tela inteira** cobre a tela inteira e não tem botão de fechar na interface da Kinbox. Para fechar, a sua página precisa enviar a mensagem `{ event: "close" }` para a Kinbox com `window.parent.postMessage({ event: "close" }, "*")`. Se não quiser programar isso, prefira **Modal** ou **Painel lateral**.
+</Warning>
+
+## Campos do contato no endereço
+
+Você pode colocar `{{chave}}` de um campo personalizado do contato no **Endpoint** para preencher o endereço com o valor do contato da conversa (veja [Contatos, organizações e negociações](/docs/conceitos/contatos-e-negocios)). A substituição de `{{chave}}` no **Endpoint** funciona **apenas** nos modos **Nova página** e **Popup**; nos outros modos, o endereço abre sem troca. Campos sem valor viram texto vazio e chaves que não existem permanecem como estão.
+
+## Criar a sua página
+
+Para conversar com a Kinbox, carregue a biblioteca `kinboxjs.js` no `<head>` da sua página e escute o evento `conversation` com `Kinbox.on("conversation", ...)`:
+
+```html
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://andrody.github.io/kinbox-lib/kinboxjs.js"></script>
+  </head>
+  <body>
+    <p id="cliente">Abra uma conversa...</p>
+    <script>
+      Kinbox.on("conversation", function (data) {
+        document.getElementById("cliente").textContent =
+          "Contato: " + data.contact.name;
+      });
+    </script>
+  </body>
+</html>
+```
+
+## O que o plugin recebe e pode fazer
+
+Nos modos **Normal**, **Modal**, **Painel lateral**, **Página lateral** e **Tela inteira**:
+
+- O endereço chega com `dark_mode` (`true` ou `false`, conforme o tema do membro) e `operator_id` (ID do membro logado).
+- O evento `conversation` traz o contato, a conversa, a sessão e o membro logado, e chega de novo quando o membro troca de conversa. Sem conversa aberta, chega `no_conversation`.
+- Pela biblioteca, o plugin pode mostrar avisos, carregamento e confirmações, gravar campos personalizados do contato ou da sessão, atribuir a conversa, mover para um grupo, pôr ou tirar tags, abrir um formulário da Kinbox e ler os membros, grupos, tags, campos e canais do workspace.
+
+Nos modos **Nova página** e **Popup**, nada disso acontece: a página abre só com o endereço.
+
+<Accordion title="Funções da biblioteca">
+  | Função | O que faz |
+  | --- | --- |
+  | `Kinbox.on("conversation", fn)` | Recebe os dados da conversa aberta (também `"no_conversation"` e `"callback"`). |
+  | `Kinbox.loading(true)` / `Kinbox.loading(false)` | Mostra ou tira o carregamento sobre o plugin. |
+  | `Kinbox.toast(tipo, texto)` | Mostra um aviso (`success`, `error`, `info`, `warning` ou `loading`). |
+  | `Kinbox.dialog("confirm", { title, description, okText, cancelText }, fn)` | Pede confirmação; `fn` recebe `true` ou `false`. |
+  | `Kinbox.setProperty({ key, type, contactId \| sessionId, fields })` | Grava campos personalizados do contato (`type: "contact"`, com `contactId`) ou da sessão (`type: "session"`, com `sessionId`); a resposta chega no evento `callback`. |
+  | `Kinbox.assignTo(idDoMembro)` | Atribui a conversa aberta ao membro. |
+  | `Kinbox.moveToGroup(idDoGrupo)` | Move a conversa aberta para o grupo. |
+  | `Kinbox.addTag(idDaTag)` / `Kinbox.removeTag(idDaTag)` | Põe ou tira a tag da conversa aberta. |
+  | `Kinbox.sendForm({ items, type, title }, fn)` | Abre um formulário da Kinbox (`type`: `"modal"` ou `"drawer"`); `fn` recebe as respostas. |
+  | `Kinbox.getWorkspaceInfo(fn)` | Entrega membros, grupos, tags, campos personalizados, canais e papéis do workspace. |
+</Accordion>
+
+## Editar ou excluir um plugin
+
+Em **Configurações** → **Integrações** → **Plugins** (com busca **Pesquisar por nome** e filtros **Tudo** e **Visível somente para mim**), clique no plugin para editar ou exclua pelo menu da linha.
+
+## Problemas comuns
+
+- **Plugins não aparece no menu.** O seu papel não tem a permissão **Integrações**.
+- **O plugin não aparece na conversa.** Confira se a opção **Visível para** inclui você ou um dos seus [grupos](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos).
+- **O plugin abre em branco.** Teste o endereço em uma aba do navegador: a página precisa estar acessível na internet, usar `https://` e permitir ser aberta dentro de outra página.
+- **`{{chave}}` no Endpoint não é trocado.** A troca de campos personalizados no endereço só funciona nos modos **Nova página** e **Popup**.
+- **O plugin não recebe a conversa ou as funções não fazem nada.** Confira o modo: em **Nova página** e **Popup**, a página abre sem a biblioteca da Kinbox funcionar.
+- **O plugin fica preso no carregando.** Confira se o seu código chama `Kinbox.loading(false)` ao terminar, inclusive quando ocorre um erro.

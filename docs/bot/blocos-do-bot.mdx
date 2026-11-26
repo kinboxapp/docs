@@ -124,7 +124,7 @@ Oferece quatro opções em **Tipo de espera**:
 
 - **Intervalo de tempo:** aguarda um valor fixo em **Segundos de espera** (de 1 segundo até 7 dias).
 - **Envio de mensagem pelo cliente:** pausa até o contato mandar uma nova mensagem.
-- **Recebimento de webhook:** pausa até um sistema externo enviar uma requisição POST para o **Endereço do webhook** exibido na gaveta.
+- **Recebimento de webhook:** pausa até um sistema externo enviar uma requisição POST para o **Endereço do webhook** exibido na gaveta (endereço, corpo da requisição e token em [Continuar o bot por webhook](/docs/desenvolvedor/webhook-continuar-bot), que descreve a retomada sem **Tempo máximo de espera**).
 - **Randomizar delay:** sorteia um tempo entre **Tempo mínimo entre envios** e **Tempo máximo entre envios** na **Unidade** escolhida (**Segundos**, **Minutos**, **Horas** ou **Dias**).
 
 Em **Envio de mensagem pelo cliente** e **Recebimento de webhook**, ligar **Tempo máximo de espera** cria uma saída extra de tempo esgotado; se o contato responder antes do prazo, a contagem é cancelada.
