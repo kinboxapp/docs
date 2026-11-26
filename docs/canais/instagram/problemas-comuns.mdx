@@ -1,0 +1,140 @@
+---
+title: O Instagram ou o Facebook não conecta ou desconectou
+description: O que fazer quando a página não aparece, o Instagram ou o Facebook não conecta, o canal fica desconectado ou a mensagem não é enviada.
+keywords: [instagram não conecta, facebook não conecta, página não aparece, não encontramos nenhuma página, instagram desconectado, facebook desconectado, reconectar instagram, reconectar facebook, mensagem não enviada instagram, já está ativado em outro ambiente, página cinza, página desativada, comentários instagram, conta comercial, instagram business, mensagem não chega]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/channels/facebook/AddMetaChannel.tsx
+  - web:src/pages/settings/channels/index.tsx
+  - api-v0:server/controllers/IntegrationsController.js
+  - api-v0:server/controllers/KinboxDirectController.js
+  - api-v0:server/controllers/MessengerController.js
+  - api-v0:server/modules/scheduler/facebookScheduler.js
+codigo:
+  - web:src/pages/settings/channels/facebook/**
+  - web:src/pages/settings/channels/instagram/**
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/inbox/Message.tsx
+  - api-v0:server/controllers/IntegrationsController.js
+  - api-v0:server/controllers/KinboxDirectController.js
+  - api-v0:server/controllers/MessengerController.js
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/scheduler/facebookScheduler.js
+  - api-v0:server/modules/accessRestriction/**
+verificado_em: 2026-11-26
+---
+
+Use esta página quando o Instagram ou o Facebook não conecta, a página não aparece na lista, o canal fica **Desconectado**, as mensagens não chegam ou uma mensagem falha ao enviar.
+
+## Sintoma
+
+- O Instagram ou o Facebook não conecta, ou a janela da Meta não abre.
+- A página que você quer conectar não aparece na lista ou aparece cinza (desativada).
+- O canal está **Desconectado** e você não encontra como reconectar.
+- O canal está **Conectado**, mas as mensagens não chegam.
+- Uma mensagem fica com erro ao enviar.
+- Respostas a stories, menções ou comentários não viram conversa.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="Cliquei em Conectar página do Instagram ou Conectar página do Facebook e nada aconteceu">
+    A conexão abre uma janela (pop-up) da Meta. Se o navegador bloquear o pop-up ou se você fechar a janela antes do fim, nenhum canal é criado e nenhum aviso aparece na Kinbox.
+
+    Libere pop-ups para a Kinbox no navegador e clique no botão de conectar de novo.
+  </Accordion>
+
+  <Accordion title='Apareceu "Não encontramos nenhuma página com as permissões necessárias."'>
+    A conta do Facebook usada na janela da Meta não liberou nenhuma página para a Kinbox. No Instagram, também acontece quando nenhuma das páginas liberadas tem uma conta do Instagram profissional vinculada.
+
+    Clique em **Tentar novamente**, entre na janela da Meta com a conta do Facebook que tem acesso à página e libere a página. No Instagram, confira no Instagram e na Meta se a conta é profissional e está vinculada à página do Facebook.
+  </Accordion>
+
+  <Accordion title="A página que eu quero não aparece na lista">
+    A lista mostra apenas as páginas liberadas na janela da Meta (até 99 páginas). No Instagram, só aparecem páginas do Facebook que têm uma conta do Instagram profissional vinculada.
+
+    Faça a conexão de novo e libere a página na janela da Meta. No Instagram, confirme também que a conta profissional está vinculada a essa página.
+  </Accordion>
+
+  <Accordion title="A página aparece cinza (desativada) e não dá para clicar">
+    Essa página (ou a conta do Instagram ligada a ela) já é um canal ativo deste workspace. Isso acontece mesmo quando o canal está **Desconectado**.
+
+    Para reconectar esse canal, siga **O canal está Desconectado**, abaixo.
+  </Accordion>
+
+  <Accordion title='Apareceu "Esse canal já está ativado em outro ambiente"'>
+    A página do Facebook (ou a conta do Instagram ligada a ela) já é canal ativo em outro workspace. A tela chama o workspace de "ambiente".
+
+    Exclua o canal no outro workspace e conecte a página neste. Se você não tem acesso para excluir o canal no outro workspace, peça a quem administra os canais de lá. O histórico de conversas continua no workspace de origem: ele não vem para este.
+  </Accordion>
+
+  <Accordion title="Erros de plano ou teste grátis">
+    No Instagram, o plano precisa ter uma unidade livre de **Instagram Direct**, e o canal não pode ser conectado no teste grátis. Os avisos mais comuns são:
+
+    - **"Você não pode adicionar canais de Instagram em plano trial":** o workspace está no teste grátis. Assine um plano com **Instagram Direct** para conectar.
+    - **"Você precisa remover canais de Instagram para prosseguir com a contratação":** todas as unidades de **Instagram Direct** do plano estão em uso. Aumente a quantidade no plano ou exclua outro canal de Instagram.
+    - **"Assinatura expirada":** a assinatura do workspace venceu. Regularize a assinatura.
+
+    No Facebook, a assinatura paga atual não tem limite de páginas. No teste grátis, dá para conectar uma página do Facebook por workspace; a segunda mostra "Seu plano atual não permite adicionar o novo canal". Com a assinatura vencida, a conexão do Facebook pode ser recusada com "Sua assinatura expirou". Contas mais antigas podem ter outros limites.
+
+    Para ajustar o plano, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
+  </Accordion>
+
+  <Accordion title="O canal está Desconectado">
+    A Kinbox perdeu o acesso à página na Meta: a renovação automática do acesso falhou ou, no Instagram, a Meta recusou um envio por falta de acesso. A dica do selo **Desconectado** fala em "conexão de internet", mas no Instagram e no Facebook a causa é o acesso na Meta.
+
+    Não existe botão de reconectar. Antes de começar:
+
+    - Confirme na Meta que a conta do Facebook que você vai usar ainda tem acesso à mesma página.
+    - Abra o canal e veja se **Restringir visibilidade** está ligada. Se estiver, anote os grupos marcados, porque a lista de grupos volta vazia.
+
+    Para reconectar:
+
+    1. Vá em **Configurações** → **Chat** → **Canais**, abra o menu de três pontos do canal e clique em **Excluir**. Excluir não apaga as conversas, e, no Instagram, o canal excluído não ocupa unidade do plano.
+    2. Clique em **Novo canal** e escolha **Instagram** ou **Facebook**.
+    3. Conecte a mesma página seguindo [Conectar o Instagram](/docs/canais/instagram) ou [Conectar o Facebook Messenger](/docs/canais/facebook/conectar). O mesmo canal volta **Conectado**, com as conversas antigas.
+    4. Se **Restringir visibilidade** estava ligada, abra o canal, selecione de novo os grupos e clique em **Salvar**.
+    5. Mande uma mensagem de teste a partir de outra conta e confira se ela chega na **Caixa de entrada**.
+
+    Quem pode: o proprietário do workspace ou membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)) que não tenham a restrição **Somente pode dar manutenção simples em canais**. Essa restrição esconde **Novo canal** e **Excluir**. Se esses botões não aparecerem para você, peça ao proprietário ou a quem administra os canais.
+  </Accordion>
+
+  <Accordion title="O canal está Conectado, mas as mensagens não chegam">
+    O selo verde **Conectado** não garante que a Meta está entregando as mensagens.
+
+    1. Abra o canal e confira se o **Status** está **Conectado**.
+    2. Confira **Restringir visibilidade**: essa opção escolhe os grupos de membros da Kinbox que podem ver o canal. Se estiver ligada, veja se você está num dos grupos escolhidos.
+    3. Mande uma mensagem de teste a partir de outra conta do Instagram ou do Facebook.
+
+    Se a mensagem de teste não aparecer, fale com o suporte informando o canal e o horário do teste.
+  </Accordion>
+
+  <Accordion title="A mensagem ficou com erro">
+    Passe o mouse sobre o ícone de erro da mensagem para ler o motivo. Quando não há motivo, a tela mostra "Erro ao enviar mensagem". No Messenger, o erro também aparece como aviso na tela.
+
+    - **Instagram:** se o aviso disser que o canal precisa ser reconectado, o canal ficou **Desconectado**. Siga **O canal está Desconectado**, acima.
+    - **Outros motivos:** o texto vem da Meta. A Kinbox não mostra contador de prazo para responder nem bloqueia o campo de resposta. Quem aceita ou recusa a mensagem é a Meta.
+  </Accordion>
+
+  <Accordion title="Stories ou menções não viram conversa">
+    No Instagram, confira se **Ignorar resposta de story** ou **Ignorar menções** estão ligados em [Configurações do Instagram e do Facebook](/docs/canais/instagram/configuracoes).
+
+    Essas opções existem só no Instagram. Desligar vale apenas para o que chegar depois: respostas e menções já descartadas não voltam.
+  </Accordion>
+
+  <Accordion title="Comentários não aparecem">
+    A Kinbox não traz comentários em posts, reels ou anúncios do Instagram nem da página do Facebook. Viram conversa só as mensagens do Direct e do Messenger e, no Instagram, as respostas e menções em stories que não estiverem ignoradas.
+
+    Responda os comentários no próprio Instagram ou Facebook.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte da Kinbox informando:
+
+- O tipo de canal (Instagram ou Facebook), o nome do canal como aparece na lista e o ID obtido em **Copiar ID**.
+- O texto exato do aviso ou da mensagem de erro exibida na tela.
+- Quando o problema começou.
+- Se houve alguma mudança recente na Meta (como senha, acesso à página ou conta trocada).

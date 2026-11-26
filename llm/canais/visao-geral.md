@@ -1,7 +1,7 @@
 ---
 title: Limite de canais por plano, status da lista e erros de plano
-description: Regras de limite de canais de WhatsApp e Instagram por plano, todos os status da lista de canais e as mensagens de erro de plano.
-keywords: [limite de canais, plano, whatsapp no plano, linhas de whatsapp, assinatura expirada, status do canal, exportar canais]
+description: Regras de limite de canais de WhatsApp, Instagram, Facebook, Telegram e e-mail por plano (incluindo o teste grátis, que aceita uma página do Facebook), todos os status da lista de canais e as mensagens de erro de plano.
+keywords: [limite de canais, plano, whatsapp no plano, linhas de whatsapp, assinatura expirada, status do canal, exportar canais, facebook teste grátis, limite facebook, seu plano atual não permite adicionar o novo canal]
 publico: llm
 tipo: referencia
 fontes:
@@ -9,6 +9,7 @@ fontes:
   - web:src/pages/settings/channels/AddChannel.tsx
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/accessRestriction/rules.js
 codigo:
   - web:src/pages/settings/channels/index.tsx
   - web:src/pages/settings/channels/AddChannel.tsx
@@ -17,14 +18,15 @@ codigo:
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/routes/IntegrationsApiRoutes.js
+  - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
 ---
 
-Detalhes de referência da página humana "Canais: conectar e gerenciar" (`/docs/canais/visao-geral`).
+Detalhes de referência da página humana [Canais: conectar e gerenciar](/docs/canais/visao-geral).
 
 ## Limite de canais por plano e mensagens de erro
 
-Criar um canal de WhatsApp (oficial ou por QR Code) passa pela checagem do plano. **Recriar** um canal não passa por essa checagem.
+Criar canais de WhatsApp, Instagram, Facebook, Telegram e e-mail passa pela checagem do plano. **Recriar** um canal de WhatsApp não passa.
 
 - **WhatsApp (assinatura atual)**: conta todos os canais de WhatsApp ativos do workspace, somando oficiais e por QR Code, contra a quantidade contratada de **WhatsApp** (cobrada por linha).
   - Acima do limite (inclusive ao criar um novo canal): `"Você precisa remover canais de Whatsapp para prosseguir com a contratação"`
@@ -34,10 +36,12 @@ Criar um canal de WhatsApp (oficial ou por QR Code) passa pela checagem do plano
   - `"Seu plano atual não permite adicionar ou modificar número de whatsapps."`
   - `"Seu plano atual não permite adicionar o novo canal"`
   - `"Sua assinatura expirou"`
-- **Instagram**: tem limite próprio e não pode ser adicionado no período de teste grátis:
+- **Instagram** ([Conectar o Instagram](/docs/canais/instagram)): conta os canais de Instagram ativos contra as unidades de **Instagram Direct** do plano e não pode ser adicionado no período de teste grátis:
   - `"Você não pode adicionar canais de Instagram em plano trial"`
+  - `"Você precisa remover canais de Instagram para prosseguir com a contratação"` (todas as unidades em uso)
 - **SMS**: máximo de 1 por workspace (o cartão fica desativado quando o workspace já possui um).
-- **Telegram, E-mail, Widget, Facebook e Customizado**: não passam pela checagem de quantidade do plano. O cartão **Widget** não aparece para membros com a restrição `"Não pode gerenciar widget."`
+- **Facebook, Telegram e E-mail**: sem limite de quantidade na assinatura paga atual. A partir do quarto dia depois do vencimento da assinatura (ou sem assinatura ativa), a conexão é recusada com `"Sua assinatura expirou"`. No teste grátis, o workspace pode ter até 1 página do Facebook, 1 canal de Telegram e 3 canais de e-mail ativos; acima disso, `"Seu plano atual não permite adicionar o novo canal"`. Na assinatura antiga paga: até 50 páginas do Facebook, 10 canais de Telegram e 10 de e-mail. Veja [Conectar o Facebook Messenger](/docs/canais/facebook/conectar).
+- **Widget e Customizado**: não passam pela checagem de quantidade do plano. O cartão **Widget** não aparece para membros com a restrição `"Não pode gerenciar widget."`
 
 ## Todos os status da lista de canais
 
@@ -73,7 +77,7 @@ No layout novo, os textos aparecem com Inicial Maiúscula em cada palavra por CS
 ## Excluir e criar novamente com o mesmo número
 
 - **Excluir** um canal de WhatsApp apenas desliga o canal (fica inativo e não apaga as conversas). Na conexão **Express**, a exclusão também remove o canal dos bots que o usavam.
-- Excluir um canal **Clássica** não tira o canal dos bots (diferente da **Express**); não prometa nada sobre bots depois de excluir um canal **Clássica**.
+- Excluir um canal **Clássica** não tira o canal dos bots que o usavam (diferente da **Express**): o vínculo com o bot pode permanecer após a exclusão.
 - Conectar de novo o **mesmo número** no mesmo workspace pode reaproveitar o canal excluído: mantém o mesmo ID e traz as conversas antigas de volta.
   - **Express**: reaproveita o canal de WhatsApp excluído com o número, seja ele **Clássica**, **Express** ou oficial (o canal passa a ser **Express**).
   - **Clássica**: reaproveita um canal por QR Code excluído com o número; não reaproveita canal oficial.

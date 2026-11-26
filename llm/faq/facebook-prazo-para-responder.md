@@ -1,0 +1,43 @@
+---
+title: Até quando posso responder uma mensagem do Messenger?
+description: A Kinbox não limita nem mostra prazo para responder no Messenger ou no Instagram; quem define o prazo é a Meta.
+keywords: [prazo messenger, janela do messenger, até quando responder facebook, etiqueta atendimento humano, human agent, prazo responder instagram, mensagem com erro messenger]
+publico: llm
+tipo: faq
+fontes:
+  - web:src/pages/inbox/Chat/index.tsx
+  - web:src/components-old/inbox/NewMessageModal/index.tsx
+  - api-v0:server/controllers/MessengerController.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+codigo:
+  - web:src/pages/inbox/Chat/index.tsx
+  - web:src/pages/inbox/Message.tsx
+  - web:src/components-old/inbox/NewMessageModal/index.tsx
+  - api-v0:server/controllers/MessengerController.js
+  - api-v0:server/controllers/KinboxDirectController.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+verificado_em: 2026-11-26
+---
+
+## Pergunta
+
+Até quando posso responder uma mensagem do Messenger?
+
+## Resposta
+
+A Kinbox não mostra contador nem bloqueia a resposta por prazo no Facebook Messenger (nem no Instagram). Quem define o prazo é a Meta, que ainda pode recusar o envio.
+
+As mensagens enviadas por membros saem com a etiqueta de atendimento humano da Meta; mensagens enviadas sem membro (como o [bot](/docs/bot/visao-geral)) saem sem essa etiqueta. Se a Meta recusar o envio (por exemplo, por ter passado do prazo dela), a mensagem fica com ícone de erro, o motivo devolvido pela Meta aparece ao passar o mouse e, no Messenger, também surge um aviso na tela.
+
+Não dá para iniciar uma conversa nova pelo Messenger nem pelo Instagram na Kinbox: a conversa só começa quando o contato escreve ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)). No WhatsApp oficial é diferente: existe contador na conversa e é preciso usar template quando a janela fecha (veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
+
+Veja mais em [Conectar o Facebook Messenger](/docs/canais/facebook/conectar).
+
+## Variações
+
+- qual é o prazo para responder no facebook messenger pela kinbox
+- o messenger tem janela igual ao whatsapp oficial na kinbox
+- por que minha mensagem no messenger ficou com erro depois de alguns dias
+- a kinbox bloqueia o campo de resposta no instagram ou no facebook
+- consigo mandar a primeira mensagem para um contato pelo messenger
+- quanto tempo depois posso responder uma dm do instagram na kinbox

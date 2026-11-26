@@ -1249,3 +1249,70 @@
   arquivo: images/ajuda/conta/notificacoes-desktop.webp
   paginas:
     - docs/conta/notificacoes
+
+# Seção instagram-e-facebook (Canais › Instagram e Facebook)
+#
+# A conexão abre a janela de login da Meta e só funciona com conta real: nada é conectado, desconectado nem excluído.
+# As telas antes da janela da Meta vêm do workspace de documentação. As configurações de um canal conectado vêm do
+# workspace de testes (id 1, "Kinbox"), só para ver: título do canal e nome da página ficam sob tarja, e os campos
+# personalizados do workspace de testes ficam fora do recorte.
+
+- id: instagram-conectar
+  largura: 1000
+  url: /settings/channels/new/instagram
+  passos:
+    - esperar: '.g_settings_simple_page button:has-text("Conectar página do Instagram")'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/instagram-e-facebook/conectar-instagram.webp
+  paginas:
+    - docs/canais/instagram
+
+- id: facebook-conectar
+  largura: 1000
+  url: /settings/channels/new/facebook
+  passos:
+    - esperar: '.g_settings_simple_page button:has-text("Conectar página do Facebook")'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/instagram-e-facebook/conectar-facebook.webp
+  paginas:
+    - docs/canais/facebook/conectar
+
+- id: instagram-configuracoes
+  workspace: Kinbox
+  url: /settings/channels/93
+  passos:
+    - esperar: '.ant-drawer-body #ignore_story_mention'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .ant-form-item:has(#isPrivate)'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+    - '.ant-drawer-body #description'
+  arquivo: images/ajuda/instagram-e-facebook/configuracoes-instagram.webp
+  paginas:
+    - docs/canais/instagram/configuracoes
+
+- id: facebook-configuracoes
+  workspace: Kinbox
+  url: /settings/channels/29
+  passos:
+    - esperar: '.ant-drawer-body #isPrivate'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .ant-form-item:has(#isPrivate)'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+    - '.ant-drawer-body #name'
+  arquivo: images/ajuda/instagram-e-facebook/configuracoes-facebook.webp
+  paginas:
+    - docs/canais/instagram/configuracoes

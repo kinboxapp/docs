@@ -71,6 +71,15 @@
                     ]
                   }
                 ]
+              },
+              {
+                "group": "Instagram e Facebook",
+                "pages": [
+                  "docs/canais/instagram",
+                  "docs/canais/facebook/conectar",
+                  "docs/canais/instagram/configuracoes",
+                  "docs/canais/instagram/problemas-comuns"
+                ]
               }
             ]
           },
@@ -657,10 +666,6 @@
     },
     {
       "source": "/docs/canais/canal-customizado",
-      "destination": "/docs/canais/visao-geral"
-    },
-    {
-      "source": "/docs/canais/instagram",
       "destination": "/docs/canais/visao-geral"
     },
     {
