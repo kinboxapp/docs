@@ -541,5 +541,50 @@
     "pergunta": "Consigo criar um bot que responde pelo Telegram pessoal do meu celular, sem cadastrar canal na Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como faço para as DMs do Instagram da minha loja caírem na Kinbox?",
+    "esperado": [
+      "docs/canais/instagram",
+      "llm/canais/instagram"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero atender pela Kinbox as mensagens que chegam na fanpage do Facebook, como conecto?",
+    "esperado": [
+      "docs/canais/facebook/conectar",
+      "llm/canais/facebook/conectar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Meu canal do Instagram ficou desconectado e a página aparece cinza quando tento conectar de novo, o que fazer?",
+    "esperado": [
+      "docs/canais/instagram/problemas-comuns",
+      "llm/faq/instagram-reconectar"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Tem como parar de abrir conversa toda vez que alguém responde meu story?",
+    "esperado": [
+      "docs/canais/instagram/configuracoes",
+      "llm/faq/instagram-stories-e-mencoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Estou no período de teste e não consigo adicionar o Instagram, é normal?",
+    "esperado": [
+      "llm/faq/instagram-teste-gratis",
+      "llm/canais/instagram"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para publicar posts e agendar stories do Instagram pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

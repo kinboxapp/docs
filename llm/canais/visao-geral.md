@@ -17,6 +17,7 @@ codigo:
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/routes/IntegrationsApiRoutes.js
+  - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
 ---
 
@@ -37,7 +38,9 @@ Criar um canal de WhatsApp (oficial ou por QR Code) passa pela checagem do plano
 - **Instagram**: tem limite próprio e não pode ser adicionado no período de teste grátis:
   - `"Você não pode adicionar canais de Instagram em plano trial"`
 - **SMS**: máximo de 1 por workspace (o cartão fica desativado quando o workspace já possui um).
-- **Telegram, E-mail, Widget, Facebook e Customizado**: não passam pela checagem de quantidade do plano. O cartão **Widget** não aparece para membros com a restrição `"Não pode gerenciar widget."`
+- **Facebook**: na assinatura paga atual, sem limite de páginas. No teste grátis, uma página do Facebook ativa por workspace; a segunda é recusada com `"Seu plano atual não permite adicionar o novo canal"`. Assinatura antiga paga: até 50 páginas. Veja [Conectar o Facebook Messenger](/docs/canais/facebook/conectar).
+- **Telegram e E-mail**: sem limite de quantidade na assinatura paga atual; no teste grátis, também podem ter limite de quantidade.
+- **Widget e Customizado**: não passam pela checagem de quantidade do plano. O cartão **Widget** não aparece para membros com a restrição `"Não pode gerenciar widget."`
 
 ## Todos os status da lista de canais
 

@@ -17,6 +17,7 @@ codigo:
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/routes/IntegrationsApiRoutes.js
+  - api-v0:server/modules/accessRestriction/**
 verificado_em: 2026-11-26
 ---
 
@@ -106,7 +107,7 @@ Confira o histórico nos dois canais antes de excluir o canal de origem.
 
 ## Limite de canais do plano
 
-O plano define quantos canais de WhatsApp você pode ter, somando os oficiais e os por QR Code. O Instagram tem limite próprio. Os outros tipos não têm limite de quantidade, menos o **SMS**: um por workspace. Para aumentar a quantidade, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
+O plano define quantos canais de WhatsApp você pode ter, somando os oficiais e os por QR Code. O Instagram tem limite próprio e não pode ser conectado no teste grátis. Nos planos pagos, os outros tipos não têm limite de quantidade, menos o **SMS**: um por workspace. No teste grátis, dá para conectar uma página do Facebook por workspace, e o Telegram e o e-mail também podem ter limite de quantidade. Para aumentar a quantidade, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
 
 ## Próximos passos
 
