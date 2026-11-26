@@ -1,0 +1,180 @@
+---
+title: Criar dashboards
+description: Como criar dashboards em Relatórios, adicionar e organizar cartões a partir dos modelos e atualizar os dados com snapshots.
+keywords: [dashboard, dashboards, painel, painel de indicadores, kpi, indicadores, cartões, relatório personalizado, carrossel, pipeline atendimento, funil de vendas, metas, snapshot, atualizar dados, obter dados atualizados, visível para]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/reports/CustomDashboard/EditDashboard.tsx
+  - web:src/pages/reports/CustomDashboard/AddTemplateDashboard.tsx
+  - web:src/pages/reports/CustomDashboard/EditDashboardCard.tsx
+  - web:src/pages/reports/CustomDashboard/DashboardSnapshotSelect.tsx
+  - web:src/pages/settings/roles/EditRole.tsx
+  - api:src/modules/dashboards/dashboards.controller.ts
+  - api:src/modules/dashboards/snapshots/snapshot.consumer.ts
+codigo:
+  - web:src/pages/reports/CustomDashboard/**
+  - web:src/models/dashboards.ts
+  - web:src/components-old/ui/PrivacyField/**
+  - web:src/hooks/usePrivacy.ts
+  - web:src/components/navigation/HomeRedirect.tsx
+  - api:src/modules/dashboards/**
+verificado_em: 2026-11-26
+---
+
+Um dashboard é um painel que reúne vários relatórios (cartões) em uma mesma tela. Os números vêm de um **snapshot**, uma foto dos dados calculada em um momento, e não de dados ao vivo. A exceção são os cartões **Tarefas**, que consultam os dados na hora.
+
+<Note>Para ver os dashboards, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê).</Note>
+
+- Com a restrição **Não pode criar ou excluir Dashboard** no papel, ao tentar criar, clonar, editar ou excluir um dashboard aparece um aviso de que você não tem permissão.
+- Cartões de negociações exigem também a permissão **Gerenciar negociações** (veja [Cartões que pedem outras permissões](#cartões-que-pedem-outras-permissões)).
+
+## Abrir os dashboards
+
+No menu lateral, vá em **Relatórios** → **Dashboards**.
+
+Por esse caminho, a Kinbox abre o último dashboard aberto naquele navegador ou, se não houver, o primeiro da lista que você pode ver.
+
+Se o papel tiver **Gerenciar relatórios**, quem configura o papel pode escolher **Dashboard** como primeira tela na seção **Home** e indicar o **Dashboard inicial**: ao entrar no workspace, a pessoa já cai nesse dashboard (veja a [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+
+Para trocar de dashboard, clique no **título** no topo da tela (dica **Mudar dashboard**). O menu traz uma busca pelos dashboards visíveis para você e a opção **Adicionar dashboard** no fim. A descrição do dashboard aparece logo abaixo do título.
+
+<Frame caption="Topo de um dashboard: seletor de dashboard no título, descrição, seletor de snapshot, botão Obter dados atualizados, datas do dashboard compartilhado e ícones Adicionar relatório, Organizar cards e ...">
+  <img src="/images/ajuda/relatorios/dashboard-topo.webp" alt="Barra superior de um dashboard com o título clicável e a descrição à esquerda, o seletor de snapshot, o botão Obter dados atualizados, o seletor de datas do dashboard compartilhado e, no canto superior direito, os ícones Adicionar relatório, Organizar cards e menu de opções" />
+</Frame>
+
+## Criar um dashboard
+
+Todo dashboard nasce em branco. Os modelos prontos da Kinbox são de **cartões**, escolhidos depois que o dashboard está criado.
+
+<Steps>
+  <Step title="Abra o formulário de criação">
+    Se ainda não houver nenhum dashboard no workspace, a tela já abre direto **Criar Dashboard**. Se já existirem dashboards, clique no título no topo da tela e escolha **Adicionar dashboard** para abrir o painel **Criar dashboard**.
+  </Step>
+  <Step title="Preencha os campos do dashboard">
+    Informe **Nome** (opcional; se ficar em branco, o título aparece como `Dashboard`), **Descrição** (opcional, exibida abaixo do título), **Período dos relatórios** e **Visível para**.
+
+    Escolha o comportamento de **Período dos relatórios**:
+
+    | Opção | Como funciona |
+    | --- | --- |
+    | **Individual** | Cada cartão usa o próprio campo **Período**. Se você deixar **Período dos relatórios** vazio, o dashboard funciona como **Individual**. |
+    | **Compartilhado** | O dashboard ganha um seletor de datas no topo para todos os cartões, e o campo **Período** de cada cartão mostra **Selecionado na dashboard**. |
+
+    Em **Visível para**, escolha quem encontra o dashboard na lista do título (**Mudar dashboard**): **Todos** (padrão: todos com acesso a relatórios), **Grupos** (abre o campo **Grupos**, onde você marca um ou mais grupos) ou **Apenas para mim** (apenas quem criou). O proprietário do workspace vê todos na lista.
+  </Step>
+  <Step title="Crie o dashboard">
+    Clique em **Criar**. O dashboard abre pronto para receber cartões.
+  </Step>
+</Steps>
+
+## Adicionar cartões
+
+Você pode adicionar até **100** cartões em um mesmo dashboard. Adicionar, editar, clonar ou excluir um cartão é salvo na hora; não existe um botão geral para salvar o dashboard. Só a organização da grade pede **Concluir** (veja [Organizar e editar cartões](#organizar-e-editar-cartões)).
+
+<Steps>
+  <Step title="Abra a galeria de modelos">
+    Clique no ícone **Adicionar relatório** no canto superior direito (ou na faixa **Adicionar relatório** no fim da grade) para abrir a janela **Escolha um template...**.
+
+    <Frame caption="Janela Escolha um template... com busca, filtro por categoria e modelos de cartão">
+      <img src="/images/ajuda/relatorios/dashboard-modelos.webp" alt="Modal Escolha um template com campo Pesquisar, categorias Todos, Vendas, Atendimento, Tarefas, Metas e Do seu jeito, e os primeiros modelos Personalizado, Carrossel, Conversão de leads e Funil de vendas" />
+    </Frame>
+  </Step>
+  <Step title="Escolha um modelo">
+    Use a busca ou filtre pelas categorias (**Todos**, **Vendas**, **Atendimento**, **Tarefas**, **Metas** e **Do seu jeito**) e clique no modelo desejado.
+  </Step>
+  <Step title="Configure e salve o cartão">
+    Alguns modelos entram direto no dashboard, sem abrir formulário: **Ciclo médio de vendas**, **Pipeline Atendimento**, **Melhor horário de resposta** e **Tarefas** (cria um cartão com 3 indicadores: **A fazer**, **Completas** e **Atrasadas**). Os demais abrem o painel do cartão para preencher os campos; clique em **Criar** para salvar.
+
+    O **Pipeline Atendimento** cria um cartão com 5 indicadores, um para cada estado: **Não atribuído**, **Em espera**, **Em atendimento**, **Pendente** e **Atribuído**, os mesmos do relatório [Visão geral](/docs/relatorios/visao-geral).
+
+    <Frame caption="Cartão Pipeline Atendimento em um dashboard">
+      <img src="/images/ajuda/relatorios/dashboard-pipeline.webp" alt="Cartão Pipeline Atendimento em um dashboard com os cinco indicadores Não atribuído, Em espera, Em atendimento, Pendente e Atribuído" />
+    </Frame>
+  </Step>
+  <Step title="Atualize os dados">
+    Os cartões que usam snapshot só ganham números no próximo snapshot: clique em **Obter dados atualizados** (veja [Atualizar os dados](#atualizar-os-dados-snapshots)). Os cartões de **Tarefas** consultam os dados na hora, mas podem ficar carregando enquanto o snapshot selecionado é processado.
+  </Step>
+</Steps>
+
+### Modelos de cartão disponíveis
+
+| Categoria | Modelos |
+| --- | --- |
+| **Vendas** | **Conversão de leads**, **Funil de vendas**, **Progressão do funil**, **Ciclo médio de vendas**, **Taxa de recompra** |
+| **Atendimento** | **Pipeline Atendimento**, **Melhor horário de resposta** |
+| **Tarefas** | **Tarefas**, **Calendário de tarefas**, **Feed operacional** |
+| **Metas** | **Necessidade de leads**, **Meta x Realizado** |
+| **Do seu jeito** | **Personalizado**, **Carrossel** |
+
+Cada modelo traz uma descrição curta na janela **Escolha um template...**.
+
+## Montar um relatório Personalizado
+
+Ao escolher **Personalizado**, o painel **Relatório** abre os campos do cartão. Em dashboards **Compartilhados**, o período é escolhido no seletor de datas do topo do dashboard: no cartão, o campo **Período** aparece desativado com **Selecionado na dashboard**.
+
+**Exemplo:** para ver o valor total das negociações de cada vendedor no mês:
+
+<Steps>
+  <Step title="Preencha o cartão">
+    Em **Nome**, escreva, por exemplo, `Valor por vendedor`. Em **Período**, escolha **Esse mês** (em dashboards **Compartilhados**, escolha o mês no seletor de datas do topo). Em **Fonte dos dados**, escolha **Negócios**; em **Por propriedade**, **Ganho/perdido em** (ou mantenha **Data da criação** para contar pela data em que a negociação foi criada). Em **Métrica**, marque **Por valor** com **Operação** em **Soma**, selecione **Membro** em **Agrupar por** e escolha **Barras** em **Visualização**.
+  </Step>
+  <Step title="Salve">
+    Clique em **Criar**. O cartão aparece na grade.
+  </Step>
+  <Step title="Atualize os dados">
+    Clique em **Obter dados atualizados** e confirme em **Atualizar dados** para o cartão ganhar números.
+  </Step>
+</Steps>
+
+## Agrupar gráficos em Carrossel
+
+O modelo **Carrossel** reúne dois ou mais relatórios compatíveis do dashboard (cartões de métrica única não entram) para alterná-los em um mesmo bloco.
+
+Defina **Nome do gráfico** (até 100 caracteres), marque pelo menos dois relatórios e, se quiser alternância automática, configure **Ciclo automático** escolhendo **Duração** e **Unidade** (**Segundos**, **Minutos** ou **Horas**). Depois clique em **Adicionar carrossel** (ou **Salvar alterações** ao editar).
+
+Se você excluir um carrossel, os relatórios que estavam dentro dele voltam para a grade do dashboard.
+
+## Organizar e editar cartões
+
+- **Editar, clonar ou excluir um cartão:** passe o mouse sobre o cartão para abrir o menu com **Editar**, **Clonar** (cria `<nome> (cópia)`) e **Excluir** (pede confirmação). Essas mudanças são salvas na hora. Clicar sobre o cartão abre o detalhamento dos dados; no **Pipeline Atendimento**, ao clicar em um número, abre a lista das sessões por trás dele.
+- **Mover e redimensionar:** clique no ícone **Organizar cards** no topo direito (ou arraste e redimensione diretamente um cartão) para abrir a barra **Organizando cards**. Arraste os cartões pela grade ou clique em **Auto-organizar** para redistribuí-los automaticamente. A nova organização só é salva quando você clica em **Concluir**. Em **Cancelar**, se houver mudanças não salvas, a tela pede confirmação entre **Sair sem salvar** e **Continuar editando**.
+
+## Atualizar os dados (snapshots)
+
+Os cartões do dashboard exibem um **snapshot** (uma foto dos dados de todos os cartões calculada em um momento) e não atualizam sozinhos. Gere um novo snapshot sempre que precisar de números atualizados. Os cartões **Tarefas** são a exceção: consultam os dados na hora.
+
+Sem nenhum snapshot gerado, os cartões ficam carregando. Em um dashboard **Compartilhado**, escolha primeiro o intervalo de datas no seletor do topo antes de atualizar: trocar as datas sem gerar um novo snapshot não altera os números exibidos.
+
+<Steps>
+  <Step title="Peça a atualização">
+    Clique no ícone **Obter dados atualizados**, ao lado do seletor de snapshot (também disponível no fim do menu do seletor). O dashboard precisa ter pelo menos um cartão.
+  </Step>
+  <Step title="Confirme a geração do snapshot">
+    Na janela **Atualizar dados**, clique em **Atualizar dados**. A tela já seleciona o novo snapshot enquanto ele processa.
+  </Step>
+  <Step title="Aguarde a notificação">
+    O cálculo roda em segundo plano e pode levar vários minutos, conforme o tamanho do dashboard. Enquanto processa, os cartões ficam carregando e o seletor mostra um ícone girando. Quando terminar, você recebe uma notificação no ícone de sino no topo da tela para abrir os novos dados. Os cartões **Tarefas** consultam os dados na hora.
+  </Step>
+</Steps>
+
+- **Ver snapshots anteriores:** ao abrir um dashboard, a Kinbox mostra sempre o snapshot mais recente. Para consultar fotos anteriores, abra o seletor abaixo do título; cada item exibe a data, a hora e quem gerou. Se os snapshots anteriores aparecerem desativados no seletor, peça ao administrador a permissão **Atribuir** no seu papel.
+- **Falha ou cartão vazio:** se o processamento falhar, os cartões exibem o aviso de erro e o botão **Tentar novamente**, que gera um novo snapshot. Quando um cartão não tem registros no snapshot selecionado, a tela mostra **Sem dados**.
+
+## Editar, clonar ou excluir o dashboard
+
+Clique no menu **...** no canto superior direito do dashboard:
+
+- **Editar:** abre o painel **Editar dashboard** para alterar **Nome**, **Descrição**, **Período dos relatórios** e **Visível para**, e clique em **Salvar**.
+- **Clonar:** após confirmar em **Clonar dashboard**, cria `Cópia de <nome>` e abre a cópia.
+- **Excluir dashboard:** remove o dashboard após confirmação.
+
+<Warning>Excluir um dashboard apaga o dashboard e todos os cartões dele, sem como desfazer pela tela. Se quiser guardar uma cópia antes, use **Clonar**.</Warning>
+
+## Cartões que pedem outras permissões
+
+- **Negociações:** cartões com fonte **Negócios** e os modelos **Conversão de leads**, **Funil de vendas**, **Progressão do funil**, **Ciclo médio de vendas**, **Taxa de recompra**, **Necessidade de leads** e **Meta x Realizado** exigem **Gerenciar negociações** (veja [Visão geral do CRM](/docs/crm/visao-geral) e [Criar funil de vendas](/docs/crm/criar-funil-de-vendas)). Sem essa permissão, o cartão mostra **Sem permissão**.
+- **Tarefas:** nos cartões **Tarefas** e **Calendário de tarefas**, quem não pode ver tarefas de outros membros vê apenas as próprias tarefas.
+- **Metas:** os modelos **Necessidade de leads** e **Meta x Realizado** exigem uma meta cadastrada no workspace.
+
+Para as permissões e a exportação do módulo, consulte [Exportar relatórios e quem pode ver cada um](/docs/relatorios/exportar-e-permissoes). Para acompanhar o atendimento sem depender de snapshot, veja o [Relatório Visão geral](/docs/relatorios/visao-geral) e o [Atendimento ao vivo](/docs/relatorios/ao-vivo).

@@ -123,7 +123,7 @@ O menu lateral **Tarefas** aparece para todos os membros.
 
 ### Relatórios
 
-O que cada relatório mostra com estas opções: [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
+O que cada relatório mostra com estas opções: [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam) e [Exportar relatórios e quem pode ver cada um](/docs/relatorios/exportar-e-permissoes).
 
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |

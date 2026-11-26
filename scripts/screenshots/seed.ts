@@ -896,6 +896,50 @@ async function garantirCenarios(api: Api, canal: string) {
   log(`cenários: criados [${criados.join(', ')}], atualizados [${atualizados.join(', ')}] (todos desligados)`)
 }
 
+/**
+ * Dashboard de exemplo "Atendimento da loja" (prints da seção dashboards), criado a partir do modelo
+ * Pipeline Atendimento: um cartão com os indicadores Não atribuído, Em espera, Em atendimento, Pendente e Atribuído.
+ * Sem snapshot os cartões ficam em esqueleto: se o dashboard ainda não tem nenhum, gere um pela tela
+ * (Obter dados atualizados → Atualizar dados) e espere concluir antes de capturar.
+ */
+const DASHBOARD_EXEMPLO = 'Atendimento da loja'
+// Os números do dashboard vêm do snapshot: a descrição não pode prometer "tempo real"
+const DASHBOARD_DESCRICAO = 'Sessões da loja por estado de atendimento.'
+async function garantirDashboard(api: Api) {
+  let existente = lista(await api.v3('GET', '/dashboards')).find((d) => d.name === DASHBOARD_EXEMPLO)
+  const reaproveitado = !!existente
+  if (!existente) {
+    existente = await api.v3('POST', '/dashboards', {
+      preset: 'pipeline_atendimento',
+      name: DASHBOARD_EXEMPLO,
+      description: DASHBOARD_DESCRICAO,
+    })
+  }
+  const id = existente?._id || existente?.id
+  if (existente?.description !== DASHBOARD_DESCRICAO) {
+    await api.v3('PATCH', `/dashboards/${id}`, { description: DASHBOARD_DESCRICAO })
+  }
+  // O preset da API cria 5 itens soltos na grade; pela tela (Adicionar relatório → Pipeline Atendimento) eles
+  // ficam num cartão só, com 5 indicadores. Agrupa do mesmo jeito (mesmos ids: o snapshot existente continua valendo).
+  const cartoes: Record<string, any> = existente?.dashboardCards || {}
+  const ids = Object.keys(cartoes).filter((c) => cartoes[c]?.template === 'pipeline_atendimento')
+  const principal = ids.includes('pipeline_atendimento_unassigned') ? 'pipeline_atendimento_unassigned' : ids[0]
+  const layout: any[] = existente?.layout || []
+  const agrupado = ids.every((c) => cartoes[c].metricContainerId === principal) && layout.length === 1 && layout[0]?.i === principal
+  if (principal && !agrupado) {
+    await api.v3('PATCH', `/dashboards/${id}`, {
+      dashboardCards: Object.fromEntries(Object.entries(cartoes).map(([c, v]) => [c, ids.includes(c) ? { ...v, metricContainerId: principal } : v])),
+      layout: [{ i: principal, x: 0, y: 0, w: 4, h: 2, minW: 4, minH: 2, maxW: 4, maxH: 2 }],
+    })
+    log(`dashboard: ${ids.length} indicadores do Pipeline Atendimento agrupados num cartão`)
+  }
+  const snapshots = lista(await api.v3('GET', `/dashboards/${id}/snapshots`))
+  if (!snapshots.length) {
+    log(`dashboard: "${DASHBOARD_EXEMPLO}" sem snapshot — gere um pela tela (Obter dados atualizados) antes de capturar`)
+  }
+  log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length} snapshot(s)`)
+}
+
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
 // (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
 const falhas: Record<string, string> = {}
@@ -913,6 +957,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['crm', () => garantirCrm(api, contatoIds)],
   ['salas', () => garantirSalas(api)],
   ['cenarios', () => garantirCenarios(api, canal)],
+  ['dashboard', () => garantirDashboard(api)],
 ]
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
 // `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.

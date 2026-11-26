@@ -74,7 +74,7 @@ Detalhes de referência da página [Ligar para um contato por telefone (VoIP)](/
 - A transcrição no VoIP é **manual**: abra a mensagem **Ligação de voz** na conversa e clique em **Transcrever** (disponível quando a ligação foi gravada).
 - A transcrição é feita em **português** e gera a **Transcrição** (falas separadas por pessoa com horário; clicar em uma fala leva o áudio até aquele ponto) e o **Resumo** com sentimento (**Positivo**, **Negativo** ou **Neutro**).
 - **Custo e saldo mínimo:** a transcrição gasta saldo da carteira por minuto de áudio arredondado para cima (lançamento `"Transcrição de chamada de voz"`) e o resumo também gasta saldo da carteira (lançamento `"Resumo da transcrição de chamada de voz"`). É necessário ter saldo **acima de R$ 0,20** na carteira para iniciar a transcrição.
-- As gravações podem ser baixadas em **Baixar áudio** (no painel **Ligação de voz**) ou em **Relatórios** → **Ligações**, para quem tem a permissão **Gerenciar relatórios** (**Baixar** / **Ver**, filtro `"Telefone (VoIP)"`), com o nome de arquivo `ligacao-voip-<id>.<extensão>`.
+- As gravações podem ser baixadas em **Baixar áudio** (no painel **Ligação de voz**) ou em **Relatórios** → **Ligações** ([Relatório de ligações](/docs/relatorios/ligacoes)), para quem tem a permissão **Gerenciar relatórios** (**Baixar** / **Ver**, filtro `"Telefone (VoIP)"`), com o nome de arquivo `ligacao-voip-<id>.<extensão>`.
 
 ## SIP reserva
 

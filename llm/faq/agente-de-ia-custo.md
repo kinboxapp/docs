@@ -28,7 +28,7 @@ O agente de IA de texto gasta saldo da carteira a cada resposta (inclusive no pr
 - **Saldo mínimo:** no agente de texto, quando o saldo da carteira chega a **R$ 1,00 ou menos**, o agente para de responder (no agente de voz sem franquia disponível, o mínimo é acima de **R$ 0,50**, com aviso 30 segundos antes de encerrar a ligação se o saldo acabar).
 - **Agente gerenciado pelo parceiro:** os gastos podem sair da carteira do parceiro em vez da carteira do workspace; com a carteira do parceiro em R$ 1,00 ou menos, o agente para mesmo com saldo no workspace.
 - **Testes:** o chat de teste por texto no editor também consome saldo como uma resposta real; já o **Testar por voz** do agente de voz não cobra.
-- **Cortesia e acompanhamento:** workspaces novos começam com um saldo de cortesia para testar. Você acompanha os débitos em **Relatórios** → **Saldo** (categoria **Agente de IA** para respostas e processamento de conhecimento, e categoria **Voz e áudio** para ligações atendidas por IA).
+- **Cortesia e acompanhamento:** workspaces novos começam com um saldo de cortesia para testar. Você acompanha os débitos em [Relatório de saldo](/docs/relatorios/saldo) (categoria **Agente de IA** para respostas e processamento de conhecimento, e categoria **Voz e áudio** para ligações atendidas por IA).
 
 Para colocar saldo, veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo). Veja mais em [Agentes de IA: visão geral](/docs/agente-de-ia/visao-geral) e [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos).
 

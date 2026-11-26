@@ -3063,3 +3063,110 @@
   arquivo: images/ajuda/automacao/automacao-acoes.webp
   paginas:
     - docs/automacao/configurando-automacoes
+
+# Seção dashboards (Relatórios › Dashboards e consumo)
+# Dashboard "Atendimento da loja" (seed, etapa dashboard): cartão do Pipeline Atendimento. Antes de capturar,
+# o dashboard precisa de um snapshot concluído (o seed avisa quando não há); o rótulo do snapshot fica mascarado.
+# Saldo e Ligações: a Loja Exemplo não tem consumo nem ligações; os prints mostram só o topo, os cartões e os menus.
+
+- id: dashboard-topo
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
+    - pausa: 1500
+  alvo:
+    - 'div.flex.justify-between:has([data-academia="dashboard-title"])'
+    - 'button:has-text(" by ")'
+    - '.ant-picker-range'
+  mascarar:
+    - 'button:has-text(" by ") span.font-medium'
+  arquivo: images/ajuda/relatorios/dashboard-topo.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: dashboard-pipeline
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
+    - esperar: '.react-grid-item >> text=Atribuído'
+    - pausa: 1500
+  alvo: '.react-grid-layout'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/dashboard-pipeline.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: dashboard-modelos
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"]'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - clicar: '.ant-dropdown-menu-item:has-text("Atendimento da loja")'
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text(" by ")'
+    - clicar: '[data-academia="dashboard-add-report"] button'
+    - esperar: 'text=Escolha um template...'
+    - pausa: 1200
+  alvo: '.ant-modal-content:has-text("Escolha um template...")'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/dashboard-modelos.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: saldo-exportar
+  url: /reports/balance-usage
+  passos:
+    - esperar: 'text=Total consumido'
+    - clicar: 'button.common_dropdown'
+    - esperar: '.ant-dropdown-menu >> text=Exportar serviços'
+    - pausa: 800
+  alvo:
+    - '.ant-picker-range'
+    - 'div.rounded-xl:has(> span:has-text("Total consumido"))'
+    - 'div.rounded-xl:has(> span:has-text("Maior gasto"))'
+    - '.ant-dropdown-menu'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/saldo-exportar.webp
+  paginas:
+    - docs/relatorios/saldo
+
+- id: ligacoes-filtro
+  url: /reports/voip
+  manterFoco: true
+  passos:
+    - esperar: 'text=Minutos diários'
+    - clicar: '.ant-select:has-text("Todas as ligações")'
+    - esperar: '.ant-select-dropdown >> text=Telefone (VoIP)'
+    - pausa: 800
+  alvo:
+    - '.g-card-box-space div:text-is("Ligações")'
+    - '.ant-picker-range'
+    - '.ant-select-dropdown:not(.ant-select-dropdown-hidden)'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/ligacoes-filtro.webp
+  paginas:
+    - docs/relatorios/ligacoes
+
+- id: permissoes-relatorios
+  url: /settings/roles/new
+  altura: 1600
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar permissão'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Home")'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Relatórios")'
+    - esperar: '.ant-drawer >> text=Restringir relatórios ao membro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer .ant-collapse-item:has(.ant-collapse-header:has-text("Relatórios"))'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/permissoes-relatorios.webp
+  paginas:
+    - docs/relatorios/exportar-e-permissoes
