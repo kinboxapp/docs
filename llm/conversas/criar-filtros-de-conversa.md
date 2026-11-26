@@ -46,7 +46,7 @@ O bloco **Estados** fica sempre visível no painel (o item **Estado** dentro do 
 | **Sem tags** | Conversas sem nenhuma tag aplicada. |
 | **Nunca respondidos** | Conversas sem nenhuma mensagem de membro, considerando apenas conversas criadas após `22/11/2022`. |
 | **Sessão sem resposta de operador** | Sessão atual ainda sem resposta de membro. |
-| **Janela de resposta expirado** | Conversas individuais do WhatsApp oficial com a janela de 24 h vencida ou sem data de janela (o contato nunca escreveu). |
+| **Janela de resposta expirado** | Conversas individuais do WhatsApp oficial com a janela de 24 h vencida ou sem data de janela (o contato nunca escreveu). Pode incluir grupos do WhatsApp por QR Code (Express), cujo identificador é `<id>-group` e não tem data de janela: combine com **Canais** para ver só o oficial. |
 | **Janela de resposta aberta** | Conversas individuais do WhatsApp oficial com a janela de 24 h aberta. |
 | **Sessão com erro de envio de mensagem** | Sessão marcada com erro de envio. |
 

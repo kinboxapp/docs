@@ -44,7 +44,7 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | --- | --- | --- |
 | **Global** | Todas as conversas | Ana vê tudo |
 | **Por Grupo ou sem Grupo** | As conversas dos grupos dele, as sem grupo e as atribuídas a ele | Ana vê as de Vendas, as sem grupo e as dela em qualquer grupo (inclusive as de Suporte atribuídas a ela); não vê as outras de Suporte |
-| **Por Grupo** | As conversas dos grupos dele e as atribuídas a ele, mesmo em outro grupo ou sem grupo | Ana vê as de Vendas e as atribuídas a ela (mesmo sem grupo ou em Suporte); não vê as sem grupo de outras pessoas nem as outras de Suporte |
+| **Por Grupo** | As conversas dos grupos dele e as atribuídas a ele, mesmo em outro grupo ou sem grupo | Ana vê as de Vendas e as atribuídas a ela (mesmo sem grupo ou em Suporte); não vê as outras sem grupo nem as outras de Suporte |
 | **Por Grupo Limitado** | As atribuídas a ele (mesmo fora dos grupos dele) e as sem responsável dos grupos dele | Ana vê as dela e as de Vendas sem responsável; não vê as de Vendas atribuídas a Bruno |
 | **Limitado** | As atribuídas a ele e as sem responsável, desde que sem grupo ou de um grupo dele | Ana vê as dela e as sem responsável de Vendas ou sem grupo; não vê nada de Suporte, nem as dela que estejam em Suporte |
 | **Restrito** | Só as atribuídas a ele | Ana vê só as dela |
