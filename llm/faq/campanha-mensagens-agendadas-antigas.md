@@ -23,7 +23,7 @@ Onde ficaram as mensagens agendadas "Individual" e "Por API"?
 
 As abas **Individual** e **Por API** só existem no layout antigo da tela de campanhas (**CRM** → **Campanhas**) e não aparecem no item **Campanhas** do layout atual.
 
-O layout antigo é exibido apenas em telas de celular (menos de 768 px) e em algumas versões de marca branca; nele, acessar **Individual** e **Por API** exige as permissões **Campanhas** e **Agendamentos** juntas.
+O layout antigo aparece, por exemplo, em telas de celular (menos de 768 px) e em algumas versões de marca branca; nele, acessar **Individual** e **Por API** exige as permissões **Campanhas** e **Agendamentos** juntas.
 
 No layout atual, os agendamentos de um contato ficam na própria conversa, pelo selo **Mensagem Agendada** ou em **Ver Informações** → **Agendamentos**. Veja como usar em [Agendar uma mensagem](/docs/conversas/agendar-mensagem).
 

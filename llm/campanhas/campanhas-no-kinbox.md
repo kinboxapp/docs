@@ -1,5 +1,5 @@
 ---
-title: "Campanhas: uma por canal, versões de canal, erros ao criar e ao enviar"
+title: "Campanhas: uma por canal, tipos de conexão, erros ao criar e ao enviar"
 description: Regras de borda das campanhas da Kinbox, como fila por canal, distribuição entre canais, normalização de números, variáveis, status dos contatos da lista, contagem de respostas e mensagens de erro.
 keywords: [campanha regras, fila de campanha, aguardando outra campanha, misturar canais, normalizar números, nono dígito, ddi 55, número internacional campanha, variável vazia, first_name campanha, status do lead, formatação incorreta, duplicado, respondido 96 horas, erro campanha, sem créditos disponíveis, canal desconectado campanha express]
 publico: llm
@@ -36,7 +36,8 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 
 ## Fila por canal e distribuição entre canais
 
-- **Uma campanha por canal principal:** a fila considera o **primeiro canal** escolhido em **Canais de disparo**. Se outra campanha já está em **Enviando mensagens** nesse canal principal, a nova fica em **Aguardando outra campanha** e inicia automaticamente quando a anterior termina, é excluída ou entra em **Aguardando horário**.
+- **Uma campanha por canal principal:** a fila considera o **primeiro canal** escolhido em **Canais de disparo**. Só barra quando a outra campanha está em **Enviando mensagens** nesse canal principal: aí a nova fica em **Aguardando outra campanha** e inicia automaticamente quando a anterior termina, é excluída ou entra em **Aguardando horário**.
+- **Outra campanha em pausa entre lotes:** se a outra está em **Aguardando lote** (ou **Aguardando horário**), a nova começa a enviar; quando a pausa da primeira acaba, é ela que passa para **Aguardando outra campanha** até a nova terminar.
 - **Canais principais diferentes:** duas campanhas cujo primeiro canal é diferente podem rodar ao mesmo tempo, mesmo que compartilhem canais secundários.
 - **Pausar e retomar na fila:** ao **Pausar** uma campanha que tem outra esperando o mesmo canal, a Kinbox exibe a janela **Iniciar campanha** perguntando se deseja iniciar a campanha da fila (botão **Sim**). Clicar em **Resumir** na campanha em **Aguardando outra campanha** não fura a fila enquanto a outra continuar ativa.
 - **WhatsApp oficial e SMS:** apenas um canal por campanha.
@@ -59,6 +60,7 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
   - Números iniciados com `+` não são alterados. Números de fora do Brasil precisam sempre começar com `+`; sem `+`, são tratados como brasileiros e ficam incorretos.
   - Número sem `+` com menos de 12 dígitos que não começa com `55` ganha o DDI `55` (exemplo: `11900000001` → `5511900000001`).
   - Número sem `+` com menos de 13 dígitos ganha o dígito `9` após o DDD (vale tanto para celular brasileiro de 12 dígitos com `55` + DDD sem o nono dígito quanto para número fixo brasileiro de 10 dígitos com DDD + 8 dígitos). Para disparar para números fixos brasileiros, desmarque a caixa de normalização e informe o número completo com DDI e DDD.
+  - Números do DDD 55 (Rio Grande do Sul) sem DDI ficam errados com a caixa marcada, porque o DDD é confundido com o DDI: escreva-os com o DDI (`+55 55 9...`).
   - Com a caixa desmarcada, a Kinbox mantém apenas os dígitos informados (ou o número com `+`), sem acrescentar DDI nem nono dígito.
 
 ## Fonte Contatos e ordem das colunas
@@ -83,10 +85,10 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 
 ## Regras específicas do SMS
 
-- Nos canais de SMS da Kinbox, cada SMS enviado desconta **1 crédito de SMS** no momento do envio.
+- Nos canais de SMS da Kinbox, cada SMS que a campanha tenta enviar desconta **1 crédito de SMS** antes do envio, mesmo se o envio falhar depois. Créditos: [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo) (permissão **Assinatura**).
 - Contador de acentos: letras fora do alfabeto básico do SMS (como `ã`, `õ`, `ç`, `á`, `í`, `ó`, `ú`, `ê`) fazem o contador ao lado de **Mensagem** trocar o limite exibido de 160 para 70 caracteres (67 por parte em textos maiores) e ficar vermelho ao passar disso. A Kinbox só bloqueia a criação acima de 160 caracteres.
 - Se a mensagem ultrapassar 160 caracteres após a substituição das variáveis, a Kinbox corta o texto em **160 caracteres**.
-- Se os créditos acabarem durante o envio, as mensagens seguintes ficam em **Falha** com `"Sem créditos disponíveis"` em **Detalhes** e a campanha continua até o fim da lista sem pausar; falhas não são reenviadas.
+- Nos canais de SMS da Kinbox, se os créditos acabarem durante o envio, as mensagens seguintes ficam em **Falha** com `"Sem créditos disponíveis"` em **Detalhes** e a campanha continua até o fim da lista sem pausar; falhas não são reenviadas.
 - Outros erros por contato no SMS: `"Mensagem inválida, número inválido ou você não tem permissão para enviar SMS para este número"` e `"Você atingiu o limite de envio de SMS por minuto"`.
 
 ## Status da campanha e dos contatos da lista
@@ -121,6 +123,10 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 | **Duplicado** | Número repetido na lista, escrito da mesma forma (recebe uma vez só). |
 | **Formatação incorreta** | Número inválido na validação da lista. |
 
+## Campanhas grandes no painel
+
+- O painel da campanha carrega os contatos de até **500 lotes**. Com lotes de 100 contatos (**Moderado** no WhatsApp), isso dá até 50.000 contatos; acima disso, as listas, o gráfico e as contagens calculadas a partir delas podem ficar parciais.
+
 ## Regra do Respondido
 
 - **Respondido** conta apenas respostas que abrem uma **sessão nova** pelo **canal principal** da campanha em até **96 horas** após o início do lote daquele contato.
@@ -134,20 +140,20 @@ Referência complementar de [Criar uma campanha](/docs/campanhas/campanhas-no-ki
 | --- | --- |
 | `"O canal de disparo escolhido está desconectado."` | Ao criar com canal principal de WhatsApp (QR Code ou oficial) fora do status **Conectado**. |
 | `"Necessário recriar esse canal para usar as campanhas."` | Ao criar com canal de WhatsApp por QR Code na conexão **Clássica** criado ou recriado até 27/01/2024. |
-| `"Você não tem permissão para criar campanhas de WhatsApp."` | Ao criar campanha de WhatsApp com a restrição **Proibir criar campanha de WhatsApp** ativa no papel (não se aplica ao proprietário). |
+| `"Você não tem permissão para criar campanhas de WhatsApp."` (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)) | Ao criar campanha de WhatsApp com a restrição **Proibir criar campanha de WhatsApp** ativa no papel (não se aplica ao proprietário). |
 | `"Mensagem de SMS não pode conter mais de 160 caracteres."` | Ao criar campanha de SMS com texto acima de 160 caracteres. |
 | `"Mensagem não pode conter emojis."` | Ao criar campanha de SMS contendo emojis. |
 | `"Necessário escolher um anexo"` | Ao criar campanha de WhatsApp oficial com template de mídia no cabeçalho sem arquivo selecionado. |
-| `"Sem saldo de créditos SMS suficiente."` | Ao criar campanha de SMS quando o workspace não tem nenhum crédito de SMS disponível. |
+| `"Sem saldo de créditos SMS suficiente."` | Ao criar campanha num canal de SMS da Kinbox quando o workspace não tem nenhum crédito de SMS disponível. |
 | `"Canal de disparo não encontrado."` | Ao criar campanha de SMS quando o canal escolhido não é encontrado. |
 | `"Não é possível misturar canais de versões diferentes na mesma campanha."` | Ao criar campanha de WhatsApp por QR Code misturando canais **Express** e **Clássica** (por exemplo, pela API). |
 | `"Campanha não encontrada."` | Ao tentar excluir uma campanha que não existe. |
 | `"Campanha não está pausada ou esperando outra campanha."` | Ao tentar usar **Resumir** em campanha fora dos status **Pausado** e **Aguardando outra campanha**. |
-| `"Sem créditos disponíveis"` | Em **Detalhes** de um contato (só no SMS), quando os créditos acabam durante o disparo. |
+| `"Sem créditos disponíveis"` | Em **Detalhes** de um contato (só nos canais de SMS da Kinbox), quando os créditos acabam durante o disparo. |
 | `"Mensagem inválida, número inválido ou você não tem permissão para enviar SMS para este número"` | Em **Detalhes** de um contato (só no SMS). |
 | `"Você atingiu o limite de envio de SMS por minuto"` | Em **Detalhes** de um contato (só no SMS). |
 | `"{código} - {mensagem da Meta}"` ou `"Falha interna ao enviar a mensagem"` | Em **Detalhes** de um contato (só no WhatsApp oficial), quando a Meta recusa o envio ou há falha interna. Veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns). |
 
 ## API pública
 
-Os endpoints em `/v1/campaigns` permitem criar, listar, pausar, retomar, excluir e consultar leads de campanhas pela API. Veja [Criar uma campanha (API)](/api-reference/campaigns/create-a-campaign).
+Os endpoints em `/v1/campaigns` permitem criar, listar, atualizar, pausar, retomar, excluir e consultar leads de campanhas pela API. Veja [Criar uma campanha (API)](/api-reference/campaigns/create-a-campaign) e [Atualizar uma campanha (API)](/api-reference/campaigns/update-a-campaign). A tela de **Campanhas** não tem edição: a atualização só existe pela API.

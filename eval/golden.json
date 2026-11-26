@@ -490,5 +490,12 @@
     "pergunta": "Dá para programar posts no feed do Instagram pela Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quanto tempo demora para uma campanha terminar de enviar tudo?",
+    "esperado": [
+      "docs/campanhas/velocidade-e-horario"
+    ],
+    "tipo": "referencia"
   }
 ]

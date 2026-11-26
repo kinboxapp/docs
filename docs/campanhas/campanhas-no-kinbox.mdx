@@ -29,7 +29,7 @@ verificado_em: 2026-11-26
 Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização por variáveis, para uma lista de contatos por WhatsApp (QR Code ou oficial) ou SMS.
 
 <Note>
-  Quem pode: membros com a permissão **Campanhas**. Com a restrição **Proibir criar campanha de WhatsApp**, é possível criar apenas campanhas de SMS (essa restrição não vale para o proprietário do workspace).
+  Quem pode: membros com a permissão **Campanhas**. Com a restrição **Proibir criar campanha de WhatsApp**, é possível criar apenas campanhas de SMS (essa restrição não vale para o proprietário do workspace). Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 </Note>
 
 ## Antes de começar
@@ -76,7 +76,9 @@ Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização p
 
     - **Contatos**: clique em **Buscar sessões** para abrir **Selecionar Sessões**, filtre em **Filtrar** (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)) e clique em **Selecionar**. A Kinbox junta todas as sessões do filtro, tira contatos repetidos (cada contato entra uma vez) e deixa de fora contatos sem celular válido.
 
-    A caixa **Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável** vem marcada: ela completa números brasileiros sem DDI ou sem o nono dígito, e não mexe em números que começam com `+`. Números de outro país precisam começar com `+`. Desmarque a caixa se a lista já estiver completa ou tiver números fixos. A Kinbox tira números repetidos escritos da mesma forma; o mesmo número escrito de formas diferentes (por exemplo, com e sem `+`) pode receber a campanha mais de uma vez, por isso padronize a lista antes de enviar.
+    A caixa **Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável** vem marcada: ela completa números brasileiros sem DDI ou sem o nono dígito, e não mexe em números que começam com `+`. Números de outro país precisam começar com `+`. Desmarque a caixa se a lista já estiver completa ou tiver números fixos.
+
+    <Tip>A Kinbox tira números repetidos escritos da mesma forma. O mesmo número escrito de formas diferentes (por exemplo, com e sem `+`) pode receber a campanha mais de uma vez: padronize a coluna de números antes de enviar.</Tip>
 
     <Frame caption="Seção Público alvo com Upload selecionado e opção de normalização marcada">
       <img src="/images/ajuda/campanhas/publico-alvo.webp" alt="Seção Público alvo mostrando Fonte dos leads com Upload selecionado e Contatos ao lado, área Arraste e solte seu arquivo .csv aqui ou browse e a caixa Normalizar números do Brasil adicionando o DDI 55 automaticamente quando aplicável marcada" />
@@ -92,7 +94,7 @@ Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização p
       - **Emojis:** disponível só no WhatsApp por QR Code (não existe no SMS).
       - **Anexar:** disponível só no WhatsApp por QR Code (permite enviar um anexo com a mensagem).
       - **Chaves reservadas** (ícone `{ }`): lista **Coluna 1** a **Coluna 5** (`{{1}}` a `{{5}}`). Você também pode digitar números acima de 5 à mão (como `{{6}}`).
-      - **Frase aleatória** (ícone de dado): abre **Adicionar frase aleatória**. Cadastre variações em **Frase** e clique em **Adicionar** para inserir opções no formato `{{opção 1|opção 2}}`. A Kinbox sorteia uma das opções a cada envio (a mesma opção pode sair para mais de um contato).
+      - **Frase aleatória** (ícone de dado): abre **Adicionar frase aleatória**. Digite uma variação em cada campo (o botão **Frase** acrescenta outro campo) e clique em **Adicionar** para inserir as opções no formato `{{opção 1|opção 2}}`. A Kinbox sorteia uma das opções a cada envio (a mesma opção pode sair para mais de um contato).
 
     - **WhatsApp oficial:** em vez do campo de texto livre, aparece o bloco de template (**Modelo de mensagem**, variáveis, **Anexo** e **Pré-visualização**). Escolha um template aprovado pela Meta, preencha as variáveis usando as colunas da lista (`{{2}}`, `{{3}}`...) e, se o template tiver mídia no cabeçalho, selecione o arquivo. Veja os detalhes em [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template).
 
@@ -124,7 +126,7 @@ Crie uma campanha na Kinbox para enviar a mesma mensagem, com personalização p
 
 ## Depois de criar
 
-- **Sem edição:** depois de criada, a campanha não pode ser editada. Para alterar qualquer informação, exclua a campanha e crie outra.
+- **Sem edição na tela:** na tela de **Campanhas**, não dá para editar uma campanha depois de criar. Para alterar qualquer informação, exclua a campanha e crie outra.
 - **Acompanhamento:** veja entregas, leituras, falhas, respostas e ações de pausar, retomar ou excluir em [Acompanhar os resultados da campanha](/docs/campanhas/acompanhar-resultados).
 - **Fila por canal:** só uma campanha envia por vez em cada canal principal; se outra já estiver rodando nele, a nova fica em **Aguardando outra campanha**.
 

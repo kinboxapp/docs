@@ -24,6 +24,8 @@ Apenas uma campanha pode ser enviada por vez em cada canal principal (o primeiro
 
 Enquanto outra campanha está em **Enviando mensagens** no mesmo canal principal, a nova fica com o status **Aguardando outra campanha** ("Somente uma campanha pode ser executada por vez no mesmo canal"). Ela começa automaticamente assim que a campanha anterior termina, é excluída ou entra em **Aguardando horário**.
 
+A fila só barra quando a outra campanha está em **Enviando mensagens**. Se ela estiver em **Aguardando lote** (pausa entre lotes) ou **Aguardando horário**, a nova começa a enviar, e a primeira é que passa a **Aguardando outra campanha** quando a pausa acaba.
+
 Se você clicar em **Pausar** na campanha em andamento, a Kinbox pergunta na janela **Iniciar campanha** se deseja iniciar a campanha que estava esperando. Clicar em **Resumir** na campanha em espera não a coloca na frente enquanto a outra continuar ativa no mesmo canal.
 
 Veja mais em [Velocidade de envio e horário comercial](/docs/campanhas/velocidade-e-horario) e [Minha campanha não envia ou parou](/docs/campanhas/problemas-comuns).

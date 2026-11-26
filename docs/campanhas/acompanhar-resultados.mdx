@@ -70,16 +70,18 @@ Clique na linha da campanha (ou no menu **...** → **Visualizar**) para abrir o
 
 Abaixo dos cartões, o gráfico mostra um ponto por mensagem no horário do envio, colorido pelo status; passe o mouse sobre um ponto para ver **Data**, **Envios restantes**, **Status** e **Número**. Logo abaixo fica a barra de progresso.
 
-Na seção **Detalhes**, você consulta a prévia da mensagem (preenchida com a primeira linha do arquivo), **Canais** (principal e adicionais), **Início**, **Previsão de término**, **Previsão de duração**, **Autor**, **Horário comercial**, **Lote**, **Tempo entre lotes** e **Tempo entre mensagens**.
+Na seção **Detalhes**, você consulta uma prévia da mensagem, **Canais** (principal e adicionais), **Início**, **Previsão de término**, **Previsão de duração**, **Autor**, **Horário comercial**, **Lote**, **Tempo entre lotes** e **Tempo entre mensagens**.
 
 ## Ver quem recebeu, falhou ou respondeu
 
-- **Lista completa:** clique no cartão **Enviados** para abrir todos os contatos da lista, com o status de cada um.
+- **Lista sem filtro de status:** clique no cartão **Enviados** para abrir os contatos da lista com o status de cada um.
 - **Listas filtradas:** clique em **Recebidos** (recebidos, lidos e respondidos), **Lidos** (lidos e respondidos) ou **Falhas** para abrir só esses contatos.
 - **Colunas das listas:** busca e as colunas **Número**, **Status**, **Data de envio**, **Detalhes** (com o motivo da falha), **Canal** (o canal que enviou) e as colunas do arquivo.
   - As colunas extras do arquivo aparecem a partir da segunda coluna: **Coluna 1** na tela corresponde à segunda coluna da sua planilha (porque a primeira está em **Número**).
   - Clique em **Exportar** para baixar a lista em CSV ou planilha do Excel.
 - **Respostas:** clicar no cartão **Respondido** abre as **sessões** de conversa ligadas à campanha (em vez da lista de contatos). A Kinbox contabiliza em **Respondido** as respostas que abrem uma **sessão nova** pelo **canal principal** da campanha em até **96 horas** após o início do lote daquele contato.
+
+<Note>Em campanhas muito grandes, o painel pode mostrar resultados parciais: as listas e o gráfico carregam só parte dos contatos.</Note>
 
 Se o número de falhas estiver alto ou **Respondido** estiver abaixo do esperado, consulte [Minha campanha não envia ou parou](/docs/campanhas/problemas-comuns).
 
@@ -92,7 +94,7 @@ Quando um contato responde dentro da regra de rastreamento, a conversa recebe o 
 Abra o menu **...** de uma linha na lista (ou o menu no topo do painel da campanha) para controlar a execução:
 
 <Frame caption="Menu de ações na lista de campanhas">
-  <img src="/images/ajuda/campanhas/menu-de-acoes.webp" alt="Menu de ações de uma campanha mostrando Visualizar, Resumir e Pausar desativados e Excluir" />
+  <img src="/images/ajuda/campanhas/menu-de-acoes.webp" alt="Menu de ações de uma campanha concluída com Visualizar e Excluir disponíveis e Resumir e Pausar desativados" />
 </Frame>
 
 - **Visualizar:** abre o painel de resultados (no menu da lista).
@@ -102,5 +104,5 @@ Abra o menu **...** de uma linha na lista (ou o menu no topo do painel da campan
 - **Excluir:** disponível no menu da lista. Excluir também libera a próxima campanha que estava aguardando o mesmo canal.
 
 <Warning>
-  Ao clicar em **Excluir**, a Kinbox pede confirmação: "Ao excluir esta campanha, os envios pendentes serão cancelados imediatamente. Essa operação não poderá ser desfeita." Não é possível editar ou duplicar uma campanha depois de criada; para mudar algo, exclua e crie outra em [Criar uma campanha](/docs/campanhas/campanhas-no-kinbox).
+  Ao clicar em **Excluir**, a Kinbox pede confirmação: "Ao excluir esta campanha, os envios pendentes serão cancelados imediatamente. Essa operação não poderá ser desfeita." Na tela de **Campanhas**, não dá para editar nem duplicar uma campanha depois de criar; para mudar algo, exclua e crie outra em [Criar uma campanha](/docs/campanhas/campanhas-no-kinbox).
 </Warning>
