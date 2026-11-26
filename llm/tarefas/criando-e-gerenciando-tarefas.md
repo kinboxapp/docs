@@ -45,7 +45,7 @@ Os recursos ligados ao **Kinbox Agenda** (tipo **Agendamento**, agendamentos na 
 - **Prioridades:** **Urgente**, **Alta**, **Média**, **Baixa**, **Sem prioridade** (padrão; o botão de prioridade exibe **Prioridade** quando está sem valor).
 - **Tipos:** **Ligar**, **Reunião**, **Agendamento**, **Tarefa** (padrão), **Deadline**, **Almoço**, **E-mail**, **Iniciar bot**.
   - **E-mail** apenas registra o tipo da tarefa e não envia e-mail.
-  - **Agendamento** aparece apenas numa tarefa nova e com a permissão **Gerenciar agendamentos**; selecioná-lo troca a janela para o formulário de agendamento do **Kinbox Agenda**.
+  - **Agendamento** aparece apenas numa tarefa nova e com a permissão **Gerenciar agendamentos**; selecioná-lo troca a janela para o formulário de agendamento do **Kinbox Agenda** ([Criar, reagendar e cancelar agendamentos](/docs/agenda/agendamentos)).
   - **Iniciar bot** aparece apenas quando a tarefa está vinculada a uma conversa.
 
 ## Situações da lista
