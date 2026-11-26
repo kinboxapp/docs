@@ -50,8 +50,8 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | **Restrito** | Só as atribuídas a ele | Ana vê só as dela |
 
 - Seguir uma conversa **não** a traz para a lista: as descrições da tela de **Limitado** e **Restrito** falam em "seguindo", mas o que vale é a tabela acima. A visão **Seguindo** mostra só as conversas seguidas que o membro já vê pelo acesso dele.
-- Abrir uma conversa (por link, notificação ou pesquisa) é outra regra: abre tudo o que o acesso do papel já mostra na lista e, além disso, as conversas que o membro segue, as compartilhadas com ele e as atribuídas a ele em qualquer grupo. O proprietário e quem tem **Global** abrem tudo. Fora disso, a conversa fecha com "Você não tem permissão para ver essa conversa".
-- Proprietário do workspace: tem todas as permissões e não é afetado pelas restrições da seção.
+- Abrir uma conversa (por link, notificação ou pesquisa): o membro abre as conversas que o acesso do papel mostra na lista, as que ele segue, as compartilhadas com ele e as atribuídas a ele em qualquer grupo. O proprietário e quem tem **Global** abrem tudo. Fora disso, a conversa fecha com "Você não tem permissão para ver essa conversa".
+- Proprietário do workspace: tem todas as permissões e não é afetado pelas restrições da seção, com duas exceções que valem também para ele quando o papel dele tem a opção: **Não mostrar sugestões de respostas** e **Não marca como lido ao abrir uma conversa** (veja a [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 - Página de conceito sobre papéis: [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
 
 ## Permissões da seção Conversas
@@ -122,7 +122,7 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 
 - **Responder** (citar uma mensagem): só no WhatsApp e no Instagram, em mensagens que passaram pelo canal (têm ID do canal). Em canais de Instagram ligados por uma conexão antiga, feita por integração de terceiro, o item não aparece.
 - Anexos: cada arquivo vai como uma mensagem; até 100 MB por arquivo e 20 por vez; áudio gravado até 25 MB.
-- Botão **Áudio** do editor (gravar): só no WhatsApp, Instagram, Facebook, Widget e Telegram; não aparece no SMS nem no e-mail.
+- Botão **Áudio** do editor (gravar): só no WhatsApp, Instagram, Facebook, Widget e Telegram; não aparece no SMS, no e-mail nem no canal customizado.
 
 - **Excluir mensagem**:
   - WhatsApp por QR Code: o item **Excluir** aparece no menu da mensagem para mensagens enviadas por membro ou bot; exige permissão (**Deletar própria mensagem** ou **Deletar mensagens de outros membros**) e que a mensagem tenha chegado ao canal (possua ID externo).
@@ -151,7 +151,7 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 
 ## Matriz de diagnóstico: não consigo responder ou ver uma conversa
 
-O proprietário do workspace não sofre restrições de papel.
+O proprietário do workspace não sofre restrições de papel, com duas exceções que valem também para ele quando o papel dele tem a opção: **Não mostrar sugestões de respostas** e **Não marca como lido ao abrir uma conversa** (veja a [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 
 | Se o usuário vê | Causa | O que orientar |
 | --- | --- | --- |

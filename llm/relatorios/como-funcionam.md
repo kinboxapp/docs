@@ -32,7 +32,7 @@ Referência técnica complementar de [Como os relatórios contam sessões e temp
 ## Acesso, permissões e restrições
 
 - **Menu:** **Relatórios** no menu lateral. Quando o membro define **Dashboard** como **Home**, o item **Relatórios** sobe para o topo do menu lateral.
-- **Permissão base:** **Gerenciar relatórios** (seção **Relatórios** do papel). Sem ela, o item **Relatórios** e todos os relatórios somem do menu. O proprietário do workspace sempre tem acesso e não sofre restrições. Nos papéis padrão, **Administrador** e **Supervisor** vêm com **Gerenciar relatórios**; **Atendente** não.
+- **Permissão base:** **Gerenciar relatórios** (seção **Relatórios** do papel). Sem ela, o item **Relatórios** e todos os relatórios somem do menu. O proprietário do workspace sempre tem acesso e não sofre restrições. Nos papéis prontos, **Administrador** e **Supervisor** vêm com **Gerenciar relatórios**; **Atendente** não.
 - **Vendas ao vivo:** exige **Gerenciar relatórios** e **Gerenciar negociações**.
 - **Restrições da seção Relatórios do papel** (lista completa em [Referência de permissões](/docs/administracao/referencia-de-permissoes)):
   - **Restringir relatórios ao membro:** limita os relatórios às sessões em que o membro é o responsável atual (na **Avaliação**, às avaliações registradas para ele; na **Presença**, só a presença dele) e limita os filtros ao próprio membro.

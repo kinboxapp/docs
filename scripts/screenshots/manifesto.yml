@@ -1214,21 +1214,6 @@
   paginas:
     - docs/relatorios/ao-vivo
 
-- id: relatorios-avaliacao-configurar
-  url: /reports/rating
-  passos:
-    - esperar: 'button:has-text("Configurar")'
-    - clicar: 'button:has-text("Configurar")'
-    - esperar: '.ant-drawer-body >> text=Texto de agradecimento'
-    - pausa: 1000
-  alvo:
-    - '.ant-drawer-header'
-    - '.ant-drawer-content button:has-text("Salvar")'
-  mascarar: []
-  arquivo: images/ajuda/relatorios/configurar-avaliacao.webp
-  paginas:
-    - docs/relatorios/avaliacao
-
 # Seção conta (Sua conta e app › Sua conta)
 #
 # A conta de teste é a dona do workspace de documentação: nome, e-mail, celular e foto dela aparecem no perfil e no
@@ -1502,7 +1487,7 @@
     - '.ant-form-item:has(input[disabled]) input'
   arquivo: images/ajuda/desenvolvedores/canal-customizado.webp
   paginas:
-    - docs/desenvolvedor/criando-canal-customizado
+    - docs/canais/canal-customizado
 
 # Link de conversa em um clique com um número que não tem conversa: abre Enviar mensagem com nome, número e texto do link.
 - id: dev-link-enviar-mensagem

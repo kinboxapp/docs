@@ -38,13 +38,13 @@ O consumo do saldo se divide nestas categorias:
 - **Análises** (recursos do **Copiloto**, quando ligados): **Análise de sentimento**, **Lead score**, **Classificação de intenção**, **Cliente preso no bot**, **Sugestão de retorno**, **Aviso ao resolver** e **Não reabrir por agradecimento**.
 - **Voz e áudio**: transcrição de áudios; nas ligações do WhatsApp, o atendimento por IA fora da franquia, a transcrição pedida pelo botão **Transcrever** e o resumo da transcrição (a gravação e a transcrição automática estão incluídas no plano de ligações; ligações não atendidas não cobram); no VoIP, a transcrição e o resumo das ligações.
 - **Outros**: ligações por telefone (VoIP), minutos excedentes do plano de ligações do WhatsApp e geração de FAQ a partir das conversas.
-- **Mensagens**: o relatório **Saldo** tem essa sexta categoria, para mensagens cobradas por envio. Hoje, as mensagens de template do WhatsApp oficial não descontam da carteira, então ela costuma ficar vazia.
+- **Mensagens**: a sexta categoria do relatório **Saldo**, para mensagens cobradas por envio. Hoje, as mensagens de template do WhatsApp oficial não descontam da carteira, então ela costuma ficar vazia.
 
-**O que não gasta saldo**: envios de SMS (usam **Créditos de SMS**), templates do WhatsApp oficial (não descontam da carteira), bots sem o bloco **Agente de IA**, **Automações**, **Cenários** e **Atribuição automática**.
+**O que não gasta saldo**: envios de SMS (usam **Créditos de SMS**), templates do WhatsApp oficial (não descontam da carteira), bots sem recursos de IA (bloco **Agente de IA**, **Usar prompt**, **Transcrever áudio** e **Assistente Kin**), **Automações**, **Cenários** e **Atribuição automática**. Nos cenários, a exceção é o botão **Corrigir e formatar com IA**, no corpo da **Requisição HTTP**, que gasta saldo.
 
 Quando o saldo fica muito baixo, perto de zero, o agente de IA para de responder (no teste do agente aparece **Saldo Insuficiente** e "O agente não respondeu porque o saldo acabou. Faça uma recarga para continuar."). O copiloto passa a mostrar **Seus créditos acabaram** (nas telas do copiloto, "créditos" é o saldo da carteira) e as ligações por telefone são encerradas se o saldo acabar. Em agentes gerenciados por um parceiro, o consumo pode sair da carteira do parceiro em vez da carteira do workspace.
 
-Para acompanhar os gastos, consulte **Relatórios** → **Saldo** (por categoria) e o **Extrato do saldo**. A recarga é feita por **Pix** em **Configurações** → **Assinatura** → **Carteira** → **Adicionar saldo** (**Assinatura** só aparece para quem tem acesso ao financeiro).
+Para acompanhar os gastos, consulte **Relatórios** → **Saldo** (por categoria) e o **Extrato do saldo**. A recarga é feita por **Pix** em **Configurações** → **Assinatura** (seção **Carteira**) → **Adicionar saldo** (**Assinatura** só aparece para quem tem acesso ao financeiro).
 
 Veja mais detalhes em [Saldo da carteira e créditos: o que consome](/docs/conceitos/saldo-e-creditos).
 

@@ -204,7 +204,7 @@ Nas telas do copiloto, "créditos" significa o [saldo da carteira](/docs/conceit
 | **Entre R$ 0,11 e R$ 0,20** | O menu abre normalmente, mas clicar em um comando mostra `"Saldo insuficiente."`. Sugestões de resposta, frases rápidas sugeridas, análises, avisos, **Não reabrir por agradecimento** e **Criar com Copiloto** não rodam (todos exigem saldo **acima de R$ 0,20**). As linhas do cartão **Sessão** que ainda não têm leitura mostram **Sem saldo**; resultados já registrados continuam aparecendo. |
 | **R$ 0,90 ou menos** | A transcrição automática de áudios das sugestões não roda (exige saldo **acima de R$ 0,90**). Com **Transcrever áudios** ligado e um áudio entre as mensagens recentes, as sugestões daquela conversa também param de aparecer, sem aviso. |
 
-Uma recarga ou o fim do saldo pode levar até **30 segundos** para refletir nas análises. O botão **Comprar créditos** leva ao **Extrato do saldo** — para fazer a recarga, acesse **Configurações** → **Assinatura** → **Adicionar saldo** (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
+Uma recarga ou o fim do saldo pode levar até **30 segundos** para refletir nas análises. O botão **Comprar créditos** leva ao **Extrato do saldo** — para fazer a recarga, acesse **Configurações** → **Assinatura** (seção **Carteira**) → **Adicionar saldo** (veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)).
 
 ## Restrições de papel
 

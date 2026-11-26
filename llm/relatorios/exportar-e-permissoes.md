@@ -33,7 +33,7 @@ Referência técnica complementar de [Exportar relatórios e quem pode ver cada 
 ## Acesso e restrições de relatório
 
 - **Permissão base:** **Gerenciar relatórios** ("Ver e gerar relatórios."), configurada no workspace (na tela, **ambiente**) em **Configurações** → **Ambiente** → **Permissões** → papel → seção **Relatórios** ([Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Sem ela, o item **Relatórios** não aparece no menu lateral.
-- **Proprietário e papéis padrão:** o proprietário não precisa dessa permissão no papel. As condições de cada relatório continuam valendo. **Administrador** e **Supervisor** já vêm com **Gerenciar relatórios**; **Atendente** não.
+- **Proprietário e papéis prontos:** o proprietário não precisa dessa permissão no papel. As condições de cada relatório continuam valendo. **Administrador** e **Supervisor** já vêm com **Gerenciar relatórios**; **Atendente** não.
 - **Condições extras por relatório:**
   - [**Dashboards**](/docs/relatorios/dashboard): cada dashboard define em **Visível para** quem o encontra na lista de dashboards (menu do título, **Mudar dashboard**): **Todos**, **Grupos** ou **Apenas para mim**; cartões de negociações exigem **Gerenciar negociações**.
   - [**Atendimento ao vivo**](/docs/relatorios/ao-vivo): o mapa e a fila seguem o **Acesso as Conversas** do papel.

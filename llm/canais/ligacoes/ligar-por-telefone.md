@@ -1,7 +1,7 @@
 ---
 title: "VoIP: saldo mínimo, transcrição, número com nono dígito e erros"
 description: Regras da ligação por telefone (VoIP) na Kinbox, com o saldo mínimo, como a cobrança e a transcrição funcionam, como o número é ajustado, o SIP reserva e as mensagens de erro.
-keywords: [voip, telefonia, pabx, ramal, central telefônica, saldo mínimo voip, você precisa ter mais saldo na carteira para fazer chamadas, seu saldo acabou a chamada será encerrada, você não tem permissão para fazer chamadas voip, nono dígito, número de telefone não informado, transcrever, não foi possível transcrever a chamada, sip reserva, falha conexão voz]
+keywords: [voip, saldo mínimo voip, você precisa ter mais saldo na carteira para fazer chamadas, seu saldo acabou a chamada será encerrada, você não tem permissão para fazer chamadas voip, nono dígito, número de telefone não informado, transcrever, não foi possível transcrever a chamada, sip reserva, falha conexão voz]
 publico: llm
 tipo: referencia
 fontes:

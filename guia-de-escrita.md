@@ -196,7 +196,7 @@ Termos fixos. Os rótulos exatos vêm sempre do i18n do `web`; esta lista é com
 | proprietário | dono, admin | O dono do workspace (um por workspace). "Administrador" é o nome de um papel padrão |
 | saldo (da carteira) | créditos | Reais na carteira para IA e ligações. "Créditos" só em **Créditos de SMS** ou ao citar um rótulo da tela (o copiloto chama o saldo de "créditos") |
 | ticket | — | Só a negociação de um **Funil Operacional**. Nunca como sinônimo de conversa ou sessão |
-| copiloto | assistente, Assistente Kin | Assistente de IA do membro (**Configurações** → **Automação** → **Copiloto**). Não atende o contato sozinho |
+| copiloto | assistente, Assistente Kin | Assistente de IA do membro (**Configurações** → **Automação** → **Copiloto**). Não atende o contato sozinho. Exceção: o botão **Assistente Kin** dos editores **Código** e **Json** do bloco de integração do bot mantém esse nome na tela; cite-o assim. Para o recurso antigo da conversa, escreva "o antigo Assistente Kin **da conversa**" |
 | automação × cenário | regra, workflow, fluxo | **Automações**: regra "quando X, faça Y". **Cenários**: fluxo de integração (webhook, HTTP, agenda). Não troque um pelo outro |
 | WhatsApp oficial | API oficial, WABA, Cloud API | O canal pela API da Meta |
 | WhatsApp por QR Code | WhatsApp App, WhatsApp Web, não oficial | O canal de WhatsApp lido pelo celular (tipos de conexão **Express** e **Clássica**). Na tela: **Modo QRCode** |
