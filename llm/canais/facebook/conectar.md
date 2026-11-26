@@ -58,7 +58,7 @@ Detalhes de referência da página humana [Conectar o Facebook Messenger](/docs/
 - Entram textos, fotos, vídeos, áudios e arquivos enviados à página pelo Messenger.
 - Cada anexo vira uma mensagem separada na conversa, e a Kinbox guarda uma cópia do arquivo recebido.
 - O nome e a foto do contato são buscados no perfil da Meta a cada mensagem.
-- Comentários em posts da página, reações a mensagens e cliques em anúncios sem mensagem não entram na Kinbox.
+- Comentários em posts da página, reações a mensagens e cliques em anúncios sem mensagem não entram na Kinbox. Os resultados dos anúncios ficam no relatório do app Meta Ads (veja [Conectar o Meta Ads](/docs/marketing/meta-ads)).
 - Respostas que a empresa manda direto pelo Facebook (fora da Kinbox) não aparecem na conversa da Kinbox.
 
 ## Envio de mensagens

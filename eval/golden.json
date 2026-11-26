@@ -1478,5 +1478,57 @@
     "pergunta": "Dá para agendar o envio do dashboard em PDF por e-mail toda segunda-feira para os gestores?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero ver na Kinbox quanto gastei e quantos leads vieram dos meus anúncios do Facebook e do Instagram. Como ligo a conta de anúncios?",
+    "esperado": [
+      "docs/marketing/meta-ads"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Tenho uma conta gerenciadora no Google Ads com várias contas de clientes embaixo. Dá para escolher quais delas aparecem no relatório?",
+    "esperado": [
+      "docs/marketing/google-ads",
+      "llm/marketing/relatorios-de-marketing"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Coloquei o script de rastreamento do site pelo Tag Manager, mas o teste da instalação fica parado esperando e nenhum evento chega. O que pode ser?",
+    "esperado": [
+      "docs/marketing/tracking",
+      "llm/marketing/tracking"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "O botão de atualizar o relatório de anúncios do Google ficou travado e diz que as consultas do dia acabaram. Quando volta a funcionar?",
+    "esperado": [
+      "llm/faq/marketing-limite-de-consultas",
+      "docs/marketing/relatorios-de-marketing"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como descubro se o cliente que chamou no WhatsApp veio do anúncio do Instagram ou da campanha do Google?",
+    "esperado": [
+      "llm/faq/marketing-origem-do-lead",
+      "docs/marketing/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O que significam CPL e ROAS no painel de marketing e de onde a Kinbox tira esses números?",
+    "esperado": [
+      "docs/marketing/relatorios-de-marketing",
+      "llm/marketing/relatorios-de-marketing"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Consigo acompanhar os resultados dos meus anúncios do TikTok dentro da Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

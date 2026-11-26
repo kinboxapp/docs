@@ -73,7 +73,7 @@ A checagem do plano acontece depois da janela da Meta e da escolha da página. C
 | Post ou outro conteúdo compartilhado | Imagem do post ou botão `"Te encaminhou uma mídia"`. |
 | Contato apaga a mensagem | A mensagem fica marcada como apagada. |
 | Mensagem enviada pela empresa pelo app do Instagram | Aparece na conversa como mensagem enviada pela empresa. |
-| Comentário em post, reel ou anúncio; reação a mensagem; clique em anúncio sem mensagem | Não aparece na Kinbox. |
+| Comentário em post, reel ou anúncio; reação a mensagem; clique em anúncio sem mensagem | Não aparece na Kinbox. Os resultados dos anúncios ficam no relatório do app Meta Ads (veja [Conectar o Meta Ads](/docs/marketing/meta-ads)). |
 
 **Ignorar menções** e **Ignorar resposta de story** existem apenas no Instagram, vêm desligadas por padrão, valem somente para o que chegar depois de ligá-las e não bloqueiam mensagens normais do Direct (veja [Configurações do Instagram e do Facebook](/docs/canais/instagram/configuracoes)).
 
