@@ -27,7 +27,7 @@ O copiloto gasta saldo?
 
 ## Resposta
 
-Sim. O copiloto consome o saldo da carteira do workspace (chamado de "créditos" nas telas do copiloto) sempre que uma função ligada roda. Funções desligadas não gastam, exceto o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (e gasta saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende da tela do Copiloto.
+Sim. O copiloto consome o saldo da carteira do workspace (chamado de "créditos" nas telas do copiloto) sempre que uma função ligada roda. Funções desligadas não gastam, exceto o botão **Sugestões**, que gera sugestões sob demanda ao ser clicado mesmo sem **Sugestões automáticas** (gerar uma nova sugestão consome saldo), e **Criar com Copiloto** nos editores do WhatsApp oficial, que não depende da tela do Copiloto.
 
 O que consome saldo e como aparece no **Extrato do saldo**:
 
@@ -37,12 +37,12 @@ O que consome saldo e como aparece no **Extrato do saldo**:
 - **Avisos e automações:** `"Revisor de mensagens"`, `"Aviso de pendência ao resolver"`, `"Sugestão de retorno"`, `"Rascunho de retorno"` e `"Mensagem de encerramento"`.
 - **Editores do WhatsApp oficial (Criar com Copiloto):** `"Uso do copilot (chat)"`.
 - **Base de conhecimento:** processar a base em **Configurações** → **Automação** → **Base de conhecimento** não gasta saldo; o uso da base entra no débito normal da resposta.
-- **Botão Sugestões sob demanda:** aparece nas conversas elegíveis mesmo sem **Sugestões automáticas** adicionada, e clicar nele gera sugestões e gasta saldo. Para evitar o uso, ative a restrição **Não mostrar sugestões de respostas** no papel ou limite **Onde o copiloto atua**.
+- **Botão Sugestões sob demanda:** aparece nas conversas elegíveis mesmo sem **Sugestões automáticas** adicionada, e clicar nele gera sugestões (gerar uma nova sugestão consome saldo). Para evitar o uso, ative a restrição **Não mostrar sugestões de respostas** no papel ou limite **Onde o copiloto atua**.
 
 **Limites mínimos de saldo:**
 
 - Com **R$ 0,10 ou menos**, o menu mostra **Seus créditos acabaram** com os comandos desativados e as sugestões não são geradas.
-- Comandos, sugestões, análises, avisos e **Criar com Copiloto** só rodam com saldo **acima de R$ 0,20** (sem saldo, nenhum aviso bloqueia o envio ou o encerramento da conversa).
+- Comandos, sugestões, análises, avisos, **Não reabrir por agradecimento** e **Criar com Copiloto** só rodam com saldo **acima de R$ 0,20** (sem saldo, nenhum aviso bloqueia o envio ou o encerramento da conversa).
 - A transcrição automática de áudios das sugestões exige saldo **acima de R$ 0,90**.
 
 **Como reduzir o consumo:** deixe ligadas apenas as funções usadas, restrinja canais e grupos em **Onde o copiloto atua**, reduza **Quantidade de sugestões** e desligue **Transcrever áudios** ou **Processar imagens** se não precisar deles.

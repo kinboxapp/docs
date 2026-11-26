@@ -45,9 +45,11 @@ Na conversa, o começo de cada sessão aparece como a faixa **Nova sessão**, se
 | --- | --- |
 | O contato manda mensagem e há uma sessão aberta | A mensagem entra na sessão atual. |
 | Um membro clica em **Resolver** | A sessão termina. |
-| O contato escreve depois de resolvida, fora do tempo de tolerância (ou com ele desligado) | Normalmente começa uma sessão nova, com protocolo novo. Exceção: uma mensagem só de agradecimento pode manter a conversa resolvida (veja [Não reabrir por agradecimento](/docs/copiloto/configuracoes-de-copiloto#não-reabrir-por-agradecimento)). |
+| O contato escreve depois de resolvida, fora do tempo de tolerância (ou com ele desligado) | Começa uma sessão nova, com protocolo novo. |
 | O contato escreve dentro do **Tempo de tolerância ao resolver conversa** (quando ligado) | A sessão anterior é reaberta. |
 | Um membro inicia a conversa pelo botão **Enviar mensagem** | Começa uma sessão na conversa. |
+
+Quando o contato escreve depois de resolvida, dentro ou fora do tempo de tolerância, há uma exceção: com a função **Não reabrir por agradecimento** do copiloto ligada, uma mensagem só de agradecimento enviada até 24 horas depois de resolver pode manter a conversa resolvida, sem reabrir nem criar sessão (veja [Não reabrir por agradecimento](/docs/copiloto/configuracoes-de-copiloto#não-reabrir-por-agradecimento)).
 
 O **Tempo de tolerância ao resolver conversa** fica nas configurações do workspace (na tela, **ambiente**), em **Configurações** → **Ambiente** → **Geral**, e vem desligado em workspaces novos.
 

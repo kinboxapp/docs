@@ -61,7 +61,7 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 | Função / recurso | Onde aparece | Condições extras | Descrição no **Extrato do saldo** |
 | --- | --- | --- | --- |
 | **Onde o copiloto atua** | Limita todas as funções | — | Não gera cobrança |
-| **Sugestões automáticas** | Bloco **Sugestões** acima do editor | Última mensagem do contato, conversa aberta, sem bot, no escopo, sem restrição **Não mostrar sugestões de respostas**, saldo acima de R$ 0,20 | `"Uso do copilot"` (e `"Transcrição de áudio"` ao transcrever áudios) |
+| **Sugestões automáticas** | Bloco **Sugestões** acima do editor | Última mensagem do contato, conversa aberta, sem bot, no escopo, saldo acima de R$ 0,20 | `"Uso do copilot"` (e `"Transcrição de áudio"` ao transcrever áudios) |
 | Frases rápidas sugeridas (opção **Sugerir frases rápidas**) | Topo da janela **Frases rápidas** | **Sugestões automáticas** e **Sugerir frases rápidas** ligadas, frases cadastradas, conversa no escopo, saldo acima de R$ 0,20 | `"Uso do copilot"` |
 | **Comandos de chat** | Ícone de estrelas (**Copiloto**) no editor de conversas e de campanhas por WhatsApp por QR Code ou SMS | Função adicionada; nas conversas, a conversa precisa estar no escopo | `"Uso do copilot"` |
 | **Análise de sentimento** | Cartão **Sessão** e lista de conversas abertas (só Irritado/Impaciente) | Mensagem do contato, conversa aberta, no escopo | `"Análise de sentimento"` |
@@ -73,7 +73,7 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 | **Cliente preso no bot** | 🆘 na lista e cartão **Sessão** | Só enquanto bot/agente atende e após resposta do contato ao bot, 1 vez por sessão | `"Cliente preso no bot"` |
 | **Classificação de intenção** | Cartão **Sessão** e tag opcional na conversa | No início da sessão (até decidir ou 5 leituras), no escopo | `"Classificação de intenção"` |
 | **Lead score** | Cartão **Sessão** e lista de conversas abertas (só Quente/Excelente) | Conversa com contato sem negociação ganha, no escopo | `"Lead score"` |
-| **Criar com Copiloto** (editores do WhatsApp oficial) | Painel lateral em templates, Flows e carrossel | Independente da tela do Copiloto; exige saldo acima de R$ 0,20 | `"Uso do copilot (chat)"` |
+| **Criar com Copiloto** (editores do WhatsApp oficial) | Painel lateral em templates e Flows (**Criar com Copiloto**) e no carrossel (ícone **Copiloto** do campo **Corpo da mensagem**) | Independente da tela do Copiloto; exige saldo acima de R$ 0,20 | `"Uso do copilot (chat)"` |
 
 ## Menu do copiloto (**Comandos de chat**)
 
@@ -100,7 +100,7 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 
 - **Quando o bloco Sugestões aparece:** última mensagem (de texto/mídia, sem contar notas e eventos) é do contato, conversa não está resolvida, bot não está atendendo, conversa está em **Onde o copiloto atua** e o papel do membro não tem a restrição **Não mostrar sugestões de respostas**.
 - **Com Sugestões automáticas ligada:** as sugestões são geradas ao abrir a conversa. Com saldo de R$ 0,20 ou menos, nada é gerado e o bloco **Sugestões** não aparece.
-- **Sob demanda:** mesmo sem **Sugestões automáticas** adicionada, o botão **Sugestões** aparece nas mesmas condições acima e gera sugestões ao clicar (consumindo saldo). Com saldo de R$ 0,20 ou menos, o botão pode continuar aparecendo, mas o clique não gera sugestões. Para escondê-lo, use a restrição **Não mostrar sugestões de respostas** no papel ou restrinja **Onde o copiloto atua**.
+- **Sob demanda:** mesmo sem **Sugestões automáticas** adicionada, o botão **Sugestões** aparece nas mesmas condições acima e gera sugestões ao clicar. Gerar uma nova sugestão consome saldo; a sugestão já gerada para a mesma última mensagem é reaproveitada sem nova cobrança. Com saldo de R$ 0,20 ou menos, o botão pode continuar aparecendo, mas o clique não gera sugestões. Para escondê-lo, use a restrição **Não mostrar sugestões de respostas** no papel ou restrinja **Onde o copiloto atua**.
 - **O que lê:** até **100 mensagens** da sessão atual (contato, membros e bot).
   - **Processar imagens** (padrão ligado): analisa apenas imagens enviadas pelo contato.
   - **Transcrever áudios** (padrão ligado): transcreve os áudios presentes entre as **5 mensagens mais recentes** (inclusive de membros), mostra `"Transcrevendo áudios"` e salva a transcrição na mensagem.
@@ -156,6 +156,10 @@ As linhas do copiloto aparecem no topo do cartão **Sessão** na ordem **Atendim
 | **Já é cliente** | `"Este contato já é cliente (tem negociação ganha), então o lead score não é mais analisado."` |
 | **🆘 Precisa de humano** | Detectado em **Atendimento automático**; mostra se o bot foi interrompido (`"O Copiloto interrompeu o bot e passou a conversa para humano."`), se está em andamento (`"O Copiloto está passando a conversa para humano."`), se o bot já havia parado (`"O bot já tinha parado quando o Copiloto foi passar a conversa para humano."`) ou se falhou (`"O Copiloto não conseguiu passar a conversa para humano. Transfira manualmente."`). |
 
+## Relatório
+
+- **Relatórios** → **Copiloto**: exige a permissão **Gerenciar relatórios** e ao menos uma aba disponível (sem nenhuma função ligada, mostra `"Ligue um recurso do copiloto em Configurações → Copiloto para ver os relatórios."`). Abas disponíveis: **Qualidade** (quando um dos modelos **Nota do atendimento**, **Problema resolvido?** ou **Pontos a melhorar** está ligado salvando em campo), **Sentimento**, **Intenções**, **Lead score** e **Atendimento automático** (com **Cliente preso no bot** ou **Não reabrir por agradecimento**). Desligar a função oculta a aba correspondente.
+
 ## Avisos ao membro e Não reabrir por agradecimento
 
 Nenhum aviso bloqueia o membro: sem saldo, fora do escopo, com erro ou ao atingir o tempo limite, a mensagem é enviada, a conversa é resolvida, o agendamento abre vazio ou a conversa reabre normalmente.
@@ -196,7 +200,7 @@ Nas telas do copiloto, "créditos" significa o [saldo da carteira](/docs/conceit
 
 | Saldo na carteira | Comportamento |
 | --- | --- |
-| **R$ 0,10 ou menos** | O menu do copiloto exibe **Seus créditos acabaram** com os comandos desativados, botão **Comprar créditos** (para quem não acessa o financeiro: `"Fale com um administrador para colocar créditos no ambiente."`) e dica `"Copiloto (Pouco ou nenhum crédito restante)"`. Sugestões de resposta e frases rápidas sugeridas não são geradas. |
+| **R$ 0,10 ou menos** | O menu do copiloto exibe **Seus créditos acabaram** com os comandos desativados, botão **Comprar créditos** (para quem não acessa o financeiro: `"Fale com um administrador para colocar créditos no ambiente."`) e dica `"Copiloto (Pouco ou nenhum crédito restante)"`. Sugestões de resposta e frases rápidas sugeridas não são geradas. Tudo o que exige saldo acima de R$ 0,20 (análises, avisos, **Não reabrir por agradecimento** e **Criar com Copiloto**) também fica parado. |
 | **Entre R$ 0,11 e R$ 0,20** | O menu abre normalmente, mas clicar em um comando mostra `"Saldo insuficiente."`. Sugestões de resposta, frases rápidas sugeridas, análises, avisos, **Não reabrir por agradecimento** e **Criar com Copiloto** não rodam (todos exigem saldo **acima de R$ 0,20**). As linhas do cartão **Sessão** que ainda não têm leitura mostram **Sem saldo**; resultados já registrados continuam aparecendo. |
 | **R$ 0,90 ou menos** | A transcrição automática de áudios das sugestões não roda (exige saldo **acima de R$ 0,90**). Com **Transcrever áudios** ligado e um áudio entre as mensagens recentes, as sugestões daquela conversa também param de aparecer, sem aviso. |
 
@@ -204,12 +208,9 @@ Uma recarga ou o fim do saldo pode levar até **30 segundos** para refletir nas 
 
 ## Restrições de papel
 
-- **Não mostrar sugestões de respostas** (seção **Copiloto** do papel; texto da tela: `"Não aparecer sugestões de respostas no chat e nem o botão para sugerir respostas."`) vale para o bloco e o botão **Sugestões**; o menu de comandos depende da função **Comandos de chat**. Vale também para o proprietário quando o papel dele tem essa restrição.
+- **Não mostrar sugestões de respostas** (seção **Copiloto** do papel; texto da tela: `"Não aparecer sugestões de respostas no chat e nem o botão para sugerir respostas."`). Vale também para o proprietário quando o papel dele tem essa restrição.
+- O menu de comandos depende da função **Comandos de chat**.
 - **Esconder sentimento do cliente** e **Esconder lead score** (quadro **Restrições** da seção **Conversas** do papel). Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
-
-## Relatório
-
-- **Relatórios** → **Copiloto**: exige a permissão **Gerenciar relatórios** e ao menos uma aba disponível (sem nenhuma função ligada, mostra `"Ligue um recurso do copiloto em Configurações → Copiloto para ver os relatórios."`). Abas disponíveis: **Qualidade** (quando um dos modelos **Nota do atendimento**, **Problema resolvido?** ou **Pontos a melhorar** está ligado salvando em campo), **Sentimento**, **Intenções**, **Lead score** e **Atendimento automático** (com **Cliente preso no bot** ou **Não reabrir por agradecimento**). Desligar a função oculta a aba correspondente.
 
 ## Problemas comuns
 

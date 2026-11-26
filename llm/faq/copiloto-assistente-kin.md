@@ -38,7 +38,7 @@ Onde foi parar o Assistente Kin?
 
 O antigo Assistente Kin virou o **copiloto**, e os comandos de texto dele (resumir, expandir, reescrever, corrigir português, traduzir, mudar o tom e gerar texto) agora ficam no menu do copiloto, no ícone de estrelas (**Copiloto**) do editor da conversa.
 
-- **Como fazer aparecer:** alguém com a permissão **Copiloto** (ou o proprietário do workspace) deve ir em **Configurações** → **Automação** → **Copiloto**, adicionar a função **Comandos de chat** e clicar em **Salvar mudanças** (pode levar até 60 segundos para valer). A conversa também precisa estar dentro de **Onde o copiloto atua** e o workspace precisa ter saldo na carteira.
+- **Como fazer aparecer:** alguém com a permissão **Copiloto** (ou o proprietário do workspace) deve ir em **Configurações** → **Automação** → **Copiloto**, adicionar a função **Comandos de chat** e clicar em **Salvar mudanças** (pode levar até 60 segundos para valer). A conversa também precisa estar dentro de **Onde o copiloto atua**. Sem saldo na carteira, o ícone continua no editor, mas o menu abre com **Seus créditos acabaram** e os comandos desativados.
 - **Sem permissão por comando:** as antigas permissões por comando do Assistente Kin em cada papel não existem mais. Os comandos são ligados, desligados e reordenados para o workspace inteiro no bloco **Comandos padrão** da função **Comandos de chat**.
 - **Comandos próprios:** na mesma tela, você também pode ativar **Comandos personalizados** para criar prompts da sua empresa no topo do menu.
 
