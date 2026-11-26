@@ -74,9 +74,10 @@ No layout novo, os textos aparecem com Inicial Maiúscula em cada palavra por CS
 
 - **Excluir** um canal de WhatsApp apenas desliga o canal (fica inativo e não apaga as conversas). Na conexão **Express**, a exclusão também remove o canal dos bots que o usavam.
 - Excluir um canal **Clássica** não tira o canal dos bots (diferente da **Express**); não prometa nada sobre bots depois de excluir um canal **Clássica**.
-- Só no QR Code (**Express** ou **Clássica**): criar novamente um canal com o **mesmo número** no mesmo workspace reaproveita o canal excluído: mantém o mesmo ID e traz as conversas antigas de volta, inclusive quando o canal excluído era **Clássica** e o novo canal é criado como **Express**.
-
-- WhatsApp oficial: criar de novo com o mesmo número gera um canal novo (outro ID); as conversas do canal excluído não voltam para ele.
+- Conectar de novo o **mesmo número** no mesmo workspace pode reaproveitar o canal excluído: mantém o mesmo ID e traz as conversas antigas de volta.
+  - **Express**: reaproveita o canal de WhatsApp excluído com o número, seja ele **Clássica**, **Express** ou oficial (o canal passa a ser **Express**).
+  - **Clássica**: reaproveita um canal por QR Code excluído com o número; não reaproveita canal oficial.
+  - WhatsApp oficial (janela da Meta): reaproveita o canal do workspace com o mesmo identificador da Meta ou o mesmo número; só cria um canal novo se não achar nenhum.
 - Excluir um canal **Express** cuja criação não terminou (status cru `pending_review` ou `error`) pode falhar com um erro: nesse caso, falar com o suporte com o ID do canal.
 
 ## Migrar conversas: o que não é migrado
@@ -86,13 +87,14 @@ No layout novo, os textos aparecem com Inicial Maiúscula em cada palavra por CS
 - Enquanto migra, a linha do canal de origem mostra o ícone "Em transferência de conversas". Pode levar algumas horas.
 - Só um processo de migração por canal de origem por vez: um segundo pedido recebe "Já existe um processo de transferência de conversas para este canal em andamento".
 - As conversas migradas parecem ter sido sempre do canal de destino.
+- Destino **oficial**: a migração zera a data da última mensagem do contato, então a janela de 24 horas fica fechada até o contato escrever de novo (só template até lá). Conversas de grupo não continuam como grupo no destino oficial: o identificador do grupo vira um número que não existe.
 
 ## Permissões que afetam canais
 
 | Permissão ou restrição (seção **Canais**) | Efeito |
 | --- | --- |
 | **Gerenciar Canais** | "Ver, adicionar, editar e excluir canais." Sem ela, a tela de canais não abre. O dono do workspace sempre pode. |
-| **Somente pode dar manutenção simples em canais** | "Membro pode apenas desconectar, reiniciar, sincronizar histórico e recriar o canal." Some o **Novo canal** e o **Excluir**; **Migrar** fica desativado; as opções do canal ficam desativadas; salvar mostra "Você não tem permissão para editar o canal". |
+| **Somente pode dar manutenção simples em canais** | "Membro pode apenas desconectar, reiniciar, sincronizar histórico e recriar o canal." Some o **Novo canal** e o **Excluir**; **Migrar**/**Migrar conversas** fica desativado nos canais por QR Code (no oficial, **Migrar conversas** continua liberado); as opções do canal ficam desativadas; salvar mostra "Você não tem permissão para editar o canal". |
 | **Somente pode ver canais na lista se estiver no grupo do canal** | O membro só vê os canais com **Restringir visibilidade** ligado para um grupo de membros dele. **Migrar** e **Salvar** ficam desativados. |
 | **Não pode ver notificações de canal** | Esconde a faixa **Telefone desconectado** da lista de conversas. |
 | **Não pode gerenciar widget.** | Esconde os canais de widget e o cartão **Widget**. |

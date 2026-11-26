@@ -29,7 +29,7 @@ Só se você ativar e selecionar cada grupo: por padrão, a Kinbox ignora todas 
 
 No canal de WhatsApp por QR Code, abra o canal em **Configurações** → **Chat** → **Canais**, ative **Permitir Grupos de WhatsApp** e marque os grupos que você quer ler e responder pela Kinbox (no WhatsApp oficial não existe opção de grupos). A lista de grupos vem do WhatsApp do número e aparece vazia se o canal estiver desconectado.
 
-Nas conversas de grupo, o contato é o próprio grupo (sem número de telefone), quem escreveu aparece identificado na mensagem, você pode mencionar participantes com `@` (participantes com número ocultado pelo WhatsApp aparecem como `"Participante (final do identificador)"`) e não há tiques de entrega/leitura. Veja mais em [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes) e [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
+Nas conversas de grupo, o contato é o próprio grupo (sem número de telefone), quem escreveu aparece identificado na mensagem, você pode mencionar participantes com `@` (participante com número ocultado pelo WhatsApp aparece como "Participante"; na lista para mencionar, com mais de um nessa situação, ganha os últimos 4 dígitos do identificador) e não há tiques de entrega/leitura. Veja mais em [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes) e [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
 
 ## Variações
 
