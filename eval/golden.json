@@ -392,5 +392,59 @@
     "pergunta": "Como sincronizo os membros da Kinbox com o Active Directory da minha empresa?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Liguei a IA no WhatsApp mas ela não responde ninguém, o que pode ser?",
+    "esperado": [
+      "docs/agente-de-ia/problemas-comuns",
+      "llm/agente-de-ia/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como faço o agente de IA passar o atendimento para alguém da equipe?",
+    "esperado": [
+      "llm/faq/agente-de-ia-transferir-para-humano",
+      "docs/agente-de-ia/conectar-canais",
+      "docs/agente-de-ia/ferramentas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para colocar dois agentes de IA respondendo por mensagem no mesmo número?",
+    "esperado": [
+      "llm/faq/agente-de-ia-um-por-canal",
+      "docs/agente-de-ia/conectar-canais"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Que tipos de arquivo posso mandar para a IA aprender sobre minha empresa?",
+    "esperado": [
+      "docs/agente-de-ia/conhecimento",
+      "llm/agente-de-ia/conhecimento"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quanto de saldo a inteligência artificial consome por mensagem?",
+    "esperado": [
+      "llm/faq/agente-de-ia-custo",
+      "docs/conceitos/saldo-e-creditos"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como treino o assistente de voz da Alexa para ler minhas conversas da Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "A IA consegue atender ligação do WhatsApp?",
+    "esperado": [
+      "docs/agente-de-ia/agente-de-voz",
+      "llm/agente-de-ia/agente-de-voz"
+    ],
+    "tipo": "faq"
   }
 ]

@@ -29,7 +29,7 @@ A Kinbox reúne diferentes ferramentas de automação e inteligência artificial
 | Ferramenta | O que é | Com quem conversa | Onde fica | Gasta saldo? |
 | --- | --- | --- | --- | --- |
 | **Bot** | Fluxo montado com blocos (mensagens, menus, perguntas, decisões e integrações) | O contato, com respostas previstas | **Configurações** → **Automação** → **Bot** | Só no bloco **Agente de IA** |
-| **Agentes de IA** | Agente com IA que conversa com as próprias palavras, segue etapas e usa ferramentas e conhecimento | O contato, por texto (e por voz no **Agente de voz**, em teste) | **Configurações** → **Automação** → **Agentes de IA** | Sim |
+| **Agentes de IA** | Agente com IA que conversa com as próprias palavras, segue suas instruções e usa ferramentas e conhecimento | O contato, por texto (e por voz no **Agente de voz**, em teste) | **Configurações** → **Automação** → **Agentes de IA** | Sim |
 | **Automações** | Regras do tipo gatilho → condições → ações dentro da Kinbox | Ninguém diretamente | **Configurações** → **Automação** → **Automações** | Não (só o bot com IA que ela executar) |
 | **Cenários** | Fluxos de passos para integrar sistemas externos e manipular dados | Ninguém diretamente | **Configurações** → **Automação** → **Cenários** | Não (só o bot com IA que ele executar) |
 | **Copiloto** | Assistente de IA do time que sugere, revisa, resume, transcreve e analisa | O membro | **Configurações** → **Automação** → **Copiloto** | Sim |
@@ -43,9 +43,9 @@ Ele pode ser ativado por condições (por exemplo, se o contato é novo ou já e
 
 ## Agentes de IA
 
-Os **Agentes de IA** (**Configurações** → **Automação** → **Agentes de IA**, botão **Novo agente de IA**) conversam com o contato usando as próprias palavras, seguindo um fluxograma com etapas, base de conhecimento e ferramentas como **Transferir para humano**.
+Os **Agentes de IA** (**Configurações** → **Automação** → **Agentes de IA**, botão **Novo agente de IA**) conversam com o contato com as próprias palavras, usando as instruções que você escreve, o conhecimento que você cadastra (separado da **Base de conhecimento**) e ferramentas como **Transferir para humano**; um fluxograma é opcional.
 
-O **Agente de texto** atende por mensagem nos canais conectados. Existe também o **Agente de voz** (**Beta**), que atende ligações do WhatsApp oficial em tempo real; por estar em teste, ele pode não aparecer no seu workspace. Cada canal é atendido por apenas um agente de IA, e o uso consome saldo da carteira.
+O **Agente de texto** atende por mensagem nos canais conectados. Existe também o **Agente de voz** (**Beta**), que atende ligações do WhatsApp oficial em tempo real; por estar em teste, ele pode não aparecer no seu workspace. Cada canal tem um único agente de texto para as mensagens; no WhatsApp oficial com ligações, um agente de voz à parte atende as ligações. O uso consome saldo da carteira. Veja [Agentes de IA: visão geral](/docs/agente-de-ia/visao-geral).
 
 ## Automações
 
