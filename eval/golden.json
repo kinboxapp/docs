@@ -349,6 +349,51 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Como coloco um colega novo da equipe para usar a Kinbox comigo?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/gerenciar-membros"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que os atendentes vejam só as conversas do grupo deles. Onde configuro isso?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios",
+      "docs/administracao/referencia-de-permissoes",
+      "docs/conceitos/workspace-membros-e-papeis"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Aparece que o limite foi atingido quando tento chamar mais uma pessoa para o ambiente. O que faço?",
+    "esperado": [
+      "llm/faq/membro-limite-de-licencas",
+      "docs/administracao/licencas-e-propriedade",
+      "docs/administracao/problemas-com-membros"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Vou sair da empresa e preciso passar a conta principal do ambiente para outra pessoa",
+    "esperado": [
+      "docs/administracao/licencas-e-propriedade"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Mandei o convite mas o funcionário diz que não chegou nada no e-mail",
+    "esperado": [
+      "docs/administracao/problemas-com-membros",
+      "docs/configuracoes-no-workspace/gerenciar-membros"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como sincronizo os membros da Kinbox com o Active Directory da minha empresa?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Liguei a IA no WhatsApp mas ela não responde ninguém, o que pode ser?",
     "esperado": [
       "docs/agente-de-ia/problemas-comuns",
@@ -393,5 +438,13 @@
     "pergunta": "Como treino o assistente de voz da Alexa para ler minhas conversas da Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "A IA consegue atender ligação do WhatsApp?",
+    "esperado": [
+      "docs/agente-de-ia/agente-de-voz",
+      "llm/agente-de-ia/agente-de-voz"
+    ],
+    "tipo": "faq"
   }
 ]
