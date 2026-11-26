@@ -22,7 +22,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Detalhes de referência sobre a conexão **Clássica**, complementares à página humana "Migrar da conexão Clássica para a Express" (`/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo`).
+Detalhes de referência sobre a conexão **Clássica**, complementares à página humana [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
 
 ## Sincronizar histórico (somente Clássica)
 

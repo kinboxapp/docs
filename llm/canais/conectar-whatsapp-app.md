@@ -21,7 +21,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Detalhes técnicos de referência da página humana "Conectar o WhatsApp pelo QR Code" (`/docs/canais/conectar-whatsapp-app`).
+Detalhes técnicos de referência da página humana [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
 
 ## Tempos do QR Code e da criação
 

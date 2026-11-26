@@ -21,7 +21,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Matriz de diagnóstico complementar à página humana "Meu WhatsApp desconectou" (`/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte`).
+Matriz de diagnóstico complementar à página humana [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte).
 
 ## Matriz de diagnóstico por status e sinais
 

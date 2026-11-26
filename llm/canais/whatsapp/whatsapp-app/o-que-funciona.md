@@ -16,7 +16,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Detalhes completos de referência da página humana "O que funciona e o que não funciona no WhatsApp por QR Code" (`/docs/canais/whatsapp/whatsapp-app/o-que-funciona`). Escopo: conexão **Express**.
+Detalhes completos de referência da página humana [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona). Escopo: conexão **Express**.
 
 ## Envio (Express)
 
