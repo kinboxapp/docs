@@ -57,7 +57,10 @@ type Item = {
   site?: { widget: string }
 }
 
-/** Domínio reservado para exemplos. A captura responde por ele: nada sai para a internet nem para um site real. */
+/**
+ * Domínio reservado para exemplos. O HTML do site de teste é servido localmente pela captura nesse endereço (nenhum
+ * site real é aberto); o script e as configurações do chat vêm do staging.
+ */
 const SITE_TESTE = 'https://www.example.com'
 const PREFIXO_WIDGET = 'widget>> '
 

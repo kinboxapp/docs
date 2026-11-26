@@ -469,7 +469,8 @@ const WIDGET_EXEMPLO_CONFIG = {
     whatsapp: { enabledWhatsApp: true, phone: '+5511900000001', text: 'Oi, quero saber mais sobre os produtos.', onlyWhatsapp: false, captureCampaign: false },
     businessHours: { enableBusinessHours: false },
   },
-  // Domínio reservado para exemplos: o site de teste da captura é servido nele, sem rede
+  // Domínio reservado para exemplos: o HTML do site de teste é servido localmente pela captura nesse endereço;
+  // o script e as configurações do chat vêm do staging
   domains: ['https://www.example.com'],
 }
 

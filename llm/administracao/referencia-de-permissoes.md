@@ -245,7 +245,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 | **Metas** no menu lateral | **Metas** |
 | **Parceria** no menu lateral | **Pode acessar painel de parceria** (em workspace de parceiro) |
 | Ícone **Salas** | Remover a restrição **Não pode acessar as salas** (criar/excluir salas exige **Salas**) |
-| **Widget** em **Adicionar canal** | Remover a restrição **Não pode gerenciar widget.** |
+| **Widget** em **Conectar novo canal** | Remover a restrição **Não pode gerenciar widget.** |
 
 ## Membros: convite, edição, exclusão e senha
 

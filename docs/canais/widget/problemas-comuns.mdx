@@ -27,7 +27,7 @@ verificado_em: 2026-11-26
 Use esta página quando o botão do chat não aparece no site, some no celular, não mostra "Online", não recebe as conversas no canal esperado ou quando você não consegue abrir ou salvar o widget na Kinbox.
 
 <Note>
-  **Quem pode conferir e editar o widget:** o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista de canais e a tela do widget; **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir**.
+  **Quem pode conferir e editar o widget:** o proprietário do workspace (na tela, **ambiente**) e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). A restrição **Não pode gerenciar widget.** esconde o cartão **Widget**, os widgets da lista de canais e a tela do widget; **Somente pode dar manutenção simples em canais** esconde **Novo canal** e **Excluir**.
 </Note>
 
 ## Sintoma
@@ -41,7 +41,7 @@ Use esta página quando o botão do chat não aparece no site, some no celular, 
 ## Causas e soluções
 
 <Tip>
-  Quem cuida do site pode abrir o console do navegador (ferramentas de desenvolvedor) e procurar uma mensagem que comece com "Kinbox", "Widget" ou "Domain" para identificar por que o chat não carregou.
+  Quem cuida do site pode abrir o console do navegador (ferramentas de desenvolvedor) e procurar uma mensagem que contenha "Kinbox", "Widget not found" ou "Domain not allowed" para identificar por que o chat não carregou.
 </Tip>
 
 <AccordionGroup>
@@ -67,7 +67,7 @@ Use esta página quando o botão do chat não aparece no site, some no celular, 
     Duas opções do cartão **Ajustes** escondem o botão do chat:
 
     - **Esconder botão do widget:** o chat abre só pelo balão da **Chamada para ação**, se estiver ligada, ou por um botão ou link do site que chame `window.openWidget()`.
-    - **Usar somente WhatsApp** (em **Habilitar balão de WhatsApp**): fica só o botão verde do WhatsApp. Se **Número** estiver vazio, nenhum dos dois botões aparece.
+    - **Usar somente WhatsApp** (em **Habilitar balão de WhatsApp**): fica só o botão verde do WhatsApp. Se **Chamada para ação** estiver ligada, o balão dela ainda abre o chat; desligue-a para ficar só com o WhatsApp.
 
     Abra [Configurações do widget](/docs/canais/widget/configuracoes), desligue a opção que não deve estar ativa, clique em **Salvar mudanças** e recarregue o site.
   </Accordion>
@@ -93,11 +93,11 @@ Use esta página quando o botão do chat não aparece no site, some no celular, 
   <Accordion title='Não aparece "Online"'>
     O topo do chat mostra "Online" apenas com **Habilitar horário comercial** ligado, um horário escolhido em **Selecione o horário** e dentro desse horário **pelo relógio do aparelho do visitante**. Em qualquer outro caso (inclusive com a opção desligada), o topo mostra a **Mensagem de fora do expediente**.
 
-    Abra o cartão **Ajustes**, confirme que **Habilitar horário comercial** está ligado com o horário certo selecionado (os horários vêm de **Configurações** → **Ambiente** → **Horários**; o workspace aparece na tela como **ambiente**) e confira o relógio do aparelho usado no teste.
+    Abra o cartão **Ajustes**, confirme que **Habilitar horário comercial** está ligado com o horário certo selecionado (os horários vêm de **Configurações** → **Ambiente** → **Horários**) e confira o relógio do aparelho usado no teste.
   </Accordion>
 
   <Accordion title="O visitante não vê a resposta">
-    A conversa do widget fica guardada no navegador do visitante, por widget, e o chat não envia e-mail nem aviso fora do site. O visitante só vê a resposta quando volta ao site no mesmo navegador em que conversou; em outro navegador, outro aparelho ou janela anônima, começa uma conversa nova.
+    A conversa do widget fica guardada no navegador do visitante, por widget, e o chat não envia e-mail nem aviso fora do site. O visitante só vê a resposta quando volta ao mesmo site e widget, no mesmo navegador em que conversou; em outro navegador, outro aparelho ou janela anônima, começa uma conversa nova.
 
     Para continuar o atendimento fora do site caso o visitante saia da página, peça e-mail ou celular no formulário pré-chat (veja [Personalizar a aparência, os textos e o formulário do widget](/docs/canais/widget/personalizar)).
   </Accordion>

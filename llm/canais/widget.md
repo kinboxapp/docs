@@ -55,7 +55,7 @@ No campo de texto (`"Digite sua mensagem..."`), **Enter** envia, **Shift+Enter**
 
 ## Topo do chat
 
-- **Topo aberto e recolhido:** no computador, o topo começa aberto (nome, status e **Descrição do time**); no celular, começa recolhido. Depois que o visitante escreve, o topo se recolhe e mostra só o nome e o status; o visitante pode clicar para abrir de novo.
+- **Topo aberto e recolhido:** no computador, o topo começa aberto (nome, status e **Descrição do time**) numa conversa nova; no celular, ou quando o visitante já tem conversa, começa recolhido. Depois que o visitante escreve, o topo se recolhe e mostra só o nome e o status; o visitante pode clicar para abrir de novo.
 - **Nome:** exibe o nome e sobrenome do último membro que respondeu. Antes da primeira resposta, exibe o **Nome de exibição**; vazio, o topo aberto mostra `"Suporte"`.
 - **Foto:** com **Mostrar avatares dos membros** ligado, exibe a foto do último membro que respondeu; desligado (ou antes de um membro responder), exibe a foto do widget (a imagem de **Usar imagem personalizada** ou a foto do workspace copiada na criação).
 - **Status:** exibe `"Online"` com bolinha verde somente quando **Habilitar horário comercial** está ligado, há um horário em **Selecione o horário** e o horário atual está dentro da faixa, comparado de minuto em minuto pelo **relógio do aparelho do visitante** (sem fuso horário próprio e sem considerar feriados). Em qualquer outro caso, exibe a **Mensagem de fora do expediente**.
@@ -65,7 +65,7 @@ No campo de texto (`"Digite sua mensagem..."`), **Enter** envia, **Shift+Enter**
 
 ## Mensagem inicial
 
-- Exibida na janela do visitante quando ele abre o chat, uma mensagem por vez. Quando a conversa ainda não tem mensagens, cada uma aparece com efeito de "digitando" e toca som se **Habilitar sons** estiver ligado.
+- Exibida na janela do visitante quando ele abre o chat. Em conversa nova, as mensagens aparecem uma por vez, com efeito de "digitando" e som (se **Habilitar sons** estiver ligado); com conversa existente, aparecem juntas.
 - Aparece somente para o visitante e não entra na conversa da Kinbox.
 - Quando o formulário pré-chat tem campos, a mensagem inicial aparece depois que o visitante clica em **Iniciar**.
 
@@ -75,7 +75,7 @@ No campo de texto (`"Digite sua mensagem..."`), **Enter** envia, **Shift+Enter**
 - **Validação dos campos:** exibe **Descrição**, os campos na ordem configurada e o botão **Iniciar**. Campos obrigatórios e o formato de **E-mail** são cobrados pelo navegador. No campo **Celular** (seletor de país com Brasil por padrão):
   - `"Informe o telefone"`: campo obrigatório deixado vazio.
   - `"Telefone inválido"`: número do Brasil com menos de 10 dígitos depois de `+55`, ou número de outro país com menos de 6 dígitos.
-- **Casamento e criação de contato:** a Kinbox procura um contato com o mesmo e-mail ou celular. Se achar, usa esse contato e completa o nome e os campos personalizados que estiverem vazios; campos já preenchidos não mudam. O e-mail e o celular do contato não mudam, mesmo vazios. Se não achar, cria um novo contato. Um celular só com o código do país (ex.: `+55`) é descartado. Visitantes sem nome aparecem na **Caixa de entrada** como `"Visitante #<número>"`.
+- **Casamento e criação de contato:** a Kinbox procura um contato com o mesmo e-mail ou celular. Se achar, usa esse contato, completa o nome, se estiver vazio, e acrescenta os campos personalizados que ainda não constam no contato (um campo que já consta no contato não muda, mesmo vazio). O e-mail e o celular do contato não mudam, mesmo vazios. Se não achar, cria um novo contato. Um celular só com o código do país (ex.: `+55`) é descartado. Visitantes sem nome aparecem na **Caixa de entrada** como `"Visitante #<número>"`.
 - **Campos personalizados:** campos personalizados de **contato** vão para o contato; campos personalizados de **sessão** vão para a sessão junto com a primeira mensagem.
 - **Mensagem automática:** com **Enviar mensagem automática ao enviar o formulário** ligado, o widget envia a **Mensagem** em nome do visitante logo após **Iniciar**; a conversa é criada na Kinbox imediatamente e o [bot](/docs/bot/aprender-a-usar-o-bot) do canal já pode atender. Sem ela, a conversa só nasce quando o visitante escreve.
 
@@ -105,8 +105,11 @@ Quando **Mostrar widget no celular** está desligado e a tela tem menos de 768 p
 - **No chat do site:** sempre ligado, sem opção na tela. O chat captura os parâmetros de campanha da URL da página e envia com a próxima mensagem do visitante, registrando-os como origem da sessão e no contato. A lista é fechada: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_id`, `utm_campaign_name`, `utm_ad_name`, `utm_ad`, `gclid`, `gbraid`, `wbraid`, `gad_source`, `gad_campaignid`, `fbclid`, `meta_campaign_id`, `meta_adset_id`, `meta_ad_id`, `campaign_id`, `adset_id`, `ad_id` e `placement`.
   - O parâmetro `fbclid` sozinho não conta como campanha.
   - Vale o último clique: se o visitante chega por outro anúncio antes de escrever, a campanha nova substitui a que ainda não foi enviada.
-  - Recarregar a página com os mesmos parâmetros (o mesmo clique) não gera outro registro.
-- **No balão de WhatsApp:** depende de **Capturar informações de campanha** em **Habilitar balão de WhatsApp** ([Configurações do widget](/docs/canais/widget/configuracoes)). Quando o endereço da página tem parâmetros (qualquer um, não só os de campanha), o link leva informações da página; com **Enviar código de rastreio na mensagem** também marcado, o clique passa pela Kinbox, que registra a campanha e pode acrescentar `(ref: ...)` no fim do **Texto padrão**. Sem parâmetros no endereço, o link do WhatsApp abre normalmente, sem código.
+  - Recarregar a página com os mesmos parâmetros (o mesmo clique) não gera outro registro: o navegador lembra as últimas 20 campanhas já enviadas.
+- **No balão de WhatsApp:** depende de **Capturar informações de campanha** em **Habilitar balão de WhatsApp** ([Configurações do widget](/docs/canais/widget/configuracoes)). Quando o endereço da página tem parâmetros (qualquer um, não só os de campanha), o link leva informações da página. Com **Enviar código de rastreio na mensagem** também marcado, o clique passa pela Kinbox antes de abrir o WhatsApp, e ela pode registrar a campanha e acrescentar `(ref: ...)` no fim do **Texto padrão**.
+  - Passar pela Kinbox não garante registro nem código: os parâmetros `text`, `phone`, `tracking_code` e `kinbox_tracking` não contam, e só a origem da página (sem outros parâmetros) também não gera registro.
+  - O código vale 7 dias e é usado uma vez: a campanha vai para a primeira sessão aberta com aquela mensagem.
+  - Sem parâmetros no endereço, o link do WhatsApp abre normalmente, sem código.
 
 ## Eventos para o Google Tag Manager
 
@@ -124,14 +127,15 @@ Em sites que usam Google Tag Manager, o widget envia ao `dataLayer` o evento `Ki
 Para abrir o chat a partir de um botão ou link do próprio site (em conjunto com **Esconder botão do widget**), chame `window.openWidget()` na página.
 
 - A função faz o mesmo que clicar no botão do chat: se o chat já estiver aberto, ela fecha.
-- Com **Usar somente WhatsApp** (e **Número** preenchido), não há chat para abrir e a função não faz nada.
+- Com **Usar somente WhatsApp**, não há botão de chat para acionar e a função não faz nada.
+- No celular, com o balão de WhatsApp ligado, o primeiro acionamento (pela função, pelo botão ou pelo balão da chamada para ação) só mostra o botão verde; o segundo abre o chat.
 - Com **Esconder botão do widget**, o balão da **Chamada para ação** (se ligada) também abre o chat.
 
 ## Botões que aparecem no site
 
-- **Botão do chat:** some com **Esconder botão do widget** (o chat continua abrindo pela função acima ou pela chamada para ação) e com **Usar somente WhatsApp**.
-- **Botão verde do WhatsApp:** só aparece com **Habilitar balão de WhatsApp** ligado e **Número** preenchido.
-- **Usar somente WhatsApp sem Número:** o botão do chat some e o do WhatsApp não aparece; o site fica sem nenhum botão. Na **Pré-visualização**, **Usar somente WhatsApp** só desativa **Formulário** e **Chat** quando o balão está ligado e o **Número** está preenchido.
+- **Botão do chat:** some com **Esconder botão do widget** (o chat continua abrindo pela função acima ou pela chamada para ação) e com **Usar somente WhatsApp**. Com **Usar somente WhatsApp**, se **Chamada para ação** estiver ligada, o balão dela ainda abre o chat; desligue-a para ficar só com o WhatsApp.
+- **Botão verde do WhatsApp:** só aparece com **Habilitar balão de WhatsApp** ligado e algo em **Número**. Ligar o balão sem digitar o número salva só o código do país (`+55`): o botão verde aparece no site, mas abre o WhatsApp sem um número válido. Digite o número completo.
+- **Usar somente WhatsApp com Número vazio:** o botão do chat some e o do WhatsApp não aparece; sem nenhum botão no site (fica só o balão da chamada para ação, se ligada). Na **Pré-visualização**, **Usar somente WhatsApp** só desativa **Formulário** e **Chat** quando o balão está ligado e o **Número** está preenchido.
 - **Chamada para ação:** **Tempo até aparecer** vazio ou `0` espera 1 segundo; o campo aceita só número (senão mostra "Digite um número"); o balão toca som se **Habilitar sons** estiver ligado e aparece a cada página aberta, enquanto o visitante não abriu o chat.
 
 ## Criar, salvar e excluir
