@@ -1,7 +1,7 @@
 ---
 title: Conectar o Telegram
 description: Como conectar um bot do Telegram à Kinbox com o token dele para receber e responder as mensagens das pessoas na Caixa de entrada.
-keywords: [telegram, conectar telegram, bot do telegram, token do bot, botfather, canal telegram, token inválido, telegram não recebe mensagens, mensagens do telegram]
+keywords: [telegram, conectar telegram, bot do telegram, token do bot, botfather, canal telegram, token inválido, telegram não recebe mensagens, mensagens do telegram, telegram pessoal, número do telegram]
 publico: humano
 tipo: guia
 fontes:
@@ -29,7 +29,7 @@ O canal de Telegram liga um bot do Telegram à Kinbox: as mensagens que os conta
 ## Antes de começar
 
 - Crie um bot no Telegram pelo **@BotFather** (o bot oficial do Telegram para criar bots) e copie o token dele. A Kinbox não cria o bot.
-- O token tem o formato `número:letras`, por exemplo `123456789:AAExemploDeTokenFicticio`. Guarde o token em um lugar seguro, pois ele dá acesso ao bot.
+- O token tem o formato `número:letras`. Guarde o token em um lugar seguro, pois ele dá acesso ao bot.
 
 ## Passo a passo
 
@@ -43,18 +43,18 @@ O canal de Telegram liga um bot do Telegram à Kinbox: as mensagens que os conta
     Na tela **Conectar novo canal**, clique no cartão **Telegram**.
   </Step>
   <Step title="Preencha a descrição e o token">
-    No painel **Conectar Telegram**, preencha **Descrição** (obrigatório, por exemplo "Atendimento da loja") e cole o token do bot em **Token** (obrigatório).
+    No painel **Conectar Telegram**, preencha **Descrição** (obrigatório, por exemplo "Atendimento da loja") e cole `<token do bot>` em **Token** (obrigatório).
 
-    <Frame caption="Painel Conectar Telegram preenchido com Descrição e um token fictício">
-      <img src="/images/ajuda/outros-canais/telegram-conectar.webp" alt="Painel Conectar Telegram com Descrição preenchida com Atendimento da loja, Token preenchido com um token fictício e o botão Conectar canal" />
+    <Frame caption="Painel Conectar Telegram com a Descrição preenchida e um marcador no lugar do token">
+      <img src="/images/ajuda/outros-canais/telegram-conectar.webp" alt="Painel Conectar Telegram com Descrição preenchida com Atendimento da loja, Token com um marcador no lugar do token do bot e o botão Conectar canal" />
     </Frame>
 
     Clique em **Conectar canal**. Quando aparecer o aviso "Canal de Telegram criado.", a Kinbox volta para a lista com o canal **Conectado**.
   </Step>
   <Step title="Teste o canal">
-    A Kinbox confere apenas se o token contém `:`; um token errado ou revogado no formato certo ainda cria um canal **Conectado**, mas que não recebe nem envia mensagens.
+    Envie uma mensagem de teste para o bot: abra o bot no Telegram pelo nome de usuário dele, mande a mensagem, veja a conversa chegar na **Caixa de entrada** e responda pela Kinbox.
 
-    Para confirmar que está funcionando, abra o bot no Telegram pelo nome de usuário dele, envie uma mensagem de teste, veja a conversa chegar na **Caixa de entrada** e responda pela Kinbox.
+    O status **Conectado** não garante que o token está certo. Se a mensagem de teste não chegar, confira o token e se o bot não está ligado a outra ferramenta.
   </Step>
 </Steps>
 
@@ -71,14 +71,16 @@ O canal de Telegram liga um bot do Telegram à Kinbox: as mensagens que os conta
 
 ## Editar e excluir
 
-Na lista de canais, o canal aparece com a **Descrição** e "Bot do telegram" abaixo. Clique na linha para abrir o painel **Canal de Telegram**, que mostra **Status**, **Descrição** e **Token**.
+Na lista de canais, o canal aparece com a **Descrição** e "Bot do telegram" abaixo. Clique na linha do canal: o painel abre com a **Descrição** do canal no topo e mostra **Status**, **Descrição** e **Token**.
 
-- **Alterar o nome ou o token:** ao salvar, apenas a **Descrição** muda. O token não pode ser trocado pelo painel: para usar outro bot ou um token novo do mesmo bot, conecte um canal novo.
+- **Alterar a descrição:** no painel, você pode alterar a **Descrição** (e os campos personalizados, se houver). Para usar outro bot ou token, conecte um canal novo: com o **Token** alterado, o painel mostra "Canal não encontrado" e não salva.
 - **Copiar ID e excluir:** no menu de três pontos da linha ficam **Copiar ID** e, se aparecer, **Excluir** (ele não aparece para quem tem a restrição **Somente pode dar manutenção simples em canais**). **Excluir** desliga o canal e a Kinbox para de receber as mensagens do bot, mas as conversas não são apagadas. Se você conectar o mesmo token novamente no mesmo workspace, o canal volta com as conversas.
 
 ## Problemas comuns
 
-- **"Token inválido" ao conectar:** o token está sem `:`. Copie o token completo do bot e tente novamente.
+- **"Token inválido" ao conectar:** o token está incompleto. Copie o token completo do bot e tente novamente.
+- **"Essa conta já foi adicionada" ao conectar:** esse bot já está conectado neste workspace. Use o canal que já está na lista ou conecte outro bot.
+- **"Seu plano atual não permite adicionar o novo canal":** no teste grátis, o limite é de 1 canal de Telegram. Use o canal que já existe ou contrate um plano pago.
 - **Canal Conectado, mas nenhuma mensagem chega:** o token está errado ou revogado, ou o bot foi conectado em outro lugar depois. Exclua o canal e conecte de novo com o token correto.
 - **O contato diz que mandou mensagem, mas ela não chega:** confirme se ele escreveu para o bot certo, já que a conversa só começa quando o contato manda a primeira mensagem para o bot conectado.
 - **A mensagem enviada fica com erro:** o Telegram recusou o envio (por exemplo, o contato bloqueou o bot).

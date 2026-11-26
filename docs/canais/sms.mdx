@@ -1,7 +1,7 @@
 ---
 title: "Usar SMS: criar o canal e comprar créditos"
 description: Como criar o canal de SMS da Kinbox, comprar créditos de SMS por Pix e enviar SMS para os contatos pela conversa ou por campanha.
-keywords: [sms, canal de sms, criar canal sms, créditos de sms, comprar créditos, comprar sms, pix, enviar sms, sms para contato, sem créditos, histórico de sms, mensagem de texto, torpedo]
+keywords: [sms, canal de sms, criar canal sms, créditos de sms, comprar créditos, comprar sms, pix, enviar sms, sms para contato, sem créditos, histórico de sms, mensagem de texto, torpedo, saldo de sms, recarregar sms]
 publico: humano
 tipo: guia
 fontes:
@@ -9,7 +9,7 @@ fontes:
   - web:src/pages/settings/channels/sms/EditSms.tsx
   - web:src/pages/settings/channels/sms/BuySmsModal/index.tsx
   - web:src/components-old/chat/side/DetailsTitle.tsx
-  - api-v0:server/controllers/SmsController.js
+  - api-v0:server/controllers/**
   - api-v0:server/controllers/TransactionOrderController.js
 codigo:
   - web:src/pages/settings/channels/sms/**
@@ -17,7 +17,7 @@ codigo:
   - web:src/pages/settings/channels/channels.def.tsx
   - web:src/lib/sms_counter.jsx
   - web:src/components-old/chat/side/DetailsTitle.tsx
-  - api-v0:server/controllers/SmsController.js
+  - api-v0:server/controllers/**
   - api-v0:server/controllers/TransactionOrderController.js
   - api-v0:server/modules/sms/**
 verificado_em: 2026-11-26
@@ -59,16 +59,16 @@ Não é preciso ter créditos de SMS para criar o canal.
 
 <Steps>
   <Step title="Abra o canal de SMS">
-    Em **Configurações** → **Chat** → **Canais**, clique na linha **SMS** para abrir o painel **Canal de SMS**. Ele mostra **Créditos disponíveis** e os botões **Comprar créditos** e **Ver histórico**.
+    Em **Configurações** → **Chat** → **Canais**, clique na linha **SMS** para abrir o painel **Canal de SMS**. Ele mostra **Créditos disponíveis**, o botão **Ver histórico** e, se aparecer, o botão **Comprar créditos**.
 
     <Frame caption="Painel Canal de SMS com os créditos disponíveis e os botões de compra e histórico">
       <img src="/images/ajuda/outros-canais/sms-painel.webp" alt="Painel Canal de SMS mostrando Créditos disponíveis com 0 e os botões Comprar créditos e Ver histórico" />
     </Frame>
   </Step>
   <Step title="Escolha o pacote">
-    Clique em **Comprar créditos**. Se o botão **Comprar créditos** não aparecer, fale com quem gerencia o seu plano ou compre pela **Assinatura**.
+    Clique em **Comprar créditos**. Se o botão **Comprar créditos** não aparecer, fale com quem gerencia o seu plano (ou, se a opção estiver disponível para você, compre pela **Assinatura**).
 
-    No painel **Comprar créditos**, selecione o pacote em **Quantidade de créditos** (de 1 mil a 1 milhão de créditos) e confira o **Total**.
+    No painel **Comprar créditos**, selecione o pacote em **Quantidade de créditos** e confira o **Total**.
 
     <Frame caption="Painel Comprar créditos com o pacote de 1000 créditos selecionado">
       <img src="/images/ajuda/outros-canais/sms-comprar-creditos.webp" alt="Painel Comprar créditos com Quantidade de créditos em 1000, o Total sob tarja, o aviso sobre compras acima de 100 mil créditos e o botão Comprar com PIX" />
@@ -79,16 +79,16 @@ Não é preciso ter créditos de SMS para criar o canal.
   </Step>
 </Steps>
 
-Para comprar mais de 100 mil créditos, fale com o suporte. Depois da confirmação do pagamento, os créditos podem levar até **1 dia útil** para liberar.
+A lista vai até 1 milhão, mas o aviso do painel pede falar com o suporte em compras acima de 100 mil. Depois da confirmação do pagamento, os créditos podem levar até **1 dia útil** para liberar.
 
-Em **Ver histórico**, você abre **Histórico de transações de SMS** para conferir **Status**, **Créditos**, **Valor** e **Data** das compras, e pode reabrir o Pix de uma compra pelo menu da linha em **Ver QRCode**.
+Em **Ver histórico**, você confere as compras e reabre o Pix de uma compra.
 
-Quem tem a permissão **Assinatura** também pode comprar os mesmos créditos de SMS em [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo). O plano também pode incluir créditos de SMS mensais: veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
+Quem tem a permissão **Assinatura** também pode comprar os mesmos créditos de SMS pela **Carteira**, dentro de **Assinatura**: veja [Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo). O plano também pode incluir créditos de SMS mensais: veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
 
 ## Enviar SMS
 
-- **Para um contato:** enviar a primeira mensagem por SMS exige a permissão **Iniciar chat ativo** (ou ser proprietário). Se o contato tiver celular, clique em **Enviar SMS** no painel do contato dentro da conversa, ou abra a janela **Enviar mensagem** na **Caixa de entrada** e escolha o canal de SMS ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
-- **Editor e contador:** no SMS, o editor aceita apenas texto (sem **Anexar** e sem gravar áudio). O contador `(n/160)` mostra quantos caracteres você digitou; com letras acentuadas (como `ã`, `ç` ou `é`), o limite do contador cai para 70 caracteres e o número fica vermelho quando passa. Na conversa, a Kinbox não corta nem bloqueia o envio, mas prefira mensagens curtas e sem acento quando possível.
+- **Para um contato:** enviar a primeira mensagem por SMS exige a permissão **Iniciar chat ativo** (ou ser proprietário). Se o contato tiver telefone, clique no botão com o ícone de SMS no painel do contato dentro da conversa (ao passar o mouse, aparece a dica **Enviar SMS**), ou abra a janela **Enviar mensagem** na **Caixa de entrada** e escolha o canal de SMS ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
+- **Editor e contador:** no SMS, o editor aceita apenas texto (sem **Anexar** e sem gravar áudio). O contador mostra o tamanho da mensagem e o limite muda conforme os caracteres usados; o número fica vermelho ao passar do limite. Na conversa, a Kinbox não corta nem bloqueia o envio, mas prefira textos curtos.
 - **Consumo e respostas:** cada SMS enviado gasta 1 crédito de SMS, descontado antes do envio. Sem créditos, a mensagem não sai. As respostas do contato chegam na mesma conversa de SMS na **Caixa de entrada**.
 - **Campanhas por SMS:** para enviar para uma lista de contatos (até 160 caracteres, sem emoji e sem anexo, gastando 1 crédito por mensagem), veja [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms).
 
@@ -99,7 +99,7 @@ No menu de três pontos da linha **SMS** ficam **Copiar ID** e, se aparecer, **E
 ## Problemas comuns
 
 - **A mensagem fica com erro ("Sem créditos disponíveis"):** o workspace não tem **Créditos de SMS** disponíveis. Compre créditos pelo painel **Canal de SMS** ou pela **Assinatura** e tente novamente.
-- **"Você precisa configurar um canal de SMS para enviar mensagens."** — o workspace ainda não tem um canal de SMS ativo. Crie o canal seguindo os passos de **Criar o canal**.
+- **"Você precisa configurar um canal de SMS para enviar mensagens.":** o workspace ainda não tem um canal de SMS ativo. Crie o canal seguindo os passos de **Criar o canal**.
 - **O cartão SMS está desativado em Conectar novo canal:** o workspace já tem um canal de SMS ativo (o limite é de um por workspace). Volte para a lista de canais e abra o canal **SMS**.
 - **Os créditos não entraram depois do pagamento:** depois da confirmação do Pix, os créditos podem levar até 1 dia útil para liberar. Se passar desse prazo, fale com o suporte.
 

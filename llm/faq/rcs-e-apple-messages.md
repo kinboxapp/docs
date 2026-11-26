@@ -6,11 +6,9 @@ publico: llm
 tipo: faq
 fontes:
   - web:src/pages/settings/channels/AddChannel.tsx
-  - api:src/modules/rcs-consents/rcs-consents.controller.ts
 codigo:
   - web:src/pages/settings/channels/AddChannel.tsx
   - web:src/pages/settings/channels/**
-  - api:src/modules/rcs-consents/**
 verificado_em: 2026-11-26
 ---
 

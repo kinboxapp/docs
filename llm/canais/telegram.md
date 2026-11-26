@@ -25,15 +25,15 @@ Detalhes de referência da página [Conectar o Telegram](/docs/canais/telegram).
 ## Token
 
 - O canal conecta um bot do Telegram criado no @BotFather, identificado pelo **Token**. Não conecta a conta pessoal de Telegram de alguém.
-- **Formato:** `número:letras` (exemplo fictício: `123456789:AAExemploDeTokenFicticio`).
-- **Validação ao conectar:** a Kinbox confere apenas se o token contém `:`. Um token no formato certo, mas incorreto ou revogado, ainda cria um canal com status **Conectado** que não recebe nem envia mensagens. Sempre teste enviando uma mensagem para o bot depois de conectar.
+- **Formato:** `número:letras`. Nos exemplos desta página, o token aparece como `<token do bot>`.
+- **Status Conectado:** o status **Conectado** não garante que o token está certo. Envie uma mensagem de teste para o bot; se não chegar, confira o token e se o bot não está ligado a outra ferramenta.
 - **Segurança:** guarde o token em local seguro, pois ele dá acesso ao bot.
 
 ## Mensagens ao conectar
 
 | Mensagem | Causa | O que fazer |
 | --- | --- | --- |
-| `"Token inválido"` | O **Token** informado não contém `:`. | Copie o token completo do bot no formato `número:letras` e tente novamente. |
+| `"Token inválido"` | O **Token** informado está incompleto. | Copie o token completo do bot no formato `número:letras` e tente novamente. |
 | `"Essa conta já foi adicionada"` | Esse token já pertence a um canal de Telegram ativo no mesmo workspace. | Use o canal já conectado na lista ou conecte outro bot. |
 | `"Seu plano atual não permite adicionar o novo canal"` | O workspace está no teste grátis e já possui 1 canal de Telegram. | Use o canal existente ou mude para um plano pago. |
 | `"Sua assinatura expirou"` | A assinatura do workspace está vencida há mais de 3 dias. | Regularize a assinatura antes de conectar novos canais. |
@@ -62,9 +62,10 @@ Detalhes de referência da página [Conectar o Telegram](/docs/canais/telegram).
 
 ## Trocar de bot ou de token
 
-- No painel **Canal de Telegram** (**Status**, **Descrição** e **Token**), apenas a **Descrição** muda ao salvar.
-- Trocar o campo **Token** no painel e salvar retorna `"Canal não encontrado"`.
-- Para usar outro bot ou um token novo do mesmo bot, conecte um canal novo com o token novo.
+- Clique na linha do canal. O painel abre com a **Descrição** do canal no topo e mostra **Status**, **Descrição** e **Token**.
+- No painel, você pode alterar a **Descrição** (e os campos personalizados do canal, se houver).
+- Com o **Token** alterado, o painel mostra `"Canal não encontrado"` e não salva nada.
+- Para usar outro bot ou token, conecte um canal novo com o token novo.
 
 ## Excluir e reconectar
 
@@ -76,7 +77,7 @@ Detalhes de referência da página [Conectar o Telegram](/docs/canais/telegram).
 ## Um bot em mais de um lugar
 
 - O Telegram entrega as mensagens de um bot a apenas um destino por vez.
-- Se o mesmo token for conectado depois em outra ferramenta ou em outro workspace da Kinbox (o mesmo token pode ser adicionado em dois workspaces diferentes), as mensagens passam a ir para o último lugar conectado e deixam de chegar no anterior.
+- Se o mesmo token for conectado depois em outra ferramenta ou em outro workspace da Kinbox, as mensagens passam a ir para o último lugar conectado e deixam de chegar no anterior.
 - Use um bot exclusivo para cada workspace da Kinbox.
 
 ## Mensagem com erro

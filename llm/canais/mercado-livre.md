@@ -41,8 +41,8 @@ verificado_em: 2026-11-26
 - A resposta é publicada como resposta pública àquela pergunta no anúncio do Mercado Livre.
 - A conversa aceita apenas texto: não há notas internas nem anexos.
 
-## Lista de canais, edição e exclusão
+## Lista de canais, detalhes e exclusão
 
 - Em **Configurações** → **Chat** → **Canais**, a linha mostra a descrição e `"Loja do Mercado Livre"` abaixo.
-- Clicar na linha abre o painel **Canal de Mercado Livre**, com **Status** e **Descrição**.
+- Clicar na linha abre o painel **Canal de Mercado Livre**, com **Status** e **Descrição**. A **Descrição** é só leitura: não dá para alterá-la no painel.
 - No menu de três pontos ficam **Copiar ID** (`"ID do canal (<id>) copiado para clipboard."`) e **Excluir** (`"Tem certeza que deseja excluir esse canal?"`), que exige a permissão **Gerenciar Canais** (ou proprietário) e estar sem a restrição **Somente pode dar manutenção simples em canais**. **Excluir** desliga o canal e mantém as conversas.

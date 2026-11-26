@@ -18,7 +18,7 @@ fontes:
   - api:src/shared/utils/helper.ts
   - api:src/modules/reports/session-summary/session-summary.consumer.ts
   - api-v0:server/controllers/CampaignController.js
-  - api-v0:server/controllers/SmsController.js
+  - api-v0:server/controllers/**
   - api-v0:server/controllers/WbaCloudController.js
 codigo:
   - web:src/pages/crm/campaigns/**
@@ -27,7 +27,7 @@ codigo:
   - api:src/shared/utils/helper.ts
   - api:src/modules/reports/session-summary/session-summary.consumer.ts
   - api-v0:server/controllers/CampaignController.js
-  - api-v0:server/controllers/SmsController.js
+  - api-v0:server/controllers/**
   - api-v0:server/modules/wabox/WaboxSender.js
 verificado_em: 2026-11-26
 ---
