@@ -2358,3 +2358,134 @@
   arquivo: images/ajuda/copiloto/bases-lista.webp
   paginas:
     - docs/copiloto/base-de-conhecimento
+# Seção cenarios (Automação e IA › Cenários)
+#
+# Os três cenários de exemplo vêm do seed (`bun seed.ts --so cenarios`) e ficam sempre desligados: nada roda nem chama
+# endereço externo (o webhook de entrada grava um endereço fictício em example.com; a Requisição HTTP aponta para exemplo.com). Os itens abrem o cenário pelo nome na lista, porque o id muda se o
+# seed recriar o cenário. O endereço do webhook de entrada leva tarja em todo print. Sem print da janela "Começar o
+# cenário quando..." nem do fim da lista "Nova ação": o staging já mostra o gatilho "Conversa resolvida" e a ação
+# "Criar tarefa" (KIN-7904), que ainda não estão em produção. Sem print do Analítico: os cenários de exemplo nunca rodam,
+# então a tela fica vazia. A janela "Webhook de Recebimento" mostra a estrutura de exemplo gravada pelo seed (dados
+# fictícios), sem enviar nada ao endereço.
+
+- id: cenarios-lista
+  url: /settings/workflows
+  passos:
+    - esperar: 'text=Lead do site'
+    - pausa: 800
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/lista.webp
+  paginas:
+    - docs/cenarios/visao-geral
+    - docs/cenarios/criar-um-cenario
+
+- id: cenarios-editor
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1500
+  alvo: '.workflow-fullscreen'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/editor.webp
+  paginas:
+    - docs/cenarios/criar-um-cenario
+
+- id: cenarios-nova-acao
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1000
+    - clicar: '[class*="animated_border"]'
+    - esperar: 'text=Nova ação'
+    - pausa: 800
+  alvo:
+    - '[class*="animated_border"]'
+    - '.ant-dropdown-menu-item:has-text("Buscar contato")'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/nova-acao.webp
+  paginas:
+    - docs/cenarios/criar-um-cenario
+
+- id: cenarios-gatilho-webhook
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node-trigger'
+    - pausa: 1000
+    - clicar: '.react-flow__node-trigger'
+    - esperar: '.base-edit-action >> text=Determinar estrutura'
+    - pausa: 800
+  alvo:
+    - '.base-edit-action .g_base_edit_action'
+    - '.base-edit-action button:has-text("Novo gatilho")'
+  mascarar:
+    - '.base-edit-action .ant-form-item:has-text("Endereço Url") input'
+  arquivo: images/ajuda/cenarios/gatilho-webhook.webp
+  paginas:
+    - docs/cenarios/integrar-via-webhook-com-cenarios
+
+- id: cenarios-determinar-estrutura
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Lead do site'
+    - esperar: '.react-flow__node-trigger'
+    - pausa: 1000
+    - clicar: '.react-flow__node-trigger'
+    - clicar: '.base-edit-action >> text=Determinar estrutura'
+    - esperar: '.ant-modal-content >> text=Webhook de Recebimento'
+    - pausa: 1000
+  alvo: '.ant-modal-content'
+  mascarar:
+    - '.ant-modal-content .ant-form-item:has-text("Endereço Url") input'
+  arquivo: images/ajuda/cenarios/determinar-estrutura.webp
+  paginas:
+    - docs/cenarios/integrar-via-webhook-com-cenarios
+
+- id: cenarios-loop
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Pedidos do dia para o ERP'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1500
+  alvo: '.workflow-fullscreen'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/loop.webp
+  paginas:
+    - docs/cenarios/gatilhos-e-acoes
+
+- id: cenarios-agendamento
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Pedidos do dia para o ERP'
+    - esperar: '.react-flow__node-trigger'
+    - pausa: 1000
+    - clicar: '.react-flow__node-trigger'
+    - esperar: '.base-edit-action >> text=Horário de execução'
+    - pausa: 800
+  alvo:
+    - '.base-edit-action .g_base_edit_action'
+    - '.base-edit-action button:has-text("Novo gatilho")'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/gatilho-agendamento.webp
+  paginas:
+    - docs/cenarios/gatilhos-e-acoes
+
+- id: cenarios-requisicao-http
+  url: /settings/workflows
+  passos:
+    - clicar: 'text=Pedidos do dia para o ERP'
+    - esperar: '.react-flow__node[data-id="3"]'
+    - pausa: 1000
+    - clicar: '.react-flow__node[data-id="3"]'
+    - esperar: 'text=Pré-visualização (Exemplo)'
+    - pausa: 1000
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/cenarios/requisicao-http.webp
+  paginas:
+    - docs/cenarios/gatilhos-e-acoes

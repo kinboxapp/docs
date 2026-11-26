@@ -2,7 +2,7 @@
  * Cria (ou completa) o workspace de documentação no staging, com dados fictícios estáveis para os prints
  * da central de ajuda.
  *
- * Uso: `bun scripts/screenshots/seed.ts`
+ * Uso: `bun scripts/screenshots/seed.ts` (ou `--so <etapa>` para rodar só uma etapa, ex.: `--so cenarios`)
  *
  * É idempotente: cada item é procurado pelo nome (ou e-mail) antes de ser criado, e as conversas continuam
  * do passo em que pararam. Rodar de novo não duplica nada.
@@ -589,12 +589,90 @@ async function garantirClientes(api: Api, contatoIds: Record<string, string>) {
   log(`clientes: ${CAMPOS_CONTATO.length} campos de contato e ${ORGANIZACOES.length} organizações`)
 }
 
+/**
+ * Cenários de exemplo (prints da seção `cenarios`), todos desligados: nenhum roda nem chama endereço externo.
+ * - "Lead do site": Webhook recebido → Buscar contato → Atualizar contato ou Criar contato.
+ * - "Pedidos do dia para o ERP": Agendamento cíclico → Buscar negócio (todos do funil) → Loop → Requisição HTTP
+ *   para exemplo.com.
+ * - "Bot na nova sessão": Nova Sessão (chat do site) → Executar bot.
+ * O endereço do webhook é fictício (example.com): o cenário fica desligado e os prints levam tarja nesse campo.
+ * Cenário que já existe desligado é atualizado (passos e posições), mantendo o gatilho gravado.
+ */
+function montarCenarios(dados: { canal: string; botId: string; pipelineId: string }) {
+  const no = (id: string, type: string, x: number, y: number, action: any = {}) => ({ id, type, position: { x, y }, data: { action } })
+  const aresta = (source: string, sourceHandle: string, target: string) => ({
+    id: `reactflow__edge-${source}${sourceHandle}-${target}`, source, sourceHandle, target, targetHandle: null,
+    type: 'removable_edge', arrowHeadType: 'arrow', style: { stroke: 'var(--content-primary)' },
+  })
+  const gatilho = (triggers: any) => ({ id: 'trigger', type: 'trigger', position: { x: 300, y: 300 }, sourcePosition: 'right', data: { label: '', action: { triggers } } })
+  const v = (type: string, jsonPath = '', reference = '') => `{${type}|${jsonPath}|${reference}|}`
+  const montar = (name: string, lastNodeId: number, nos: any[], arestas: any[]) => {
+    const actions = Object.fromEntries(nos.map((n) => [n.id, {
+      id: n.id, type: n.type, data: n.data?.action,
+      targets: Object.fromEntries(arestas.filter((e) => e.source === n.id).map((e) => [e.sourceHandle, e.target])),
+    }]))
+    return { name, active: false, lastNodeId, elements: [...nos, ...arestas], actions }
+  }
+  const idWebhook = 'docsExemplo' + Math.random().toString(36).slice(2, 8)
+  return [
+    montar('Lead do site', 3, [
+      gatilho({ webhook_inbound: { active: true, webhookUrl: `https://example.com/inbound/${idWebhook}`,
+        schema: { body: { nome: 'Cliente Exemplo', telefone: '5511900000001', email: 'cliente@example.com', origem: 'site' }, query: {} } } }),
+      no('1', 'contact:find', 680, 300, { contact: { phone: v('webhook:body', '$.telefone', 'trigger') } }),
+      no('2', 'contact:update', 1060, 180, { contact: { contactReference: '1', name: v('webhook:body', '$.nome', 'trigger'), email: v('webhook:body', '$.email', 'trigger') } }),
+      no('3', 'contact:create', 1060, 480, { contact: { name: v('webhook:body', '$.nome', 'trigger'), phone: v('webhook:body', '$.telefone', 'trigger'), email: v('webhook:body', '$.email', 'trigger') } }),
+    ], [aresta('trigger', 'default', '1'), aresta('1', 'default', '2'), aresta('1', 'not_found', '3')]),
+    montar('Pedidos do dia para o ERP', 3, [
+      gatilho({ 'schedule:cyclic': { active: true, periodicity: 'daily', hour: 18, minute: 0 } }),
+      no('1', 'deal:find', 600, 300, { deal: { findMode: 'all_by_pipeline', pipelineId: dados.pipelineId, limit: 500 } }),
+      no('2', 'loop', 900, 300, { loop: { items: v('deal:json', '$.data', '1'), maxIterations: 500, batchSize: 50 } }),
+      no('3', 'make_request', 1200, 560, { request: { method: 'POST', url: 'https://exemplo.com/api/pedidos', headers: {},
+        body: `{\n\n  "negocio": "${v('loop:item', '$.name', '2')}",\n\n  "valor": ${v('loop:item', '$.value', '2')}\n\n}` } }),
+    ], [aresta('trigger', 'default', '1'), aresta('1', 'default', '2'), aresta('2', 'default', '3')]),
+    montar('Bot na nova sessão', 1, [
+      gatilho({ 'conversation:new_session': { active: true, channelId: [dados.canal], triggerFilterValue: JSON.stringify([dados.canal]) } }),
+      no('1', 'conversation:run-bot', 680, 300, { runBot: { conversationReference: 'trigger', botId: dados.botId } }),
+    ], [aresta('trigger', 'default', '1')]),
+  ]
+}
+
+async function garantirCenarios(api: Api, canal: string) {
+  const bot = lista(await api.v0('GET', '/bot')).find((b) => b.name === 'Atendimento inicial')
+  const funil = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  if (!bot || !funil) throw new Error('bot "Atendimento inicial" ou funil "Vendas" não encontrado')
+  const existentes = lista(await api.v3('GET', '/workflows'))
+  const criados: string[] = []
+  const atualizados: string[] = []
+  for (const cenario of montarCenarios({ canal, botId: String(bot.id), pipelineId: String(funil.id ?? funil._id) })) {
+    const atual = existentes.find((w) => w.name === cenario.name)
+    if (!atual) {
+      await api.v3('POST', '/workflows', cenario)
+      criados.push(cenario.name)
+      continue
+    }
+    // Ligado por alguém: não mexe. Desligado: atualiza passos e posições, mantendo o gatilho gravado (e o endereço do webhook)
+    const completo = await api.v3('GET', `/workflows/${atual.id}`)
+    if (completo?.active) continue
+    const gatilhoAtual = (completo?.elements || []).find((e: any) => e.id === 'trigger')
+    if (gatilhoAtual) {
+      cenario.elements = cenario.elements.map((e: any) => (e.id === 'trigger' ? gatilhoAtual : e))
+      cenario.actions.trigger.data = gatilhoAtual.data?.action
+    }
+    await api.v3('PATCH', `/workflows/${atual.id}`, { elements: cenario.elements, actions: cenario.actions, lastNodeId: cenario.lastNodeId })
+    atualizados.push(cenario.name)
+  }
+  log(`cenários: criados [${criados.join(', ')}], atualizados [${atualizados.join(', ')}] (todos desligados)`)
+}
+
+/** `--so <etapa>` roda só uma etapa da lista abaixo (mais a base idempotente de canal, tags e contatos). */
+const so = process.argv.includes('--so') ? process.argv[process.argv.indexOf('--so') + 1] : undefined
+
 const workspace = await garantirWorkspace()
 const api = client(workspace.token)
-await pularOnboarding(api)
+if (!so) await pularOnboarding(api)
 const canal = await garantirWidget(api)
 const tagIds = await garantirTags(api)
-await garantirConversas(api, canal, tagIds)
+if (!so) await garantirConversas(api, canal, tagIds)
 const contatoIds = await garantirContatos(api)
 
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
@@ -609,8 +687,9 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['organização do atendimento', () => garantirOrganizacao(api)],
   ['widget de exemplo', () => garantirWidgetExemplo(api)],
   ['clientes', () => garantirClientes(api, contatoIds)],
+  ['cenarios', () => garantirCenarios(api, canal)],
 ]
-for (const [nome, etapa] of etapas) {
+for (const [nome, etapa] of etapas.filter(([nome]) => !so || nome === so)) {
   try {
     await etapa()
   } catch (e) {
