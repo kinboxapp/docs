@@ -1121,5 +1121,57 @@
     "pergunta": "O copiloto consegue publicar posts nas redes sociais da minha loja?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Arrasto o card para a próxima coluna do funil e ele volta sozinho, o que está travando?",
+    "esperado": [
+      "llm/faq/funil-negociacao-nao-muda-de-etapa",
+      "docs/crm/gerenciando-funil-de-vendas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Subi uma planilha de negócios errada no funil, tem como apagar tudo que ela criou?",
+    "esperado": [
+      "llm/faq/funil-reverter-importacao",
+      "docs/crm/importar-negociacoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para criar uma tarefa automática de follow-up quando o lead entra numa etapa do funil?",
+    "esperado": [
+      "docs/crm/cadencias"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para abrir um negócio no CRM direto da conversa com o cliente?",
+    "esperado": [
+      "llm/faq/funil-negocio-da-conversa",
+      "docs/crm/gerenciando-funil-de-vendas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Por que o sistema não deixa eu apagar um funil antigo?",
+    "esperado": [
+      "llm/faq/funil-excluir-funil",
+      "docs/crm/criar-funil-de-vendas"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Clico para marcar a negociação como ganha e aparece um aviso pedindo para preencher um campo, como resolvo?",
+    "esperado": [
+      "docs/crm/motivos-de-perda-e-regras",
+      "docs/crm/gerenciando-funil-de-vendas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A Kinbox gera proposta comercial em PDF a partir da negociação?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
