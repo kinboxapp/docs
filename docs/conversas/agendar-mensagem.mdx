@@ -1,0 +1,62 @@
+---
+title: Agendar uma mensagem
+description: Como programar uma mensagem para ser enviada mais tarde numa conversa, repetir todo mês e editar ou excluir o agendamento.
+keywords: [agendar mensagem, mensagem programada, enviar depois, lembrete, repetir mensalmente, mensagem agendada, editar agendamento, cancelar agendamento]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/components-old/inbox/ScheduleMessageModal/index.tsx
+  - web:src/pages/inbox/ChatHeader/index.tsx
+  - web:src/components-old/chat/side/ContactSchedules/index.tsx
+  - api-v0:server/modules/scheduler/scheduleCallMessagesScheduler.js
+codigo:
+  - web:src/components-old/inbox/ScheduleMessageModal/**
+  - web:src/components-old/chat/side/ContactSchedules/**
+  - web:src/pages/inbox/ChatHeader/index.tsx
+  - web:src/pages/inbox/ChatHeader/ConversationInfoModal.tsx
+  - api-v0:server/modules/scheduler/scheduleCallMessagesScheduler.js
+  - api-v0:server/modules/scheduler/schedulerManager.js
+verificado_em: 2026-11-26
+---
+
+Programe o envio de uma mensagem em uma conversa para uma data e horário futuros, com opção de repetição mensal.
+
+<Note>
+  Quem pode: membros com a permissão **Agendar mensagem**. Sem ela, o item aparece desativado no menu.
+</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra o agendamento na conversa">
+    No cabeçalho da conversa, clique em **Mais ações** (três pontos) → **Agendar mensagem**. Você também pode abrir pelo comando na pesquisa geral (`Ctrl+K` / `⌘K`).
+  </Step>
+  <Step title="Defina a data, o conteúdo e a repetição">
+    Escolha primeiro a **Data** (data e hora no formato `DD/MM/AAAA HH:mm`, a partir de hoje); no WhatsApp oficial, é a data que decide se o campo é de texto livre ou de template (veja abaixo). Depois escreva o **Texto** — o editor aceita [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas) (inclusive de voz), emojis, anexos e chaves `{}`. Para agendar um áudio, escolha uma frase rápida de voz. Se quiser enviar todo mês, marque **Repetir mensalmente**.
+
+    <Frame caption="Janela Agendar mensagem com Data, Texto e Repetir mensalmente">
+      <img src="/images/ajuda/conversas/agendar-mensagem.webp" alt="Janela Agendar mensagem vazia com campo Data obrigatório, editor de Texto com os ícones Nota pro time, frases rápidas, emoji, anexo e chaves, opção Repetir mensalmente e botão Criar" />
+    </Frame>
+  </Step>
+  <Step title="Salve o agendamento">
+    Clique em **Criar**. Aparece o aviso "Agendamento realizado.".
+  </Step>
+</Steps>
+
+## WhatsApp oficial
+
+Escolha a data antes de escrever. O texto livre só aparece quando a data cai dentro da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas) desde a última mensagem do contato. Se a janela já está fechada, ou fecha antes do horário marcado, a tela troca o campo de texto por **Modelo de mensagem**, e é preciso escolher um template aprovado pela Meta.
+
+## Depois de agendar
+
+- O cabeçalho da conversa exibe o selo **Mensagem Agendada** (passar o mouse mostra a data do envio).
+- Clique no selo **Mensagem Agendada** — ou abra **Mais ações** → **Ver Informações** — e vá em **Agendamentos** para consultar todos os agendamentos da conversa.
+- Clique em um agendamento que ainda não saiu para editar ou excluir. Os que já saíram abrem só para consulta, sem botão de salvar.
+- Depois do horário, confira na conversa se a mensagem saiu sem erro. O selo some quando a Kinbox dispara o envio, mesmo que o canal recuse a mensagem.
+
+## Bom saber
+
+- A mensagem pode sair alguns minutos depois do horário definido.
+- Chaves como `{{name}}` e `{{first_name}}` são trocadas pelos dados do contato na hora do envio; se o contato não tiver valor naquele campo, a chave some do texto.
+- Se a conversa estiver resolvida quando chegar a hora do envio, a Kinbox abre uma nova sessão atribuída a quem criou o agendamento.
+- Com **Repetir mensalmente** marcado, a Kinbox agenda a próxima para o mês seguinte assim que dispara o envio deste mês.
