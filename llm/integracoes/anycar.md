@@ -65,7 +65,7 @@ O padrão selecionado é **RENAJUD Plus**. Os 25 tipos disponíveis em **Tipo de
   - Sem **Api Key** em **RENAJUD Plus**: `"A integração Anycar não está configurada para este workspace."`
   - Placa fora do padrão: `"Placa inválida. Revise e tente novamente."`
   - Resposta da Anycar sem sucesso ou sem dados: `"A Anycar não conseguiu concluir a consulta. Tente novamente."` (ou a mensagem devolvida pela Anycar / `"Não foi possível concluir a consulta."`).
-  - Tempo limite acima de 15 segundos: `"A consulta demorou mais que o esperado. Tente novamente."`
+  - Consulta que excede o tempo de resposta: `"A consulta demorou mais que o esperado. Tente novamente."`
   - Outros erros: `"Não foi possível realizar a consulta no momento."`
 
 ## Ação no bot: Consulta RENAJUD Plus na Anycar

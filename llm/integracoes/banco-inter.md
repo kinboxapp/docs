@@ -42,7 +42,7 @@ A janela sempre abre vazia (não preenche dados a partir do contato), exibe o av
 
 ## Emissão, PDF e o que a integração não faz
 
-- **Tela Compartilhar boleto:** depois de gerar, o título passa a **Compartilhar boleto**, sem aviso de sucesso na tela e sem botão de envio ao contato. Exibe **Linha Digitável** (somente leitura), **Copiar** (aviso `"Linha digitável copiada para a área de transferência."`) e **Baixar PDF** (baixa `boleto.pdf`). O botão **Fechar** do rodapé fica oculto nessa tela; para sair, feche a janela.
+- **Tela Compartilhar boleto:** depois de gerar, o título passa a **Compartilhar boleto**, sem aviso de sucesso na tela e sem botão de envio ao contato. Exibe **Linha Digitável** (somente leitura), **Copiar** (aviso `"Linha digitável copiada para a área de transferência."`) e **Baixar PDF** (baixa `boleto.pdf`). O botão **Fechar** do rodapé fica oculto nessa tela; para sair, clique no **X** do cabeçalho.
 - **Sem gravação na Kinbox:** emitir um boleto não cria negociação, nota, tag nem registro no histórico da conversa e não envia mensagem ao contato.
 - **Fora do escopo:** não gera Pix ou QR Code, não lista boletos anteriores, não consulta status, não dá baixa, não cancela boletos e não possui ação pronta no bot.
 

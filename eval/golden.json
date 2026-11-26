@@ -1633,7 +1633,7 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Uso o Tiny como ERP. Consigo cadastrar o contato da conversa como cliente lá e ver o CPF e o endereço dele sem sair da Kinbox?",
+    "pergunta": "Uso o Tiny como ERP. Consigo ligar o contato da conversa a um cliente de lá e ver os dados cadastrais já preenchidos no Tiny sem sair da Kinbox?",
     "esperado": [
       "docs/integracoes/tiny-erp"
     ],

@@ -1,6 +1,6 @@
 ---
 title: Posso cobrar o cliente pela conversa (Pix ou boleto)?
-description: Em parte. A Kinbox não gera Pix, link de pagamento nem cobrança no cartão; com integrações, dá para gerar boleto do Banco Inter na conversa e o bot enviar boletos do Asaas ou da Hinova.
+description: Em parte. Não há uma função nativa de cobrança na conversa (Pix, link de pagamento ou cartão); com integrações, dá para gerar boleto do Banco Inter na conversa e o bot enviar boletos do Asaas ou da Hinova.
 keywords: [cobrar pelo chat, pix pelo whatsapp, link de pagamento, boleto pela conversa, segunda via pelo bot, cobrança no whatsapp, checkout, cartão de crédito]
 publico: llm
 tipo: faq
@@ -23,7 +23,7 @@ Posso cobrar o cliente pela conversa (Pix ou boleto)?
 
 ## Resposta
 
-Em parte: a Kinbox não gera Pix, link de pagamento nem cobrança no cartão, mas três integrações ajudam com boleto.
+Em parte: não há uma função nativa de cobrança na conversa (Pix, link de pagamento ou cartão), mas três integrações ajudam com boleto.
 
 - **[Integrar com o Banco Inter](/docs/integracoes/banco-inter):** o membro gera um boleto de cobrança pelo quadro **Banco Inter** na conversa, copia a **Linha Digitável** ou baixa o PDF (`boleto.pdf`) e envia ao cliente manualmente. Não gera Pix, não envia o boleto sozinha, não consulta nem cancela boletos e não tem ação no bot.
 - **[Integrar com o Asaas](/docs/integracoes/asaas):** o bot envia ao cliente a segunda via dos boletos em aberto (pendentes ou vencidos) cadastrados no Asaas, buscando pelo campo personalizado `cpf` do contato (ação **Consulta boletos ASAAS**; confirme a identidade do cliente no fluxo do bot antes deste bloco). Não tem quadro na conversa e não gera boleto novo.
