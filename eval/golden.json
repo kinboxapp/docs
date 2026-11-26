@@ -1769,5 +1769,60 @@
     "pergunta": "Como faço para o WhatsApp do meu celular fazer backup automático das conversas no Google Drive?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Onde conecto meu primeiro WhatsApp?",
+    "esperado": [
+      "docs/primeiros-passos/conectar-o-primeiro-canal",
+      "docs/canais/whatsapp/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Fiz o cadastro mas o código de 6 dígitos nunca chegou no meu e-mail, o que eu faço?",
+    "esperado": [
+      "llm/faq/nao-recebi-o-codigo-de-confirmacao",
+      "docs/primeiros-passos/criar-seu-workspace-no-kinbox",
+      "llm/primeiros-passos/criar-seu-workspace-no-kinbox"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Cliquei em pular na configuração guiada do Kin sem querer, como volto para ela?",
+    "esperado": [
+      "llm/faq/pular-onboarding",
+      "docs/primeiros-passos/configurar-com-o-kin",
+      "llm/primeiros-passos/configurar-com-o-kin"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Mandei uma mensagem de teste. Como respondo e encerro a conversa?",
+    "esperado": [
+      "docs/primeiros-passos/atender-a-primeira-conversa",
+      "docs/conversas/gerenciar-conversas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como meu time tira o certificado de Operador Certificado da Academia e como eu cobro um prazo deles?",
+    "esperado": [
+      "llm/faq/academia-certificado",
+      "docs/primeiros-passos/videos-para-comecar",
+      "llm/primeiros-passos/videos-para-comecar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Minha empresa é de varejo e marquei Vendas no onboarding do Kin: qual funil e quais etapas ele cria?",
+    "esperado": [
+      "llm/primeiros-passos/configurar-com-o-kin"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "A Kinbox oferece um curso presencial com certificado reconhecido pelo MEC?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

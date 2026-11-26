@@ -280,12 +280,19 @@ async function garantirWorkspace(page: Page, nome: string) {
   if ((await workspaceAtivo(page)) !== nome) throw new Error(`Não consegui entrar no workspace "${nome}"`)
 }
 
+/** Telas de /auth (ex.: cadastro) abrem sem login e encerram a sessão ao abrir: vão num contexto à parte. */
+function telaPublica(item: Item) {
+  return item.url.startsWith('/auth/')
+}
+
 async function capturar(page: Page, conversor: Page, item: Item) {
   await page.setViewportSize({ width: item.largura || VIEWPORT.width, height: item.altura || VIEWPORT.height })
   if (item.site) {
     const html = paginaDeTeste(await codigoDoWidget(item.site.widget))
     await page.route(`${SITE_TESTE}/**`, (rota) => rota.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: html }))
     await page.goto(SITE_TESTE + item.url, { waitUntil: 'domcontentloaded' })
+  } else if (telaPublica(item)) {
+    await page.goto(WEB_URL + item.url, { waitUntil: 'domcontentloaded' })
   } else {
     await garantirWorkspace(page, item.workspace || DOCS_WORKSPACE_NAME)
     await page.goto(WEB_URL + item.url, { waitUntil: 'domcontentloaded' })
@@ -352,6 +359,11 @@ try {
   await garantirSessao(context)
   const page = await context.newPage()
   const conversor = await context.newPage()
+  // Contexto sem sessão para as telas públicas, para não derrubar o login do contexto principal
+  const contextoPublico = itens.some(telaPublica)
+    ? await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: 2, locale: 'pt-BR', timezoneId: 'America/Sao_Paulo', colorScheme: 'light' })
+    : undefined
+  const paginaPublica = contextoPublico ? await contextoPublico.newPage() : undefined
   if (explorar) {
     await garantirWorkspace(page, workspace || DOCS_WORKSPACE_NAME)
     await page.goto(WEB_URL + explorar, { waitUntil: 'domcontentloaded' })
@@ -366,7 +378,8 @@ try {
   }
   for (const item of itens) {
     try {
-      const { destino, bytes } = await capturar(page, conversor, item).finally(() =>
+      const alvo = telaPublica(item) && paginaPublica ? paginaPublica : page
+      const { destino, bytes } = await capturar(alvo, conversor, item).finally(() =>
         item.site ? page.unroute(`${SITE_TESTE}/**`).catch(() => {}) : undefined,
       )
       console.log(`✓ ${item.id} → ${destino.replace(RAIZ + '/', '')} (${Math.round(bytes / 1024)} KB)`)

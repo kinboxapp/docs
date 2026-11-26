@@ -23,7 +23,7 @@ Posso criar uma conta pelo app?
 
 Não; o app da Kinbox para celular só entra em uma conta que já existe.
 
-Para criar uma conta e um workspace, use a Kinbox no navegador do computador. Também não é possível criar um novo workspace pelo app. Se você quer entrar no workspace da sua empresa, peça um convite a quem administra o workspace (veja [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros)).
+Para criar uma conta e um workspace, use a Kinbox no navegador do computador (veja [Criar sua conta e o workspace](/docs/primeiros-passos/criar-seu-workspace-no-kinbox)). Também não é possível criar um novo workspace pelo app. Se você quer entrar no workspace da sua empresa, peça um convite a quem administra o workspace (veja [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros)).
 
 Ao tentar entrar no app com uma conta sem workspace (na tela, **ambiente**) ativo — inclusive usando **Continuar com Google** sem ter conta cadastrada — aparece a mensagem: "Esta conta não tem acesso a um ambiente ativo. Entre com sua conta de trabalho ou peça acesso ao administrador da sua empresa."
 

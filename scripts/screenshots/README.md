@@ -70,6 +70,8 @@ Seletores que costumam funcionar no app:
 - Janela de confirmação: `.ant-modal-confirm .ant-modal-content`.
 - Campos de formulário do antd têm `id` igual ao nome do campo (`#description`, `#phone`): bons para `mascarar`. A máscara é uma tarja sólida desenhada por cima de tudo (inclusive de modais): em print de modal, mascare só o que fica fora do recorte.
 
+Itens com `url` em `/auth/` (telas públicas, como o cadastro) rodam num contexto do navegador sem login, porque essas telas encerram a sessão ao abrir.
+
 A captura faz login no staging web, entra no workspace de documentação e tira cada print com viewport de 1440×900 e `deviceScaleFactor: 2`. A sessão fica em `~/.cache/kinbox-docs-screenshots/`, fora do repositório. Se um item falhar, o print da tela inteira vai para a mesma pasta, como `erro-<id>.png`.
 
 Depois de capturar, abra cada imagem e confira que ela mostra o que o item descreve e que não tem nenhum dado real.

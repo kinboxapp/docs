@@ -3692,3 +3692,35 @@
   arquivo: images/ajuda/app/menu-baixar-app.webp
   paginas:
     - docs/app/visao-geral
+
+# Seção primeiros-passos (Primeiros passos, lote 12)
+#
+# A tela de cadastro é pública: itens com `url` em /auth/ rodam num contexto sem login (o cadastro encerra a sessão ao
+# abrir). Só o primeiro passo (e-mail): os passos seguintes mandariam um código de verdade para um e-mail.
+
+- id: primeiros-passos-cadastro
+  url: /auth/register
+  passos:
+    - esperar: '.auth-card button.auth-submit'
+  esconder:
+    - '.request-inspector'
+  alvo:
+    - '.auth-card'
+  mascarar: []
+  arquivo: images/ajuda/primeiros-passos/cadastro.webp
+  paginas: [docs/primeiros-passos/criar-seu-workspace-no-kinbox]
+
+# A Academia abre com "Boa tarde, <nome do dono da conta>": o recorte começa nas abas, abaixo da saudação.
+- id: primeiros-passos-academia-trilhas
+  url: /academy
+  passos:
+    - esperar: 'button:has-text("Começar lição")'
+  esconder:
+    - '.request-inspector'
+  alvo:
+    - 'nav:has(button:has-text("Trilhas"))'
+    - 'button:has-text("Começar lição") >> nth=1'
+    - 'text=Frases rápidas, Copiloto'
+  mascarar: []
+  arquivo: images/ajuda/primeiros-passos/academia-trilhas.webp
+  paginas: [docs/primeiros-passos/videos-para-comecar]
