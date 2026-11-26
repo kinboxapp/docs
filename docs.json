@@ -156,6 +156,25 @@
             ]
           },
           {
+            "group": "Relatórios",
+            "icon": "chart-line",
+            "pages": [
+              {
+                "group": "Relatórios de atendimento",
+                "pages": [
+                  "docs/relatorios/como-funcionam",
+                  "docs/relatorios/visao-geral",
+                  "docs/relatorios/ao-vivo",
+                  "docs/relatorios/produtividade",
+                  "docs/relatorios/atribuicao",
+                  "docs/relatorios/interacao",
+                  "docs/relatorios/presenca",
+                  "docs/relatorios/avaliacao"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Administração",
             "icon": "gear",
             "pages": [
@@ -763,6 +782,22 @@
     {
       "source": "/docs/usando-o-kinbox/aprendendo-a-usar-o-bot",
       "destination": "/docs/bot/aprender-a-usar-o-bot"
+    },
+    {
+      "source": "/docs/relatorios/copiloto",
+      "destination": "/docs/relatorios/como-funcionam"
+    },
+    {
+      "source": "/docs/relatorios/dashboard",
+      "destination": "/docs/relatorios/como-funcionam"
+    },
+    {
+      "source": "/docs/relatorios/ligacoes",
+      "destination": "/docs/relatorios/como-funcionam"
+    },
+    {
+      "source": "/docs/relatorios/saldo",
+      "destination": "/docs/relatorios/como-funcionam"
     }
   ]
 }

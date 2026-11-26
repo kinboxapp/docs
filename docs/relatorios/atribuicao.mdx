@@ -1,0 +1,64 @@
+---
+title: Relatório de atribuição
+description: Como ver quantas vezes cada membro ou grupo recebeu sessões por dia, contando transferências, atribuição automática e a primeira atribuição.
+keywords: [atribuição, relatório de atribuição, distribuição de conversas, transferências, quem recebeu, atribuição automática, por membro, por grupo, mapa de calor, atendentes]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/reports/ReportAssignment/index.tsx
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+  - api:src/modules/reports/session-summary/session-summary.consumer.ts
+  - api-v0:server/services/V2CompatibilityService.js
+codigo:
+  - web:src/pages/reports/ReportAssignment/**
+  - web:src/pages/reports/useReports.tsx
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+  - api:src/modules/reports/session-summary/session-summary.helper.ts
+  - api:src/modules/reports/session-summary/session-summary.consumer.ts
+  - api-v0:server/services/V2CompatibilityService.js
+verificado_em: 2026-11-26
+---
+
+O relatório de **Atribuição** mostra quantas vezes cada membro ou grupo recebeu sessões por dia em um período.
+
+<Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê). Se o seu papel tiver **Restringir relatórios ao membro**, você vê só as sessões em que é o responsável; se tiver **Restringir relatórios aos grupos do membro**, você vê só as sessões que estão ou já estiveram nos seus grupos.</Note>
+
+## O que conta como atribuição
+
+Cada vez que uma sessão passa a ter um membro ou um grupo responsável, a Kinbox grava um registro de atribuição, e cada registro soma `1` no relatório:
+
+- **O que gera registro:** atribuir ou transferir uma sessão para um membro ou grupo (veja [Atribuir e transferir](/docs/conversas/atribuir-e-transferir)), distribuições pela atribuição automática, a resposta de um membro numa sessão sem responsável (que o define como responsável) e sessões que já começam com membro ou grupo, como as iniciadas pelo botão **Enviar mensagem** (veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
+- **Mesma sessão várias vezes:** se a sessão vai e volta entre membros ou passa novamente pelo mesmo membro, cada mudança gera um novo registro.
+- **O registro permanece:** mesmo depois que a sessão sai do membro ou do grupo, o registro de que ele a recebeu continua no relatório.
+
+<Note>Atribuição não é o mesmo que atendimento: uma sessão pode ser atribuída e transferida antes de o membro responder. Para ver em quantas sessões cada membro interagiu, use o [Relatório de interação](/docs/relatorios/interacao); para ver tempos médios e volumes por responsável atual, use o [Relatório de produtividade](/docs/relatorios/produtividade).</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra o relatório">
+    No menu lateral, vá em **Relatórios** → **Atribuição**. Por padrão, o relatório abre nos últimos 7 dias, sem hoje, agrupado **Por Membro**.
+  </Step>
+  <Step title="Escolha o período e os filtros">
+    Troque as datas no seletor à esquerda (os dados atualizam sozinhos) ou clique em **Filtrar**, defina os critérios e clique em **Aplicar filtros**. Para remover tudo, clique em **Limpar filtros**.
+  </Step>
+  <Step title="Alterne entre membros e grupos">
+    Clique em **Por Membro** para trocar para **Por Grupo** quando quiser acompanhar quantas atribuições cada grupo recebeu.
+  </Step>
+  <Step title="Leia o mapa e a tabela">
+    No mapa de calor **Atribuições por Membro** (ou **Atribuições por Grupo**), cores mais fortes indicam mais atribuições naquele dia; passe o mouse para ver o número exato. Em períodos longos, use a paginação do mapa. Na tabela abaixo, cada linha é um membro ou grupo e cada coluna é um dia (passe o mouse no título do dia para ver o total daquele dia).
+  </Step>
+  <Step title="Abra as sessões">
+    Clique em **Ver sessões** para listar as sessões com atribuições no período.
+
+    Para ver um dia de um membro ou grupo, clique na célula da tabela: a lista mostra as sessões atribuídas a ele naquele dia. Uma sessão atribuída duas vezes ao mesmo membro no dia soma 2 na tabela, mas aparece uma vez na lista.
+  </Step>
+  <Step title="Exporte a tabela">
+    Clique em **...** → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+  </Step>
+  <Step title="Exporte a lista de sessões (opcional)">
+    Dentro da lista de sessões, use o **Exportar** da lista. Se o seu papel tiver **Não pode exportar relatórios**, esse botão fica desativado.
+  </Step>
+</Steps>
+
+Veja também [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).

@@ -26,6 +26,8 @@ codigo:
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/controllers/RolesController.js
   - api-v0:server/middlewares/MiddlewaresService.js
+  - web:src/pages/reports/useReports.tsx
+  - web:src/pages/reports/ReportOverview/IndividualSummaries.tsx
 verificado_em: 2026-11-26
 ---
 
@@ -121,13 +123,15 @@ O menu lateral **Tarefas** aparece para todos os membros.
 
 ### Relatórios
 
+O que cada relatório mostra com estas opções: [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
+
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |
 | **Gerenciar relatórios** | Mostra **Relatórios** no menu lateral e libera a opção **Dashboard** na seção **Home**. | — |
-| **Não pode exportar relatórios** | Desativa o botão de exportar nos relatórios. | — |
+| **Não pode exportar relatórios** | Desativa o botão **Exportar** da lista de sessões dos relatórios (**Ver sessões**). | — |
 | **Não pode criar ou excluir Dashboard** | "Membro fica impossibilitado de criar ou excluir dashboards." | — |
-| **Restringir relatórios aos grupos do membro** | Mostra nos relatórios apenas dados relativos aos grupos do membro (exclui **Restringir relatórios ao membro**). | — |
-| **Restringir relatórios ao membro** | Mostra nos relatórios apenas dados relativos ao próprio membro (exclui **Restringir relatórios aos grupos do membro**). | — |
+| **Restringir relatórios aos grupos do membro** | Na **Visão geral**, **Produtividade**, **Interação** e **Avaliação**, mostra só as sessões dos grupos do membro; na **Atribuição**, as sessões que estão ou já estiveram nos grupos dele (exclui **Restringir relatórios ao membro**). Detalhes em [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam). | Sem grupo, o relatório não abre e aparece um aviso de que o membro não pertence a nenhum grupo. |
+| **Restringir relatórios ao membro** | Na **Visão geral**, **Produtividade**, **Atribuição** e **Interação**, mostra só as sessões em que o membro é o responsável atual; na **Avaliação**, só as avaliações registradas para ele; na **Presença**, só a presença dele (exclui **Restringir relatórios aos grupos do membro**). Detalhes em [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam). | — |
 
 ### Canais
 
