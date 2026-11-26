@@ -1,0 +1,62 @@
+---
+title: Relatório de interação
+description: Como ver, dia a dia, em quantas sessões cada membro mandou mensagem, e a diferença para o relatório de atribuição.
+keywords: [interação, relatório de interação, sessões atendidas, quem respondeu, atendimentos por dia, por membro, mapa de calor, atribuição x interação, atendentes]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/reports/ReportInteraction/index.tsx
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+  - api:src/modules/reports/session-summary/session-summary.helper.ts
+codigo:
+  - web:src/pages/reports/ReportInteraction/**
+  - web:src/pages/reports/useReports.tsx
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+  - api:src/modules/reports/session-summary/session-summary.helper.ts
+  - api:src/modules/reports/session-summary/session-summary.consumer.ts
+  - api-v0:server/modules/chat/ChatEventsNotificator.js
+verificado_em: 2026-11-26
+---
+
+O relatório de **Interação** mostra, dia a dia, em quantas [sessões](/docs/conceitos/conversas-e-sessoes) cada membro mandou mensagem dentro de um período.
+
+<Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê). Se o seu papel tiver **Restringir relatórios ao membro**, você vê só as sessões em que é o responsável; se tiver **Restringir relatórios aos grupos do membro**, você vê só as sessões dos seus grupos.</Note>
+
+## O que conta
+
+Uma **interação** representa uma sessão em que o membro enviou mensagem naquele dia, contando na data da mensagem (no fuso do workspace):
+
+- **Uma vez por membro por dia:** não importa quantas mensagens o membro mandou na mesma sessão naquele dia, a sessão conta uma vez.
+- **Em dias diferentes:** se o mesmo membro responde a mesma sessão em dois dias, conta `1` em cada dia.
+- **Vários membros na mesma sessão:** se dois membros mandam mensagem na mesma sessão, conta `1` para cada um.
+- **Qualquer responsável:** a interação conta mesmo que o membro não seja o responsável atual da sessão.
+- **Mensagens do bot não contam.**
+
+Este relatório agrupa apenas **Por Membro**.
+
+## Interação × Atribuição
+
+| | [Atribuição](/docs/relatorios/atribuicao) | **Interação** |
+| --- | --- | --- |
+| Conta | Registros de atribuição a membros e grupos | Sessões em que o membro mandou mensagem, 1 por dia |
+| Responde | Quanto cada um recebeu | Quanto cada um atendeu |
+| Agrupa | Por membro ou por grupo | Por membro |
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra o relatório">
+    No menu lateral, vá em **Relatórios** → **Interação**. Por padrão, a tela abre nos últimos 7 dias, sem hoje, agrupada **Por Membro**.
+  </Step>
+  <Step title="Escolha o período e os filtros">
+    Troque as datas no seletor à esquerda (os dados atualizam sozinhos) ou clique em **Filtrar**, escolha os critérios e clique em **Aplicar filtros**. Use **Limpar filtros** para remover todos.
+  </Step>
+  <Step title="Leia o mapa e a tabela">
+    No mapa de calor **Interações por Membro**, cores mais fortes mostram os dias com mais sessões atendidas; passe o mouse para ver a quantidade exata. Na tabela abaixo, cada linha é um membro e cada coluna é um dia (passe o mouse no título do dia para ver o total daquele dia).
+  </Step>
+  <Step title="Veja as sessões ou exporte">
+    Clique em **Ver sessões** ou em qualquer célula da tabela para abrir as sessões em que aquele membro interagiu naquele dia. Se o seu papel tiver **Não pode exportar relatórios**, o botão **Exportar** dentro da lista de sessões fica desativado. Para baixar a tabela do relatório, clique em **...** → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+  </Step>
+</Steps>
+
+Para ver tempos médios e volumes resolvidos, consulte o [Relatório de produtividade](/docs/relatorios/produtividade). Para ver quanto tempo cada membro ficou online, veja o [Relatório de presença](/docs/relatorios/presenca), ou volte a [Relatórios: visão geral e métricas](/docs/relatorios/como-funcionam).

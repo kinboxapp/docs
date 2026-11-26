@@ -541,5 +541,47 @@
     "pergunta": "Consigo criar um bot que responde pelo Telegram pessoal do meu celular, sem cadastrar canal na Kinbox?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "O tempo que o cliente passa conversando com o bot entra no tempo médio de espera do relatório?",
+    "esperado": [
+      "llm/faq/relatorio-tme-tma",
+      "docs/relatorios/como-funcionam"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Onde vejo o TMA e o TME de cada atendente na semana passada?",
+    "esperado": [
+      "docs/relatorios/produtividade",
+      "llm/faq/relatorio-tme-tma"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero saber quantas conversas cada atendente recebeu por dia, contando as transferências",
+    "esperado": [
+      "docs/relatorios/atribuicao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como vejo quanto tempo cada pessoa da equipe ficou online ontem?",
+    "esperado": [
+      "docs/relatorios/presenca"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Tem como colocar a fila de atendimento numa TV para a equipe acompanhar em tempo real?",
+    "esperado": [
+      "docs/relatorios/ao-vivo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para ver na Kinbox o NPS do atendimento calculado automaticamente com promotores e detratores?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

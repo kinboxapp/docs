@@ -1,0 +1,59 @@
+---
+title: Relatório Visão geral (tempo real)
+description: Como usar a Visão geral para ver agora quantas sessões estão em espera, em atendimento, pendentes, sem responsável ou com o bot.
+keywords: [visão geral, tempo real, conversas abertas, em espera, em atendimento, pendente, não atribuído, bot atendendo, fila, carga da equipe, distribuição, atendentes]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/reports/ReportOverview/index.tsx
+  - web:src/pages/reports/ReportOverview/overview.worker.ts
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+codigo:
+  - web:src/pages/reports/ReportOverview/**
+  - web:src/pages/reports/useReports.tsx
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+verificado_em: 2026-11-26
+---
+
+A **Visão geral** mostra apenas as sessões abertas agora no workspace, sem filtro de período, divididas por estado e por responsável, grupo, tag ou canal.
+
+<Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê). Se o seu papel tiver **Restringir relatórios ao membro**, você vê só as sessões em que é o responsável; se tiver **Restringir relatórios aos grupos do membro**, você vê só as sessões dos seus grupos.</Note>
+
+## Os cartões
+
+<Frame caption="Cartões de indicadores do relatório Visão Geral">
+  <img src="/images/ajuda/relatorios/visao-geral-indicadores.webp" alt="Linha com seis cartões da Visão Geral: Não atribuído em destaque vermelho, Em espera, Em atendimento, Pendente, Atribuído e Bot" />
+</Frame>
+
+| Cartão | O que conta |
+| --- | --- |
+| **Não atribuído** | Sessões abertas sem membro responsável. Ao passar o mouse, divide entre **Bot atendendo** e **Sem bot**. |
+| **Em espera** | Sessões abertas em que nenhum membro mandou a primeira mensagem e que não foram iniciadas pela equipe. |
+| **Em atendimento** | Sessões abertas em que um membro já mandou mensagem ou que foram iniciadas pela equipe pelo botão **Enviar mensagem**. |
+| **Pendente** | Sessões abertas de conversas marcadas como pendentes de resposta. |
+| **Atribuído** | Sessões abertas que já têm um membro responsável. |
+| **Bot** | Sessões abertas em que um bot está atendendo. |
+
+A soma de **Em espera** com **Em atendimento** equivale ao total de sessões abertas. Para entender como os estados funcionam, veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes).
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra o relatório">
+    No menu lateral, vá em **Relatórios** → **Visão geral** (o título da página aparece como **Visão Geral**). A tela mostra o gráfico de pizza **Distribuição por Membro** com o **Total**, os cartões logo abaixo dele e a tabela por agrupamento.
+  </Step>
+  <Step title="Filtre ou pesquise quando precisar">
+    Use **Pesquisar por nome** ou clique em **Filtrar** para recortar por critérios como canal, grupo ou tag, e clique em **Aplicar filtros**. Para remover tudo, clique em **Limpar filtros**.
+  </Step>
+  <Step title="Troque o agrupamento">
+    Clique em **Por Membro** (padrão) para alternar entre **Por Membro**, **Por Grupo**, **Por Tag** e **Por Canal**. A tabela mostra a primeira coluna (**Atendente**, **Grupo**, **Tag** ou **Canal**) junto com **Em espera**, **Em atendimento**, **Pendente** e **Total**. Em **Por Membro**, cada sessão conta para o responsável atual. Sessões sem membro, sem grupo ou sem tag aparecem em **Sem atribuição**, **Sem grupo** e **Sem tag**.
+  </Step>
+  <Step title="Clique num número para ver as sessões">
+    Clique em **Ver sessões**, em um cartão ou em qualquer célula da tabela para abrir a lista das sessões daquele indicador e acessar as conversas. Se o seu papel tiver **Não pode exportar relatórios**, o botão **Exportar** dentro da lista de sessões fica desativado.
+  </Step>
+  <Step title="Atualize os números">
+    Clique em **Atualizar** (ícone de setas) sempre que quiser buscar os dados novamente. A página não se atualiza sozinha.
+  </Step>
+</Steps>
+
+Para acompanhar a operação em um mapa animado com fila e alertas de atraso, use o [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo). Para analisar resultados em um período, veja o [Relatório de produtividade](/docs/relatorios/produtividade) ou [Relatórios: visão geral e métricas](/docs/relatorios/como-funcionam). Para responder às conversas, abra a [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox).

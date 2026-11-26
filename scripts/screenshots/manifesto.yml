@@ -1152,3 +1152,78 @@
   arquivo: images/ajuda/campanhas/resultados-da-campanha.webp
   paginas:
     - docs/campanhas/acompanhar-resultados
+# Seção relatorios (Relatórios › Relatórios de atendimento)
+#
+# O workspace de documentação (Loja Exemplo) tem poucas sessões e nenhuma resposta de membro: TME, TMP e TMA ficam
+# vazios. O print da Produtividade vem do workspace de testes (id 1, "Kinbox") agrupado "Por Dia" (sem nome de pessoa);
+# a tarja no nome do workspace só satisfaz a regra de mascarar e fica fora do recorte. Relatórios com nomes de membros
+# (Atribuição, Interação, Presença, tabela da Visão geral) ficam sem print: o dono do workspace é uma conta real.
+# Na Loja Exemplo o staging mostra no Ao vivo um painel "Setores" e a troca "Escritório / Mapa de calor" que não estão
+# no código de produção: o recorte pega só a barra de indicadores do topo.
+
+- id: relatorios-menu
+  url: /reports/productivity
+  passos:
+    - esperar: 'a[href="/reports/voip"]'
+    - pausa: 1000
+  alvo:
+    - 'a[href="/reports/dashboard"]'
+    - 'a[href="/reports/voip"]'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/menu-de-relatorios.webp
+  paginas:
+    - docs/relatorios/como-funcionam
+
+- id: relatorios-visao-geral-indicadores
+  url: /reports/overview
+  passos:
+    - esperar: '.g-total-report-row >> text=Em atendimento'
+    - pausa: 2000
+  alvo: '.g-total-report-row'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/visao-geral-indicadores.webp
+  paginas:
+    - docs/relatorios/visao-geral
+
+- id: relatorios-produtividade
+  workspace: Kinbox
+  url: /reports/productivity
+  passos:
+    - esperar: '.g-total-report-row >> text=Sessões novas'
+    - pausa: 3000
+  alvo:
+    - '.ant-picker-range'
+    - '.g-total-report-row'
+  mascarar:
+    - '.g_workspace_drop_title'
+  arquivo: images/ajuda/relatorios/produtividade.webp
+  paginas:
+    - docs/relatorios/produtividade
+
+- id: relatorios-ao-vivo-indicadores
+  url: /reports/live/service
+  passos:
+    - esperar: 'text=na fila'
+    - pausa: 3000
+  alvo:
+    - 'button[title="Voltar para os relatórios"]'
+    - 'div[title="Operadores online sobre o total da equipe"]'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/ao-vivo-indicadores.webp
+  paginas:
+    - docs/relatorios/ao-vivo
+
+- id: relatorios-avaliacao-configurar
+  url: /reports/rating
+  passos:
+    - esperar: 'button:has-text("Configurar")'
+    - clicar: 'button:has-text("Configurar")'
+    - esperar: '.ant-drawer-body >> text=Texto de agradecimento'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-content button:has-text("Salvar")'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/configurar-avaliacao.webp
+  paginas:
+    - docs/relatorios/avaliacao

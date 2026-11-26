@@ -1,0 +1,113 @@
+---
+title: "Relatórios: visão geral e métricas"
+description: Quais relatórios de atendimento a Kinbox tem, quem pode ver cada um e como TME, TMP, TMA, sessões novas e resolvidas são contados.
+keywords: [relatórios, métricas, tme, tma, tmp, tempo médio de espera, tempo médio de atendimento, tempo de resposta, primeira resposta, sessões, desempenho da equipe, produtividade, gerenciar relatórios, horário comercial, sla, atendentes, dashboard de atendimento]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/reports/index.tsx
+  - web:src/layouts/BaseLayout.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - api:src/modules/reports/session-summary/session-summary.consumer.ts
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+  - api:src/modules/reports/session-summary/time-average.ts
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+codigo:
+  - web:src/pages/reports/index.tsx
+  - web:src/pages/reports/useReports.tsx
+  - web:src/pages/reports/useRestrictedResources.tsx
+  - web:src/pages/reports/RangePickerReport/**
+  - api:src/modules/reports/session-summary/session-summary.consumer.ts
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+  - api:src/modules/reports/session-summary/session-summary.helper.ts
+  - api:src/modules/reports/session-summary/time-average.ts
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+verificado_em: 2026-11-26
+---
+
+Os relatórios de atendimento da Kinbox medem as [sessões](/docs/conceitos/conversas-e-sessoes) (atendimentos) das conversas do workspace, em tempo real ou em um período escolhido.
+
+## Onde ficam
+
+No menu lateral, clique em **Relatórios**.
+
+<Note>Para ver os relatórios, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê). Nos papéis padrão, **Administrador** e **Supervisor** já vêm com essa permissão, e **Atendente** não.</Note>
+
+<Frame caption="Submenu de Relatórios na barra lateral">
+  <img src="/images/ajuda/relatorios/menu-de-relatorios.webp" alt="Submenu de Relatórios exibindo Dashboards, Visão geral, Atendimento ao vivo, Vendas ao vivo, Produtividade, Atribuição, Interação, Presença, Avaliação, Saldo e Ligações" />
+</Frame>
+
+## Qual relatório usar
+
+| Relatório | Para que serve | Período |
+| --- | --- | --- |
+| [**Visão geral**](/docs/relatorios/visao-geral) | Sessões abertas agora, por estado e por membro, grupo, tag ou canal | Tempo real |
+| [**Atendimento ao vivo**](/docs/relatorios/ao-vivo) | Mapa animado das conversas abertas e da equipe, com fila e atrasos | Tempo real |
+| [**Vendas ao vivo**](/docs/relatorios/ao-vivo) | Mapa animado das negociações abertas de um funil (exige também a permissão **Gerenciar negociações**) | Tempo real |
+| [**Produtividade**](/docs/relatorios/produtividade) | TME, TMP, TMA, sessões novas, resolvidas, leads e mensagens | Período |
+| [**Atribuição**](/docs/relatorios/atribuicao) | Quantas vezes cada membro ou grupo recebeu uma sessão por dia | Período |
+| [**Interação**](/docs/relatorios/interacao) | Em quantas sessões cada membro mandou mensagem por dia | Período |
+| [**Presença**](/docs/relatorios/presenca) | Quanto tempo cada membro ficou online por dia | Período |
+| [**Avaliação**](/docs/relatorios/avaliacao) | Nota média dada pelos contatos aos atendimentos | Período |
+
+O submenu de **Relatórios** também inclui **Dashboards**, **Copiloto** (quando algum recurso do copiloto está ligado), **Saldo**, **Ligações** e a seção **Marketing**, que acompanham outros indicadores fora dos relatórios de atendimento.
+
+## Como os números são contados
+
+Os relatórios de atendimento contam **sessões**, e não conversas nem contatos. Se o mesmo contato abre dois atendimentos em dias diferentes, cada atendimento entra como uma sessão (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)).
+
+| Métrica | Mede | Começa | Termina |
+| --- | --- | --- | --- |
+| **TME** | Tempo médio de espera | Criação da sessão | Primeira resposta de um membro |
+| **TMP** | Tempo médio pós-atribuição | Primeira atribuição a um membro | Primeira resposta de um membro |
+| **TMA** | Tempo médio de atendimento | Primeira resposta de um membro | Resolução da sessão |
+
+- **Tempo com o bot:** apenas mensagens enviadas por um membro marcam a primeira resposta; mensagens do bot e mensagens automáticas do sistema não contam. Por isso, o tempo em que a sessão fica com o [bot](/docs/bot/visao-geral) entra no **TME**, e não no **TMP** nem no **TMA**.
+- **Sessões fora dos tempos:** sessões iniciadas pela equipe pelo botão **Enviar mensagem** (veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)) ficam fora do **TME** e do **TMP**. Sessões resolvidas sem nenhuma resposta de membro não têm nenhum dos três tempos.
+- **Horário comercial:** quando o workspace (na tela, **ambiente**) tem um **Horário comercial** escolhido em **Configurações** → **Ambiente** → **Geral**, os três tempos contam apenas os minutos dentro desse horário. Sem horário escolhido, contam todos os minutos corridos.
+- **Responsável atual:** ao agrupar por membro ou por grupo na **Visão geral** e na **Produtividade**, a sessão inteira conta para quem é o responsável atual (ou era ao ser resolvida). Uma sessão transferida (veja [Atribuir e transferir](/docs/conversas/atribuir-e-transferir)) conta para o último responsável; para ver quem recebeu a sessão antes, use o relatório de [Atribuição](/docs/relatorios/atribuicao).
+
+## O que dá para fazer em todos os relatórios
+
+- **Escolher o período** (nos relatórios por período): o padrão são os últimos 7 dias, sem hoje. Você pode escolher data e hora ou usar os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**.
+- **Filtrar**: clique em **Filtrar**, escolha os critérios (como estado, membro, grupo, tag, canal ou campos personalizados) e clique em **Aplicar filtros**. Para tirar todos os filtros, clique em **Limpar filtros**.
+- **Agrupar**: use o botão **Por ...** para alternar entre as visões aceitas por cada relatório (**Por Dia**, **Por Membro**, **Por Grupo**, **Por Tag** ou **Por Canal**).
+- **Ver sessões**: clique em **Ver sessões**, em um cartão ou em qualquer número da tabela para listar as sessões que formam aquele resultado.
+- **Exportar**: clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+
+## Quem vê o quê
+
+Além da permissão **Gerenciar relatórios**, o papel do membro em **Configurações** → **Ambiente** → **Permissões** pode aplicar restrições (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis) e a [Referência de permissões](/docs/administracao/referencia-de-permissoes)):
+
+- Se o seu papel tiver **Restringir relatórios ao membro**, você vê só as sessões em que é o responsável (na **Avaliação**, só as avaliações registradas para você; na **Presença**, só a sua presença).
+- Se o seu papel tiver **Restringir relatórios aos grupos do membro**, você vê só as sessões dos seus grupos. Se você não pertencer a nenhum grupo, o relatório não abre e aparece um aviso de que você não pertence a nenhum grupo.
+- As duas restrições por membro e por grupo não podem ficar marcadas ao mesmo tempo.
+- Se o seu papel tiver **Não pode exportar relatórios**, o botão **Exportar** dentro da lista de sessões (**Ver sessões**) fica desativado.
+- No **Atendimento ao vivo**, as conversas visíveis seguem o **Acesso as Conversas** do seu papel, e não essas restrições.
+- O proprietário do workspace vê todos os dados e não sofre restrições.
+
+## Próximos passos
+
+<CardGroup cols={2}>
+  <Card title="Relatório Visão geral (tempo real)" href="/docs/relatorios/visao-geral">
+    Veja agora quantas sessões estão em espera, em atendimento, pendentes, sem responsável ou com o bot.
+  </Card>
+  <Card title="Atendimento e vendas ao vivo" href="/docs/relatorios/ao-vivo">
+    Acompanhe a fila, os atrasos, a equipe online e as negociações de um funil num mapa animado.
+  </Card>
+  <Card title="Relatório de produtividade" href="/docs/relatorios/produtividade">
+    Consulte TME, TMP, TMA, sessões novas, resolvidas, leads e mensagens no período escolhido.
+  </Card>
+  <Card title="Relatório de atribuição" href="/docs/relatorios/atribuicao">
+    Acompanhe quantas vezes cada membro ou grupo recebeu sessões por dia, incluindo transferências.
+  </Card>
+  <Card title="Relatório de interação" href="/docs/relatorios/interacao">
+    Veja, dia a dia, em quantas sessões cada membro enviou mensagem.
+  </Card>
+  <Card title="Relatório de presença" href="/docs/relatorios/presenca">
+    Consulte quanto tempo cada membro ficou online por dia e em quais horários esteve conectado.
+  </Card>
+  <Card title="Relatório de avaliação" href="/docs/relatorios/avaliacao">
+    Veja a nota média dada pelos contatos aos atendimentos e ajuste a pergunta da pesquisa.
+  </Card>
+</CardGroup>
