@@ -1,6 +1,6 @@
 ---
 title: Por que as ligações não aparecem no meu número em coexistência?
-description: A Kinbox não recebe nem faz ligações em números de WhatsApp oficial em coexistência porque a Meta não oferece ligações pela API nesse modo; as chamadas ficam apenas no celular.
+description: A Kinbox não recebe nem faz ligações em números de WhatsApp oficial em coexistência porque a Meta não oferece ligações pela API nesse modo; as ligações ficam apenas no celular.
 keywords: [coexistência ligação, ligação whatsapp business celular, a meta não oferece ligações neste número, número coexistente ligação, não consigo ativar ligações whatsapp]
 publico: llm
 tipo: faq

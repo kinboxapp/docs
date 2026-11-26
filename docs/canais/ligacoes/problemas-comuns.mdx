@@ -22,7 +22,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Use esta página quando você não consegue ligar ou atender pelo [WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp) ou por [telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone), a chamada não toca, cai no meio ou fica sem gravação ou transcrição.
+Use esta página quando você não consegue ligar ou atender pelo [WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp) ou por [telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone), a ligação não toca, cai no meio ou fica sem gravação ou transcrição.
 
 ## Sintoma
 
@@ -73,7 +73,9 @@ Use esta página quando você não consegue ligar ou atender pelo [WhatsApp ofic
   </Accordion>
 
   <Accordion title="A ligação do WhatsApp não toca para mim">
-    A ligação recebida pelo WhatsApp oficial toca apenas para membros que podem atender: proprietário ou quem tem a permissão **Responder**, está online, disponível (não **Ausente** — veja [Disponibilidade](/docs/conta/disponibilidade)) e fora de outra ligação. Se a conversa já tem um responsável disponível, a chamada toca apenas para ele.
+    A ligação recebida pelo WhatsApp oficial toca apenas para membros que podem atender: o proprietário ou quem tem a permissão **Responder**, está online e disponível (interruptor **Disponível** ligado; veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação. Quem tem só a opção **Responder apenas conversas dele** não recebe o toque, nem nas conversas atribuídas a ele. Se a conversa já tem um responsável disponível, a ligação toca apenas para ele.
+
+    Mesmo sem o aviso na tela, quem pode atender vê na conversa a mensagem **Ligação do WhatsApp** ("Tocando...") com **Recusar** e **Atender**: atenda por ela.
 
     Confira também:
 
@@ -109,7 +111,7 @@ Use esta página quando você não consegue ligar ou atender pelo [WhatsApp ofic
   <Accordion title="A ligação caiu no meio">
     - **Saldo acabou:** no VoIP, a tela avisa "Seu saldo acabou. A chamada será encerrada." e encerra a ligação. No WhatsApp oficial, uma faixa vermelha avisa 30 segundos antes ("Saldo de ligações esgotado...") e, se não houver recarga, a conversa recebe "Ligação encerrada: o saldo de ligações (franquia do plano e carteira) acabou.".
     - **Falha de rede ou navegador:** no WhatsApp oficial, pode aparecer "A conexão de áudio da ligação falhou". Confira a conexão de internet e o microfone.
-    - **Aba fechada ou recarregada:** fechar ou recarregar a aba do navegador encerra a ligação feita pelo WhatsApp.
+    - **Aba fechada ou recarregada:** fechar ou recarregar a aba do navegador encerra a ligação do WhatsApp em andamento, recebida ou feita.
   </Accordion>
 
   <Accordion title='Não há gravação ou aparece "Não há gravação disponível"'>
@@ -117,20 +119,19 @@ Use esta página quando você não consegue ligar ou atender pelo [WhatsApp ofic
 
     Outras causas possíveis:
 
-    - **WhatsApp sem plano nem saldo:** aparece "Gravação desativada: saldo insuficiente" durante a ligação.
     - **VoIP com SIP reserva:** com **Usar SIP reserva** ativado, a gravação não é feita.
     - **Falha ao enviar a gravação no WhatsApp:** o navegador de quem atendeu não conseguiu enviar o áudio no fim ("Não foi possível enviar a gravação da ligação").
   </Accordion>
 
   <Accordion title="Não aparece transcrição">
     - **Telefone (VoIP):** a transcrição não é automática. Abra o painel **Ligação de voz** na mensagem da conversa e clique em **Transcrever** (gasta saldo da carteira). Se não houver saldo suficiente, aparece "Saldo insuficiente"; em caso de erro, "Não foi possível transcrever a chamada".
-    - **WhatsApp oficial:** quando há gravação, a transcrição é gerada automaticamente. Se ela falhou, abra o painel **Ligação de voz** e clique em **Transcrever** (essa transcrição gasta saldo da carteira, mesmo com o plano).
+    - **WhatsApp oficial:** quando há gravação, a transcrição e o resumo são gerados automaticamente e podem aparecer um pouco depois do áudio. Se ela falhou, abra o painel **Ligação de voz** e clique em **Transcrever** (essa transcrição gasta saldo da carteira, mesmo com o plano).
   </Accordion>
 
   <Accordion title='"Encerre a ligação atual antes de iniciar outra" ou "Encerre a ligação antes de resolver a conversa"'>
     Você só pode manter uma ligação ativa por vez (seja VoIP ou WhatsApp) e não pode resolver uma conversa enquanto uma ligação do WhatsApp estiver em andamento.
 
-    Encerre a ligação atual na janela da chamada antes de iniciar outra ligação ou resolver a conversa.
+    Encerre a ligação atual na janela da ligação antes de iniciar outra ligação ou resolver a conversa.
   </Accordion>
 
   <Accordion title='Aviso "Este número está com SIP ativado"'>

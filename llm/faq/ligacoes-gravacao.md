@@ -26,11 +26,11 @@ Onde ficam as gravações das ligações?
 
 ## Resposta
 
-As gravações ficam na mensagem da ligação dentro da conversa (**Ligação de voz**, **Ligação recebida pelo WhatsApp** ou **Ligação feita pelo WhatsApp** — clique para abrir o painel **Ligação de voz** com player e **Baixar áudio**) e no relatório **Relatórios** → **Ligações** (com as opções **Baixar** e **Ver**; na exportação, a coluna **Gravação** traz o link).
+As gravações ficam primeiro na mensagem da ligação dentro da conversa (**Ligação de voz**, **Ligação recebida pelo WhatsApp** ou **Ligação feita pelo WhatsApp**): clique nela para abrir o painel **Ligação de voz**, com o áudio e **Baixar áudio**. Quem tem a permissão **Gerenciar relatórios** também encontra as gravações em **Relatórios** → **Ligações** (opções **Baixar** e **Ver**; na exportação, a coluna **Gravação** traz o link).
 
-- **Quando a gravação existe:** apenas quando a opção já estava ligada antes da chamada — **Gravar ligações** na aba **Ligações** do canal de WhatsApp oficial (recurso em teste com plano **Ligações WhatsApp**) ou **Gravar chamadas** em **Configurações** → **Chat** → **Voip** (no VoIP).
-- **Quando não há gravação:** se a opção estava desligada; no WhatsApp oficial sem plano nem saldo (`"Gravação desativada: saldo insuficiente"`) ou se o navegador de quem atendeu falhou ao enviar o áudio (`"Não foi possível enviar a gravação da ligação"`); no VoIP quando **Usar SIP reserva** está ativado.
-- **Transcrição, resumo e download:** no WhatsApp oficial, gravação e transcrição automática estão incluídas no plano **Ligações WhatsApp** e o resumo gasta saldo da carteira. No VoIP, a transcrição e o resumo são gerados clicando em **Transcrever** no painel **Ligação de voz** e gastam saldo. O arquivo baixado tem o nome `ligacao-voip-<id>` com a extensão do áudio.
+- **Quando a gravação existe:** apenas quando a opção já estava ligada antes da ligação — **Gravar ligações** na aba **Ligações** do canal de WhatsApp oficial (recurso em teste com plano **Ligações WhatsApp**) ou **Gravar chamadas** em **Configurações** → **Chat** → **Voip** (no VoIP).
+- **Quando não há gravação:** se a opção estava desligada; no WhatsApp oficial, se o navegador de quem atendeu falhou ao enviar o áudio no fim (`"Não foi possível enviar a gravação da ligação"`); no VoIP, quando **Usar SIP reserva** está ligada.
+- **Transcrição, resumo e download:** no WhatsApp oficial, a gravação e a transcrição automática estão incluídas no plano **Ligações WhatsApp**; o resumo gasta saldo da carteira, e a transcrição e o resumo podem aparecer um pouco depois do áudio. Se a transcrição automática falhar, o botão **Transcrever** gera a transcrição usando o saldo da carteira. No VoIP, a transcrição e o resumo são gerados clicando em **Transcrever** no painel **Ligação de voz** e gastam saldo. O arquivo baixado tem o nome `ligacao-voip-<id>` com a extensão do áudio.
 
 Veja mais em [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/ligacoes/visao-geral) e [Configurações de VoIP: gravação, resumo por IA e SIP reserva](/docs/canais/ligacoes/configuracoes-voip).
 

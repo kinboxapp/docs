@@ -40,7 +40,7 @@ Detalhes de referência da página [Fazer e receber ligações pelo WhatsApp ofi
 | --- | --- |
 | Recurso em teste (**Beta**) | Precisa estar liberado no workspace. Sem liberação, a aba **Ligações** e a opção **Ligar pelo WhatsApp** não aparecem (e a tentativa exibe `"Ligações do WhatsApp ainda não estão liberadas para este workspace"`). |
 | Canal | Apenas **WhatsApp oficial** sem [coexistência](/docs/canais/whatsapp-api-oficial-coexistente). O WhatsApp por QR Code não tem ligações pela Kinbox (veja [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)). |
-| Plano | Plano **Ligações WhatsApp** contratado em **Configurações** → **Assinatura** por quem cuida da assinatura ([Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)). A tela de planos menciona ainda conta comercial verificada na Meta. |
+| Plano | Plano **Ligações WhatsApp** contratado em **Configurações** → **Assinatura** por quem cuida da assinatura ([Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano)). |
 | Franquia ou saldo | Franquia de minutos sobrando no plano **ou** saldo de pelo menos **R$ 0,50** na carteira ([Adicionar saldo e créditos de SMS](/docs/assinatura/adicionar-saldo)). |
 | Permissões | Configurar a aba **Ligações**, desativar SIP e criar o template pela janela da conversa exigem **Gerenciar Canais** ou proprietário ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Atender exige **Responder** ou proprietário. O membro na conversa pode ligar pelo WhatsApp (a permissão **Pode ligar para o contato** vale apenas para o VoIP). |
 | Microfone | Liberado no navegador de quem faz ou atende ligações. Sem acesso ao microfone: `"Ative o microfone para fazer ligações"` ou `"Ative o microfone para receber ligações"`. |
@@ -56,10 +56,12 @@ Detalhes de referência da página [Fazer e receber ligações pelo WhatsApp ofi
 
 ## Para quem toca (ligações recebidas)
 
-- Toca apenas para membros que podem atender: proprietário do workspace ou membro com a permissão **Responder**, online, disponível (não **Ausente** — veja [Disponibilidade](/docs/conta/disponibilidade)) e fora de outra ligação.
+- Toca apenas para membros que podem atender: proprietário do workspace ou membro com a permissão **Responder**, online e disponível (interruptor **Disponível** ligado; veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação.
+- Quem tem só a opção **Responder apenas conversas dele** (no lugar de **Responder**) nunca recebe o toque de ligação do WhatsApp, nem nas conversas atribuídas a ele.
 - **Conversa com responsável que pode atender:** toca apenas para esse responsável.
 - **Conversa sem responsável (ou responsável indisponível):** toca para todos que podem atender e têm permissão para ver conversas sem atribuição, conforme o escopo de visão do papel e o grupo da conversa.
-- **Global e proprietário:** o proprietário do workspace e membros com a visão **Global** também podem atender a ligação.
+- **Proprietário e acesso Global:** na conversa sem responsável disponível, entre os que podem atender, toca também para o proprietário e para quem tem acesso **Global** às conversas. O proprietário e quem tem acesso **Global** também podem atender pela mensagem da conversa, mesmo que a ligação não tenha tocado para eles.
+- **Na conversa:** enquanto toca, a mensagem da ligação aparece como **Ligação do WhatsApp** (`"Tocando..."`) com **Recusar** e **Atender** para quem pode atender; depois vira **Ligação recebida pelo WhatsApp**. Esse é o caminho de atender que não depende das preferências de notificação.
 - **Aviso na tela:** aparece um cartão em qualquer tela da Kinbox com nome e foto do contato, `"Ligação do WhatsApp"` e os botões **Recusar** e **Atender**. O som toca em apenas uma aba. Se a aba estiver em segundo plano e as notificações do navegador estiverem permitidas, aparece também uma notificação do navegador.
 - **Preferências pessoais** (em **Configurações** → **Notificações**, disponíveis com o recurso em teste; veja [Notificações](/docs/conta/notificacoes)):
   - **Quando receber ligação do WhatsApp:** `"Toca e mostra o aviso para atender em qualquer tela"`.
@@ -67,13 +69,13 @@ Detalhes de referência da página [Fazer e receber ligações pelo WhatsApp ofi
 
 ## Atender, recusar e tempo de toque
 
-- Quando o contato liga pelo WhatsApp, a conversa recebe a mensagem **Ligação recebida pelo WhatsApp** (`"Tocando..."`), abrindo ou criando a conversa. Um bot ativo na conversa não responde e sai da conversa.
-- **Atender:** o primeiro membro a clicar em **Atender** fica com a chamada (`"Conectando…"` na janela) e a conversa passa a ser atribuída a ele. Quem tentar atender depois vê `"Outro atendente já atendeu esta ligação"`.
-- **Recusar:** apenas remove o aviso da tela de quem clicou. A ligação só é recusada no WhatsApp quando todos os membros para quem tocou recusam; se o canal tiver agente de voz configurado, a IA atende nesse caso.
+- Quando o contato liga pelo WhatsApp, a ligação entra como mensagem na conversa dele (abrindo ou criando a conversa). Um bot ativo na conversa não responde e sai da conversa.
+- **Atender:** o primeiro membro a clicar em **Atender** fica com a ligação (`"Conectando…"` na janela) e a conversa passa a ser atribuída a ele. Quem tentar atender depois vê `"Outro atendente já atendeu esta ligação"`.
+- **Recusar:** apenas remove o aviso da tela de quem clicou. A ligação só é recusada no WhatsApp quando todos os membros para quem tocou recusam; se o canal tiver agente de voz ligado, a ligação pode passar para o agente de voz (veja [Agente de voz para as ligações do WhatsApp (Beta)](/docs/agente-de-ia/agente-de-voz)).
 - **Tempo de toque:**
   - **Ligação recebida:** a Meta desiste após cerca de **60 segundos** sem atendimento; a conversa registra **Chamada perdida** e dispara o gatilho de automação **Chamada perdida**.
   - **Ligação feita pelo membro:** desiste após **45 segundos** sem resposta. Avisos possíveis: `"O cliente não atendeu"` e `"O cliente recusou a ligação"`.
-- Ao fazer uma ligação pelo WhatsApp, a mensagem **Ligação feita pelo WhatsApp** entra na conversa sem enviar texto ao contato; a conversa é reaberta e atribuída como em uma mensagem enviada pelo membro. Fechar ou recarregar a aba do navegador durante uma ligação feita pede confirmação e encerra a chamada.
+- Ao fazer uma ligação pelo WhatsApp, a mensagem **Ligação feita pelo WhatsApp** entra na conversa sem enviar texto ao contato; a conversa é reaberta e atribuída como em uma mensagem enviada pelo membro. Fechar ou recarregar a aba do navegador durante qualquer ligação do WhatsApp em andamento (recebida e atendida, ou feita) pede confirmação e encerra a ligação.
 - Cada membro mantém apenas uma ligação ativa por vez (`"Encerre a ligação atual antes de iniciar outra"`), e não é possível resolver uma conversa enquanto uma ligação do WhatsApp está em andamento (`"Encerre a ligação antes de resolver a conversa"`).
 
 ## Estados do menu Ligar pelo WhatsApp
@@ -117,6 +119,7 @@ Na janela **Pedir permissão para ligar** (`"O WhatsApp só deixa a empresa liga
 
 | Mensagem | Causa |
 | --- | --- |
+| `"Este canal não está configurado para fazer ligações"` | **Receber ligações** ou **Fazer ligações** desligada na aba **Ligações** do canal. |
 | `"Ligações do WhatsApp ainda não estão liberadas para este workspace"` | Recurso em teste (**Beta**) não liberado no workspace. |
 | `"Contrate um plano de Ligações WhatsApp para fazer ligações"` / aviso **Ligações pelo WhatsApp** (`"Para usar as ligações, o ambiente precisa assinar um dos planos de Ligações WhatsApp."`; para quem não cuida da assinatura: `"Peça para o gestor do ambiente assinar um plano de Ligações WhatsApp em Configurações > Assinatura."`) | Workspace sem o plano **Ligações WhatsApp**. |
 | `"Você já está em uma ligação"` / `"Encerre a ligação atual antes de iniciar outra"` | O membro já está em outra ligação (WhatsApp ou VoIP). |
@@ -129,8 +132,8 @@ Na janela **Pedir permissão para ligar** (`"O WhatsApp só deixa a empresa liga
 | `"A conexão de áudio da ligação falhou"` | Falha na conexão de áudio durante a ligação. |
 | `"Não foi possível ligar para o cliente"` | Falha ao iniciar a ligação. |
 | `"Outro atendente já atendeu esta ligação"` | Outro membro atendeu a ligação recebida antes. |
-| `"Gravação desativada: saldo insuficiente"` | Gravação ligada, mas sem plano nem saldo disponível. |
-| `"Não foi possível enviar a gravação da ligação"` | O navegador de quem atendeu não conseguiu enviar o áudio gravado no fim da chamada. |
+| `"Gravação desativada: saldo insuficiente"` | Gravação ligada, mas o workspace está sem o plano **Ligações WhatsApp** e com saldo de R$ 0,50 ou menos. Com o plano, a gravação é sempre liberada. |
+| `"Não foi possível enviar a gravação da ligação"` | O navegador de quem atendeu não conseguiu enviar o áudio gravado no fim da ligação. |
 | `"Encerre a ligação antes de resolver a conversa"` | Tentativa de resolver a conversa com ligação do WhatsApp em andamento. |
 
 ## SIP ativado na Meta
@@ -147,13 +150,13 @@ Na janela **Pedir permissão para ligar** (`"O WhatsApp só deixa a empresa liga
 
 ## Plano, franquia e saldo acabando
 
-- **Franquia mensal:** o plano **Ligações WhatsApp** inclui minutos humanos (ligações feitas e recebidas atendidas por pessoa, contados por minuto iniciado) e, conforme o plano, minutos de IA (cada minuto de IA equivale a uma quantidade maior de minutos humanos, indicada na tela de planos). A franquia é compartilhada entre os canais de WhatsApp do workspace, renova a cada ciclo da assinatura e os minutos não usados não acumulam para o mês seguinte.
+- **Franquia mensal:** o plano **Ligações WhatsApp** inclui minutos atendidos pela equipe (ligações feitas e recebidas, contados por minuto iniciado) e, conforme o plano, minutos de IA (cada minuto de IA consome mais de um minuto da franquia, na proporção indicada na tela de planos). A franquia é compartilhada entre os canais de WhatsApp do workspace, renova a cada ciclo da assinatura e os minutos não usados não acumulam para o mês seguinte.
 - **Alertas de franquia:** quando o consumo da franquia do ciclo atinge **80%** (`"Você já usou 80% dos minutos do plano de ligações deste ciclo."`) e **100%** (`"Os minutos do plano de ligações deste ciclo acabaram. As próximas ligações usam o saldo da carteira, pelo preço do excedente."`), chega um aviso uma vez por ciclo, por notificação na Kinbox e por e-mail, para as mesmas pessoas que recebem o alerta de saldo: o proprietário e os membros com a permissão **Assinatura** (veja [Configurar o alerta de saldo](/docs/assinatura/alerta-de-saldo)).
 - **Excedente:** minutos além da franquia saem do [saldo da carteira](/docs/conceitos/saldo-e-creditos) com a descrição `"Excedente do plano de ligações do WhatsApp"`.
 - **Mínimo sem franquia:** sem franquia disponível, é necessário ter saldo de pelo menos **R$ 0,50** na carteira para fazer ou receber ligações. Ligação recebida sem plano, ou sem franquia nem saldo, é recusada na Meta e registrada na conversa como **Chamada perdida**.
 - **Gravação, transcrição e resumo:** gravação e transcrição automática estão incluídas no plano **Ligações WhatsApp** (a transcrição pedida pelo botão **Transcrever** usa o saldo; veja **Gravação** abaixo). O **resumo** gerado por IA é cobrado do saldo da carteira como `"Resumo da transcrição de chamada de voz"`. Ligações não atendidas não consomem franquia nem saldo.
 - **Tarifas da Meta:** cobradas diretamente pela Meta, à parte da mensalidade do plano.
-- **Saldo de ligações acabando:** 30 segundos antes de a franquia e o saldo da carteira acabarem durante uma chamada, aparece a faixa vermelha `"Saldo de ligações esgotado. A ligação será encerrada em <segundos> s."` com o link **Adicionar saldo** (para quem cuida da assinatura). Recarregar antes do término remove o aviso; se acabar, a ligação é encerrada e a conversa recebe `"Ligação encerrada: o saldo de ligações (franquia do plano e carteira) acabou."`.
+- **Saldo de ligações acabando:** 30 segundos antes de a franquia e o saldo da carteira acabarem durante uma ligação, aparece a faixa vermelha `"Saldo de ligações esgotado. A ligação será encerrada em <segundos> s."` com o link **Adicionar saldo** (para quem cuida da assinatura). Recarregar antes do término remove o aviso; se acabar, a ligação é encerrada e a conversa recebe `"Ligação encerrada: o saldo de ligações (franquia do plano e carteira) acabou."`.
 
 ## Gravação
 

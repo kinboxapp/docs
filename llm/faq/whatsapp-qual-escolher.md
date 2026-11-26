@@ -25,7 +25,7 @@ Qual é a diferença entre o WhatsApp oficial e o QR Code?
 
 ## Resposta
 
-O **WhatsApp oficial** (**API Oficial**) conecta pelo cadastro da Meta e tem templates, Flows, carrossel e ligações pelo WhatsApp (recurso em teste, com plano de ligações). Passadas 24 horas da última mensagem do contato, só dá para escrever com template; numa conversa resolvida nessa situação, a Kinbox mostra "Resolvida · janela de 24h encerrada" com **Enviar template**.
+O **WhatsApp oficial** (**API Oficial**) conecta pelo cadastro da Meta e tem templates, Flows, carrossel e ligações pelo WhatsApp (recurso em teste, com plano de ligações; veja [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp)). Passadas 24 horas da última mensagem do contato, só dá para escrever com template; numa conversa resolvida nessa situação, a Kinbox mostra "Resolvida · janela de 24h encerrada" com **Enviar template**.
 
 O **WhatsApp por QR Code** (**Modo QRCode**) funciona como um aparelho conectado ao WhatsApp do celular: não tem limite de 24 horas para responder, aceita grupos e deixa usar o celular junto sem configurar nada. Em troca, não envia templates, botões, listas nem localização, e o número pode ser bloqueado pelo WhatsApp se receber denúncias de spam. O oficial também permite usar o aplicativo WhatsApp Business junto, mas só com a coexistência da Meta.
 

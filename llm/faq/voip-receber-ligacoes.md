@@ -26,7 +26,7 @@ Posso receber ligações de telefone (VoIP) na Kinbox?
 
 Não. A Kinbox não tem recebimento de ligações por telefone (VoIP) nem oferece um número VoIP para o contato ligar — o VoIP da Kinbox apenas **faz** ligações do navegador para o telefone fixo ou celular do contato (usando saldo da carteira e a permissão **Pode ligar para o contato** ou proprietário).
 
-- **Alternativa:** para receber e atender ligações na Kinbox pelo navegador, use as ligações pelo **WhatsApp oficial** — um recurso em teste (**Beta**) que funciona apenas em canal de WhatsApp oficial sem coexistência, exige o plano **Ligações WhatsApp** e franquia ou saldo, e toca apenas para quem tem a permissão **Responder** (ou é proprietário), está online, não está **Ausente** e está fora de outra ligação.
+- **Alternativa:** para receber e atender ligações na Kinbox pelo navegador, use as ligações pelo **WhatsApp oficial** — um recurso em teste (**Beta**) que funciona apenas em canal de WhatsApp oficial sem coexistência, exige o plano **Ligações WhatsApp** e franquia ou saldo, e toca apenas para quem tem a permissão **Responder** (ou é proprietário), está online e disponível (interruptor **Disponível** ligado; veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)) e fora de outra ligação.
 - **WhatsApp por QR Code:** canais por QR Code não fazem nem recebem ligações na Kinbox (veja [O que funciona e o que não funciona no WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)).
 
 Veja mais em [Ligar para um contato por telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone) e [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp).

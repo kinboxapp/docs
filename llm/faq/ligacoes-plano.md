@@ -1,7 +1,7 @@
 ---
 title: Preciso de um plano para fazer ligações pelo WhatsApp?
 description: Sim, receber e fazer ligações pelo WhatsApp oficial (Beta) exige o plano Ligações WhatsApp; já as ligações por telefone (VoIP) usam apenas o saldo da carteira.
-keywords: [plano ligações whatsapp, precisa de plano para ligar, franquia de minutos whatsapp, pagar ligação whatsapp, custo ligação whatsapp, voip precisa de plano]
+keywords: [plano ligações whatsapp, precisa de plano para ligar, quanto custa ligação whatsapp, franquia de minutos, franquia de minutos whatsapp, pagar ligação whatsapp, custo ligação whatsapp, voip precisa de plano]
 publico: llm
 tipo: faq
 fontes:
@@ -28,7 +28,7 @@ Preciso de um plano para fazer ligações pelo WhatsApp?
 
 Sim. Fazer ligações, receber ligações e usar o agente de voz pelo WhatsApp oficial exigem o plano **Ligações WhatsApp**, contratado em **Configurações** → **Assinatura** por quem cuida da assinatura. Sem o plano, ativar as opções da aba **Ligações** abre o aviso **Ligações pelo WhatsApp** e o menu de ligar mostra `"Disponível nos planos de Ligações WhatsApp"`.
 
-- **Como o plano funciona:** inclui uma franquia mensal de minutos humanos (ligações feitas e recebidas atendidas por pessoa, contadas por minuto iniciado), compartilhada entre os canais de WhatsApp do workspace e renovada a cada ciclo, sem acumular sobras para o mês seguinte. O excedente sai do [saldo da carteira](/docs/conceitos/saldo-e-creditos). Gravação e transcrição estão incluídas no plano (o resumo por IA gasta saldo da carteira). Quando o plano inclui minutos de IA, cada minuto de IA equivale a uma quantidade maior de minutos humanos, conforme o plano. As tarifas oficiais da Meta são cobradas diretamente pela Meta, à parte da mensalidade do plano.
+- **Como o plano funciona:** inclui uma franquia mensal de minutos atendidos pela equipe (ligações feitas e recebidas, contadas por minuto iniciado), compartilhada entre os canais de WhatsApp do workspace e renovada a cada ciclo, sem acumular sobras para o mês seguinte. O excedente sai do [saldo da carteira](/docs/conceitos/saldo-e-creditos). A gravação e a transcrição automática estão incluídas no plano; o resumo por IA e a transcrição pedida pelo botão **Transcrever** gastam saldo da carteira. Quando o plano inclui minutos de IA, cada minuto de IA consome mais de um minuto da franquia, conforme o plano. As tarifas oficiais da Meta são cobradas diretamente pela Meta, à parte da mensalidade do plano.
 - **Outros requisitos:** as ligações pelo WhatsApp são um recurso em teste (**Beta**) — confirme com o suporte se o recurso está liberado no seu workspace antes de contratar o plano. Também é preciso ter um canal de **WhatsApp oficial** sem [coexistência](/docs/canais/whatsapp-api-oficial-coexistente) e franquia sobrando ou saldo na carteira.
 - **Ligação por telefone (VoIP):** não precisa do plano **Ligações WhatsApp** — usa apenas o saldo da carteira por minuto de ligação atendida e exige a permissão **Pode ligar para o contato** (ou ser proprietário).
 

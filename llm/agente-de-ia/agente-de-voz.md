@@ -42,7 +42,7 @@ A configuração fica na aba **Ligações** do canal oficial → cartão **IA at
 - **Quando ninguém atende a tempo:** toca para a equipe e a IA atende após **Esperar antes da IA** (`5` a `45` segundos, padrão `20`). Se não houver ninguém para tocar, a IA atende na hora.
 - **Sempre:** a IA atende na hora.
 
-Em qualquer das opções, se o workspace estiver sem plano de **Ligações WhatsApp** ou sem franquia/saldo suficiente, a IA não entra e a ligação toca para a equipe normalmente.
+Em qualquer das opções: sem o plano **Ligações WhatsApp**, ou sem franquia nem saldo, a ligação é recusada e fica como **Chamada perdida**. Com o plano, mas sem minutos de IA na franquia e com saldo de R$ 0,50 ou menos, a IA não entra e a ligação toca para a equipe. Veja as regras das ligações em [Fazer e receber ligações pelo WhatsApp oficial (Beta)](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp).
 
 ## Capacidades, idioma e transferência na ligação
 

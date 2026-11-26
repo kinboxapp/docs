@@ -1,7 +1,7 @@
 ---
 title: Ligar para um contato por telefone (VoIP)
 description: Como ligar do navegador para o telefone fixo ou celular de um contato a partir da conversa na Kinbox, usando o saldo da carteira.
-keywords: [voip, ligar por telefone, ligação telefônica, ligar para fixo, ligar para celular, chamada voip, botão ligar, pode ligar para o contato, saldo voip, ligação de voz]
+keywords: [voip, ligar por telefone, ligação telefônica, ligar para fixo, ligar para celular, chamada voip, botão ligar, pode ligar para o contato, saldo voip, ligação de voz, telefonia, pabx, ramal, central telefônica, "0800", ura]
 publico: humano
 tipo: guia
 fontes:
@@ -20,7 +20,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Com o VoIP da Kinbox, você liga do navegador para o telefone fixo ou celular de um contato a partir de qualquer conversa na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox). O VoIP apenas **faz** ligações — não é possível receber ligações telefônicas na Kinbox (para receber chamadas, veja [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/ligacoes/visao-geral)).
+Com o VoIP da Kinbox, você liga do navegador para o telefone fixo ou celular de um contato a partir de qualquer conversa na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox). O VoIP apenas **faz** ligações — não é possível receber ligações telefônicas na Kinbox (para receber ligações, veja [Ligações na Kinbox: WhatsApp oficial e telefone](/docs/canais/ligacoes/visao-geral)).
 
 <Note>
 Quem pode: proprietário do workspace ou membro com a permissão **Pode ligar para o contato** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Custo: gasta [saldo da carteira](/docs/conceitos/saldo-e-creditos) por minuto de ligação atendida e não exige plano de ligações.
@@ -42,13 +42,13 @@ Quem pode: proprietário do workspace ou membro com a permissão **Pode ligar pa
   <Step title="Clique no botão de telefone">
     No painel do contato, à direita, clique no botão de telefone (com a dica **Ligar**).
 
-    Em conversas de WhatsApp oficial com o recurso de ligações liberado, abre um menu: escolha **Ligar por telefone (VoIP)**. Nas demais conversas, a ligação começa direto.
+    Se o menu aparecer (conversas de WhatsApp oficial com as ligações pelo WhatsApp liberadas), escolha **Ligar por telefone (VoIP)**. Essa opção depende do telefone no cadastro do contato e da permissão **Pode ligar para o contato**. Nas outras conversas, a ligação começa direto.
   </Step>
   <Step title="Permita o microfone">
     Na primeira vez, o navegador pede acesso ao microfone: clique para permitir.
   </Step>
   <Step title="Converse pela janela da ligação">
-    A janela da ligação abre na tela (você pode arrastá-la) mostrando "Iniciando chamada…", "Chamando…" com o número do contato e, depois que ele atende, o tempo da ligação. A janela traz os botões de silenciar o microfone e desligar, além do selo **Gravando** quando a gravação estiver ativada.
+    A janela da ligação abre grande (ou flutuante, se você escolheu assim da última vez), mostrando "Iniciando chamada…", "Chamando…" com o número do contato e, depois que ele atende, o tempo da ligação. Ela traz os botões de silenciar o microfone e desligar. Você pode reduzi-la para uma janela flutuante, que dá para arrastar pela tela.
   </Step>
   <Step title="Encerre a ligação">
     Quando terminar, clique no botão vermelho de desligar. A janela mostra "Ligação encerrada".
@@ -59,10 +59,10 @@ Quem pode: proprietário do workspace ou membro com a permissão **Pode ligar pa
 
 - **Cobrança:** a cobrança começa quando o contato atende. Ligações não atendidas não são cobradas.
 - **Saldo acabou no meio:** se o saldo da carteira acabar durante a ligação, aparece "Seu saldo acabou. A chamada será encerrada." e a ligação é encerrada.
-- **Uma ligação por vez:** não é possível iniciar uma nova chamada enquanto outra estiver aberta ("Encerre a ligação atual antes de iniciar outra").
+- **Uma ligação por vez:** não é possível iniciar uma nova ligação enquanto outra estiver aberta ("Encerre a ligação atual antes de iniciar outra").
 - **Registro na conversa:** a ligação fica registrada na conversa como a mensagem **Ligação de voz** (que não é enviada ao contato), com a situação ("Chamando...", "Em andamento", duração, "Não atendeu" ou "Ligação falhou").
 - **Gravação e transcrição:** clique na mensagem **Ligação de voz** para abrir o painel da ligação. Se a gravação estava ativa, você pode ouvir o áudio, clicar em **Baixar áudio** e clicar em **Transcrever** para gerar a **Transcrição** e o **Resumo** (a transcrição e o resumo gastam saldo; veja como ligar a gravação em [Configurações de VoIP: gravação, resumo por IA e SIP reserva](/docs/canais/ligacoes/configuracoes-voip)). Sem gravação, o painel mostra "Não há gravação disponível".
-- **Relatório:** as ligações aparecem em **Relatórios** → **Ligações**, no filtro "Telefone (VoIP)".
+- **Relatório:** quem tem a permissão **Gerenciar relatórios** vê as ligações em **Relatórios** → **Ligações**, no filtro "Telefone (VoIP)".
 
 ## Problemas comuns
 
