@@ -1,0 +1,99 @@
+---
+title: Minha campanha não envia ou parou
+description: Causas e soluções para campanha que não cria, fica aguardando, falha, mostra canal desconectado, troca variáveis errado ou não conta respostas na Kinbox.
+keywords: [campanha não envia, campanha parada, campanha travada, aguardando outra campanha, aguardando horário, campanha falhou, canal desconectado campanha, falhas na campanha, variável errada campanha, criar desabilitado, campanha não aparece, respondido zerado, sms cortado]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/crm/campaigns/AddCampaign/index.tsx
+  - web:src/pages/crm/campaigns/campaign.helper.tsx
+  - web:src/pages/crm/campaigns/ChunkLeadsDrawer.tsx
+  - api:src/modules/campaigns/campaigns.service.ts
+  - api:src/modules/campaigns/campaigns.consumer.ts
+  - api:src/shared/utils/helper.ts
+  - api-v0:server/controllers/CampaignController.js
+codigo:
+  - web:src/pages/crm/campaigns/**
+  - api:src/modules/campaigns/**
+  - api:src/shared/utils/helper.ts
+  - api-v0:server/controllers/CampaignController.js
+  - api-v0:server/controllers/SmsController.js
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+Você não encontra **Campanhas** no menu, não consegue clicar em **Criar**, recebe um aviso ao criar, a campanha fica parada em espera, aparece com **Canal desconectado** ou **Falhou**, acumula falhas, envia variáveis erradas ou mostra **Respondido** menor do que as respostas recebidas.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="Não consigo criar a campanha (menu ausente, botão Criar cinza, canal oculto ou erro)">
+    - **Campanhas não aparece no menu ou a tela não abre:** falta a permissão **Campanhas** no seu papel. Peça ao **proprietário** do workspace ou a quem gerencia papéis para liberá-la.
+    - **Botão Criar está cinza:** falta preencher **Nome da campanha**, **Canais de disparo**, **Público alvo** ou **Conteúdo** (no WhatsApp oficial, é preciso escolher um template).
+    - **O canal não aparece em Canais de disparo:** campanhas aceitam apenas WhatsApp e SMS; canais com **Apenas Receptivo** não aparecem (no WhatsApp oficial, veja [Configurações do WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/configuracoes)); canais restritos a grupos dos quais você não participa ficam ocultos; e, depois de selecionar o primeiro canal, só aparecem canais compatíveis (no WhatsApp oficial e no SMS, nenhum outro canal; no WhatsApp por QR Code, só canais do mesmo tipo — todos **Express** ou todos **Clássica**). Limpe a seleção para escolher outro tipo.
+    - **Erro ao clicar em Criar:**
+      - *"O canal de disparo escolhido está desconectado."* (só no WhatsApp por QR Code e oficial): reconecte o canal principal.
+      - *"Necessário recriar esse canal para usar as campanhas."* (só no WhatsApp por QR Code na conexão **Clássica** criada ou recriada até 27/01/2024): recrie o canal — veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo).
+      - *"Você não tem permissão para criar campanhas de WhatsApp."*: seu papel tem a restrição **Proibir criar campanha de WhatsApp** (SMS continua liberado).
+      - *"Mensagem de SMS não pode conter mais de 160 caracteres."* ou *"Mensagem não pode conter emojis."* (só no SMS): encurte o texto ou remova emojis.
+      - *"Sem saldo de créditos SMS suficiente."* (só no SMS): compre **Créditos de SMS** (botão **Comprar créditos** na tela do canal de SMS) antes de criar (veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos)).
+      - *"Necessário escolher um anexo"* (só no WhatsApp oficial): anexe a mídia exigida pelo cabeçalho do template.
+  </Accordion>
+
+  <Accordion title="A campanha ficou aguardando (outra campanha, horário, lote ou agendada)">
+    - **Aguardando outra campanha:** outra campanha já está enviando pelo mesmo canal principal. Aguarde ela terminar, entrar em **Aguardando horário** ou ser excluída, ou pause a outra campanha. Clicar em **Resumir** não fura a fila.
+    - **Aguardando horário:** o momento atual está fora do **Horário comercial** escolhido; a campanha retoma sozinha no próximo período. Confira o horário em **Configurações** → **Ambiente** → **Horários**.
+    - **Aguardando lote:** pausa normal entre lotes.
+    - **Agendado:** a **Data de início** definida ainda não chegou.
+
+    Veja os detalhes em [Velocidade de envio e horário comercial](/docs/campanhas/velocidade-e-horario).
+  </Accordion>
+
+  <Accordion title="A campanha ficou em Falhou ou mostra Canal desconectado">
+    - **Status Falhou:** nenhum número da lista era válido ou houve erro ao ler o arquivo. Revise a primeira coluna da planilha e crie outra campanha.
+    - **Selo Canal desconectado:** o canal principal da campanha está desconectado **agora** (na lista, o selo pode aparecer até em campanhas concluídas se o canal estiver desconectado hoje). Reconecte o canal.
+    - **Só no WhatsApp por QR Code na conexão Express:** se o canal desconectar durante o disparo, as mensagens enviadas enquanto ele está fora do ar falham na hora e não são reenviadas, mesmo que os contatos ainda na fila mostrem **Aguardando canal conectar**. Clique em **Pausar** assim que notar a desconexão e use **Resumir** depois de reconectar. Em campanhas com vários canais **Express**, a Kinbox envia apenas pelos canais conectados.
+  </Accordion>
+
+  <Accordion title="A campanha teve muitas falhas">
+    Abra a campanha, clique no cartão **Falhas** e veja o motivo de cada envio na coluna **Detalhes** (veja [Acompanhar os resultados da campanha](/docs/campanhas/acompanhar-resultados)). Causas por canal:
+
+    - **WhatsApp por QR Code (Express):** número sem WhatsApp (a conexão **Express** verifica antes de enviar — veja [Enviar campanhas pelo QR Code com menos risco de bloqueio](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas)) ou canal desconectado durante o disparo.
+    - **WhatsApp oficial:** recusa da Meta, exibida em **Detalhes** no formato código e mensagem da Meta (consulte [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns)).
+    - **SMS:** os **Créditos de SMS** acabaram durante o envio (aparece `"Sem créditos disponíveis"` em **Detalhes**). As mensagens que falharam não são reenviadas.
+  </Accordion>
+
+  <Accordion title="A lista deu Erros, Duplicados ou o contato recebeu duas vezes">
+    - **Linhas em Erros (Upload):** confira se a primeira linha não é um título, se os números têm entre 10 e 13 dígitos, se as colunas estão separadas por vírgula e se números de fora do Brasil começam com `+`.
+    - **Linhas em Duplicados:** comportamento normal — dentro da mesma campanha, números repetidos recebem uma única vez (tanto em **Upload** quanto em **Contatos**).
+    - **Contato recebeu duas vezes:** na mesma campanha, repetidos são removidos. Se o contato recebeu duas vezes, confira se ele está em **duas campanhas diferentes**: a Kinbox não compara a lista de uma campanha com a de outra.
+  </Accordion>
+
+  <Accordion title="A mensagem saiu com a variável errada">
+    - **Saiu um número no lugar do dado (ex.: "Olá 2"):** a célula dessa coluna estava vazia no arquivo (só no WhatsApp por QR Code e no SMS; no WhatsApp oficial, célula vazia sai em branco). Preencha todas as células das colunas usadas.
+    - **Saiu "email", "first_name" ou o nome de um campo:** chaves de contato não funcionam em campanhas (no WhatsApp por QR Code e no SMS saem como a palavra sem chaves; no WhatsApp oficial vão literais para o contato). Use sempre o número da coluna (`{{2}}`, `{{3}}`...; na fonte **Contatos**, por exemplo, `{{4}}` é **E-mail**).
+    - **Saiu a coluna errada:** `{{1}}` é o número e `{{2}}` é a segunda coluna do arquivo. Na lista de contatos da campanha, **Coluna 1** mostra a segunda coluna do arquivo.
+  </Accordion>
+
+  <Accordion title="SMS cortado ou contador vermelho com menos de 160 caracteres (só no SMS)">
+    - **Texto cortado:** se a mensagem passar de 160 caracteres depois da troca das variáveis, a Kinbox corta em 160 caracteres no envio. Deixe folga para nomes ou dados longos.
+    - **Contador vermelho:** acentos mudam o limite exibido no rótulo para 70 (ou 67) e deixam o contador vermelho ao passar disso. A Kinbox só bloqueia acima de 160 caracteres; prefira textos curtos. Veja [Criar uma campanha por SMS](/docs/campanhas/campanha-de-sms).
+  </Accordion>
+
+  <Accordion title="Respondido está zerado ou menor do que as respostas que eu vi">
+    A Kinbox contabiliza em **Respondido** apenas respostas que abrem uma **sessão nova** pelo **canal principal** da campanha em até **96 horas** depois de o lote do contato começar. Respostas enviadas em conversas já abertas, após 96 horas ou por um canal secundário (em campanhas com vários canais de WhatsApp por QR Code) não entram nesse contador.
+  </Accordion>
+
+  <Accordion title="Quero mudar uma campanha já criada">
+    Não existe edição de campanha depois de criada. Para alterar lista, texto ou canal, abra o menu **...** → **Excluir** (os envios pendentes são cancelados imediatamente, sem desfazer) e crie outra campanha em [Criar uma campanha](/docs/campanhas/campanhas-no-kinbox).
+  </Accordion>
+
+  <Accordion title="A campanha aparece como ***** e sem menu de ações">
+    O canal da campanha tem visibilidade restrita a grupos dos quais você não participa. Peça ao **proprietário** do workspace ou a quem gerencia grupos e canais para incluir você no grupo autorizado.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Se o problema continuar, fale com o suporte informando o **nome da campanha**, o **canal** usado, o **status** exibido e o texto da coluna **Detalhes** de uma das falhas.

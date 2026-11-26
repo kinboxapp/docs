@@ -1,0 +1,88 @@
+---
+title: "Campanhas: visão geral"
+description: O que é uma campanha na Kinbox, por quais canais ela sai (WhatsApp por QR Code, WhatsApp oficial e SMS), quem pode criar e como ela é enviada.
+keywords: [campanha, campanhas, disparo em massa, envio em massa, mensagem em massa, lista de transmissão, mandar mensagem para vários contatos, campanha whatsapp, campanha sms, permissão campanhas]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/crm/campaigns/index.tsx
+  - web:src/pages/crm/campaigns/AddCampaign/index.tsx
+  - web:src/pages/crm/campaigns/AddCampaign/CampaingMessageInput.tsx
+  - web:src/pages/crm/campaigns/campaign.helper.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - web:src/layouts/BaseLayout.tsx
+  - api:src/modules/campaigns/campaigns.service.ts
+codigo:
+  - web:src/pages/crm/campaigns/index.tsx
+  - web:src/pages/crm/campaigns/AddCampaign/index.tsx
+  - web:src/pages/crm/campaigns/AddCampaign/CampaingMessageInput.tsx
+  - web:src/pages/crm/campaigns/campaign.helper.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - api:src/modules/campaigns/campaigns.service.ts
+verificado_em: 2026-11-26
+---
+
+Uma campanha na Kinbox envia a mesma mensagem — personalizada por variáveis — para uma lista de números, em lotes e no ritmo que você escolher.
+
+## Por quais canais você pode enviar
+
+As campanhas funcionam apenas em canais de **WhatsApp** (por QR Code ou oficial) e **SMS**. Outros canais conectados ao workspace, como Instagram, e-mail, Telegram e widget, não ficam disponíveis para campanhas.
+
+| | WhatsApp por QR Code (Express ou Clássica) | WhatsApp oficial | SMS |
+| --- | --- | --- | --- |
+| Conteúdo | Texto livre (até 4096 caracteres), emojis, um anexo, **Frase aleatória** e variáveis (`{{2}}`, `{{3}}`...) | Somente template aprovado pela Meta | Texto até 160 caracteres, sem emoji, sem anexo, **Frase aleatória** e variáveis (`{{2}}`, `{{3}}`...) |
+| Vários canais na mesma campanha | Sim, todos do mesmo tipo (todos **Express** ou todos **Clássica**) | Não (um canal por campanha) | Não (um canal por campanha) |
+| Exige canal **Conectado** ao criar | Sim | Sim | Não |
+| Consome créditos na Kinbox | Não | Não (a cobrança das mensagens é feita pela Meta) | 1 crédito de SMS por mensagem enviada |
+
+Se ainda está decidindo entre WhatsApp por QR Code e WhatsApp oficial, consulte [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral). Para entender a diferença entre **Créditos de SMS** e o saldo da carteira, veja [Saldo da carteira e créditos](/docs/conceitos/saldo-e-creditos).
+
+## Onde fica e quem pode usar
+
+A tela de campanhas fica no item **Campanhas** do menu lateral.
+
+- **Permissão necessária:** o membro precisa ter a permissão **Campanhas** (localizada no grupo **Gerenciamento do Ambiente** do editor de permissões). Sem ela, o item não aparece no menu e a tela não abre. Veja como papéis funcionam em [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
+- **Restrição para WhatsApp:** a opção **Proibir criar campanha de WhatsApp** impede o membro de criar campanhas por WhatsApp (QR Code ou oficial), mas mantém liberadas as campanhas por SMS. Essa restrição não se aplica ao **proprietário** do workspace (na tela, **ambiente**).
+- **Canais restritos a grupos:** se um canal tem acesso restrito a grupos dos quais você não faz parte, ele não aparece ao criar campanhas. Na lista, campanhas desse canal aparecem com o nome mascarado como `*****`, sem menu de ações, e não podem ser abertas. O **proprietário** vê todas as campanhas.
+
+## Como uma campanha funciona
+
+1. Você configura a campanha em **Criar Campanha** (informações básicas, público, conteúdo e controle de tempo).
+2. Ao criar, a campanha entra em **Processando** enquanto a Kinbox lê a lista e monta os lotes.
+3. Se tiver data futura ou horário definido, ela aguarda em **Agendado** ou **Aguardando horário**.
+4. No disparo, a campanha alterna entre **Enviando mensagens** e pausas em **Aguardando lote** até ser marcada como concluída.
+
+Algumas regras se aplicam a toda campanha:
+
+- **Uma por canal de cada vez:** se outra campanha já estiver em andamento no mesmo canal principal, a nova fica em **Aguardando outra campanha** até o canal ficar livre.
+- **Sem edição depois de criada:** não é possível editar uma campanha pronta. Para mudar texto, lista ou canal, exclua a campanha e crie outra.
+- **Respostas:** quando um contato da lista responde, a contagem aparece em **Respondido** e a conversa recebe o cartão **Campanha**.
+
+## De onde vem a lista de contatos
+
+Você pode carregar uma planilha (`.csv`, `.xls` ou `.xlsx`, até 100 MB) pela opção **Upload** ou selecionar contatos das sessões de conversa da Kinbox pela opção **Contatos**. A Kinbox não limita a quantidade de contatos da lista; os limites práticos dependem do canal escolhido (créditos no SMS, risco de bloqueio no WhatsApp por QR Code e limites da Meta no WhatsApp oficial).
+
+Para falar com até 10 números de uma vez sem criar campanha, use [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa) (no WhatsApp por QR Code, acima de 10 números a tela pede que você crie uma campanha). Também é possível criar e controlar campanhas pela [API de campanhas](/api-reference/campaigns/create-a-campaign).
+
+## Próximos passos
+
+<CardGroup cols={2}>
+  <Card title="Criar uma campanha" href="/docs/campanhas/campanhas-no-kinbox">
+    Passo a passo completo do nome e canal à lista, à mensagem e ao envio.
+  </Card>
+  <Card title="Criar uma campanha por SMS" href="/docs/campanhas/campanha-de-sms">
+    O que muda ao disparar por SMS: limite de 160 caracteres, sem emoji e créditos.
+  </Card>
+  <Card title="Velocidade de envio e horário comercial" href="/docs/campanhas/velocidade-e-horario">
+    Campos do Controle de tempo, tempos do SMS, lotes e status de espera.
+  </Card>
+  <Card title="Acompanhar os resultados da campanha" href="/docs/campanhas/acompanhar-resultados">
+    Como ler os cartões, exportar falhas e pausar, retomar ou excluir campanhas.
+  </Card>
+  <Card title="Boas práticas de campanha" href="/docs/campanhas/boas-praticas">
+    Como escolher o canal, revisar a lista e reduzir falhas e bloqueios.
+  </Card>
+  <Card title="Minha campanha não envia ou parou" href="/docs/campanhas/problemas-comuns">
+    Causas e soluções para erros ao criar, fila, desconexão, variáveis e respostas.
+  </Card>
+</CardGroup>

@@ -260,5 +260,49 @@
     "pergunta": "Como recupero uma conversa que apaguei no aplicativo do WhatsApp do meu celular?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero mandar uma promoção pelo WhatsApp para uma planilha de clientes, como monto isso?",
+    "esperado": [
+      "docs/campanhas/campanhas-no-kinbox",
+      "docs/campanhas/visao-geral"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Criei um disparo novo e ele não sai do status aguardando outra campanha, o que houve?",
+    "esperado": [
+      "llm/faq/campanha-uma-por-canal",
+      "docs/campanhas/problemas-comuns",
+      "docs/campanhas/velocidade-e-horario"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Na mensagem da campanha apareceu 'Olá 2' em vez do nome da pessoa, por quê?",
+    "esperado": [
+      "docs/campanhas/problemas-comuns",
+      "llm/campanhas/campanhas-no-kinbox"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para fazer disparo de SMS em massa e quanto crédito gasta cada mensagem?",
+    "esperado": [
+      "docs/campanhas/campanha-de-sms"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como vejo quem leu e quem respondeu a campanha que enviei ontem?",
+    "esperado": [
+      "docs/campanhas/acompanhar-resultados"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para programar posts no feed do Instagram pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]
