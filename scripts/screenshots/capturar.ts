@@ -28,7 +28,7 @@ type Passo =
   | { passar: string }
   /** Arrasta `de` até `para`; `x`/`y` (px) soltam num ponto dentro de `para` (ex.: área vazia do fluxograma) */
   | { arrastar: { de: string; para: string; x?: number; y?: number } }
-  /** Troca o texto do elemento antes do print (ex.: código de instalação do staging pelo formato de produção, com dados fictícios) */
+  /** Troca o texto do elemento antes do print (ex.: código de instalação do staging pelo formato de produção, com dados fictícios). Em `input`/`textarea`, troca o texto de exemplo (placeholder). */
   | { trocarTexto: { seletor: string; texto: string } }
   /** Envia um arquivo fictício (caminho relativo a `scripts/screenshots/`) num `input[type=file]` */
   | { enviar: { seletor: string; arquivo: string } }
@@ -215,7 +215,11 @@ async function executarPasso(page: Page, passo: Passo) {
   }
   else if ('trocarTexto' in passo) {
     const total = await localizar(page, passo.trocarTexto.seletor).evaluateAll((els, texto) => {
-      for (const el of els) el.textContent = texto
+      // Em campo de formulário, troca o texto de exemplo (placeholder); nos outros elementos, o texto.
+      for (const el of els) {
+        if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) el.placeholder = texto
+        else el.textContent = texto
+      }
       return els.length
     }, passo.trocarTexto.texto)
     if (!total) throw new Error(`trocarTexto: o seletor não achou nenhum elemento: ${passo.trocarTexto.seletor}`)

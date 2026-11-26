@@ -1020,6 +1020,58 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Quero receber os e-mails do contato da empresa na caixa de entrada da Kinbox, qual tipo de conexão uso?",
+    "esperado": [
+      "docs/canais/e-mail/visao-geral"
+    ],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Coloquei host, porta e senha do IMAP e aparece erro ao testar conexão, o que confiro?",
+    "esperado": [
+      "docs/canais/e-mail/por-imap",
+      "docs/canais/e-mail/problemas-comuns",
+      "llm/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Onde pego o Tenant ID e o Client Secret para ligar o Outlook da empresa?",
+    "esperado": [
+      "docs/canais/e-mail/outlook"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Ativei o encaminhamento do Gmail, mas a resposta chega ao cliente como via Kinbox, é normal?",
+    "esperado": [
+      "docs/canais/e-mail/por-encaminhamento",
+      "docs/canais/e-mail/problemas-comuns",
+      "llm/faq/email-spam"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Os e-mails levam alguns minutos para entrar na Kinbox, por quê?",
+    "esperado": [
+      "llm/faq/email-atraso",
+      "docs/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Dá para conectar a caixa de e-mail pela Kinbox usando POP3?",
+    "esperado": [
+      "llm/canais/e-mail/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo saber se o cliente abriu o e-mail que respondi pela Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Como faço para a IA corrigir o português da minha mensagem antes de mandar para o cliente?",
     "esperado": [
       "docs/copiloto/usar-o-copiloto-de-ia",

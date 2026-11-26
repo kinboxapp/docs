@@ -2159,6 +2159,70 @@
   paginas:
     - docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp
 
+# Seção e-mail (Canais › E-mail)
+#
+# Só as telas antes de conectar, no workspace de documentação: nenhum canal de e-mail é criado e nenhuma caixa real
+# é conectada (o botão Conectar canal nunca é clicado). Os formulários ficam vazios. Nos painéis de IMAP/SMTP e de
+# Outlook o recorte começa em Descrição, abaixo do aviso superior. No encaminhamento, o texto de exemplo do campo
+# Descrição é trocado por contato@example.com.
+
+- id: email-tipos-de-conexao
+  largura: 1300
+  url: /settings/channels/new/email
+  passos:
+    - esperar: '.g_settings_simple_page a[href="/settings/channels/new/email/outlook"]'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page .ant-card-head'
+    - '.g_settings_simple_page .ant-card-body'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/tipos-de-conexao.webp
+  paginas:
+    - docs/canais/e-mail/visao-geral
+
+- id: email-encaminhamento-formulario
+  url: /settings/channels/new/email/forward
+  passos:
+    - esperar: '.ant-drawer-body #description'
+    - trocarTexto:
+        seletor: '.ant-drawer-body #description'
+        texto: contato@example.com
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Conectar canal")'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/encaminhamento-formulario.webp
+  paginas:
+    - docs/canais/e-mail/por-encaminhamento
+
+- id: email-imap-formulario
+  altura: 1300
+  url: /settings/channels/new/email/imap-smtp
+  passos:
+    - esperar: '.ant-drawer-body #extraData_smtpData_secure'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-body .ant-form-item:has(#description)'
+    - '.ant-drawer-body .ant-form-item:has(#extraData_smtpData_secure)'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/imap-formulario.webp
+  paginas:
+    - docs/canais/e-mail/por-imap
+
+- id: email-outlook-formulario
+  url: /settings/channels/new/email/outlook
+  passos:
+    - esperar: '.ant-drawer-body #extraData_outlookData_graphSender'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-body .ant-form-item:has(#description)'
+    - '.ant-drawer-body .ant-form-item:has(#extraData_outlookData_graphSender)'
+  mascarar: []
+  arquivo: images/ajuda/e-mail/outlook-formulario.webp
+  paginas:
+    - docs/canais/e-mail/outlook
+
 # Seção copiloto. Antes de capturar, o copiloto do workspace de documentação é configurado só durante a captura
 # (script fora do repo) e volta a ficar vazio depois. Os itens "galeria", "comandos-personalizados" e "intencao"
 # foram capturados com Sugestões automáticas, Comandos de chat (com 2 comandos personalizados fictícios), Análise de
