@@ -61,7 +61,7 @@ A coluna **Status** exibe o status informado pela Meta quando ele existe; caso c
 | **Sincronizado** | Rótulo técnico raro de sincronização. | Não |
 | **Desconhecido** | Rótulo técnico raro quando o estado não é reconhecido. | Não |
 
-Quando um template está em estado de análise (**Submetido**, **Pendente**, **Em recurso**, **Sinalizado pela Meta** ou **Exclusão pendente**), o editor exibe o aviso **Template em análise pela Meta** ("Este template está bloqueado até a Meta concluir a análise. Após um status final, você poderá editá-lo e enviá-lo novamente.") e o servidor recusa edições com `"Template em análise pela Meta. A edição fica disponível quando a Meta concluir a análise."`.
+Quando um template está em estado de análise (**Submetido**, **Pendente**, **Em recurso**, **Sinalizado pela Meta** ou **Exclusão pendente**), o editor exibe o aviso **Template em análise pela Meta** ("Este template está bloqueado até a Meta concluir a análise. Após um status final, você poderá editá-lo e enviá-lo novamente."). Você não pode editar o template enquanto ele estiver em análise.
 
 ## Sincronização e atualização de status com a Meta
 

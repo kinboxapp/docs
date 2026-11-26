@@ -29,7 +29,7 @@ verificado_em: 2026-11-26
 
 Envie templates com status **Aprovado** para iniciar conversas ou retomar atendimentos fora da [janela de 24 horas](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas). O envio de templates existe apenas no **WhatsApp oficial**: no WhatsApp por QR Code esse recurso não existe (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
 
-<Note>Quem pode: depende do lugar do envio. Começar uma conversa nova pede a permissão **Iniciar chat ativo**, e **Agendar mensagem** pede a permissão **Agendar mensagem**. Campanhas, automações, bot e cenários pedem a permissão de cada uma dessas telas. Em todos os casos, o canal precisa ser um WhatsApp oficial e o template precisa estar **Aprovado**.</Note>
+<Note>Quem pode: depende do lugar do envio. Começar uma conversa nova pede a permissão **Iniciar chat ativo**, e **Agendar mensagem** pede a permissão **Agendar mensagem**. Campanhas, automações, bot e cenários pedem a permissão de cada uma dessas telas, e os agentes de IA pedem a permissão **Agentes de IA**. Em todos os casos, o canal precisa ser um WhatsApp oficial e o template precisa estar **Aprovado**.</Note>
 
 Se ainda não criou o template, veja [Criar um template e enviar para aprovação](/docs/canais/criar-templates-dentro-do-kinbox).
 
@@ -45,7 +45,7 @@ As telas de envio listam só os templates **Aprovado** do canal oficial escolhid
 | Conversa nova | Botão **Enviar mensagem** (lista de conversas, contato ou CRM) | Com um canal oficial escolhido, a mensagem é sempre um template. |
 | Agendar na conversa | Menu da conversa → **Agendar mensagem** | Template obrigatório quando a data cai fora da janela de 24 horas. |
 | Campanhas | **Criar Campanha** → seção **Conteúdo** | Template obrigatório; um canal oficial por campanha; variáveis pelas colunas do arquivo. |
-| Automações | Ações **Agendar mensagem template** e **Iniciar conversa** | Use template sem mídia no cabeçalho: o anexo escolhido nessas ações não é enviado. |
+| Automações | Ações **Agendar mensagem template** e **Iniciar conversa** | Use template sem mídia no cabeçalho: o anexo escolhido nessas ações não é enviado. Em **Agendar mensagem template**, o envio sai pelo canal da conversa: ela precisa estar no WhatsApp oficial em que o template está aprovado. |
 | Bot | Bloco **Notificar** | O template aparece ao escolher um canal oficial em **Do canal**. |
 | Cenários | Ação **Enviar mensagem** (conversa) | Template obrigatório no canal oficial; mídia do cabeçalho por link (**URL da mídia**). |
 | Agentes de IA | Ação **Enviar template WhatsApp** ou opção **Usar template caso conversa expirada** | Envio direto ou plano B quando a janela já expirou. |

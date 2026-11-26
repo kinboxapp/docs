@@ -67,7 +67,7 @@ Detalhes do envio de templates aprovados do WhatsApp oficial. O passo a passo es
 - **Cenários (ação Enviar mensagem de conversa)**: com canal oficial é sempre template. Campos: **Modelo de mensagem** (obrigatório), **Cabeçalho** `{{n}}`, **Corpo** `{{n}}`, botões e, para cabeçalho de mídia, **URL da mídia** (obrigatório) e **Nome do arquivo** (documento). A mídia é um link, não um upload. O canal usado é o da conversa referenciada, quando ela tem um. A ação de criar conversa dos Cenários não tem seletor de template.
 - **Agentes de IA**: ação **Enviar template WhatsApp** ("O template aprovado é enviado sempre — dentro ou fora da janela de 24h do WhatsApp."), com campos de cabeçalho e corpo fixos ou gerados pela IA; e a opção **Usar template caso conversa expirada** em **Enviar mensagem** e nos follow-ups.
 - **Automação Iniciar conversa**: só existe no gatilho **Tempo sem conversa ao criar contato**; com canal oficial em **Canal**, o template aparece no lugar de **Texto** e pode rodar um bot junto.
-- **Automação Agendar mensagem template**: **Para quando?** (próximo horário comercial, depois de um tempo, próximo dia da semana e horário), **Canal** (só oficiais) e o template.
+- **Automação Agendar mensagem template**: **Para quando?** (próximo horário comercial, depois de um tempo, próximo dia da semana e horário), **Canal** (só oficiais) e o template. O envio sai pelo canal da conversa em que a automação rodou, não pelo **Canal** escolhido: a conversa precisa estar no WhatsApp oficial em que o template está aprovado.
 
 ## Erros exatos ao enviar
 

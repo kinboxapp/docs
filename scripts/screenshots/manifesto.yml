@@ -507,7 +507,8 @@
     - docs/canais/criar-flows-dentro-do-kinbox
 
 # Janela "Enviar mensagem" numa conversa do canal oficial de QA (workspace 1, conversa 3418, janela fechada), com o
-# template aprovado de teste "status_com_imagem" ({{1}} e {{2}} no corpo). Não clica em Enviar. Número e canal sob tarja.
+# template aprovado de teste "status_com_imagem" ({{1}} e {{2}} no corpo). Não clica em Enviar. Número sob tarja; o canal
+# aparece com o nome de teste "Oficial Teste" (fictício), porque o passo da página aponta para o campo Canal.
 - id: whatsapp-templates-enviar-mensagem
   workspace: Kinbox
   altura: 1300
@@ -534,7 +535,6 @@
   alvo: '.ant-modal-content'
   mascarar:
     - '.ant-modal-content .ant-input-affix-wrapper:has(#phone)'
-    - '.ant-modal-content .ant-form-item:has(label[title="Canal"]) .ant-select-selection-item'
   arquivo: images/ajuda/whatsapp-templates/enviar-mensagem-template.webp
   paginas:
     - docs/canais/whatsapp/whatsapp-templates/enviar-template
