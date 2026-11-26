@@ -596,6 +596,57 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Como coloco autenticação de dois fatores com o Google Authenticator na minha conta?",
+    "esperado": [
+      "docs/conta/verificacao-em-duas-etapas",
+      "llm/conta/verificacao-em-duas-etapas"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Apareceu que atingi o limite de sessões ativas no ambiente, como libero?",
+    "esperado": [
+      "docs/conta/senha-e-sessoes",
+      "llm/conta/problemas-de-acesso"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "As notificações da Kinbox não aparecem no meu navegador, por quê?",
+    "esperado": [
+      "llm/faq/conta-nao-recebo-notificacoes",
+      "docs/conta/notificacoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Esqueci a senha do meu e-mail pessoal do Gmail, como recupero?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como mudo minha foto e meu nome que aparecem para a equipe na Kinbox?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como passo de um ambiente para outro sem precisar sair da minha conta?",
+    "esperado": [
+      "docs/conta/trocar-de-workspace"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Fiquei indisponível e parou de tocar o som de mensagem nova, é normal?",
+    "esperado": [
+      "docs/conta/disponibilidade",
+      "llm/faq/conta-nao-recebo-notificacoes"
+    ],
+    "tipo": "guia"
+  },
+  {
     "pergunta": "O tempo que o cliente passa conversando com o bot entra no tempo médio de espera do relatório?",
     "esperado": [
       "llm/faq/relatorio-tme-tma",
@@ -604,31 +655,9 @@
     "tipo": "faq"
   },
   {
-    "pergunta": "Onde vejo o TMA e o TME de cada atendente na semana passada?",
-    "esperado": [
-      "docs/relatorios/produtividade",
-      "llm/faq/relatorio-tme-tma"
-    ],
-    "tipo": "guia"
-  },
-  {
-    "pergunta": "Quero saber quantas conversas cada atendente recebeu por dia, contando as transferências",
-    "esperado": [
-      "docs/relatorios/atribuicao"
-    ],
-    "tipo": "guia"
-  },
-  {
     "pergunta": "Como vejo quanto tempo cada pessoa da equipe ficou online ontem?",
     "esperado": [
       "docs/relatorios/presenca"
-    ],
-    "tipo": "guia"
-  },
-  {
-    "pergunta": "Tem como colocar a fila de atendimento numa TV para a equipe acompanhar em tempo real?",
-    "esperado": [
-      "docs/relatorios/ao-vivo"
     ],
     "tipo": "guia"
   },
@@ -641,6 +670,13 @@
     "pergunta": "Onde vejo a nota que os clientes deram para cada atendente?",
     "esperado": [
       "docs/relatorios/avaliacao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quantas conversas estão esperando atendimento agora, sem ninguém responder?",
+    "esperado": [
+      "docs/relatorios/visao-geral"
     ],
     "tipo": "guia"
   },
