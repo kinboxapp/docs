@@ -695,5 +695,48 @@
       "llm/faq/relatorio-consumo-da-meta"
     ],
     "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para as conversas novas serem divididas entre os vendedores em rodízio?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
+      "docs/atendimento/estrategias-de-atribuicao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Criei uma regra de distribuição e nenhuma conversa está caindo para a equipe, o que pode ser?",
+    "esperado": [
+      "docs/atendimento/problemas-comuns",
+      "llm/atendimento/estrategias-de-atribuicao"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Dá para colocar o horário de almoço no horário de atendimento da empresa?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-e-gerenciar-horarios"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como mando uma pesquisa de satisfação quando termino o atendimento?",
+    "esperado": [
+      "docs/atendimento/pesquisa-de-satisfacao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que cada cliente volte sempre para o mesmo atendente que cuidou dele antes, tem como?",
+    "esperado": [
+      "llm/faq/contato-responsavel-fixo",
+      "docs/atendimento/estrategias-de-atribuicao"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A Kinbox calcula e paga bônus para os atendentes de acordo com a nota das avaliações?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

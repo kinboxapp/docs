@@ -439,6 +439,55 @@ async function garantirBotIntegracao(api: Api) {
   log(`bot: "Consulta de pedido" (desligado, sem canal) e campo Json "pedido"${existente ? ' (reaproveitado)' : ''}`)
 }
 
+/**
+ * Organização do atendimento (prints da seção `atendimento`): grupos Vendas e Suporte, um horário com intervalo,
+ * uma regra de atribuição (nasce inativa), a tag Orçamento visível só para Vendas e a automação de avaliação, desligada.
+ */
+async function garantirOrganizacao(api: Api) {
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  const idDe = (nome: string) => String(operadores.find((o) => o.name === nome)?.id || '')
+  const grupos = lista(await api.v0('GET', '/group'))
+  const novos = [
+    { name: 'Vendas', description: 'Orçamentos e novos pedidos', icon: '#22c55e', membros: ['Bruno Carvalho', 'Carla Mendes'] },
+    { name: 'Suporte', description: 'Trocas, entregas e dúvidas de uso', icon: '#0ea5e9', membros: ['Carla Mendes', 'Diego Santos'] },
+  ]
+  for (const g of novos) {
+    if (!grupos.some((x) => x.name === g.name)) {
+      await api.v0('POST', '/group', { name: g.name, description: g.description, icon: g.icon, members: g.membros.map(idDe).filter(Boolean) })
+    }
+  }
+  const vendas = lista(await api.v0('GET', '/group')).find((g) => g.name === 'Vendas')
+
+  const horarios = lista(await api.v0('GET', '/business-hours'))
+  if (!horarios.some((h) => h.name === 'Atendimento da loja')) {
+    const util = { active: true, hours: [['09:00', '12:00'], ['13:00', '18:00']] }
+    await api.v0('POST', '/business-hours', {
+      name: 'Atendimento da loja', mon: util, tue: util, wed: util, thu: util, fri: util,
+      sat: { active: true, hours: [['09:00', '13:00']] }, sun: { active: false, hours: [] },
+    })
+  }
+
+  const regras = lista(await api.v0('GET', '/inbox/assignment'))
+  if (vendas && !regras.some((r) => r.name === 'Distribuir entre Vendas')) {
+    await api.v0('POST', '/inbox/assignment', { name: 'Distribuir entre Vendas', rule: 'all', assignTo: 'round_robin_agent_group', groupId: vendas.id })
+  }
+
+  const orcamento = lista(await api.v3('GET', '/tags')).find((t) => t.name === 'Orçamento')
+  // Cor da paleta da tela (sky): com o hex do seed, o campo Cor da edição mostra o código em vez do nome
+  if (vendas && orcamento && (orcamento.privacy?.type !== 'group' || orcamento.color !== '#e0f2fe')) {
+    await api.v3('PATCH', `/tags/${orcamento.id}`, { color: '#e0f2fe', privacy: { type: 'group', groupIds: [String(vendas.id)] } })
+  }
+
+  const automacoes = lista(await api.v0('GET', '/automations'))
+  if (!automacoes.some((a) => a.name === 'Pedir avaliação')) {
+    await api.v0('POST', '/automations', {
+      name: 'Pedir avaliação', active: false, trigger: 'trigger:conversation:resolved',
+      conditions_active: false, actions: [{ type: 'action:conversation:rate' }],
+    })
+  }
+  log('organização: grupos Vendas e Suporte, horário "Atendimento da loja", regra "Distribuir entre Vendas" (inativa), automação "Pedir avaliação" (desligada)')
+}
+
 const workspace = await garantirWorkspace()
 const api = client(workspace.token)
 await pularOnboarding(api)
@@ -456,6 +505,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['agente', () => garantirAgente(api)],
   ['bot', () => garantirBot(api, canal)],
   ['bot de integração', () => garantirBotIntegracao(api)],
+  ['organização do atendimento', () => garantirOrganizacao(api)],
 ]
 for (const [nome, etapa] of etapas) {
   try {

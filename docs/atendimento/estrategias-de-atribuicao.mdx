@@ -1,0 +1,79 @@
+---
+title: Estratégias de atribuição automática
+description: Referência de todas as opções de Atribuir para da atribuição automática da Kinbox, com o que cada uma faz, os campos que pede e quando exige membro disponível ou online.
+keywords: [estratégias de atribuição, atribuir ciclicamente, menos atendimentos, membro online, último membro que atendeu, carteira de clientes, transbordo, atribuição por ddd, atribuição por cep, atribuição por estado, grupos participantes, membro precisa estar disponível, excluir canais]
+publico: humano
+tipo: referencia
+fontes:
+  - web:src/pages/settings/assignmentRules/EditAssignmentRule.tsx
+  - api-v0:server/services/AssignmentService.js
+  - api-v0:server/services/OperatorWorkspaceService.js
+  - api-v0:server/mongodb/services/SessionSummaryService.js
+codigo:
+  - web:src/pages/settings/assignmentRules/EditAssignmentRule.tsx
+  - api-v0:server/services/AssignmentService.js
+  - api-v0:server/services/OperatorWorkspaceService.js
+  - api-v0:server/mongodb/services/SessionSummaryService.js
+  - api-v0:server/services/GeoLocationService.js
+verificado_em: 2026-11-26
+---
+
+Referência das 20 opções do campo **Atribuir para** em **Configurações** → **Automação** → **Atribuição automática** (acessível ao proprietário ou a quem tem a opção **Atribuição automática** na seção **Gerenciamento do Ambiente** do papel, chamado na tela de **Permissão**). Para criar e ligar uma regra, veja [Distribuir as conversas automaticamente](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas).
+
+## Definições
+
+- **Disponível:** membro **Ativo** com o interruptor **Disponível** ligado (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)).
+- **Online:** membro disponível que também está com a Kinbox aberta e conectada (navegador ou aplicativo).
+- **Atendimentos** (nas opções de "menos atendimentos"): número de sessões abertas em que o membro é o responsável, contado na hora.
+
+As regras que escolhem um membro entre vários só escolhem membros disponíveis; as opções "online" e as de transbordo exigem membro online. Na Kinbox, um **grupo** é uma equipe de membros (não um grupo de WhatsApp).
+
+## Opções de Atribuir para
+
+| Opção | O que faz | Campos | Precisa de |
+| --- | --- | --- | --- |
+| **Atribuir para um membro** | Atribui sempre ao membro escolhido (só membro), sem conferir se está ativo, disponível ou online. | **Membro** (obrigatório) | Nada |
+| **Atribuir para um grupo** | Atribui sempre ao grupo escolhido (só grupo). | **Grupo** (obrigatório) | Nada |
+| **Atribuir a um grupo que o membro participa** | Coloca a conversa no primeiro grupo do membro que já é responsável pela sessão aberta (só grupo). | Nenhum | Conversa já ter responsável |
+| **Atribuir ciclicamente para um membro** | Faz rodízio entre todos os membros disponíveis do workspace (só membro); quando todos já receberam, a rodada recomeça. | Nenhum | Membro disponível |
+| **Atribuir ciclicamente para um grupo** | Faz rodízio pela ordem da lista de grupos (só grupo), sem olhar membros. | **Grupos participantes** (vazio = todos os grupos) | Nada |
+| **Atribuir ciclicamente para um membro de um grupo** | Faz rodízio entre os membros disponíveis do grupo escolhido (grava só o membro, não o grupo). | **Grupo** (obrigatório) | Membro disponível no grupo |
+| **Atribuir ciclicamente para um membro online de um grupo** | Faz rodízio entre os membros online do grupo escolhido (grava só o membro, não o grupo). | **Grupo** (obrigatório) | Membro online no grupo |
+| **Atribuir ciclicamente entre membros de grupos** | Avança para o próximo grupo da lista a cada conversa e faz rodízio entre os membros disponíveis do grupo da vez (só membro); se o grupo da vez não tiver ninguém disponível, não tenta outro grupo. | **Grupo** múltiplo (vazio = todos os grupos) | Membro disponível no grupo da vez |
+| **Atribuir ciclicamente entre membros online de grupos** | Escolhe, entre os membros online de todos os grupos da lista, quem recebeu menos conversas por esta regra hoje, com sorteio em empate (só membro; não alterna entre grupos). | **Grupo** múltiplo (vazio = todos os grupos) | Membro online em algum dos grupos |
+| **Atribuir para o membro que tem menos atendimentos** | Escolhe o membro disponível do workspace com menos atendimentos abertos na hora (só membro). | Nenhum | Membro disponível |
+| **Atribuir para membro que tem menos atendimentos no grupo** | Escolhe o membro disponível do grupo com menos atendimentos abertos naquele grupo na hora (só membro). | **Grupo** (obrigatório) | Membro disponível no grupo |
+| **Atribuir para membro que tem menos e está online** *(na lista: Atribuir para o membro que tem menos atendimentos e está online)* | Escolhe o membro online do workspace com menos atendimentos abertos na hora (só membro). | Nenhum | Membro online |
+| **Atribuir para o último membro que atendeu a conversa** | Atribui ao último membro responsável da sessão mais recente desta conversa que teve responsável (só membro). | **Membro precisa estar disponível** | **Regra** em **Contato existente no canal** (e membro disponível, se a caixa estiver marcada) |
+| **Atribuir para o último grupo que atendeu a conversa** | Atribui ao grupo da sessão mais recente desta conversa que teve grupo (só grupo). | Nenhum | **Regra** em **Contato existente no canal** |
+| **Atribuir para grupo mais próximo do CEP** | Escolhe o grupo com o CEP mais próximo do CEP do contato, dentro da distância máxima (só grupo). | **Grupos participantes** (vazio = todos), **Distância máxima em km** (obrigatório) | CEP no contato e nos grupos |
+| **Atribui ao grupo com mesmo DDD que o cliente** | Faz rodízio entre os grupos com o mesmo DDD do telefone do contato, sem olhar membros (só grupo). | **Grupos participantes** (vazio = todos, incluindo grupos sem DDD) | Telefone com DDD no contato |
+| **Atribui ao grupo com mesmo DDD que o cliente com transbordo** | Escolhe um grupo do mesmo DDD do contato com membro online, priorizando o que recebeu menos conversas desta regra nas últimas 24 horas, com transbordo se nenhum servir (só grupo). | **Grupos participantes**, **Grupos de transbordo** | Telefone com DDD e membro online |
+| **Atribui ao grupo com mesmo estado que o cliente com transbordo** *(na lista: Atribui ao grupo do mesmo estado que o cliente com transbordo)* | Escolhe um grupo cujo DDD é do mesmo estado (UF) do telefone do contato, com membro online e transbordo (só grupo). | **Grupos participantes**, **Grupos de transbordo** | Telefone com DDD e membro online |
+| **Distribuição cíclica entre grupos com transbordo** | Escolhe entre os grupos da lista com membro online quem recebeu menos conversas desta regra nas últimas 24 horas, com transbordo quando os principais acabam (só grupo). | **Grupos participantes** (vazio = todos), **Grupos de transbordo** | Membro online |
+| **Atribuir para último membro que atendeu ao contato** | Atribui ao último membro responsável da sessão mais recente do contato em qualquer canal, menos os excluídos (só membro). | **Membro precisa estar disponível**, **Excluir canais** | Membro **Ativo** (e disponível, se a caixa estiver marcada) |
+
+## Depois de escolher
+
+- Se a regra escolher um **membro** e a conversa estiver em um grupo do qual ele não participa, a conversa sai desse grupo.
+- Se a regra escolher um **grupo** e o responsável atual da conversa não participar dele, a conversa fica sem responsável.
+- Ao atribuir, a conversa mostra a mensagem de sistema "Conversa transferida por [nome da regra] para [membro ou grupo]".
+
+## Regras por DDD, estado e CEP
+
+- O DDD e o estado (UF) do contato vêm do número de telefone da conversa (considerando o código do país `55` seguido do DDD). Em canais sem telefone (como Instagram e e-mail), essas regras não encontram o DDD correto.
+- O CEP do contato vem de um campo personalizado de contato com a chave `cep`.
+- O DDD e o CEP do grupo são cadastrados no grupo; se os campos não aparecerem na tela de [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos), fale com o suporte.
+
+## Transbordo
+
+- Nas três opções "com transbordo", a Kinbox busca primeiro entre os **Grupos participantes** que têm pelo menos um membro online, dando preferência ao grupo que recebeu menos conversas por aquela regra nas últimas 24 horas (empates são sorteados).
+- Os grupos que já receberam o mesmo contato pela regra são evitados por 3 dias. Quando os grupos principais acabam ou nenhum tem membro online, a regra tenta os **Grupos de transbordo**; se também não houver grupo disponível lá, a conversa não é atribuída e o ciclo do contato recomeça.
+- Deixar **Grupos de transbordo** vazio significa **nenhum transbordo**, embora o campo exiba o texto "Todos os grupos".
+
+## Último membro
+
+- **Atribuir para o último membro que atendeu a conversa** olha apenas a conversa atual (aquele contato naquele canal) e exige **Regra** em **Contato existente no canal**. **Atribuir para último membro que atendeu ao contato** olha todas as conversas do contato em qualquer canal, exceto os escolhidos em **Excluir canais**. Em ambas, "atender" significa ter sido responsável pela sessão.
+- Com **Membro precisa estar disponível** marcado, se o último membro estiver indisponível ou inativo, a conversa fica sem responsável. Com a caixa desmarcada, a conversa vai para ele mesmo indisponível — exceto em **Atribuir para último membro que atendeu ao contato**, onde um membro inativo nunca recebe a conversa.
+
+Se a distribuição não acontecer como esperado, veja [As conversas não chegam para mim ou para a equipe](/docs/atendimento/problemas-comuns).

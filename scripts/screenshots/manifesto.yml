@@ -1391,3 +1391,153 @@
   arquivo: images/ajuda/instagram-e-facebook/configuracoes-facebook.webp
   paginas:
     - docs/canais/instagram/configuracoes
+
+# --- Seção atendimento (lote 5) ---
+
+# Tela Grupos: Novo grupo, busca, filtro Tudo e os grupos fictícios Suporte, Vendas e Atendimento com descrição e iniciais dos membros.
+- id: grupos-lista
+  url: /settings/groups
+  passos:
+    - esperar: 'text=Orçamentos e novos pedidos'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Novo grupo")'
+    - 'tr:has(a[href="/settings/groups/167"])'
+  arquivo: images/ajuda/atendimento/grupos-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-grupos
+
+# Painel Editar grupo do grupo fictício Vendas: Nome do grupo, Descrição, Membros (Bruno Carvalho e Carla Mendes), Cor ou emoji e Salvar.
+- id: grupo-editar
+  url: /settings/groups/168
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar grupo'
+    - esperar: '.ant-drawer >> text=Bruno Carvalho'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Salvar")'
+  arquivo: images/ajuda/atendimento/grupo-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-grupos
+
+# Lista de Atribuição Automática: Nova Regra, busca, filtro Tudo e a regra "Distribuir entre Vendas" com o interruptor desligado (regra nova nasce inativa).
+- id: atribuicao-lista
+  url: /settings/assignment-rules
+  passos:
+    - esperar: 'text=Distribuir entre Vendas'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Nova Regra")'
+    - 'tr:has(a[href="/settings/assignment-rules/94"])'
+  arquivo: images/ajuda/atendimento/atribuicao-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-atribuicoes-automaticas
+
+# Painel Editar atribuição automática: Nome, Regra = Todos, Atribuir para = Atribuir ciclicamente para um membro de um grupo, a ajuda de disponibilidade e Grupo = Vendas.
+- id: atribuicao-editar
+  url: /settings/assignment-rules/94
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar atribuição automática'
+    - esperar: '.ant-drawer >> text=Vendas'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Salvar")'
+  arquivo: images/ajuda/atendimento/atribuicao-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-atribuicoes-automaticas
+
+# Tela Horários: Novo horário e os horários "Atendimento da loja" e "Horário Comercial Relatório" com a marca Horário Padrão.
+- id: horarios-lista
+  url: /settings/business-hours
+  passos:
+    - esperar: 'text=Horário Padrão'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Novo horário")'
+    - 'tr:has(a[href="/settings/business-hours/368"])'
+  arquivo: images/ajuda/atendimento/horarios-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-horarios
+
+# Painel Editar horário "Atendimento da loja": Nome do horário e o cartão Segunda ligado com 09:00 até 12:00, 13:00 até 18:00 e o botão Horário.
+- id: horario-editar
+  url: /settings/business-hours/369
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar horário'
+    - esperar: '.ant-drawer >> text=Segunda'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer .ant-card:has-text("Segunda")'
+  arquivo: images/ajuda/atendimento/horario-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-horarios
+
+# Tela Tags: Nova tag, busca, filtro Tudo e as 5 tags fictícias; Orçamento com a coluna Grupos.
+- id: atendimento-tags-lista
+  url: /settings/tags
+  passos:
+    - esperar: 'text=Orçamento'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Nova tag")'
+    - 'tr:has(a[href="/settings/tags/596"])'
+  arquivo: images/ajuda/atendimento/tags-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-tags
+
+# Janela Editar tag "Orçamento": Nome, Cor, Visível para = Grupos e Grupos = Vendas.
+- id: tag-editar
+  url: /settings/tags/593
+  passos:
+    - esperar: '.ant-modal-content >> text=Visível para'
+    - esperar: '.ant-modal-content >> text=Vendas'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  arquivo: images/ajuda/atendimento/tag-editar.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-tags
+
+# Conversa fictícia (Carlos Pereira): botão de adicionar tag no rodapé aberto, lista Categorizar com busca e as tags, Orçamento marcada. Só o menu.
+- id: tag-na-conversa
+  url: /inbox/all/4393
+  passos:
+    - esperar: '[data-academia="tag-button"]'
+    - clicar: '[data-academia="tag-button"]'
+    - esperar: '.ant-dropdown >> text=Categorizar'
+    - pausa: 800
+  alvo: '.ant-dropdown:has-text("Categorizar")'
+  arquivo: images/ajuda/atendimento/tag-na-conversa.webp
+  paginas:
+    - docs/configuracoes-no-workspace/criar-e-gerenciar-tags
+
+# Automação fictícia "Pedir avaliação" (desligada): Ativo desligado, Gatilho = Ao resolver uma conversa, Sem condições e a ação Avaliar atendimento com Configurar.
+- id: avaliacao-automacao
+  url: /settings/automations/6b07eb7f0793c0000e0197ee
+  passos:
+    - esperar: '.ant-drawer >> text=Avaliar atendimento'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Configurar")'
+  arquivo: images/ajuda/atendimento/avaliacao-automacao.webp
+  paginas:
+    - docs/atendimento/pesquisa-de-satisfacao
+
+# Configurar da ação Avaliar atendimento: painel Configurar Avaliação com Pergunta, Opções (Nota e Texto), Opção, Texto de agradecimento e Salvar (texto do bot de avaliação que o workspace recebe ao ser criado).
+- id: avaliacao-configurar
+  url: /settings/automations/6b07eb7f0793c0000e0197ee
+  passos:
+    - esperar: '.ant-drawer button:has-text("Configurar")'
+    - clicar: '.ant-drawer button:has-text("Configurar")'
+    - esperar: '.ant-drawer-title >> text=Configurar Avaliação'
+    - esperar: 'text=Texto de agradecimento'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-content:has-text("Configurar Avaliação") .ant-drawer-header'
+    - '.ant-drawer-content:has-text("Configurar Avaliação") button:has-text("Salvar")'
+  arquivo: images/ajuda/atendimento/avaliacao-configurar.webp
+  paginas:
+    - docs/atendimento/pesquisa-de-satisfacao
