@@ -1,0 +1,111 @@
+---
+title: Montar o fluxograma e as etapas do agente
+description: Como desenhar o caminho da conversa do agente de IA no fluxograma, ligar os blocos com setas, publicar e usar etapas.
+keywords: [fluxograma, flow, fluxo do agente, blocos, setas, condição llm, condição lógica, sem resposta, publicar fluxograma, etapas, subagente, triador]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/agents/flow/EditFlow.tsx
+  - web:src/pages/agents/flow/FlowCanvas.tsx
+  - web:src/pages/agents/flow/drawers/EditEdgeDrawer.tsx
+  - web:src/pages/agents/components/stages/EditAgentStage.tsx
+  - api:src/modules/agents/flow/flow-runner.service.ts
+  - api:src/modules/agents/flow/flow-execution.consumer.ts
+codigo:
+  - web:src/pages/agents/flow/*.tsx
+  - web:src/pages/agents/flow/drawers/**
+  - web:src/pages/agents/flow/edges/**
+  - web:src/pages/agents/flow/nodes/**
+  - web:src/pages/agents/flow/panels/**
+  - web:src/pages/agents/components/AgentStages.tsx
+  - web:src/pages/agents/components/stages/**
+  - web:src/pages/agents/components/AIFormItem/**
+  - api:src/modules/agents/flow/flow-runner.service.ts
+  - api:src/modules/agents/flow/flow-execution.consumer.ts
+verificado_em: 2026-11-26
+---
+
+Use o **Fluxograma** quando o atendimento do agente precisa seguir passos definidos, coletar dados obrigatórios ou executar ações em ordem certa.
+
+<Note>
+Quem pode: membros com a permissão **Agentes de IA** e o proprietário do workspace. O fluxograma e as etapas existem apenas no **agente de texto** e não ficam visíveis em agentes marcados como **Gerenciado pelo parceiro**.
+</Note>
+
+## Quando usar o fluxograma
+
+O fluxograma é opcional. Ele só passa a rodar quando o bloco **Início** tem pelo menos uma seta ligada a outro bloco; sem isso, o agente responde usando apenas as **Instruções**.
+
+Comece só com as instruções se o atendimento for aberto. Use o fluxograma quando quiser garantir uma ordem de perguntas, ramificações claras ou ações automáticas entre uma etapa e outra da conversa.
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra o fluxograma">
+    No editor do agente, clique no ícone **Fluxograma**, no topo do chat de teste. O painel abre ao lado do chat, começando sempre pelo bloco **Início**.
+
+    <Frame caption="Editor do fluxograma com o bloco Início, o botão Publicar e a barra inferior">
+      <img src="/images/ajuda/agente-de-ia/fluxograma.webp" alt="Painel Fluxograma vazio exibindo apenas o bloco Início, o botão Publicar no topo e a barra inferior com o botão +" />
+    </Frame>
+  </Step>
+  <Step title="Adicione e configure blocos">
+    Clique no botão **+** da barra inferior para adicionar **Ação**, **Subagente**, **Coletar dados** ou **Anotação** (você pode clicar ou arrastar para a tela). Também dá para puxar uma seta de um bloco e soltar no vazio para criar e ligar uma nova ação, ou clicar com o botão direito no fundo.
+
+    - O bloco **Ação** abre a janela **Selecione uma ação**, com busca e as abas **Top**, **Apps** e **Core**.
+    - Clique em qualquer bloco para configurar os campos e clique em **Salvar**. No menu do bloco, você encontra **Renomear**, **Clonar** e **Excluir**.
+    - A barra inferior também traz **Desfazer**, **Refazer**, **Organizar nós** e **Enquadrar**.
+    - O bloco **Anotação** funciona como um lembrete visual no desenho e não afeta a conversa.
+  </Step>
+  <Step title="Ligue os blocos com setas">
+    Puxe uma seta da saída de um bloco até o próximo e clique na seta para definir o **Tipo de transição**:
+
+    | Tipo de transição | O que faz | Onde pode usar |
+    | --- | --- | --- |
+    | **Transição direta** | Segue sem condição e serve como caminho reserva quando outras condições não batem. | Todos os blocos |
+    | **Condição LLM** | O agente lê a conversa e avalia se a frase descrita em **Condição** aconteceu. | Todos os blocos |
+    | **Condição lógica** | Testa regras de **Campo**, **Operador** e **Valor** combinadas com E (todas precisam ser verdadeiras). | Todos os blocos |
+    | **Sem resposta** | Segue por este caminho se o contato não responder no tempo definido (**Duração**, **Unidade**, **Repetir**, **Escalonar** e **Considerar horários**). | **Subagente**, **Coletar dados** e **Aguardar mensagem do cliente** |
+    | **Erro** | Segue automaticamente quando ocorre um erro no bloco. | Todos os blocos |
+
+    Em setas de **Condição LLM** ou **Condição lógica** que saem de **Subagente** ou **Coletar dados**, você pode marcar **Avaliar antes de responder** para testar a condição antes do bloco enviar uma mensagem.
+  </Step>
+  <Step title="Preencha campos com IA ou contexto">
+    Muitos campos das ações oferecem três modos de preenchimento:
+
+    - **Manual:** você digita o valor fixo.
+    - **Prompt AI:** o agente gera o valor a partir do seu texto de orientação e da conversa.
+    - **Auto:** o agente preenche sozinho usando o contexto da conversa (disponível nos campos que oferecem esta opção).
+
+    Use o botão **Injetar contexto** para inserir valores de **Etapas anteriores**, **Contexto** (sessão, contato, negociações e tarefas) e **Utilitarios**.
+  </Step>
+  <Step title="Publique o fluxograma">
+    Clique em **Publicar** no topo do editor. O botão só fica ativo quando há alterações pendentes.
+
+    Não existe rascunho separado: ao publicar, o desenho novo já entra em vigor. Conversas que já estavam em andamento continuam do bloco onde pararam (o estado fica salvo por até 7 dias na sessão), e [sessões novas](/docs/conceitos/conversas-e-sessoes) começam pelo **Início**.
+  </Step>
+</Steps>
+
+## Como o fluxograma anda
+
+- A cada mensagem do contato, o fluxograma executa os blocos em sequência até parar num bloco que conversa (**Subagente** ou **Coletar dados**), num bloco que espera (**Aguardar mensagem do cliente** ou **Delay**) ou no fim do caminho.
+- Em **Subagente** e **Coletar dados**, você escolhe se o bloco vai **Substituir** ou **Herdar** as **Instruções**, o **Conhecimento** e as **Ferramentas** do agente principal.
+- Quando o caminho termina sem um bloco que conversa e sem **Encerrar agente**, a resposta daquela mensagem vem das instruções principais do agente.
+- Se um membro assume a conversa ou ela é resolvida durante uma espera, o fluxograma não continua e os follow-ups pendentes são cancelados.
+- Se ocorrer um erro num bloco, o fluxo segue pela seta **Erro** daquele bloco ou pelo bloco **Erro não tratado**, quando configurado.
+
+## Erros mais comuns ao publicar
+
+- **Bloco incompleto:** algum bloco está com campo obrigatório vazio ou sem ação selecionada. Corrija os blocos com aviso e tente publicar de novo.
+- **Ciclo sem espera:** existe um caminho que volta para um bloco anterior sem passar por um bloco que espera o contato (como **Subagente**, **Coletar dados** ou **Aguardar mensagem do cliente**).
+- **Condição sem texto:** alguma seta de **Condição LLM** está sem a condição preenchida.
+- **Falta o caminho padrão:** um bloco que não fica esperando o contato tem seta de **Condição LLM** ou **Condição lógica**, mas não tem uma seta de **Transição direta** para quando nenhuma condição vale.
+
+## Etapas
+
+As **Etapas** dividem um agente em fases com **Condição de execução**, **Dados obrigatórios**, **Instruções da etapa**, **Conhecimento da etapa**, **Ferramentas da etapa**, **Modelo** e **Modo silencioso**, com interruptores para herdar ou substituir o que está no agente principal. A cada mensagem do contato, o agente escolhe a primeira etapa ativa que bate com a conversa — essa escolha também consome [saldo da carteira](/docs/conceitos/saldo-e-creditos).
+
+O cartão **Etapas** só aparece no painel de agentes que já têm etapas configuradas. Para dividir o atendimento em fases em agentes novos, use blocos de **Subagente** no fluxograma.
+
+## Próximos passos
+
+- Consulte todas as ações disponíveis em [Ações do fluxograma](/docs/agente-de-ia/acoes-do-fluxograma).
+- Valide cada caminho no chat em [Testar o agente antes de ativar](/docs/agente-de-ia/testar).

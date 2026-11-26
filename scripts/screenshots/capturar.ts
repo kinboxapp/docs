@@ -51,6 +51,8 @@ const QUALIDADE_WEBP = 0.9
 const CSS_ESTAVEL = `
   *, *::before, *::after { transition: none !important; animation: none !important; caret-color: transparent !important; }
   #kinbox-widget, .Toastify, .ant-message, .ant-notification { display: none !important; }
+  /* Selo "Staging" arrastável do canto inferior esquerdo: só existe no staging */
+  .react-draggable:has(.fa-vial) { display: none !important; }
   /* Sem animação, os modais do antd ficariam presos no estado inicial da entrada (invisíveis) */
   .ant-zoom-appear, .ant-zoom-appear-prepare, .ant-zoom-enter, .ant-zoom-enter-prepare,
   .ant-fade-appear, .ant-fade-appear-prepare, .ant-fade-enter, .ant-fade-enter-prepare { opacity: 1 !important; transform: none !important; }

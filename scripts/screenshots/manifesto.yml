@@ -224,3 +224,132 @@
   arquivo: images/ajuda/conceitos/caixa-de-entrada.webp
   paginas:
     - docs/conceitos/visao-geral
+
+# Seção agente-de-ia (Automação e IA › Agentes de IA)
+#
+# Agente "Lia" do seed (sem canal e sem agente de voz, que é recurso em teste e não está ligado no workspace de
+# documentação). Nunca confirmar a conexão de um canal: os prints de "Conectar canal" param na janela aberta.
+
+- id: agente-lista
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/lista-de-agentes.webp
+  paginas:
+    - docs/agente-de-ia/visao-geral
+
+- id: agente-novo
+  url: /settings/agents/new
+  passos:
+    - esperar: 'text=Configuração manual'
+    - pausa: 800
+  alvo:
+    - 'h1:has-text("Como você quer criar seu agente?")'
+    - '#method'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/novo-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-editor
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - pausa: 1000
+  alvo:
+    - '#preview-panel'
+    - '#side-panel'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/editor-do-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-configuracoes
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
+    - esperar: '.ant-drawer-content >> text=Comportamento'
+    - clicar: '.ant-drawer-content >> text=Configure como o agente deve se comportar'
+    - pausa: 800
+  alvo: '.ant-drawer-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/configuracoes-do-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-conectar-canal
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: 'button.group\/stack'
+    - esperar: '.ant-modal-content >> text=Gerenciar canais'
+    - pausa: 800
+  alvo:
+    - '.ant-modal-header'
+    - '.ant-modal-content button:has-text("Selecionar")'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/conectar-canal.webp
+  paginas:
+    - docs/agente-de-ia/conectar-canais
+
+# Fluxograma vazio da Lia (só o Início): o print mostra o cabeçalho com Publicar e a barra inferior. Nada é publicado.
+- id: agente-fluxograma
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
+    - esperar: '#side-panel .react-flow__node >> text=Início'
+    - pausa: 1500
+  alvo: '#side-panel'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/fluxograma.webp
+  paginas:
+    - docs/agente-de-ia/fluxograma-e-etapas
+
+- id: agente-adicionar-conhecimento
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#side-panel header:has-text("Conhecimento") a:has-text("Adicionar")'
+    - esperar: '.ant-modal-content >> text=Cole texto'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/adicionar-conhecimento.webp
+  paginas:
+    - docs/agente-de-ia/conhecimento
+
+- id: agente-selecionar-ferramenta
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#side-panel header:has-text("Ferramentas") a:has-text("Adicionar")'
+    - esperar: '.ant-modal-content >> text=Selecione uma ferramenta'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/selecionar-ferramenta.webp
+  paginas:
+    - docs/agente-de-ia/ferramentas
+
+# Chat de teste com uma pergunta (a resposta é gerada na hora e gasta saldo de cortesia do staging). O histórico do
+# teste fica no navegador da captura (perfil fora do repositório).
+- id: agente-testar
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#preview-panel textarea'
+    - digitar:
+        seletor: '#preview-panel textarea'
+        texto: 'Até que horas vocês atendem no sábado?'
+    - tecla: Enter
+    - pausa: 25000
+  alvo: '#preview-panel'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/testar-agente.webp
+  paginas:
+    - docs/agente-de-ia/testar
