@@ -1,0 +1,98 @@
+---
+title: Configurações gerais do workspace
+description: O que cada opção da tela Geral faz na Kinbox — imagem e nome do workspace, fuso horário, horário comercial, idioma, moeda, inatividade dos membros, regras da caixa de entrada, parceria e exclusão — e como salvar.
+keywords: [configurações gerais, geral, configurações do ambiente, seu ambiente, nome do workspace, logo do workspace, fuso horário, horário comercial, idioma padrão, moeda, tornar indisponível se inativo, tornar offline se inativo, inatividade, salvar mudanças]
+publico: humano
+tipo: referencia
+fontes:
+  - web:src/pages/settings/workspace/index.tsx
+  - web:src/pages/settings/index.tsx
+  - web:src/hooks/useInit.tsx
+  - web:src/hooks/useCurrency.ts
+  - api-v0:server/controllers/WorkspaceController.js
+  - api-v0:server/auxiliary/Utils.js
+  - api:src/modules/push-notifications/push-notifications.service.ts
+codigo:
+  - web:src/pages/settings/workspace/**
+  - web:src/pages/settings/index.tsx
+  - web:src/lib/timezones.json
+  - web:src/lib/currencies.json
+  - web:src/hooks/useCurrency.ts
+  - api-v0:server/controllers/WorkspaceController.js
+  - api-v0:server/routes/workspaceApiRoutes.js
+verificado_em: 2026-11-26
+---
+
+A tela **Geral** reúne as informações básicas, as preferências e as regras de atendimento do seu workspace (na tela, **ambiente**). Tudo o que você configura nesta tela vale para todos os membros do workspace.
+
+<Note>
+  Quem pode: você precisa da permissão **Workspace** na seção **Gerenciamento do Ambiente** do papel (na tela, **Permissão**) ou ser o proprietário do workspace (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)). O cartão **Admin** (**Excluir ambiente**) só aparece para o proprietário, e o cartão **Parceria** só aparece se o seu workspace for ligado a um parceiro que pode inspecioná-lo.
+</Note>
+
+## Onde fica
+
+Vá em **Configurações** (ícone de engrenagem no menu lateral) → **Ambiente** → **Geral**. A tela abre com o título **Geral** e o cartão de apresentação **Seu ambiente**. Sem a permissão **Workspace**, o item **Geral** não aparece no menu.
+
+## Como salvar
+
+A tela salva as alterações de dois jeitos:
+
+- **Imagem do ambiente** e **Nome do ambiente** salvam na hora, assim que você envia a imagem ou confirma a edição do nome.
+- **Preferências**, **Caixa de Entrada** e **Parceria** mostram a barra com **Cancelar** e **Salvar mudanças** sempre que algum campo muda. Clique em **Salvar mudanças** para aplicar ("Suas preferências foram atualizadas.") ou em **Cancelar** para voltar aos valores salvos. Se você sair da tela sem salvar, as alterações são perdidas.
+
+## Imagem e nome
+
+| Campo | O que faz |
+| --- | --- |
+| **Imagem do ambiente** | Define o logo do workspace. Aceita arquivos de imagem de até 2 MB e salva na hora ("Imagem do ambiente alterada."). Clique em **Remover** para tirar a imagem; sem imagem, a Kinbox mostra as iniciais do nome. |
+| **Nome do ambiente** | Nome exibido no [seletor de workspaces](/docs/conta/trocar-de-workspace) e exigido na confirmação de exclusão do workspace. Clique no ícone de lápis para editar na janela **Editar Nome do ambiente** (campo obrigatório; salva na hora com o aviso "Nome do ambiente editado."). |
+
+## Preferências
+
+| Campo | O que faz |
+| --- | --- |
+| **Fuso horário** | Define o fuso usado pelas regras do workspace: horários de atendimento, **Mensagem quando fora do horário comercial**, [bot](/docs/bot/visao-geral) e limites de horário do papel. |
+| **Horário comercial** | Escolhe um horário cadastrado em [Horários](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios) para o cálculo de TME, TMP e TMA nos [relatórios](/docs/relatorios/como-funcionam) e para a **Mensagem quando fora do horário comercial**. |
+| **Idioma padrão do ambiente** | Escolhe **Português (Brasil)** ou **English** como idioma de reserva para avisos automáticos sem tela aberta (como notificações push) de membros sem idioma definido no perfil. Não muda o idioma da interface nem traduz as mensagens da **Caixa de Entrada**. |
+| **Moeda** | Define o símbolo e o formato dos valores nas negociações (funis) e metas, sem converter valores já cadastrados (vazio usa real). O preço dos produtos continua em R$. |
+| **Tornar indisponível se inativo.** | Define quantos minutos sem atividade em todas as abas da Kinbox deixam o membro indisponível (sugestão inicial de 30 minutos). Ao voltar a mexer, ele fica disponível de novo. Não age em quem ficou indisponível manualmente, em quem tem **Não torna indisponível se ficar inativo** nem no proprietário. |
+| **Tornar offline se inativo** | Define quantos minutos (de 1 a 1444; vazio vale 60) sem atividade desconectam o membro por inatividade ("Você foi desconectado por inatividade." com **Reconectar**). Não age em quem tem **Não torna offline se ficar inativo** nem no proprietário. |
+
+<Frame caption="Cartão Preferências em Configurações → Ambiente → Geral">
+  <img src="/images/ajuda/workspace/geral-preferencias.webp" alt="Cartão Preferências com Fuso horário em (UTC-03:00) Brasilia, Horário comercial em Horário Comercial Relatório, Idioma padrão do ambiente em Português (Brasil), Moeda em Brazilian Real e as chaves Tornar indisponível se inativo. e Tornar offline se inativo desligadas" />
+</Frame>
+
+O **Fuso horário** vale para as regras do workspace; se o campo ficar vazio, a Kinbox usa o horário de Brasília (UTC−3). A hora mostrada na tela (mensagens, listas e Auditoria) segue o relógio e o fuso do computador ou celular de cada pessoa, não esse campo.
+
+## Caixa de Entrada
+
+O cartão **Caixa de Entrada** reúne as mensagens automáticas e as regras de atendimento. Veja como configurar cada opção em [Mensagens automáticas e regras da caixa de entrada](/docs/administracao/mensagens-automaticas).
+
+| Opção | O que faz |
+| --- | --- |
+| **Mensagem ao resolver conversa** | Envia um texto automático quando uma sessão é resolvida (não sai em sessão que tinha sido reaberta). |
+| **Mensagem quando fora do horário comercial** | Envia um texto automático a cada mensagem do contato fora do horário; funciona só em conversas com membro responsável e com um **Horário comercial** escolhido em **Preferências**. |
+| **Mensagem quando membro indisponível** | Envia um texto automático a cada mensagem do contato em conversas cujo responsável está indisponível; fora do horário tem prioridade. |
+| **Preservar tags ao resolver uma conversa** | Faz a próxima sessão do mesmo contato herdar as tags da sessão anterior. |
+| **Enviar nome do membro em cada mensagem** | Inclui o nome do membro na primeira linha das mensagens enviadas por ele no WhatsApp, Facebook Messenger e Instagram. |
+| **Sempre atribuir ao membro que responder** | Transfere a conversa para quem enviar uma resposta, mesmo se já houver outro responsável. |
+| **Desatribuir ao reabrir se membro offline** | Retira o responsável se uma sessão for reaberta dentro do tempo de tolerância e o responsável estiver offline. |
+| **Nota de avaliação pública** | Mostra a média de avaliação de cada membro na lista de membros das **Salas**. |
+| **Indicação dinâmica de conversa pendente** | Muda o indicador da conversa pendente para amarelo ou vermelho após os tempos configurados sem resposta. |
+| **Tempo de tolerância ao resolver conversa** | Reabre a mesma sessão, em vez de criar uma nova, se o contato responder antes do tempo definido em minutos. |
+| **Campos obrigatórios no chat ativo** | Exige o preenchimento dos campos de contato selecionados ao iniciar uma conversa pelo chat ativo. |
+
+## Parceria
+
+O cartão **Parceria** só aparece se o seu workspace for ligado a um parceiro que pode inspecioná-lo. Ele traz a opção **Permitir que o parceiro veja as conversas**; veja o que muda ao desligar em [Controlar o que o parceiro vê no seu workspace](/docs/administracao/acesso-do-parceiro).
+
+## Admin
+
+O cartão **Admin** só aparece para o proprietário do workspace e traz o botão **Excluir ambiente**. Veja o passo a passo e os cuidados antes de confirmar em [Excluir o workspace](/docs/administracao/excluir-workspace).
+
+## Veja também
+
+- [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)
+- [Ficar disponível ou indisponível](/docs/conta/disponibilidade)
+- [Ver o histórico de alterações (Auditoria)](/docs/administracao/auditoria)
+- [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)

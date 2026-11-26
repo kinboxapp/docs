@@ -1121,5 +1121,56 @@
     "pergunta": "O copiloto consegue publicar posts nas redes sociais da minha loja?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Quero saber quem apagou uma tag da minha conta semana passada, onde eu vejo isso?",
+    "esperado": [
+      "docs/administracao/auditoria",
+      "llm/configuracoes-no-workspace/configuracoes-gerais"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O cliente manda mensagem de madrugada e a mensagem de ausência não chega pra ele, por quê?",
+    "esperado": [
+      "docs/administracao/mensagens-automaticas",
+      "llm/configuracoes-no-workspace/configuracoes-gerais",
+      "llm/faq/atendimento-mensagem-fora-do-horario"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "A hora das mensagens na Kinbox está uma hora adiantada, como eu arrumo o fuso?",
+    "esperado": [
+      "llm/faq/workspace-mudar-fuso",
+      "docs/configuracoes-no-workspace/configuracoes-gerais"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "A agência que cuida da nossa conta consegue ler as conversas dos nossos clientes? Dá para bloquear?",
+    "esperado": [
+      "docs/administracao/acesso-do-parceiro"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como faço para encerrar e apagar o ambiente da minha empresa na Kinbox?",
+    "esperado": [
+      "docs/administracao/excluir-workspace"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "A Kinbox segue a LGPD com os dados dos meus clientes?",
+    "esperado": [
+      "llm/faq/lgpd-e-privacidade"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo baixar o histórico da Auditoria em uma planilha?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

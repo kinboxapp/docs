@@ -42,7 +42,7 @@ As conversas novas ficam sem responsável, a atribuição automática não distr
 
     - a bolinha na foto de cada membro (verde = disponível);
     - se o membro participa do grupo da regra (grupos são equipes de membros, não grupos de WhatsApp);
-    - a opção **Tornar indisponível se inativo.** em **Configurações** → **Ambiente** → **Geral** (no workspace, chamado na tela de **ambiente**);
+    - a opção **Tornar indisponível se inativo.** em **Configurações** → **Ambiente** → **Geral** (no workspace, chamado na tela de **ambiente**; veja [Configurações gerais do workspace](/docs/configuracoes-no-workspace/configuracoes-gerais));
     - a restrição **Limitar horário que pode ficar disponível** no papel.
 
     **O que fazer:** ligue **Disponível** no menu da foto ou em [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros), confira os participantes em [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos), escolha uma estratégia sem "online" ou ajuste o tempo de inatividade e o horário do papel (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)).
@@ -81,7 +81,7 @@ As conversas novas ficam sem responsável, a atribuição automática não distr
   </Accordion>
 
   <Accordion title="A mensagem de fora do horário (ou de membro indisponível) não sai">
-    **Como confirmar:** em **Configurações** → **Ambiente** → **Geral**, confirme se existe um **Horário comercial** escolhido e se **Mensagem quando fora do horário comercial** (ou **Mensagem quando membro indisponível**) está ligada. Essas mensagens só são enviadas em conversas que já têm um membro responsável.
+    **Como confirmar:** em **Configurações** → **Ambiente** → **Geral**, confirme se existe um **Horário comercial** escolhido e se **Mensagem quando fora do horário comercial** (ou **Mensagem quando membro indisponível**) está ligada. Essas mensagens só são enviadas em conversas que já têm um membro responsável (veja [Mensagens automáticas e regras da caixa de entrada](/docs/administracao/mensagens-automaticas)).
 
     **O que fazer:** escolha o **Horário comercial** em **Geral** (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)). Para responder também conversas sem responsável fora do horário, use um bot, que começa sozinho quando o contato abre uma sessão nova. O bot só começa **dentro** dos horários escolhidos no campo **Horários**: cadastre um horário cujas faixas cubram o período **fora** do expediente e escolha esse horário no bot (não vale com **Atende todos os canais**). Outra opção é um bot que possa começar nesse período e use o bloco **Decisão** com a condição **Horário** → **está fora de** (veja [Blocos do bot](/docs/bot/blocos-do-bot)).
   </Accordion>

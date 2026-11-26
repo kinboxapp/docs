@@ -1,0 +1,83 @@
+---
+title: Ver o histórico de alterações (Auditoria)
+description: Como usar a Auditoria da Kinbox para ver quem criou, alterou ou excluiu algo no workspace nos últimos 30 dias, entender as colunas e filtrar por data, membro, ação e entidade.
+keywords: [auditoria, log, logs, histórico de alterações, quem alterou, quem excluiu, registro de ações, rastrear alterações, atividade dos membros, parceiro via mcp, membro removido, filtros da auditoria]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/audit/Audit.tsx
+  - web:src/pages/settings/index.tsx
+  - api-v0:server/controllers/AuditController.js
+  - api:src/modules/audit/audit.schema.ts
+  - api:src/modules/mcp/mcp-audit.service.ts
+codigo:
+  - web:src/pages/settings/audit/**
+  - web:src/models/audit.ts
+  - api-v0:server/controllers/AuditController.js
+  - api:src/modules/audit/**
+  - api:src/interceptors/audit.interceptor.ts
+  - api:src/modules/mcp/mcp-audit.service.ts
+verificado_em: 2026-11-26
+---
+
+A **Auditoria** registra quem criou, alterou ou excluiu algo no seu workspace (na tela, **ambiente**) nos últimos 30 dias. Entram apenas ações concluídas com sucesso — consultas (como abrir uma tela ou buscar um contato) não aparecem; a exceção visível são chamadas de parceiro pelo MCP, que também aparecem quando falham.
+
+<Note>
+  Quem pode: você precisa da permissão **Auditoria** na seção **Gerenciamento do Ambiente** do papel (na tela, **Permissão**) ou ser o proprietário do workspace. Nos papéis prontos da Kinbox, apenas **Administrador** inclui essa permissão (veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+</Note>
+
+## Abrir a Auditoria
+
+Vá em **Configurações** (ícone de engrenagem no menu lateral) → **Auditoria**. A tela mostra 20 registros por página, do mais recente para o mais antigo.
+
+<Frame caption="Tela Auditoria com o botão Filtros e a lista de registros">
+  <img src="/images/ajuda/workspace/auditoria-lista.webp" alt="Lista da Auditoria mostrando o botão Filtros e a tabela com as colunas Autor, Ação, Entidade, Descrição e Quando" />
+</Frame>
+
+## O que cada coluna mostra
+
+| Coluna | O que exibe |
+| --- | --- |
+| **Autor** | Nome e foto do membro (com o total de registros entre parênteses no cabeçalho). Mostra **Membro removido** quando a pessoa saiu do workspace ([Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros)), **Integração** quando a ação veio de uma integração, ou `Parceiro <workspace> · <membro>` para ações de parceiro pelo MCP. |
+| **Ação** | **Criou**, **Atualizou** ou **Excluiu** (ou um rótulo específico da ação). Em ações de parceiro pelo MCP, exibe **Consultou**, **Alterou** ou **Falhou**. |
+| **Entidade** | Tipo de item alterado, como **Tag**, **Assinatura**, **Bot**, **Permissão**, **Membro**, **Contato**, **Negociação**, **Frase Rápida** ou **MCP**. Alguns itens aparecem com o nome técnico em inglês (como `workspace`, `workflows`, `products`, `pipelines` ou `organizations`). |
+| **Descrição** | Nome ou detalhe do item, quando disponível (como "Manual" ou "Automático: inatividade" em mudanças de disponibilidade, ou o motivo em tarefas). Clique na descrição para copiar o ID da entidade ("ID da entidade copiado"). |
+| **Quando** | Tempo decorrido e data com hora, exibidos no relógio do seu aparelho. |
+
+## Filtrar registros
+
+<Steps>
+  <Step title="Abra o painel de filtros">
+    Na tela **Auditoria**, clique em **Filtros**.
+  </Step>
+  <Step title="Escolha os critérios">
+    Preencha os campos que quiser combinar: **Criado entre** (com os atalhos **Hoje** e **Ontem**), **Membro**, **Ação**, **Entidade** ou **ID da entidade**.
+
+    <Frame caption="Painel de filtros da Auditoria">
+      <img src="/images/ajuda/workspace/auditoria-filtros.webp" alt="Painel de filtros da Auditoria com os campos Criado entre, Membro, Ação, Entidade, ID da entidade e o botão Filtrar" />
+    </Frame>
+  </Step>
+  <Step title="Aplique o filtro">
+    Clique em **Filtrar**.
+  </Step>
+</Steps>
+
+<Tip>
+  Em **Ação**, tanto **Atualizou (Put)** quanto **Atualizou (Patch)** aparecem na lista como **Atualizou**. Para ver todas as alterações de um período, filtre primeiro por um e depois pelo outro. Use **Entidade** ou **ID da entidade** um de cada vez, pois preencher um substitui o outro.
+</Tip>
+
+## Ações de parceiro
+
+Se o seu workspace for ligado a um parceiro que pode inspecioná-lo, as chamadas feitas pelo parceiro pelo MCP aparecem na Auditoria com **Autor** no formato `Parceiro <workspace> · <membro>`, **Entidade** como **MCP**, a ação (**Consultou**, **Alterou** ou **Falhou**) e o nome da ferramenta usada — sem exibir os dados consultados.
+
+Para ver só esses registros, abra **Filtros**, selecione **Parceiro via MCP** em **Ação** e clique em **Filtrar**. Veja mais em [Controlar o que o parceiro vê no seu workspace](/docs/administracao/acesso-do-parceiro).
+
+## Ações da IA pelo MCP
+
+Cada chamada bem-sucedida de um assistente de IA conectado pelo MCP por um membro fica registrada em nome dele na entidade **MCP** (veja [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp)).
+
+## O que a Auditoria não mostra
+
+- Leituras e consultas comuns (quem abriu uma conversa, um contato ou um relatório).
+- Tentativas que deram erro (exceto chamadas de parceiro pelo MCP, que aparecem como **Falhou**).
+- Registros com mais de 30 dias.

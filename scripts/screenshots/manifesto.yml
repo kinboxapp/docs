@@ -2358,3 +2358,89 @@
   arquivo: images/ajuda/copiloto/bases-lista.webp
   paginas:
     - docs/copiloto/base-de-conhecimento
+# Seção workspace (Administração › Configurações do workspace e auditoria)
+#
+# Nada é salvo: os itens abrem seletores, ligam chaves e digitam textos de exemplo, mas nunca clicam em
+# "Salvar mudanças" nem confirmam a exclusão. Nome, fuso, idioma e logo do workspace não mudam.
+# Na Auditoria, a coluna Autor mostra o nome da conta de teste (pessoa real): leva tarja.
+
+- id: workspace-geral-preferencias
+  url: /settings/account/workspace
+  altura: 1500
+  passos:
+    - esperar: 'div.text-md:text-is("Fuso horário")'
+    - pausa: 800
+    # O workspace de documentação não tem fuso nem moeda escolhidos (a tela mostra o campo vazio e a Kinbox usa
+    # Brasília e real). Para o print, o campo mostra o texto da opção correspondente; nada é salvo.
+    - trocarTexto:
+        seletor: 'div.py-6:has(div.text-md:text-is("Fuso horário")) .ant-select-selector'
+        texto: '(UTC-03:00) Brasilia'
+    - trocarTexto:
+        seletor: 'div.py-6:has(div.text-md:text-is("Moeda")) .ant-select-selector'
+        texto: 'Brazilian Real'
+  alvo:
+    - 'h3:text-is("Preferências")'
+    - 'div.card-bordered:has(div.text-md:text-is("Fuso horário"))'
+  mascarar: []
+  arquivo: images/ajuda/workspace/geral-preferencias.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configuracoes-gerais
+
+- id: workspace-mensagens-automaticas
+  url: /settings/account/workspace
+  passos:
+    - esperar: 'div.text-md:text-is("Mensagem quando fora do horário comercial")'
+    - clicar: '#settings_sendMessageWhenOutsideOfBusinessHours'
+    - esperar: '#settings_messageOutsideOfBusinessHoursText'
+    - digitar:
+        seletor: '#settings_messageOutsideOfBusinessHoursText'
+        texto: 'Olá! Nosso atendimento funciona de segunda a sexta, das 9h às 18h. Respondemos assim que voltarmos.'
+    - pausa: 800
+  alvo:
+    - 'h3:text-is("Caixa de Entrada")'
+    - 'div.py-6:has(div.text-md:text-is("Mensagem quando membro indisponível"))'
+  mascarar: []
+  arquivo: images/ajuda/workspace/mensagens-automaticas.webp
+  paginas:
+    - docs/administracao/mensagens-automaticas
+
+- id: workspace-excluir-modal
+  url: /settings/account/workspace
+  passos:
+    - esperar: 'div.text-md:text-is("Excluir ambiente")'
+    - clicar: 'button:has-text("Excluir ambiente")'
+    - esperar: '.ant-modal-content'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/workspace/excluir-ambiente.webp
+  paginas:
+    - docs/administracao/excluir-workspace
+
+- id: auditoria-lista
+  url: /settings/audit
+  passos:
+    - esperar: 'tbody.ant-table-tbody tr:nth-child(6)'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Filtros")'
+    - 'tbody.ant-table-tbody tr:nth-child(6)'
+  mascarar:
+    - 'tbody.ant-table-tbody tr td:first-child > div'
+  arquivo: images/ajuda/workspace/auditoria-lista.webp
+  paginas:
+    - docs/administracao/auditoria
+
+- id: auditoria-filtros
+  url: /settings/audit
+  passos:
+    - esperar: 'tbody.ant-table-tbody tr'
+    - clicar: 'button:has-text("Filtros")'
+    - esperar: '.ant-dropdown-menu label[for="actionMethod"]'
+    - pausa: 800
+  # O recorte é só o painel de filtros (opaco, por cima da lista): a coluna Autor fica fora do print.
+  alvo: '.ant-dropdown-menu'
+  mascarar: []
+  arquivo: images/ajuda/workspace/auditoria-filtros.webp
+  paginas:
+    - docs/administracao/auditoria
