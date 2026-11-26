@@ -29,7 +29,9 @@ Você tenta responder uma conversa e o campo de mensagem não aparece, mostra um
   <Accordion title='O editor sumiu e aparece "Essa conversa foi encerrada."'>
     **Causa:** a conversa já foi resolvida e está em **Arquivados**.
 
-    **Como confirmar e resolver:** verifique se aparece a faixa "Essa conversa foi encerrada." e o botão **Reabrir conversa** no rodapé. Clique em **Reabrir conversa** (ou **Reabrir** no cabeçalho) para voltar a responder. Se aparecer "Você não tem permissão para reabrir conversas.", peça a permissão **Reabrir** ao administrador do workspace. Veja [Atender uma conversa](/docs/conversas/gerenciar-conversas).
+    **Como confirmar e resolver:** verifique se aparece a faixa "Essa conversa foi encerrada." e o botão **Reabrir conversa** no rodapé. Clique em **Reabrir conversa** (ou **Reabrir** no cabeçalho) para voltar a responder. Se aparecer "Você não tem permissão para reabrir conversas.", peça a permissão **Reabrir** ao administrador do workspace (na tela, **ambiente**). Veja [Atender uma conversa](/docs/conversas/gerenciar-conversas).
+
+    **Só no WhatsApp oficial:** se a janela de 24 horas está fechada, o rodapé mostra **Enviar template** como ação principal, e **Reabrir conversa** fica no menu ao lado. Reabrir não libera texto livre: veja o item da janela de 24 horas abaixo.
   </Accordion>
 
   <Accordion title='Aparece "Você não possui permissão para enviar essa mensagem." ou "...para enviar notas."'>
@@ -69,15 +71,15 @@ Você tenta responder uma conversa e o campo de mensagem não aparece, mostra um
   </Accordion>
 
   <Accordion title='No WhatsApp oficial aparece "A janela de tempo para respostas foi encerrada."'>
-    **Causa:** passaram mais de 24 horas desde a última mensagem enviada pelo contato no WhatsApp oficial.
+    **Causa:** no WhatsApp oficial, passaram mais de 24 horas desde a última mensagem do contato, ou ele nunca escreveu.
 
-    **Como confirmar e resolver:** no lugar do editor aparecem apenas **Enviar template** e **Enviar nota de time**. Para voltar a falar com o contato, clique em **Enviar template** e envie um modelo de mensagem aprovado pela Meta (você continua podendo registrar notas internas em **Enviar nota de time**).
+    **Como confirmar e resolver:** no lugar do editor aparecem **Enviar template** e **Enviar nota de time** (com a conversa resolvida, a faixa "Resolvida · janela de 24h encerrada"). Envie um modelo de mensagem aprovado pela Meta em **Enviar template**. O texto livre volta quando o contato responder. Reabrir a conversa não muda isso.
   </Accordion>
 
   <Accordion title='Aparece a faixa "Telefone desconectado" ou a mensagem fica marcada com erro'>
     **Causa:** um canal de WhatsApp por QR Code desconectou ou o canal recusou o envio da mensagem.
 
-    **Como confirmar e resolver:** se a faixa **Telefone desconectado** aparecer no topo da lista, quem gerencia canais precisa abrir as configurações do canal e reconectar o aparelho (veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte)). Quando uma mensagem fica marcada com erro, passe o mouse sobre ela para ver o motivo (ou abra o menu da mensagem → **Copiar erro**). A Kinbox tenta reenviar automaticamente até 4 vezes; se continuar falhando, corrija o problema indicado pelo canal.
+    **Como confirmar e resolver:** se a faixa **Telefone desconectado** aparecer no topo da lista, quem gerencia canais precisa abrir as configurações do canal e reconectar o aparelho (veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte)). Quando uma mensagem fica marcada com erro, passe o mouse sobre ela para ver o motivo (ou abra o menu da mensagem → **Copiar erro**). A Kinbox faz até 4 tentativas de envio; se continuar falhando, corrija o problema indicado pelo canal.
   </Accordion>
 
   <Accordion title="O contato está bloqueado ou faltam botões como Resolver e Enviar mensagem">

@@ -32,7 +32,7 @@ Programe o envio de uma mensagem em uma conversa para uma data e horário futuro
     No cabeçalho da conversa, clique em **Mais ações** (três pontos) → **Agendar mensagem**. Você também pode abrir pelo comando na pesquisa geral (`Ctrl+K` / `⌘K`).
   </Step>
   <Step title="Defina a data, o conteúdo e a repetição">
-    Escolha a **Data** (data e hora no formato `DD/MM/AAAA HH:mm`, a partir de hoje) e escreva o **Texto** — o editor aceita [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas), emojis, anexos, chaves `{}` e também **Áudio**. Se quiser enviar todo mês, marque **Repetir mensalmente**.
+    Escolha a **Data** (data e hora no formato `DD/MM/AAAA HH:mm`, a partir de hoje) e escreva o **Texto** — o editor aceita [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas) (inclusive de voz), emojis, anexos e chaves `{}`. Para agendar um áudio, escolha uma frase rápida de voz. Se quiser enviar todo mês, marque **Repetir mensalmente**.
 
     <Frame caption="Janela Agendar mensagem com Data, Texto e Repetir mensalmente">
       <img src="/images/ajuda/conversas/agendar-mensagem.webp" alt="Janela Agendar mensagem vazia com campo Data obrigatório, editor de Texto com botões de frases rápidas, emoji, anexo e chaves, opção Repetir mensalmente e botão Criar" />
@@ -51,11 +51,12 @@ Se a data escolhida ficar dentro da janela de 24 horas desde a última mensagem 
 
 - O cabeçalho da conversa exibe o selo **Mensagem Agendada** (passar o mouse mostra a data do envio).
 - Clique no selo **Mensagem Agendada** — ou abra **Mais ações** → **Ver Informações** — e vá em **Agendamentos** para consultar todos os agendamentos da conversa.
-- Clique em um agendamento ainda não enviado para editar os dados ou excluí-lo. Agendamentos já enviados abrem apenas para visualização, sem botão de salvar.
+- Clique em um agendamento que ainda não saiu para editar ou excluir. Os que já saíram abrem só para consulta, sem botão de salvar.
+- Depois do horário, confira na conversa se a mensagem saiu sem erro. O selo some quando a Kinbox dispara o envio, mesmo que o canal recuse a mensagem.
 
 ## Bom saber
 
 - A mensagem pode sair alguns minutos depois do horário definido.
 - Chaves como `{{name}}` e `{{first_name}}` são trocadas pelos dados do contato na hora do envio; se o contato não tiver valor naquele campo, a chave some do texto.
 - Se a conversa estiver resolvida quando chegar a hora do envio, a Kinbox abre uma nova sessão atribuída a quem criou o agendamento.
-- Com **Repetir mensalmente** marcado, depois que a mensagem é enviada a Kinbox agenda automaticamente a próxima para o mês seguinte.
+- Com **Repetir mensalmente** marcado, a Kinbox agenda a próxima para o mês seguinte assim que dispara o envio deste mês.

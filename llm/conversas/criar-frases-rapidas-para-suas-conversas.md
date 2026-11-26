@@ -29,9 +29,9 @@ Referência complementar de `docs/conversas/criar-frases-rapidas-para-suas-conve
 
 ## Permissões, visibilidade e restrição de grupo
 
-- **Frases Rápidas** (seção **Gerenciamento do Ambiente**): "Adicionar, editar e excluir frases rápidas.". Sem ela, o item de menu, a página de configurações e o botão **Nova resposta rápida** na conversa não aparecem (verificação feita na tela).
+- **Frases Rápidas** (seção **Gerenciamento do Ambiente**): "Adicionar, editar e excluir frases rápidas.". Sem ela, o item de menu, a página de configurações e o botão **Nova resposta rápida** na conversa não aparecem.
 - **Usar na conversa:** não exige permissão.
-- **Quem vê cada frase (lista e conversa):** frases **Todos os membros**, frases criadas pelo próprio membro e frases de **Grupo específico** dos grupos de que ele participa. O **dono do workspace** recebe todas as frases, inclusive as **Apenas para mim** de outros membros.
+- **Quem vê cada frase (lista e conversa):** frases **Todos os membros**, frases criadas pelo próprio membro e frases de **Grupo específico** dos grupos de que ele participa. O **proprietário do workspace** recebe todas as frases, inclusive as **Apenas para mim** de outros membros.
 - **Restrição "Somente pode ver frases rápidas na lista se estiver no grupo da frase rápida"** (seção **Outros** › **Restrições**):
   - Na lista de **Frases rápidas**, esconde frases **Apenas para mim** de outros membros e frases de grupos alheios.
   - As frases **Todos os membros** continuam visíveis (e utilizáveis na conversa), mas sem as ações **Clonar** e **Excluir** e sem botão de salvar ao abrir ("Você não tem permissão para editar frases públicas.").

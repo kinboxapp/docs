@@ -70,7 +70,7 @@ Marcar uma opção desmarca automaticamente a outra:
 ## Visibilidade e inscrição na barra lateral
 
 - **Quem tem acesso?** (padrão: **Todos os membros**): **Todos os membros**, **Apenas você** ou **Membros em grupos específicos** (exige pelo menos um grupo).
-- Quem vê cada filtro em **Gerenciar Filtros**: filtros de **Todos os membros**, filtros criados pelo próprio membro e filtros restritos a grupos dos quais ele faz parte. O dono do workspace **não** vê filtros **Apenas você** de outros membros.
+- Quem vê cada filtro em **Gerenciar Filtros**: filtros de **Todos os membros**, filtros criados pelo próprio membro e filtros restritos a grupos dos quais ele faz parte. O proprietário do workspace **não** vê filtros **Apenas você** de outros membros.
 - Filtro privado mostra ícone com a dica **Apenas você**.
 - Inscrição: ao criar um filtro, apenas o criador fica inscrito (aparece na barra lateral dele). Outros membros com acesso veem o filtro oculto em **Gerenciar Filtros** e precisam clicar em **Mostrar** para exibir na própria barra lateral. **Esconder** afeta apenas quem clicou.
 
@@ -91,12 +91,10 @@ Marcar uma opção desmarca automaticamente a outra:
 - Visibilidade independente: a restrição de acesso da pasta não substitui a restrição individual de cada filtro dentro dela.
 - Os filtros **Padrões** em **Gerenciar Filtros** (onde **Abertos** aparece como **Caixa de entrada**) são apenas informativos e não podem ser editados nem escondidos.
 
-## Permissões (web e app de celular)
+## Permissões
 
 - Permissão **Filtros** (seção **Gerenciamento do Ambiente**): "Adicionar, editar e excluir filtros públicos.".
-- Sem **Filtros** no navegador: ao criar um filtro novo ou abrir um filtro que não é só seu, o painel exibe "Você não possui permissão para criar ou alterar filtros públicos.", desativa **Todos os membros** e **Membros em grupos específicos** e mantém o botão de salvar desativado mesmo se escolher **Apenas você** (o mesmo ocorre em pastas). Assim, no navegador, sem a permissão não é possível criar nem filtros privados.
-- Sem **Filtros** no app de celular: é possível criar filtros com acesso **Só eu**.
-- Na tela web, a tela não confere a permissão **Filtros** para as ações **Excluir**, **Mover para pasta** e **Esconder**/**Mostrar** em filtros visíveis para o membro.
+- Sem **Filtros**: ao criar um filtro novo ou abrir um filtro que não é só seu, o painel exibe "Você não possui permissão para criar ou alterar filtros públicos.", desativa **Todos os membros** e **Membros em grupos específicos** e não deixa salvar (o mesmo vale para pastas). Para criar ou editar filtros, o membro pede a permissão **Filtros** ao administrador do workspace.
 
 ## Mensagens exatas
 

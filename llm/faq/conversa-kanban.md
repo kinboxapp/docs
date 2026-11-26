@@ -1,6 +1,6 @@
 ---
 title: Dá para ver as conversas em colunas (kanban)?
-description: Não existe visualização em colunas (kanban) na Caixa de entrada; como contorno, use Funis para cards em colunas ou filtros e tags na lista de conversas.
+description: Não existe visualização em colunas (kanban) na Caixa de entrada; como contorno, use Funis para ver negociações em colunas ou filtros e tags na lista de conversas.
 keywords: [kanban de conversas, visão em colunas, quadro kanban caixa de entrada, organizar conversas em colunas, funis]
 publico: llm
 tipo: faq
@@ -20,7 +20,7 @@ Dá para ver as conversas em colunas (kanban)?
 
 Não existe visualização em colunas (kanban) para as conversas na **Caixa de entrada**: ela funciona sempre em lista.
 
-Como contorno, você pode usar **Funis** para acompanhar negociações (cards) em colunas — e visualizar as negociações do contato direto no painel **Detalhes** → **Negociações** dentro da conversa. Para separar conversas por etapa ou status dentro da própria Caixa de entrada, combine tags com [filtros de conversa](/docs/conversas/criar-filtros-de-conversa). Veja também [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox).
+Como contorno, você pode usar **Funis** para acompanhar negociações em colunas — e visualizar as negociações do contato direto no painel **Detalhes** → **Negociações** dentro da conversa. Para separar conversas por etapa ou status dentro da própria Caixa de entrada, combine tags com [filtros de conversa](/docs/conversas/criar-filtros-de-conversa). Veja também [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox).
 
 ## Variações
 

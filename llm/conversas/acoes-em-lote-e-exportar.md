@@ -32,11 +32,11 @@ Referência complementar de `docs/conversas/acoes-em-lote-e-exportar`.
 
 | Ação | Campo extra | Aviso no fim | Permissão / restrição verificada na tela |
 | --- | --- | --- | --- |
-| **Resolver** | — | "{{total}} conversas foram resolvidas" | A tela não confere a permissão **Resolver** no lote. |
+| **Resolver** | — | "{{total}} conversas foram resolvidas" | — |
 | **Atribuir** | **Membro** (obrigatório) | "{{total}} conversas foram atribuídas" | Permissão **Atribuir** (item desativado sem ela). |
 | **Mover para grupo** | **Grupo** (obrigatório) | "{{total}} conversas foram movidas para o grupo" | Permissão **Mover para grupo** (item desativado sem ela). |
-| **Adicionar Tag** | **Tag** (obrigatório) | "{{total}} conversas tiveram tags adicionadas" | A tela não confere permissão nesta ação. |
-| **Remover Tag** | **Tag** (obrigatório) | "{{total}} conversas tiveram tags removidas" | A tela não confere a restrição **Não pode remover tags** no lote. |
+| **Adicionar Tag** | **Tag** (obrigatório) | "{{total}} conversas tiveram tags adicionadas" | — |
+| **Remover Tag** | **Tag** (obrigatório) | "{{total}} conversas tiveram tags removidas" | — |
 | **Exportar conversas** | **Período** (obrigatório) | "{{calls}} atendimentos e {{messages}} mensagens exportados" | Bloqueada com **Não pode exportar para CSV** ou **Não pode executar ações em lote** (conferidas também no servidor). |
 
 ## Exportar conversas (em lote)

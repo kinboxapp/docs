@@ -1,7 +1,7 @@
 ---
 title: "Atender uma conversa: responder, notas, resolver e reabrir"
 description: Como responder um contato, mandar notas para o time, anexar arquivos e áudios, resolver, reabrir, seguir, bloquear e usar o menu de cada mensagem na Caixa de entrada.
-keywords: [responder conversa, nota interna, nota pro time, anexar arquivo, gravar áudio, resolver conversa, reabrir conversa, marcar como pendente, seguir conversa, bloquear contato, excluir mensagem, transcrever áudio, encaminhar mensagem]
+keywords: [responder conversa, nota interna, nota pro time, anexar arquivo, gravar áudio, resolver conversa, encerrar conversa, finalizar atendimento, fechar atendimento, arquivar conversa, reabrir conversa, marcar como pendente, seguir conversa, bloquear contato, excluir mensagem, transcrever áudio, encaminhar mensagem]
 publico: humano
 tipo: guia
 fontes:
@@ -24,78 +24,86 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Na conversa aberta você responde o contato, troca notas internas com o time, gerencia mensagens individuais e encerra ou reabre o atendimento.
+Na conversa aberta você responde o contato, troca notas internas com o time, usa o menu de cada mensagem e resolve ou reabre a conversa.
 
 <Note>
   Quem pode:
   - Responder contatos: permissão **Responder**.
   - Mandar notas internas: permissão **Enviar notas privadas**.
-  - Encerrar ou reabrir conversas: permissões **Resolver** e **Reabrir**.
+  - Resolver ou reabrir conversas: permissões **Resolver** e **Reabrir**.
 
-  Se a Kinbox impedir algum envio ou ação por permissão, restrição ou canal, consulte [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
+  Se a Kinbox impedir algum envio ou ação, veja [Não consigo responder ou ver uma conversa](/docs/conversas/problemas-comuns).
 </Note>
+
+<Frame caption="Cabeçalho da conversa: Resolver, Atribuir, Mover para grupo, Mais ações e Modo foco">
+  <img src="/images/ajuda/conversas/cabecalho-da-conversa.webp" alt="Cabeçalho de uma conversa com o nome do contato e o canal à esquerda e, à direita, os ícones de Resolver, Atribuir (com a foto de quem atende coberta), Mover para grupo, Mais ações e Modo foco" />
+</Frame>
 
 ## Responder
 
 1. Selecione a conversa na lista da [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox).
-2. Digite a mensagem no editor na parte de baixo e pressione `Enter` para enviar (`Shift + Enter` cria uma nova linha).
+2. Digite a mensagem no editor, na parte de baixo, e pressione `Enter` para enviar (`Shift + Enter` cria uma nova linha).
+
+<Frame caption="Editor da conversa com os botões Áudio, Nota pro time, Frases rápidas, Emojis, Anexar e Enviar">
+  <img src="/images/ajuda/conversas/editor-da-conversa.webp" alt="Editor de mensagem com o texto de ajuda Shift + Enter para nova linha e barra para frase rápida, e os ícones de áudio, nota pro time, frases rápidas, emojis, anexar e enviar" />
+</Frame>
 
 No editor você também pode:
 
 - Digitar `/` no início do campo para escolher uma das [frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas).
-- Clicar em **Anexar**, arrastar e soltar arquivos na conversa ou colar arquivos direto no campo. Cada arquivo é enviado como uma mensagem separada.
-- Clicar em **Áudio** para gravar uma mensagem de voz. O botão fica disponível no WhatsApp, Instagram, Facebook, Widget e Telegram (não aparece em SMS nem em e-mail).
-- Responder citando uma mensagem específica pelo menu da mensagem → **Responder** (só no WhatsApp e no Instagram oficial, em mensagens que passaram pelo canal).
+- Clicar em **Anexar**, arrastar e soltar arquivos na conversa ou colar arquivos no campo. Cada arquivo vai como uma mensagem separada.
+- Clicar em **Áudio** para gravar uma mensagem de voz (no WhatsApp, Instagram, Facebook, Widget e Telegram).
+- Responder citando uma mensagem pelo menu da mensagem → **Responder** (no WhatsApp e no Instagram).
 
-Se a conversa já estiver resolvida, o editor some e aparece o botão **Reabrir conversa** no rodapé.
+Se a conversa está resolvida, o editor some e aparece **Reabrir conversa** no rodapé. No WhatsApp oficial, a regra é outra: veja [Resolver e reabrir](#resolver-e-reabrir).
 
 ## Mandar uma nota para o time
 
-1. Clique em **Nota pro time** no editor. O campo muda para o modo de anotação particular — o contato não recebe nem visualiza o texto.
-2. Escreva a nota e pressione `Enter` para enviar.
+1. Clique em **Nota pro time** no editor. O contato não recebe nem vê o texto.
+2. Escreva a nota e pressione `Enter`.
 
-- Digite `@` na nota para mencionar um membro do workspace; ele recebe uma notificação avisando que foi mencionado na conversa.
-- Abra o menu de uma nota e clique em **Fixar** (ou **Desafixar**) para mantê-la em destaque.
-- No WhatsApp oficial com a janela de 24 horas fechada, o botão **Enviar nota de time** continua disponível.
+Digite `@` na nota para mencionar um membro: ele recebe uma notificação. Uma nota pode ser fixada pelo menu dela (**Fixar**).
 
 ## Resolver e reabrir
 
-Clique em **Resolver** no cabeçalho para encerrar o atendimento. A conversa vai para **Arquivados** e exibe a faixa "Essa conversa foi encerrada.".
+Clique em **Resolver** no cabeçalho. A conversa vai para **Arquivados** e mostra a faixa "Essa conversa foi encerrada.".
 
-Antes de concluir, a Kinbox verifica se existe algum impedimento:
+A Kinbox não deixa resolver enquanto houver:
 
-- Um campo personalizado obrigatório para resolver está vazio (o painel lateral abre destacando o campo).
-- Há uma ligação de WhatsApp em andamento na conversa.
-- Quando o copiloto está ativo na conversa, pode aparecer um aviso perguntando se ficou algo em aberto, com a opção de voltar ou resolver mesmo assim.
+- um campo personalizado obrigatório vazio (o painel lateral abre com o campo destacado);
+- uma ligação de WhatsApp em andamento.
 
-Para voltar a atender uma conversa encerrada, clique em **Reabrir** no cabeçalho ou **Reabrir conversa** no rodapé.
+Com o copiloto ligado na conversa, pode aparecer a pergunta "Ficou algo em aberto?", com a opção de resolver mesmo assim.
 
-Quando o contato volta a mandar mensagem depois que a conversa foi resolvida, começa uma nova sessão (**Nova sessão #N**). Se o **Tempo de tolerância ao resolver conversa** estiver configurado em **Configurações** → **Ambiente** → **Geral**, mensagens recebidas dentro desse prazo reabrem a sessão anterior em vez de abrir uma nova.
+Para voltar a atender, clique em **Reabrir** no cabeçalho ou em **Reabrir conversa** no rodapé. Quando o contato escreve de novo depois de resolvida, começa uma nova sessão (faixa **Nova sessão #N**). Se o workspace (na tela, **ambiente**) usa **Tempo de tolerância ao resolver conversa** (**Configurações** → **Ambiente** → **Geral**), uma mensagem dentro desse prazo reabre a sessão anterior.
 
-## Outras ações
+<Info>
+  **Só no WhatsApp oficial:** se já passaram 24 horas desde a última mensagem do contato, ou se ele nunca escreveu, reabrir não libera texto livre. Com a conversa resolvida, o rodapé mostra **Enviar template** como ação principal, e **Reabrir conversa** e **Enviar nota de time** ficam no menu ao lado. Envie um template: o texto livre volta quando o contato responder. A regra completa está na página da janela de 24 horas do WhatsApp oficial.
+</Info>
 
-No menu **Mais ações** (três pontos no cabeçalho), você também encontra:
+## Outras ações do menu Mais ações
 
-- **Marcar como não lido** / **Marcar como lido**: alterna o indicador de não lida na lista.
-- **Marcar como pendente** / **Desmarcar como pendente**: sinaliza a conversa como pendente (pode ser usado em filtros e automações).
-- **Seguir** / **Parar de seguir**: coloca ou remove a conversa da visão **Seguindo**, sem alterar o membro atribuído.
-- **Sincronizar histórico**: só no WhatsApp por QR Code com a conexão Clássica; traz conversas recentes do WhatsApp (veja [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes)).
-- **Executar bot**: inicia um fluxo de bot na conversa ou seleciona **Atendimento manual** para interromper o bot (exige a permissão **Iniciar Bot**).
-- **Agendar mensagem**, **Transferir para outro canal**, **Exportar para CSV**, **Pesquisar mensagem** e **Ver Informações**: veja [Agendar uma mensagem](/docs/conversas/agendar-mensagem), [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir) e [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar).
+- **Marcar como não lido** / **Marcar como lido**.
+- **Marcar como pendente** / **Desmarcar como pendente**.
+- **Seguir** / **Parar de seguir**: põe a conversa na visão **Seguindo**, sem mudar quem atende.
+- **Executar bot**: inicia um bot; **Atendimento manual** para o bot.
+- **Agendar mensagem**: veja [Agendar uma mensagem](/docs/conversas/agendar-mensagem).
+- **Sincronizar histórico** (só no WhatsApp por QR Code com conexão Clássica): veja [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes).
+- **Transferir para outro canal**: veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir).
+- **Bloquear** / **Desbloquear**: veja abaixo.
+- **Exportar para CSV**: veja [Ações em lote e exportar conversas](/docs/conversas/acoes-em-lote-e-exportar).
+- **Pesquisar mensagem** e **Ver Informações**.
 
 ## Menu de cada mensagem
 
-Abra o menu **Mais ações** de uma mensagem para acessar as opções disponíveis para ela:
-
-- **Responder**: cita a mensagem na resposta (WhatsApp e Instagram oficial).
+- **Responder**: cita a mensagem (no WhatsApp e no Instagram).
 - **Fixar** / **Desafixar**: destaca uma nota interna.
-- **Encaminhar**: escolhe outra conversa e confirma o envio da mensagem.
-- **Ver histórico de edições**: aparece quando o contato editou a mensagem no canal.
-- **Conversar com** + o número do participante (ex.: **Conversar com +55 11 90000-0001**): em conversas de grupo, abre a conversa direta com esse participante ou, se ainda não existir, a janela **Enviar mensagem** com o número dele.
-- **Baixar áudio**: salva o arquivo de áudio no seu computador.
-- **Transcrever**: transforma um áudio sem transcrição em texto na própria conversa (também pelo botão **Transcrever áudio**, ao lado do áudio). A transcrição usa o saldo da carteira do workspace e aceita áudios de até 1 MB. A restrição **Não pode transcrever áudio** esconde o botão ao lado do áudio.
-- **Copiar texto** e **Copiar erro**: copiam o conteúdo da mensagem ou a descrição do erro de envio.
-- **Excluir**: só no WhatsApp por QR Code e no Telegram (não existe no WhatsApp oficial nem nos outros canais). No WhatsApp por QR Code, vale para mensagens enviadas por membro ou por bot que já chegaram ao canal, e exige a permissão **Deletar própria mensagem** (para as suas) ou **Deletar mensagens de outros membros** (para as de outras pessoas).
+- **Encaminhar**: envia a mensagem para outra conversa.
+- **Ver histórico de edições**: aparece quando o contato editou a mensagem.
+- **Conversar com** + número: numa conversa de grupo, abre a conversa com o participante.
+- **Baixar áudio** e **Transcrever** (transforma o áudio em texto; usa o saldo da carteira).
+- **Copiar texto** e **Copiar erro**.
+- **Excluir**: só no WhatsApp por QR Code e no Telegram, com as permissões de deletar mensagens.
 
 <Warning>
   Excluir uma mensagem não pode ser desfeito.
@@ -103,7 +111,7 @@ Abra o menu **Mais ações** de uma mensagem para acessar as opções disponíve
 
 ## Bloquear um contato
 
-1. No cabeçalho da conversa, clique em **Mais ações** → **Bloquear** e confirme.
-2. O ícone **Bloqueado** passa a aparecer ao lado do nome do contato, e a Kinbox deixa de receber novas mensagens desse contato naquele canal.
+1. No cabeçalho, clique em **Mais ações** → **Bloquear** e confirme.
+2. O ícone **Bloqueado** aparece ao lado do nome, e a Kinbox deixa de receber mensagens desse contato naquele canal.
 
-Para voltar a receber mensagens, clique em **Mais ações** → **Desbloquear** e confirme. Quem tem a restrição **Não pode bloquear conversa** não consegue usar esta opção.
+Para voltar a receber, use **Mais ações** → **Desbloquear**.

@@ -10,6 +10,7 @@ fontes:
   - web:src/lib/inboxUtils.ts
   - web:src/pages/settings/roles/permissionSections.tsx
   - web:src/components/navigation/GlobalSearch/useContactFieldSearch.tsx
+  - web:src/pages/settings/profile/Profile.tsx
 codigo:
   - web:src/pages/inbox/index.tsx
   - web:src/pages/inbox/Conversations/index.tsx
@@ -20,13 +21,13 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-A **Caixa de entrada** é a tela onde chegam e são atendidas as conversas de todos os canais conectados ao workspace. Cada conversa reúne a troca de mensagens com um contato em um canal, dividida em sessões numeradas a cada atendimento.
+A **Caixa de entrada** é a tela onde chegam e são atendidas as conversas de todos os canais conectados ao workspace (na tela, **ambiente**). Cada conversa reúne a troca de mensagens com um contato em um canal, dividida em sessões numeradas a cada atendimento.
 
 ## Como a tela se organiza
 
 Você acessa a **Caixa de entrada** no primeiro item da barra lateral. A tela se divide em três colunas:
 
-1. **Painel Chat**, à esquerda: traz as visões padrão e a seção **Filtros** para os filtros personalizados.
+1. **Painel Chat**, à esquerda: traz as visões padrão (**Abertos**, **Meus**, **Seguindo**, **Arquivados**) e a seção **Filtros** para os filtros personalizados.
 2. **Lista de conversas**, ao centro: mostra as conversas da visão ou do filtro selecionado. Cada item exibe a foto ou iniciais do contato, o ícone do canal, o nome, a prévia e o horário da última mensagem, as tags, a foto de quem atende e um ponto azul quando há mensagem não lida.
 3. **Conversa aberta**, à direita: mostra as mensagens, o editor de resposta e o painel **Detalhes** (com **Contato**, **Negociações**, **Tarefas** e **Notas**), além dos ícones laterais **Detalhes**, **Linha do tempo** e **Notas**. Quando nenhuma conversa está aberta, a tela orienta a selecionar uma conversa ou escolher um filtro.
 
@@ -40,16 +41,16 @@ Você acessa a **Caixa de entrada** no primeiro item da barra lateral. A tela se
 | --- | --- |
 | **Abertos** | Todas as conversas não resolvidas que você pode ver. |
 | **Meus** | Conversas atribuídas a você e ainda não resolvidas. |
-| **Compartilhados** | Conversas compartilhadas com você por outro membro (só aparece quando alguém compartilha uma conversa). |
+| **Compartilhados** | Conversas de outro membro que escolheu você em **Compartilhamento de conversas**, no perfil dele. Só aparece quando alguém faz isso. |
 | **Seguindo** | Conversas que você marcou em **Mais ações** → **Seguir**. Seguir não atribui a conversa a você. |
 | **Arquivados** | Conversas que foram resolvidas. |
 
-O número ao lado de **Abertos**, **Meus**, **Seguindo** e dos filtros conta apenas conversas abertas: acima de 999 exibe o aviso de "mais de 999", e quando há conversas demais para contar na hora aparece "—". **Arquivados** não tem contador.
+O número ao lado das visões e dos filtros conta só as conversas abertas.
 
 ## Encontrar uma conversa
 
 - **Na lista atual:** use o campo **Pesquisar** no topo da lista para buscar dentro da visão ou do filtro aberto.
-- **Em todo o workspace:** use o campo **Pesquisar** no topo da tela (ou o atalho `Ctrl+K` / `⌘K`). A pesquisa geral encontra contatos por nome (mínimo de 3 letras), telefone (mínimo de 5 números), e-mail (mínimo de 3 letras) ou valor exato de campo personalizado, e lista as conversas de cada contato como **Em aberto** ou **Finalizada**.
+- **Em todo o workspace:** use o campo **Pesquisar** no topo da tela (ou `Ctrl+K` / `⌘K`). Ele encontra o contato por nome, telefone, e-mail ou campo personalizado e lista as conversas dele.
 
 ## O que dá para fazer na lista
 
@@ -60,7 +61,7 @@ O número ao lado de **Abertos**, **Meus**, **Seguindo** e dos filtros conta ape
 
 ## Quem vê o quê
 
-As conversas visíveis para cada membro dependem da opção **Acesso as Conversas** definida no papel dele pelo administrador em **Configurações** → **Ambiente** → **Permissões**. O dono do workspace vê todas as conversas.
+As conversas visíveis para cada membro dependem da opção **Acesso as Conversas** definida no papel dele pelo administrador em **Configurações** → **Ambiente** → **Permissões**. O proprietário do workspace vê todas as conversas.
 
 ## Próximos passos
 

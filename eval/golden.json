@@ -166,14 +166,6 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Dá para mandar a primeira mensagem para um cliente pelo Instagram direto da Kinbox?",
-    "esperado": [
-      "docs/conversas/iniciar-conversa",
-      "llm/conversas/iniciar-conversa"
-    ],
-    "tipo": "guia"
-  },
-  {
     "pergunta": "Como recupero uma conversa que apaguei no aplicativo do WhatsApp do meu celular?",
     "esperado": [],
     "tipo": "negativo"

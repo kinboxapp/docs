@@ -1,7 +1,7 @@
 ---
 title: Permissões e restrições de conversa e as mensagens de erro de cada uma
 description: Referência das permissões, restrições e regras da Caixa de entrada da Kinbox, com o efeito de cada uma na tela, as mensagens de erro e a matriz de diagnóstico de "não consigo responder ou ver".
-keywords: [permissões de conversa, restrições, acesso às conversas, global, por grupo, restrito, limitado, esconder mensagens, responder apenas conversas dele, palavras proibidas, mensagem de erro, dono do workspace, protocolo, sessão]
+keywords: [permissões de conversa, restrições, acesso às conversas, global, por grupo, restrito, limitado, esconder mensagens, responder apenas conversas dele, palavras proibidas, mensagem de erro, proprietário do workspace, dono, protocolo, sessão]
 publico: llm
 tipo: referencia
 fontes:
@@ -12,6 +12,7 @@ fontes:
   - web:src/pages/inbox/ChatHeader/index.tsx
   - api-v0:server/controllers/CallController.js
   - api-v0:server/modules/scheduler/scheduleCallMessagesScheduler.js
+  - web:src/pages/settings/profile/Profile.tsx
 codigo:
   - web:src/pages/settings/roles/permissionSections.tsx
   - web:src/lib/inboxUtils.ts
@@ -26,6 +27,13 @@ verificado_em: 2026-11-26
 
 Referência complementar das páginas humanas da Caixa de entrada, atendimento, atribuição, agendamento e solução de problemas.
 
+## Visões, contadores e pesquisa
+
+- Visões padrão: **Abertos** (não resolvidas que o membro pode ver; no layout antigo, **Entrada**), **Meus**, **Compartilhados**, **Seguindo** e **Arquivados** (resolvidas).
+- **Compartilhados** aparece quando outro membro liga **Compartilhamento de conversas** no próprio perfil (**Configurações** → **Perfil**) e escolhe você no campo **Compartilhamento**: você passa a ver e atender as conversas atribuídas a ele ("Compartilhe suas conversas com outros membros... Útil quando você tiver de ir almoçar"). Não existe compartilhar uma conversa só. A restrição **Não pode compartilhar conversa** tira essa opção do perfil.
+- Contadores: só conversas abertas; dica "Conversas abertas: {{count}}"; acima de 999, "Conversas abertas: mais de 999"; quando não dá para contar na hora, "—" com "Esse filtro tem conversas demais para contar agora". **Arquivados** não tem contador.
+- Pesquisa geral (**Pesquisar** no topo ou `Ctrl+K` / `⌘K`): contato por nome (mín. 3 letras), telefone (mín. 5 números), e-mail (mín. 3 letras) ou valor exato de campo personalizado; lista as conversas do contato como **Em aberto** ou **Finalizada**.
+
 ## Acesso as Conversas
 
 Configurado em **Configurações** → **Ambiente** → **Permissões** (uma opção por papel).
@@ -39,10 +47,9 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | **Limitado** | "Ver apenas as conversas atribuídas a ele ou seguindo ou sem atribuição." |
 | **Restrito** | "Pode ver apenas as conversas atribuídas a ele ou seguindo." |
 
-- Regra de visibilidade: o dono do workspace, quem tem **Global**, quem está atribuído à conversa, quem segue a conversa e quem recebeu a conversa compartilhada sempre conseguem visualizá-la.
+- Regra de visibilidade: o proprietário do workspace, quem tem **Global**, quem está atribuído à conversa, quem segue a conversa e quem recebeu a conversa compartilhada sempre conseguem visualizá-la.
 - Sem acesso, ao tentar abrir a conversa ela fecha com o aviso: "Você não tem permissão para ver essa conversa".
-- Dono do workspace: passa em todas as permissões e não é afetado pelas restrições da seção.
-- Aplicação das regras: as permissões e restrições da conversa são aplicadas na tela da Kinbox (no navegador); a exportação em lote e uma das restrições de chat ativo também são conferidas no servidor.
+- Proprietário do workspace: tem todas as permissões e não é afetado pelas restrições da seção.
 
 ## Permissões da seção Conversas
 
@@ -55,7 +62,6 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | **Deletar própria mensagem** | Não libera **Excluir** para mensagens enviadas pelo próprio membro. | — |
 | **Iniciar chat ativo** | O botão **Enviar mensagem** (lápis) não aparece na lista. | — |
 | **Reabrir** | A tela não deixa reabrir uma conversa resolvida. | "Você não tem permissão para reabrir conversas." |
-| **Categorizar** | Não tem efeito na tela: membros sem ela continuam adicionando tags. | — |
 | **Atribuir** | Os itens do seletor **Atribuir** ficam desativados. | "Você não tem permissão para atribuir conversas." |
 | **Mover para grupo** | A tela não deixa mover para outro grupo. | "Você não tem permissão para mover conversas para grupos." |
 | **Iniciar Bot** | A tela não deixa iniciar bot em **Executar bot**. | "Você não tem permissão para iniciar bots." |
@@ -86,7 +92,7 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 | **Não pode bloquear conversa** | Desativa **Bloquear** em **Mais ações**. | — |
 | **Não pode sincronizar histórico** | Impede usar **Sincronizar histórico** (disponível apenas no WhatsApp por QR Code na conexão Clássica). | — |
 | **Não pode exportar para CSV** | Desativa **Exportar para CSV** na conversa e impede **Exportar conversas** em lote. | "Seu perfil não pode exportar conversas." |
-| **Não pode transcrever áudio** | Esconde o botão **Transcrever áudio** ao lado do áudio. O item **Transcrever** do menu da mensagem continua aparecendo. | — |
+| **Não pode transcrever áudio** | O membro não transcreve áudios. | — |
 | **Esconder notas do contato**, **Esconder informações do contato**, **Esconder informações da sessão**, **Esconder linha do tempo**, **Esconder sentimento do cliente**, **Esconder lead score**, **Esconder informações de integração** | Ocultam as respectivas seções do painel lateral da conversa. | — |
 
 ## Regras de atribuição, grupo, bot e transferência
@@ -108,17 +114,21 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 - **Tempo de tolerância ao resolver conversa** (**Configurações** → **Ambiente** → **Geral**, em minutos): se o contato enviar nova mensagem antes do prazo definido, a Kinbox reabre a sessão anterior em vez de criar uma nova sessão.
 - Visão **Arquivados**: a dica (tooltip) na barra lateral mostra o texto incorreto "Seguindo - Conversas que foram resolvidas.", mas a visão exibe todas as conversas resolvidas que o membro pode ver (não apenas as seguidas).
 
-## Excluir mensagem, transcrever áudio e bloquear contato
+## Responder citando, excluir mensagem, transcrever áudio e bloquear contato
+
+- **Responder** (citar uma mensagem): só no WhatsApp e no Instagram, em mensagens que passaram pelo canal (têm ID do canal). Em canais de Instagram ligados por uma conexão antiga, feita por integração de terceiro, o item não aparece.
+- Anexos: cada arquivo vai como uma mensagem; até 100 MB por arquivo e 20 por vez; áudio gravado até 25 MB.
 
 - **Excluir mensagem**:
   - Onde existe: o item **Excluir** só aparece em conversas de WhatsApp por QR Code e de Telegram. Não existe no WhatsApp oficial nem nos outros canais.
   - WhatsApp por QR Code: só mensagens enviadas por membro ou bot; exige permissão (**Deletar própria mensagem** ou **Deletar mensagens de outros membros**) e que a mensagem tenha chegado ao canal (possua ID externo).
-  - Telegram: o item **Excluir** aparece no menu para qualquer mensagem da conversa, sem verificar autor nem permissão.
+  - Telegram: o item **Excluir** também aparece no menu da mensagem.
   - Confirmação: "Tem certeza que deseja excluir essa mensagem? Essa operação não poderá ser desfeita.".
 - **Transcrever áudio**:
   - Usa o saldo da carteira do workspace; limite de 1 MB ("O tamanho do arquivo de áudio excede o limite de 1 MB").
   - Quando não há saldo suficiente, o servidor retorna "Saldo insuficiente" mas a tela apenas encerra o carregamento sem mostrar aviso.
-  - Restrição: **Não pode transcrever áudio** esconde o botão **Transcrever áudio** ao lado do áudio (o item **Transcrever** do menu da mensagem continua aparecendo).
+  - Restrição: com **Não pode transcrever áudio**, o membro não transcreve áudios.
+  - Onde fica: botão **Transcrever áudio** ao lado do áudio e item **Transcrever** no menu da mensagem.
 - **Bloquear contato**:
   - **Mais ações** → **Bloquear** / **Desbloquear**.
   - Confirmação ao bloquear: "Tem certeza que deseja bloquear essa conversa? Seu ambiente não receberá novas mensagens dessa conversa." → aviso "Você bloqueou essa conversa.".
@@ -128,16 +138,17 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 ## Agendamento de mensagens
 
 - Aviso ao criar: "Agendamento realizado.".
+- Conteúdo: texto com frases rápidas, emojis, anexos e chaves `{}`. A janela não tem botão de gravar áudio: para agendar um áudio, escolha uma frase rápida de voz (a janela troca o texto pelo áudio da frase).
 - Frequência de conferência: a cada 3 minutos (a mensagem pode sair alguns minutos após o horário agendado).
-- Tentativas: até 2 tentativas (se falhar, tenta novamente no ciclo seguinte). Se o canal estiver desconectado, segue o comportamento de erro do canal sem tentativas extras além das 2.
+- Estado do agendamento: a Kinbox marca o agendamento como enviado quando dispara o envio, antes de o canal aceitar a mensagem. Se o canal recusar (ex.: canal desconectado), a mensagem fica com erro na conversa e o agendamento não tenta de novo. Por isso, oriente a conferir a mensagem na conversa (sem erro) em vez de confiar só no agendamento. Uma falha antes do disparo (ex.: dados do contato) é tentada de novo no ciclo seguinte, até 2 vezes.
 - Envio: segue o mesmo fluxo do chat ativo em nome de quem agendou; se a conversa estiver resolvida na hora do envio, cria uma nova sessão atribuída a quem agendou.
 - Chaves reservadas (como `{{name}}`): trocadas no momento do envio, apenas na primeira ocorrência de cada chave; chaves sem valor somem do texto.
-- **Repetir mensalmente**: após o envio, agenda automaticamente a mesma mensagem para o mês seguinte.
+- **Repetir mensalmente**: quando dispara o envio, a Kinbox já cria o agendamento do mês seguinte, mesmo que o canal recuse a mensagem deste mês.
 - WhatsApp oficial: se a data agendada cair fora da janela de 24 h (ou se a janela já estiver fechada), exige **Modelo de mensagem** (template).
 
 ## Matriz de diagnóstico: não consigo responder ou ver uma conversa
 
-O dono do workspace não sofre restrições de papel.
+O proprietário do workspace não sofre restrições de papel.
 
 | Se o usuário vê | Causa | O que orientar |
 | --- | --- | --- |
@@ -153,7 +164,7 @@ O dono do workspace não sofre restrições de papel.
 | Conversa não aparece na lista | Está em outra visão (ex.: **Arquivados**), fora do filtro atual ou fora do **Acesso as Conversas** | Buscar na pesquisa geral (`Ctrl+K` / `⌘K`) ou conferir **Arquivados**. |
 | WhatsApp oficial: "A janela de tempo para respostas foi encerrada." (ou "Resolvida · janela de 24h encerrada") e botões **Enviar template** / **Enviar nota de time** | Passaram 24 h desde a última mensagem do contato | Enviar um template aprovado pela Meta (notas internas continuam disponíveis). |
 | Faixa **Telefone desconectado** no topo da lista (some com **Não pode ver notificações de canal**) | Canal de WhatsApp por QR Code desconectado | Quem tem permissão de gerenciar canais precisa reconectar o aparelho nas configurações do canal. |
-| Mensagem marcada com erro ("Erro ao enviar mensagem" ou descrição; "Tentando reenviar... (Tentativa N/4)") | O canal recusou o envio | Passar o mouse ou usar **Copiar erro** no menu da mensagem; a Kinbox tenta até 4 vezes automaticamente. |
+| Mensagem marcada com erro ("Erro ao enviar mensagem" ou descrição; "Tentando reenviar... (Tentativa N/4)") | O canal recusou o envio | Passar o mouse ou usar **Copiar erro** no menu da mensagem; a Kinbox faz até 4 tentativas de envio (a tela mostra "Tentativa N/4"). |
 | Ícone **Bloqueado** no cabeçalho e contato não envia novas mensagens | Conversa bloqueada naquele canal | **Mais ações** → **Desbloquear**. |
 | "Conversas restritas pelo cliente" ("O cliente não permite que o parceiro veja as conversas deste ambiente. Relatórios e configurações continuam disponíveis.") | Cliente desativou **Permitir que o parceiro veja as conversas** em **Configurações** → **Ambiente** → **Geral** | Pedir ao cliente para ativar a opção. |
 | Ao resolver: "Campo obrigatório {{name}} não foi setado." | Campo personalizado obrigatório para resolver está vazio | Preencher o campo destacado no painel lateral e resolver novamente. |

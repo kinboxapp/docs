@@ -9,6 +9,7 @@ fontes:
   - web:src/components-old/inbox/NewMessageModal/NewMessageTemplate.tsx
   - web:src/pages/inbox/Conversations/index.tsx
   - api-v0:server/controllers/CallController.js
+  - api-v0:server/controllers/SmsController.js
 codigo:
   - web:src/components-old/inbox/NewMessageModal/**
   - web:src/pages/inbox/Conversations/index.tsx
@@ -24,7 +25,7 @@ Referência complementar de `docs/conversas/iniciar-conversa`.
 
 - **Aceitos:** **WhatsApp** (oficial e por QR Code), **SMS** e **E-mail**.
 - **Excluídos:** Instagram, Facebook, Telegram, Widget e demais canais não aparecem no campo **Canal**.
-- **SMS:** consome saldo da carteira do workspace.
+- **SMS:** cada mensagem consome **Créditos de SMS** (não o saldo da carteira). O SMS é só texto: a janela não mostra **Anexar** nem **Gravar Áudio** para canal de SMS.
 - **Apenas Receptivo:** canais marcados com **Apenas Receptivo** ("Com essa opção marcada, o canal não pode enviar mensagem ativa e nem ser usado em campanhas.") não aparecem na lista **Canal**. Se uma requisição tentar usar esse canal pela API, retorna: "Esse canal não tem permissão para chat ativo".
 
 ## Permissões e restrições

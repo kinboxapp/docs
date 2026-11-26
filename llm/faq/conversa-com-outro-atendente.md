@@ -21,7 +21,7 @@ Por que não consigo responder um contato que está com outra pessoa?
 
 ## Resposta
 
-Isso acontece por causa de restrições configuradas no seu papel (o dono do workspace não sofre essas restrições). As causas mais comuns são:
+Isso acontece por causa de restrições configuradas no seu papel (o proprietário do workspace não sofre essas restrições). As causas mais comuns são:
 
 - **Responder apenas conversas dele:** ao tentar enviar, aparece "Você não possui permissão para enviar essa mensagem.".
 - **Esconder mensagens se não atribuído.** ou **Esconder mensagens se não atribuído, com botão de aceitar.:** a tela oculta o histórico com "Necessário ser atribuído à conversa para visualizar as mensagens". Mesmo quando aparece o botão **Aceitar conversa**, ele só funciona se ninguém estiver atendendo (caso contrário, exibe "Já existe um membro atendendo esse contato.").

@@ -243,3 +243,30 @@
   arquivo: images/ajuda/conversas/exportar-conversas.webp
   paginas:
     - docs/conversas/acoes-em-lote-e-exportar
+
+# Cabeçalho de uma conversa do seed: Resolver, Atribuir, Mover para grupo, Mais ações e Modo foco.
+# A foto no botão Atribuir é da conta dona (real): coberta com tarja.
+- id: conversas-cabecalho
+  url: /inbox/all/4392
+  passos:
+    - esperar: '.g_chat_header_inner [aria-label="Mais ações"]'
+    - pausa: 1000
+  alvo: '.g_chat_header_inner'
+  mascarar:
+    - '.g_chat_header_inner [data-academia="assign"] figure'
+  arquivo: images/ajuda/conversas/cabecalho-da-conversa.webp
+  paginas:
+    - docs/conversas/gerenciar-conversas
+    - docs/conversas/atribuir-e-transferir
+
+# Editor da mesma conversa: campo de texto e os botões Áudio, Nota pro time, Frases rápidas, Emojis, Anexar e Enviar.
+- id: conversas-editor
+  url: /inbox/all/4392
+  passos:
+    - esperar: '.chat-actions-box textarea'
+    - pausa: 1000
+  alvo: '.chat-actions-box'
+  mascarar: []
+  arquivo: images/ajuda/conversas/editor-da-conversa.webp
+  paginas:
+    - docs/conversas/gerenciar-conversas
