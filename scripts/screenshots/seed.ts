@@ -782,6 +782,37 @@ async function garantirCenarios(api: Api, canal: string) {
   log(`cenários: criados [${criados.join(', ')}], atualizados [${atualizados.join(', ')}] (todos desligados)`)
 }
 
+/**
+ * Dashboard de exemplo "Atendimento da loja" (prints da seção dashboards), criado a partir do modelo
+ * Pipeline Atendimento: cartões de sessões não atribuídas, em espera, em atendimento, pendentes e atribuídas.
+ * Sem snapshot os cartões ficam em esqueleto: gera um só se o dashboard ainda não tem nenhum
+ * (o snapshot só avisa, dentro do app, a conta que o pediu; não envia nada a contato nem gasta saldo).
+ * O autor exibido no seletor de snapshots é um membro fictício.
+ */
+const DASHBOARD_EXEMPLO = 'Atendimento da loja'
+// Os números do dashboard vêm do snapshot: a descrição não pode prometer "tempo real"
+const DASHBOARD_DESCRICAO = 'Sessões da loja por estado de atendimento.'
+async function garantirDashboard(api: Api) {
+  let existente = lista(await api.v3('GET', '/dashboards')).find((d) => d.name === DASHBOARD_EXEMPLO)
+  const reaproveitado = !!existente
+  if (!existente) {
+    existente = await api.v3('POST', '/dashboards', {
+      preset: 'pipeline_atendimento',
+      name: DASHBOARD_EXEMPLO,
+      description: DASHBOARD_DESCRICAO,
+    })
+  }
+  const id = existente?._id || existente?.id
+  if (existente?.description !== DASHBOARD_DESCRICAO) {
+    await api.v3('PATCH', `/dashboards/${id}`, { description: DASHBOARD_DESCRICAO })
+  }
+  const snapshots = lista(await api.v3('GET', `/dashboards/${id}/snapshots`))
+  if (!snapshots.length) {
+    await api.v3('POST', `/dashboards/${id}/snapshots`, { dashboardId: id, authorName: 'Carla Mendes', dashboardName: DASHBOARD_EXEMPLO })
+  }
+  log(`dashboard: "${DASHBOARD_EXEMPLO}"${reaproveitado ? ' (reaproveitado)' : ''}, ${snapshots.length || 'novo'} snapshot(s)`)
+}
+
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
 // (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
 const falhas: Record<string, string> = {}
@@ -797,6 +828,7 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['clientes', () => garantirClientes(api, contatoIds)],
   ['crm', () => garantirCrm(api, contatoIds)],
   ['cenarios', () => garantirCenarios(api, canal)],
+  ['dashboard', () => garantirDashboard(api)],
 ]
 // `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
 // `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.

@@ -2901,3 +2901,97 @@
   arquivo: images/ajuda/cenarios/requisicao-http.webp
   paginas:
     - docs/cenarios/gatilhos-e-acoes
+
+# Seção dashboards (Relatórios › Dashboards e consumo)
+# Dashboard "Atendimento da loja" (seed, etapa dashboard): cartões do Pipeline Atendimento e um snapshot com autor fictício.
+# Saldo e Ligações: a Loja Exemplo não tem consumo nem ligações; os prints mostram só a barra do topo e os menus.
+
+- id: dashboard-topo
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - esperar: 'button:has-text("by Carla Mendes")'
+    - pausa: 1500
+  alvo:
+    - 'div.flex.justify-between:has([data-academia="dashboard-title"])'
+    - 'button:has-text("by Carla Mendes")'
+    - '.ant-picker-range'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/dashboard-topo.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: dashboard-criar
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - clicar: '[data-academia="dashboard-title"] a'
+    - esperar: 'text=Adicionar dashboard'
+    - clicar: 'text=Adicionar dashboard'
+    - esperar: '.ant-drawer >> text=Visível para'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer .ant-form-item:has-text("Visível para")'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/dashboard-criar.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: dashboard-modelos
+  url: /reports/dashboard
+  passos:
+    - esperar: '[data-academia="dashboard-title"] >> text=Atendimento da loja'
+    - clicar: '[data-academia="dashboard-add-report"] button'
+    - esperar: 'text=Escolha um template...'
+    - pausa: 1200
+  alvo: '.ant-modal-content:has-text("Escolha um template...")'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/dashboard-modelos.webp
+  paginas:
+    - docs/relatorios/dashboard
+
+- id: saldo-exportar
+  url: /reports/balance-usage
+  passos:
+    - esperar: 'text=Total consumido'
+    - clicar: 'button.common_dropdown'
+    - esperar: '.ant-dropdown-menu >> text=Exportar serviços'
+    - pausa: 800
+  alvo:
+    - '.ant-picker-range'
+    - 'span:has-text("Maior gasto")'
+    - '.ant-dropdown-menu'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/saldo-exportar.webp
+  paginas:
+    - docs/relatorios/saldo
+
+- id: ligacoes-filtro
+  url: /reports/voip
+  passos:
+    - esperar: 'text=Minutos diários'
+    - pausa: 800
+  alvo:
+    - '.ant-picker-range'
+    - '.ant-select:has-text("Todas as ligações")'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/ligacoes-filtro.webp
+  paginas:
+    - docs/relatorios/ligacoes
+
+- id: permissoes-relatorios
+  url: /settings/roles/new
+  altura: 1600
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar permissão'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Home")'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Relatórios")'
+    - esperar: '.ant-drawer >> text=Restringir relatórios ao membro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer .ant-collapse-item:has(.ant-collapse-header:has-text("Relatórios"))'
+  mascarar: []
+  arquivo: images/ajuda/relatorios/permissoes-relatorios.webp
+  paginas:
+    - docs/relatorios/exportar-e-permissoes

@@ -1,0 +1,73 @@
+---
+title: Relatório de ligações
+description: Como ver no relatório Ligações os minutos, os status e a lista das ligações por WhatsApp e por telefone, ouvir e baixar gravações e exportar.
+keywords: [ligações, chamadas, voip, telefone, ligações whatsapp, minutos, minutagem, gravação, baixar gravação, transcrição, resumo da ligação, não atendeu, relatório de chamadas, exportar ligações]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/reports/ReportVoip/index.tsx
+  - web:src/pages/settings/channels/voip/VoipCallDetailsDrawer.tsx
+  - web:src/models/voipCall.ts
+  - api:src/modules/voip/voip.service.ts
+codigo:
+  - web:src/pages/reports/ReportVoip/**
+  - web:src/pages/settings/channels/voip/VoipCallDetailsDrawer.tsx
+  - web:src/pages/settings/channels/voip/voip.helper.ts
+  - web:src/models/voipCall.ts
+  - api:src/modules/voip/**
+verificado_em: 2026-11-26
+---
+
+O relatório de **Ligações** mostra a minutagem, os status e a lista das ligações feitas e recebidas no workspace pelo [WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/ligacoes-pelo-whatsapp) e por [telefone (VoIP)](/docs/canais/ligacoes/ligar-por-telefone) (veja também [Visão geral das ligações](/docs/canais/ligacoes/visao-geral)).
+
+<Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê).</Note>
+
+## Período e origem
+
+No menu lateral, vá em **Relatórios** → **Ligações**.
+
+- **Período:** abre nos últimos 15 dias, sem hoje, considerando a data em que cada ligação foi criada. Clique nas datas para escolher outro intervalo (com data e hora) ou use os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**.
+- **Origem:** ao lado do período, filtre por **Todas as ligações** (padrão), **WhatsApp: feitas**, **WhatsApp: recebidas** ou **Telefone (VoIP)**. Não há filtro por membro, canal ou status.
+
+<Frame caption="Barra de filtros do relatório Ligações com seletor de período e filtro de origem">
+  <img src="/images/ajuda/relatorios/ligacoes-filtro.webp" alt="Topo do relatório Ligações exibindo o seletor de período de 15 dias e o seletor de origem em Todas as ligações" />
+</Frame>
+
+## Gráfico e totais
+
+- **Gráfico por dia:** considera apenas as ligações **concluídas**. Use o seletor do gráfico para alternar entre **Minutagem** (título **Minutos diários**), **Média de minutos** e **Contagem de ligações**.
+- **Cartões de totais:** ficam abaixo do gráfico e respeitam o filtro de origem. Exibem **Minutos** e **Média de minutos** (das ligações concluídas), **Concluídas** e um cartão para cada outro status que apareceu no período. Quando não há ligações, aparece apenas **Média de minutos** zerado.
+
+## Lista de ligações
+
+A lista exibe 20 ligações por página, das mais recentes para as mais antigas, com as colunas **Destino** (ícone do WhatsApp ou **Telefone (VoIP)**, seta indicando **Recebida** ou **Feita** e o número), **Minutos** (`-` quando não concluída), **Status**, **Data** e **Membro**.
+
+Clicar sobre a linha não abre os detalhes: passe o mouse na linha para exibir os botões **Baixar** e **Ver**.
+
+| Status | O que indica |
+| --- | --- |
+| **Chamando...** | Ligação iniciada, aguardando atendimento. |
+| **Em andamento** | Ligação ativa no momento. |
+| **Concluída** | Ligação atendida e encerrada. |
+| **Ligação falhou** | Não foi possível completar a ligação. |
+| **Não atendeu** | Ligação sem atendimento — inclui também ligações recebidas que foram perdidas. |
+| **Recusada** | Ligação recusada. |
+
+## Ouvir, baixar e transcrever
+
+- **Ver:** abre o painel **Ligação de voz**.
+  - Quando existe gravação, o painel exibe o player de áudio e o botão **Baixar áudio**.
+  - Quando existe transcrição e resumo, aparecem **Resumo** (com o sentimento: **Positivo**, **Negativo** ou **Neutro**) e **Transcrição** dividida por falante — clicar em uma fala pula o áudio para aquele momento.
+  - Quando há gravação sem transcrição, aparece o botão **Transcrever**. Transcrever uma ligação sai do [saldo da carteira](/docs/conceitos/saldo-e-creditos) e aparece como **Transcrição de chamada de voz** no [Relatório de saldo](/docs/relatorios/saldo).
+  - Se o painel avisar que não há gravação disponível, confira se a gravação está ativada nas [Configurações de ligações (VoIP)](/docs/canais/ligacoes/configuracoes-voip).
+- **Baixar:** baixa o áudio da gravação direto da lista. O botão aparece em todas as linhas; se a ligação não tiver gravação, a tela avisa que não há gravação disponível.
+
+## Quanto as ligações custaram
+
+Este relatório não mostra valores em reais. Para acompanhar quanto as ligações consumiram (minutos, gravação, transcrição e atendimento por IA), abra o [Relatório de saldo](/docs/relatorios/saldo): ligações do WhatsApp e transcrições ficam na categoria **Voz e áudio**, enquanto minutos por telefone (VoIP) e excedente do plano de ligações do WhatsApp ficam em **Outros**.
+
+## Exportar
+
+Clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+
+O arquivo traz todas as ligações do período e da origem escolhida, incluindo **Destino**, **Status**, **Data**, **Minutos**, **Membro**, **ID da Conversa**, **Iniciado por**, **Sentimento**, **Gravação** (link do áudio) e **Resumo**. Como o arquivo exportado leva o link da gravação e o resumo da chamada, compartilhe-o apenas com quem deve ter acesso a esse conteúdo.

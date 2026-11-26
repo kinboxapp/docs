@@ -1,0 +1,114 @@
+---
+title: Relatório do copiloto
+description: Como ler o relatório do Copiloto, com as abas Qualidade, Sentimento, Intenções, Lead score e Atendimento automático, e quais sessões entram em cada uma.
+keywords: [relatório do copiloto, copiloto, qualidade do atendimento, nota do atendimento, sentimento, clientes irritados, intenções, lead score, leads quentes, cliente preso no bot, reaberturas evitadas, avaliadores, ia]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/reports/ReportCopilot/index.tsx
+  - web:src/pages/reports/ReportCopilot/QualityReport.tsx
+  - web:src/pages/reports/ReportCopilot/shared.tsx
+  - api:src/modules/reports/session-summary/session-summary.service.ts
+codigo:
+  - web:src/pages/reports/ReportCopilot/**
+  - web:src/pages/reports/useReports.tsx
+  - api:src/modules/reports/session-summary/**
+verificado_em: 2026-11-26
+---
+
+O relatório do **Copiloto** reúne os resultados das análises de IA feitas nas sessões resolvidas do workspace em até cinco abas: **Qualidade**, **Sentimento**, **Intenções**, **Lead score** e **Atendimento automático**.
+
+O relatório **Copiloto** reúne o que as análises de IA do copiloto registraram nas sessões resolvidas: qualidade do atendimento, sentimento, intenções, lead score e clientes presos no bot.
+
+<Note>Para ver este relatório, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê), e o item **Copiloto** só aparece em **Relatórios** quando pelo menos um recurso correspondente está ligado. Se o seu papel tiver **Restringir relatórios ao membro**, você vê só as sessões em que é o responsável; se tiver **Restringir relatórios aos grupos do membro**, você vê só as sessões dos seus grupos.</Note>
+
+## Quando cada aba aparece
+
+No menu lateral, vá em **Relatórios** → **Copiloto**. O relatório abre na primeira aba disponível, conforme os recursos ativados em **Configurações** → **Automação** → **Copiloto** (veja [Analisar conversas com IA](/docs/copiloto/analises-de-ia)):
+
+| Aba | Recurso necessário |
+| --- | --- |
+| **Qualidade** | Um avaliador ativo que grava em campo, criado a partir dos modelos **Nota do atendimento**, **Problema resolvido?** ou **Pontos a melhorar** (um avaliador criado só com critério próprio não ativa a aba). |
+| **Sentimento** | **Análise de sentimento** |
+| **Intenções** | **Classificação de intenção** |
+| **Lead score** | **Lead score** |
+| **Atendimento automático** | **Cliente preso no bot** ou **Não reabrir por agradecimento** |
+
+Se nenhum desses recursos estiver ligado, a tela avisa que é preciso ativar um recurso do copiloto em **Configurações** → **Copiloto** para ver os relatórios. Desligar um recurso esconde a aba, mas não apaga os dados; ao ligar de novo, o histórico volta a aparecer.
+
+## Quais sessões entram
+
+Entram apenas sessões **resolvidas** no período escolhido (contadas pela data de resolução) que foram analisadas pelo copiloto para aquela aba. Sessões abertas ou sem análise não entram. Uma sessão resolvida no dia 16 entra no dia 16, mesmo que tenha começado antes.
+
+Por padrão, o relatório abre nos últimos 7 dias, sem hoje. Você pode escolher outro intervalo de até **1 ano** (períodos maiores não são aceitos) ou usar os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**.
+
+## O que dá para fazer em todas as abas
+
+- **Filtrar:** clique em **Filtrar** para recortar com os mesmos filtros de sessão dos relatórios de atendimento (veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam)).
+- **Agrupar:** alterne entre **Por Dia**, **Por Membro**, **Por Grupo** e **Por Canal** (não há agrupamento por tag). As abas abrem em **Por Membro**, exceto **Atendimento automático**, que abre em **Por Dia**. Com **Restringir relatórios aos grupos do membro**, as linhas **Sem atribuição** e **Sem grupo** não aparecem.
+- **Ver sessões:** clique em **Ver sessões** para listar todas as sessões do filtro atual, ou clique em um cartão ou célula da tabela para abrir as sessões ligadas àquele número.
+- **Exportar:** clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**. O arquivo baixa todas as linhas da tabela agrupada (os cartões de resumo não entram).
+
+## Qualidade
+
+Exibe o título **Qualidade do atendimento**, com nota, resolução do problema e pontos a melhorar segundo os avaliadores do copiloto.
+
+| Cartão | O que mostra |
+| --- | --- |
+| **Sessões avaliadas** | Total de sessões avaliadas no período. |
+| **Nota média** | Média das notas de 0 a 10, com a variação contra o período anterior de mesma duração. |
+| **Problema resolvido** | Porcentagem das sessões em que o avaliador decidiu pelo problema resolvido (ao clicar, abre as sessões não resolvidas). |
+| **Precisam de atenção** | Sessões com nota até 6. |
+| **Ponto a melhorar mais comum** | Ponto a melhorar mais frequente no período. |
+
+As notas aparecem agrupadas nas faixas **Crítico (0–4)**, **Atenção (5–6)**, **Adequado (7–8)** e **Excelente (9–10)**. Quando existem avaliadores com critério próprio, a área **Seus critérios** mostra um cartão para cada um.
+
+A tabela traz as colunas **Distribuição da nota**, **Sessões**, **Nota média**, **Resolvido** e **Ponto a melhorar mais comum**.
+
+## Sentimento
+
+Exibe o título **Sentimento dos clientes**, classificando as sessões em **Irritado**, **Impaciente**, **Neutro**, **Satisfeito** e **Encantado**.
+
+| Cartão | O que mostra |
+| --- | --- |
+| **Sessões analisadas** | Total de sessões com análise de sentimento no período. |
+| **Terminaram negativas** | Sessões encerradas como **Irritado** ou **Impaciente**. |
+| **Recuperadas** | Sessões que passaram de negativo para **Satisfeito** ou **Encantado**. |
+| **Pioraram** | Sessões que não começaram negativas e terminaram negativas. |
+| **Sentimento médio** | Média de sentimento das sessões no período. |
+
+A tabela traz essas mesmas métricas por agrupamento, junto com a coluna **Distribuição**.
+
+## Intenções
+
+Exibe o título **Intenções dos clientes**. O painel lista **Intenção**, **Volume**, **Sessões**, **TMA** e **TME** de cada intenção identificada.
+
+A tabela agrupada mostra as 6 intenções mais frequentes e reúne o restante em **Outras**.
+
+## Lead score
+
+Exibe o título **Lead score**, classificando os contatos avaliados em **Frio**, **Morno**, **Quente** e **Excelente**.
+
+| Cartão | O que mostra |
+| --- | --- |
+| **Leads avaliados** | Total de sessões com lead score no período. |
+| **Quentes ou excelentes** | Leads classificados como **Quente** ou **Excelente**. |
+| **Viraram venda** | Entre os leads quentes ou excelentes, quantos têm negociação ganha na sessão. |
+| **Nota média** | Média da nota, de 0 a 100. |
+
+A tabela reúne esses indicadores conforme o agrupamento escolhido.
+
+## Atendimento automático
+
+Mostra quantos contatos ficaram presos nos bots e agentes de IA e quantas reaberturas o copiloto evitou.
+
+| Cartão | O que mostra |
+| --- | --- |
+| **Sessões com bot analisadas** | Total de sessões com bot analisadas no período. |
+| **Clientes presos** | Sessões em que o contato ficou preso no bot ou agente de IA. |
+| **Reaberturas evitadas** | Mensagens de agradecimento ("Obrigado") que mantiveram a sessão resolvida. |
+| **Bots com cliente preso** | Quantidade de bots com ocorrências de cliente preso. |
+
+Abaixo dos cartões, aparecem a lista por bot (**Bot**, **Clientes presos**, **Sessões com bot** e **Presos**) e a tabela por agrupamento. A tabela e a exportação não incluem **Reaberturas evitadas**.
+
+Consultar este relatório não consome saldo, mas as análises do copiloto saem do saldo da carteira e aparecem na categoria **Análises** do [Relatório de saldo](/docs/relatorios/saldo). Para ativar ou ajustar esses recursos, veja [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto).

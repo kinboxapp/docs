@@ -66,4 +66,4 @@ Os limites abaixo valem para **anexos enviados pelo contato durante uma conversa
 
 ## Custo
 
-Processar um conhecimento debita saldo da carteira com a descrição `"Processamento da base de conhecimento"` (categoria **Agente de IA** no relatório **Saldo**), quando há custo de processamento. A busca nos trechos a cada resposta entra no débito da própria resposta do agente.
+Processar um conhecimento debita saldo da carteira com a descrição `"Processamento da base de conhecimento"` (categoria **Agente de IA** no [Relatório de saldo](/docs/relatorios/saldo)), quando há custo de processamento. A busca nos trechos a cada resposta entra no débito da própria resposta do agente.

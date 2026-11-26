@@ -1328,5 +1328,54 @@
     "pergunta": "Dá para montar um cenário que publica stories no Instagram da loja todo dia de manhã?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Montei um painel com os números de vendas, mas ele continua mostrando os valores de manhã. Como faço os cartões puxarem os dados de agora?",
+    "esperado": [
+      "docs/relatorios/dashboard",
+      "llm/faq/dashboard-snapshot"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Quero um gráfico de barras com o valor total das negociações de cada vendedor no mês. Onde eu crio isso?",
+    "esperado": [
+      "docs/relatorios/dashboard"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Gastei mais saldo da carteira do que eu esperava nessa quinzena. Onde vejo o que consumiu, serviço por serviço?",
+    "esperado": [
+      "docs/relatorios/saldo"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Preciso baixar a gravação das chamadas que a equipe fez por telefone na semana passada e mandar a lista para a diretoria em planilha.",
+    "esperado": [
+      "docs/relatorios/ligacoes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Onde vejo quantos clientes terminaram a conversa irritados e quais leads o copiloto marcou como quentes?",
+    "esperado": [
+      "docs/relatorios/copiloto"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero que o supervisor veja os relatórios, mas sem conseguir apagar os painéis que eu montei. Qual opção do papel resolve?",
+    "esperado": [
+      "docs/relatorios/exportar-e-permissoes",
+      "llm/relatorios/exportar-e-permissoes"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Dá para agendar o envio do dashboard em PDF por e-mail toda segunda-feira para os gestores?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

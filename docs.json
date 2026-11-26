@@ -275,6 +275,16 @@
                   "docs/relatorios/presenca",
                   "docs/relatorios/avaliacao"
                 ]
+              },
+              {
+                "group": "Dashboards e consumo",
+                "pages": [
+                  "docs/relatorios/dashboard",
+                  "docs/relatorios/saldo",
+                  "docs/relatorios/ligacoes",
+                  "docs/relatorios/copiloto",
+                  "docs/relatorios/exportar-e-permissoes"
+                ]
               }
             ]
           },
@@ -901,22 +911,6 @@
     {
       "source": "/docs/usando-o-kinbox/aprendendo-a-usar-o-bot",
       "destination": "/docs/bot/aprender-a-usar-o-bot"
-    },
-    {
-      "source": "/docs/relatorios/copiloto",
-      "destination": "/docs/relatorios/como-funcionam"
-    },
-    {
-      "source": "/docs/relatorios/dashboard",
-      "destination": "/docs/relatorios/como-funcionam"
-    },
-    {
-      "source": "/docs/relatorios/ligacoes",
-      "destination": "/docs/relatorios/como-funcionam"
-    },
-    {
-      "source": "/docs/relatorios/saldo",
-      "destination": "/docs/relatorios/como-funcionam"
     },
     {
       "source": "/api-shorturl",
