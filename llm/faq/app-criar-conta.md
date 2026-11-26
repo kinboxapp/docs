@@ -9,15 +9,9 @@ fontes:
   - mobile:src/app/sign-in.tsx
   - mobile:src/app/workspaces.tsx
 codigo:
-  - mobile:src/app/(tabs)/_layout.tsx
-  - mobile:src/app/(tabs)/profile/index.tsx
   - mobile:src/app/sign-in.tsx
   - mobile:src/app/sign-in-form.tsx
-  - mobile:src/app/privacy.tsx
-  - mobile:src/app/appearance.tsx
   - mobile:src/app/workspaces.tsx
-  - web:src/components/base/MobileApp/**
-  - web:src/components-old/header/UserDrop.tsx
 verificado_em: 2026-11-26
 ---
 

@@ -11,8 +11,7 @@ fontes:
 codigo:
   - mobile:src/app/privacy.tsx
   - mobile:src/lib/deleteAccount.ts
-  - api:src/modules/operators/operators.service.ts
-  - api:src/modules/operators/operators.controller.ts
+  - api:src/modules/operators/**
   - api:src/modules/account-deletion-requests/**
 verificado_em: 2026-11-26
 ---
@@ -24,7 +23,7 @@ Pelo app da Kinbox para celular, você pode excluir a sua conta pessoal da Kinbo
 </Note>
 
 <Warning>
-  A exclusão da conta não pode ser desfeita. Seus dados pessoais e seu acesso a todos os workspaces serão apagados de forma permanente.
+  A exclusão da conta não pode ser desfeita. Os dados pessoais do seu perfil e o seu acesso a todos os workspaces serão apagados de forma permanente. As conversas e os registros que você fez continuam com a empresa.
 </Warning>
 
 ## Como excluir pelo app
@@ -33,11 +32,8 @@ Pelo app da Kinbox para celular, você pode excluir a sua conta pessoal da Kinbo
   <Step title="Abra a opção Excluir conta">
     No app, vá em **Você** → **Privacidade** → **Excluir conta**.
   </Step>
-  <Step title="Leia e confirme o primeiro aviso">
-    O app exibe "Excluir sua conta?" — "Seus dados pessoais (nome, e-mail, telefone e foto) serão apagados e você perderá o acesso a todos os workspaces. As conversas e registros feitos por você continuam com a empresa." Toque em **Continuar** (ou em **Cancelar** para desistir).
-  </Step>
   <Step title="Confirme a exclusão">
-    O app exibe "Tem certeza?" — "A exclusão da conta não pode ser desfeita." Toque em **Excluir conta**.
+    Leia os avisos na tela e siga as confirmações até concluir em **Excluir conta**, ou toque em **Cancelar** para desistir.
   </Step>
   <Step title="Aguarde a conclusão">
     O app desconecta sua conta, volta para a tela de entrada e mostra "Conta excluída" — "Sua conta Kinbox foi excluída."
@@ -46,7 +42,7 @@ Pelo app da Kinbox para celular, você pode excluir a sua conta pessoal da Kinbo
 
 ## O que é apagado e o que fica
 
-- **Apagado:** seu nome, e-mail, telefone e foto, o seu acesso a todos os workspaces e o vínculo com a Conta Apple, se houver.
+- **Apagado:** os dados pessoais do seu perfil (nome, e-mail, telefone e foto), o seu acesso a todos os workspaces e o vínculo com a Conta Apple, se houver.
 - **Mantido com a empresa:** as conversas, mensagens e registros que você fez nos workspaces continuam com a empresa, exibidos com o nome "Usuário excluído".
 - **E-mail livre depois:** após a exclusão, o seu e-mail fica livre para um novo cadastro. Para voltar a um workspace, você precisará de um novo convite de quem administra.
 
@@ -59,3 +55,7 @@ Dentro da Kinbox no navegador não existe botão para excluir a conta. Se você 
 - **Só sair do app neste celular:** use **Você** → **Sair da conta**. Sua conta e seus acessos continuam ativos (veja [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes)).
 - **Sair de um workspace sem apagar a conta:** peça a quem administra o workspace que desative ou exclua o seu acesso (veja [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade)).
 - **Excluir o workspace inteiro:** apaga o workspace da empresa e só pode ser feito pelo proprietário (veja [Excluir o workspace](/docs/administracao/excluir-workspace)).
+
+## Veja também
+
+- [App da Kinbox para celular: o que dá para fazer](/docs/app/visao-geral)

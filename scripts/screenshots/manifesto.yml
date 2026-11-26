@@ -3511,10 +3511,16 @@
     - clicar: '.g_user_avatar'
     - esperar: '.ant-dropdown-menu-item:has-text("Baixar app para celular")'
     - pausa: 600
+  esconder:
+    - '.ant-dropdown-menu-item:has-text("Abrir no Admin")'
   alvo:
-    - '.ant-dropdown-menu-item:has-text("Novidades")'
-    - '.ant-dropdown-menu-item:has-text("Voltar ao design antigo")'
-  mascarar: []
+    - '.g_user_avatar'
+    - '.ant-dropdown-menu.ant-dropdown-menu-root'
+  mascarar:
+    - '.g_user_avatar'
+    - '.ant-dropdown-menu-root figure'
+    - '.ant-dropdown-menu-root [class*="_user_menu_name"]'
+    - '.ant-dropdown-menu-root [class*="_user_menu_meta"]'
   arquivo: images/ajuda/app/menu-baixar-app.webp
   paginas:
     - docs/app/visao-geral

@@ -125,9 +125,8 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 - Botão **Áudio** do editor (gravar): só no WhatsApp, Instagram, Facebook, Widget e Telegram; não aparece no SMS nem no e-mail.
 
 - **Excluir mensagem**:
-  - Onde existe: o item **Excluir** só aparece em conversas de WhatsApp por QR Code e de Telegram. Não existe no WhatsApp oficial nem nos outros canais.
-  - WhatsApp por QR Code: só mensagens enviadas por membro ou bot; exige permissão (**Deletar própria mensagem** ou **Deletar mensagens de outros membros**) e que a mensagem tenha chegado ao canal (possua ID externo).
-  - Telegram: o item **Excluir** também aparece no menu da mensagem.
+  - WhatsApp por QR Code: o item **Excluir** aparece no menu da mensagem para mensagens enviadas por membro ou bot; exige permissão (**Deletar própria mensagem** ou **Deletar mensagens de outros membros**) e que a mensagem tenha chegado ao canal (possua ID externo).
+  - WhatsApp oficial: não permite excluir mensagens.
   - Confirmação: "Tem certeza que deseja excluir essa mensagem? Essa operação não poderá ser desfeita.".
 - **Transcrever áudio**:
   - Usa o saldo da carteira do workspace; limite de 1 MB ("O tamanho do arquivo de áudio excede o limite de 1 MB").
