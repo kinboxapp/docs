@@ -41,7 +41,7 @@ Referência técnica complementar de [Como os relatórios contam sessões e temp
   - **Não pode exportar relatórios:** desativa o botão **Exportar** dentro da lista de sessões (**Ver sessões**).
   - **Não pode criar ou excluir Dashboard:** impede criar ou excluir dashboards.
 - **Canais restritos a grupos:** canais com visibilidade restrita a grupos não aparecem nos filtros de relatórios para membros fora desses grupos (exceto o proprietário e quem tem acesso **Global**).
-- **Atendimento ao vivo:** o mapa e a fila não usam as restrições de relatório; segue o **Acesso as Conversas** do papel, igual à [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Com a restrição **Esconder telefone**, o telefone dos contatos não é exibido. Os indicadores do dia no conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) vêm da **Produtividade** de hoje e seguem as restrições de relatórios.
+- **Atendimento ao vivo:** o mapa e a fila não usam as restrições de relatório; seguem o **Acesso as Conversas** do papel, igual à [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). Com a restrição **Esconder telefone**, o telefone dos contatos não é exibido. Os indicadores do dia no conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) vêm da **Produtividade** de hoje e seguem as restrições de relatórios.
 
 ## Sessão e primeira resposta
 
@@ -63,7 +63,7 @@ O que entra e o que fica fora das médias na [Produtividade](/docs/relatorios/pr
 
 - **Recorte inicial:** a **Produtividade** considera só as sessões **criadas ou resolvidas** dentro do período. Uma sessão criada antes do período, respondida dentro dele e ainda aberta (ou resolvida depois) fica fora do relatório inteiro, inclusive do **TME**. Exemplo: sessão criada no domingo, respondida na segunda e ainda aberta não aparece com o período só da segunda.
 - **TME e TMP:** dentro desse recorte, média das sessões com o tempo calculado e maior que zero, cuja **primeira resposta** ocorreu no período e que **não** foram iniciadas pela equipe.
-- **Transferência e TMP:** o **TMP** começa na **primeira** atribuição a um membro; transferir depois não reinicia a contagem. O tempo antes da primeira atribuição fica fora do **TMP**, e o tempo antes da primeira resposta fica fora do **TMA**.
+- **Transferência e TMP:** o **TMP** começa na **primeira** atribuição a um membro; transferir depois não reinicia a contagem.
 - **TMA:** média das sessões **resolvidas** dentro do período que tiveram resposta de membro e TMA de **1 minuto ou mais** (sessões resolvidas em menos de 1 minuto ficam fora da média).
 - **Tempo com o [bot](/docs/bot/visao-geral):** o bot não marca a primeira resposta, então o tempo dele até a primeira resposta entra no **TME**. Os tempos são medidos entre duas datas, sem descontar o bot à parte: o tempo antes da primeira atribuição fica fora do **TMP** e o tempo antes da primeira resposta fica fora do **TMA**; se o bot atuar dentro do intervalo de uma métrica, esse tempo entra nela.
 - **Sessão sem resposta de membro:** sessões resolvidas sem nenhuma resposta de membro (por exemplo, atendidas apenas por bot ou agente de IA e resolvidas por automação) não têm TME, TMP nem TMA.
@@ -113,7 +113,7 @@ Por isso, numa mesma data da tabela, colunas diferentes podem se referir a sess�
 - **Seletor de período:** formato `DD/MM/YYYY HH:mm`, com atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**. Não aceita datas futuras nem datas anteriores a `03/06/2022`. Não há limite máximo de duração no seletor.
 - **Cache:** relatórios de períodos que terminam antes de hoje ficam guardados em cache até a meia-noite — alterações feitas hoje em sessões de dias anteriores podem aparecer só no dia seguinte. Períodos que incluem hoje são calculados na hora.
 - **Limite de consultas:** trocar filtros ou períodos em sequência muito rápida pode fazer a busca falhar; espere alguns segundos e tente novamente.
-- **Linhas especiais nos agrupamentos:** **Sem atribuição** (sem membro), **Sem grupo** (sem grupo), **Sem tag** (sem tag) e `Excluído #id` (membro excluído do ambiente).
+- **Linhas especiais nos agrupamentos:** **Sem atribuição** (sem membro), **Sem grupo** (sem grupo) e `Excluído #id` (membro excluído do ambiente). Sessões sem tag não ganham linha no agrupamento **Por Tag**.
 
 ## Visão geral
 
@@ -143,8 +143,10 @@ Por isso, numa mesma data da tabela, colunas diferentes podem se referir a sess�
   - **Estilo visual**: **Do tema** (padrão; "Escritório no tema claro, Grafite no escuro"), **Claro**, **Escuro**, **Grafite**, **Escritório**, **Maquete** (a **Maquete** só existe no **Atendimento ao vivo**; no **Vendas ao vivo** ela vira **Claro**).
   - **Cidade em volta**: **Mostrar** ou **Ocultar**; a escolha vale só para o estilo visual atual ("só neste estilo").
   - Só no **Atendimento ao vivo**: **Departamentos** (**Todos os departamentos** ou grupos escolhidos; **Mostrar todos** volta a mostrar todos), **Cor dos clientes** (**Tempo de espera** ou **Canal**; com **Canal**, "atraso vira um losango acima da cabeça"), **Quem vira bonequinho** (**Todas as conversas** ou **Só quem espera**), **Indicadores** (**Fila** ou **Tempo médio**), **Operadores offline** (**Mostrar** ou **Ocultar**).
-  - Nos dois: **Nome dos operadores** (padrão **Ao passar o mouse**) e, no **Vendas ao vivo**, **Nome dos vendedores** (padrão **Sempre**), com as opções **Ao passar o mouse** ou **Sempre**; **Grade no piso**: **Ligada** (padrão) ou **Desligada**.
-  - Topo: busca **Buscar cliente, operador, robô...** (atalho `/`; só no **Atendimento ao vivo** e fora do modo TV), botão **TV** (dica **Modo TV**) e, no modo TV, **Sair** (dica **Sair do modo TV**; ou a tecla `Esc`), **Legenda**. No modo TV, o botão de **Configurações** some.
+  - **Nome dos operadores** no **Atendimento ao vivo** (padrão **Ao passar o mouse**) ou **Nome dos vendedores** no **Vendas ao vivo** (padrão **Sempre**), com as opções **Ao passar o mouse** ou **Sempre**.
+  - Nos dois: **Estilo visual**, **Cidade em volta** e **Grade no piso** (**Ligada**, padrão, ou **Desligada**).
+  - Topo: busca **Buscar cliente, operador, robô...** (atalho `/`; só no **Atendimento ao vivo** e fora do modo TV), botão **TV** (dica **Modo TV**) e, no modo TV, **Sair** (dica **Sair do modo TV**; ou a tecla `Esc`). No modo TV, o botão de **Configurações** some.
+  - **Legenda**: botão no canto inferior esquerdo; some no modo TV.
 - **Limite de sessões:** carrega até as **20.000** sessões abertas mais recentes do workspace; acima disso, as mais antigas ficam fora.
 - **Mensagens de erro exatas:**
   - Sem permissão em **Vendas ao vivo:** "Seu perfil não tem acesso aos negócios" / `A Vendas ao vivo mostra os negócios do CRM. Peça a um administrador a permissão "Gerenciar negociações" no seu perfil.` (botão **Abrir Atendimento ao vivo**).
@@ -161,7 +163,7 @@ Por isso, numa mesma data da tabela, colunas diferentes podem se referir a sess�
 - A Kinbox registra a cada **5 minutos** quais membros estão conectados; cada registro conta 5 minutos online, e quem está desconectado no momento da verificação conta como offline naquele intervalo.
 - Mede conexão ativa, não o status **Disponível** nem se o membro está atendendo.
 - Histórico retido por **90 dias**; períodos anteriores aparecem vazios.
-- **Grade de horários:** clicar na célula de um membro num dia abre a grade daquele membro naquele dia; **Ver presenças** abre a grade de todos os membros do filtro no período. A grade lê no máximo **500** blocos de presença (um a cada 5 minutos em que havia alguém conectado, com todos os membros conectados naquele momento): em períodos longos, fica incompleta. Cada faixa fica **Online** se houve registro de conexão em pelo menos um intervalo de 5 minutos dentro dela. **Tolerância** define o tamanho da faixa: **5 minutos**, **15 minutos**, **30 minutos** (padrão) ou **1 hora** (salva no navegador). Mensagem de falha ao exportar a grade: "Ocorreu um erro ao exportar os dados".
+- **Grade de horários:** clicar na célula de um membro num dia abre a grade daquele membro naquele dia; **Ver presenças** abre a grade de todos os membros do filtro no período. A grade lê no máximo **500** blocos de presença (um a cada 5 minutos em que havia alguém conectado, com todos os membros conectados naquele momento), o que equivale a cerca de 41h40 com alguém conectado: em períodos maiores que isso, fica incompleta. Cada faixa fica **Online** se houve registro de conexão em pelo menos um intervalo de 5 minutos dentro dela. **Tolerância** define o tamanho da faixa: **5 minutos**, **15 minutos**, **30 minutos** (padrão) ou **1 hora** (salva no navegador). Mensagem de falha ao exportar a grade: "Ocorreu um erro ao exportar os dados".
 - **Tabela por dia × grade:** a tabela soma o tempo pelo dia em horário UTC (3 horas à frente de Brasília), então o tempo online das 21h à meia-noite de Brasília aparece no dia seguinte da tabela. A grade de horários mostra os horários no fuso do navegador.
 
 ## Avaliação

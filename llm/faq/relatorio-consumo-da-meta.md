@@ -32,7 +32,7 @@ Onde vejo quantas conversas a Meta me cobrou?
 
 A Kinbox não mostra quantas conversas ou mensagens a Meta cobrou; o consumo e a cobrança do WhatsApp oficial ficam direto na sua conta do WhatsApp na Meta.
 
-A Kinbox não cobra nem repassa os envios do WhatsApp oficial, e templates do WhatsApp oficial não descontam da carteira do workspace. O relatório **Saldo** (**Relatórios** → **Saldo**) mostra apenas o consumo do saldo da Kinbox (como recursos de IA e ligações), e não a fatura da Meta.
+A Kinbox não cobra nem repassa os envios do WhatsApp oficial, e templates do WhatsApp oficial não descontam da carteira do workspace. O relatório **Saldo** (**Relatórios** → **Saldo**; seu papel precisa da permissão **Gerenciar relatórios**, e o proprietário do workspace sempre vê) mostra apenas o consumo do saldo da Kinbox (como recursos de IA e ligações), e não a fatura da Meta.
 
 Para acompanhar o volume de atendimentos de um número oficial dentro da Kinbox, abra **Relatórios** → **Produtividade** (exige a permissão **Gerenciar relatórios**; o proprietário do workspace sempre vê), clique em **Filtrar**, escolha o **Canal** do número e clique em **Aplicar filtros** para consultar sessões novas e resolvidas. Esse volume mede sessões da Kinbox e não corresponde às conversas cobradas pela Meta.
 
