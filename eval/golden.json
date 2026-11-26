@@ -1626,6 +1626,102 @@
     "tipo": "negativo"
   },
   {
+    "pergunta": "Indiquei uma empresa para usar a Kinbox e quero que a conta dela caia na minha carteira de parceiro. Como faço?",
+    "esperado": [
+      "docs/programa-de-parceiros/convidar-clientes"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Sou parceiro e preciso entrar no ambiente de um cliente meu para arrumar umas configurações. Onde faço isso?",
+    "esperado": [
+      "docs/programa-de-parceiros/inspecionar-cliente"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Configurei tags, funis e bot num ambiente modelo. Tem como copiar tudo isso para os clientes novos que eu trouxer?",
+    "esperado": [
+      "docs/programa-de-parceiros/templates"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Em que dia do mês a Kinbox paga a comissão de parceiro?",
+    "esperado": [
+      "llm/faq/parceiro-quando-recebo",
+      "docs/programa-de-parceiros/pagamento-das-comissoes"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Sou parceiro da Kinbox. Onde no painel eu consulto quanto de comissão ganho em cada cliente?",
+    "esperado": [
+      "docs/programa-de-parceiros/niveis-do-programa-de-comissionamento"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "O item Parceria não aparece no meu menu lateral. Por quê?",
+    "esperado": [
+      "docs/programa-de-parceiros/visao-geral"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como vejo quanto rende o programa de afiliados do Mercado Livre?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
+    "pergunta": "Estou atendendo um cliente no chat e quero emitir um boleto do Inter para ele ali mesmo, sem abrir o internet banking. Tem como?",
+    "esperado": [
+      "docs/integracoes/banco-inter"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Uso o Tiny como ERP. Consigo ligar o contato da conversa a um cliente de lá e ver os dados cadastrais já preenchidos no Tiny sem sair da Kinbox?",
+    "esperado": [
+      "docs/integracoes/tiny-erp"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Trabalho com proteção veicular. Dá para puxar os dados de um carro pela placa sem sair da conversa?",
+    "esperado": [
+      "docs/integracoes/anycar"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Vendo IPTV e queria liberar um teste para o cliente direto pela conversa da Kinbox. É possível?",
+    "esperado": [
+      "docs/integracoes/smarters",
+      "docs/integracoes/gestor-premium"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Desliguei a integração do Asaas, mas o bot continua mandando boleto para os clientes. Por quê?",
+    "esperado": [
+      "docs/integracoes/asaas"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Consigo mandar um Pix ou um link de pagamento para o cliente pela conversa?",
+    "esperado": [
+      "llm/faq/cobrar-pelo-chat"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para a Kinbox receber os pagamentos aprovados no Mercado Pago e dar baixa automática nos pedidos?",
+    "esperado": [],
+    "tipo": "negativo"
+  },
+  {
     "pergunta": "Tem aplicativo da Kinbox para Android ou só para iPhone? Onde eu baixo?",
     "esperado": [
       "llm/faq/app-onde-baixar",
