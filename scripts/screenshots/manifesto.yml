@@ -6,6 +6,8 @@
 # alvo      seletor do recorte; uma lista recorta o retângulo que cobre todos
 # mascarar  seletores cobertos por uma tarja sólida antes do print (dados que não podem aparecer); seletor que não acha
 #           nenhum elemento faz o item falhar
+# esconder  (opcional) seletores escondidos antes do print: o que o cliente nunca vê (menu Admin da conta de teste,
+#           selo de staging)
 # arquivo   saída em images/ajuda/<secao>/<nome>.webp
 # paginas   páginas da central que usam o print
 # largura  (opcional) largura da janela em px só para o item (padrão 1440; abaixo de 768 o app troca de layout)
@@ -126,3 +128,25 @@
   arquivo: images/ajuda/whatsapp/conectar-com-numero-de-telefone.webp
   paginas:
     - docs/canais/conectar-whatsapp-app
+
+# Seção conceitos
+
+# Tela inteira no workspace de documentação, para mostrar as peças: cabeçalho com o botão do ambiente ("Loja Exemplo"),
+# menu lateral inteiro (só ícones), painel Chat e a lista de conversas. O item "Admin" (só da conta de teste) e o selo
+# de staging somem do print; a foto do membro no cabeçalho e as fotos na lista levam tarja.
+- id: conceitos-caixa-de-entrada
+  url: /inbox/all
+  passos:
+    - esperar: 'a[href="/inbox/archived"]'
+    - esperar: 'text=Cliente Novo'
+    - pausa: 1000
+  alvo: body
+  esconder:
+    - 'a[href="/admin"]'
+    - '.react-draggable:has(.fa-vial)'
+  mascarar:
+    - '.g_user_avatar'
+    - 'img[alt="avatar"]'
+  arquivo: images/ajuda/conceitos/caixa-de-entrada.webp
+  paginas:
+    - docs/conceitos/visao-geral
