@@ -19,7 +19,7 @@ verificado_em: 2026-11-26
 Use as ações em lote para mover, atribuir, mudar o status, excluir, iniciar bots, associar conversas ou gerar relatórios de várias negociações de um funil de uma só vez.
 
 <Note>
-  Quem pode: membros com a permissão **Gerenciar negociações** ou o proprietário do workspace. Se o item **Funis** não aparecer no menu lateral, peça ao proprietário a permissão **Gerenciar negociações**. **Iniciar bot em uma etapa** exige também a permissão **Iniciar Bot** (na seção **Conversas**). O menu **⋯** → **Executar ação...** aparece apenas com um funil aberto no computador.
+  Quem pode: exige **Gerenciar negociações**. As ações seguem as permissões e restrições do seu papel (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Se o item **Funis** não aparecer no menu lateral, peça ao proprietário a permissão **Gerenciar negociações**. O menu **⋯** → **Executar ação...** aparece apenas com um funil aberto no computador.
 </Note>
 
 ## Quais negociações a ação alcança
@@ -85,18 +85,18 @@ Como informa o aviso da tela, apenas conversas já existentes no canal seleciona
 
 Escolha **Aberto**, **Ganho** ou **Perdido** em **Status** (no **Funil Operacional**, **Ganho** equivale a **Resolvido** e **Perdido** equivale a **Não resolvido**).
 
-A ação altera todas as negociações alcançadas: **Ganho** e **Perdido** gravam a data de hoje como data de fechamento, enquanto **Aberto** apaga essa data.
+A ação altera todas as negociações alcançadas: **Ganho** e **Perdido** gravam a data de hoje como data de fechamento, enquanto **Aberto** apaga essa data. A ação não pede motivo e a negociação continua na etapa em que está.
 
 ### Excluir negociações
 
 Escolha **De qual etapa?** (opcional — deixar vazio exclui todas as negociações filtradas do funil, de todas as etapas).
 
 <Warning>
-  **Excluir negociações** começa imediatamente ao clicar em **Executar**, **sem pedir confirmação**, e não pode ser desfeito. Cada negociação é apagada definitivamente junto com o histórico e as tarefas de cadência. Revise todos os filtros e exporte uma cópia pelo menu **⋯** → **Exportar** antes de executar.
+  **Excluir negociações** começa imediatamente ao clicar em **Executar**, **sem pedir confirmação**, e não pode ser desfeito. Cada negociação é apagada definitivamente, e os comentários, o histórico e as tarefas ligadas a ela são apagados junto. O contato, a organização e a conversa permanecem no workspace. Revise todos os filtros e exporte uma cópia pelo menu **⋯** → **Exportar** antes de executar.
 </Warning>
 
 ### Gerar relatório com dados de contato
 
 Escolha o **Tipo de arquivo** (**CSV** ou **XLSX**). Ao concluir, o navegador baixa o arquivo diretamente (nada é enviado por e-mail; clicar em **Abortar** interrompe sem gerar arquivo).
 
-Além das mesmas colunas do **Exportar** do funil e dos campos personalizados de negociação, o arquivo traz os dados atuais do cadastro do contato, os campos personalizados do contato, redes sociais, **ID Externo do contato** e **Notas do contato**.
+O arquivo traz uma linha por negociação com os dados da negociação (ID, nome, status, quem criou, datas, responsável, produtos, grupo, valor, funil, etapa, tags, motivo da perda, organização e link da conversa), os campos personalizados de negociação e os dados atuais do cadastro do contato: nome, e-mail, telefone, criação, quem criou, campos personalizados do contato, redes sociais, **ID Externo do contato** e **Notas do contato**.

@@ -1162,11 +1162,12 @@
     "tipo": "faq"
   },
   {
-    "pergunta": "Como mudo o responsável de todas as negociações de um funil de uma vez?",
+    "pergunta": "Clico para marcar a negociação como ganha e aparece um aviso pedindo para preencher um campo, como resolvo?",
     "esperado": [
-      "docs/crm/acoes-em-lote"
+      "docs/crm/motivos-de-perda-e-regras",
+      "docs/crm/gerenciando-funil-de-vendas"
     ],
-    "tipo": "guia"
+    "tipo": "solucao-de-problema"
   },
   {
     "pergunta": "A Kinbox gera proposta comercial em PDF a partir da negociação?",

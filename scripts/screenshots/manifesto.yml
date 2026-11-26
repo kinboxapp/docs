@@ -2365,8 +2365,8 @@
 
 - id: funis-quadro
   url: /crm/deals
-  largura: 1800
-  altura: 760
+  largura: 2000
+  altura: 640
   passos:
     - clicar: '.g_subside_portal >> text=Vendas'
     - esperar: 'text=Kit presente — Ana Souza'
@@ -2412,6 +2412,7 @@
 
 - id: funis-nova-negociacao
   url: /crm/deals
+  altura: 780
   passos:
     - clicar: '.g_subside_portal >> text=Vendas'
     - esperar: 'text=Kit presente — Ana Souza'
@@ -2464,7 +2465,6 @@
   arquivo: images/ajuda/funis/perda-de-negocio.webp
   paginas:
     - docs/crm/gerenciando-funil-de-vendas
-    - docs/crm/motivos-de-perda-e-regras
 
 - id: funis-operacional
   url: /crm/deals
@@ -2491,10 +2491,15 @@
     - docs/crm/criar-funil-de-vendas
 
 - id: funis-nome-visibilidade
-  url: /settings/pipelines
+  # Tela de criação (o padrão marca Valor do negócio); o item digita o nome e não salva o funil
+  url: /settings/pipelines/new
   passos:
-    - clicar: '.g_table_wrapper >> text=Vendas'
+    - esperar: 'text=Como você quer criar seu funil?'
+    - clicar: 'button:has-text("Continuar")'
     - esperar: 'text=Comece com nome e visibilidade'
+    - digitar:
+        seletor: '#name'
+        texto: 'Vendas'
     - pausa: 800
   alvo: '#pipeline-wizard-content > div'
   mascarar: []
@@ -2550,7 +2555,6 @@
   arquivo: images/ajuda/funis/motivos-e-regras.webp
   paginas:
     - docs/crm/motivos-de-perda-e-regras
-    - docs/crm/criar-funil-de-vendas
 
 - id: funis-importar
   url: /crm/deals

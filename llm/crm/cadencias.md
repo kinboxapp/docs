@@ -71,7 +71,7 @@ Detalhes de referência de [Cadências: tarefas automáticas por etapa](/docs/cr
 
 ## Tarefa obrigatória e regras do funil
 
-- **Obrigatória para avançar:** ao mudar a etapa pelo quadro ou pela negociação, qualquer tarefa obrigatória pendente (não concluída e não cancelada) da negociação bloqueia a mudança com `"Você tem tarefas obrigatórias pendentes, não é possível mudar estágio."`. Modelos **Dias depois** só travam a partir do dia em que a tarefa nasce. Concluir ou cancelar a tarefa libera a mudança de etapa.
+- **Obrigatória para avançar:** ao mudar a etapa, qualquer tarefa obrigatória pendente (não concluída e não cancelada) da negociação bloqueia a mudança com `"Você tem tarefas obrigatórias pendentes, não é possível mudar estágio."`. Modelos **Dias depois** só travam a partir do dia em que a tarefa nasce. Concluir ou cancelar a tarefa libera a mudança de etapa.
 - **Não executar tarefas anteriores ao horário de mudança de etapa no mesmo dia.:** impede a criação de tarefas com horário fixo cujo horário de hoje já passou no momento da entrada (`"Se um negócio entrar agora, as {{time}} de hoje já passaram: pela regra do funil, a tarefa não é criada."`).
 - **Criar tarefas de cadência mesmo após negócio ganho ou perdido.** *(operacional: **Criar tarefas de cadência mesmo após ticket resolvido ou não resolvido.**)*: sem essa regra, tarefas agendadas e mensais não são criadas para negociações já encerradas; com ela ligada, continuam sendo criadas.
 

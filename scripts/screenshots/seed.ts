@@ -347,10 +347,12 @@ async function garantirCrm(api: Api, contatoIds: Record<string, string>) {
 
   // Responsáveis fictícios (membros convidados)
   const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  // Sem o membro, o negócio ficaria com o dono real da conta (nome e foto no print): falha em vez de seguir
   const opId = (nome: string) => {
     const membro = MEMBROS.find((m) => m.name === nome)
     const op = operadores.find((o) => o.email === membro?.email)
-    return op ? Number(op.operatorId || op.id) : undefined
+    if (!op) throw new Error(`membro "${nome}" não encontrado: rode antes a etapa "membros" (bun seed.ts --so membros,crm)`)
+    return Number(op.operatorId || op.id)
   }
 
   const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
@@ -700,15 +702,8 @@ async function garantirClientes(api: Api, contatoIds: Record<string, string>) {
   log(`clientes: ${CAMPOS_CONTATO.length} campos de contato e ${ORGANIZACOES.length} organizações`)
 }
 
-const workspace = await garantirWorkspace()
-const api = client(workspace.token)
-await pularOnboarding(api)
-const canal = await garantirWidget(api)
-const tagIds = await garantirTags(api)
-await garantirConversas(api, canal, tagIds)
-const contatoIds = await garantirContatos(api)
-
 // As etapas abaixo são independentes: uma falha é registrada e o seed segue com as outras
+// (as funções só rodam no laço do fim, depois que `api`, `canal`, `tagIds` e `contatoIds` existem)
 const falhas: Record<string, string> = {}
 const etapas: [string, () => Promise<unknown>][] = [
   ['funil', () => garantirFunil(api, contatoIds, tagIds)],
@@ -722,9 +717,28 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['clientes', () => garantirClientes(api, contatoIds)],
   ['crm', () => garantirCrm(api, contatoIds)],
 ]
-// `bun seed.ts --so crm,funil` roda só as etapas listadas (as do começo, idempotentes, rodam sempre)
+// `bun seed.ts --so funil,membros,crm` roda só as etapas listadas (as do começo, idempotentes, rodam sempre).
+// `crm` depende de `funil` (o funil "Vendas") e de `membros` (os responsáveis): rode as três juntas.
+const nomesEtapas = etapas.map(([nome]) => nome)
 const soArg = process.argv.indexOf('--so')
-const so = soArg > -1 ? process.argv[soArg + 1]?.split(',') : undefined
+let so: string[] | undefined
+if (soArg > -1) {
+  const valor = process.argv[soArg + 1]
+  if (!valor || valor.startsWith('--')) throw new Error(`--so precisa da lista de etapas, separadas por vírgula: ${nomesEtapas.join(', ')}`)
+  const pedidas = valor.split(',').map((nome) => nome.trim())
+  const desconhecidas = pedidas.filter((nome) => !nomesEtapas.includes(nome))
+  if (desconhecidas.length) throw new Error(`--so: etapa desconhecida (${desconhecidas.join(', ')}). Use: ${nomesEtapas.join(', ')}`)
+  so = pedidas
+}
+
+const workspace = await garantirWorkspace()
+const api = client(workspace.token)
+await pularOnboarding(api)
+const canal = await garantirWidget(api)
+const tagIds = await garantirTags(api)
+await garantirConversas(api, canal, tagIds)
+const contatoIds = await garantirContatos(api)
+
 for (const [nome, etapa] of etapas) {
   if (so && !so.includes(nome)) continue
   try {

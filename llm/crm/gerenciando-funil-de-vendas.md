@@ -40,15 +40,15 @@ Configuradas nos papéis do workspace em **Configurações** → **Ambiente** �
 | **Não pode ver negociações de grupos que não pertence** | **Negociações** | Oculta negociações em grupos dos quais o membro não participa. |
 | **Não pode ver negociações sem grupo** | **Negociações** | Oculta negociações sem grupo. |
 | **Não pode excluir negociação** | **Negociações** | Impede excluir negociações. |
-| **Não pode exportar negociações** | **Negociações** | Desabilita o item **Exportar** no menu **⋯** do quadro. |
+| **Não pode exportar negociações** | **Negociações** | Impede exportar as negociações do funil. |
 | **Não pode voltar para etapa anterior** | **Negociações** | Bloqueia mover a negociação para uma etapa anterior no funil. |
 | **Não pode criar negócio se já contato tiver um negócio aberto** | **Negociações** | Bloqueia criar nova negociação quando o contato já tem qualquer negociação aberta (em qualquer funil). |
 | **Não pode criar negócio se já contato tiver negócio aberto para outro agente** | **Negociações** | Permite criar várias negociações abertas para o mesmo contato atribuídas ao próprio membro (ou sem responsável), mas bloqueia se existir negociação aberta atribuída a outro membro. |
 | **Pode gerenciar as negociações da conversa.** | **Negociações** | Exibe a seção **Negociações** na aba **Detalhes** da conversa (lista as negociações do contato). Criar e editar a partir dali exige também **Gerenciar negociações**. |
 | **Funis** | **Gerenciamento do Ambiente** | Libera **Configurações** → **CRM** → **Funis** e os atalhos **+** / **Criar Funil** para criar, editar e excluir funis. |
 | **Produtos** | **Gerenciamento do Ambiente** | Libera **Configurações** → **CRM** → **Produtos** para gerenciar produtos. |
-| **Atribuir** / **Somente pode atribuir para quem pertence ao grupo do membro** | **Conversas** | Controlam a alteração de **Responsável** no cabeçalho da negociação (sem **Atribuir**, os itens ficam desabilitados; com a restrição, aparecem apenas membros dos mesmos grupos). |
-| **Somente pode mover para grupo que pertence** | **Conversas** | Restringe a lista **Mover para grupo** no cabeçalho aos grupos do membro. |
+| **Atribuir** / **Somente pode atribuir para quem pertence ao grupo do membro** | **Conversas** | Controlam a alteração de **Responsável** da negociação (sem **Atribuir**, os itens ficam desabilitados; com a restrição, aparecem apenas membros dos mesmos grupos). |
+| **Somente pode mover para grupo que pertence** | **Conversas** | Restringe a lista **Mover para grupo** aos grupos do membro. |
 | Permissões de contato no painel **Contato** da negociação | **Contatos** / **Conversas** | **Esconder informações do contato** oculta o painel **Contato**; **Esconder telefone** oculta **Celular**; **Proibir alterar celular** deixa **Celular** somente leitura; sem **Alterar propriedades do contato**, os campos não são editáveis; sem **Ver telefone de contatos privados**, o telefone do contato privado aparece mascarado (`*******`). |
 
 Regra de visibilidade: uma negociação **atribuída ao próprio membro** sempre aparece para ele, mesmo quando o papel possui restrições de grupo.
@@ -70,7 +70,7 @@ Mensagens de acesso negado:
 
 ## Mudar de etapa
 
-Ao mudar a etapa pelo quadro (arrastar e soltar) ou pela negociação (barra de etapas ou janela **Editar etapa e funil**), a Kinbox verifica, nesta ordem:
+Ao mudar a etapa de uma negociação, a Kinbox verifica, nesta ordem:
 
 1. **Restrição de voltar etapa (**Não pode voltar para etapa anterior**):** bloqueia mover para etapa anterior (ou mesma posição), exibindo `"Você não tem permissão para retornar a uma etapa anterior. Chame seu gestor para essa ação."`.
 2. **Tarefa obrigatória pendente:** verifica **todas** as tarefas obrigatórias não concluídas e não canceladas da negociação (não apenas as da etapa atual). Se houver alguma, exibe `"Você tem tarefas obrigatórias pendentes, não é possível mudar estágio."` e destaca a tarefa. Tarefa cancelada não trava.
@@ -101,7 +101,7 @@ Mensagens de bloqueio na criação:
 
 ## Ganhar, perder, retomar e excluir
 
-- **Produtos na negociação:** disponíveis apenas no **Funil Comercial** (**Adicionar produtos a negociação**). Quantidade mínima 1; desconto em `%` ou valor; total da linha = `preço × quantidade − desconto`; o **Total** geral vira o valor da negociação. Produtos inativos não aparecem para novas inclusões e são mostrados com `(Inativo)` se já estavam na negociação.
+- **Produtos na negociação:** disponíveis apenas no **Funil Comercial** (**Adicionar produtos a negociação**). Quantidade mínima 1; desconto em `%` ou valor; total da linha = preço × quantidade menos o desconto aplicado; o **Total** geral vira o valor da negociação. Produtos inativos não aparecem para novas inclusões e são mostrados com `(Inativo)` se já estavam na negociação.
 - **Ganhar (✓):**
   - Confere os **Campos obrigatórios para ganhar negócio** do funil (**Valor do negócio** > 0, **Produto** >= 1, campos personalizados não vazios). No **Funil Operacional**, confere **Campos obrigatórios para encerrar atendimento** (campos personalizados) apenas ao **Marcar como resolvido**. Se faltar algum campo, exibe `"Necessário preencher o campo ... para ganhar esse negócio."` (ou `"...para resolver esse ticket."`) e destaca o campo.
   - Ao ganhar, a Kinbox verifica apenas os campos obrigatórios configurados no funil (e não tarefas obrigatórias nem campos obrigatórios da etapa).
@@ -127,6 +127,7 @@ Mensagens de bloqueio na criação:
 ## Pesquisa e filtros
 
 - **Pesquisar** (aplicada com `Enter`): busca sem diferenciar maiúsculas em **nome da negociação**, **nome do contato**, **telefone do contato** e, no formato `#<ID>`, no **ID do contato**. **Não** busca por e-mail do contato, organização, ID do ticket, produto, tag nem campos personalizados.
+- **Filtros do menu Filtrar, nesta ordem:** **Status** (**Ganho**, **Perdido**, **Em andamento**), **Valor**, **Atribuído**, **Grupo** (inclui negociações sem grupo), **Organização**, **Produto**, **Tag**, **Motivo de perda** (do funil aberto), **Outros** (**Tem comentários**, **Associado a uma conversa**, **Conversa pendente**, **Criado por Meta Ads**, **Criado por Google Ads**), as datas (**Criado em**, **Ganho/perdido em**, **Previsão de fechamento**, **Última mudança de etapa**), **Campos customizados** e, por último, **Etapa** (do funil aberto). **Salvar segmento** guarda a combinação em **Filtros salvos** (visível para **Todos**, **Grupos** ou **Apenas para mim**); **Limpar filtros** remove todos.
 - **Operadores de filtro:**
   - Listas (**Status**, **Atribuído**, **Grupo**, **Produto**, **Tag**, **Motivo de perda**, **Outros**, **Etapa**): "é igual a" / "não é igual a" (com múltiplos valores: "é qualquer um dentre" / "é nenhum dentre").
   - **Valor:** além dos operadores de igualdade, aceita "é maior que", "é menor que", "é vazio" e "não é vazio".
@@ -146,9 +147,13 @@ Mensagens de bloqueio na criação:
 - **Período do fluxo:** padrão **Fluxo geral** (mostra todas as negociações). Nas demais opções (**Fluxo do mês**, **Fluxo do mês passado**, **Fluxo de 3 meses passados**, **Fluxo de 6 meses passados** e **Fluxo de 12 meses passados**), o quadro exibe sempre todas as negociações em aberto e filtra as ganhas e perdidas pela data de fechamento no fuso do workspace.
 - **Ordenação:** padrão **Mais recentes** (criação); inclui **Mais antigos**, **Maior valor**, **Menor valor**, **Mensagem mais recente**, **Mensagem mais antiga**, **Pendência mais antiga** e **Pendência mais recente**. As duas opções de pendência filtram o quadro para exibir **apenas negociações com conversa pendente**.
 
+## Menu ⋯ do quadro
+
+- **Itens:** **Executar ação...**, **Atualizar a cada 30s** (vira **Parar de atualizar a cada 30s**), **Mostrar campos...** (exibe **ID do contato** e campos personalizados de negociação nos cartões; vale para todos os funis), **Exportar** e **Importar**. Aparece só no computador, com um funil aberto.
+
 ## Exportação
 
-- **Restrição:** desabilitada no menu **⋯** para quem tem **Não pode exportar negociações**.
+- **Restrição:** indisponível para quem tem **Não pode exportar negociações**.
 - **Escopo e formato:** exporta todas as negociações do funil aberto (todas as etapas) que passam pela pesquisa, filtros, período e restrições de visibilidade, na ordenação atual. Sem limite de linhas (busca de 400 em 400, com pausa de 1 s entre lotes). Formatos: **CSV** (UTF-8 com BOM, separado por vírgula, todos os campos entre aspas) e Excel `.xlsx` (aba única `Sheet 1`).
 - **Arquivos:** `relatorio_negocios.csv` / `relatorio_negocios.xlsx` (comercial) e `relatorio_tickets.csv` / `relatorio_tickets.xlsx` (operacional). Erro: `"Ocorreu um erro ao exportar os dados"`.
 - **Colunas do Funil Comercial:** ID, Nome da negociação, Status (`Aberto`, `Vendido`, `Perdido`), Criado por, Criado em, Vendido/Perdido em, Previsão de fechamento, Responsável, Produtos (`nome (preço x quantidade)`), Grupo, Valor, Funil, Etapa, Tempo na etapa (`N dias`), Tags, Motivo da perda, Observação da perda, Nome do contato, E-mail do contato, Telefone do contato, Criação do contato, Organização, Link da conversa relacionada — seguidas de uma coluna por campo personalizado de negociação.
@@ -175,7 +180,8 @@ Mensagens de bloqueio na criação:
 
 ## Ações em lote
 
+- **Permissões:** exige **Gerenciar negociações**. As ações seguem as permissões e restrições do papel (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 - **Processamento:** sem limite de quantidade; busca as negociações em blocos de 400 (pausa de 1 s) e aplica a ação uma por vez.
 - **Contagem final:** o total exibido na mensagem de conclusão reflete o total de negociações encontradas pelos filtros (incluindo itens pulados). Em **Associar conversas**, exibe `"{{associated}} negociações associadas. {{skipped}} ignoradas."`.
 - **Interrupção:** clicar em **Abortar** encerra após a negociação em andamento (`"Ação cancelada durante execução"`). Alterações já aplicadas permanecem; em **Gerar relatório com dados de contato**, nenhum arquivo é baixado se a ação for abortada.
-- **Gerar relatório com dados de contato:** consulta cada contato (pausa de 0,4 s por contato), baixa o arquivo `relatorio_negocios` diretamente no navegador (`"{{total}} negociações foram exportadas."`) e acrescenta às colunas da exportação: **Nome do contato**, **E-mail do contato**, **Telefone do contato**, **Criação do contato**, **Contato criado por**, os campos personalizados do contato com o sufixo `(contato)` (ou `(campo-contato)` para campos chamados Nome, Membro, Criado em, E-mail ou Celular), **Facebook do contato**, **Instagram do contato**, **Telegram do contato**, **ID Externo do contato** e **Notas do contato**.
+- **Gerar relatório com dados de contato:** consulta cada contato (pausa de 0,4 s por contato), baixa o arquivo `relatorio_negocios` diretamente no navegador (`"{{total}} negociações foram exportadas."`) e traz, por negociação, os dados da negociação, os campos personalizados de negociação e os dados atuais do contato: **Nome do contato**, **E-mail do contato**, **Telefone do contato**, **Criação do contato**, **Contato criado por**, os campos personalizados do contato com o sufixo `(contato)` (ou `(campo-contato)` para campos chamados Nome, Membro, Criado em, E-mail ou Celular), **Facebook do contato**, **Instagram do contato**, **Telegram do contato**, **ID Externo do contato** e **Notas do contato**.

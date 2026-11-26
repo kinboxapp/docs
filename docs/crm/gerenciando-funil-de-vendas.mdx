@@ -30,7 +30,7 @@ verificado_em: 2026-11-26
 Use o quadro do funil para criar, acompanhar, filtrar, mover e encerrar negociações no dia a dia — e também para gerenciar negociações direto dentro de uma conversa.
 
 <Note>
-  Quem pode: membros com a permissão **Gerenciar negociações** ou o proprietário do workspace. Se o item **Funis** não aparecer no menu lateral, peça ao proprietário a permissão **Gerenciar negociações**. O que você vê no quadro depende das restrições de visibilidade do seu papel e da visibilidade de cada funil; excluir, exportar e voltar etapa exigem não ter as restrições correspondentes (o proprietário nunca tem restrições). Veja [Referência de permissões](/docs/administracao/referencia-de-permissoes) e [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
+  Quem pode: membros com a permissão **Gerenciar negociações** ou o proprietário do workspace. Se o item **Funis** não aparecer no menu lateral, peça ao proprietário a permissão **Gerenciar negociações**. O que você vê e faz no quadro segue as permissões e restrições do seu papel e a visibilidade de cada funil (o proprietário nunca tem restrições). Veja [Referência de permissões](/docs/administracao/referencia-de-permissoes) e [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 </Note>
 
 ## Abrir um funil
@@ -87,12 +87,8 @@ Clique em qualquer cartão no quadro para abrir a negociação por cima do quadr
 
 No topo ficam o botão de voltar, o título editável, os botões de encerramento (✓ e ✕, ou **Retomar negociação**), o **Responsável**, o **Grupo** e o menu **⋯**, seguidos pela barra de etapas (passe o mouse sobre uma etapa para ver **Etapa** e **Tempo na etapa**).
 
-- **Responsável:** clique para atribuir ou trocar o membro (exige a permissão **Atribuir**; com **Somente pode atribuir para quem pertence ao grupo do membro**, aparecem apenas membros dos seus grupos). Se houver tarefas abertas na negociação, a Kinbox pergunta **Transferir tarefas em aberto?** com as opções **Transferir tarefas** e **Não transferir tarefas**.
-- **Grupo:** clique em **Mover para grupo** para escolher um grupo ou **Sem grupo** (respeita **Somente pode mover para grupo que pertence**).
-- **Menu ⋯:**
-  - **Ir para conversa:** abre a conversa associada na Caixa de entrada (fica desativado se não houver conversa vinculada).
-  - **Associar uma conversa:** aparece quando ainda não existe conversa vinculada e permite ligar uma das conversas do contato pelo canal. Depois de associar, não é possível desassociar pela tela.
-  - **Excluir:** apaga a negociação (veja abaixo).
+- **Responsável** e **Grupo:** clique para trocar (seguem as permissões de atribuição e de grupo do seu papel). Ao trocar o responsável de uma negociação com tarefas abertas, a Kinbox pergunta **Transferir tarefas em aberto?**.
+- **Menu ⋯:** **Ir para conversa** (abre a conversa associada), **Associar uma conversa** (aparece quando ainda não há conversa vinculada; depois de associar, não dá para desassociar pela tela) e **Excluir**.
 
 <Frame caption="Cabeçalho da negociação com encerramento, responsável, grupo, menu de opções e barra de etapas">
   <img src="/images/ajuda/funis/negociacao-cabecalho.webp" alt="Cabeçalho de uma negociação aberta exibindo botão voltar, título, botões ganhar e perder, responsável, grupo, menu de três pontos e barra horizontal de etapas" />
@@ -102,12 +98,12 @@ No topo ficam o botão de voltar, o título editável, os botões de encerrament
 
 No painel **Negócio** (na coluna da direita), você altera:
 
-- **Valor e produtos:** clique em **Add valor** (ou no valor atual) para editar. Clique em **Add produto** (ou na contagem de produtos) para abrir **Adicionar produtos a negociação**, escolher produtos ativos em **Produtos**, definir **Preço**, **Quantidade** e **Desconto** (em `%` ou valor) e clicar em **Salvar** — o **Total** passa a ser o valor da negociação. Veja como cadastrar itens em [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos).
-- **Previsão de Fechamento:** clique em **Add fechamento** (ou na data) para definir a previsão.
-- **Funil:** clique no nome do funil para abrir **Editar etapa e funil** e trocar a negociação de funil e etapa (mostra apenas funis visíveis para você). Levar uma negociação para um **Funil Operacional** zera valor e produtos e gera um número de ticket.
-- **Tags e campos personalizados:** adicione ou remova [tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags) e preencha os [campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox) de negociação (se o funil tiver a regra de exibir apenas campos selecionados, aparecem só esses).
+- **Valor e produtos:** clique em **Add valor** para editar o valor ou em **Add produto** para escolher produtos ativos com **Preço**, **Quantidade** e **Desconto** — com produtos, o **Total** vira o valor da negociação. Veja [Cadastrar produtos](/docs/crm/criar-e-gerenciar-produtos).
+- **Previsão de Fechamento:** clique em **Add fechamento** (ou na data).
+- **Funil:** clique no nome do funil para abrir **Editar etapa e funil** e trocar funil e etapa. Levar a negociação para um **Funil Operacional** zera valor e produtos e gera um número de ticket.
+- **Tags e campos personalizados:** [tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags) e [campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox) de negociação.
 
-No **Funil Operacional**, o painel chama-se **Ticket**, exibe **Ticket ID** e **SLA** (no lugar de valor, produtos e fechamento), e a **Descrição** fica em um cartão acima da caixa de comentário.
+No **Funil Operacional**, o painel chama-se **Ticket** e exibe **Ticket ID** e **SLA** no lugar de valor, produtos e fechamento.
 
 <Frame caption="Painéis Negócio e Contato na coluna da direita da negociação">
   <img src="/images/ajuda/funis/painel-negocio.webp" alt="Painel Negócio mostrando valor, produtos, Add fechamento, funil Vendas e tags, seguido pelo painel Contato com nome, celular, e-mail e campo personalizado" />
@@ -115,21 +111,20 @@ No **Funil Operacional**, o painel chama-se **Ticket**, exibe **Ticket ID** e **
 
 Os demais blocos da negociação reúnem:
 
-- **Contato:** exibe e permite editar nome, telefone, e-mail e campos personalizados do contato, respeitando as permissões de contato do seu papel (o painel some para quem tem **Esconder informações do contato**).
-- **Organização:** permite vincular uma organização do contato (ou buscar outra), trocar (**Trocar organização**) ou remover (**Remover da negociação**). Se o contato ainda não fizer parte da organização escolhida, aparece o botão **Vincular** (para quem tem **Gerenciar Organizações**).
-- **Tarefas:** clique em **Tarefa** abaixo da caixa de comentário para criar uma tarefa já ligada à negociação, ou gerencie as tarefas existentes no painel **Tarefas** (concluir, abrir ou excluir). Tarefas obrigatórias exibem um indicador e travam a mudança de etapa.
-- **Comentários e Destacado:** escreva comentários, mencione membros com `@` (o membro mencionado recebe notificação), insira emojis ou anexos, reaja, clique em **Responder** para abrir um fio, edite os seus comentários ou use **Destacar** para fixar o comentário na seção **Destacado**.
-- **Histórico:** registra a criação, comentários e alterações da negociação, com filtro para ver **Tudo**, **Comentários** ou apenas o registro de alterações.
+- **Contato** e **Organização:** dados do contato (conforme as permissões de contato do seu papel) e a organização vinculada, que você pode trocar ou remover.
+- **Tarefas:** clique em **Tarefa** abaixo da caixa de comentário para criar uma tarefa ligada à negociação; tarefas obrigatórias exibem um indicador.
+- **Comentários:** escreva, mencione membros com `@` (eles recebem notificação), anexe arquivos, responda em fio e use **Destacar** para fixar um comentário.
+- **Histórico:** criação, comentários e alterações da negociação, com filtro **Tudo**, **Comentários** ou só alterações.
 
 ## Mudar de etapa
 
 Você pode mudar uma negociação de etapa arrastando o cartão para outra coluna no quadro, clicando diretamente na etapa desejada na barra de etapas da negociação ou usando **Editar etapa e funil** no painel **Negócio**.
 
-Ao mudar a etapa pelo quadro ou pela negociação, a Kinbox confere, nesta ordem:
+Ao mudar a etapa, a Kinbox confere, nesta ordem:
 
-1. Se o seu papel tem a restrição **Não pode voltar para etapa anterior** (bloqueia mover para uma etapa anterior).
-2. Se existe alguma tarefa obrigatória pendente (não concluída e não cancelada) na negociação.
-3. Se todos os campos obrigatórios **da etapa em que a negociação está** foram preenchidos (para sair dela).
+1. **Restrição de voltar etapa:** quem tem **Não pode voltar para etapa anterior** não move a negociação para uma etapa anterior.
+2. **Tarefa obrigatória:** se existe alguma tarefa obrigatória pendente (não concluída e não cancelada) na negociação.
+3. **Campos da etapa:** se todos os campos obrigatórios **da etapa em que a negociação está** foram preenchidos (para sair dela).
 
 Se alguma dessas verificações falhar, a Kinbox mostra o aviso e mantém a negociação na etapa atual. Negociações ganhas ou perdidas também podem mudar de etapa e continuam ganhas ou perdidas — para reabrir, use **Retomar negociação**.
 
@@ -140,27 +135,55 @@ Quando a negociação entra em uma etapa com cadência configurada, a Kinbox cri
 - **Ganhar (✓):** no **Funil Comercial**, a Kinbox verifica apenas os **Campos obrigatórios para ganhar negócio** configurados no funil. Se algum campo faltar, ela avisa e destaca o campo; se tudo estiver preenchido, a negociação é marcada como ganha na hora, sem pedir motivo. No **Funil Operacional**, **Marcar como resolvido** confere os campos obrigatórios de encerramento e abre **Ticket resolvido** para escolher **Motivo** e **Detalhes**.
 - **Perder (✕):** abre **Perda de negócio** (no operacional, **Ticket não resolvido**) com **Motivo** (obrigatório; você pode marcar mais de um) e **Detalhes** (opcional). Se o funil tiver a regra **Usar motivo de perda por produto.** e a negociação tiver produtos, a janela pede motivo para cada produto.
 - **Mover automaticamente:** se o funil tiver a regra de mover ao ganhar ou ao perder, a negociação vai para a etapa configurada junto com a mudança de status. Veja como configurar motivos, campos e regras em [Motivos de perda, campos obrigatórios e regras do funil](/docs/crm/motivos-de-perda-e-regras).
-- **Retomar:** em uma negociação ganha ou perdida, clique em **Retomar negociação** (ou **Retomar ticket**) no cabeçalho para voltar o status para **Aberto** na mesma etapa.
+- **Retomar:** em uma negociação ganha ou perdida, clique em **Retomar negociação** (ou **Retomar ticket**) para voltar o status para **Aberto** na mesma etapa.
 
 <Frame caption="Janela Perda de negócio com seleção obrigatória de motivo e campo opcional de detalhes">
   <img src="/images/ajuda/funis/perda-de-negocio.webp" alt="Janela Perda de negócio mostrando o campo obrigatório Motivo com caixas de seleção Sem justificativa, Preço e Concorrência, o campo Detalhes e o botão Salvar" />
 </Frame>
 
+## Pesquisar, filtrar e ordenar
+
+Na barra do topo do quadro:
+
+- **Pesquisar:** digite e pressione `Enter`. Procura no nome da negociação, no nome e no telefone do contato e, com `#` seguido do número (por exemplo, `#123`), no ID do contato.
+- **Filtrar:** combina critérios como status, valor, responsável, grupo, organização, produto, tag, motivo de perda, datas, campos personalizados e, por último na lista, **Etapa**. Com dois ou mais filtros, clique em **todos** para alternar entre exigir **todos** ou **qualquer** deles; **Salvar segmento** guarda a combinação em **Filtros salvos**.
+- **Período:** o padrão **Fluxo geral** mostra todas as negociações; os outros períodos continuam mostrando as abertas e filtram as ganhas e perdidas pela data de fechamento.
+- **Ordenação:** o padrão é **Mais recentes**. As ordenações por pendência mostram só negociações com conversa pendente.
+
+<Frame caption="Menu Filtros aberto na barra superior do quadro do funil">
+  <img src="/images/ajuda/funis/filtrar.webp" alt="Menu Filtros aberto exibindo campo de busca e as opções Status, Valor, Atribuído, Grupo, Organização, Produto, Tag, Motivo de perda e Outros" />
+</Frame>
+
+Pesquisa e filtros são limpos ao recarregar a página; o último funil aberto, o período, a ordenação e os campos exibidos nos cartões ficam guardados no seu navegador.
+
+## Menu do funil e Analítico
+
+No computador, com um funil aberto, o botão **⋯** no canto superior direito reúne:
+
+- **Executar ação...:** altera em massa as negociações filtradas — veja [Ações em lote no funil](/docs/crm/acoes-em-lote).
+- **Atualizar a cada 30s** e **Mostrar campos...:** atualização automática das colunas e escolha dos campos exibidos nos cartões.
+- **Exportar:** baixa em **CSV** ou Excel (`.xlsx`) as negociações do funil aberto que passam pela pesquisa, pelos filtros e pelo período atuais.
+- **Importar:** cria negociações em massa por planilha — veja [Importar negociações](/docs/crm/importar-negociacoes).
+
+<Frame caption="Menu de opções do funil aberto no canto superior direito do quadro">
+  <img src="/images/ajuda/funis/menu-do-funil.webp" alt="Menu de três pontos do funil mostrando Executar ação..., Atualizar a cada 30s, Mostrar campos..., Exportar e Importar" />
+</Frame>
+
+Ao lado de **⋯**, o ícone **Analítico** abre totais e gráficos do funil aberto, com os mesmos filtros, pesquisa e período do quadro.
+
 ## Excluir uma negociação
 
-Para excluir, abra a negociação, clique em **⋯** → **Excluir** e confirme.
+Para excluir, abra a negociação, clique em **⋯** → **Excluir** e confirme. Quem tem a restrição **Não pode excluir negociação** não exclui negociações.
 
 <Warning>
   Excluir uma negociação é definitivo e não tem volta. Todos os comentários, o histórico e as tarefas ligadas a ela são apagados junto com a negociação. O contato, a organização e a conversa permanecem no workspace.
 </Warning>
 
-Membros com a restrição **Não pode excluir negociação** não conseguem excluir negociações (o proprietário nunca tem restrições).
-
 ## Na conversa
 
-Você pode ver, criar e editar negociações sem sair da [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox). Abra a conversa e, no painel **Detalhes** à direita, clique em **Negociações** para abrir a seção (se o painel estiver fechado, clique em **Mostrar detalhes do contato**).
+Você pode ver, criar e editar negociações sem sair da conversa na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox). Abra a conversa e, no painel **Detalhes** à direita, clique em **Negociações** para abrir a seção (se o painel estiver fechado, clique em **Mostrar detalhes do contato**).
 
-- A seção lista as negociações **do contato** da conversa, não só as associadas a ela. Se a seção **Negociações** não aparecer na conversa, falta a permissão **Pode gerenciar as negociações da conversa.** no seu papel; para criar ou editar a partir dali, seu papel também precisa de **Gerenciar negociações**.
+- A seção lista as negociações do contato, não só as associadas a esta conversa. Se a seção **Negociações** não aparecer, falta a permissão **Pode gerenciar as negociações da conversa.** no seu papel; para criar ou editar a partir dali, seu papel também precisa de **Gerenciar negociações**.
 - Para criar uma negociação dali, passe o mouse no título **Negociações** e clique em **+** (ou clique em **Negócio** se o contato ainda não tiver nenhuma). A janela já abre com o contato fixo, o nome do contato preenchido e esta conversa associada automaticamente; se você deixar **Responsável** vazio, a negociação fica atribuída a quem criou.
 - Clicar em um cartão da lista abre a negociação em uma gaveta lateral por cima da conversa, com as mesmas ações do quadro.
 
@@ -168,52 +191,15 @@ Você pode ver, criar e editar negociações sem sair da [Caixa de entrada: vis�
   <img src="/images/ajuda/funis/negociacoes-na-conversa.webp" alt="Painel Detalhes de uma conversa mostrando a seção Negociações com o botão + no cabeçalho e o cartão de uma negociação do contato" />
 </Frame>
 
-## Pesquisar, filtrar e ordenar
-
-Na barra do topo do quadro, você encontra rapidamente as negociações do funil aberto:
-
-- **Pesquisar:** digite no campo **Pesquisar** e pressione `Enter`. A pesquisa procura no nome da negociação, no nome do contato, no telefone do contato e, digitando `#` seguido do número (por exemplo, `#123`), no ID do contato.
-- **Filtrar:** clique em **Filtrar** para abrir o menu **Filtros** e combinar critérios:
-  - **Status** (**Ganho**, **Perdido** e **Em andamento**), **Valor**, **Atribuído**, **Grupo** (incluindo negociações sem grupo), **Organização**, **Produto**, **Tag**, **Motivo de perda** (do funil aberto) e **Etapa** (do funil aberto);
-  - **Outros:** **Tem comentários**, **Associado a uma conversa**, **Conversa pendente**, **Criado por Meta Ads** e **Criado por Google Ads**;
-  - **Datas:** **Criado em**, **Ganho/perdido em**, **Previsão de fechamento** e **Última mudança de etapa**;
-  - **Campos customizados:** campos personalizados de negociação;
-  - **Filtros salvos:** segmentos já salvos.
-- Com dois ou mais filtros aplicados, clique em **todos** para alternar entre exigir **todos** ou **qualquer** dos filtros. Use **Salvar segmento** para guardar a combinação em **Filtros salvos** (visível para **Todos**, **Grupos** ou **Apenas para mim**) e **Limpar filtros** para remover todos.
-
-<Frame caption="Menu Filtros aberto na barra superior do quadro do funil">
-  <img src="/images/ajuda/funis/filtrar.webp" alt="Menu Filtros aberto exibindo campo de busca e as opções Status, Valor, Atribuído, Grupo, Organização, Produto, Tag, Motivo de perda e Outros" />
-</Frame>
-
-- **Período do fluxo:** o padrão é **Fluxo geral** (mostra todas as negociações). Nas outras opções (**Fluxo do mês**, **Fluxo do mês passado**, **Fluxo de 3 meses passados**, **Fluxo de 6 meses passados** e **Fluxo de 12 meses passados**), o quadro continua mostrando todas as negociações em aberto e filtra apenas as ganhas e perdidas pela data de fechamento.
-- **Ordenação:** o padrão é **Mais recentes**; você também pode ordenar por **Mais antigos**, **Maior valor**, **Menor valor**, **Mensagem mais recente**, **Mensagem mais antiga**, **Pendência mais antiga** e **Pendência mais recente**. Atenção: ao escolher **Pendência mais antiga** ou **Pendência mais recente**, o quadro passa a exibir somente as negociações que têm conversa pendente.
-
-Pesquisa e filtros são limpos ao recarregar a página; o último funil aberto, o período, a ordenação e os campos exibidos nos cartões ficam guardados no seu navegador.
-
-## Menu do funil e Analítico
-
-No computador, com um funil aberto, o botão **⋯** no canto superior direito oferece cinco opções:
-
-- **Executar ação...:** aplica uma alteração em massa nas negociações filtradas — veja [Ações em lote no funil](/docs/crm/acoes-em-lote).
-- **Atualizar a cada 30s:** liga a atualização automática de todas as colunas a cada 30 segundos (o item vira **Parar de atualizar a cada 30s** e volta a desligado ao recarregar a página).
-- **Mostrar campos...:** permite exibir **ID do contato** e campos personalizados de negociação nos cartões do quadro. A escolha fica salva no navegador e vale para todos os funis.
-- **Exportar:** baixa em **CSV** ou Excel (`.xlsx`) todas as negociações do funil aberto que passam pelos filtros, pesquisa e período atuais, com os dados da negociação, do contato, o link da conversa associada e os campos personalizados (no funil comercial, o status das ganhas sai como "Vendido"). Se **Exportar** estiver apagado, seu papel tem a restrição **Não pode exportar negociações** (o proprietário sempre pode exportar).
-- **Importar:** cria negociações em massa por planilha — veja [Importar negociações](/docs/crm/importar-negociacoes).
-
-<Frame caption="Menu de opções do funil aberto no canto superior direito do quadro">
-  <img src="/images/ajuda/funis/menu-do-funil.webp" alt="Menu de três pontos do funil mostrando Executar ação..., Atualizar a cada 30s, Mostrar campos..., Exportar e Importar" />
-</Frame>
-
-Ao lado de **⋯**, o ícone **Analítico** abre um painel com **Total**, **Valor total**, **Ticket médio**, lista de negócios e gráficos para o funil aberto (usando os filtros, a pesquisa e o período do quadro). Nele você escolhe o período de criação, a **Métrica** (**Por quantidade**, **Por valor** ou **Tempo até ganhar ou perder o negócio**), o **Agrupamento** e a **Visualização** (**Linha**, **Pizza**, **Ranking** ou **Barra**).
-
 ## No celular
 
 No navegador do celular, o quadro exibe as colunas e os cartões, mas **Pesquisar**, **Filtrar**, período, ordenação, **Analítico** e o menu **⋯** estão disponíveis apenas no computador.
 
 ## Problemas comuns
 
-- **Não consigo mover a negociação de etapa.** Confira, nesta ordem: se o seu papel tem **Não pode voltar para etapa anterior**, se existe tarefa obrigatória pendente na negociação (conclua ou cancele) e se todos os campos obrigatórios da etapa **atual** estão preenchidos.
+- **Não consigo mover a negociação de etapa.** Confira, nesta ordem: se o seu papel tem **Não pode voltar para etapa anterior** (e a etapa de destino é anterior), se existe tarefa obrigatória pendente na negociação (conclua ou cancele) e se todos os campos obrigatórios da etapa **atual** estão preenchidos.
 - **Não vejo um funil ou algumas negociações.** A Kinbox exibe apenas funis com visibilidade liberada para você e negociações permitidas pelas restrições do seu papel. Peça ao proprietário ou a quem configura funis para revisar a visibilidade e as permissões.
 - **O item Exportar aparece apagado no menu ⋯.** Seu papel tem a restrição **Não pode exportar negociações**. Peça ao proprietário para alterar o papel se você precisar exportar.
+- **Não consigo marcar a negociação como ganha: aparece um aviso pedindo um campo.** O funil exige esse campo em **Campos obrigatórios para ganhar negócio**. Preencha o campo destacado e marque como ganha de novo — veja [Motivos de perda, campos obrigatórios e regras do funil](/docs/crm/motivos-de-perda-e-regras).
 - **Não consigo marcar a negociação como perdida.** Escolha pelo menos um **Motivo** na janela **Perda de negócio**. Se não houver opções cadastradas, peça a quem tem a permissão **Funis** para incluir motivos em [Motivos de perda, campos obrigatórios e regras do funil](/docs/crm/motivos-de-perda-e-regras).
 - **Aparece "Você não tem permissão para acessar esse funil" ao abrir um link.** Você não tem acesso ao funil do link (ou ele não existe mais) e a Kinbox redireciona para o último funil disponível para você.

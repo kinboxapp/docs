@@ -48,18 +48,20 @@ Configurados no passo **Comece com nome e visibilidade**.
 
 | Tipo de funil | Nome do campo | Opções disponíveis | Quando é conferido |
 | --- | --- | --- | --- |
-| **Funil Comercial** | **Campos obrigatórios para ganhar negócio** | **Valor do negócio** (marcado por padrão no funil novo; exige valor maior que zero), **Produto** (pelo menos um produto) e campos personalizados de negociação | Quando o membro clica em **Marcar como ganho** na tela da negociação (não é conferido ao marcar como perdido) |
-| **Funil Operacional** | **Campos obrigatórios para encerrar atendimento** | Campos personalizados de negociação | Quando o membro clica em **Marcar como resolvido** na tela da negociação (não é conferido ao marcar como não resolvido) |
+| **Funil Comercial** | **Campos obrigatórios para ganhar negócio** | **Valor do negócio** (marcado por padrão no funil novo; exige valor maior que zero), **Produto** (pelo menos um produto) e campos personalizados de negociação | Ao marcar a negociação como ganha (não é conferido ao marcar como perdida) |
+| **Funil Operacional** | **Campos obrigatórios para encerrar atendimento** | Campos personalizados de negociação | Ao marcar o ticket como resolvido (não é conferido ao marcar como não resolvido) |
 
-Se algum campo obrigatório estiver vazio, a Kinbox impede o encerramento, avisa qual campo falta e destaca o campo na tela. Crie os campos personalizados antes em **Configurações** → **Ambiente** → **Campos personalizados** para a entidade **Negociação** (veja [Criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox)).
+Se algum campo obrigatório estiver vazio, a Kinbox impede o encerramento, avisa qual campo falta e destaca o campo na tela. Esses campos valem só para encerrar a negociação: mudar de etapa não os confere (para isso existem os campos obrigatórios da etapa, abaixo). Crie os campos personalizados antes em **Configurações** → **Ambiente** → **Campos personalizados** para a entidade **Negociação** (veja [Criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox)).
 
 ## Campos obrigatórios da etapa
 
 Configurados no passo **Configure as etapas do funil**, clicando no ícone de lápis de cada etapa (**Campos obrigatórios**).
 
 - **Opções:** **Valor do negócio**, **Produto** (apenas no **Funil Comercial**) e campos personalizados de negociação.
-- **Quando valem:** são exigidos para **sair da etapa em que a negociação está** (em qualquer direção, para a frente ou para trás), ao mudar a etapa pelo quadro ou pela tela da negociação (barra de etapas ou **Editar etapa e funil**). Por exemplo: se a etapa **Proposta enviada** exige **Valor do negócio**, a negociação só sai de **Proposta enviada** quando o valor estiver preenchido.
-- **Ordem das conferências:** ao mudar a etapa pelo quadro ou pela negociação, a Kinbox verifica (1) a restrição **Não pode voltar para etapa anterior**, (2) tarefas obrigatórias pendentes na negociação e (3) os campos obrigatórios **da etapa atual**.
+- **Quando valem:** são exigidos para **sair da etapa em que a negociação está** (em qualquer direção, para a frente ou para trás). Por exemplo: se a etapa **Proposta enviada** exige **Valor do negócio**, a negociação só sai de **Proposta enviada** quando o valor estiver preenchido.
+- **Ao ganhar ou perder:** não são conferidos; ao marcar como ganha, valem apenas os **Campos obrigatórios para ganhar negócio** (acima).
+
+O que mais pode impedir a mudança de etapa está em [Trabalhar com negociações no funil](/docs/crm/gerenciando-funil-de-vendas#mudar-de-etapa).
 
 ## Regras
 
@@ -67,9 +69,9 @@ No passo **Motivos e regras**, abra **Configurar regras**, clique em **Regra** e
 
 | Regra | O que faz |
 | --- | --- |
-| **Mover negócio para estágio específico ao ganhar** *(operacional: **Mover ticket para etapa específica ao resolver**)* | Pede uma **Etapa**. Quando o membro marca a negociação como ganha (ou o ticket como resolvido) na tela da negociação, ela vai automaticamente para a etapa escolhida. |
+| **Mover negócio para estágio específico ao ganhar** *(operacional: **Mover ticket para etapa específica ao resolver**)* | Pede uma **Etapa**. Quando a negociação é marcada como ganha (ou o ticket como resolvido), ela vai automaticamente para a etapa escolhida. |
 | **Somente mostrar campos personalizados selecionados** | Pede os campos personalizados na ordem desejada. Na tela da negociação, exibe apenas os campos selecionados, na ordem escolhida. Inclua na seleção qualquer campo obrigatório para ganhar ou sair de etapa, para que o membro consiga preenchê-lo. |
-| **Mover negócio para estágio específico ao perder** *(operacional: **Mover ticket para etapa específica ao marcar como não resolvido**)* | Pede uma **Etapa**. Quando o membro confirma a perda (ou não resolução) na tela da negociação, ela vai automaticamente para a etapa escolhida. |
+| **Mover negócio para estágio específico ao perder** *(operacional: **Mover ticket para etapa específica ao marcar como não resolvido**)* | Pede uma **Etapa**. Quando a perda (ou não resolução) é confirmada, ela vai automaticamente para a etapa escolhida. |
 | **Máximo de negócios abertos por contato** *(operacional: **Máximo de tickets abertos por contato**)* | Pede um número (mínimo 1). Ao criar uma negociação para um contato existente, conta as negociações abertas desse contato **neste funil** e bloqueia se o limite já foi atingido (ganhas, perdidas e de outros funis não contam). |
 | **Não executar tarefas anteriores ao horário de mudança de etapa no mesmo dia.** | Na [cadência](/docs/crm/cadencias), impede a criação de tarefas do mesmo dia cujo horário fixo já passou quando a negociação entra na etapa. |
 | **Criar tarefas de cadência mesmo após negócio ganho ou perdido.** *(operacional: **Criar tarefas de cadência mesmo após ticket resolvido ou não resolvido.**)* | Na [cadência](/docs/crm/cadencias), continua criando tarefas agendadas e mensais mesmo depois de a negociação ser encerrada. |

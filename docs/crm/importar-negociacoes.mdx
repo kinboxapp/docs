@@ -34,7 +34,7 @@ Monte a planilha antes de abrir a importação (pelo menu **⋯** → **Importar
 - **Etapa:** informe o nome exato de uma etapa do funil; se ficar vazia, a negociação entra na primeira etapa.
 - **Status:** escreva `aberto`, `ganho` ou `perdido` (no **Funil Operacional**, escreva `ganho` para resolvido e `perdido` para não resolvido). Células vazias ou outros textos entram como aberto.
 - **Valor (só no Funil Comercial):** no CSV, escreva apenas números e ponto para os centavos (por exemplo, `1500.50`), sem `R$` e sem ponto de milhar; no Excel, use célula numérica.
-- **Datas:** use `DD/MM/AAAA` (com dois dígitos para dia e mês). Datas inválidas fazem a linha dar erro.
+- **Datas:** no CSV, use `DD/MM/AAAA` (com dois dígitos para dia e mês); no Excel, células no formato de data são convertidas automaticamente. Datas inválidas fazem a linha dar erro. No **Funil Operacional**, a coluna **Prazo** grava a previsão de fechamento do ticket, não o prazo de SLA.
 - **Responsável:** se você não preencher, a negociação fica atribuída a quem fez a importação. Para distribuir as negociações depois de importar, use **Atribuir todos os negócios para um membro** em [Ações em lote no funil](/docs/crm/acoes-em-lote).
 
 ## Passo a passo
@@ -83,7 +83,7 @@ Monte a planilha antes de abrir a importação (pelo menu **⋯** → **Importar
 
 ## Histórico e erros
 
-Na tela **Importar Negociações**, clique em **Histórico** no topo para abrir **Histórico de Importações** (lista importações com status **Concluído**, **Processando**, **Pendente**, **Falhou**, **Cancelado** ou **Revertido**).
+Na tela **Importar Negociações**, clique em **Histórico** no topo para abrir **Histórico de Importações**, que mostra as 10 importações mais recentes com status **Concluído**, **Processando**, **Pendente**, **Falhou**, **Cancelado** ou **Revertido**.
 
 Clique em qualquer importação para abrir **Detalhes da Importação**:
 
@@ -95,10 +95,10 @@ Clique em qualquer importação para abrir **Detalhes da Importação**:
 
 Para desfazer uma importação concluída, abra **Histórico**, clique na importação desejada, clique em **Reverter importação** e confirme em **Reverter**.
 
-O botão **Reverter importação** aparece apenas para importações com status **Concluído** e pelo menos uma negociação criada — ele não aparece para importações canceladas ou que falharam. Reverter exige a permissão **Gerenciar negociações** (ou ser o proprietário) e não tem limite de prazo.
+O botão **Reverter importação** aparece apenas para importações com status **Concluído** e pelo menos uma negociação criada — ele não aparece para importações canceladas ou que falharam. Não há limite de prazo.
 
 <Warning>
-  Reverter uma importação não pode ser desfeito e exclui definitivamente todas as negociações criadas por ela — inclusive negociações que já foram editadas, movidas de etapa ou de funil, ganhas ou perdidas. Contatos criados, dados preenchidos em contatos existentes e tags criadas pela importação não são apagados.
+  Reverter uma importação não pode ser desfeito e exclui definitivamente todas as negociações criadas por ela — inclusive negociações que já foram editadas, movidas de etapa, ganhas ou perdidas. Contatos criados e tags criadas pela importação não são apagados.
 </Warning>
 
 ## Importar ao criar um funil
