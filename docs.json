@@ -99,6 +99,16 @@
             "icon": "gear",
             "pages": [
               {
+                "group": "Membros e permissões",
+                "pages": [
+                  "docs/configuracoes-no-workspace/gerenciar-membros",
+                  "docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios",
+                  "docs/administracao/licencas-e-propriedade",
+                  "docs/administracao/referencia-de-permissoes",
+                  "docs/administracao/problemas-com-membros"
+                ]
+              },
+              {
                 "group": "Assinatura e cobrança",
                 "pages": [
                   "docs/assinatura/visao-geral",
@@ -634,6 +644,34 @@
     {
       "source": "/docs/conversas/clientes-contatos-e-organizacoes",
       "destination": "/docs/conceitos/contatos-e-negocios"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/configuracoes-gerais",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
+    },
+    {
+      "source": "/docs/configuracoes-no-workspace/criar-e-gerenciar-tags",
+      "destination": "/docs/configuracoes-no-workspace/gerenciar-membros"
     }
   ]
 }
