@@ -30,6 +30,7 @@ Conecte uma caixa do **Outlook** (Microsoft 365) à Kinbox usando um aplicativo 
 
 - Peça a quem administra a conta Microsoft 365 da empresa para registrar um aplicativo e dar a ele permissão para **ler** os e-mails da Caixa de Entrada (e anexos), **marcar como lido** e **enviar** e-mails pela caixa que será conectada.
 - Tenha em mãos os quatro dados fornecidos por quem administra a conta Microsoft: **Tenant ID**, **Client ID**, **Client Secret** e **Graph Sender**.
+- A mesma caixa (o **Graph Sender**) não pode ser canal de outro workspace.
 - Se você não tiver quem administre a conta Microsoft 365 para configurar o aplicativo, veja as alternativas em [Conectar o e-mail por IMAP/SMTP](/docs/canais/e-mail/por-imap), [Conectar o e-mail por encaminhamento](/docs/canais/e-mail/por-encaminhamento) ou [Conectar o e-mail: qual opção escolher](/docs/canais/e-mail/visao-geral).
 
 ## Passo a passo
@@ -84,7 +85,7 @@ Pelo painel do canal você só altera a **Descrição** e eventuais [campos pers
 
 - **Aviso de erro ao conectar:** confira **Tenant ID**, **Client ID**, **Client Secret**, **Graph Sender** e se o aplicativo tem permissão para ler, marcar como lido e enviar e-mails na caixa.
 - **Os e-mails pararam de chegar ou as respostas ficam com erro:** conecte de novo com os mesmos dados (usando o mesmo **Graph Sender**).
-- **O e-mail chegou cortado:** a conexão Outlook traz só o começo do texto de cada e-mail. Para receber o texto inteiro, use [IMAP/SMTP](/docs/canais/e-mail/por-imap) ou [encaminhamento](/docs/canais/e-mail/por-encaminhamento).
+- **O e-mail chegou cortado:** a conexão Outlook traz só o começo do texto de cada e-mail. Para evitar o corte da prévia do Outlook, use [IMAP/SMTP](/docs/canais/e-mail/por-imap) ou [encaminhamento](/docs/canais/e-mail/por-encaminhamento).
 - **Anexo grande não chegou:** veja o limite de anexos em "O que a Kinbox lê e envia".
 
 Para mais diagnósticos, veja [Os e-mails não chegam ou não saem](/docs/canais/e-mail/problemas-comuns).

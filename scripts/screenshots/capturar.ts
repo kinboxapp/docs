@@ -28,7 +28,7 @@ type Passo =
   | { passar: string }
   /** Arrasta `de` até `para`; `x`/`y` (px) soltam num ponto dentro de `para` (ex.: área vazia do fluxograma) */
   | { arrastar: { de: string; para: string; x?: number; y?: number } }
-  /** Troca o texto do elemento antes do print (ex.: código de instalação do staging pelo formato de produção, com dados fictícios) */
+  /** Troca o texto do elemento antes do print (ex.: código de instalação do staging pelo formato de produção, com dados fictícios). Em `input`/`textarea`, troca o texto de exemplo (placeholder). */
   | { trocarTexto: { seletor: string; texto: string } }
   /** Envia um arquivo fictício (caminho relativo a `scripts/screenshots/`) num `input[type=file]` */
   | { enviar: { seletor: string; arquivo: string } }

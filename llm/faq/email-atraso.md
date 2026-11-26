@@ -30,7 +30,7 @@ Depende do tipo de conexão do canal de e-mail: no **Por encaminhamento**, o e-m
 
 - **Por encaminhamento:** se há demora, o atraso ocorre no encaminhamento feito pelo seu provedor de e-mail.
 - **IMAP/SMTP:** a leitura roda a cada 2 minutos e importa até **50 e-mails por leitura** (dos mais antigos para os mais novos); se chegarem muitos e-mails de uma vez, os restantes entram nas leituras seguintes.
-- **Outlook:** a leitura roda a cada 2 minutos e importa até **20 e-mails por leitura** (dos mais novos para os mais antigos); os demais não lidos do dia entram nas leituras seguintes.
+- **Outlook:** a leitura roda a cada 2 minutos e importa até **20 e-mails por leitura** (dos mais novos para os mais antigos); os demais não lidos podem entrar nas leituras seguintes, desde que ainda sejam do dia. Os 2 minutos são o intervalo entre leituras, não um prazo de entrega.
 
 Quando o e-mail não chega nunca, as causas variam conforme o tipo de conexão:
 

@@ -58,7 +58,7 @@ O selo verde **Conectado** não garante que os e-mails estão chegando nem saind
     - Se o e-mail foi aberto em outro programa antes da leitura da Kinbox, ele fica marcado como lido e não entra.
     - E-mails em spam ou em outras pastas fora da pasta de entrada não entram.
     - Se a senha do e-mail mudou no provedor, a leitura para sem aviso e o canal continua **Conectado**. Conecte de novo em **Configurações** → **Chat** → **Canais** → **Novo canal** → **E-mail** → **IMAP/SMTP** usando o mesmo **IMAP Usuário** e a nova senha para atualizar o mesmo canal.
-    - Se o canal conectou mas nenhum e-mail chega desde o início, confira a caixa **TLS/SSL** do bloco **IMAP** conforme o seu provedor e conecte de novo com o mesmo **IMAP Usuário**.
+    - Se o canal conectou mas nenhum e-mail chega desde o início, conecte de novo com o mesmo **IMAP Usuário** e, antes de clicar em **Conectar canal**, marque e desmarque a caixa **TLS/SSL** do bloco **IMAP**, deixando-a como o provedor pede.
 
     Veja [Conectar o e-mail por IMAP/SMTP](/docs/canais/e-mail/por-imap).
   </Accordion>
@@ -75,7 +75,7 @@ O selo verde **Conectado** não garante que os e-mails estão chegando nem saind
   <Accordion title="Erro ao conectar o canal de e-mail">
     - **"Erro ao testar conexão com o IMAP/SMTP. Verifique os dados da conexão e tente novamente."** (**IMAP/SMTP**): a Kinbox não conseguiu entrar na caixa pelo IMAP. Confira **IMAP Host**, **IMAP Porta**, **IMAP Usuário**, **IMAP Senha** e **TLS/SSL**; se o provedor exigir senha de app, use essa senha.
     - **Sem Descrição** (**IMAP/SMTP**): o canal não é criado sem **Descrição**. Preencha o campo e tente de novo.
-    - **Mensagem de erro da Microsoft** (**Outlook**): a Microsoft recusou o acesso ou a leitura da Caixa de Entrada. Confira **Tenant ID**, **Client ID**, **Client Secret**, **Graph Sender** e se o aplicativo tem permissão para ler, marcar como lido e enviar e-mails na caixa.
+    - **Aviso de erro ao conectar** (**Outlook**), às vezes em inglês ou sem detalhes: a Microsoft recusou o acesso ou a leitura da Caixa de Entrada. Confira **Tenant ID**, **Client ID**, **Client Secret**, **Graph Sender** e se o aplicativo tem permissão para ler, marcar como lido e enviar e-mails na caixa.
     - **"Essa conta já foi adicionada em outro ambiente"** (**IMAP/SMTP** ou **Outlook**): a caixa cadastrada (**IMAP Usuário** ou **Graph Sender**) já é canal de outro workspace ("ambiente", na tela). Fale com o suporte **antes** de excluir qualquer canal: excluir o canal no outro workspace não libera a caixa para este.
     - **"Seu plano atual não permite adicionar o novo canal"** (qualquer tipo): no teste grátis, o limite é de até 3 canais de e-mail ativos (contas mais antigas podem ter outros limites). Exclua um canal de e-mail ou ajuste o plano em [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano) (veja [Canais: conectar e gerenciar](/docs/canais/visao-geral)).
     - **"Sua assinatura expirou"** (qualquer tipo): a assinatura está vencida. Regularize em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
@@ -103,7 +103,7 @@ O selo verde **Conectado** não garante que os e-mails estão chegando nem saind
   </Accordion>
 
   <Accordion title="E-mail cortado, anexo faltando ou arquivo enviado como link">
-    - **E-mail cortado ou anexo ausente (apenas Outlook):** a conexão **Outlook** traz só o começo do texto de cada e-mail e anexos de até 10 MB cada (os maiores ficam de fora sem aviso). Para receber o texto completo, use **IMAP/SMTP** ou **Por encaminhamento**.
+    - **E-mail cortado ou anexo ausente (apenas Outlook):** a conexão **Outlook** traz só o começo do texto de cada e-mail e anexos de até 10 MB cada (os maiores ficam de fora sem aviso). Para evitar o corte da prévia do Outlook, use **IMAP/SMTP** ou **Por encaminhamento**.
     - **Arquivo enviado chegou como link (apenas encaminhamento e IMAP/SMTP):** nesses dois tipos, as respostas saem em texto simples e arquivos enviados pela Kinbox vão como link no corpo do e-mail. Apenas o **Outlook** envia arquivos como anexo.
   </Accordion>
 
