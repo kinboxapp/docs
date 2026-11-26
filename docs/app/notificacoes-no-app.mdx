@@ -1,0 +1,83 @@
+---
+title: Notificações no app
+description: Como ligar as notificações do app da Kinbox no celular, escolher quando receber e quais avisos chegam, e o que fazer quando elas não aparecem.
+keywords: [notificação no celular, notificações do aplicativo, aplicativo, push no app, notificação de outro workspace, notificações do app, não recebo notificação no celular, aviso no iphone, aviso no android, alerta no celular, horário comercial, quando não estiver usando o web, mensagens diretas, menções, atribuídas a mim]
+publico: humano
+tipo: guia
+fontes:
+  - mobile:src/app/notifications.tsx
+  - mobile:src/hooks/usePush.ts
+  - api:src/modules/push-notifications/mobile-push.policy.ts
+  - api:src/modules/push-notifications/mobile-push.service.ts
+codigo:
+  - mobile:src/app/notifications.tsx
+  - mobile:src/hooks/usePush.ts
+  - mobile:src/domain/pushTarget.ts
+  - mobile:src/app/workspaces.tsx
+  - api:src/modules/push-notifications/**
+verificado_em: 2026-11-26
+---
+
+No app da Kinbox para celular, você decide se quer receber notificações, em quais momentos e de quais conversas ou salas. As opções da tela **Notificações** valem para o workspace aberto e para a sua conta, em todos os celulares em que você usa o app; para ajustar outro workspace, troque de workspace. Para configurar notificações e sons na Kinbox no navegador, veja [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
+
+<Note>
+  Quem pode: todo membro configura as próprias notificações no app. Quem tem a restrição **Não pode acessar as salas** no papel não recebe avisos de salas (essa restrição não vale para o proprietário).
+</Note>
+
+## Ligar as notificações
+
+<Steps>
+  <Step title="Permita as notificações ao entrar no workspace">
+    Na primeira vez que você abre um workspace no app, o celular pode pedir a permissão de notificações. Se você permitir, o app liga **Receber notificações**, **Novas mensagens**, **Atribuídas a mim** e **Mensagens diretas e menções** para aquele workspace; sem a permissão, nada é ligado. A permissão é do celular e vale para todos os workspaces.
+  </Step>
+  <Step title="Confira o interruptor no app">
+    Vá em **Você** → **Notificações** e, na seção **Neste iPhone** (no Android, **Neste celular**), deixe **Receber notificações** ligado.
+  </Step>
+  <Step title="Abra cada workspace uma vez no app">
+    Se você participa de mais de um workspace, vá em **Você** → **Workspaces** e abra cada um pelo menos uma vez no app. Sem abrir o workspace no app, as notificações dele começam desligadas.
+  </Step>
+</Steps>
+
+## Escolher quando receber
+
+Na seção **Neste iPhone** (no Android, **Neste celular**), ajuste quando os avisos chegam:
+
+- **Quando receber:** escolha **Quando não estiver usando o web** (padrão) ou **Sempre**. No padrão, usar a Kinbox no navegador pode silenciar os avisos daquele workspace no celular; uma aba deixada em segundo plano não silencia. Com **Sempre**, o app avisa mesmo com a Kinbox aberta no navegador.
+- **Só no horário comercial:** limita os avisos ao horário padrão do workspace, definido na Kinbox no navegador (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)). Se o workspace não tiver horário padrão configurado, os alertas chegam a qualquer hora.
+
+Apesar do nome da seção, **Receber notificações**, **Quando receber** e **Só no horário comercial** valem para todos os celulares da sua conta no workspace aberto. Essas três opções existem só no app e são independentes das notificações de desktop no navegador.
+
+## Quais avisos chegam
+
+Nas seções **Minhas conversas** e **Salas**, ligue ou desligue os tipos de alerta:
+
+| Opção | Avisa quando |
+| --- | --- |
+| **Novas mensagens** | Chega uma nova mensagem do contato, só das conversas em que você é o responsável. Conversas sem responsável não geram aviso no app. |
+| **Atribuídas a mim** | Uma conversa é atribuída a você. |
+| **Mensagens diretas e menções** | Você recebe uma mensagem direta ou uma menção nas salas da equipe (veja [Conversar nas salas: mensagens diretas, menções e threads](/docs/salas/usar-salas)). |
+
+Essas três opções valem para o workspace atual e são as mesmas da Kinbox no navegador (**Configurações** → **Notificações**): mudar no app muda no navegador, e vice-versa. Para ajustar outro workspace, troque em **Você** → **Workspaces** e abra **Notificações** novamente.
+
+## Avisos de vários workspaces
+
+Você recebe notificações de todos os workspaces em que os avisos estão ligados, não só do workspace aberto na tela. Tocar no aviso abre direto a conversa ou a sala; se ela for de outro workspace, o app troca de workspace antes de abrir.
+
+## O que não gera aviso
+
+- **Conversa ou sala aberta:** com a conversa ou a sala aberta no app, o celular não repete o aviso dela.
+- **Salas silenciadas:** salas silenciadas não geram alertas no app.
+- **Disponibilidade:** ficar **Indisponível** não silencia as notificações no app (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)).
+- **Sair da conta:** tocar em **Você** → **Sair da conta** desliga as notificações neste celular.
+
+## Problemas comuns
+
+- **O app diz que as notificações estão desativadas nos Ajustes do iPhone (no Android, nas Configurações do celular).** A permissão do aparelho está desligada, e nenhum workspace consegue avisar neste celular. Em **Você** → **Notificações**, toque em **Abrir Ajustes do iPhone** (no Android, **Abrir Configurações do celular**) e permita as notificações da Kinbox.
+- **Não chega notificação de um workspace.** Abra o workspace no app (em **Você** → **Workspaces**), vá em **Você** → **Notificações** e confira se **Receber notificações** está ligado e se o tipo de aviso que você espera (**Novas mensagens**, **Atribuídas a mim** ou **Mensagens diretas e menções**) também está. Se você nunca tinha aberto esse workspace no app, os avisos dele começam desligados.
+- **Não chega aviso de conversa nova.** O aviso **Novas mensagens** vale só das conversas em que você é o responsável; conversas sem responsável não geram alerta no app.
+- **Não chega aviso enquanto estou no computador.** A opção **Quando receber** está em **Quando não estiver usando o web** (padrão). Troque para **Sempre** se quiser receber alertas no celular mesmo usando a Kinbox no navegador.
+- **Chega aviso fora do expediente (ou não chega fora do expediente).** Confira **Só no horário comercial** em **Você** → **Notificações** e verifique se o workspace tem um horário padrão configurado na Kinbox no navegador (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)).
+
+## Veja também
+
+- [App da Kinbox para celular: o que dá para fazer](/docs/app/visao-geral)

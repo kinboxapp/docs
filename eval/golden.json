@@ -1720,5 +1720,54 @@
     "pergunta": "Como faço para a Kinbox receber os pagamentos aprovados no Mercado Pago e dar baixa automática nos pedidos?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Tem aplicativo da Kinbox para Android ou só para iPhone? Onde eu baixo?",
+    "esperado": [
+      "llm/faq/app-onde-baixar",
+      "docs/app/visao-geral"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Instalei o app no celular, mas as notificações do segundo workspace em que trabalho não chegam. O que falta?",
+    "esperado": [
+      "docs/app/notificacoes-no-app"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como mando um áudio ou uma foto para o cliente pelo app no celular?",
+    "esperado": [
+      "docs/app/atender-pelo-celular"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Quero apagar minha conta da Kinbox e todos os meus dados pessoais. Como faço pelo celular?",
+    "esperado": [
+      "docs/app/excluir-conta"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para configurar os canais e ver os relatórios pelo app do celular?",
+    "esperado": [
+      "llm/app/visao-geral",
+      "docs/app/visao-geral"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Consigo usar o app da Kinbox no meu iPad, com a tela deitada?",
+    "esperado": [
+      "llm/faq/app-tablet"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço para o WhatsApp do meu celular fazer backup automático das conversas no Google Drive?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

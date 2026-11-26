@@ -23,7 +23,7 @@ Como excluo minha conta pelo navegador?
 
 ## Resposta
 
-Dentro da Kinbox no navegador não há botão de excluir a conta; use o app da Kinbox para celular (aba **Você** → **Privacidade** → **Excluir conta**, com duas confirmações) ou o formulário público em https://www.kinbox.com.br/delete-account/, para quem não tem o app ou não consegue entrar.
+Dentro da Kinbox no navegador não há botão de excluir a conta; use o app da Kinbox para celular (aba **Você** → **Privacidade** → **Excluir conta**; veja [Excluir sua conta pelo app](/docs/app/excluir-conta)) ou o formulário público em https://www.kinbox.com.br/delete-account/, para quem não tem o app ou não consegue entrar.
 
 - **Pelo formulário web:** informe o e-mail da conta em https://www.kinbox.com.br/delete-account/. A resposta na tela é a mesma exista ou não uma conta cadastrada, e a Kinbox responde no e-mail da conta para confirmar que ela é sua e concluir a exclusão em até 45 dias, como a página informa. A exclusão não pode ser desfeita.
 - **Se você for o proprietário de um workspace ativo:** antes de excluir a conta, transfira a propriedade para outro membro (veja [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade)) ou encerre o workspace (veja [Excluir o workspace](/docs/administracao/excluir-workspace)). No app, a tentativa sem transferir mostra: "Você é dono de um workspace. Transfira a propriedade para outro membro antes de excluir sua conta."

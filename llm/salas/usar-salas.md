@@ -104,7 +104,7 @@ verificado_em: 2026-11-26
 
 ## No celular
 
-- O app da Kinbox para celular tem a aba **Salas** (entre **Conversas** e **Agenda**) com o mesmo conteúdo do computador.
+- O app da Kinbox para celular (iPhone e celular Android) tem a aba **Salas** (entre **Conversas** e **Agenda**) com o mesmo conteúdo do computador (veja [App da Kinbox para celular: o que dá para fazer](/docs/app/visao-geral)).
 - Não estão disponíveis no app: reagir, responder em thread, editar mensagem, fixar, salvar, buscar mensagens dentro da sala, listas **Menções** e **Salvos**, **Auditoria** e a lista **@** para mencionar (menções feitas no computador aparecem destacadas no app).
 - Pelo navegador do celular, sem o app, o painel **Salas** abre em tela cheia, uma coluna por vez.
 

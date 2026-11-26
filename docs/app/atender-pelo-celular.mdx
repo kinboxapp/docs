@@ -1,0 +1,151 @@
+---
+title: Atender conversas pelo app
+description: Como achar, responder, resolver, atribuir e iniciar conversas no app da Kinbox para celular, com anexos, áudio, notas e frases rápidas.
+keywords: [atender pelo celular, aplicativo, atender pelo aplicativo, responder pelo app, conversas no app, caixa de entrada no celular, enviar áudio pelo app, enviar foto, nota interna no app, resolver conversa no celular, arquivar, transferir, iniciar conversa pelo app, modelo aprovado, template no celular]
+publico: humano
+tipo: guia
+fontes:
+  - mobile:src/app/(tabs)/inbox/index.tsx
+  - mobile:src/app/(tabs)/inbox/conversation/[id].tsx
+  - mobile:src/domain/inboxFilters.ts
+  - mobile:src/domain/messageActions.ts
+  - mobile:src/app/active-chat.tsx
+codigo:
+  - mobile:src/app/(tabs)/inbox/**
+  - mobile:src/app/conversation-*.tsx
+  - mobile:src/app/filters.tsx
+  - mobile:src/app/resolve.tsx
+  - mobile:src/app/new-message.tsx
+  - mobile:src/app/active-chat.tsx
+  - mobile:src/app/quick-phrases.tsx
+  - mobile:src/domain/inboxFilters.ts
+  - mobile:src/domain/messageActions.ts
+  - mobile:src/ui/ComposerMenu.tsx
+  - mobile:src/ui/MessageMenu.tsx
+  - mobile:src/ui/ConversationActionBar.tsx
+  - mobile:src/ui/ImageComposer.tsx
+  - mobile:src/ui/VoiceRecording.tsx
+verificado_em: 2026-11-26
+---
+
+Pelo app da Kinbox para celular, você acompanha a **Caixa de entrada**, responde contatos com texto, anexos, áudio, notas e frases rápidas, resolve ou atribui atendimentos e inicia novas conversas (para o uso no computador, veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox) e [Atender uma conversa: responder, notas, resolver e reabrir](/docs/conversas/gerenciar-conversas)).
+
+<Note>
+  Quem pode: todo membro com acesso à **Caixa de entrada**; as ações seguem o seu papel.
+</Note>
+
+## Encontrar uma conversa
+
+Na aba **Conversas**, escolha uma das visões no topo: **Tudo**, **Meus**, **Não lidas**, **Seguindo** ou **Arquivados**. No app, **Arquivar** resolve a conversa e a envia para **Arquivados**. Ao lado das visões fica o botão dos seus filtros salvos (veja [Criar filtros de conversa](/docs/conversas/criar-filtros-de-conversa)).
+
+Use a busca no topo ou toque em **Filtros** para filtrar por **Grupo**, **Responsável**, **Canal** ou **Tag**, depois toque em **Aplicar** (ou **Limpar filtros** para desfazer). Com filtros ativos, a lista mostra o aviso com **Limpar**.
+
+Cada linha exibe nome do contato, hora, foto do responsável, prévia da última mensagem e, se **Mostrar tags** estiver ligado em **Você** → **Aparência**, as tags. Puxe a lista para baixo para atualizar.
+
+## Ações rápidas na lista
+
+- **Deslizar para a direita:** marca a conversa como **Lida** ou **Não lida**.
+- **Deslizar para a esquerda:** mostra **Arquivar** numa conversa aberta (resolve a conversa) ou **Reabrir** numa conversa arquivada, se o seu papel permitir. Se a opção não aparecer, peça a quem administra o workspace. Se o workspace exigir campos obrigatórios para resolver, o app abre a tela **Resolver conversa** para preenchê-los.
+- **Tocar e segurar a conversa (só no iPhone):** abre mais opções, como marcar como lida ou não lida, marcar ou desmarcar pendência, seguir ou parar de seguir, arquivar ou reabrir, ver detalhes e bloquear ou desbloquear o contato. No celular Android, use os gestos de deslizar e, para as demais ações, a barra de ações da conversa ou **Dados do contato** → **Mais**.
+
+## Responder uma conversa
+
+<Steps>
+  <Step title="Abra a conversa">
+    Toque na conversa na aba **Conversas**. No topo aparecem a foto, o nome e o canal do contato, junto da barra de ações (que fica **Abaixo do cabeçalho** por padrão ou **Acima do campo de mensagem**, em **Você** → **Aparência**).
+  </Step>
+  <Step title="Escreva a resposta ou escolha um recurso no +">
+    Digite no campo de mensagem. Toque em **+** para usar **Câmera**, **Fotos**, **Arquivos**, **Frases rápidas** ou **Nota para o time**:
+
+    - Você pode enviar até 10 anexos por vez (cada anexo vira uma mensagem) e escrever uma legenda em cada foto ou vídeo. Numa foto, dá para recortar e girar antes de enviar; desenhar na foto funciona só no iPhone. Usar a câmera pede permissão do celular.
+    - **Frases rápidas** também abre ao digitar `/` no campo de mensagem (veja [Criar frases rápidas](/docs/conversas/criar-frases-rapidas-para-suas-conversas)).
+    - **Nota para o time** (com permissão de nota privada) troca o campo por uma nota interna, que só o time vê.
+
+    Em vez de texto, você pode mandar um áudio: segure o ícone de microfone enquanto fala e solte para enviar; para cancelar, deslize para a esquerda antes de soltar.
+  </Step>
+  <Step title="Envie">
+    Toque no botão de enviar para mandar o texto, a nota ou os anexos.
+  </Step>
+</Steps>
+
+Mercado Livre e SMS não aceitam anexo nem áudio.
+
+## Ações numa mensagem
+
+Toque e segure uma mensagem dentro da conversa para abrir as ações disponíveis (algumas só aparecem em certos canais e conforme o seu papel):
+
+- Reagir com emoji na barra acima da mensagem (só no WhatsApp).
+- **Responder:** cita a mensagem, só no WhatsApp e no Instagram oficial (arrastar a mensagem para a direita também responde). No Mercado Livre, toque e segure a pergunta do cliente que você quer responder.
+- **Encaminhar:** seleciona uma ou mais mensagens e envia pelo destino escolhido em **Encaminhar para**.
+- **Transcrever:** transcreve uma mensagem de áudio, se o seu papel permitir.
+- **Copiar:** copia o texto da mensagem.
+- **Apagar:** apaga uma mensagem enviada pela equipe no WhatsApp por QR Code: a sua, com a permissão **Deletar própria mensagem**; a de um colega, com **Deletar mensagens de outros membros**. O app pede confirmação, e a operação não pode ser desfeita. O WhatsApp oficial não permite apagar mensagens.
+
+## Quando o WhatsApp oficial pede um modelo
+
+Só no WhatsApp oficial, passadas 24 horas da última mensagem do contato, o campo de envio dá lugar ao aviso de janela de atendimento encerrada, com **Escolher modelo**. Selecione um modelo aprovado para retomar o atendimento (veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
+
+## Resolver, atribuir e mudar o grupo
+
+A barra de ações da conversa age direto: toque em **Resolver** (ou **Reabrir**) ou nos botões do responsável e do grupo para escolher outro. Quando houver campos obrigatórios ao resolver, preencha-os na tela **Resolver conversa** e toque em **Resolver**.
+
+**Responsável**, **Grupo** e **Tags** também ficam em **Dados do contato** → **Sessão**, conforme o seu papel. No iPhone, ao tocar e segurar a conversa na lista, **Ver detalhes** abre a tela **Conversa** com essas opções. Veja [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir).
+
+## Dados do contato e mais opções
+
+Toque no nome do contato no topo da conversa para abrir **Dados do contato**. Algumas opções dependem do seu papel: se uma delas não aparecer, peça acesso a quem administra o workspace.
+
+- **Pesquisar:** busca mensagens no histórico da conversa aberta (**Pesquisar nesta conversa**).
+- **Agendamentos:** lista as mensagens agendadas da conversa.
+- **Mídia, links e docs:** reúne os arquivos e links trocados.
+- **Negócios** e **Tarefas**, se a opção aparecer: mostram as negociações e as tarefas do contato. Ver a lista não garante que você possa adicionar itens: se o botão **Adicionar negócio** ou **Adicionar tarefa** não aparecer, peça acesso a quem administra o workspace (veja [Criar e acompanhar tarefas](/docs/tarefas/criando-e-gerenciando-tarefas)).
+- **Sessão**, **Contato** e **Notas do contato:** mostram e permitem editar os dados da sessão, do contato e as notas, conforme o seu papel.
+- **Mais:** reúne seguir, marcar como lida ou não lida, marcar pendência e **Bloquear** / **Desbloquear**, além destas opções, se aparecerem:
+  - **Agendar mensagem**, **Executar bot** e **Exportar CSV** (não aparecem no Mercado Livre).
+  - **Transferir para outro canal**: só para outro número de WhatsApp. Ao transferir, **Resolver esta conversa** aparece só se o seu papel permitir resolver e não houver campos obrigatórios pendentes; conclua em **Transferir conversa**.
+
+## Agendar uma mensagem
+
+Em **Dados do contato** → **Mais**, toque em **Agendar mensagem**, se a opção aparecer (ela não existe no Mercado Livre; se não aparecer, peça a permissão a quem administra o workspace). Primeiro escolha a data e a hora em **Enviar em** e decida se liga **Repetir mensalmente** (no fim da tela). Depois preencha a mensagem por um destes caminhos:
+
+- **Texto:** escreva a mensagem.
+- **Modelo aprovado (só no WhatsApp oficial):** fora da janela de 24 horas (o horário escolhido cai depois de 24 horas da última mensagem do contato, ou o contato ainda não enviou nenhuma mensagem) ou com **Repetir mensalmente** ligado, mesmo dentro da janela, o campo de texto dá lugar a **Modelo de mensagem**. Escolha o modelo, preencha as variáveis e selecione o anexo do modelo quando forem exigidos.
+
+Por fim, toque em **Agendar mensagem**.
+
+A tela **Agendamentos** apenas lista os envios: para editar ou cancelar uma mensagem agendada, use a Kinbox no navegador (veja [Agendar uma mensagem](/docs/conversas/agendar-mensagem)).
+
+## Iniciar uma conversa
+
+Você pode iniciar conversas pelo app nos canais de WhatsApp, e-mail e SMS liberados para o seu papel (veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
+
+<Steps>
+  <Step title="Toque no botão + na aba Conversas">
+    No topo da lista de conversas, toque em **+** (**Enviar nova mensagem**).
+  </Step>
+  <Step title="Escolha o contato">
+    Em **Nova mensagem**, toque em **Nova conversa** para um contato novo (abre **Novo contato**). Para um contato já cadastrado, escolha-o em **Contatos recentes** ou na busca. Você também pode tocar em **Contato do celular** e escolher um contato da agenda do aparelho que tenha telefone salvo. Abre **Conversas do contato**: toque numa conversa da lista para continuar nela ou, para começar outra, toque em **Enviar mensagem** (se o contato ainda não tem conversas) ou em **Enviar mensagem por outro canal**. Esses botões só aparecem se o contato tiver telefone ou e-mail cadastrado.
+  </Step>
+  <Step title="Escolha o canal e preencha o contato">
+    Escolha o canal em **Enviar por**. Em **Novo contato**, preencha o nome e o telefone com código do país e DDD (por exemplo, `+55 11 90000-0001`) — ou o e-mail, no canal de e-mail. No canal de e-mail, o **Assunto** é obrigatório também para contato já cadastrado.
+  </Step>
+  <Step title="Escreva a mensagem ou escolha o modelo">
+    Nos canais com texto livre, escreva a primeira mensagem. No WhatsApp oficial não há texto livre: escolha um **Modelo aprovado**, preencha todas as variáveis e envie o anexo do cabeçalho quando o modelo exigir (veja [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)). Se o modelo aparecer como "Formato ainda não suportado", faça o envio pela Kinbox no navegador.
+  </Step>
+  <Step title="Envie">
+    Toque em **Enviar**.
+  </Step>
+</Steps>
+
+## Problemas comuns
+
+- **A aba Conversas mostra "Sem acesso à caixa".** O seu papel não dá acesso à **Caixa de entrada** deste workspace. Toque em **Trocar workspace** ou peça a liberação a quem administra o workspace (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+- **Aparece "Você não tem permissão para esta ação." ou uma mensagem que começa com "Seu perfil não permite…".** O seu papel não libera aquela ação. Peça o ajuste a quem administra o workspace.
+- **O botão `+` no topo da lista está desativado.** O seu papel não tem permissão para iniciar conversas. Peça a liberação a quem administra o workspace.
+- **A conversa mostra "Assuma este atendimento para visualizar as mensagens."** O seu papel só libera as mensagens depois que você assume o atendimento. Toque em **Assumir conversa**, se a opção aparecer; se não aparecer, peça a quem administra ou a um colega que atribua a conversa a você.
+- **O campo de mensagem foi trocado pelo aviso de janela encerrada.** Só no WhatsApp oficial, passaram-se 24 horas desde a última mensagem do contato. Toque em **Escolher modelo** para continuar com um modelo aprovado (veja [Janela de 24 horas: quando é preciso usar um template](/docs/canais/whatsapp/whatsapp-cloud-api/janela-de-24-horas)).
+
+## Veja também
+
+- [App da Kinbox para celular: o que dá para fazer](/docs/app/visao-geral)
+- [Notificações no app](/docs/app/notificacoes-no-app)

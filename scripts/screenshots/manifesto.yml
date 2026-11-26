@@ -3667,3 +3667,28 @@
   arquivo: images/ajuda/programa-de-parceiros/criar-template.webp
   paginas:
     - docs/programa-de-parceiros/templates
+
+# Seção app-mobile (Sua conta e app › App para celular)
+#
+# O app nativo não é capturado (sem simulador com o workspace de documentação). Só o atalho do web para baixar o app.
+
+- id: app-menu-baixar-app
+  url: /settings/account/profile
+  passos:
+    - esperar: '.g_user_avatar'
+    - clicar: '.g_user_avatar'
+    - esperar: '.ant-dropdown-menu-item:has-text("Baixar app para celular")'
+    - pausa: 600
+  esconder:
+    - '.ant-dropdown-menu-item:has-text("Abrir no Admin")'
+  alvo:
+    - '.g_user_avatar'
+    - '.ant-dropdown-menu.ant-dropdown-menu-root'
+  mascarar:
+    - '.g_user_avatar'
+    - '.ant-dropdown-menu-root figure'
+    - '.ant-dropdown-menu-root [class*="_user_menu_name"]'
+    - '.ant-dropdown-menu-root [class*="_user_menu_meta"]'
+  arquivo: images/ajuda/app/menu-baixar-app.webp
+  paginas:
+    - docs/app/visao-geral
