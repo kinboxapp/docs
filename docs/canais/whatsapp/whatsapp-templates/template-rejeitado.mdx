@@ -1,0 +1,85 @@
+---
+title: Meu template foi rejeitado, pausado ou desativado
+description: O que fazer quando a Meta rejeita, pausa ou desativa um template do WhatsApp oficial, muda a categoria dele ou a aprovação não sai.
+keywords: [template rejeitado, template recusado, template reprovado, template pausado, template desativado, categoria alterada, meta mudou a categoria, template pendente, aprovação demorando, qualidade do template, motivo da rejeição, não consigo editar template]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/whatsappApi/sections/TemplatesListSection.tsx
+  - web:src/pages/settings/whatsappApi/helpers/templates.ts
+  - web:src/components-old/header/NotificationDropItem.tsx
+  - api:src/modules/whatsapp-api/services/core/whatsapp-api-notifications.service.ts
+  - api:src/modules/whatsapp-api/services/templates/whatsapp-templates.service.ts
+codigo:
+  - web:src/pages/settings/whatsappApi/sections/TemplatesListSection.tsx
+  - web:src/pages/settings/whatsappApi/sections/TemplateBuilder.tsx
+  - web:src/pages/settings/whatsappApi/helpers/templates.ts
+  - web:src/components-old/header/NotificationDropItem.tsx
+  - api:src/modules/whatsapp-api/services/core/whatsapp-api-notifications.service.ts
+  - api:src/modules/whatsapp-api/services/templates/whatsapp-templates.service.ts
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+Na lista de **Templates** (em **Configurações** → **Automação** → **WhatsApp API**), o status do modelo aparece como **Rejeitado**, **Pausado** ou **Desativado**, a categoria foi alterada, o status continua em **Pendente**, a edição está bloqueada ou surge um erro ao solicitar aprovação ou excluir. Você também pode ver um aviso no sino de notificações do cabeçalho.
+
+Templates existem apenas no **WhatsApp oficial**, e a decisão de aprovar, recusar, pausar, desativar ou reclassificar um modelo é da Meta. A Kinbox exibe o status e o motivo recebidos da Meta e permite corrigir e reenviar o template.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="Template rejeitado">
+    **Como confirmar:** a coluna **Status** mostra **Rejeitado** em vermelho com o motivo enviado pela Meta logo abaixo (o texto vem como a Meta envia e pode estar em inglês). No sino de notificações também aparece **Template recusado:** com o nome do template e o motivo.
+
+    **O que fazer:** abra o template em **Editar**, ajuste o conteúdo conforme o motivo informado, clique em **Salvar** e depois em **Enviar atualização para a Meta** (veja [Editar um template](/docs/canais/criar-templates-dentro-do-kinbox#editar-um-template)). Você também pode criar um novo template. A Kinbox não tem botão para contestar a decisão na Meta.
+  </Accordion>
+
+  <Accordion title="Template pausado">
+    **Como confirmar:** a coluna **Status** mostra **Pausado** e o sino exibe **Template pausado:** "A Meta pausou por qualidade baixa o template". Antes da pausa, pode chegar a notificação **Qualidade do template:** "A qualidade caiu no template".
+
+    **O que fazer:** não use o template em envios enquanto ele estiver pausado. Revise o conteúdo e o público que recebe a mensagem; você pode editar o modelo, clicar em **Salvar** e usar **Enviar atualização para a Meta**, ou criar outro template.
+  </Accordion>
+
+  <Accordion title="Template desativado">
+    **Como confirmar:** a coluna **Status** mostra **Desativado** e o sino exibe **Template desativado:** com o nome do template.
+
+    **O que fazer:** abra o template em **Editar**, faça os ajustes necessários, clique em **Salvar** e em **Enviar atualização para a Meta**, ou crie um novo template.
+  </Accordion>
+
+  <Accordion title="A Meta mudou a categoria do template">
+    **Como confirmar:** a coluna **Categoria** muda sozinha (por exemplo, de **Utility** para **Marketing**) e o sino mostra **Categoria alterada:** "A Meta mudou a categoria do template".
+
+    **O que fazer:** a categoria final é definida pela Meta e a Kinbox não tem ação para pedir a categoria anterior de volta. Se a nova categoria não atender ao uso, edite o conteúdo, salve e clique em **Enviar atualização para a Meta**, ou crie outro template.
+  </Accordion>
+
+  <Accordion title="Fica em Pendente ou o status não atualiza">
+    **Como confirmar:** o template permanece com status **Pendente** ou **Submetido** na lista.
+
+    **O que fazer:** o prazo de análise depende da Meta. A Kinbox atualiza o status assim que a Meta responde e reconsulta templates em análise periodicamente. Para forçar a atualização agora, abra o menu de três pontos acima da tabela e clique em **Sincronizar Meta**.
+  </Accordion>
+
+  <Accordion title="Não consigo editar o template">
+    **Como confirmar:** ao abrir o template, aparece o aviso **Template em análise pela Meta** e os campos ficam bloqueados.
+
+    **O que fazer:** templates em **Pendente**, **Submetido**, **Em recurso**, **Sinalizado pela Meta** ou **Exclusão pendente** não podem ser editados. Aguarde a Meta concluir a análise para editar e reenviar.
+  </Accordion>
+
+  <Accordion title="Não consigo excluir ou aparece Permissão de exclusão pendente">
+    **Como confirmar:** o topo da lista exibe o aviso **Permissão de exclusão pendente**, ou a tentativa de exclusão retorna uma mensagem informando que a Meta negou a exclusão.
+
+    **O que fazer:** o canal oficial não tem permissão na Meta para excluir templates. Reconecte o canal de WhatsApp oficial pela janela da Meta seguindo [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao).
+  </Accordion>
+
+  <Accordion title="Aparece 'Envie a mídia do cabeçalho antes de solicitar aprovação.'">
+    **Como confirmar:** a mensagem surge ao clicar em **Solicitar Aprovação**.
+
+    **O que fazer:** você escolheu **Imagem**, **Vídeo** ou **Documento** em **Amostra de mídia**, mas não enviou o arquivo de exemplo. Envie o arquivo em **Mídia do cabeçalho** ou mude **Amostra de mídia** para **Nenhum** se quiser usar apenas texto no cabeçalho.
+  </Accordion>
+</AccordionGroup>
+
+## Ainda não resolveu?
+
+Fale com o suporte informando o nome do template, o canal oficial, o status exibido e o motivo que aparece abaixo do status ou na notificação.
+
+Se o template já está **Aprovado** mas falha no envio, veja [Problemas ao conectar ou enviar pelo WhatsApp oficial](/docs/canais/whatsapp/whatsapp-cloud-api/problemas-comuns) e [Enviar um template na conversa, na campanha e na automação](/docs/canais/whatsapp/whatsapp-templates/enviar-template).

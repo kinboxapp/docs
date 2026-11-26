@@ -224,3 +224,160 @@
   arquivo: images/ajuda/conceitos/caixa-de-entrada.webp
   paginas:
     - docs/conceitos/visao-geral
+
+# ── Seção whatsapp-templates (Templates, Flows e carrossel) ──────────────────────────────────────────
+# A Central WhatsApp API só abre com um canal oficial: o workspace de documentação não tem, então os prints vêm do
+# workspace de testes (id 1, canal oficial de QA "Oficial Teste"). Nenhum print mostra lista de templates (os nomes
+# de QA não servem de exemplo). O avatar do cabeçalho fica fora de todos os recortes; a tarja nele só cumpre a regra.
+- id: whatsapp-templates-central
+  workspace: Kinbox
+  url: /settings/whatsapp-api
+  passos:
+    - esperar: 'text=Central WhatsApp API'
+    - pausa: 800
+  alvo:
+    - '.g_settings_simple_page >> text=Central WhatsApp API'
+    - '.g_settings_simple_page button:has-text("Carrossel")'
+    - '.g_settings_simple_page button:has-text("Templates")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/central-whatsapp-api.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-templates/visao-geral
+
+- id: whatsapp-templates-tipo
+  workspace: Kinbox
+  url: /settings/whatsapp-api/templates/new
+  passos:
+    - esperar: 'text=Como você quer criar seu template?'
+    - pausa: 800
+  alvo: '.max-w-\[608px\]'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/novo-template-tipo.webp
+  paginas:
+    - docs/canais/criar-templates-dentro-do-kinbox
+
+# Builder do template padrão com "Informações básicas" aberto. O nome do canal fica sob tarja.
+- id: whatsapp-templates-informacoes
+  workspace: Kinbox
+  url: /settings/whatsapp-api/templates/new?kind=standard
+  passos:
+    - esperar: 'text=Informações básicas'
+    - digitar:
+        seletor: '#name'
+        texto: confirmacao_de_pedido
+    - pausa: 800
+  alvo: '.ant-collapse-item-active:has-text("Nome do template")'
+  mascarar:
+    - '.ant-form-item:has(#channelId) .ant-select-selector'
+  arquivo: images/ajuda/whatsapp-templates/novo-template-informacoes.webp
+  paginas:
+    - docs/canais/criar-templates-dentro-do-kinbox
+
+- id: whatsapp-templates-conteudo
+  workspace: Kinbox
+  url: /settings/whatsapp-api/templates/new?kind=standard
+  passos:
+    - esperar: 'text=Informações básicas'
+    - clicar: '.ant-collapse-header:has-text("Conteúdo")'
+    - esperar: 'text=Corpo da mensagem'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active:has-text("Corpo da mensagem")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/novo-template-conteudo.webp
+  paginas:
+    - docs/canais/criar-templates-dentro-do-kinbox
+
+- id: whatsapp-templates-carrossel-cards
+  workspace: Kinbox
+  url: /settings/whatsapp-api/carousel/new
+  passos:
+    - esperar: 'text=Informações básicas'
+    - clicar: '.ant-collapse-header:has-text("Cards")'
+    - esperar: 'text=Adicionar card'
+    - pausa: 800
+  alvo: '.ant-collapse-item-active:has-text("Adicionar card")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/carrossel-cards.webp
+  paginas:
+    - docs/canais/criar-carrossel-dentro-do-kinbox
+
+# Editor de um Flow de teste do workspace 1 ("Formulario", 1 tela). Recorte: barra do nome, barra do Salvar e a tela.
+# O selo "Stag" do canto inferior esquerdo fica fora do recorte.
+- id: whatsapp-templates-flow-editor
+  workspace: Kinbox
+  url: /settings/whatsapp-api/flows/6ae33a5f867e51f3160c5358
+  passos:
+    - esperar: '.react-flow__node-wa-screen'
+    - pausa: 1200
+  alvo:
+    - '.react-flow__node-start'
+    - '.react-flow__node-wa-screen'
+    - '.pointer-events-auto:has(> button:has-text("Salvar"))'
+    - '.pointer-events-auto:has-text("Formulario")'
+  mascarar:
+    - 'button:has-text("Ask")'
+  arquivo: images/ajuda/whatsapp-templates/flow-editor.webp
+  paginas:
+    - docs/canais/criar-flows-dentro-do-kinbox
+
+# Criar flow, etapa 3 (ponto de partida). Não clica em "Criar flow": nada é gravado.
+- id: whatsapp-templates-flow-ponto-de-partida
+  workspace: Kinbox
+  url: /settings/whatsapp-api/flows/new
+  passos:
+    - esperar: '#name'
+    - digitar:
+        seletor: '#name'
+        texto: pesquisa_de_satisfacao_doc
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'text=Escolha o canal WhatsApp'
+    - pausa: 800
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'text=Escolha o ponto de partida'
+    - pausa: 800
+  alvo:
+    - 'text=Escolha o ponto de partida'
+    - 'text=Comece com o canvas limpo.'
+    - 'text=Descreva o flow para o Copiloto montar a estrutura.'
+    - 'button[aria-expanded]:has-text("Escolha um template inicial pronto para editar.")'
+  mascarar:
+    - '.g_user_avatar'
+  arquivo: images/ajuda/whatsapp-templates/flow-ponto-de-partida.webp
+  paginas:
+    - docs/canais/criar-flows-dentro-do-kinbox
+
+# Janela "Enviar mensagem" numa conversa do canal oficial de QA (workspace 1, conversa 3418, janela fechada), com o
+# template aprovado de teste "status_com_imagem" ({{1}} e {{2}} no corpo). Não clica em Enviar. Número e canal sob tarja.
+- id: whatsapp-templates-enviar-mensagem
+  workspace: Kinbox
+  url: /inbox/all/3418
+  passos:
+    - esperar: 'button:has-text("Enviar template")'
+    - clicar: 'button:has-text("Enviar template")'
+    - esperar: '.ant-modal-content #template_id'
+    - clicar: '.ant-modal-content .ant-form-item:has(#template_id) .ant-select-selector'
+    - digitar:
+        seletor: '#template_id'
+        texto: status_com_imagem
+    - pausa: 800
+    - tecla: Enter
+    - esperar: '#template_bodyFields_0'
+    - digitar:
+        seletor: '#template_bodyFields_0'
+        texto: '4512'
+    - digitar:
+        seletor: '#template_bodyFields_1'
+        texto: BR123456789
+    - clicar: '.ant-modal-content :text("Enviar mensagem")'
+    - pausa: 1000
+  alvo: '.ant-modal-content'
+  mascarar:
+    - '.ant-modal-content .ant-input-affix-wrapper:has(#phone)'
+    - '.ant-modal-content .ant-form-item:has(label[title="Canal"]) .ant-select-selection-item'
+  arquivo: images/ajuda/whatsapp-templates/enviar-mensagem-template.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-templates/enviar-template

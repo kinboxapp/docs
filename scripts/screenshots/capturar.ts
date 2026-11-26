@@ -54,6 +54,8 @@ const CSS_ESTAVEL = `
   /* Sem animação, os modais do antd ficariam presos no estado inicial da entrada (invisíveis) */
   .ant-zoom-appear, .ant-zoom-appear-prepare, .ant-zoom-enter, .ant-zoom-enter-prepare,
   .ant-fade-appear, .ant-fade-appear-prepare, .ant-fade-enter, .ant-fade-enter-prepare { opacity: 1 !important; transform: none !important; }
+  /* Sem animação, dropdown do antd fechando ficaria preso visível (estado de saída) */
+  .ant-slide-up-leave, .ant-slide-down-leave, .ant-select-dropdown-hidden { display: none !important; }
   /* Fundo branco atrás de modais: os cantos arredondados do recorte não mostram a tela de trás */
   .ant-modal-mask { background: #fff !important; }
 `
