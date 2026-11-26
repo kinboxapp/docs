@@ -1532,11 +1532,11 @@
     "tipo": "negativo"
   },
   {
-    "pergunta": "Preciso anotar que tenho que ligar para um cliente amanhã às 10h e deixar isso com outro vendedor. Onde faço isso?",
+    "pergunta": "Quem vê o ícone Meta atual no topo da tela? Um vendedor que não participa da meta também vê?",
     "esperado": [
-      "docs/tarefas/criando-e-gerenciando-tarefas"
+      "llm/metas/criando-metas-no-kinbox"
     ],
-    "tipo": "guia"
+    "tipo": "referencia"
   },
   {
     "pergunta": "Coloquei lembrete na tarefa e não apareceu aviso nenhum, nem no celular. Por que não fui avisado?",

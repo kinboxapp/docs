@@ -49,22 +49,23 @@ Detalhes de referência de [Criar metas para a equipe](/docs/metas/criando-metas
 
 Confira tipo, valor alvo e período antes de clicar em **Finalizar**.
 
-Ao sair do assistente com alterações não salvas, a Kinbox pergunta `"Você tem mudanças não salvas, tem certeza que deseja sair?"`.
+No computador, ao sair do assistente de criação com alterações não salvas, a Kinbox pergunta `"Você tem mudanças não salvas, tem certeza que deseja sair?"`. No celular não há esse aviso. Fechar a gaveta **Editar Meta** descarta as alterações sem aviso: clique em **Finalizar** antes de fechar.
 
 ## Participantes
 
 | Opção | Negociações que contam (pelo responsável atual) |
 | --- | --- |
 | **Todos** | Todas as negociações que passam nas regras da meta, inclusive as sem responsável. |
-| **Membros específicos** | Só as negociações cujo responsável está em **Membros**. Com **Membros** vazio, contam as de todos. |
-| **Grupo** | Só as negociações cujo responsável é membro de um grupo escolhido e que estão nesse grupo. Com **Grupos** vazio, contam as negociações cujo responsável é membro de qualquer grupo do workspace. |
+| **Membros específicos** | Só as negociações cujo responsável está em **Membros**. Com **Membros** vazio, contam todas, inclusive as sem responsável. |
+| **Grupo** | Só as negociações que estão em um dos grupos escolhidos e cujo responsável é membro de um dos grupos escolhidos; as duas coisas são conferidas separadamente, então a negociação pode estar num grupo e o responsável ser membro de outro. Com **Grupos** vazio, não há filtro de grupo da negociação e contam as negociações cujo responsável é membro de qualquer grupo do workspace; se nenhum grupo tem membros, também não há filtro de responsável (contam todas, inclusive as sem responsável). |
 
 ## Milestones
 
 - O botão **+ Milestone** fica desativado enquanto o valor alvo não estiver preenchido.
-- Cada milestone novo vem com o nome `"Milestone #N"` e metade do valor alvo.
+- Cada milestone novo vem com o nome `"Milestone #N"` e metade do valor alvo, arredondada para baixo.
 - Campos: **🚩 Tipo** (**Global**, **Para um membro específico**, **Individual para todos os membros**, **Para um grupo específico**), **Membro** ou **Grupo** quando o tipo pede, **Nome** e **Valor** (ou **Quantidade**), com controle deslizante.
-- **Valor** vai de 1 até o valor alvo.
+- Na meta de **Valor do negócio**, o campo **Valor** e o controle deslizante vão de 1 até o valor alvo.
+- Na meta de **Quantidade de produto**, o controle deslizante vai de 1 até o valor alvo, e o campo numérico **Quantidade** aceita a partir de 1, sem máximo.
 - Mensagens: `"Digite um milestone."` (campo do milestone vazio), `"Selecione um membro."`, `"Selecione um grupo."`.
 - Não há aviso nem marca de "atingido" quando um milestone é alcançado.
 

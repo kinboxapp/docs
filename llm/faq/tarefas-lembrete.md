@@ -1,6 +1,6 @@
 ---
 title: A Kinbox me avisa quando uma tarefa vence?
-description: O responsável recebe um lembrete dentro da Kinbox antes do prazo, se a tarefa tiver horário e o momento do lembrete ainda estiver no futuro; não há aviso no celular, por e-mail nem de tarefa atrasada.
+description: Como funciona o lembrete de tarefa na Kinbox, quem recebe, quando ele dispara e por que às vezes não chega; não há aviso no celular, por e-mail nem de tarefa atrasada.
 keywords: [lembrete de tarefa, aviso de tarefa, notificação de tarefa, tarefa vencida, tarefa atrasada, não recebi o lembrete, alerta da tarefa, lembrete no celular]
 publico: llm
 tipo: faq
