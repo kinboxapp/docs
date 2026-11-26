@@ -33,7 +33,7 @@ A quantidade permitida depende do que está contratado no seu plano: canais de *
 - `"WhatsApp bloqueado para seu plano atual."`, `"Seu plano atual não permite adicionar ou modificar número de whatsapps."`, `"Seu plano atual não permite adicionar o novo canal"` ou `"Sua assinatura expirou"` (assinatura antiga)
 - `"Você não pode adicionar canais de Instagram em plano trial"`
 
-Veja a visão geral em [Canais: conectar e gerenciar](/docs/canais/visao-geral).
+Veja a visão geral em [Canais: conectar e gerenciar](/docs/canais/visao-geral). Para aumentar a quantidade contratada, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
 
 ## Variações
 
