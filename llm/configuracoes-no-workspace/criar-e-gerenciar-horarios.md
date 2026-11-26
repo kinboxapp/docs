@@ -29,7 +29,7 @@ Referência complementar de [Definir os horários de atendimento](/docs/configur
 - **Quem pode gerenciar:** em **Configurações** → **Ambiente** → **Horários**, o proprietário ou quem tem a opção **Horários** ("Ver, adicionar, editar e excluir horário comercial.") na seção **Gerenciamento do Ambiente** do papel (na tela, **Permissão**). Em **Configurações** → **Ambiente** → **Geral**, o proprietário ou quem tem a opção **Workspace** ("Alterar informações de workspace.") em **Gerenciamento do Ambiente**.
 - **Estrutura:** cada horário tem um nome, os dias da semana ligados (de **Segunda** a **Domingo**) e uma ou mais faixas de hora por dia. Intervalos (como almoço) são definidos adicionando duas ou mais faixas no mesmo dia. Tudo fora das faixas conta como fora do horário.
 - **Limites inclusivos:** o minuto de início e o minuto de fim contam como **dentro** do horário (por exemplo, `09:00` até `12:00` inclui `09:00` e `12:00`).
-- **Fuso horário:** todos os horários são avaliados no **Fuso horário** configurado em **Configurações** → **Ambiente** → **Geral**, no cartão **Preferências** ("Escolha o fuso horário que deseja operar o seu ambiente").
+- **Fuso horário:** as faixas de hora são avaliadas no **Fuso horário** configurado em **Configurações** → **Ambiente** → **Geral**, no cartão **Preferências** ("Escolha o fuso horário que deseja operar o seu ambiente").
 
 ## Campos, limites e mensagens da tela
 

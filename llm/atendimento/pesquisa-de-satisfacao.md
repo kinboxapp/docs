@@ -49,7 +49,7 @@ A avaliação não sai quando ocorre qualquer uma das condições abaixo (mesmo 
 
 ## Registro da resposta e a quem a nota conta
 
-- **Comparação da resposta:** a resposta enviada pelo contato é comparada com o **Texto** das opções configuradas; quando atinge pelo menos 75% de semelhança, a Kinbox grava a **Nota** correspondente e envia o **Texto de agradecimento**. Respostas que não atingem essa semelhança não são registradas como nota.
+- **Comparação da resposta:** a Kinbox aceita a resposta quando ela é igual à **Nota** ou ao **Texto** de uma das opções (sem diferenciar maiúsculas de minúsculas). Se não for igual, compara com o **Texto** das opções e aceita a partir de 75% de semelhança. Aceita a resposta, grava a **Nota** daquela opção e envia o **Texto de agradecimento**. Resposta que não é aceita não vira nota e segue como mensagem comum da conversa.
 - **Atribuição da nota:** a nota conta para o membro responsável pela conversa no momento da resposta. Se a conversa estiver sem responsável, conta para o último membro que foi responsável naquela sessão (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)).
 - **Relatório e exibição pública:** as notas ficam em **Relatórios** → **Avaliação** ([Relatório de avaliação](/docs/relatorios/avaliacao); **Relatório de Avaliação**, com **Nota Média** e **Avaliadores** por membro, dia, grupo, tag ou canal; cada sessão entra pelo dia em que foi resolvida). A opção **Nota de avaliação pública** em **Configurações** → **Ambiente** → **Geral** ("Mostrar a nota de avaliação de cada membro para os demais nas salas") exibe as notas nas salas.
 

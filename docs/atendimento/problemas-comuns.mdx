@@ -38,7 +38,12 @@ As conversas novas ficam sem responsável, a atribuição automática não distr
   </Accordion>
 
   <Accordion title="Ninguém disponível ou online (ou membro ficando indisponível sozinho)">
-    **Como confirmar:** na distribuição, **Disponível** é o membro **Ativo** com o interruptor **Disponível** ligado, e **online** é o membro disponível que também está com a Kinbox aberta e conectada (navegador ou app). As regras que escolhem um membro entre vários só escolhem membros disponíveis, e as opções com "online" exigem membro online (confira a ajuda abaixo de **Atribuir para**). Verifique a bolinha na foto de cada membro, se o membro participa do grupo da regra (grupos são equipes de membros, não grupos de WhatsApp), a opção **Tornar indisponível se inativo.** em **Configurações** → **Ambiente** → **Geral** (no workspace, chamado na tela de **ambiente**) e a restrição **Limitar horário que pode ficar disponível** no papel.
+    **Como confirmar:** na distribuição, **Disponível** é o membro **Ativo** com o interruptor **Disponível** ligado, e **online** é o membro disponível que também está com a Kinbox aberta e conectada (navegador ou app). As regras que escolhem um membro entre vários (as de rodízio e as de "menos atendimentos"; as de último membro só exigem **Disponível** com **Membro precisa estar disponível** marcado) só escolhem membros disponíveis, e as opções com "online" exigem membro online (confira a ajuda abaixo de **Atribuir para**). Confira:
+
+    - a bolinha na foto de cada membro (verde = disponível);
+    - se o membro participa do grupo da regra (grupos são equipes de membros, não grupos de WhatsApp);
+    - a opção **Tornar indisponível se inativo.** em **Configurações** → **Ambiente** → **Geral** (no workspace, chamado na tela de **ambiente**);
+    - a restrição **Limitar horário que pode ficar disponível** no papel.
 
     **O que fazer:** ligue **Disponível** no menu da foto ou em [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros), confira os participantes em [Criar grupos de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos), escolha uma estratégia sem "online" ou ajuste o tempo de inatividade e o horário do papel (veja [Ficar disponível ou indisponível](/docs/conta/disponibilidade)).
   </Accordion>
@@ -50,15 +55,17 @@ As conversas novas ficam sem responsável, a atribuição automática não distr
   </Accordion>
 
   <Accordion title="Recebi conversa estando indisponível ou um membro recebe tudo">
-    **Como confirmar:** confira **Atribuir para** na regra ativa. **Atribuir para um membro**, as regras que escolhem só grupo e as de último membro com **Membro precisa estar disponível** desmarcado atribuem mesmo para membro indisponível. Um membro também recebe tudo quando a regra é fixa (**Atribuir para um membro**), quando só ele está disponível ou online, ou quando convidados que ainda não entraram recebem conversas nas regras que não exigem online.
+    **Como confirmar:** confira **Atribuir para** na regra ativa. **Atribuir para um membro** e as de último membro com **Membro precisa estar disponível** desmarcado atribuem mesmo para membro indisponível. As regras que escolhem só grupo não escolhem responsável: o responsável atual continua se faz parte do grupo escolhido (mesmo indisponível) e sai se não faz. Um membro também recebe tudo quando a regra é fixa (**Atribuir para um membro**) ou quando só ele está disponível ou online.
+
+    Membros convidados que ainda não entraram também podem receber conversas nas regras sem "online": desligue **Disponível** deles até entrarem.
 
     **O que fazer:** troque para uma estratégia cíclica ou de "menos atendimentos" com mais membros disponíveis, marque **Membro precisa estar disponível** nas regras de último membro ou desligue **Disponível** em [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros) para quem não está atendendo.
   </Accordion>
 
   <Accordion title="Regras por DDD, estado ou CEP não atribuem">
-    **Como confirmar:** veja se a conversa chegou por um canal sem telefone com DDD (como Instagram ou e-mail), se o contato está sem o campo personalizado `cep` preenchido ou se os grupos estão sem DDD ou CEP cadastrados.
+    **Como confirmar:** veja se a conversa chegou por um canal sem telefone com DDD (como Instagram ou e-mail), se o contato está sem o campo personalizado `cep` preenchido ou se os grupos estão sem DDD ou CEP cadastrados. Com **Grupos participantes** vazio (o campo mostra "Todos os grupos"), os grupos sem DDD também entram e podem receber conversas de qualquer contato, inclusive de canais sem telefone.
 
-    **O que fazer:** use outra estratégia nos canais sem telefone e consulte os requisitos em [Estratégias de atribuição automática](/docs/atendimento/estrategias-de-atribuicao).
+    **O que fazer:** use outra estratégia nos canais sem telefone e consulte os requisitos em [Estratégias de atribuição automática](/docs/atendimento/estrategias-de-atribuicao). Se os campos de DDD e CEP não aparecerem na tela do grupo, fale com o suporte.
   </Accordion>
 
   <Accordion title="O bot ou o agente de IA mudou a atribuição">
@@ -76,7 +83,7 @@ As conversas novas ficam sem responsável, a atribuição automática não distr
   <Accordion title="A mensagem de fora do horário (ou de membro indisponível) não sai">
     **Como confirmar:** em **Configurações** → **Ambiente** → **Geral**, confirme se existe um **Horário comercial** escolhido e se **Mensagem quando fora do horário comercial** (ou **Mensagem quando membro indisponível**) está ligada. Essas mensagens só são enviadas em conversas que já têm um membro responsável.
 
-    **O que fazer:** escolha o **Horário comercial** em **Geral** (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)). Para responder também conversas sem responsável fora do horário, use um bot com **Horários** (não vale com **Atende todos os canais**) ou um bloco **Decisão** com a condição **Horário** (veja [Blocos do bot](/docs/bot/blocos-do-bot)).
+    **O que fazer:** escolha o **Horário comercial** em **Geral** (veja [Definir os horários de atendimento](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios)). Para responder também conversas sem responsável fora do horário, use um bot, que começa sozinho quando o contato abre uma sessão nova. O bot só começa **dentro** dos horários escolhidos no campo **Horários**: cadastre um horário cujas faixas cubram o período **fora** do expediente e escolha esse horário no bot (não vale com **Atende todos os canais**). Outra opção é um bot que possa começar nesse período e use o bloco **Decisão** com a condição **Horário** → **está fora de** (veja [Blocos do bot](/docs/bot/blocos-do-bot)).
   </Accordion>
 
   <Accordion title="As conversas chegam, mas não recebo o aviso">

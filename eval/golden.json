@@ -727,12 +727,20 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Quero que cada cliente volte sempre para o mesmo atendente que cuidou dele antes, tem como?",
+    "pergunta": "Por que recebi uma conversa nova mesmo estando indisponível?",
     "esperado": [
-      "llm/faq/contato-responsavel-fixo",
-      "docs/atendimento/estrategias-de-atribuicao"
+      "docs/atendimento/problemas-comuns",
+      "docs/atendimento/estrategias-de-atribuicao",
+      "docs/conta/disponibilidade"
     ],
-    "tipo": "faq"
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como separo a equipe em setores, tipo vendas e suporte?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/criar-e-gerenciar-grupos"
+    ],
+    "tipo": "guia"
   },
   {
     "pergunta": "A Kinbox calcula e paga bônus para os atendentes de acordo com a nota das avaliações?",

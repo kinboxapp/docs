@@ -30,7 +30,7 @@ Crie regras de atribuição automática para distribuir as sessões novas entre 
 
 - Uma regra ligada roda sozinha sempre que uma mensagem do contato abre uma **sessão nova**, em qualquer canal (inclusive grupos de WhatsApp). Ela não roda quando uma sessão é reaberta, em mensagens de uma sessão já aberta nem em conversas iniciadas por um membro pela Kinbox.
 - Só uma regra ligada é usada em cada sessão nova, e a Kinbox não garante qual regra vence quando várias servem para a mesma situação. Deixe ligada só uma regra para cada situação (lembre que **Todos** vale tanto para o primeiro contato quanto para o contato existente).
-- Na distribuição, **Disponível** é o membro **Ativo** com o interruptor **Disponível** ligado; **online** é o membro disponível que também está com a Kinbox aberta e conectada (navegador ou app). As regras que escolhem um membro entre vários só escolhem membros disponíveis, e as opções com "online" exigem membro disponível e conectado.
+- Na distribuição, **Disponível** é o membro **Ativo** com o interruptor **Disponível** ligado; **online** é o membro disponível que também está com a Kinbox aberta e conectada (navegador ou app). As regras que escolhem um membro entre vários (as de rodízio e as de "menos atendimentos"; as de último membro só exigem **Disponível** com **Membro precisa estar disponível** marcado) só escolhem membros disponíveis, e as opções com "online" exigem membro disponível e conectado.
 
 <Tip>
   O bot (bloco **Atendimento**), as automações, os agentes de IA (ação **Transferir**), os cenários e a API conseguem usar uma regra mesmo desligada. Se a regra existe só para ser chamada por um desses recursos, deixe-a desligada na lista para evitar que ela rode sozinha em toda sessão nova.
@@ -91,7 +91,7 @@ Para ver todas as opções do campo **Atribuir para**, os campos de cada uma e a
 
 ## Depois de configurar
 
-Quando a regra distribui uma sessão nova, a conversa mostra a mensagem de sistema "Conversa transferida por [nome da regra] para [membro ou grupo]". Se a regra escolher um membro que não participa do grupo atual da conversa, a conversa sai desse grupo; se escolher um grupo do qual o responsável atual não participa, a conversa fica sem responsável. Quando ninguém atende às condições da estratégia, a conversa fica sem responsável.
+Quando a regra distribui uma sessão nova, a conversa mostra a mensagem de sistema "Conversa transferida por [nome da regra] para [membro ou grupo]". Se a regra escolher um membro que não participa do grupo atual da conversa, a conversa sai desse grupo; se escolher um grupo do qual o responsável atual não participa, a conversa fica sem responsável. Quando ninguém atende às condições da estratégia, a regra não faz nova atribuição e, em geral, mostra uma mensagem de sistema com o nome dela; se a sessão ainda não tem responsável, continua sem (se já tem, por exemplo quando o bot ou uma automação chamam a regra, o responsável continua).
 
 Você acompanha as distribuições no relatório **Atribuição** (veja [Relatório de atribuição](/docs/relatorios/atribuicao)). Veja também como gerenciar a disponibilidade em [Ficar disponível ou indisponível](/docs/conta/disponibilidade) e [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros), como usar regras no [bot](/docs/bot/blocos-do-bot) e nas [ações do fluxograma do agente de IA](/docs/agente-de-ia/acoes-do-fluxograma), ou como atribuir manualmente em [Atribuir, mover para um grupo ou transferir uma conversa](/docs/conversas/atribuir-e-transferir).
 
