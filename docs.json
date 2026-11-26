@@ -274,6 +274,16 @@
                   "docs/campanhas/velocidade-e-horario",
                   "docs/campanhas/problemas-comuns"
                 ]
+              },
+              {
+                "group": "Anúncios e Tracking",
+                "pages": [
+                  "docs/marketing/visao-geral",
+                  "docs/marketing/meta-ads",
+                  "docs/marketing/google-ads",
+                  "docs/marketing/tracking",
+                  "docs/marketing/relatorios-de-marketing"
+                ]
               }
             ]
           },

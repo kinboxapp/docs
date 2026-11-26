@@ -3170,3 +3170,112 @@
   arquivo: images/ajuda/relatorios/permissoes-relatorios.webp
   paginas:
     - docs/relatorios/exportar-e-permissoes
+
+# Seção marketing (Campanhas e marketing › Anúncios e Tracking)
+#
+# Os apps Meta Ads e Tracking são ligados pela tela (Configurações → Integrações → Apps); o Google Ads fica desligado
+# para o print da divulgação. A etapa `marketing` do seed (`bun seed.ts --so marketing`) cadastra o site fictício
+# "Site da loja" (https://www.example.com, chave "Chave do site") e avisa se algum dos dois apps estiver desligado. Nenhuma conta da Meta ou do Google é conectada (sem print do relatório com dados nem das janelas de
+# autorização). O snippet do Tracking leva tarja: ele traz a chave e o endereço do script do staging. O teste de
+# instalação só cria a sessão de teste (a URL de teste é do example.com e não é aberta).
+
+- id: marketing-divulgacao
+  url: /reports/dashboard/marketing/google-ads
+  passos:
+    - esperar: 'h1:has-text("Acompanhe suas campanhas")'
+    - pausa: 800
+  alvo: 'xpath=//h1[contains(., "Acompanhe suas campanhas")]/..'
+  mascarar: []
+  arquivo: images/ajuda/marketing/divulgacao.webp
+  paginas:
+    - docs/marketing/visao-geral
+    - docs/marketing/google-ads
+
+- id: marketing-meta-ads-app
+  url: /settings/apps/meta_ads
+  passos:
+    - esperar: 'section:has-text("Conexão Meta Ads") >> text=Conecte sua conta'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - 'section:has-text("Conexão Meta Ads")'
+  mascarar: []
+  arquivo: images/ajuda/marketing/meta-ads-conectar.webp
+  paginas:
+    - docs/marketing/meta-ads
+
+- id: marketing-tracking-sites
+  url: /settings/marketing/tracking
+  passos:
+    - esperar: 'text=Site da loja'
+    - pausa: 800
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/marketing/tracking-sites.webp
+  paginas:
+    - docs/marketing/tracking
+
+- id: marketing-tracking-relatorio
+  url: /reports/dashboard/marketing/tracking
+  passos:
+    - esperar: 'text=Interações web'
+    - pausa: 1000
+  alvo:
+    - 'xpath=//h1[contains(., "Visão do Gestor")]/../..'
+    - '.ant-card:has-text("Interações web")'
+  mascarar: []
+  arquivo: images/ajuda/marketing/tracking-relatorio.webp
+  paginas:
+    - docs/marketing/relatorios-de-marketing
+
+- id: marketing-tracking-novo-site
+  url: /settings/marketing/tracking
+  passos:
+    - esperar: 'text=Site da loja'
+    - clicar: 'button:has-text("Novo site")'
+    - esperar: 'h1:has-text("Configure seu site")'
+    - digitar: { seletor: 'input[placeholder="Ex: Site institucional"] >> nth=0', texto: 'Blog da loja' }
+    - digitar: { seletor: 'input[placeholder="seusite.com.br ou www.seusite.com.br"]', texto: 'blog.example.com' }
+    - digitar: { seletor: 'input[placeholder="Ex: Site institucional"] >> nth=1', texto: 'Chave do blog' }
+    - pausa: 800
+  alvo: 'xpath=//h1[contains(., "Configure seu site")]/../..'
+  mascarar: []
+  arquivo: images/ajuda/marketing/tracking-novo-site.webp
+  paginas:
+    - docs/marketing/tracking
+
+- id: marketing-tracking-snippet
+  url: /settings/marketing/tracking
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'h1:has-text("Configure seu site")'
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'h1:has-text("Instale o snippet")'
+    - pausa: 1200
+  alvo: 'xpath=//h1[contains(., "Instale o snippet")]/../..'
+  mascarar:
+    - 'textarea.font-mono'
+  arquivo: images/ajuda/marketing/tracking-snippet.webp
+  paginas:
+    - docs/marketing/tracking
+
+- id: marketing-tracking-teste
+  url: /settings/marketing/tracking
+  passos:
+    - clicar: 'text=Site da loja'
+    - esperar: 'h1:has-text("Configure seu site")'
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'h1:has-text("Instale o snippet")'
+    - clicar: 'button:has-text("Continuar")'
+    - esperar: 'h1:has-text("Teste a instalação")'
+    - clicar: 'button:has-text("Iniciar teste")'
+    - esperar: 'text=Aguardando o snippet ser detectado.'
+    - pausa: 1500
+  alvo: 'xpath=//h1[contains(., "Teste a instalação")]/../..'
+  mascarar:
+    - 'a.font-mono'
+  arquivo: images/ajuda/marketing/tracking-teste.webp
+  paginas:
+    - docs/marketing/tracking
