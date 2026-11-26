@@ -6,6 +6,7 @@ publico: humano
 tipo: conceito
 fontes:
   - web:src/pages/settings/bot/Bot.tsx
+  - api-v0:server/modules/chat/chatBotHandler.js
   - web:src/pages/settings/automations/index.tsx
   - web:src/pages/settings/workflows/index.tsx
   - web:src/pages/settings/agents/index.tsx
@@ -13,6 +14,8 @@ fontes:
   - api:src/modules/agents/agent-bot.service.ts
 codigo:
   - web:src/pages/settings/bot/Bot.tsx
+  - web:src/pages/settings/bot/EditBotSettings.tsx
+  - api-v0:server/modules/chat/chatBotHandler.js
   - web:src/pages/settings/bot/panels/MidLeftPanel.tsx
   - web:src/pages/settings/bot/drawers/EditNodeLLMDrawer.tsx
   - web:src/pages/settings/automations/EditAutomations.tsx
@@ -39,7 +42,7 @@ A Kinbox reúne diferentes ferramentas de automação e inteligência artificial
 
 O **Bot** (**Configurações** → **Automação** → **Bot**, botão **Novo Bot**) conduz o contato por um fluxo montado com blocos e respostas previstas, como **Mensagem**, **Menu**, **Entrada de dados**, **Decisão**, **Atendimento**, **Ação de CRM** e **Integração**.
 
-Ele pode ser ativado por condições (por exemplo, se o contato é novo ou já existente) e atender todos os canais ou canais escolhidos (inclusive grupos do WhatsApp, quando habilitado). Para ativar um bot, todos os caminhos do fluxo precisam terminar no bloco **Fim do bot**. Um bot sem bloco de IA não consome saldo.
+Ele começa sozinho quando o contato abre uma sessão nova num canal do bot. Você escolhe os canais em **Canais que atende**, com **Horários** e grupos do WhatsApp (**Atende grupos do WhatsApp**) se quiser, ou liga **Atende todos os canais**; com essa opção ligada, o bot também começa fora dos horários e em grupos do WhatsApp. Para ligar um bot, o **Início do fluxo** precisa estar ligado a um bloco, e cada caminho deve terminar num **Fim do bot**. Um bot sem bloco de IA não consome saldo. Veja [Bot: visão geral](/docs/bot/visao-geral).
 
 ## Agentes de IA
 

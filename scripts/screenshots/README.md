@@ -37,7 +37,9 @@ O seed encontra o workspace pelo nome e só cria o que falta, então pode rodar 
 - o funil `Vendas`, com 4 etapas e 6 negócios;
 - 3 membros convidados (`@example.com`) e a equipe `Atendimento`;
 - 3 respostas rápidas;
-- o agente de IA `Lia`, desligado e sem canal.
+- o agente de IA `Lia`, desligado e sem canal;
+- o bot `Atendimento inicial`, desligado, com o widget em **Canais que atende**;
+- o bot `Consulta de pedido` (blocos de integração com endereços `exemplo.com`), desligado e sem canal, e o campo personalizado Json `pedido` (sessão).
 
 Se um print precisa de um dado que o seed não tem, acrescente o dado no `seed.ts` antes de capturar.
 

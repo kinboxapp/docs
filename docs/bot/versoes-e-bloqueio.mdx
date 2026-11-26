@@ -1,0 +1,109 @@
+---
+title: Histórico de publicações, clonar, exportar e bloquear um bot
+description: Como abrir uma versão anterior de um bot, clonar, exportar e importar um bot e proteger o bot (ou só as integrações) com senha.
+keywords: [histórico de publicações, versão anterior, restaurar bot, voltar versão, clonar bot, exportar bot, importar bot, json do bot, bloquear bot, senha do bot, bloquear apenas integrações, desbloquear bot]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/bot/HistoryVersionModal.tsx
+  - web:src/pages/settings/bot/BotBlockModal.tsx
+  - web:src/pages/settings/bot/BotUnblockModal.tsx
+  - web:src/pages/settings/bot/Bot.tsx
+  - api-v0:server/routes/botApiRoutes.js
+codigo:
+  - web:src/pages/settings/bot/HistoryVersionModal.tsx
+  - web:src/pages/settings/bot/BotBlockModal.tsx
+  - web:src/pages/settings/bot/BotUnblockModal.tsx
+  - web:src/pages/settings/bot/Bot.tsx
+  - web:src/pages/settings/bot/EditBot.tsx
+  - web:src/pages/settings/bot/panels/TopLeftPanel.tsx
+  - api-v0:server/routes/botApiRoutes.js
+  - api-v0:server/controllers/BotController.js
+verificado_em: 2026-11-26
+---
+
+Recupere uma versão anterior do seu bot pelo histórico, duplique ou transfira fluxos com clonar, exportar e importar e use bloqueio por senha para restringir a edição no editor.
+
+<Note>
+  Quem pode:
+  - Ver o histórico, clonar, exportar e importar bots: permissão **Bot** ou proprietário do workspace.
+  - Bloquear e desbloquear bots com senha: permissão **Pode Bloquear bots** ou proprietário.
+</Note>
+
+## Voltar para uma versão anterior
+
+O **Histórico de publicações** lista as últimas 100 gravações do bot feitas no último ano (365 dias), com o nome e a foto do membro que salvou (ou "Desconhecido") e a data e hora. Entram no histórico todas as gravações do bot — como publicações, ativações pela lista e bloqueios; a criação inicial (primeira publicação) não aparece.
+
+<Steps>
+  <Step title="Abra o histórico no editor">
+    Abra o bot em **Configurações** → **Automação** → **Bot** e clique em **Histórico de publicações** (ícone de relógio ao lado de **Configurações**, no topo direito). Se o bot estiver bloqueado com senha, informe a senha antes para abrir o editor.
+  </Step>
+
+  <Step title="Escolha e abra a versão">
+    Selecione uma linha na janela **Histórico de publicações** e clique em **Abrir versão**.
+
+    O editor carrega o fluxo daquela gravação e exibe a etiqueta **Versão anterior** ao lado do nome do bot. Se a versão não abrir ou vier sem blocos, escolha outra linha.
+  </Step>
+
+  <Step title="Publique ou volte para a versão atual">
+    Nada muda nas conversas enquanto você apenas visualiza a versão antiga:
+
+    - Para voltar a usar essa versão, clique em **Publicar**.
+    - Para desistir e retornar ao fluxo atual, clique no **X** da etiqueta **Versão anterior** ("Voltar para versão atual").
+  </Step>
+</Steps>
+
+## Clonar, exportar e importar
+
+Use essas opções na tela **Bots** (**Configurações** → **Automação** → **Bot**) para duplicar um fluxo ou levá-lo para outro workspace:
+
+- **Clonar:** no menu de três pontos da linha do bot, clique em **Clonar** e confirme. Cria "Cópia de [nome]" com os mesmos canais.
+- **Exportar:** no menu de três pontos da linha do bot, clique em **Exportar**. Baixa um arquivo `.json` com o fluxo completo do bot.
+- **Importar:** no menu de três pontos acima da lista, à direita, clique em **Importar** e escolha um arquivo `.json`. Cria "Cópia importada de [nome]". Se nada acontecer ao escolher o arquivo, confira se ele é um `.json` exportado de um bot da Kinbox.
+
+Considere estes cuidados ao usar cópias e arquivos:
+
+- Todo bot clonado ou importado nasce **desligado** e entra no **fim** da lista. Arraste a linha para ajustar a prioridade antes de ligar (veja [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)).
+- A cópia mantém a senha e o tipo de bloqueio do bot original. Para clonar, exportar ou excluir um bot bloqueado, a tela pede a senha antes.
+- Ao importar um bot vindo de outro workspace, revise canais, horários e todos os blocos que apontam para membros, grupos, tags, campos personalizados ou outros bots antes de ligar.
+- O arquivo exportado leva o fluxo completo, inclusive os dados dos blocos de integração (endereços, cabeçalhos e código); guarde-o com cuidado.
+
+## Bloquear um bot com senha
+
+<Note>
+  Apenas membros com a permissão **Pode Bloquear bots** (ou o proprietário) veem as opções **Bloquear** e **Desbloquear** na lista. Quem conhece a senha ainda consegue abrir um bot bloqueado no editor.
+</Note>
+
+<Steps>
+  <Step title="Abra a janela de bloqueio">
+    Na tela **Bots**, clique no menu de três pontos do bot e selecione **Bloquear**.
+  </Step>
+
+  <Step title="Defina a senha e o alcance do bloqueio">
+    Na janela **Bloquear bot**, preencha o campo **Senha**. Se quiser deixar o fluxo visível e restringir apenas os blocos **Integração**, marque **Bloquear apenas integrações**.
+  </Step>
+
+  <Step title="Confirme o bloqueio">
+    Clique em **Bloquear**. Aparece o aviso "Bot bloqueado com sucesso" e o bot passa a mostrar um ícone de cadeado na lista.
+  </Step>
+</Steps>
+
+### O que muda quando o bot está bloqueado
+
+- **Bloqueio do bot inteiro:** ao abrir o bot no editor, ou ao clicar em **Clonar**, **Exportar** ou **Excluir**, a tela abre a janela **Digite a senha do bot**. Sem a senha correta, o editor volta para a lista.
+- **Bloquear apenas integrações:** o editor abre sem pedir senha; o bloqueio esconde o conteúdo dos blocos **Integração** no editor para quem não tem a senha, pedindo a senha apenas quando alguém abre um bloco **Integração** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)).
+- **Funcionamento nas conversas:** bloquear um bot não o desliga nem altera o atendimento — ele continua funcionando normalmente nas conversas.
+
+### Como desbloquear
+
+Na tela **Bots**, clique no menu de três pontos do bot bloqueado, escolha **Desbloquear** (requer a permissão **Pode Bloquear bots** ou ser proprietário) e informe a senha atual. Isso remove o bloqueio do bot inteiro e também a opção **Bloquear apenas integrações**.
+
+<Warning>
+  Guarde a senha do bot em local seguro. A tela não oferece como recuperar ou redefinir a senha sem informar a senha atual.
+</Warning>
+
+## Veja também
+
+- [Bot: visão geral](/docs/bot/visao-geral)
+- [Criar e publicar um bot](/docs/bot/aprender-a-usar-o-bot)
+- [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)

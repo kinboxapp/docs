@@ -1,0 +1,98 @@
+---
+title: Usar um campo personalizado JSON no bot
+description: Como guardar a resposta de uma integração num campo personalizado do tipo Json e usar as propriedades dele nas mensagens e nas decisões do bot.
+keywords: [campo json, campo personalizado json, json no bot, json path, propriedade do json, mapReturnToCustomField, decisão por json, chave json]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/customFields/EditCustomField.tsx
+  - web:src/components-old/forms/ConditionsInput/index.tsx
+  - web:src/components-old/ui/PlaceholderDropSearch/index.tsx
+  - api-v0:server/auxiliary/Utils.js
+  - api-v0:server/services/CustomerPlatformService.js
+codigo:
+  - web:src/pages/settings/customFields/EditCustomField.tsx
+  - web:src/components-old/forms/ConditionsInput/index.tsx
+  - web:src/components-old/ui/PlaceholderDropSearch/index.tsx
+  - api-v0:server/auxiliary/Utils.js
+  - api-v0:server/services/CustomerPlatformService.js
+  - api-v0:server/modules/chat/botFlowV2.js
+verificado_em: 2026-11-26
+---
+
+Guarde o objeto JSON devolvido por uma integração em um campo personalizado do tipo **Json** e leia cada propriedade desse objeto nas mensagens e nas condições do bloco **Decisão**.
+
+<Note>
+  Quem pode: para criar o campo personalizado, permissão **Campos personalizados** ou proprietário do workspace (na tela, **ambiente**). Para configurar o bot, permissão **Bot** ou proprietário.
+</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Crie um campo personalizado do tipo Json">
+    Vá em **Configurações** → **Ambiente** → **Campos personalizados** e crie um novo campo com:
+
+    - **Nome do campo:** por exemplo, `Pedido`.
+    - **Tipo de campo:** selecione **Json**.
+    - **Entidade:** selecione **Contato** ou **Sessão de conversa** (somente essas duas entidades podem ser gravadas e lidas pelo bot em mensagens e decisões).
+
+    A **Chave reservada** é gerada a partir do nome, sem acentos, em minúsculas e com `_` no lugar de espaços — por exemplo, `Pedido` gera `{{pedido}}`.
+  </Step>
+
+  <Step title="Grave a resposta da integração no campo">
+    No editor do bot, adicione um bloco **Integração** antes de usar o campo:
+
+    - **Com Chamar endpoint:** use `mapReturnToCustomField` com a chave do campo sem `{{}}` apontando para o caminho do objeto na resposta. Sempre indique um caminho (não deixe vazio).
+    - **Com Executar código:** chame `await kinbox.setCustomField("pedido", data)` passando o objeto recebido.
+
+    Por exemplo, imagine que o endpoint `https://exemplo.com/api/pedidos?email={{email}}` devolve:
+
+    ```json
+    {
+      "data": {
+        "numero": "123456",
+        "dias_para_entrega": 5
+      }
+    }
+    ```
+
+    Com `"mapReturnToCustomField": { "pedido": "data" }`, o bot grava o objeto inteiro de `data` no campo `pedido`. Veja mais em [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot) e [Executar código no bot](/docs/bot/usando-integracao-execucao-codigo).
+
+    <Frame caption="Bloco Integração salvando o objeto data da resposta no campo personalizado pedido">
+      <img src="/images/ajuda/bot/integracao-chamar-endpoint.webp" alt="Gaveta Integração com Chamar endpoint configurado para salvar a chave data da resposta no campo personalizado pedido usando mapReturnToCustomField" />
+    </Frame>
+  </Step>
+
+  <Step title="Use as propriedades em uma mensagem">
+    Nos campos de texto do bot (como no bloco **Mensagem**), use a sintaxe `{{json:<chave>.<caminho>}}`. Ela aceita propriedades aninhadas com ponto e índices de lista, como `{{json:pedido.itens[0].nome}}`.
+
+    Seguindo o exemplo anterior:
+
+    ```text
+    Seu pedido {{json:pedido.numero}} chega em {{json:pedido.dias_para_entrega}} dias.
+    ```
+
+    Você também pode clicar no botão `{}` (**Chaves reservadas**) no editor de texto e escolher o campo: a Kinbox insere `{{json:pedido.key_name}}` para você trocar `key_name` pelo caminho desejado.
+
+    <Note>
+      Usar `{{pedido}}` sozinho em um campo do tipo **Json** sai vazio no texto enviado ao contato. Sempre inclua o prefixo `json:` e o caminho da propriedade, como `{{json:pedido.numero}}`.
+    </Note>
+  </Step>
+
+  <Step title="Decida o caminho no bloco Decisão">
+    Adicione um bloco **Decisão** (veja [Blocos do bot](/docs/bot/blocos-do-bot)) e crie uma condição escolhendo o campo **Pedido** (no grupo **Contato** ou **Conversa/Sessão**, conforme a entidade criada).
+
+    Ao escolher um campo **Json**, aparece um campo extra para o caminho (`json path (e.g: a[0].b)`). Informe apenas o caminho **dentro** do objeto, sem o nome do campo e sem `json:` — por exemplo:
+
+    - **Campo:** **Pedido**
+    - **Caminho** (campo extra): `dias_para_entrega`
+    - **Operador:** **é igual a**
+    - **Valor:** `0`
+
+    Os operadores disponíveis para campos **Json** são **é igual a**, **não é igual a**, **é maior que**, **é menor que**, **é vazio**, **não é vazio**, **contém** e **não contém**.
+  </Step>
+</Steps>
+
+## Depois de configurar
+
+Clique em **Salvar** em cada bloco editado, teste no **Simular bot** para conferir se as propriedades são preenchidas corretamente na mensagem e se a **Decisão** segue pelo caminho esperado, e clique em **Publicar**.

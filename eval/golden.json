@@ -260,5 +260,49 @@
     "pergunta": "Como recupero uma conversa que apaguei no aplicativo do WhatsApp do meu celular?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Publiquei meu chatbot, ele está ligado, mas quando o cliente manda mensagem nada acontece. O que pode ser?",
+    "esperado": [
+      "docs/bot/problemas-comuns",
+      "llm/bot/blocos-do-bot"
+    ],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Como monto um menu automático com opções para o cliente escolher pelo número?",
+    "esperado": [
+      "docs/bot/blocos-do-bot",
+      "docs/bot/aprender-a-usar-o-bot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para o bot consultar o status do pedido no meu sistema pela API e responder o cliente?",
+    "esperado": [
+      "docs/bot/integracoes-do-bot",
+      "llm/bot/integracoes-do-bot"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O robô começou a responder dentro dos grupos do WhatsApp, como faço ele parar?",
+    "esperado": [
+      "llm/faq/bot-grupos-whatsapp",
+      "docs/bot/problemas-comuns"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "O que acontece se o cliente some no meio do fluxo do bot e não responde mais?",
+    "esperado": [
+      "llm/faq/bot-sessao-expirada"
+    ],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Consigo criar um bot que responde pelo Telegram pessoal do meu celular, sem cadastrar canal na Kinbox?",
+    "esperado": [],
+    "tipo": "negativo"
   }
 ]

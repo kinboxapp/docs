@@ -82,6 +82,25 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Automação e IA",
+            "icon": "robot",
+            "pages": [
+              {
+                "group": "Bot",
+                "pages": [
+                  "docs/bot/visao-geral",
+                  "docs/bot/aprender-a-usar-o-bot",
+                  "docs/bot/integracoes-do-bot",
+                  "docs/bot/usando-integracao-execucao-codigo",
+                  "docs/bot/usar-campo-personalizado-em-json",
+                  "docs/bot/versoes-e-bloqueio",
+                  "docs/bot/blocos-do-bot",
+                  "docs/bot/problemas-comuns"
+                ]
+              }
+            ]
           }
         ]
       },
@@ -449,6 +468,26 @@
     {
       "source": "/docs/bot-e-copiloto",
       "destination": "/docs/conceitos/automacao-e-ia"
+    },
+    {
+      "source": "/docs/bot/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
+    },
+    {
+      "source": "/docs/bot/usando-a-inteligencia-artificial-com-chatgpt",
+      "destination": "/docs/agente-de-ia/visao-geral"
+    },
+    {
+      "source": "/docs/bot/usando-campo-personalizado-json",
+      "destination": "/docs/bot/usar-campo-personalizado-em-json"
+    },
+    {
+      "source": "/docs/bot/usando-integracao-por-execucao-de-codigo",
+      "destination": "/docs/bot/usando-integracao-execucao-codigo"
+    },
+    {
+      "source": "/docs/usando-o-kinbox/aprendendo-a-usar-o-bot",
+      "destination": "/docs/bot/aprender-a-usar-o-bot"
     },
     {
       "source": "/docs/canais",
