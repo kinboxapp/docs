@@ -1,0 +1,122 @@
+---
+title: "Criar uma automação"
+description: Passo a passo para criar uma automação na Kinbox, escolher o gatilho, filtrar com condições, adicionar ações e depois ligar, desligar, editar, clonar ou excluir.
+keywords: [criar automação, nova automação, configurar automação, configurando automações, ativar automação, desligar automação, clonar automação, excluir automação, editar automação]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/automations/index.tsx
+  - web:src/pages/settings/automations/EditAutomations.tsx
+  - web:src/components-old/forms/ActionsInput/index.tsx
+  - web:src/components-old/forms/ConditionsInput/index.tsx
+  - web:src/components-old/common/SettingsPage/SettingsPageEdit.tsx
+  - web:src/components-old/shared/table/tableActionsColumn.tsx
+codigo:
+  - web:src/pages/settings/automations/**
+  - web:src/components-old/forms/ActionsInput/**
+  - web:src/components-old/forms/ConditionsInput/**
+  - web:src/pages/settings/index.tsx
+  - api-v0:server/controllers/AutomationController.js
+  - api-v0:server/controllers/AutomationEventsController.js
+  - api-v0:server/modules/EventsEnum.js
+verificado_em: 2026-11-26
+---
+
+Crie uma automação para que a Kinbox execute ações sozinha quando um evento acontece — como responder fora do horário, mover conversas para um grupo ou encerrar atendimentos parados.
+
+<Note>
+  Quem pode: ver, criar, editar e excluir automações exige a permissão **Automações** (na seção **Gerenciamento do Ambiente** do papel, chamado na tela de **Permissão**) ou ser o proprietário do workspace (na tela, **ambiente**). Se o item **Automações** não aparecer, peça ao proprietário ou a quem administra os papéis (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes) e [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios)).
+</Note>
+
+## Antes de começar
+
+- Crie antes os itens que a automação vai usar — [horários](/docs/configuracoes-no-workspace/criar-e-gerenciar-horarios), [grupos](/docs/configuracoes-no-workspace/criar-e-gerenciar-grupos), [tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags), [bots](/docs/bot/visao-geral), [regras de atribuição automática](/docs/configuracoes-no-workspace/criar-atribuicoes-automaticas) e [funis](/docs/crm/visao-geral). As listas das condições e das ações só mostram o que já existe no workspace.
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a tela de automações">
+    Vá em **Configurações** → **Automação** → **Automações** e clique em **Nova automação**.
+
+    <Frame caption="Tela Automações com o botão Nova automação no topo">
+      <img src="/images/ajuda/automacao/automacoes-lista.webp" alt="Lista Automações com o botão Nova automação, campo Pesquisar por nome, filtro Tudo e cinco automações de exemplo desligadas" />
+    </Frame>
+  </Step>
+
+  <Step title="Defina o nome e se ela já nasce ativa">
+    No painel **Criar automação**, preencha **Nome da automação** (obrigatório).
+
+    O interruptor **Ativo** já vem ligado numa automação nova: ao salvar, ela passa a valer na hora. Se quiser montar com calma antes de ligar, desligue **Ativo**.
+  </Step>
+
+  <Step title="Escolha o gatilho primeiro">
+    Abra a lista **Gatilho** e escolha o evento. Os gatilhos aparecem agrupados em **Conversa**, **Membro** e **Contato**, e você pode digitar parte do nome para encontrar mais rápido.
+
+    Escolha o **Gatilho** antes de preencher condições e ações: trocar o gatilho depois apaga as condições e as ações já preenchidas e desliga **Condições**.
+  </Step>
+
+  <Step title="Preencha o tempo, se o gatilho for de tempo">
+    Se você escolheu um gatilho de tempo, preencha **Minutos sem resposta** (ou **Minutos sem conversa criada**, no gatilho **Tempo sem conversa ao criar contato**). O campo é obrigatório, aceita no mínimo `1` minuto, vem com `3` nos gatilhos de conversa e mostra a ajuda "Pode haver atraso de até 3 minutos.". Se o campo de minutos não aparecer, confira se escolheu um gatilho de tempo.
+
+    Nos gatilhos **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**, também aparece a caixa **Habilitar para sessões geradas por API ou Integração**: marque se a automação também deve rodar em sessões abertas pela API ou por integrações. Se a caixa não aparecer, confira o gatilho escolhido.
+
+    Lembre que só **uma** automação ligada vale por gatilho de tempo, e que **Tempo para expirar a Janela de 24h** só vale para WhatsApp oficial.
+
+    <Frame caption="Automação com gatilho de tempo, sem condições e duas ações">
+      <img src="/images/ajuda/automacao/automacao-editar.webp" alt="Painel Editar automação de Encerrar conversas paradas com gatilho Tempo sem nova mensagem, caixa Habilitar para sessões geradas por API ou Integração, Minutos sem resposta em 1440, Sem condições e ações Enviar mensagem e Resolver conversa" />
+    </Frame>
+  </Step>
+
+  <Step title="Configure condições (opcional)">
+    Com o interruptor desligado (**Sem condições**), a automação roda toda vez que o gatilho acontece.
+
+    Para filtrar, ligue o interruptor de **Condições**, clique em **Condição** no bloco "Quando **todas** as condições são verdadeiras" ou em "E quando **qualquer** das condições são verdadeiras" e escolha campo, operador e valor. O **X** remove a linha.
+
+    O gatilho **Tempo sem conversa ao criar contato** não tem condições. Alguns campos só aparecem em gatilhos específicos — como **Tag**, que só aparece em **Ao adicionar tag**; se não aparecer, confira o gatilho escolhido. Veja todos os campos em [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes).
+
+    <Frame caption="Bloco de condições ligado com o filtro Tags contém Orçamento">
+      <img src="/images/ajuda/automacao/automacao-condicoes.webp" alt="Seção Condições ligada mostrando o bloco Quando todas as condições são verdadeiras com Tags contém Orçamento, o botão Condição e o bloco E quando qualquer das condições são verdadeiras vazio" />
+    </Frame>
+  </Step>
+
+  <Step title="Adicione as ações">
+    Clique em **Ação**, escolha uma opção em **Selecione uma ação...** e preencha os campos que aparecem. Repita para adicionar outras ações; o **X** remove a linha. As ações rodam na ordem em que aparecem na tela.
+
+    A lista de ações depende do gatilho: nos gatilhos de **Conversa** aparecem todas; em **Ao membro ficar online**, só **Atribuir conversas sem atendimento** (e só nesse gatilho existe a opção **Atribuir ao membro do gatilho**); em **Tempo sem conversa ao criar contato**, só **Iniciar conversa**. Se uma ação ou opção não aparecer, confira o gatilho escolhido. **Iniciar conversa** é feita para contatos novos sem conversa: para responder na própria conversa, use **Enviar mensagem**.
+
+    Em **Enviar mensagem**, a mensagem é só texto e o campo **Canal** não lista os canais do WhatsApp oficial (API) (deixe vazio para enviar na própria conversa). **Agendar execução de bot** só funciona em conversas de WhatsApp.
+
+    <Frame caption="Lista de ações aberta em Selecione uma ação...">
+      <img src="/images/ajuda/automacao/automacao-acoes.webp" alt="Menu Selecione uma ação... aberto exibindo Enviar mensagem, Executar bot, Atribuir, Mover para grupo, Adicionar tag, Resolver conversa, Reabrir conversa e Avaliar atendimento" />
+    </Frame>
+  </Step>
+
+  <Step title="Salve a automação">
+    Clique em **Salvar**. Aparece um aviso confirmando que a automação foi salva e ela passa a aparecer na lista. Se **Ativo** estiver ligado, ela já vale para novos eventos (automações não são retroativas).
+  </Step>
+</Steps>
+
+## Depois de criar
+
+- **Ligar ou desligar:** use o interruptor direto na linha da lista — a mudança grava na hora, sem abrir a automação. Use **Pesquisar por nome** e o filtro **Tudo** / **Ativos** / **Inativos** para localizar automações.
+- **Editar:** clique no nome da automação ou no menu de três pontos → **Editar**. Se tentar fechar o painel com alterações sem salvar, a Kinbox pergunta "Fechar sem salvar?"; clique em **Prosseguir** para descartar.
+- **Clonar:** no menu de três pontos, clique em **Clonar** para abrir uma automação nova já preenchida com o nome "Cópia de …". Revise os campos e salve. Antes de ligar uma cópia com gatilho de tempo, lembre que só **uma** automação ligada vale por gatilho de tempo.
+- **Excluir:** no menu de três pontos, clique em **Excluir** e confirme em "Tem certeza que deseja excluir essa automação?" → **Excluir**.
+
+<Warning>
+  Excluir uma automação não tem volta. Se você quer apenas pausar o funcionamento sem perder a configuração, desligue o interruptor na lista em vez de excluir.
+</Warning>
+
+- **Testar:** ligue a automação e provoque o gatilho em uma conversa de teste — use uma sessão nova depois de salvar, porque a automação não é retroativa. Em gatilhos de tempo, teste com poucos minutos e lembre do aviso "Pode haver atraso de até 3 minutos.". Para saber se rodou, veja o resultado na conversa: a ação **Atribuir** deixa a mensagem "Conversa atribuída por Automação …" (ou "Conversa transferida por Automação … para …"), um bot agendado pela automação aparece como "Bot iniciado por Automação …", e resolver ou reabrir mostra "Automação" no lugar do nome do membro.
+
+## Boas práticas
+
+- Dê um nome que deixe claro o gatilho e o resultado (por exemplo, **Aviso fora do horário**).
+- Use apenas uma automação ligada por gatilho de tempo e coloque todas as ações dela na mesma automação.
+- Comece sem condições (ou com poucas), teste em uma conversa e depois adicione filtros.
+
+## Próximos passos
+
+- [Exemplos de automação](/docs/automacao/exemplos)
+- [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes)
+- [Minha automação não disparou](/docs/automacao/problemas-comuns)

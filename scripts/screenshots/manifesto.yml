@@ -11,6 +11,7 @@
 # arquivo   saída em images/ajuda/<secao>/<nome>.webp
 # paginas   páginas da central que usam o print
 # largura  (opcional) largura da janela em px só para o item (padrão 1440; abaixo de 768 o app troca de layout)
+# manterFoco (opcional) true para não tirar o foco antes do print (lista suspensa aberta, que fecha ao perder o foco)
 # workspace (opcional) workspace do print; padrão: o de documentação. Outro workspace só para telas
 #           que o de documentação não tem (ex.: canal de WhatsApp) e sempre com `mascarar`
 
@@ -1652,6 +1653,7 @@
   arquivo: images/ajuda/atendimento/avaliacao-automacao.webp
   paginas:
     - docs/atendimento/pesquisa-de-satisfacao
+    - docs/automacao/exemplos
 
 # Configurar da ação Avaliar atendimento: painel Configurar Avaliação com Pergunta, Opções (Nota e Texto), Opção, Texto de agradecimento e Salvar (texto do bot de avaliação que o workspace recebe ao ser criado).
 - id: avaliacao-configurar
@@ -2981,3 +2983,83 @@
   arquivo: images/ajuda/cenarios/requisicao-http.webp
   paginas:
     - docs/cenarios/gatilhos-e-acoes
+
+# Seção automacao (Automação e IA › Automações). As automações de exemplo são criadas pelo seed (etapa `automacoes`),
+# todas desligadas, e abertas pela lista (clique no nome), sem id fixo.
+
+# Lista Automações: título, Nova automação, busca, filtro Tudo e as linhas com nome, gatilho e interruptor (todas desligadas).
+# Sem print da lista de gatilhos aberta.
+- id: automacoes-lista
+  largura: 1100
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Pedir avaliação")'
+    - pausa: 1000
+  alvo:
+    - 'header:has(h2:has-text("Automações"))'
+    - 'tr:has-text("Pedir avaliação")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacoes-lista.webp
+  paginas:
+    - docs/automacao/visao-geral
+    - docs/automacao/configurando-automacoes
+
+# Painel Editar automação de "Encerrar conversas paradas": Nome, Ativo (desligado), Gatilho Tempo sem nova mensagem,
+# Habilitar para sessões geradas por API ou Integração, Minutos sem resposta = 1440 com a ajuda do atraso, Sem condições
+# e as ações Enviar mensagem (Texto, Canal vazio) e Resolver conversa.
+- id: automacao-editar
+  altura: 1500
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Encerrar conversas paradas")'
+    - clicar: 'text=Encerrar conversas paradas'
+    - esperar: '.ant-drawer >> text=Resolver conversa'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Ação")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacao-editar.webp
+  paginas:
+    - docs/automacao/configurando-automacoes
+    - docs/automacao/exemplos
+
+# Condições de "Lembrete de orçamento": Quando todas as condições são verdadeiras, Tags contém Orçamento, e o bloco qualquer.
+- id: automacao-condicoes
+  altura: 1500
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Lembrete de orçamento")'
+    - clicar: 'text=Lembrete de orçamento'
+    - esperar: '.ant-drawer >> text=Orçamento'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer .ant-form-item:has-text("Condições")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacao-condicoes.webp
+  paginas:
+    - docs/automacao/configurando-automacoes
+    - docs/automacao/exemplos
+    - docs/automacao/gatilhos-e-acoes
+
+# Ações de "Aviso fora do horário": clica em + Ação e abre a lista de ações (sem salvar).
+- id: automacao-acoes
+  altura: 1500
+  manterFoco: true
+  url: /settings/automations
+  passos:
+    - esperar: 'tr:has-text("Aviso fora do horário")'
+    - clicar: 'text=Aviso fora do horário'
+    - esperar: '.ant-drawer >> text=Enviar mensagem'
+    - clicar: '.ant-drawer button:has-text("Ação")'
+    - pausa: 600
+    - clicar: '.ant-drawer .ant-select:has-text("Selecione uma ação...")'
+    - esperar: '.ant-select-dropdown:not(.ant-select-dropdown-hidden) >> text=Executar bot'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer .ant-select:has-text("Selecione uma ação...")'
+    - '.ant-select-dropdown:has-text("Executar bot")'
+  mascarar: []
+  arquivo: images/ajuda/automacao/automacao-acoes.webp
+  paginas:
+    - docs/automacao/configurando-automacoes

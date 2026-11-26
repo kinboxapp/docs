@@ -25,7 +25,7 @@ Não. A Kinbox não tem uma meta de SLA de resposta por conversa (prazo máximo 
 
 Para acompanhar e reagir à demora na resposta:
 
-- **Automação com gatilho de tempo:** use o gatilho **Tempo sem nenhuma resposta do membro na sessão nova** (campo **Minutos sem resposta**; pode haver atraso de até 3 minutos) para avisar, transferir ou executar outra ação. As automações também têm os gatilhos **Tempo sem nova mensagem** e **Tempo pendente**.
+- **Automação com gatilho de tempo:** use o gatilho **Tempo sem nenhuma resposta do membro na sessão nova** (campo **Minutos sem resposta**; pode haver atraso de até 3 minutos) para avisar, transferir ou executar outra ação. As automações também têm os gatilhos **Tempo sem nova mensagem** e **Tempo pendente** (veja [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes)).
 - **Indicação dinâmica de conversa pendente:** em **Configurações** → **Ambiente** → **Geral** (nas configurações gerais do workspace, chamado na tela de **ambiente**), muda a cor do círculo azul quando a conversa passa o tempo configurado em horas sem resposta do membro.
 - **Acompanhamento ao vivo:** o mapa de [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo) pinta cada conversa que espera resposta pelo tempo de espera, com estados de alerta e de atraso, e mostra a contagem de **atrasados** e a **pior espera**.
 - **Relatórios de produtividade:** acompanhe TME e TMA em [Relatório de produtividade](/docs/relatorios/produtividade).

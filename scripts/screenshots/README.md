@@ -5,7 +5,7 @@ Ferramentas para tirar os prints da central de ajuda no staging, sempre no works
 | Arquivo | Para que serve |
 | --- | --- |
 | `seed.ts` | Cria ou completa o workspace de documentação (`Loja Exemplo`) |
-| `manifesto.yml` | Um item por print: `id`, `url`, `passos`, `alvo`, `mascarar`, `arquivo`, `paginas` e, opcionais, `workspace`, `largura` (janela mais estreita para telas que ficam largas demais) e `altura` (janela mais alta para modais que passam da tela) |
+| `manifesto.yml` | Um item por print: `id`, `url`, `passos`, `alvo`, `mascarar`, `arquivo`, `paginas` e, opcionais, `workspace`, `largura` (janela mais estreita para telas que ficam largas demais), `altura` (janela mais alta para modais que passam da tela) e `manterFoco` (não tira o foco antes do print, para listas suspensas abertas, que fecham ao perder o foco) |
 | `capturar.ts` | Abre o staging com Playwright e gera os WebP em `images/ajuda/<secao>/<nome>.webp` |
 | `staging.ts` | Login e chamadas às APIs do staging, usado pelos dois scripts |
 
@@ -41,6 +41,7 @@ O seed encontra o workspace pelo nome e só cria o que falta, então pode rodar 
 - o bot `Atendimento inicial`, desligado, com o widget em **Canais que atende**;
 - o bot `Consulta de pedido` (blocos de integração com endereços `exemplo.com`), desligado e sem canal, e o campo personalizado Json `pedido` (sessão);
 - os campos de contato `Tipo de cliente` (seleção) e `Data de aniversário` e as organizações `Escritório Exemplo` e `Padaria Exemplo`, com contatos vinculados;
+- as automações de exemplo `Encerrar conversas paradas`, `Lembrete de orçamento`, `Aviso fora do horário` e `Orçamento para Vendas` (etapa `automacoes`, todas desligadas; usa o grupo, a tag e o horário da etapa `organização do atendimento`: rode `bun seed.ts --so "organização do atendimento,automacoes"`). Se encontrar uma automação de exemplo ligada, a etapa `automacoes` falha sem alterar as automações de exemplo; nas existentes, só acerta as condições e a caixa de condições ligadas;
 - o widget de exemplo `Site da loja`, já configurado (cores, textos, formulário, chamada para ação, balão de WhatsApp com número fictício e **Restringir domínio** = `https://www.example.com`), usado pelos prints da seção do widget. As configurações são reaplicadas a cada execução; se o canal existir sem as configurações do widget, ele é desativado e o widget é criado de novo.
 
 Se um print precisa de um dado que o seed não tem, acrescente o dado no `seed.ts` antes de capturar.
