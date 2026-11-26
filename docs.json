@@ -11,6 +11,37 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Central de ajuda",
+        "groups": [
+          {
+            "group": "Canais",
+            "icon": "tower-broadcast",
+            "pages": [
+              "docs/canais/visao-geral",
+              {
+                "group": "WhatsApp",
+                "pages": [
+                  "docs/canais/whatsapp/visao-geral",
+                  {
+                    "group": "Por QR Code",
+                    "pages": [
+                      "docs/canais/conectar-whatsapp-app",
+                      "docs/canais/whatsapp/whatsapp-app/o-que-funciona",
+                      "docs/canais/whatsapp/whatsapp-app/configuracoes",
+                      "docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo",
+                      "docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp",
+                      "docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas",
+                      "docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte",
+                      "docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Novidades",
         "pages": [
           "novidades"
@@ -354,6 +385,166 @@
     {
       "source": "/api",
       "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/api",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/assistente",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/authentication",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/bot",
+      "destination": "/docs/bot/visao-geral"
+    },
+    {
+      "source": "/docs/bot-e-copiloto",
+      "destination": "/docs/conceitos/automacao-e-ia"
+    },
+    {
+      "source": "/docs/canais",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/e-mail",
+      "destination": "/docs/canais/e-mail/visao-geral"
+    },
+    {
+      "source": "/docs/canais/instagram-direct",
+      "destination": "/docs/canais/instagram"
+    },
+    {
+      "source": "/docs/canais/telegram-1",
+      "destination": "/docs/canais/telegram"
+    },
+    {
+      "source": "/docs/canais/whatsapp",
+      "destination": "/docs/canais/whatsapp/visao-geral"
+    },
+    {
+      "source": "/docs/canais/whatsapp/adicionando-canal-whatsapp-app",
+      "destination": "/docs/canais/conectar-whatsapp-app"
+    },
+    {
+      "source": "/docs/canais/whatsapp/como-evitar-que-o-celular-desconecte",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/adicionando-canal-de-whatsapp-app",
+      "destination": "/docs/canais/conectar-whatsapp-app"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconcete",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-nas-campanhas",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-app/como-nao-ter-o-numero-bloqueado-pelo-whatsapp",
+      "destination": "/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp"
+    },
+    {
+      "source": "/docs/canais/whatsapp/whatsapp-business-api/limitacoes-do-whatsapp-api",
+      "destination": "/docs/canais/whatsapp/visao-geral"
+    },
+    {
+      "source": "/docs/copiloto",
+      "destination": "/docs/copiloto/copiloto-atualizado"
+    },
+    {
+      "source": "/docs/desenvolvedor",
+      "destination": "/docs/desenvolvedor/visao-geral"
+    },
+    {
+      "source": "/docs/integracoes",
+      "destination": "/docs/integracoes/visao-geral"
+    },
+    {
+      "source": "/docs/primeiros-passos",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/programa-de-parceiros",
+      "destination": "/docs/programa-de-parceiros/visao-geral"
+    },
+    {
+      "source": "/docs/quickstart",
+      "destination": "/docs/primeiros-passos/criar-seu-workspace-no-kinbox"
+    },
+    {
+      "source": "/docs/shorturl",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/usando-o-kinbox",
+      "destination": "/docs/usando-o-kinbox/conversa-em-um-clique"
+    },
+    {
+      "source": "/docs/v0",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/v1",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/v2",
+      "destination": "/api-reference/authentication"
+    },
+    {
+      "source": "/docs/changelog",
+      "destination": "/novidades"
+    },
+    {
+      "source": "/docs/canais/canal-customizado",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/criar-carrossel-dentro-do-kinbox",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/criar-flows-dentro-do-kinbox",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/criar-templates-dentro-do-kinbox",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/instagram",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/requisitos-para-se-ter-uma-api-oficial",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/sms",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/telegram",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/whatsapp-api-oficial-coexistente",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/whatsapp-api-oficial-padrao",
+      "destination": "/docs/canais/visao-geral"
+    },
+    {
+      "source": "/docs/canais/widget",
+      "destination": "/docs/canais/visao-geral"
     }
   ]
 }

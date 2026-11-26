@@ -5,9 +5,12 @@
  *   bun scripts/screenshots/capturar.ts              # todos os itens
  *   bun scripts/screenshots/capturar.ts --ids a,b    # só os ids listados
  *   bun scripts/screenshots/capturar.ts --headed     # mostra o navegador
+ *   bun scripts/screenshots/capturar.ts --explorar /settings/channels [--workspace Kinbox] [--clicar <seletor>]
+ *     abre a tela, executa o clique (opcional) e salva print e HTML em ~/.cache/kinbox-docs-screenshots/explorar.*,
+ *     para achar seletores antes de escrever o item do manifesto
  *
  * Faz login no staging web, entra no workspace de documentação, abre a `url` de cada item, executa os
- * `passos`, borra os seletores de `mascarar`, recorta o seletor `alvo` e salva o WebP em `arquivo`.
+ * `passos`, cobre com tarja os seletores de `mascarar`, recorta o seletor `alvo` e salva o WebP em `arquivo`.
  */
 import { mkdir } from 'node:fs/promises'
 import { homedir } from 'node:os'
@@ -31,6 +34,10 @@ type Item = {
   mascarar?: string[]
   arquivo: string
   paginas?: string[]
+  /** Largura da janela (px) só para este item, para telas largas demais. Padrão: 1440. Abaixo de 768 o app usa o layout antigo. */
+  largura?: number
+  /** Workspace onde o print é tirado. Padrão: o workspace de documentação. Outro workspace só para telas que ele não tem (ex.: WhatsApp), sempre com `mascarar`. */
+  workspace?: string
 }
 
 const RAIZ = resolve(import.meta.dir, '../..')
@@ -42,13 +49,19 @@ const QUALIDADE_WEBP = 0.9
 const CSS_ESTAVEL = `
   *, *::before, *::after { transition: none !important; animation: none !important; caret-color: transparent !important; }
   #kinbox-widget, .Toastify, .ant-message, .ant-notification { display: none !important; }
+  /* Sem animação, os modais do antd ficariam presos no estado inicial da entrada (invisíveis) */
+  .ant-zoom-appear, .ant-zoom-appear-prepare, .ant-zoom-enter, .ant-zoom-enter-prepare,
+  .ant-fade-appear, .ant-fade-appear-prepare, .ant-fade-enter, .ant-fade-enter-prepare { opacity: 1 !important; transform: none !important; }
+  /* Fundo branco atrás de modais: os cantos arredondados do recorte não mostram a tela de trás */
+  .ant-modal-mask { background: #fff !important; }
 `
 
 function argumentos() {
   const args = process.argv.slice(2)
   const i = args.indexOf('--ids')
   const ids = i >= 0 ? (args[i + 1] || '').split(',').map((s) => s.trim()).filter(Boolean) : []
-  return { ids, headed: args.includes('--headed') }
+  const valor = (flag: string) => (args.includes(flag) ? args[args.indexOf(flag) + 1] : undefined)
+  return { ids, headed: args.includes('--headed'), explorar: valor('--explorar'), workspace: valor('--workspace'), clicar: valor('--clicar') }
 }
 
 async function lerManifesto(): Promise<Item[]> {
@@ -61,6 +74,9 @@ async function lerManifesto(): Promise<Item[]> {
     }
     if (!/^images\/ajuda\/[^/]+\/[^/]+\.webp$/.test(item.arquivo)) {
       throw new Error(`Item ${item.id}: "arquivo" deve seguir images/ajuda/<secao>/<nome>.webp`)
+    }
+    if (item.workspace && item.workspace !== DOCS_WORKSPACE_NAME && !item.mascarar?.length) {
+      throw new Error(`Item ${item.id}: print fora do workspace de documentação precisa de "mascarar"`)
     }
   }
   return itens
@@ -77,10 +93,12 @@ async function workspaceAtivo(page: Page) {
   })
 }
 
-/** Entra no workspace de documentação pela tela de escolha de ambiente. */
-async function escolherWorkspace(page: Page) {
+const escaparRegex = (texto: string) => texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+/** Entra num workspace (por padrão, o de documentação) pela tela de escolha de ambiente. */
+async function escolherWorkspace(page: Page, nome = DOCS_WORKSPACE_NAME) {
   if (!page.url().includes('/select-workspace')) await page.goto(`${WEB_URL}/select-workspace`)
-  const card = page.locator('.wsp-card', { has: page.locator('.wsp-name', { hasText: new RegExp(`^${DOCS_WORKSPACE_NAME}$`) }) })
+  const card = page.locator('.wsp-card', { has: page.locator('.wsp-name', { hasText: new RegExp(`^${escaparRegex(nome)}$`) }) })
   await card.first().click({ timeout: 30_000 })
   await page.waitForURL((u) => !u.pathname.startsWith('/select-workspace'), { timeout: 30_000 })
 }
@@ -151,21 +169,44 @@ async function recorte(page: Page, alvo: string | string[]) {
   }
   const x = Math.max(0, Math.min(...caixas.map((c) => c.x)))
   const y = Math.max(0, Math.min(...caixas.map((c) => c.y)))
-  const direita = Math.min(VIEWPORT.width, Math.max(...caixas.map((c) => c.x + c.width)))
+  const direita = Math.min(page.viewportSize()?.width || VIEWPORT.width, Math.max(...caixas.map((c) => c.x + c.width)))
   const baixo = Math.min(VIEWPORT.height, Math.max(...caixas.map((c) => c.y + c.height)))
   return { x, y, width: direita - x, height: baixo - y }
 }
 
+/** Garante que a aba está no workspace do item antes de abrir a `url`. */
+async function garantirWorkspace(page: Page, nome: string) {
+  if (!page.url().startsWith(WEB_URL)) await page.goto(`${WEB_URL}/`, { waitUntil: 'domcontentloaded' })
+  if ((await workspaceAtivo(page)) === nome) return
+  await escolherWorkspace(page, nome)
+  if ((await workspaceAtivo(page)) !== nome) throw new Error(`Não consegui entrar no workspace "${nome}"`)
+}
+
 async function capturar(page: Page, conversor: Page, item: Item) {
+  await garantirWorkspace(page, item.workspace || DOCS_WORKSPACE_NAME)
+  await page.setViewportSize({ width: item.largura || VIEWPORT.width, height: VIEWPORT.height })
   await page.goto(WEB_URL + item.url, { waitUntil: 'domcontentloaded' })
   await page.waitForLoadState('networkidle').catch(() => {})
   await page.addStyleTag({ content: CSS_ESTAVEL })
   for (const passo of item.passos || []) await executarPasso(page, passo)
 
+  // Tarja sólida (opaca) por cima de cada elemento: borrão pode ser revertido ou deixar o texto legível.
+  // Seletor que não acha nada faz o item falhar, para um dado real não sair no print por engano.
   for (const seletor of item.mascarar || []) {
-    await page.locator(seletor).evaluateAll((els) => {
-      for (const el of els) (el as HTMLElement).style.filter = 'blur(6px)'
+    const total = await page.locator(seletor).evaluateAll((els) => {
+      for (const el of els) {
+        const r = (el as HTMLElement).getBoundingClientRect()
+        const tarja = document.createElement('div')
+        tarja.setAttribute('data-tarja', '')
+        Object.assign(tarja.style, {
+          position: 'fixed', left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px`,
+          background: '#a1a1aa', borderRadius: '6px', zIndex: '2147483647', pointerEvents: 'none',
+        })
+        document.body.appendChild(tarja)
+      }
+      return els.length
     })
+    if (!total) throw new Error(`mascarar: o seletor não achou nenhum elemento: ${seletor}`)
   }
 
   // Tira o foco de campos com autofocus, que sairiam com a borda de foco no print
@@ -179,8 +220,8 @@ async function capturar(page: Page, conversor: Page, item: Item) {
   return { destino, bytes: webp.length }
 }
 
-const { ids, headed } = argumentos()
-const manifesto = await lerManifesto()
+const { ids, headed, explorar, workspace, clicar } = argumentos()
+const manifesto = explorar ? [] : await lerManifesto()
 const itens = ids.length ? manifesto.filter((i) => ids.includes(i.id)) : manifesto
 const faltando = ids.filter((id) => !manifesto.some((i) => i.id === id))
 if (faltando.length) throw new Error(`Ids fora do manifesto: ${faltando.join(', ')}`)
@@ -200,6 +241,18 @@ try {
   await garantirSessao(context)
   const page = await context.newPage()
   const conversor = await context.newPage()
+  if (explorar) {
+    await garantirWorkspace(page, workspace || DOCS_WORKSPACE_NAME)
+    await page.goto(WEB_URL + explorar, { waitUntil: 'domcontentloaded' })
+    await page.waitForLoadState('networkidle').catch(() => {})
+    await page.addStyleTag({ content: CSS_ESTAVEL })
+    if (clicar) await executarPasso(page, { clicar })
+    await page.waitForTimeout(1500)
+    const base = join(homedir(), '.cache/kinbox-docs-screenshots/explorar')
+    await page.screenshot({ path: `${base}.png` })
+    await Bun.write(`${base}.html`, await page.content())
+    console.log(`Tela salva em ${base}.png e ${base}.html (fora do repositório: pode ter dado real)`)
+  }
   for (const item of itens) {
     try {
       const { destino, bytes } = await capturar(page, conversor, item)

@@ -4,9 +4,13 @@
 # url       caminho no app (staging web), já dentro do workspace de documentação
 # passos    ações antes do print: esperar, clicar, digitar {seletor, texto}, tecla, pausa (ms)
 # alvo      seletor do recorte; uma lista recorta o retângulo que cobre todos
-# mascarar  seletores borrados antes do print (dados que não podem aparecer)
+# mascarar  seletores cobertos por uma tarja sólida antes do print (dados que não podem aparecer); seletor que não acha
+#           nenhum elemento faz o item falhar
 # arquivo   saída em images/ajuda/<secao>/<nome>.webp
 # paginas   páginas da central que usam o print
+# largura  (opcional) largura da janela em px só para o item (padrão 1440; abaixo de 768 o app troca de layout)
+# workspace (opcional) workspace do print; padrão: o de documentação. Outro workspace só para telas
+#           que o de documentação não tem (ex.: canal de WhatsApp) e sempre com `mascarar`
 
 - id: tags-lista
   url: /settings/tags
@@ -18,3 +22,107 @@
   mascarar: []
   arquivo: images/ajuda/tags/lista-de-tags.webp
   paginas: []
+
+# Seção whatsapp (Canais › WhatsApp › QR Code)
+#
+# O workspace de documentação (Loja Exemplo) não tem canal de WhatsApp: criar um canal Express cria uma conexão real
+# na conta do motor (compartilhada com produção) e um QR Code publicado poderia ser lido por qualquer pessoa. Por isso
+# as telas de canal de WhatsApp vêm do workspace de testes (id 1, "Kinbox"), com tarja sólida sobre nome do canal e
+# número, e recorte só do bloco que a página usa. Nunca capture QR Code nem código de conexão gerado.
+
+- id: canais-lista
+  url: /settings/channels
+  largura: 900
+  passos:
+    - esperar: 'tbody tr[data-index="0"]'
+  alvo:
+    - 'button:has-text("Novo canal")'
+    - 'tbody tr[data-index="0"]'
+  mascarar: []
+  arquivo: images/ajuda/whatsapp/lista-de-canais.webp
+  paginas:
+    - docs/canais/visao-geral
+
+- id: whatsapp-qr-conectar
+  url: /settings/channels/new/whatsapp/web
+  passos:
+    - esperar: '.ant-drawer-content >> text=Opções avançadas'
+    - clicar: '.ant-drawer-content >> text=Opções avançadas'
+    - esperar: '.ant-drawer-content >> text=Modo antigo'
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Conectar canal")'
+  mascarar: []
+  arquivo: images/ajuda/whatsapp/conectar-whatsapp-qr-code.webp
+  paginas:
+    - docs/canais/conectar-whatsapp-app
+
+# Canal Express conectado do workspace de testes (id 1). Tarja sobre o nome do canal e o número; o recorte
+# termina em "Restringir visibilidade", antes do Aquecedor (beta) e dos campos personalizados.
+- id: whatsapp-qr-canal-express
+  workspace: Kinbox
+  url: /settings/channels/245
+  passos:
+    - esperar: '.ant-drawer-content #isPrivate'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body #isPrivate'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+    - '.ant-drawer-body #description'
+    - '.ant-drawer-body #phone'
+  arquivo: images/ajuda/whatsapp/canal-express.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/configuracoes
+
+# Só o bloco Ações do mesmo canal Express (página de desconexão). A tarja no título só satisfaz a regra de mascarar:
+# o título fica fora do recorte.
+- id: whatsapp-qr-acoes
+  workspace: Kinbox
+  url: /settings/channels/245
+  passos:
+    - esperar: '.ant-drawer-body a:has(.fa-power-off)'
+    - pausa: 1000
+  alvo: '.ant-drawer-body .ant-form-item:has(.fa-power-off)'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+  arquivo: images/ajuda/whatsapp/acoes-do-canal.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte
+
+# Confirmação de "Recriar" num canal Clássica do workspace de testes (id 1). Só o modal entra no recorte;
+# o nome e o número do canal ficam fora do recorte. A tarja (por cima de tudo, inclusive do modal) fica só no título,
+# que também está fora do recorte: tarja em campo atrás do modal apareceria na borda do print. Não confirme: o print só abre o modal.
+- id: whatsapp-classica-recriar
+  workspace: Kinbox
+  url: /settings/channels/254
+  passos:
+    - esperar: '.ant-drawer-body a:has(.fa-power-off)'
+    - clicar: '.ant-drawer-body a:has(.fa-power-off)'
+    - esperar: '.ant-modal-confirm >> text=Tipo de conexão'
+    - pausa: 800
+  alvo: '.ant-modal-confirm .ant-modal-content'
+  mascarar:
+    - '.ant-drawer-title'
+  arquivo: images/ajuda/whatsapp/recriar-classica-para-express.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo
+
+# Painel do código de conexão (Express) ANTES de gerar o código: só campo, botão e link, sem código na tela.
+# Precisa de um canal Express do workspace de testes no status "Necessário ler QR-Code" (canal 251, de QA, com número
+# fictício). Se ele não estiver aguardando leitura, use Reiniciar canal nele antes. Nunca capture QR Code nem código.
+- id: whatsapp-qr-codigo-de-conexao
+  workspace: Kinbox
+  url: /settings/channels/251
+  passos:
+    - esperar: '.ant-drawer-body button:has-text("Conectar com número de telefone")'
+    - clicar: '.ant-drawer-body button:has-text("Conectar com número de telefone")'
+    - esperar: '.ant-drawer-body button:has-text("Gerar código")'
+    - pausa: 800
+  alvo: '.ant-drawer-body .ant-form-item:has(label[title="Conectar com número de telefone"])'
+  mascarar:
+    - '.ant-drawer-body input[placeholder="Número do WhatsApp"]'
+  arquivo: images/ajuda/whatsapp/conectar-com-numero-de-telefone.webp
+  paginas:
+    - docs/canais/conectar-whatsapp-app

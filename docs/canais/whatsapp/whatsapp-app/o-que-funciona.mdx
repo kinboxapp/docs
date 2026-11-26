@@ -1,0 +1,90 @@
+---
+title: O que funciona e o que não funciona no WhatsApp por QR Code
+description: Tipos de mensagem que dá para enviar e receber, grupos, histórico, ligações e uso do celular no WhatsApp por QR Code (Express).
+keywords: [o que funciona, limitações, botões, listas, template, localização, figurinha, áudio, grupos, histórico, ligações, enquete, pix, editar mensagem, apagar mensagem, tamanho máximo, celular junto]
+publico: humano
+tipo: referencia
+fontes:
+  - api-v0:server/modules/wabox/WaboxSender.js
+  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules/wabox/WaboxClient.js
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - wabox:apps/docs/resources/limitations.mdx
+codigo:
+  - api-v0:server/modules/wabox/WaboxSender.js
+  - api-v0:server/modules/wabox/WaboxEvents.js
+  - api-v0:server/modules/wabox/WaboxClient.js
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - wabox:apps/docs/resources/limitations.mdx
+  - wabox:apps/engine/internal/wa/whatsmeow/**
+verificado_em: 2026-11-26
+---
+
+Esta página vale para o WhatsApp por QR Code na conexão **Express** (o padrão). Da **Clássica**, só o histórico é tratado aqui.
+
+## Enviar
+
+| Tipo | Envia? |
+| --- | --- |
+| Texto | Sim |
+| Imagem e vídeo, com legenda | Sim |
+| Documento, com legenda | Sim |
+| Áudio (sai como mensagem de voz) | Sim. Se tiver texto junto, o texto vai numa mensagem logo depois. |
+| Figurinha | Sim |
+| Contato | Sim |
+| Reação | Sim |
+| Responder citando uma mensagem | Sim |
+| Mencionar participantes com `@` em grupos | Sim |
+| Menus do bot | Sim, como texto: uma opção por linha, sem botões |
+| Template (mensagem aprovada pela Meta) | Não |
+| Botões, listas e menus interativos | Não |
+| Localização | Não. A Kinbox não envia localização pelo QR Code. |
+
+O que não é enviado fica com erro na conversa.
+
+Se o canal estiver desconectado ou bloqueado, a mensagem fica com erro na hora. Ela não é reenviada sozinha quando o canal volta: reenvie depois.
+
+## Receber
+
+| O contato manda | O que aparece na Kinbox |
+| --- | --- |
+| Texto, imagem, vídeo, áudio, documento e figurinha | A mensagem, com o arquivo. |
+| Localização, contato e pedido do catálogo | A mensagem com o conteúdo. |
+| Resposta a um botão ou a uma lista | O texto da resposta. |
+| Enquete, produto do catálogo e cobrança PIX | Um texto com as informações. |
+| Conteúdo que não pode ser mostrado no canal | Um aviso na conversa pedindo para ver no celular ou pedir o conteúdo de outro jeito. |
+| Mensagem editada | A mensagem muda na Kinbox e fica marcada como editada. |
+| Mensagem apagada para todos | A mensagem fica marcada como apagada. |
+| Reação | Aparece na mensagem. |
+| Álbum de fotos | As fotos chegam uma a uma. |
+| Status (stories), canais do WhatsApp e avisos de chamada | Não aparecem. |
+
+Arquivos recebidos acima de 25 MB não chegam na Kinbox. Peça ao contato um arquivo menor.
+
+Os tiques de entrega e leitura funcionam nas conversas individuais. Nas conversas de grupo não há tiques.
+
+## Grupos
+
+A Kinbox ignora mensagens de grupo até você marcar os grupos em **Permitir Grupos de WhatsApp**, nas [configurações do canal](/docs/canais/whatsapp/whatsapp-app/configuracoes). A lista de grupos vem do WhatsApp do número e fica vazia com o canal desconectado.
+
+Na conversa de grupo, o contato é o próprio grupo, sem telefone. Quem escreveu aparece em cada mensagem.
+
+## Conversas antigas
+
+- **Express**: a Kinbox não traz as conversas antigas do celular. Só chegam as mensagens a partir da conexão.
+- **Clássica**: tem **Sincronizar histórico** (com o canal conectado). Ele pode não trazer todo o histórico.
+
+## Ligações
+
+Não dá para fazer nem atender ligações pela Kinbox no QR Code. As ligações tocam só no celular, e nada aparece na conversa. Ligações pela Kinbox existem só no WhatsApp oficial.
+
+## Celular e Kinbox juntos
+
+Você pode usar o WhatsApp no celular ao mesmo tempo. As mensagens que você manda pelo celular entram na conversa da Kinbox. A exceção é o contato que o WhatsApp mostra sem número: nessas conversas, o que você manda pelo celular não entra.
+
+Na **Express**, a Kinbox deixa o número sempre online no WhatsApp, para mostrar se o contato está online. Por isso, o celular costuma parar de receber notificações do WhatsApp. Abra o WhatsApp no celular de tempos em tempos.
+
+## Próximos passos
+
+- [Configurações do WhatsApp por QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes)
+- [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)

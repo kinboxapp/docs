@@ -44,6 +44,19 @@ const resolve = (rota: string) => {
   return redirects.some((r) => casa('/' + limpa, r.source))
 }
 
+// Redirect cuja origem virou página: o redirect esconderia a página. Pega o redirect provisório que a seção dona
+// esqueceu de apagar ao criar a página (estrutura.md §2). Só origens sem parâmetro.
+const origens = new Set<string>()
+for (const r of redirects) {
+  if (origens.has(r.source)) falhas.push({ arquivo: 'docs.json', mensagem: `redirect repetido: ${r.source}` })
+  origens.add(r.source)
+  if (r.source.includes(':')) continue
+  const limpa = r.source.replace(/^\//, '').replace(/\/$/, '')
+  if (limpa && arquivoDaPagina(limpa)) {
+    falhas.push({ arquivo: 'docs.json', mensagem: `redirect com origem numa página que existe (apague o redirect): ${r.source}` })
+  }
+}
+
 if (existe('scripts/rotas-antigas.json')) {
   const rotas: string[] = JSON.parse(ler('scripts/rotas-antigas.json'))
   let conferidas = 0
