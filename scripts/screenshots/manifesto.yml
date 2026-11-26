@@ -2222,3 +2222,68 @@
   arquivo: images/ajuda/e-mail/outlook-formulario.webp
   paginas:
     - docs/canais/e-mail/outlook
+
+# --- Seção outros-canais (lote 8) ---
+#
+# Nada é conectado: os itens param antes de "Conectar canal" e "Criar canal". O token do Telegram é fictício.
+
+# Painel Conectar Telegram com Descrição e um token fictício, antes de clicar em Conectar canal.
+- id: telegram-conectar
+  url: /settings/channels/new
+  passos:
+    - clicar: 'text=Telegram'
+    - esperar: 'input#identifier'
+    - digitar: { seletor: '#description', texto: 'Atendimento da loja' }
+    - digitar: { seletor: 'input#identifier', texto: '123456789:AAExemploDeTokenFicticio' }
+    - pausa: 600
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Conectar canal")'
+  mascarar: []
+  arquivo: images/ajuda/outros-canais/telegram-conectar.webp
+  paginas:
+    - docs/canais/telegram
+
+# Tela Canais > Sms com o texto sobre créditos e o botão Criar canal (o item não clica nele).
+- id: sms-criar-canal
+  url: /settings/channels/new/sms
+  passos:
+    - esperar: 'text=Cada disparo de SMS consome 1 crédito.'
+    - pausa: 600
+  alvo: '.ant-card:has-text("Adicionando canal de SMS")'
+  mascarar: []
+  arquivo: images/ajuda/outros-canais/sms-criar-canal.webp
+  paginas:
+    - docs/canais/sms
+
+# Painel Canal de SMS do canal criado no workspace de documentação (etapa B, autorizado pela orquestradora).
+# Nenhum crédito é comprado: o item de compra abre o painel e para antes de "Comprar com PIX".
+- id: sms-painel
+  url: /settings/channels/258
+  passos:
+    - esperar: '.ant-drawer-body button:has-text("Comprar créditos")'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Ver histórico")'
+  mascarar: []
+  arquivo: images/ajuda/outros-canais/sms-painel.webp
+  paginas:
+    - docs/canais/sms
+
+# Painel Comprar créditos com o pacote padrão; o Total (preço) fica sob tarja.
+- id: sms-comprar-creditos
+  url: /settings/channels/258
+  passos:
+    - esperar: '.ant-drawer-body button:has-text("Comprar créditos")'
+    - clicar: '.ant-drawer-body button:has-text("Comprar créditos")'
+    - esperar: 'button:has-text("Comprar com PIX")'
+    - pausa: 1000
+  alvo:
+    - '.ant-drawer-content-wrapper:has(button:has-text("Comprar com PIX")) .ant-drawer-header'
+    - 'button:has-text("Comprar com PIX")'
+  mascarar:
+    - '.ant-form-item:has(label[title="Total"]) .ant-form-item-control-input-content'
+  arquivo: images/ajuda/outros-canais/sms-comprar-creditos.webp
+  paginas:
+    - docs/canais/sms
