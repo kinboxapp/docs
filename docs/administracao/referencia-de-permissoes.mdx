@@ -19,7 +19,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Todas as opções de um papel de permissão na Kinbox, organizadas na ordem em que aparecem na tela.
+Todas as opções de um papel de permissão na Kinbox, seção por seção, na ordem das seções da tela. Na seção **Conversas**, as permissões e as restrições estão em tabelas separadas (as do quadro **Restrições** vêm indicadas); nas outras seções, as opções seguem a ordem da tela.
 
 ## Como ler
 
@@ -31,7 +31,7 @@ Nesta central, **papel** é o conjunto de permissões dado a um membro. Na tela,
 
 ## Home
 
-A seção **Home** só aparece para o proprietário ou para quem tem **Gerenciar relatórios**. Ela define a primeira tela exibida ao entrar no workspace: **Caixa de entrada** (padrão) ou **Dashboard** com um **Dashboard inicial** (liberado apenas quando **Gerenciar relatórios** está marcada no papel; ao escolher dashboard, a snapshot mais recente é aberta automaticamente).
+A seção **Home** só aparece para o proprietário ou para quem tem **Gerenciar relatórios**. Ela define a primeira tela exibida ao entrar no workspace: **Caixa de entrada** (padrão) ou **Dashboard** com um **Dashboard inicial** (liberado apenas quando **Gerenciar relatórios** está marcada no papel; ao entrar, o membro vê a versão mais recente salva desse dashboard).
 
 ## Acesso as Conversas
 
@@ -140,9 +140,9 @@ O item **Tarefas** aparece no menu lateral para todos os membros.
 | **Gerenciar Organizações** | "Adicionar, editar, excluir e restaurar organizações e vincular contatos a elas." | libera |
 | **Não pode exportar contatos** | Tira a opção de exportar contatos e organizações. | restringe |
 | **Mesclar contatos** | "Pode mesclar dois contatos." | libera |
-| **Ver telefone de contatos privados** | "Pode ver telefone de contatos marcados como privado." | libera |
+| **Ver telefone de contatos privados** | "Pode ver telefone de contatos marcados como privado." Sem ela, o telefone e o e-mail do contato privado ficam ocultos. | libera |
 | **Alterar propriedades do contato** | "Pode alterar as informações dos contatos." | libera |
-| **Esconder telefone** | "Esconde o telefone do contato do membro" | restringe |
+| **Esconder telefone** | "Esconde o telefone do contato do membro". O telefone some da lista de conversas, do painel da conversa e da exportação. | restringe |
 | **Proibir alterar celular** | "Membro fica proibido de alterar o celular do contato" | restringe |
 | **Pode ligar para o contato** | "Pode ligar para o contato através do botão de ligar voip." | libera |
 
@@ -167,7 +167,7 @@ As opções **Restringir relatórios aos grupos do membro** e **Restringir relat
 | **Gerenciar Canais** | "Ver, adicionar, editar e excluir canais." | libera |
 | **Somente pode ver canais na lista se estiver no grupo do canal** | "Somente pode ver o canal que tiver restrição de visibilidade habilitade e pertença a um dos grupos restringidos." | restringe |
 | **Não pode ver notificações de canal** | "Membro fica impossibilitado de ver as notificações de desconexão do canal na listagem de conversas." | restringe |
-| **Somente pode dar manutenção simples em canais** | "Membro pode apenas desconectar, reiniciar, sincronizar histórico e recriar o canal." | restringe |
+| **Somente pode dar manutenção simples em canais** | "Membro pode apenas desconectar, reiniciar, sincronizar histórico e recriar o canal." Sem botão de adicionar nem de excluir canal. | restringe |
 
 ## Gerenciamento do Ambiente
 
@@ -177,7 +177,7 @@ As opções **Restringir relatórios aos grupos do membro** e **Restringir relat
 | **Assinatura** | "Contratar e alterar planos de assinatura." | libera | **Configurações** → **Assinatura** |
 | **Campanhas** | "Ver, adicionar, editar e excluir campanhas." | libera | **Campanhas** no menu lateral |
 | **Proibir criar campanha de WhatsApp** | "Proibir criar campanha de WhatsApp." | restringe | — |
-| **Agendamentos** | "Ver, adicionar, editar e excluir agendamentos." | libera | Agendamentos em **Campanhas** (menu lateral) |
+| **Agendamentos** | "Ver, adicionar, editar e excluir agendamentos." | libera | Lista de mensagens agendadas em **Campanhas** (exige também **Campanhas**). Para agendar na conversa, vale **Agendar mensagem** (seção **Conversas**) |
 | **Filtros** | "Adicionar, editar e excluir filtros públicos." | libera | [Filtros de conversa](/docs/conversas/criar-filtros-de-conversa) públicos |
 | **Workspace** | "Alterar informações de workspace." | libera | **Configurações** → **Ambiente** → **Geral** |
 | **Permissões** | "Ver, adicionar, editar e excluir permissões." | libera | **Configurações** → **Ambiente** → **Permissões** |

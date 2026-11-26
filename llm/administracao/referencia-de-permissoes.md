@@ -37,14 +37,14 @@ Um workspace (na tela, **ambiente**) novo vem com papéis prontos definidos pela
 
 | Papel | Descrição na tela | O que libera e o que não libera |
 | --- | --- | --- |
-| **Administrador** | "Acesso total, inclusive cobrança e configurações" | Libera tudo o que o Supervisor tem, mais **Assinatura**, **Permissões**, **Auditoria**, **Agentes de IA**, **Automações**, **Base de conhecimento**, **Metas** e **Gerenciar Organizações**. |
-| **Supervisor** | "Acompanha a equipe, relatórios e filas" | Libera **Global** nas conversas e ações de conversa (resolver, responder, notas, chat ativo, reabrir, atribuir, mover para grupo, bot, agendar); **Gerenciar relatórios**, **Campanhas**, **Filtros**, **Workspace**, **Gerenciar Canais**, **Membros**, **Grupos**, **Horários**, **Tags**, **Frases Rápidas**, **Atribuição automática**, **Bot**, **Copiloto**, **Campos**, **Gerenciar Contatos**, **Integrações**, **Salas**, **Agendamentos**, **Gerenciar negociações**, **Funis**, **Produtos**, **Cenários**, tarefas de outros e negociações/tarefas da conversa. **Não** libera **Assinatura**, **Permissões**, **Auditoria**, **Agentes de IA**, **Automações**, **Base de conhecimento** nem **Metas**. |
+| **Administrador** | "Acesso total, inclusive cobrança e configurações" | Libera tudo o que o Supervisor tem, mais **Assinatura**, **Permissões**, **Auditoria**, **Agentes de IA**, **Automações**, **Base de conhecimento** e **Metas**. |
+| **Supervisor** | "Acompanha a equipe, relatórios e filas" | Libera **Global** nas conversas e ações de conversa (resolver, responder, notas, chat ativo, reabrir, atribuir, mover para grupo, bot, agendar); **Gerenciar relatórios**, **Campanhas**, **Filtros**, **Workspace**, **Gerenciar Canais**, **Membros**, **Grupos**, **Horários**, **Tags**, **Frases Rápidas**, **Atribuição automática**, **Bot**, **Copiloto**, **Campos**, **Gerenciar Contatos** (que também libera as organizações enquanto **Gerenciar Organizações** não for salva no papel), **Integrações**, **Salas**, **Agendamentos**, **Gerenciar negociações**, **Funis**, **Produtos**, **Cenários**, tarefas de outros e negociações/tarefas da conversa. **Não** libera **Assinatura**, **Permissões**, **Auditoria**, **Agentes de IA**, **Automações**, **Base de conhecimento** nem **Metas**. |
 | **Atendente** | "Atende conversas e gerencia negociações" | Libera **Por Grupo ou sem Grupo** nas conversas e as mesmas ações de conversa do Supervisor, **Salas**, **Tags**, **Frases Rápidas**, **Filtros** e **Gerenciar negociações**. **Não** libera relatórios, contatos, canais nem configurações do workspace. |
 
 ## Regras do editor de papéis
 
 - **Onde fica:** **Configurações** → **Ambiente** → **Permissões** (exige a permissão **Permissões** ou ser o proprietário). Na tela, o papel se chama **Permissão**: botão **Nova permissão**, painel **Criar permissão** / **Editar permissão**, busca `"Pesquisar por nome"`.
-- **Campos:** **Nome** (obrigatório; vazio exibe `"Por favor digite um nome."`), **Descrição** (`"(Opcional) Para ajudar a identificar o que essa permissão faz."`), bloco **Permissões** com **Expandir tudo** / **Recolher tudo** e seções na ordem da tela: **Home**, **Acesso as Conversas**, **Conversas**, **Negociações**, **Tarefas**, **Contatos**, **Relatórios**, **Canais**, **Gerenciamento do Ambiente**, **Agendas**, **Copiloto**, **Outros** e **Parceria** (só em workspace de parceiro).
+- **Campos:** **Nome** (obrigatório; vazio exibe `"Por favor digite um nome."`), **Descrição** (`"(Opcional) Para ajudar a identificar o que essa permissão faz."`), bloco **Permissões** com um ícone ao lado do título (dica **Expandir tudo** / **Recolher tudo**) e seções na ordem da tela: **Home**, **Acesso as Conversas**, **Conversas**, **Negociações**, **Tarefas**, **Contatos**, **Relatórios**, **Canais**, **Gerenciamento do Ambiente**, **Agendas**, **Copiloto**, **Outros** e **Parceria** (só em workspace de parceiro). No layout antigo (tela de celular e marcas brancas), a seção **Gerenciamento do Ambiente** se chama **Gerenciar Ambiente**.
 - **Home:** só aparece para o proprietário ou quem tem **Gerenciar relatórios**. Opções: **Caixa de entrada** (padrão; `"Abre a caixa de entrada como primeira tela."`) ou **Dashboard** (`"Abre um dashboard como primeira tela."`; trancado com `"Ative a permissão \"Gerenciar relatórios\" para liberar esta opção."` enquanto **Gerenciar relatórios** está desmarcada), com **Dashboard inicial** (`"Ao escolher dashboard, a snapshot mais recente será aberta automaticamente."`).
 - **Papel novo já vem marcado com:** **Global**, **Responder**, **Iniciar chat ativo**, **Resolver**, **Enviar notas privadas**, **Reabrir**, **Categorizar**, **Atribuir**, **Mover para grupo**, **Iniciar Bot**, **Agendar mensagem**, **Alterar propriedades do contato** e **Mesclar contatos**.
 - **Restrições:** ficam com marca vermelha quando ligadas. Dentro de **Conversas** e de **Outros**, um quadro chamado **Restrições** agrupa restrições adicionais. O proprietário passa em todas as permissões e não sofre restrições de papel.
@@ -74,7 +74,7 @@ Uma opção por papel (padrão em papel novo: **Global**; padrão do **Atendente
 
 - Seguir uma conversa não a traz para a lista (mesmo que as descrições de **Limitado** e **Restrito** falem em "seguindo").
 - Abrir uma conversa por link, notificação ou pesquisa também vale para as conversas que o membro segue e as compartilhadas com ele; o proprietário e quem tem **Global** abrem todas. Fora disso, aparece `"Você não tem permissão para ver essa conversa"`.
-- Para as demais regras, permissões, restrições e mensagens da seção **Conversas**, veja `llm/conversas/caixa-de-entrada-do-kinbox.md`.
+- Para as demais regras, permissões, restrições e mensagens da seção **Conversas**, veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox) e a referência de permissões e restrições de conversa que acompanha essa página.
 
 ## Efeito de cada opção
 
@@ -146,7 +146,7 @@ O menu lateral **Tarefas** aparece para todos os membros.
 | **Assinatura** | Mostra **Configurações** → **Assinatura**. | — |
 | **Campanhas** | Mostra **Campanhas** no menu lateral. | — |
 | **Proibir criar campanha de WhatsApp** | Impede criar campanhas de WhatsApp. | `"Você não tem permissão para criar campanhas de WhatsApp."` |
-| **Agendamentos** | Libera agendamentos em **Campanhas**. | — |
+| **Agendamentos** | No layout antigo (tela de celular e marcas brancas), libera as abas **Individual** e **Por API** de **Campanhas**; a página exige também **Campanhas**. No layout atual essas abas não aparecem: agendar uma mensagem é feito na conversa, com a permissão **Agendar mensagem** (seção **Conversas**). | — |
 | **Filtros** | Libera adicionar, editar e excluir filtros públicos da **Caixa de entrada**. | — |
 | **Workspace** | Mostra **Configurações** → **Ambiente** → **Geral**. | — |
 | **Permissões** | Mostra **Configurações** → **Ambiente** → **Permissões**. | — |
@@ -192,7 +192,7 @@ O menu lateral **Tarefas** aparece para todos os membros.
 | **Não torna offline se ficar inativo** | Impede que a regra de inatividade do workspace deixe o membro offline. | — |
 | **Pode resetar senha de membros** | Libera **Resetar senha** na lista de membros (só o proprietário pode marcar). | — |
 | **Auditar mensagens diretas** | Libera leitura em modo somente leitura das mensagens diretas nas salas (mensagens diretas envolvendo o proprietário ficam de fora). | — |
-| **Limitar horário de acesso ao ambiente** *(Restrições)* | Fora do horário escolhido (pelo fuso horário do workspace), substitui o workspace pela tela de bloqueio **Fora do horário de acesso**, com os horários, `"Ou escolha outro ambiente para continuar."` e **Sair**. | `"Seu perfil só pode acessar o ambiente {{workspaceName}} dentro do horário comercial."` |
+| **Limitar horário de acesso ao ambiente** *(Restrições)* | Fora do horário escolhido (pelo fuso horário do workspace), substitui o workspace pela tela de bloqueio **Fora do horário de acesso**, com os horários, `"Ou escolha outro ambiente para continuar."` e **Sair**. | `"Seu perfil só pode acessar o ambiente {nome do workspace} dentro do horário comercial."` |
 | **Limitar horário que pode ficar disponível** *(Restrições)* | Impede ativar disponibilidade fora do horário escolhido. | `"Você não pode ficar disponível fora do horário de trabalho"` |
 | **Não pode ficar indisponível** *(Restrições)* | Impede alterar disponibilidade para ausente. | `"Você não tem permissão para ficar indisponível"` |
 | **Não pode mudar disponibilidade** *(Restrições)* | Impede alterar a disponibilidade. | — |
@@ -236,7 +236,8 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 | **Funis** no menu lateral | **Gerenciar negociações** |
 | **Clientes** no menu lateral | **Gerenciar Contatos** ou **Gerenciar Organizações** |
 | **Relatórios** no menu lateral | **Gerenciar relatórios** |
-| **Campanhas** no menu lateral (e agendamentos dentro dela) | **Campanhas** (e **Agendamentos**) |
+| **Campanhas** no menu lateral | **Campanhas** |
+| Abas **Individual** e **Por API** em **Campanhas** (layout antigo) | **Campanhas** e **Agendamentos** juntas |
 | **Metas** no menu lateral | **Metas** |
 | **Parceria** no menu lateral | **Pode acessar painel de parceria** (em workspace de parceiro) |
 | Ícone **Salas** | Remover a restrição **Não pode acessar as salas** (criar/excluir salas exige **Salas**) |
@@ -268,13 +269,14 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
   - **Desconectar** (desativada se offline ou proprietário): `"Tem certeza que deseja desconectar esse membro do ambiente? Ele poderá logar-se novamente."`. O membro vê `"Você foi deslogado por um gestor..."` e sai em 3 segundos.
   - **Desativar** (proprietário: `"Você não pode desativar o proprietário do ambiente."`): abre **Desativar membro** com `"Antes de excluir o membro {nome}, você deseja realizar alguma ação com as atribuições dele?"`, **Excluir agendamentos** (`"Os agendamentos de mensagens ainda não enviadas serão excluídos."`) e **Transferir atribuições** (`"As conversas e negociações abertas atribuídas a este membro serão transferidas para os membros selecionados de forma cíclica."`, dica `"Deixar em branco apenas retira a atribuição"`). Aviso: `"O membro {nome} foi desativado no ambiente!"`. Desligar **Ativo** em **Editar membro** não oferece essas opções.
   - Sessão do membro desativado: a aba aberta não cai na hora; quando o membro abre ou atualiza a página, exibe `"Você não tem permissão para acessar este workspace."` e encerra a sessão. Ao entrar sem outro workspace ativo, vê **Nenhum ambiente ativo** (`"Os ambientes da sua conta foram desativados ou seu acesso foi removido. Crie um novo ambiente para continuar."` / `"Esperava ver um ambiente aqui? Peça ao administrador da sua empresa para te convidar de novo."`).
-  - **Reativar**: `"Tem certeza que deseja reativar esse membro no ambiente? Ele poderá logar-se novamente."` → `"O membro {nome} foi reativado no ambiente!"`. Com assinatura vencida, falha com `"Sua assinatura expirou"`.
-  - **Excluir** (proprietário: `"Você não pode excluir o proprietário do ambiente."`): mesmas opções de **Excluir agendamentos** e **Transferir atribuições** (progresso `"Excluindo agendamentos"`, `"Transferindo conversas"`, `"Transferindo negócios"`; cancelar mostra `"Ação abortada durante execução"`). Remove o membro do workspace e dos grupos, apaga convite pendente e tira o membro do histórico de todas as sessões do workspace, inclusive as resolvidas. A conta na Kinbox permanece ativa para outros workspaces.
+  - **Reativar**: `"Tem certeza que deseja reativar esse membro no ambiente? Ele poderá logar-se novamente."` → `"O membro {nome} foi reativado no ambiente!"`. Com assinatura vencida, falha com `"Sua assinatura expirou"`. Pode falhar também quando não há licença livre: `"Seu plano atual não permite ativar ou adicionar agentes."`.
+  - **Excluir** (proprietário: `"Você não pode excluir o proprietário do ambiente."`): mesmas opções de **Excluir agendamentos** e **Transferir atribuições** (progresso `"Excluindo agendamentos"`, `"Transferindo conversas"`, `"Transferindo negócios"`; cancelar mostra `"Ação abortada durante execução"`; cancelar não desfaz o que já foi feito: agendamentos já excluídos e atribuições já transferidas continuam assim, e o membro não é desativado nem excluído). Remove o membro do workspace e dos grupos, apaga convite pendente e tira o membro do histórico de todas as sessões do workspace, inclusive as resolvidas. A conta na Kinbox permanece ativa para outros workspaces.
 - **Resetar senha:**
   - Só aparece para o proprietário ou quem tem **Pode resetar senha de membros** (marcada só pelo proprietário), em membros que já aceitaram o convite.
   - Janela **Resetar senha**: `"Tem certeza que deseja resetar a senha do membro {nome}?"`, campo **Nova senha** e aviso `"Senha resetada com sucesso"`.
   - A Kinbox gera uma senha nova e envia para o e-mail do membro com o assunto `"[Kinbox] - Redefinição de senha"` (o valor digitado em **Nova senha** não é utilizado).
-  - Condições obrigatórias: membro participa só deste workspace, já aceitou o convite e não é o proprietário. Erros:
+  - Condições obrigatórias: membro ativo (não **Inativo**), que participa só deste workspace, já aceitou o convite e não é o proprietário. Erros:
+    - `"Operador não encontrado"` (membro **Inativo**: reative antes)
     - `"Não é possível redefinir a senha de um operador que participa de outros ambientes"`
     - `"O operador ainda não aceitou o convite"`
     - `"Não é possível redefinir a senha do proprietário do ambiente"`
@@ -285,7 +287,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 - Contam todos os membros com acesso ativo, inclusive o proprietário e os convidados que ainda não aceitaram o convite. Membros **Inativo** não contam.
 - Total permitido = licenças contratadas + licenças de cortesia do plano, quando houver.
 - No limite, convidar falha com `"Número limite de operadores atingido"`. Com assinatura vencida há mais de 3 dias, convidar falha com `"Assinatura expirada"` e reativar falha com `"Sua assinatura expirou"`.
-- Mais licenças: **Configurações** → **Assinatura** → **Mudar plano**, cartão **Membros** (exige **Assinatura** ou ser o proprietário; o número de licenças não pode ficar abaixo do total de membros ativos).
+- Mais licenças: **Configurações** → **Assinatura** → **Mudar plano**, cartão **Membros** (exige **Assinatura** ou ser o proprietário; o número de licenças não pode ficar abaixo do total de membros ativos). Em teste grátis ou com a assinatura cancelada, o botão é **Assinar um plano**. Quando o plano é gerenciado por um parceiro, nenhum dos dois botões aparece: a mudança é feita com o parceiro.
 - **Exclusivo do proprietário:** excluir o workspace, transferir a propriedade e marcar **Pode resetar senha de membros**. Ele não sofre restrições de papel e não pode ser desativado, desconectado nem excluído.
 - **Transferir propriedade:** só o proprietário vê **Tornar proprietário**, e apenas em membro ativo que já aceitou o convite. Janela **Transferir propriedade** (caixa de ciência obrigatória; sem marcar: `"Confirme que está ciente para continuar."`) → **Confirmar senha** (**Senha atual** → **Transferir propriedade**) → `"Propriedade transferida com sucesso!"`.
   - O escolhido vira **Proprietário** (sem papel); o antigo proprietário recebe o papel que o novo proprietário tinha; ambos são desconectados. Ação irreversível pela tela (só o novo proprietário pode transferir de volta).
@@ -296,8 +298,8 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 | Se... | Causa | Então orientar |
 | --- | --- | --- |
 | Convite não chegou e o membro está **Convidado** | E-mail errado, spam ou filtro corporativo | Conferir o e-mail na lista; procurar no spam `"Convite para se juntar ao workspace {nome}"`, enviado pela Kinbox; usar **Reenviar convite** (link não expira). Se o e-mail estiver errado, excluir e convidar de novo. |
-| Pessoa diz que não recebeu link de cadastro, mas não aparece como **Convidado** | Já participa de outro workspace na Kinbox e entrou direto | Entrar com o login de sempre e selecionar o workspace em **Escolha um ambiente** ou no botão do ambiente no topo. |
-| Convite falha com `"Número limite de operadores atingido"` | Todas as licenças de membro em uso (proprietário e convidados contam; inativos não contam) | Conferir licenças em **Configurações** → **Assinatura**; desativar quem não usa ou aumentar licenças em **Mudar plano**. |
+| Pessoa diz que não recebeu link de cadastro, mas não aparece como **Convidado** | O acesso já está liberado: ela já concluiu o cadastro ou já participava de outro workspace na Kinbox e entrou direto | Perguntar se concluiu o cadastro. Entrar com o login de sempre e selecionar o workspace em **Escolha um ambiente** ou no botão do ambiente no topo. |
+| Convite falha com `"Número limite de operadores atingido"` | Todas as licenças de membro em uso (proprietário e convidados contam; inativos não contam) | Conferir licenças em **Configurações** → **Assinatura**; desativar quem não usa ou aumentar licenças em **Mudar plano** (em teste grátis ou assinatura cancelada, **Assinar um plano**; plano gerenciado por parceiro: falar com o parceiro). |
 | Convite falha com `"Já existe um convite para esse operador"` | Já existe membro com esse e-mail no workspace (ativo, **Inativo** ou **Convidado**) | Pesquisar o e-mail com filtro **Tudo**: se **Inativo**, **Reativar**; se **Convidado**, **Reenviar convite**. |
 | Convite falha com `"Assinatura expirada"` ou reativação falha com `"Sua assinatura expirou"` | Assinatura vencida há mais de 3 dias | Regularizar a assinatura do workspace. |
 | Membro vê **Nenhum ambiente ativo** ao entrar | Foi desativado ou excluído do workspace e não tem outro ativo | Conferir a lista com filtro **Tudo**: se **Inativo**, **Reativar**; se excluído, convidar novamente. |

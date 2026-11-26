@@ -1,7 +1,7 @@
 ---
 title: Gerenciar membros
 description: Como convidar pessoas para o workspace da Kinbox, editar o papel de um membro, reenviar o convite, desconectar, resetar a senha, desativar, excluir e exportar a lista de membros.
-keywords: [membros, convidar membro, adicionar usuário, adicionar atendente, convite, reenviar convite, editar membro, desativar membro, excluir membro, resetar senha, desconectar membro, exportar membros, equipe, disponível, ativo]
+keywords: [membros, convidar membro, adicionar usuário, adicionar atendente, adicionar funcionário, colaborador, operador, convite, reenviar convite, editar membro, desativar membro, excluir membro, resetar senha, desconectar membro, exportar membros, equipe, disponível, ativo]
 publico: humano
 tipo: guia
 fontes:
@@ -61,9 +61,9 @@ A lista mostra as seguintes informações e controles:
 
 Depois de clicar em **Convidar**, a tela exibe o aviso **Convite enviado** com o nome e o e-mail informados:
 
-- Quem ainda não tem conta na Kinbox fica como **Convidado** até concluir o cadastro pelo link recebido por e-mail (tela **Complete seu cadastro**, com **Nome**, **Senha**, **Termos e Condições** e **Finalizar cadastro**; em seguida, a tela oferece ativar a verificação em duas etapas).
-- Quem já participa de outro workspace na Kinbox com o mesmo e-mail entra direto, sem passar por **Convidado**: o e-mail apenas avisa do novo acesso, e o workspace aparece em **Escolha um ambiente** ou no botão do ambiente no topo da tela.
-- Cada membro ativo ocupa uma licença do plano desde o envio do convite — inclusive o proprietário e quem foi convidado e ainda não aceitou; membros **Inativo** não contam. Se todas as licenças estiverem em uso, aparece um aviso de que o limite foi atingido e o convite não é enviado. Veja [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade).
+- Quem ainda não tem conta na Kinbox fica como **Convidado** até concluir o cadastro. O cadastro é feito pelo link do e-mail, na tela **Complete seu cadastro** (**Nome**, **Senha**, **Termos e Condições** e **Finalizar cadastro**). Em seguida, a tela oferece ativar a verificação em duas etapas.
+- Quem já participa de outro workspace na Kinbox com o mesmo e-mail entra direto, sem passar por **Convidado**. O e-mail só avisa do novo acesso. O workspace aparece em **Escolha um ambiente** ou no botão do ambiente no topo da tela.
+- O convite já ocupa uma licença do plano, mesmo antes de a pessoa aceitar. Se todas as licenças estiverem em uso, aparece um aviso de que o limite foi atingido e o convite não é enviado. Veja [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade).
 - O convite também não é enviado se o e-mail já estiver no workspace (mesmo como **Convidado** ou **Inativo**) ou se a assinatura estiver vencida há mais de 3 dias.
 
 ## Editar um membro
@@ -72,16 +72,16 @@ Clique na linha do membro ou passe o mouse, abra os três pontos e clique em **E
 
 - Você pode alterar **Nome** (bloqueado para o proprietário), foto, **Permissão**, campos personalizados de membro e os interruptores **Disponível** e **Ativo** (que não aparecem para o proprietário). Clique em **Salvar** ao terminar.
 - **E-mail** não muda na edição: se o convite foi enviado para o endereço errado, exclua o membro convidado e envie um novo convite. **Grupos** aparece apenas para consulta — para adicionar ou remover o membro de grupos, acesse **Configurações** → **Ambiente** → **Grupos**.
-- **Disponível** define se o membro recebe notificações e novos atendimentos pela atribuição automática (a atribuição manual continua possível). **Ativo** define se o membro consegue entrar no workspace; desligar **Ativo** deixa o membro **Inativo** e libera a licença.
+- **Disponível** define se o membro recebe notificações e novos atendimentos pela atribuição automática (a atribuição manual continua possível). **Ativo** define se o membro consegue entrar no workspace: desligar **Ativo** deixa o membro **Inativo**.
 - Você não consegue trocar o próprio papel: ao editar a si mesmo, o campo **Permissão** fica bloqueado (exceto para o proprietário).
 
 ## Clonar um membro
 
-Nos três pontos da linha, clique em **Clonar** para abrir **Convidar membro** preenchido com "Cópia de {nome}", o mesmo e-mail e o mesmo papel. Troque o **Nome** e o **E-mail** antes de clicar em **Convidar**, pois a Kinbox não permite convidar um e-mail que já está no workspace.
+Nos três pontos da linha, clique em **Clonar** para abrir **Convidar membro** preenchido com "Cópia de [nome]", o mesmo e-mail e o mesmo papel. Troque o **Nome** e o **E-mail** antes de clicar em **Convidar**, pois a Kinbox não permite convidar um e-mail que já está no workspace.
 
 ## Reenviar o convite
 
-Se o membro ainda aparece como **Convidado**, abra os três pontos da linha, clique em **Reenviar convite** (a opção só aparece para quem ainda não aceitou o convite) e confirme em **Sim**. A Kinbox reenvia o mesmo link para o e-mail do membro — o link não expira; para cancelar um convite antes de ser aceito, exclua o membro convidado.
+Se o membro ainda aparece como **Convidado**, abra os três pontos da linha, clique em **Reenviar convite** (a opção só aparece para quem ainda não aceitou o convite) e confirme em **Sim**. A Kinbox reenvia o mesmo link para o e-mail do membro. O link não expira. Para cancelar um convite antes de ser aceito, exclua o membro convidado.
 
 ## Desconectar um membro
 
@@ -89,7 +89,9 @@ Nos três pontos da linha, clique em **Desconectar** e confirme. A opção só f
 
 ## Desativar e reativar um membro
 
-Para bloquear o acesso mantendo o histórico de quem atendeu cada conversa, abra os três pontos da linha e clique em **Desativar** (o proprietário não pode ser desativado). Na janela **Desativar membro**, você pode escolher **Excluir agendamentos** e **Transferir atribuições** antes de confirmar em **Desativar**. O membro passa a **Inativo** e libera a licença (membros ativos, convidados que ainda não aceitaram e o proprietário ocupam licença; inativos não ocupam).
+Desativar bloqueia o acesso e mantém o histórico de quem atendeu cada conversa. Abra os três pontos da linha e clique em **Desativar** (o proprietário não pode ser desativado). Na janela **Desativar membro**, você pode escolher **Excluir agendamentos** e **Transferir atribuições** antes de confirmar em **Desativar**. O membro passa a **Inativo** e deixa de ocupar uma licença do plano.
+
+Se você cancelar a janela de progresso no meio, o que já foi feito não volta: os agendamentos já excluídos e as atribuições já transferidas continuam assim, e o membro não é desativado.
 
 Desativar não derruba na hora uma aba já aberta: se o membro estiver **Online**, clique em **Desconectar** para encerrar a sessão imediatamente. Para devolver o acesso depois, abra os três pontos de um membro **Inativo** e clique em **Reativar** — ele volta a entrar com a mesma senha e o mesmo papel e volta a ocupar uma licença. Veja os detalhes em [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade).
 
@@ -100,7 +102,7 @@ Nos três pontos da linha, clique em **Excluir** (o proprietário não pode ser 
 - **Excluir agendamentos**: exclui os agendamentos de mensagens ainda não enviadas criados pelo membro.
 - **Transferir atribuições**: transfere as conversas abertas e negociações abertas atribuídas ao membro, alternando uma a uma entre os membros selecionados. Se o campo de membros ficar em branco, a Kinbox apenas retira a atribuição.
 
-Enquanto a transferência acontece, uma janela exibe o progresso e permite cancelar. Excluir remove o membro do workspace e dos grupos e apaga convites pendentes, sem apagar a conta dele na Kinbox (ele continua com acesso a outros workspaces).
+Enquanto a transferência acontece, uma janela exibe o progresso e permite cancelar. Cancelar não desfaz o que já foi feito: os agendamentos já excluídos e as atribuições já transferidas continuam assim, e o membro não é excluído. Excluir remove o membro do workspace e dos grupos e apaga convites pendentes, sem apagar a conta dele na Kinbox (ele continua com acesso a outros workspaces).
 
 <Warning>Excluir um membro tira ele do histórico de todas as conversas do workspace, inclusive as já resolvidas. Se quiser manter o histórico de quem atendeu cada conversa, desative em vez de excluir.</Warning>
 
@@ -108,7 +110,7 @@ Enquanto a transferência acontece, uma janela exibe o progresso e permite cance
 
 A opção **Resetar senha** só aparece nos três pontos se você for o proprietário ou tiver a permissão **Pode resetar senha de membros** (marcada apenas pelo proprietário), e apenas para membros que já aceitaram o convite. Se a opção não aparecer, confirme esses dois pontos.
 
-O reset só funciona quando o membro atende às três condições ao mesmo tempo: participa **somente deste workspace**, **já aceitou o convite** e **não é o proprietário**. Se o membro participa de outros workspaces, ele mesmo precisa redefinir a senha nas configurações da própria conta.
+O reset só funciona quando o membro atende às quatro condições ao mesmo tempo: está **ativo** (não **Inativo**), participa **somente deste workspace**, **já aceitou o convite** e **não é o proprietário**. Para um membro **Inativo**, reative antes. Se o membro participa de outros workspaces, ele mesmo precisa redefinir a senha nas configurações da própria conta.
 
 <Steps>
   <Step title="Abra a janela de reset">

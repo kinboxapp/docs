@@ -34,16 +34,16 @@ Nesta central, **papel** é o conjunto de permissões dado a um membro (na tela,
 
 <AccordionGroup>
   <Accordion title="O convite não chegou ou a pessoa não recebeu o link de cadastro">
-    **Como confirmar:** vá em **Configurações** → **Ambiente** → **Membros** e veja se a pessoa aparece como **Convidado**, conferindo o e-mail logo abaixo do nome. Se ela **não** aparece como **Convidado** e já está ativa, é porque já participa de outro workspace na Kinbox.
+    **Como confirmar:** vá em **Configurações** → **Ambiente** → **Membros** e veja se a pessoa aparece como **Convidado**, conferindo o e-mail logo abaixo do nome. Se ela **não** aparece como **Convidado**, o acesso já está liberado: ou ela já concluiu o cadastro, ou já participava de outro workspace na Kinbox e entrou direto.
 
     **O que fazer:**
-    - Se estiver como **Convidado**: peça para a pessoa procurar no spam o e-mail com o assunto "Convite para se juntar ao workspace {nome}", enviado pela Kinbox. Você pode abrir os três pontos da linha e clicar em **Reenviar convite** (a opção só aparece para quem ainda não aceitou, e o link não expira). Se o e-mail foi digitado errado, exclua o membro convidado e envie um novo convite, pois o e-mail não muda na edição.
-    - Se a pessoa já usa a Kinbox em outro workspace: quem já tem conta em outro workspace entra direto e recebe apenas um aviso por e-mail, sem link de cadastro. Peça para entrar com o login de sempre e selecionar o workspace em **Escolha um ambiente** ou no botão do ambiente no topo da tela.
+    - Se estiver como **Convidado**: peça para a pessoa procurar no spam o e-mail com o assunto "Convite para se juntar ao workspace [nome do workspace]", enviado pela Kinbox. Você pode abrir os três pontos da linha e clicar em **Reenviar convite** (a opção só aparece para quem ainda não aceitou, e o link não expira). Se o e-mail foi digitado errado, exclua o membro convidado e envie um novo convite, pois o e-mail não muda na edição.
+    - Se não estiver como **Convidado**: pergunte se a pessoa já concluiu o cadastro ou se já usa a Kinbox em outro workspace (nesse caso ela entra direto e recebe só um aviso por e-mail, sem link de cadastro). Nos dois casos, peça para entrar com o e-mail e a senha dela e selecionar o workspace em **Escolha um ambiente** ou no botão do ambiente no topo da tela.
   </Accordion>
 
   <Accordion title="Não consigo convidar um novo membro">
     **Como confirmar e o que fazer:**
-    - **Limite de licenças atingido:** aparece um aviso de que o limite foi atingido. Cada membro ativo ocupa uma licença do plano — inclusive o proprietário e os convidados que ainda não aceitaram; membros **Inativo** não contam. Confira em **Configurações** → **Assinatura** quantas licenças o plano tem e compare com os membros ativos e convidados na lista. Desative quem não usa mais o workspace ou aumente as licenças em **Configurações** → **Assinatura** → **Mudar plano** (veja [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade)).
+    - **Limite de licenças atingido:** aparece um aviso de que o limite foi atingido. Cada membro ativo ocupa uma licença do plano — inclusive o proprietário e os convidados que ainda não aceitaram; membros **Inativo** não contam. Confira em **Configurações** → **Assinatura** quantas licenças o plano tem e compare com os membros ativos e convidados na lista. Desative quem não usa mais o workspace ou aumente as licenças em **Configurações** → **Assinatura** → **Mudar plano** (veja [Licenças, desativar membros e transferir a propriedade](/docs/administracao/licencas-e-propriedade)). Em teste grátis ou com a assinatura cancelada, o botão é **Assinar um plano**. Quando o plano é gerenciado por um parceiro, nenhum dos dois botões aparece: fale com o parceiro.
     - **O e-mail já foi convidado:** aparece um aviso de que o e-mail já está no workspace. Pesquise o endereço em **Membros** usando o filtro **Tudo**. Se o membro estiver **Inativo**, clique em **Reativar**; se estiver **Convidado**, clique em **Reenviar convite**.
     - **Assinatura vencida:** quando a assinatura está vencida há mais de 3 dias, a Kinbox bloqueia novos convites e reativações com um aviso de assinatura vencida. Regularize a assinatura do workspace para liberar novos convites.
   </Accordion>
@@ -84,10 +84,10 @@ Nesta central, **papel** é o conjunto de permissões dado a um membro (na tela,
   </Accordion>
 
   <Accordion title="Resetar senha dá erro ou o membro não sabe a nova senha">
-    **Como confirmar:** a opção **Resetar senha** só aparece para o proprietário ou para quem tem a permissão **Pode resetar senha de membros** (marcada apenas pelo proprietário), e só funciona quando três condições são atendidas ao mesmo tempo: o membro participa **somente deste workspace**, **já aceitou o convite** e **não é o proprietário**.
+    **Como confirmar:** a opção **Resetar senha** só aparece para o proprietário ou para quem tem a permissão **Pode resetar senha de membros** (marcada apenas pelo proprietário), e só funciona quando quatro condições são atendidas ao mesmo tempo: o membro está **ativo** (não **Inativo**), participa **somente deste workspace**, **já aceitou o convite** e **não é o proprietário**.
 
     **O que fazer:**
-    - Se der erro porque o membro participa de outros workspaces ou é o proprietário, a própria pessoa deve redefinir a senha nas configurações da própria conta. Se ainda não aceitou o convite, use **Reenviar convite**.
+    - Se der erro porque o membro participa de outros workspaces ou é o proprietário, a própria pessoa deve redefinir a senha nas configurações da própria conta. Se ainda não aceitou o convite, use **Reenviar convite**. Se está **Inativo**, reative antes de resetar.
     - Se o reset deu certo mas o membro não sabe a senha: a Kinbox cria uma senha nova e envia para o e-mail dele com o assunto "[Kinbox] - Redefinição de senha" (o campo **Nova senha** da janela não é usado). Peça para conferir o e-mail, entrar com essa senha e depois alterá-la no perfil.
   </Accordion>
 </AccordionGroup>

@@ -22,7 +22,7 @@ Quais papéis já vêm prontos no workspace?
 
 Em geral, três: **Administrador**, **Supervisor** e **Atendente**.
 
-- **Administrador** ("Acesso total, inclusive cobrança e configurações"): libera tudo o que o Supervisor tem, mais **Assinatura**, **Permissões**, **Auditoria**, **Agentes de IA**, **Automações**, **Base de conhecimento**, **Metas** e **Gerenciar Organizações**.
+- **Administrador** ("Acesso total, inclusive cobrança e configurações"): libera tudo o que o Supervisor tem, mais **Assinatura**, **Permissões**, **Auditoria**, **Agentes de IA**, **Automações**, **Base de conhecimento** e **Metas**.
 - **Supervisor** ("Acompanha a equipe, relatórios e filas"): vê todas as conversas (**Global**), acessa relatórios, campanhas, canais, membros, grupos, contatos, integrações, negociações e a maior parte das configurações do workspace; não inclui **Assinatura**, **Permissões**, **Auditoria**, **Agentes de IA**, **Automações**, **Base de conhecimento** nem **Metas**.
 - **Atendente** ("Atende conversas e gerencia negociações"): vê conversas com **Por Grupo ou sem Grupo**, usa as ações de conversa, **Salas**, **Tags**, **Frases Rápidas**, **Filtros** e **Gerenciar negociações**; não inclui relatórios, contatos, canais nem configurações do workspace.
 
