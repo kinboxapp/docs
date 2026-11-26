@@ -48,13 +48,13 @@ Este exemplo monta o cenário **Lead do site**, que recebe dados de um formulár
     </Frame>
   </Step>
   <Step title="Abra a janela para determinar a estrutura">
+    <Warning>
+      **Enviar amostra com o cenário ligado executa o fluxo.** Se o cenário estiver ligado e publicado, a amostra também faz o cenário rodar e pode criar ou alterar registros com esses dados. Antes de abrir a janela, confirme que o selo ao lado do interruptor, no topo do editor, mostra **Inativo**. Se mostrar **Live**, desligue o interruptor e clique em **Publicar**.
+    </Warning>
+
     Clique em **Determinar estrutura**. A janela **Webhook de Recebimento** abre exibindo o **Endereço Url**, o aviso de que a Kinbox está ouvindo os dados e, em **Estrutura**, o status "Aguardando recebimento de dados...".
   </Step>
   <Step title="Envie uma amostra com a janela aberta">
-    <Warning>
-      **Enviar amostra com o cenário ligado executa o fluxo.** Se o cenário estiver ligado e publicado, a amostra também faz o cenário rodar e pode criar ou alterar registros com esses dados. Antes de enviar, confirme que o selo ao lado do interruptor, no topo do editor, mostra **Inativo**. Se mostrar **Live**, desligue o interruptor e clique em **Publicar**.
-    </Warning>
-
     Com o selo em **Inativo** e a janela **Webhook de Recebimento** aberta, envie uma amostra de dados usando **POST** com corpo em JSON para o **Endereço Url**. A captura funciona mesmo antes de clicar em **Publicar** e fica ativa por 10 minutos a partir da abertura da janela; se a amostra não aparecer, feche e abra a janela de novo antes de reenviar.
   </Step>
   <Step title="Confira os campos recebidos e salve">

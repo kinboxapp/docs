@@ -60,7 +60,7 @@ Complemento técnico de [Gatilhos e ações dos cenários](/docs/cenarios/gatilh
 | --- | --- |
 | Cenário ligado e publicado | `{"success": true}` na hora; o cenário roda em seguida por conta própria (a resposta não contém o resultado dos passos). |
 | Cenário que não está ligado e publicado (desligado, não publicado, excluído ou com o gatilho trocado), com a captura da estrutura ativa | Amostra reconhecida, sem iniciar execução: `success: false` com a mensagem `"Estrutura determinada mas cenário não foi publicado ainda."` |
-| Mesmos casos sem captura ativa (passados os 10 minutos), ou endereço incorreto | Endereço não encontrado: erro **404** (`"Inbound Webhook not found"`). |
+| Sem cenário ligado e publicado para esse endereço e sem captura ativa, ou endereço incorreto | Endereço não encontrado: erro **404** (`"Inbound Webhook not found"`). |
 
 - Variáveis do grupo **Webhook**:
   - **Url**: URL do webhook de recebimento.
