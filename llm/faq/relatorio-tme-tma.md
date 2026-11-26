@@ -27,17 +27,19 @@ O que são TME e TMA?
 
 **TME** é o tempo médio de espera, contado da criação da sessão até a primeira resposta de um membro; **TMA** é o tempo médio de atendimento, contado da primeira resposta de um membro até a resolução da sessão.
 
-Há também o **TMP** (tempo médio pós-atribuição), contado da primeira atribuição da sessão a um membro até a primeira resposta dele. Você vê os três indicadores em **Relatórios** → **Produtividade** (seu papel precisa da permissão **Gerenciar relatórios**; o proprietário do workspace sempre vê).
+Há também o **TMP** (tempo médio pós-atribuição), contado da primeira atribuição da sessão a um membro até a primeira resposta de um membro. Você vê os três indicadores em **Relatórios** → **Produtividade** (seu papel precisa da permissão **Gerenciar relatórios**; o proprietário do workspace sempre vê).
 
 Principais regras que afetam os cálculos:
 
 - **Bot e primeira resposta:** mensagens do bot e mensagens automáticas do sistema não contam como primeira resposta, então o tempo com o bot entra no **TME** (e não no **TMP** nem no **TMA**). Uma **nota interna** enviada por um membro também conta como primeira resposta.
 - **Sessões fora das médias:** sessões iniciadas pela equipe pelo botão **Enviar mensagem** ficam fora do **TME** e do **TMP**. Sessões resolvidas sem nenhuma resposta de membro não têm TME, TMP nem TMA.
-- **TMA mínimo:** o **TMA** considera apenas sessões resolvidas no período escolhido e com atendimento de pelo menos **1 minuto**.
-- **Horário comercial:** quando o workspace (na tela, **ambiente**) tem um **Horário comercial** escolhido em **Configurações** → **Ambiente** → **Geral**, os três tempos contam apenas os minutos dentro desse horário.
+- **Quais sessões entram:** a **Produtividade** só considera sessões criadas ou resolvidas no período. Dentro delas, o **TME** e o **TMP** usam as que tiveram a primeira resposta no período, e o **TMA** usa as resolvidas no período com atendimento de pelo menos **1 minuto**.
+- **Horário comercial:** quando o workspace (na tela, **ambiente**) tem um **Horário comercial** escolhido em **Configurações** → **Ambiente** → **Geral**, os três tempos contam apenas os minutos dentro desse horário. Uma sessão cuja espera ou atendimento ficou inteira fora do horário fica com tempo zero e não entra na média.
 - **Responsável atual:** ao agrupar **Por Membro** ou **Por Grupo**, a sessão inteira conta para quem é o responsável atual (ou era ao ser resolvida).
 
-Veja os detalhes em [Relatório de produtividade](/docs/relatorios/produtividade) e [Relatórios: visão geral e métricas](/docs/relatorios/como-funcionam).
+Os relatórios de atendimento não têm uma meta de SLA de resposta para configurar: para acompanhar prazos de resposta das conversas, use o **TME** da **Produtividade** e, em tempo real, os alertas de espera e atraso do [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo).
+
+Veja os detalhes em [Relatório de produtividade](/docs/relatorios/produtividade) e [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
 
 ## Variações
 
@@ -48,3 +50,4 @@ Veja os detalhes em [Relatório de produtividade](/docs/relatorios/produtividade
 - tme conta o tempo do bot
 - como é calculado o tempo médio de atendimento
 - qual a diferença entre tme tmp e tma
+- a kinbox tem relatório de sla?

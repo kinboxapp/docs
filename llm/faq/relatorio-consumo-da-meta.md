@@ -1,22 +1,21 @@
 ---
 title: Onde vejo quantas conversas a Meta me cobrou?
 description: A Kinbox não mostra quantas conversas ou mensagens a Meta cobrou; o consumo e a cobrança ficam na sua conta do WhatsApp na Meta.
-keywords: [conversas cobradas meta, consumo meta, fatura whatsapp oficial, quantas conversas meta cobrou, relatório whatsapp api oficial, gasto templates meta, cobrança meta]
+keywords: [fatura do whatsapp oficial, gasto com templates, conversas cobradas meta, consumo meta, fatura whatsapp oficial, quantas conversas meta cobrou, relatório whatsapp api oficial, gasto templates meta, cobrança meta]
 publico: llm
 tipo: faq
 fontes:
   - web:src/pages/reports/index.tsx
-  - api:src/modules/reports/session-summary/session-summary.service.ts
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/modules/meta/CloudApiClient.js
+  - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
 codigo:
   - web:src/pages/reports/index.tsx
-  - web:src/pages/reports/useReports.tsx
-  - web:src/pages/reports/useRestrictedResources.tsx
-  - web:src/pages/reports/RangePickerReport/**
-  - api:src/modules/reports/session-summary/session-summary.consumer.ts
-  - api:src/modules/reports/session-summary/session-summary.service.ts
-  - api:src/modules/reports/session-summary/session-summary.helper.ts
-  - api:src/modules/reports/session-summary/time-average.ts
-  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
+  - web:src/pages/reports/WalletUsage/wallet-usage.helper.ts
+  - web:src/pages/settings/channels/whatsappCloud/**
+  - api-v0:server/controllers/WbaCloudController.js
+  - api-v0:server/modules/meta/CloudApiClient.js
+  - api-v0:server/controllers/NewPaymentController.js
 verificado_em: 2026-11-26
 ---
 

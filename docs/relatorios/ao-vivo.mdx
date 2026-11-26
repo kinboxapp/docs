@@ -1,7 +1,7 @@
 ---
 title: Atendimento e vendas ao vivo
 description: Como acompanhar em tempo real, num mapa animado, a fila, as conversas que esperam resposta, a equipe online e as negociações de um funil.
-keywords: [ao vivo, atendimento ao vivo, vendas ao vivo, tempo real, fila, atrasados, modo tv, telão, monitorar equipe, operadores online, em pausa, negócios parados, sla, dashboard de atendimento]
+keywords: [ao vivo, atendimento ao vivo, vendas ao vivo, tempo real, fila, atrasados, modo tv, telão, monitorar equipe, operadores online, em pausa, negócios parados, sla, painel de atendimento, monitor de atendimento]
 publico: humano
 tipo: guia
 fontes:
@@ -20,11 +20,27 @@ verificado_em: 2026-11-26
 
 O **Atendimento ao vivo** e o **Vendas ao vivo** mostram a operação em tempo real num mapa animado em tela cheia, em **Relatórios** → **Atendimento ao vivo** e **Relatórios** → **Vendas ao vivo**.
 
-<Note>Para ver o **Atendimento ao vivo**, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê). Para ver o **Vendas ao vivo**, seu papel precisa também da permissão **Gerenciar negociações** — sem ela, o item não aparece no menu e a tela avisa que o seu perfil não tem acesso aos negócios, com o botão **Abrir Atendimento ao vivo**.</Note>
+<Note>Para ver o **Atendimento ao vivo**, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê). Para ver o **Vendas ao vivo**, seu papel precisa também da permissão **Gerenciar negociações**: sem ela, o item não aparece no menu e a tela avisa que o seu perfil não tem acesso aos negócios, com o botão **Abrir Atendimento ao vivo**.</Note>
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a tela">
+    Vá em **Relatórios** → **Atendimento ao vivo** (ou **Vendas ao vivo**). A tela abre em tela cheia.
+  </Step>
+  <Step title="Confira os indicadores do topo">
+    A barra do topo mostra os números do momento. Para trocar o conjunto de números ou mostrar só alguns grupos, abra **Configurações** (ícone no canto superior direito) e use **Indicadores** e **Departamentos**. No **Vendas ao vivo**, clique no nome do funil, no topo, para escolher outro funil.
+  </Step>
+  <Step title="Leve para uma TV, se quiser">
+    Clique em **Modo TV** para deixar a tela pronta para um telão. Para voltar, clique em **Sair do modo TV**.
+  </Step>
+</Steps>
+
+A **Legenda**, na própria tela, explica cada símbolo do mapa. Clicar num contato ou numa mesa abre os detalhes.
 
 ## Quais conversas aparecem
 
-No **Atendimento ao vivo**, você vê as mesmas conversas que pode ver na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), conforme o **Acesso as Conversas** do seu papel (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)). O proprietário vê todas as conversas, e esta tela não usa as restrições de relatório por membro ou por grupo.
+O mapa e a fila do **Atendimento ao vivo** mostram as mesmas conversas que você vê na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), conforme o **Acesso as Conversas** do seu papel (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)), e não as restrições de relatório. Já os números do conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) seguem as restrições de relatório do seu papel. O proprietário vê tudo.
 
 Se o seu papel tiver a restrição **Esconder telefone**, o telefone dos contatos não aparece.
 
@@ -45,38 +61,22 @@ Se o seu papel tiver a restrição **Esconder telefone**, o telefone dos contato
 | Em pausa | Membro com a Kinbox aberta, mas fora do status **Disponível** |
 | Offline (mesa vazia) | Membro sem a Kinbox aberta |
 
-### Limites de atraso
+### Tempo de espera e atraso
 
-Se a **Indicação dinâmica de conversa pendente** estiver ligada nas configurações do workspace (na tela, **ambiente**), em **Configurações** → **Ambiente** → **Geral**, o mapa usa os tempos configurados nela: o primeiro tempo marca quem está aguardando há mais tempo e o segundo marca quem está atrasado.
+O mapa pinta cada conversa que espera resposta pelo tempo de espera, contado desde que ela ficou pendente (ou, na falta disso, desde a última mensagem). Ela passa a **aguardando há mais de** um primeiro tempo e a **atrasada** depois de um segundo tempo.
 
-Quando essa opção não está ligada, o **Atendimento ao vivo** usa o padrão de **10 minutos** para alerta e **20 minutos** para atrasado.
+Esses dois tempos vêm da **Indicação dinâmica de conversa pendente**, em **Configurações** → **Ambiente** → **Geral** do workspace (na tela, **ambiente**), quando ela está ligada. Se ela estiver desligada, os tempos são **10 minutos** e **20 minutos**.
 
 ### Indicadores
 
-<Frame caption="Barra do topo do Atendimento ao vivo com os indicadores de Fila">
+<Frame caption="Barra do topo do Atendimento ao vivo com os indicadores do conjunto Fila">
   <img src="/images/ajuda/relatorios/ao-vivo-indicadores.webp" alt="Barra do topo do Atendimento ao vivo com botões de voltar e busca e os indicadores 1 na fila com seta de variação, 1 aguardando e 1 atrasado, e 1 de 4 online" />
 </Frame>
 
-Em **Configurações** → **Indicadores**, você escolhe qual conjunto aparece no topo:
+Em **Configurações** → **Indicadores**, você escolhe o conjunto:
 
-- **Fila** (padrão): conversas **na fila** (a seta mostra a variação na última hora), conversas **aguardando** (com a contagem de atrasados) e membros **online** (e **em pausa**) sobre o total da equipe.
-- **Tempo médio**: conversas **resolvidas hoje**, **TM 1ª resposta** (o TME de hoje) e **pior espera** atual entre quem aguarda resposta (com a contagem acima do limite).
-
-### Barra do topo e configurações
-
-Na barra superior você pode voltar para os relatórios, usar a busca (**Buscar cliente, operador, robô...**, atalho `/`), ligar ou sair do **Modo TV** (**Sair do modo TV**), abrir **Configurações** e consultar a **Legenda**. Clicar em um contato ou numa mesa abre os detalhes.
-
-As opções de **Configurações** ficam salvas no seu navegador:
-
-- **Estilo visual**: **Do tema** (padrão), **Claro**, **Escuro**, **Grafite**, **Escritório** ou **Maquete**
-- **Cidade em volta**: **Mostrar** ou **Ocultar** (disponível apenas no estilo compatível)
-- **Departamentos**: **Todos os departamentos** ou selecionar grupos específicos (**Mostrar todos** restaura)
-- **Cor dos clientes**: **Tempo de espera** ou **Canal**
-- **Quem vira bonequinho**: **Todas as conversas** (padrão) ou **Só quem espera**
-- **Indicadores**: **Fila** (padrão) ou **Tempo médio**
-- **Nome dos operadores** (no **Vendas ao vivo**, **Nome dos vendedores**): **Ao passar o mouse** (padrão) ou **Sempre**
-- **Operadores offline**: **Mostrar** (padrão) ou **Ocultar**
-- **Grade no piso**: **Ligada** (padrão) ou **Desligada**
+- **Fila** (padrão): **na fila** (conversas sem membro responsável; a seta mostra a variação na última hora), **aguardando** (conversas esperando resposta de um membro), com a contagem de **atrasados**, que inclui também as conversas da fila, e **online** (membros online sobre o total da equipe, com os **em pausa**).
+- **Tempo médio**: **resolvidas hoje**, **TM 1ª resposta** (o TME de hoje) e **pior espera** (a maior espera agora, contando também as conversas da fila), com a contagem acima do limite.
 
 ## Vendas ao vivo
 
@@ -84,14 +84,12 @@ O **Vendas ao vivo** mostra as negociações abertas de **um funil** por vez, al
 
 No topo aparecem três indicadores:
 
-- **ganho em** e o nome do mês: valor ganho no mês atual, acompanhado da meta do mês quando há uma meta de vendas cadastrada.
-- **em aberto**: soma das negociações abertas no funil selecionado.
-- **parados**: negociações há mais de **7 dias** na mesma etapa, destacando como **críticos** as que estão há mais de **14 dias**.
-
-Abra a **Legenda** na tela para ver o significado de cada símbolo das vendas no mapa.
+- O ganho do mês: sem meta de vendas cadastrada para o mês, aparece como **ganho em** e o nome do mês; com meta, aparece uma barra com a **% da meta**.
+- **em aberto**: soma das negociações abertas no funil.
+- **parados**: negociações paradas na mesma etapa a partir de **7 dias**; as paradas a partir de **14 dias** aparecem como **críticos**.
 
 ## Se a tela não abrir
 
 O **Atendimento ao vivo** e o **Vendas ao vivo** usam gráficos 3D (WebGL) no navegador. Se aparecer um aviso de que o navegador não consegue mostrar a tela, ative a aceleração de hardware ou teste outro navegador, como o Chrome.
 
-Se ocorrer um erro ao montar a tela, clique em **Tentar de novo** ou em **Voltar para os relatórios**. Para ver os números em tempo real sem o mapa animado, use o [Relatório Visão geral (tempo real)](/docs/relatorios/visao-geral). Veja também [Relatórios: visão geral e métricas](/docs/relatorios/como-funcionam) e [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes).
+Se ocorrer um erro ao montar a tela, clique em **Tentar de novo** ou em **Voltar para os relatórios**. Para ver os números em tempo real sem o mapa animado, use o [Relatório Visão geral (tempo real)](/docs/relatorios/visao-geral). Veja também [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam) e [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes).

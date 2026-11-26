@@ -1,7 +1,7 @@
 ---
-title: "Relatórios: visão geral e métricas"
+title: Como os relatórios contam sessões e tempos
 description: Quais relatórios de atendimento a Kinbox tem, quem pode ver cada um e como TME, TMP, TMA, sessões novas e resolvidas são contados.
-keywords: [relatórios, métricas, tme, tma, tmp, tempo médio de espera, tempo médio de atendimento, tempo de resposta, primeira resposta, sessões, desempenho da equipe, produtividade, gerenciar relatórios, horário comercial, sla, atendentes, dashboard de atendimento]
+keywords: [relatórios, métricas, tme, tma, tmp, tempo médio de espera, tempo médio de atendimento, tempo de resposta, primeira resposta, sessões, desempenho da equipe, produtividade, gerenciar relatórios, horário comercial, sla, atendentes, quais relatórios existem]
 publico: humano
 tipo: conceito
 fontes:
@@ -67,23 +67,29 @@ Os relatórios de atendimento contam **sessões**, e não conversas nem contatos
 - **Horário comercial:** quando o workspace (na tela, **ambiente**) tem um **Horário comercial** escolhido em **Configurações** → **Ambiente** → **Geral**, os três tempos contam apenas os minutos dentro desse horário. Sem horário escolhido, contam todos os minutos corridos.
 - **Responsável atual:** ao agrupar por membro ou por grupo na **Visão geral** e na **Produtividade**, a sessão inteira conta para quem é o responsável atual (ou era ao ser resolvida). Uma sessão transferida (veja [Atribuir e transferir](/docs/conversas/atribuir-e-transferir)) conta para o último responsável; para ver quem recebeu a sessão antes, use o relatório de [Atribuição](/docs/relatorios/atribuicao).
 
-## O que dá para fazer em todos os relatórios
+## Ações comuns nos relatórios
 
-- **Escolher o período** (nos relatórios por período): o padrão são os últimos 7 dias, sem hoje. Você pode escolher data e hora ou usar os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**.
-- **Filtrar**: clique em **Filtrar**, escolha os critérios (como estado, membro, grupo, tag, canal ou campos personalizados) e clique em **Aplicar filtros**. Para tirar todos os filtros, clique em **Limpar filtros**.
-- **Agrupar**: use o botão **Por ...** para alternar entre as visões aceitas por cada relatório (**Por Dia**, **Por Membro**, **Por Grupo**, **Por Tag** ou **Por Canal**).
-- **Ver sessões**: clique em **Ver sessões**, em um cartão ou em qualquer número da tabela para listar as sessões que formam aquele resultado.
-- **Exportar**: clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+Nos relatórios por período (**Produtividade**, **Atribuição**, **Interação**, **Presença** e **Avaliação**):
+
+- **Escolher o período:** o padrão são os últimos 7 dias, sem hoje. Você pode escolher data e hora ou usar os atalhos **Hoje**, **Ontem**, **Últimos 7 dias**, **Últimos 30 dias**, **Esse mês** e **Mês passado**.
+- **Filtrar:** clique em **Filtrar**, escolha os critérios e clique em **Aplicar filtros**. Para tirar todos os filtros, clique em **Limpar filtros**. Na **Presença**, os filtros são só de membro e de grupo.
+- **Agrupar:** use o botão **Por ...** para trocar entre os agrupamentos que cada relatório aceita (**Por Dia**, **Por Membro**, **Por Grupo**, **Por Tag** ou **Por Canal**).
+- **Ver as sessões:** clique em **Ver sessões** para listar as sessões do relatório, ou num cartão ou número da tabela para listar as sessões daquele resultado. Na **Presença**, o botão é **Ver presenças** e abre a grade de horários.
+- **Exportar:** clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+
+A **Visão geral** não tem período: mostra as sessões abertas agora. Ela tem **Filtrar**, o agrupamento, **Ver sessões** e **Atualizar**; para exportar, abra **Ver sessões** e use o **Exportar** da lista.
+
+O **Atendimento ao vivo** e o **Vendas ao vivo** não têm esses controles: veja [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo).
 
 ## Quem vê o quê
 
 Além da permissão **Gerenciar relatórios**, o papel do membro em **Configurações** → **Ambiente** → **Permissões** pode aplicar restrições (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis) e a [Referência de permissões](/docs/administracao/referencia-de-permissoes)):
 
-- Se o seu papel tiver **Restringir relatórios ao membro**, você vê só as sessões em que é o responsável (na **Avaliação**, só as avaliações registradas para você; na **Presença**, só a sua presença).
-- Se o seu papel tiver **Restringir relatórios aos grupos do membro**, você vê só as sessões dos seus grupos. Se você não pertencer a nenhum grupo, o relatório não abre e aparece um aviso de que você não pertence a nenhum grupo.
-- As duas restrições por membro e por grupo não podem ficar marcadas ao mesmo tempo.
-- Se o seu papel tiver **Não pode exportar relatórios**, o botão **Exportar** dentro da lista de sessões (**Ver sessões**) fica desativado.
-- No **Atendimento ao vivo**, as conversas visíveis seguem o **Acesso as Conversas** do seu papel, e não essas restrições.
+- **Restringir relatórios ao membro:** na **Visão geral**, **Produtividade**, **Atribuição** e **Interação**, você vê só as sessões em que é o responsável atual; na **Avaliação**, só as avaliações registradas para você; na **Presença**, só a sua presença.
+- **Restringir relatórios aos grupos do membro:** na **Visão geral**, **Produtividade**, **Interação** e **Avaliação**, você vê só as sessões dos seus grupos; na **Atribuição**, as sessões que estão ou já estiveram nos seus grupos. Se você não pertencer a nenhum grupo, o relatório não abre e aparece um aviso de que você não pertence a nenhum grupo.
+- As duas restrições acima não podem ficar marcadas ao mesmo tempo.
+- **Não pode exportar relatórios:** desativa o botão **Exportar** dentro da lista de sessões (**Ver sessões**).
+- **Atendimento ao vivo:** o mapa e a fila seguem o **Acesso as Conversas** do seu papel, e não as restrições de relatório. Os números do conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) seguem as restrições de relatório.
 - O proprietário do workspace vê todos os dados e não sofre restrições.
 
 ## Próximos passos

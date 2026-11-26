@@ -583,5 +583,28 @@
     "pergunta": "Dá para ver na Kinbox o NPS do atendimento calculado automaticamente com promotores e detratores?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Onde vejo a nota que os clientes deram para cada atendente?",
+    "esperado": [
+      "docs/relatorios/avaliacao"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Por que o número de atendimentos de um atendente é diferente no relatório de atribuição e no de interação?",
+    "esperado": [
+      "llm/relatorios/como-funcionam",
+      "docs/relatorios/interacao",
+      "docs/relatorios/atribuicao"
+    ],
+    "tipo": "referencia"
+  },
+  {
+    "pergunta": "Onde acompanho o gasto com templates e a fatura do WhatsApp oficial dentro da Kinbox?",
+    "esperado": [
+      "llm/faq/relatorio-consumo-da-meta"
+    ],
+    "tipo": "faq"
   }
 ]

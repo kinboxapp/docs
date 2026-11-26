@@ -25,7 +25,9 @@ O relatório de **Avaliação** mostra a nota média que os contatos deram aos a
 
 ## Como a avaliação chega ao relatório
 
-A pesquisa de satisfação usa o bot de avaliação do workspace e é enviada ao contato pela ação **Avaliar atendimento** de uma automação em **Configurações** → **Automações**. Sem essa automação configurada, os contatos não recebem a pesquisa.
+A pesquisa de satisfação usa o bot de avaliação do workspace. Ela só é enviada ao contato por uma automação com a ação **Avaliar atendimento**, criada em **Configurações** → **Automação** → **Automações** (seu papel precisa da permissão **Automações**). Sem essa automação, os contatos não recebem a pesquisa.
+
+O contato avalia respondendo com a **Nota** ou o **Texto** de uma das opções.
 
 O relatório considera apenas as sessões **resolvidas no período** que têm avaliação. No agrupamento **Por Dia**, cada sessão avaliada aparece no dia em que foi resolvida.
 
@@ -36,19 +38,25 @@ O relatório considera apenas as sessões **resolvidas no período** que têm av
     No menu lateral, vá em **Relatórios** → **Avaliação** (o título da página aparece como **Relatório de Avaliação**). Por padrão, a tela abre nos últimos 7 dias, sem hoje, agrupada **Por Membro**.
   </Step>
   <Step title="Ajuste período, filtros e agrupamento">
-    Troque as datas no seletor à esquerda, use **Filtrar** + **Aplicar filtros** quando quiser recortar os dados e alterne entre **Por Membro**, **Por Dia**, **Por Grupo**, **Por Tag** e **Por Canal**.
+    Troque as datas no seletor à esquerda. Para recortar os dados, clique em **Filtrar**, escolha os critérios e clique em **Aplicar filtros**. Para mudar o agrupamento, alterne entre **Por Membro**, **Por Dia**, **Por Grupo**, **Por Tag** e **Por Canal**.
   </Step>
   <Step title="Leia as colunas">
     A tabela exibe a **Nota Média** (em estrelas, com uma casa decimal) e o número de **Avaliadores** (total de sessões avaliadas naquela linha). Em **Por Membro**, a avaliação conta para o membro registrado nela; em **Por Grupo**, **Por Tag** e **Por Canal**, conta conforme o grupo, as tags e o canal da sessão.
   </Step>
-  <Step title="Veja as sessões ou exporte">
-    Clique em **Ver sessões** ou nos números da tabela para abrir as sessões avaliadas. Se o seu papel tiver **Não pode exportar relatórios**, o botão **Exportar** dentro da lista de sessões fica desativado. Para baixar a tabela do relatório, clique em **...** → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+  <Step title="Abra as sessões">
+    Clique em **Ver sessões** para listar as sessões avaliadas no período, ou num número da tabela para listar só as daquela linha.
+  </Step>
+  <Step title="Exporte a tabela">
+    Clique em **...** → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**.
+  </Step>
+  <Step title="Exporte a lista de sessões (opcional)">
+    Dentro da lista de sessões, use o **Exportar** da lista. Se o seu papel tiver **Não pode exportar relatórios**, esse botão fica desativado.
   </Step>
 </Steps>
 
 ## Ajustar a pergunta
 
-No topo do relatório, clique em **Configurar** para abrir a janela **Configurar Avaliação**:
+A janela **Configurar** muda só o texto da pesquisa; quem envia a pesquisa é a automação (veja acima). No topo do relatório, clique em **Configurar** para abrir a janela **Configurar Avaliação**:
 
 - **Pergunta**: o texto enviado ao contato para pedir a avaliação.
 - **Opções**: cada linha combina uma **Nota** (número de `0` a `5`) e um **Texto**. Clique em **Opção** para adicionar outra opção ou no **x** para remover.
@@ -60,4 +68,4 @@ Clique em **Salvar** para guardar as mudanças (a tela confirma com "Avaliação
   <img src="/images/ajuda/relatorios/configurar-avaliacao.webp" alt="Janela Configurar Avaliação mostrando o campo Pergunta, a lista Opções com colunas Nota e Texto, o botão Opção, o campo Texto de agradecimento e o botão Salvar" />
 </Frame>
 
-Veja também [Relatórios: visão geral e métricas](/docs/relatorios/como-funcionam) e o [Relatório de produtividade](/docs/relatorios/produtividade).
+Veja também [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam) e o [Relatório de produtividade](/docs/relatorios/produtividade).

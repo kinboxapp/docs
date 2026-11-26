@@ -27,7 +27,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Referência técnica complementar de [Relatórios: visão geral e métricas](/docs/relatorios/como-funcionam), [Relatório Visão geral (tempo real)](/docs/relatorios/visao-geral), [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo), [Relatório de produtividade](/docs/relatorios/produtividade), [Relatório de atribuição](/docs/relatorios/atribuicao), [Relatório de interação](/docs/relatorios/interacao), [Relatório de presença](/docs/relatorios/presenca) e [Relatório de avaliação](/docs/relatorios/avaliacao).
+Referência técnica complementar de [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam), [Relatório Visão geral (tempo real)](/docs/relatorios/visao-geral), [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo), [Relatório de produtividade](/docs/relatorios/produtividade), [Relatório de atribuição](/docs/relatorios/atribuicao), [Relatório de interação](/docs/relatorios/interacao), [Relatório de presença](/docs/relatorios/presenca) e [Relatório de avaliação](/docs/relatorios/avaliacao).
 
 ## Acesso, permissões e restrições
 
@@ -61,17 +61,22 @@ Referência técnica complementar de [Relatórios: visão geral e métricas](/do
 
 O que entra e o que fica fora das médias na [Produtividade](/docs/relatorios/produtividade):
 
-- **TME e TMP:** média das sessões com o tempo calculado, cuja **primeira resposta** ocorreu dentro do período e que **não** foram iniciadas pela equipe.
+- **Recorte inicial:** a **Produtividade** considera só as sessões **criadas ou resolvidas** dentro do período. Uma sessão criada antes do período, respondida dentro dele e ainda aberta (ou resolvida depois) fica fora do relatório inteiro, inclusive do **TME**. Exemplo: sessão criada no domingo, respondida na segunda e ainda aberta não aparece com o período só da segunda.
+- **TME e TMP:** dentro desse recorte, média das sessões com o tempo calculado e maior que zero, cuja **primeira resposta** ocorreu no período e que **não** foram iniciadas pela equipe.
+- **Transferência e TMP:** o **TMP** começa na **primeira** atribuição a um membro; transferir depois não reinicia a contagem. O tempo antes da primeira atribuição fica fora do **TMP**, e o tempo antes da primeira resposta fica fora do **TMA**.
 - **TMA:** média das sessões **resolvidas** dentro do período que tiveram resposta de membro e TMA de **1 minuto ou mais** (sessões resolvidas em menos de 1 minuto ficam fora da média).
 - **Tempo com o [bot](/docs/bot/visao-geral):** entra no **TME** (o bot não marca primeira resposta) e fica fora do **TMP** e do **TMA**.
 - **Sessão sem resposta de membro:** sessões resolvidas sem nenhuma resposta de membro (por exemplo, atendidas apenas por bot ou agente de IA e resolvidas por automação) não têm TME, TMP nem TMA.
 - **Sessão reaberta:** o **TMA** é recalculado na nova resolução, indo da primeira resposta até a última resolução (o intervalo em que ficou resolvida entra no cálculo).
-- **Exibição e exportação:** na tela os tempos aparecem em horas e minutos (ex.: `3h 51m`), ou `-` sem dado. Na exportação da Produtividade, as colunas trazem o agrupamento, **Sessões novas**, **Sessões resolvidas**, **TME (min)** e **TMA (min)**.
+- **Exibição:** na tela os tempos aparecem em horas e minutos (ex.: `3h 51m`), ou `-` sem dado.
+- **Exportação da Produtividade** (**...** → **Exportar**): colunas do agrupamento (**Período**, **Atendente**, **Grupo**, **Tag** ou **Canal**), **TME**, **TMP** e **TMA** (em horas e minutos), **Sessões novas**, **Sessões respondidas** (só em **Por Dia**), **Leads**, **Sessões resolvidas**, **Mensagens trocadas**, **Mensagens de bot**, **Mensagens de membro** e **Mensagens de contato**.
+- **Lista de sessões × número do cartão:** a lista aberta pelo cartão **TMA** não mostra sessões reabertas, mas a média do **TMA** inclui as reabertas; por isso a lista pode não reproduzir o número. A coluna **Mensagens** da tabela só abre a lista no agrupamento **Por Membro**.
 
 ## Horário comercial
 
 - Definido no workspace (na tela, **ambiente**) em **Configurações** → **Ambiente** → **Geral**, no campo **Horário comercial**, escolhendo um horário cadastrado em **Configurações** → **Ambiente** → **Horários**.
 - Quando há um horário escolhido, **TME**, **TMP** e **TMA** contam apenas os minutos dentro desse horário. Sem horário escolhido, contam todos os minutos corridos.
+- **Tempo zero fica fora das médias:** uma sessão em que a espera (ou o atendimento) aconteceu inteira fora do horário comercial fica com tempo zero e não entra na média daquele indicador. No **TMA**, também ficam fora as sessões com menos de 1 minuto.
 - O cálculo é gravado na sessão no momento da primeira resposta (TME e TMP) e da resolução (TMA), usando o horário vigente naquele momento: alterar o horário comercial depois não recalcula sessões antigas.
 
 ## Sessões novas, leads, resolvidas e mensagens
@@ -79,7 +84,7 @@ O que entra e o que fica fora das médias na [Produtividade](/docs/relatorios/pr
 - **Sessões novas:** sessões criadas no período selecionado.
 - **Leads:** sessões criadas no período cujo contato foi criado junto com essa sessão (contato novo). Um contato que já existia no workspace e escreve pela primeira vez em outro canal não conta como lead.
 - **Sessões resolvidas** (cartão) / **Resolvidas** (coluna): sessões resolvidas no período, mesmo se criadas antes.
-- **Mensagens:** soma as mensagens comuns (de membros e de contatos) e as mensagens de bot registradas por dia no período; notas internas não entram. Fora do agrupamento **Por Membro**, passar o mouse mostra a divisão entre membros, bots e contatos. Em **Por Membro**, soma as mensagens de membro das sessões em que ele é o responsável atual.
+- **Mensagens:** soma as mensagens comuns (de membros e de contatos) e as mensagens de bot registradas por dia no período, nas sessões do recorte do relatório (criadas ou resolvidas no período); notas internas não entram. Fora do agrupamento **Por Membro**, passar o mouse mostra a divisão entre membros, bots e contatos. Em **Por Membro**, soma as mensagens de membro das sessões em que ele é o responsável atual.
 
 ### Qual data cada coluna usa no agrupamento Por Dia
 
@@ -88,7 +93,7 @@ No agrupamento **Por Dia** da **Produtividade**, cada coluna usa uma data própr
 | Coluna | Data usada |
 | --- | --- |
 | **Sessões novas** e **Leads** | Dia de criação da sessão |
-| **TME** e **TMP** | Dia da primeira resposta de membro |
+| **TME** e **TMP** | Dia da primeira resposta de membro (só sessões criadas ou resolvidas no período) |
 | **TMA** e **Resolvidas** | Dia da resolução |
 | **Mensagens** | Dia em que cada mensagem foi registrada |
 
@@ -100,7 +105,7 @@ Por isso, numa mesma data da tabela, colunas diferentes podem se referir a sess�
 | --- | --- | --- |
 | [**Produtividade**](/docs/relatorios/produtividade) e [**Visão geral**](/docs/relatorios/visao-geral) | Sessões | Pelo **responsável atual** da sessão (ou responsável na resolução). Uma sessão transferida ([Atribuir e transferir](/docs/conversas/atribuir-e-transferir)) conta inteira para o último responsável. |
 | [**Atribuição**](/docs/relatorios/atribuicao) | Registros de atribuição | Cada vez que a sessão recebe um membro ou grupo (primeira atribuição, atribuição automática, resposta em sessão sem responsável, chat ativo ou transferência). A mesma sessão pode somar várias vezes e o registro permanece depois da transferência. Uma mesma mudança pode somar `1` para o membro e `1` para o grupo. O período compara a data e a hora da atribuição (registros antigos sem hora usam só o dia). |
-| [**Interação**](/docs/relatorios/interacao) | Sessões únicas por membro por dia | Toda sessão em que o membro enviou mensagem naquele dia (incluindo nota interna), mesmo sem ser o responsável. Responder a mesma sessão em dois dias soma `1` em cada dia; dois membros na mesma sessão somam `1` para cada um. |
+| [**Interação**](/docs/relatorios/interacao) | Sessões únicas por membro por dia | Toda sessão em que o membro enviou mensagem, nota interna ou fez uma ação registrada na conversa (como passar a seguir a conversa) naquele dia, mesmo sem ser o responsável. Com **Restringir relatórios ao membro**, considera só as sessões em que ele é o responsável atual. Responder a mesma sessão em dois dias soma `1` em cada dia; dois membros na mesma sessão somam `1` para cada um. |
 
 ## Período, cache e limites
 
@@ -117,7 +122,7 @@ Por isso, numa mesma data da tabela, colunas diferentes podem se referir a sess�
 - **Em espera:** sessões abertas sem primeira resposta de membro e não iniciadas pela equipe.
 - **Em atendimento:** sessões abertas com primeira resposta de membro ou iniciadas pela equipe.
 - **Em espera** + **Em atendimento** = total de sessões abertas.
-- **Pendente:** conta todas as sessões abertas de conversas marcadas como pendentes, mesmo quando ainda estão em espera ou sem responsável. As dicas da tela descrevem o indicador de forma mais restrita do que o número que ele mostra.
+- **Pendente:** o número inclui todas as sessões abertas de conversas pendentes, também as que estão em espera e as sem responsável.
 - **Atribuído:** sessões abertas com membro responsável.
 - **Bot:** sessões abertas com bot ativo.
 
@@ -128,19 +133,27 @@ Por isso, numa mesma data da tabela, colunas diferentes podem se referir a sess�
   - Na fila: sem membro responsável (fila na recepção do grupo, ou **Sem departamento** quando sem grupo).
   - Aguardando: com membro responsável, sem primeira resposta de membro ou marcada como pendente (cor pelo tempo de espera desde que ficou pendente ou, na falta, desde a última mensagem).
   - Vez do contato: membro já respondeu e a conversa não está pendente (cor apagada).
-- **Limites de atraso:** usa os dois tempos de **Indicação dinâmica de conversa pendente** (**Configurações** → **Ambiente** → **Geral**) quando ligada; sem ela, padrão de **10 minutos** ("aguardando há mais de") e **20 minutos** ("atrasado").
+- **Tempo de espera e atraso:** a conversa que espera resposta passa a "aguardando há mais de" depois de um primeiro tempo e a "atrasado" depois de um segundo tempo. Os dois tempos vêm da **Indicação dinâmica de conversa pendente** (**Configurações** → **Ambiente** → **Geral**) quando ela está ligada; desligada, são **10 minutos** e **20 minutos**.
 - **Membros:** online com fone (Kinbox aberta e **Disponível**), em pausa (Kinbox aberta e fora de **Disponível**), mesa sem ninguém/offline (sem a Kinbox aberta).
 - **Indicadores no topo:**
-  - **Fila** (padrão): `na fila` (com seta de variação na última hora), `aguardando · N atrasado(s)`, `N/M online · N em pausa`.
-  - **Tempo médio:** `resolvidas hoje`, `TM 1ª resposta` (TME de hoje; `—` sem dado), `pior espera · N acima do limite`.
+  - **Fila** (padrão): `na fila` (sessões sem membro responsável; seta de variação na última hora), `aguardando` (sessões esperando resposta de um membro: sem primeira resposta ou pendentes) com `· N atrasado(s)` (os atrasados contam também as sessões da fila), `N/M online · N em pausa`.
+  - **Tempo médio:** `resolvidas hoje`, `TM 1ª resposta` (TME de hoje; `—` sem dado), `pior espera` (maior espera agora, contando também as sessões da fila) com `· N acima do limite`. Esses números do dia seguem as restrições de relatório do papel; o mapa e a fila seguem o **Acesso as Conversas**.
   - Quando o copiloto analisa sentimento, pode mostrar também `irritados`/`impacientes`.
+- **Configurações** (ícone no topo; ficam salvas no navegador):
+  - **Estilo visual**: **Do tema** (padrão; "Escritório no tema claro, Grafite no escuro"), **Claro**, **Escuro**, **Grafite**, **Escritório**, **Maquete** (a **Maquete** só existe no **Atendimento ao vivo**; no **Vendas ao vivo** ela vira **Claro**).
+  - **Cidade em volta**: **Mostrar** ou **Ocultar**; a escolha vale só para o estilo visual atual ("só neste estilo").
+  - Só no **Atendimento ao vivo**: **Departamentos** (**Todos os departamentos** ou grupos escolhidos; **Mostrar todos** volta a mostrar todos), **Cor dos clientes** (**Tempo de espera** ou **Canal**; com **Canal**, "atraso vira um losango acima da cabeça"), **Quem vira bonequinho** (**Todas as conversas** ou **Só quem espera**), **Indicadores** (**Fila** ou **Tempo médio**), **Operadores offline** (**Mostrar** ou **Ocultar**).
+  - Nos dois: **Nome dos operadores** (no **Vendas ao vivo**, **Nome dos vendedores**): **Ao passar o mouse** (padrão) ou **Sempre**; **Grade no piso**: **Ligada** (padrão) ou **Desligada**.
+  - Topo: busca **Buscar cliente, operador, robô...** (atalho `/`), **Modo TV** / **Sair do modo TV**, **Legenda**.
 - **Limite de sessões:** carrega até as **20.000** sessões abertas mais recentes do workspace; acima disso, as mais antigas ficam fora.
 - **Mensagens de erro exatas:**
   - Sem permissão em **Vendas ao vivo:** "Seu perfil não tem acesso aos negócios" / `A Vendas ao vivo mostra os negócios do CRM. Peça a um administrador a permissão "Gerenciar negociações" no seu perfil.` (botão **Abrir Atendimento ao vivo**).
   - Sem WebGL: "Este navegador não consegue mostrar o Ao vivo" / "A tela usa gráficos 3D (WebGL), que estão desligados ou não existem neste aparelho. Tente outro navegador, como o Chrome, ou ative a aceleração de hardware."
   - Erro ao montar: "Não foi possível abrir o Ao vivo" / "Algo deu errado ao montar a tela. Tente de novo; se continuar, avise o suporte." (botões **Tentar de novo** e **Voltar para os relatórios**).
 - **Vendas ao vivo:** mostra negociações abertas de um funil por vez, mais as ganhas e perdidas hoje, respeitando o acesso a negociações do papel (o proprietário vê todas). Funis do tipo **Operacional** não entram.
-  - Indicadores: ganho no mês (com a meta do mês quando existe meta de vendas cadastrada), `em aberto` (soma das negociações abertas do funil) e `parados · N críticos` (parados há mais de **7 dias** na mesma etapa; críticos há mais de **14 dias**).
+  - Indicadores: ganho no mês (sem meta de vendas cadastrada para o mês, `ganho em` + mês; com meta, uma barra com `N% da meta`), `em aberto` (soma das negociações abertas do funil) e `parados · N críticos` (paradas na mesma etapa a partir de **7 dias**; críticas a partir de **14 dias**).
+  - Carrega até **3.000** negociações abertas por funil, começando pelas que estão há mais tempo na mesma etapa.
+  - Escolha do funil: botão com o nome do funil, no topo.
   - Símbolos da **Legenda:** caixa = negociação (maior = maior valor), fita dourada = negociação de **R$ 20.000** ou mais, esteira = etapas, pódio = venda ganha, caçamba = perdida, tubo na mesa = progresso da meta do mês do vendedor, coroa = primeiro do ranking do mês.
 
 ## Presença
@@ -148,13 +161,14 @@ Por isso, numa mesma data da tabela, colunas diferentes podem se referir a sess�
 - A Kinbox registra a cada **5 minutos** quais membros estão conectados; cada registro conta 5 minutos online, e quem está desconectado no momento da verificação conta como offline naquele intervalo.
 - Mede conexão ativa, não o status **Disponível** nem se o membro está atendendo.
 - Histórico retido por **90 dias**; períodos anteriores aparecem vazios.
-- Grade de horários (ao clicar no membro ou em **Ver presenças**): cada faixa fica **Online** se houve registro de conexão em pelo menos um intervalo de 5 minutos dentro dela. **Tolerância** define o tamanho da faixa: **5 minutos**, **15 minutos**, **30 minutos** (padrão) ou **1 hora** (salva no navegador). Mensagem de falha ao exportar a grade: "Ocorreu um erro ao exportar os dados".
+- **Grade de horários:** clicar na célula de um membro num dia abre a grade daquele membro naquele dia; **Ver presenças** abre a grade de todos os membros do filtro no período. A grade lê no máximo **500** registros de 5 minutos: em períodos longos ou com muitos membros, fica incompleta. Cada faixa fica **Online** se houve registro de conexão em pelo menos um intervalo de 5 minutos dentro dela. **Tolerância** define o tamanho da faixa: **5 minutos**, **15 minutos**, **30 minutos** (padrão) ou **1 hora** (salva no navegador). Mensagem de falha ao exportar a grade: "Ocorreu um erro ao exportar os dados".
+- **Tabela por dia × grade:** a tabela soma o tempo pelo dia em horário UTC (3 horas à frente de Brasília), então o tempo online das 21h à meia-noite de Brasília aparece no dia seguinte da tabela. A grade de horários mostra os horários no fuso do navegador.
 
 ## Avaliação
 
-- Enviada pela ação **Avaliar atendimento** de uma automação (**Configurações** → **Automações**) usando o bot de avaliação do workspace.
+- Enviada pela ação **Avaliar atendimento** de uma automação (**Configurações** → **Automação** → **Automações**, permissão **Automações**) usando o bot de avaliação do workspace. A janela **Configurar** do relatório muda só a pergunta, as opções e o agradecimento.
 - **Quando não é enviada:** sessão reaberta, sessão já avaliada, workspace sem bot de avaliação, ou sessão em que o contato não enviou nenhuma mensagem.
-- **Cálculo da nota:** compara a resposta do contato com o texto das **Opções** (exige semelhança de pelo menos **75%**) e grava a **Nota** (`0` a `5`) da opção correspondente. Vale apenas uma avaliação por sessão.
+- **Cálculo da nota:** a resposta do contato vale se for igual à **Nota** ou ao **Texto** de uma opção (sem diferenciar maiúsculas) ou, se não for igual, pelo menos **75%** parecida com o **Texto** de uma opção. Grava a **Nota** (`0` a `5`) da opção escolhida. Outra resposta encerra a pesquisa sem nota. Vale apenas uma avaliação por sessão.
 - **Membro creditado:** responsável pela sessão no momento da resposta; se não houver responsável, o último membro que foi responsável; se a sessão nunca teve membro, a avaliação não é gravada.
 - **Agrupamento e período:** entram sessões **resolvidas no período** que têm avaliação (**Por Dia** usa a data da resolução). **Por Membro** usa o membro gravado na avaliação; **Por Grupo**, **Por Tag** e **Por Canal** usam os da sessão. A exportação inclui o agrupamento, **Nota média** e **Avaliadores**.
 - **Nota de avaliação pública:** opção em **Configurações** → **Ambiente** → **Geral** ("Mostrar a nota de avaliação de cada membro para os demais nas salas").

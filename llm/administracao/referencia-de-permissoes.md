@@ -123,6 +123,8 @@ O menu lateral **Tarefas** aparece para todos os membros.
 
 ### Relatórios
 
+O que cada relatório mostra com estas opções: [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
+
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |
 | **Gerenciar relatórios** | Mostra **Relatórios** no menu lateral e libera a opção **Dashboard** na seção **Home**. | — |

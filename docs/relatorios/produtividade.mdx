@@ -1,7 +1,7 @@
 ---
 title: Relatório de produtividade
 description: Como ler o relatório de Produtividade, com TME, TMP, TMA, sessões novas, sessões resolvidas, leads e mensagens por dia, membro, grupo, tag ou canal.
-keywords: [produtividade, tme, tmp, tma, tempo médio de espera, tempo médio de atendimento, tempo pós-atribuição, tempo de resposta, sessões novas, sessões resolvidas, leads, mensagens, desempenho por atendente, exportar relatório, sla]
+keywords: [produtividade, painel de atendimento, desempenho da equipe, tme, tmp, tma, tempo médio de espera, tempo médio de atendimento, tempo pós-atribuição, tempo de resposta, sessões novas, sessões resolvidas, leads, mensagens, desempenho por atendente, exportar relatório, sla]
 publico: humano
 tipo: guia
 fontes:
@@ -30,7 +30,7 @@ O relatório de **Produtividade** mostra os tempos médios de espera e atendimen
   <Step title="Abra o relatório">
     No menu lateral, vá em **Relatórios** → **Produtividade**. A tela traz os gráficos **Quantidade de sessões** (com **Novo** e **Resolvido**) e **Tempo médio** (com **TME** e **TMA**), os cartões de resumo e a tabela abaixo.
 
-    <Frame caption="Relatório de Produtividade com período, filtros, gráficos e cartões de resumo">
+    <Frame caption="Produtividade agrupada por dia: período, botões Filtrar, Ver sessões e Por Dia, gráficos e cartões de resumo">
       <img src="/images/ajuda/relatorios/produtividade.webp" alt="Tela de Produtividade com seletor de período, botões Filtrar, Ver sessões e Por Dia, gráficos Quantidade de sessões e Tempo médio e os cartões TME, TMP, TMA, Sessões novas, Sessões resolvidas e Leads" />
     </Frame>
   </Step>
@@ -44,10 +44,13 @@ O relatório de **Produtividade** mostra os tempos médios de espera e atendimen
     Clique em **Por Dia** (padrão) para mudar para **Por Membro**, **Por Grupo**, **Por Tag** ou **Por Canal**. Em **Por Dia**, a tabela lista os dias em ordem; nos outros agrupamentos, aparecem primeiro as linhas com mais sessões novas. A primeira coluna muda conforme o agrupamento (**Período**, **Atendente**, **Grupo**, **Tag** ou **Canal**), e sessões sem vínculo aparecem em **Sem atribuição**, **Sem grupo** ou **Sem tag**.
   </Step>
   <Step title="Abra a lista de sessões">
-    Clique em **Ver sessões**, em um cartão ou em qualquer número da tabela para listar as sessões que compõem aquele resultado. Se o seu papel tiver **Não pode exportar relatórios**, o botão **Exportar** dentro da lista de sessões fica desativado.
+    Clique em **Ver sessões** para listar as sessões do relatório. Para ver os detalhes de um número, clique no cartão ou na célula da tabela: a lista abre com as sessões daquele indicador. A coluna **Mensagens** só abre a lista no agrupamento **Por Membro**.
   </Step>
   <Step title="Exporte o relatório">
     Clique no menu **...** no canto superior direito → **Exportar** e escolha **CSV (.csv)** ou **Excel (.xlsx)**. O arquivo sai com as linhas do agrupamento atual.
+  </Step>
+  <Step title="Exporte a lista de sessões (opcional)">
+    Dentro de **Ver sessões**, a lista tem o próprio **Exportar**. Se o seu papel tiver **Não pode exportar relatórios**, esse botão fica desativado.
   </Step>
 </Steps>
 
@@ -55,18 +58,14 @@ O relatório de **Produtividade** mostra os tempos médios de espera e atendimen
 
 | Indicador | O que conta |
 | --- | --- |
-| **TME** | Tempo médio de espera: da criação da sessão até a primeira resposta de um membro (inclui o tempo com o bot). |
-| **TMP** | Tempo médio pós-atribuição: da primeira atribuição a um membro até a primeira resposta dele. |
-| **TMA** | Tempo médio de atendimento: da primeira resposta de um membro até a resolução da sessão. |
-| **Sessões novas** | Sessões criadas dentro do período selecionado. |
-| **Sessões resolvidas** (coluna **Resolvidas**) | Sessões resolvidas no período, mesmo que tenham sido criadas antes. |
-| **Leads** | Sessões novas criadas no período para contatos novos (contatos criados junto com a sessão). |
-| **Mensagens** (coluna da tabela) | Mensagens registradas no período. Em **Por Membro**, soma as mensagens de membro das sessões em que ele é o responsável atual; nos outros agrupamentos, passar o mouse divide entre membros, bots e contatos. |
+| **TME** | Tempo médio de espera: da criação da sessão até a primeira resposta de um membro. |
+| **TMP** | Tempo médio pós-atribuição: da primeira atribuição a um membro até a primeira resposta de um membro. |
+| **TMA** | Tempo médio de atendimento: da primeira resposta de um membro até a resolução. |
+| **Sessões novas** | Sessões criadas no período. |
+| **Sessões resolvidas** (coluna **Resolvidas**) | Sessões resolvidas no período, mesmo que criadas antes. |
+| **Leads** | Sessões novas de contatos criados junto com a sessão. |
+| **Mensagens** (coluna) | Mensagens das sessões do período. Em **Por Membro**, as mensagens de membros nas sessões em que ele é o responsável atual; nos outros agrupamentos, o total, e o mouse mostra a divisão entre membros, bots e contatos. |
 
-Quando não há dado para um indicador, a tela mostra `-`.
+Quando não há dado para um indicador, a tela mostra `-`. Os tempos seguem o **Horário comercial** do workspace, se houver um escolhido, e cada sessão conta para o responsável atual nos agrupamentos **Por Membro** e **Por Grupo**: veja [Como os relatórios contam sessões e tempos](/docs/relatorios/como-funcionam).
 
-Se o workspace (na tela, **ambiente**) tiver um **Horário comercial** escolhido em **Configurações** → **Ambiente** → **Geral**, **TME**, **TMP** e **TMA** contam apenas os minutos dentro desse horário.
-
-Nos agrupamentos **Por Membro** e **Por Grupo**, cada sessão conta inteira para quem é o responsável atual (ou era ao ser resolvida): uma sessão transferida (veja [Atribuir e transferir](/docs/conversas/atribuir-e-transferir)) aparece no último responsável.
-
-Para entender em detalhe como os tempos e as sessões são contados, leia [Relatórios: visão geral e métricas](/docs/relatorios/como-funcionam). Para ver quem recebeu cada sessão ao longo do período, use o [Relatório de atribuição](/docs/relatorios/atribuicao); para ver em quantas sessões cada membro respondeu, use o [Relatório de interação](/docs/relatorios/interacao).
+Para ver quem recebeu cada sessão ao longo do período, use o [Relatório de atribuição](/docs/relatorios/atribuicao); para ver em quantas sessões cada membro respondeu, use o [Relatório de interação](/docs/relatorios/interacao).
