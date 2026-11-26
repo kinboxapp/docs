@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "pergunta": "Como ligo meu número de WhatsApp na Kinbox lendo o QR Code?",
+    "esperado": ["docs/canais/conectar-whatsapp-app"],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "O canal do WhatsApp ficou desconectado e o QR Code sumiu da tela, o que eu faço?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte"],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Apareceu um aviso de que meu número possivelmente foi bloqueado pelo WhatsApp",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado"],
+    "tipo": "solucao-de-problema"
+  },
+  {
+    "pergunta": "Qual a diferença entre a API oficial e o modo QR Code do WhatsApp?",
+    "esperado": ["docs/canais/whatsapp/visao-geral", "llm/faq/whatsapp-qual-escolher"],
+    "tipo": "conceito"
+  },
+  {
+    "pergunta": "Meu canal ainda está na conexão Clássica, como passo para a Express sem perder as conversas?",
+    "esperado": ["docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo"],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Dá para atender as ligações do WhatsApp do QR Code pela Kinbox?",
+    "esperado": ["llm/faq/whatsapp-qr-ligacoes", "docs/canais/whatsapp/whatsapp-app/o-que-funciona"],
+    "tipo": "faq"
+  },
+  {
+    "pergunta": "Como faço backup das conversas do WhatsApp no Google Drive do meu celular?",
+    "esperado": [],
+    "tipo": "negativo"
+  }
+]

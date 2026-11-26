@@ -1,0 +1,47 @@
+---
+title: Como evitar que o número seja bloqueado
+description: Boas práticas para usar o WhatsApp por QR Code na Kinbox sem ter o número bloqueado ou banido pelo WhatsApp.
+keywords: [número bloqueado, banimento, banido, evitar bloqueio, spam, aquecer número, número novo, whatsapp qr code, boas práticas]
+publico: humano
+tipo: guia
+fontes:
+  - wabox:apps/docs/guides/best-practices.mdx
+  - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - api-v0:server/modules/wabox/WaboxClient.js
+codigo:
+  - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - web:src/pages/settings/channels/warmbox/**
+  - api-v0:server/modules/wabox/WaboxClient.js
+  - wabox:apps/docs/guides/best-practices.mdx
+verificado_em: 2026-11-26
+---
+
+No WhatsApp por QR Code, o número funciona para o WhatsApp como uma conta comum com um aparelho conectado, e envios indesejados em volume podem gerar bloqueio ou banimento. A principal causa são denúncias de spam e bloqueios feitos pelos próprios contatos — o WhatsApp não publica um limite fixo de mensagens porque a tolerância varia com a reputação do número.
+
+<Warning>O bloqueio é aplicado pelo WhatsApp. A Kinbox não controla essa decisão e não consegue desbloquear um número banido.</Warning>
+
+## O que fazer para proteger o número
+
+1. **Fale só com quem espera a sua mensagem.** Peça permissão antes de iniciar envios e ofereça uma saída clara (por exemplo, "responda SAIR").
+2. **Aqueça números novos antes de aumentar o volume.** Use o número normalmente por alguns dias em conversas reais, com foto, nome e recado preenchidos, e aumente o envio aos poucos ao longo de semanas. A tela da Kinbox recomenda aquecer por pelo menos uma semana trocando mensagens diariamente com contatos conhecidos.
+3. **Varie e personalize o texto.** Inclua o nome ou dados relevantes do contato para evitar enviar a mesma frase para muitas pessoas. Evite links encurtados e prefira o seu próprio domínio.
+4. **Prefira conversar a disparar.** Mensagens em conversas iniciadas pelo contato têm risco bem menor. Para campanhas frias, use o WhatsApp oficial com templates (veja [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)).
+5. **Nunca use o número principal da empresa em disparos.** Para volumes maiores, divida os envios entre vários números dedicados.
+6. **Fique atento aos sinais de alerta.** Observe se as mensagens passam a ficar só com um tique (enviadas, mas não entregues), se as respostas caem ou se os bloqueios aumentam. Se isso acontecer, interrompa os envios em massa e deixe o número descansar por alguns dias.
+
+## O que a Kinbox já faz na conexão Express
+
+- Aplica um intervalo aleatório de 1 a 3 segundos entre as mensagens enviadas pelo mesmo número.
+- Em campanhas, mostra "digitando..." por 2 segundos antes de cada mensagem e confere se o número tem WhatsApp antes de enviar.
+
+## Configurações que ajudam
+
+- **Apenas Receptivo**: marque essa opção na tela do canal do número principal de atendimento. Com ela ativa, o canal não pode enviar mensagem ativa nem ser escolhido em campanhas. Veja todas as opções em [Configurações do WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes).
+- **Aquecedor**: alguns workspaces com recursos em teste exibem essa opção na tela do canal para configurar um perfil de aquecimento; ela pode não aparecer no seu workspace.
+
+## Próximos passos
+
+- Para configurar disparos em massa com menos risco, veja [Enviar campanhas pelo QR Code sem bloquear o número](/docs/canais/whatsapp/whatsapp-app/como-fazer-numero-nao-ser-bloqueado-campanhas).
+- Se o seu número já recebeu o alerta de bloqueio, veja [Meu número foi bloqueado](/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado).

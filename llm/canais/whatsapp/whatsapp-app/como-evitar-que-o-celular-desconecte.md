@@ -1,0 +1,70 @@
+---
+title: "Diagnóstico do status do canal QR Code (desconectado, QR expirado, banido, em revisão)"
+description: Matriz de diagnóstico do status de um canal de WhatsApp por QR Code na Kinbox, com causa, como confirmar e o que fazer.
+keywords: [diagnóstico, desconectado, starting, connecting, pending_review, qr expirou, banido, aparelho removido, mensagem com erro, send_timeout, phone_not_on_whatsapp]
+publico: llm
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - web:src/pages/inbox/Conversations/index.tsx
+  - api-v0:server/modules/wabox/WaboxStatus.js
+  - wabox:apps/docs/webhooks/instance-status.mdx
+codigo:
+  - web:src/pages/settings/channels/whatsapp/**
+  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/IntegrationsController.js
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/inbox/Conversations/index.tsx
+  - wabox:apps/docs/webhooks/instance-status.mdx
+verificado_em: 2026-11-26
+---
+
+Matriz de diagnóstico complementar à página humana "Meu WhatsApp desconectou" (`/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte`).
+
+## Matriz de diagnóstico por status e sinais
+
+Observação importante: na tela de canais, a dica do status **Desconectado** sempre diz `"Seu canal está desconectado. Verifique sua conexão de internet."`, mas na conexão **Express** esse mesmo status cobre queda de rede, QR expirado, aparelho removido no celular e número banido.
+
+| Se a tela mostra | E também ocorre | Causa provável | O que fazer |
+| --- | --- | --- | --- |
+| **Desconectado** | Volta sozinho para **Conectado** depois de alguns instantes | Queda temporária (internet do celular, celular off-line/desligado por muito tempo ou manutenção) | Aguardar e conferir a internet do celular; se não voltar, clicar em **Reiniciar canal**. |
+| **Desconectado** | Logo depois de criar ou reiniciar (~13 min sem ler), sem QR na tela, ou aviso `"QRCode expirou, necessário reiniciar o canal."` | O QR Code da conexão **Express** expirou | Clicar em **Reiniciar canal** para gerar novo QR e ler no celular. |
+| **Desconectado** | Não volta sozinho e não há alerta de bloqueio | Aparelho removido em **Dispositivos conectados** no celular, sessão expirada ou ação **Desconectar** | Clicar em **Desconectar** (na **Express** já reinicia e pede novo QR) ou **Reiniciar canal**, e ler o QR. |
+| **Desconectado** | Ícone vermelho `"Seu canal foi possivelmente bloqueado pelo WhatsApp"`, alerta na tela do canal ou faixa `"Possivelmente seu número foi bloqueado pelo WhatsApp."` | Número banido pelo WhatsApp | Conferir no celular (revisão é pelo próprio WhatsApp). Para manter o histórico em outro número, conectar novo canal e usar **Migrar conversas**. Ver "Meu número foi bloqueado" (`/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado`). |
+| **Necessário ler QR-Code** | QR Code visível na tela do canal | Aguardando pareamento (QR Code ou código de pareamento) | Abrir o canal e ler o QR Code ou usar **Conectar com número de telefone** (**Express**). |
+| `starting` ou `connecting` (cru, em vermelho) | Canal **Express** | Canal carregando ou reconectando | Aguardar alguns instantes. |
+| `pending_review` ou `error` (cru, em vermelho) | Logo após criar canal **Express** | Falha ou pendência na criação do canal | Acionar o suporte com o ID do canal (**Copiar ID**); não há ação na tela. |
+| **Necessário reiniciar canal** | Canal **Clássica** | Sessão precisa reiniciar | Clicar em **Reiniciar canal**. Se avisar `"Necessário recriar o canal para reiniciar"` (tela do canal) ou `"Necessário recriar o canal e ler o QRcode para reiniciar"` (lista), usar **Recriar**. |
+| **Recomendado recriar canal** | Canal **Clássica** (por exemplo, criado antes de 09/01/2023) | Canal desatualizado | Usar **Recriar** (preferencialmente escolhendo **Express**). |
+| **Criando...** ou **Reiniciando...** | — | Operação em andamento (até 10 min criando na **Clássica**; até 5 min reiniciando) | Aguardar a conclusão. |
+
+## Envio com o canal fora do ar
+
+- Quando um canal **Express** está desconectado ou bloqueado, a Kinbox recusa o envio imediatamente: a mensagem fica com erro e não entra em fila para reenvio automático quando o canal voltar.
+- O motivo do erro aparece ao passar o mouse sobre o aviso na mensagem.
+
+## Códigos de erro exibidos no aviso da mensagem
+
+Ao passar o mouse sobre o erro de entrega de uma mensagem na conexão **Express**, podem aparecer códigos em inglês:
+
+| Código | Significado |
+| --- | --- |
+| `phone_not_on_whatsapp` | O número de destino não tem conta no WhatsApp. Confira o número do contato. |
+| `media_invalid` | O arquivo passou do limite (16 MB para imagem, áudio, vídeo e figurinha; 100 MB para documento) ou está num formato inválido. |
+| `send_timeout` | O WhatsApp não confirmou o envio a tempo (por exemplo, celular muito tempo sem internet). A mensagem pode ter saído: confira na conversa antes de reenviar. |
+| `not_allowed` | O WhatsApp recusou o envio por falta de permissão. |
+| `send_failed` | O WhatsApp recusou a mensagem por outro motivo. |
+
+Esses códigos aparecem crus, em inglês. Não existe hoje um código específico de bloqueio silencioso: os sinais são mensagens enviadas que não chegam a ser entregues, queda nas respostas e aumento de bloqueios.
+
+## Faixa Telefone desconectado nas conversas
+
+- No topo da lista de conversas, a faixa **Telefone desconectado** exibe uma das mensagens:
+  - `"Necessário ler o QR Code do canal {nome}."`
+  - `"Necessário reiniciar canal {nome}."`
+  - `"Verifique se o aparelho do canal {nome} está conectado à internet."`
+  - `"Possivelmente seu número foi bloqueado pelo WhatsApp."` (quando o canal está marcado como bloqueado)
+- Membros com a permissão **Gerenciar Canais** veem o link **Configuração do canal** na faixa.
+- A restrição **Não pode ver notificações de canal** oculta essas notificações de desconexão na listagem de conversas.

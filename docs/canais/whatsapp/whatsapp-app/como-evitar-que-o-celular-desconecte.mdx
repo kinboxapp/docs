@@ -1,0 +1,96 @@
+---
+title: Meu WhatsApp desconectou
+description: O que fazer quando o canal de WhatsApp por QR Code aparece desconectado, pede QR Code ou para de enviar mensagens.
+keywords: [whatsapp desconectou, desconectado, celular desconecta, qr code expirou, necessário ler qr-code, necessário reiniciar canal, reconectar whatsapp, telefone desconectado, canal caiu]
+publico: humano
+tipo: solucao-de-problema
+fontes:
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - web:src/pages/inbox/Conversations/index.tsx
+  - api-v0:server/modules/wabox/WaboxStatus.js
+  - wabox:apps/docs/webhooks/instance-status.mdx
+codigo:
+  - web:src/pages/settings/channels/whatsapp/**
+  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/IntegrationsController.js
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/inbox/Conversations/index.tsx
+  - wabox:apps/docs/webhooks/instance-status.mdx
+verificado_em: 2026-11-26
+---
+
+## Sintoma
+
+- Na lista de canais (**Configurações** → **Chat** → **Canais**), o canal aparece como **Desconectado**, **Necessário ler QR-Code**, **Necessário reiniciar canal**, **Recomendado recriar canal** ou com um status em inglês (`starting`, `connecting`).
+- No topo da lista de conversas, aparece a faixa **Telefone desconectado**.
+- As mensagens enviadas pela Kinbox ficam com erro na hora. Mensagens que falham enquanto o canal está fora do ar não são reenviadas sozinhas: reenvie depois que o canal reconectar.
+
+## Causas e soluções
+
+<AccordionGroup>
+  <Accordion title="Queda temporária de rede ou manutenção">
+    **Como confirmar:** o canal mostra **Desconectado**, mas costuma voltar sozinho para **Conectado**. Pode acontecer quando o celular perde internet, fica muito tempo desligado ou durante uma manutenção.
+
+    **O que fazer:** aguarde alguns instantes e verifique se o celular está conectado à internet. Se o canal não reconectar sozinho, clique em **Reiniciar canal**.
+  </Accordion>
+
+  <Accordion title="O QR Code expirou antes da leitura">
+    **Como confirmar:** na conexão **Express**, o canal fica **Desconectado** logo depois de ser criado ou reiniciado e o QR Code desaparece (o código fica disponível por cerca de 13 minutos). Se a tela estava aberta, aparece o aviso "QRCode expirou, necessário reiniciar o canal.".
+
+    **O que fazer:** clique em **Reiniciar canal** para gerar um novo QR Code e faça a leitura no celular.
+  </Accordion>
+
+  <Accordion title="Aparelho removido no celular ou sessão expirada">
+    **Como confirmar:** o canal permanece **Desconectado** e não volta sozinho.
+
+    **O que fazer:** clique em **Desconectar** (na conexão **Express**, o canal já reinicia e pede um novo QR Code) ou em **Reiniciar canal**, e leia o QR Code novamente no celular.
+  </Accordion>
+
+  <Accordion title="Canal aguardando leitura do QR Code">
+    **Como confirmar:** o status na lista é **Necessário ler QR-Code**.
+
+    **O que fazer:** abra o canal e leia o QR Code no celular (ou use **Conectar com número de telefone** na conexão **Express**). Veja o passo a passo em [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app).
+  </Accordion>
+
+  <Accordion title="Canal carregando ou reconectando">
+    **Como confirmar:** aparece `starting` ou `connecting` em vermelho na lista de canais.
+
+    **O que fazer:** aguarde alguns instantes para o canal terminar de iniciar ou reconectar.
+  </Accordion>
+
+  <Accordion title="Número possivelmente bloqueado pelo WhatsApp">
+    **Como confirmar:** aparece o ícone vermelho "Seu canal foi possivelmente bloqueado pelo WhatsApp" na lista, o alerta na tela do canal ou "Possivelmente seu número foi bloqueado pelo WhatsApp." na faixa das conversas.
+
+    **O que fazer:** siga as orientações em [Meu número foi bloqueado](/docs/canais/whatsapp/whatsapp-app/o-que-fazer-se-meu-numero-foi-bloqueado).
+  </Accordion>
+
+  <Accordion title="Conexão Clássica pedindo reinício ou recriação">
+    **Como confirmar:** o status mostra **Necessário reiniciar canal** ou **Recomendado recriar canal**.
+
+    **O que fazer:** clique em **Reiniciar canal**. Se aparecer "Necessário recriar o canal para reiniciar", ou se o status for **Recomendado recriar canal**, clique em **Recriar** — de preferência escolhendo **Express** (veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo)).
+  </Accordion>
+</AccordionGroup>
+
+## Onde ficam as ações
+
+Vá em **Configurações** → **Chat** → **Canais** e clique no canal. Os botões **Desconectar**, **Reiniciar canal** e **Recriar** ficam no bloco **Ações** (e também no menu de três pontos da linha). Reiniciar o canal não apaga conversas nem configurações. Veja todas as opções em [Configurações do WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes).
+
+<Frame caption="Bloco Ações na tela do canal de WhatsApp Express">
+  <img src="/images/ajuda/whatsapp/canal-express.webp" alt="Tela de um canal de WhatsApp Express mostrando o bloco Ações com os botões Desconectar, Reiniciar canal, Migrar e Recriar" />
+</Frame>
+
+## Como evitar novas desconexões
+
+- Mantenha o celular conectado à internet com o WhatsApp instalado no número e abra o aplicativo de tempos em tempos.
+- Não remova o aparelho da Kinbox em **Dispositivos conectados** no celular.
+
+## Ainda não resolveu?
+
+Fale com o suporte da Kinbox informando:
+
+- O tipo de conexão (**Express** ou **Clássica**, no campo **Versão**).
+- O status que aparece na tela.
+- Se a Kinbox continua listada em **Dispositivos conectados** no celular.
+- O ID do canal (use **Copiar ID** no menu de três pontos da lista).

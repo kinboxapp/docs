@@ -1,0 +1,87 @@
+---
+title: "Canais: conectar e gerenciar"
+description: O que são os canais da Kinbox, onde conectar um novo canal, o que significa cada status e quantos canais o plano permite.
+keywords: [canais, conectar canal, novo canal, status do canal, desconectado, limite de canais, whatsapp, instagram, widget]
+publico: humano
+tipo: conceito
+fontes:
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/settings/channels/AddChannel.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - api-v0:server/controllers/NewPaymentController.js
+codigo:
+  - web:src/pages/settings/channels/index.tsx
+  - web:src/pages/settings/channels/AddChannel.tsx
+  - web:src/pages/settings/channels/channels.def.tsx
+  - web:src/pages/settings/channels/whatsapp/ForwardZapModal.tsx
+  - web:src/pages/settings/roles/permissionSections.tsx
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/routes/IntegrationsApiRoutes.js
+verificado_em: 2026-11-26
+---
+
+Um canal é uma conta de mensagem ligada ao seu workspace para receber e responder conversas na **Caixa de entrada**.
+
+## Tipos de canal
+
+Em **Conectar novo canal**, você pode conectar:
+
+- **WhatsApp**
+- **Facebook**
+- **Telegram**
+- **E-mail**
+- **Instagram**
+- **SMS**
+- **Widget** (chat no site)
+- **Customizado**
+
+O canal de **Voip** fica separado, em **Configurações** → **Chat** → **Voip**.
+
+## Onde encontrar e organizar canais
+
+Os canais ficam em **Configurações** → **Chat** → **Canais**. Clique em **Novo canal** para abrir a tela **Conectar novo canal**.
+
+Cada linha da lista mostra o ícone do tipo, o nome (descrição) do canal, o número ou detalhe (como "Chat no site" no widget) e o status à direita. Canais de WhatsApp **Express** exibem o selo **v5**, e canais de WhatsApp oficial exibem o ícone de oficial.
+
+Você pode filtrar a lista por **Status** (**Todos os status**, **Conectado** ou **Desconectado**) e por **Canais**, pesquisar por nome, descrição ou número, e ordenar por **Canal**, **A a Z** ou **Status**.
+
+## Status dos canais
+
+| Status | O que significa | O que fazer |
+| --- | --- | --- |
+| **Conectado** | O canal está conectado e funcionando (aparece como um selo verde de check na lista). | Nenhuma ação necessária. |
+| **Desconectado** | O canal está fora do ar. | Verifique a conexão do canal; em WhatsApp por QR Code, veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte). |
+| **Necessário ler QR-Code** | O canal de WhatsApp aguarda o pareamento com o celular. | Abra o canal e leia o QR Code (ou use o código de pareamento na conexão **Express**). |
+| **Necessário reiniciar canal** | A sessão do canal precisa ser reiniciada. | Abra o canal, vá em **Ações** e clique em **Reiniciar canal**. |
+| **Criando...** / **Reiniciando...** | A Kinbox está criando (até 10 minutos) ou reiniciando (até 5 minutos) o canal. | Aguarde a conclusão do processo. |
+| **Recomendado recriar canal** | O canal está desatualizado e precisa ser recriado. | Abra o canal, vá em **Ações** e clique em **Recriar**. Será preciso ler o QR Code novamente. |
+
+A linha também pode exibir alertas de número possivelmente bloqueado pelo WhatsApp ou de transferência de conversas em andamento. Quando um canal de WhatsApp cai, a lista de conversas exibe a faixa **Telefone desconectado** no topo.
+
+## Ações comuns
+
+No menu de três pontos de cada canal, você encontra:
+
+- **Copiar ID**: copia o identificador do canal para a área de transferência.
+- **Editar**: abre as configurações do canal.
+- **Excluir**: desliga o canal sem apagar as conversas existentes. Em canais de WhatsApp **Express**, a exclusão também remove o canal dos bots que o usavam.
+- **Migrar conversas** (somente WhatsApp): transfere todas as conversas existentes para outro canal de WhatsApp do workspace. O processo pode levar algumas horas e faz parecer que as conversas sempre foram do canal de destino.
+
+## Quem pode gerenciar canais
+
+Para abrir a tela de canais, o membro precisa da permissão **Gerenciar Canais** (o dono do workspace tem acesso). Restrições na seção **Canais** das permissões podem limitar o membro a dar apenas manutenção simples (ocultando **Novo canal** e **Excluir**, desativando **Migrar** e bloqueando a edição), exibir somente canais cujo **Restringir visibilidade** inclua os grupos dele ou ocultar alertas de desconexão na lista de conversas.
+
+## Limite de canais do plano
+
+O plano define quantos canais de WhatsApp (oficiais e por QR Code, somados) e de Instagram você pode ter. Os outros tipos não têm limite de quantidade, exceto o **SMS**, que é um por workspace.
+
+## Próximos passos
+
+<CardGroup cols={2}>
+  <Card title="Qual WhatsApp usar: oficial ou QR Code" href="/docs/canais/whatsapp/visao-geral">
+    Compare os dois modos de WhatsApp antes de escolher como conectar o número.
+  </Card>
+  <Card title="Conectar o WhatsApp pelo QR Code" href="/docs/canais/conectar-whatsapp-app">
+    Siga o passo a passo para ligar um número pelo QR Code ou código de pareamento.
+  </Card>
+</CardGroup>

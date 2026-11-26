@@ -1,0 +1,95 @@
+---
+title: Conectar o WhatsApp pelo QR Code
+description: Passo a passo para conectar um número de WhatsApp à Kinbox lendo o QR Code ou usando o código de pareamento.
+keywords: [conectar whatsapp, qr code, ler qr code, código de pareamento, conectar com número de telefone, whatsapp web, express, clássica, novo canal whatsapp]
+publico: humano
+tipo: guia
+fontes:
+  - web:src/pages/settings/channels/whatsapp/AddWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/WhatsappPairingCode.tsx
+  - api-v0:server/controllers/WaboxController.js
+  - wabox:apps/docs/webhooks/instance-status.mdx
+codigo:
+  - web:src/pages/settings/channels/whatsapp/**
+  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/IntegrationsController.js
+  - web:src/pages/settings/channels/AddChannel.tsx
+  - web:src/pages/settings/channels/AddChannelWhatsApp.tsx
+  - wabox:apps/engine/internal/config/config.go
+verificado_em: 2026-11-26
+---
+
+Conecte um número de WhatsApp à Kinbox lendo o QR Code no celular ou usando o código de pareamento. O canal funciona como um aparelho conectado ao aplicativo do seu celular.
+
+<Note>Quem pode: membros com a permissão **Gerenciar Canais** e sem a restrição **Somente pode dar manutenção simples em canais** (o dono do workspace tem acesso). O plano precisa ter um canal de WhatsApp disponível.</Note>
+
+## Antes de começar
+
+- Tenha em mãos o celular com o WhatsApp (ou WhatsApp Business) do número conectado à internet. Como o canal funciona como um aparelho conectado, o celular precisa abrir o WhatsApp de tempos em tempos.
+- Evite conectar um número novo logo após criá-lo. A Kinbox recomenda aquecer o número por pelo menos uma semana, trocando mensagens diárias com contatos conhecidos. Veja mais em [Como evitar que o número seja bloqueado](/docs/canais/whatsapp/whatsapp-app/como-nao-ter-numero-bloqueado-whatsapp).
+
+## Passo a passo
+
+<Steps>
+  <Step title="Abra a tela de canais">
+    Vá em **Configurações** → **Chat** → **Canais** e clique em **Novo canal**.
+  </Step>
+  <Step title="Selecione o modo QR Code">
+    Em **Conectar novo canal**, clique em **WhatsApp** e depois escolha **Modo QRCode**.
+  </Step>
+  <Step title="Preencha os dados do canal">
+    No painel **Conectar WhatsApp**, informe:
+
+    - **Descrição**: nome que identifica o canal na Kinbox.
+    - **Número**: número com DDI, de 10 a 15 dígitos (exemplo: `+55 11 90000-0000`).
+    - Campos personalizados de canal, se o seu workspace tiver.
+
+    Deixe **Tipo de conexão** em **Express** (**Recomendada**). Abra **Opções avançadas** apenas se quiser escolher **Clássica** (**Modo antigo**). Clique em **Conectar canal**.
+
+    <Frame caption="Painel Conectar WhatsApp com Opções avançadas aberto">
+      <img src="/images/ajuda/whatsapp/conectar-whatsapp-qr-code.webp" alt="Painel Conectar WhatsApp mostrando os campos Descrição e Número, aviso de número novo, Opções avançadas aberto com as opções Express e Clássica e o botão Conectar canal" />
+    </Frame>
+  </Step>
+  <Step title="Abra o canal na lista">
+    Depois do aviso "Canal de WhatsApp criado.", a Kinbox volta para a lista de canais. Clique no canal recém-criado para abrir a tela **Canal de WhatsApp**.
+
+    Na conexão **Express**, o status **Necessário ler QR-Code** e o QR Code aparecem em pouco tempo. Na conexão **Clássica**, o canal pode ficar em **Criando...** por até 10 minutos antes de exibir o QR Code.
+  </Step>
+  <Step title="Leia o QR Code no celular">
+    Abra o WhatsApp no celular desse número, toque em **Dispositivos conectados** → **Conectar dispositivo** e aponte a câmera para o QR Code na tela. A imagem se atualiza sozinha a cada 10 segundos.
+  </Step>
+</Steps>
+
+## Conectar com o código (sem câmera)
+
+Disponível apenas na conexão **Express**, quando o status estiver como **Necessário ler QR-Code**.
+
+<Steps>
+  <Step title="Abra o pareamento por código">
+    Abaixo do QR Code, clique em **Conectar com número de telefone**. Enquanto esse painel fica aberto, a Kinbox pausa a busca de novos QR Codes para não invalidar o código gerado.
+  </Step>
+  <Step title="Gere e copie o código">
+    Confira o campo **Número do WhatsApp** (10 a 15 dígitos com DDI) e clique em **Gerar código**. Para números do Brasil, a Kinbox verifica se a conta está registrada com ou sem o nono dígito e gera o código no formato correto. Clique em **Copiar** para copiar o código `XXXX-XXXX`.
+  </Step>
+  <Step title="Digite o código no celular">
+    Abra o WhatsApp no celular desse número, toque em **Dispositivos conectados** → **Conectar dispositivo**, toque em **Conectar com número de telefone** e digite o código. Se preferir voltar ao QR Code, clique em **Voltar para QR Code**.
+  </Step>
+</Steps>
+
+## Depois de conectar
+
+O status muda para **Conectado**. Na conexão **Express**, o campo **Número** é atualizado automaticamente com o número confirmado pelo WhatsApp.
+
+O campo **Número** fica bloqueado depois da criação: para usar outro número, crie um novo canal. Se o número já teve um canal excluído no workspace, criar um canal com o mesmo número reaproveita o canal antigo com o mesmo ID e o histórico de conversas.
+
+Para ajustar opções como **Apenas Receptivo** e grupos, veja [Configurações do WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/configuracoes). Para conferir os tipos de mensagem aceitos, veja [O que funciona e o que não funciona no WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona).
+
+## Problemas comuns
+
+- **O QR Code expirou.** Na conexão **Express**, o QR Code fica disponível por cerca de 13 minutos. Se não for lido a tempo, o canal muda para **Desconectado** e o código some; clique em **Reiniciar canal** para gerar um novo.
+- **Número inválido.** Informe de 10 a 15 dígitos incluindo o DDI (exemplo: `+55 11 90000-0000`).
+- **O canal já está ativo.** Já existe um canal ativo com esse número no workspace. Confira a lista de canais antes de tentar de novo.
+- **Limite do plano.** O plano atingiu o limite de canais de WhatsApp ou a assinatura expirou. Veja [Canais: conectar e gerenciar](/docs/canais/visao-geral).
+- **Queda ou erro após criar.** Se o canal ficar com status `pending_review` ou `error` na criação, fale com o suporte. Para outros casos de desconexão, veja [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte).

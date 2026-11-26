@@ -7,6 +7,8 @@
 # mascarar  seletores borrados antes do print (dados que não podem aparecer)
 # arquivo   saída em images/ajuda/<secao>/<nome>.webp
 # paginas   páginas da central que usam o print
+# workspace (opcional) workspace do print; padrão: o de documentação. Outro workspace só para telas
+#           que o de documentação não tem (ex.: canal de WhatsApp) e sempre com `mascarar`
 
 - id: tags-lista
   url: /settings/tags
@@ -18,3 +20,58 @@
   mascarar: []
   arquivo: images/ajuda/tags/lista-de-tags.webp
   paginas: []
+
+# Seção whatsapp (Canais › WhatsApp › QR Code)
+
+- id: whatsapp-qr-conectar
+  url: /settings/channels/new/whatsapp/web
+  passos:
+    - esperar: '.ant-drawer-content >> text=Opções avançadas'
+    - clicar: '.ant-drawer-content >> text=Opções avançadas'
+    - esperar: '.ant-drawer-content >> text=Modo antigo'
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body button:has-text("Conectar canal")'
+  mascarar: []
+  arquivo: images/ajuda/whatsapp/conectar-whatsapp-qr-code.webp
+  paginas:
+    - docs/canais/conectar-whatsapp-app
+
+# Canal Express conectado do workspace de testes (id 1). Nome do canal e número borrados; o recorte
+# termina em "Restringir visibilidade", antes do Aquecedor (beta) e dos campos personalizados.
+- id: whatsapp-qr-canal-express
+  workspace: Kinbox
+  url: /settings/channels/245
+  passos:
+    - esperar: '.ant-drawer-content #isPrivate'
+    - pausa: 1500
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body #isPrivate'
+  mascarar:
+    - '.ant-drawer-title .truncate'
+    - '.ant-drawer-body #description'
+    - '.ant-drawer-body #phone'
+  arquivo: images/ajuda/whatsapp/canal-express.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/configuracoes
+    - docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte
+
+# Confirmação de "Recriar" num canal Clássica do workspace de testes (id 1). Só o modal entra no recorte;
+# o canal e o número ficam atrás da máscara do modal e fora do recorte. Não confirme: o print só abre o modal.
+- id: whatsapp-classica-recriar
+  workspace: Kinbox
+  url: /settings/channels/254
+  passos:
+    - esperar: '.ant-drawer-body a:has(.fa-power-off)'
+    - clicar: '.ant-drawer-body a:has(.fa-power-off)'
+    - esperar: '.ant-modal-confirm >> text=Tipo de conexão'
+    - pausa: 800
+  alvo: '.ant-modal-confirm .ant-modal-content'
+  mascarar:
+    - '.ant-drawer-title'
+    - '.ant-drawer-body #description'
+    - '.ant-drawer-body #phone'
+  arquivo: images/ajuda/whatsapp/recriar-classica-para-express.webp
+  paginas:
+    - docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo

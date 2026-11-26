@@ -1,0 +1,72 @@
+---
+title: Configurações do WhatsApp QR Code
+description: O que é cada campo, ação e opção da tela de um canal de WhatsApp por QR Code (Express e Clássica).
+keywords: [configurações whatsapp, apenas receptivo, permitir grupos de whatsapp, restringir visibilidade, recriar, reiniciar canal, desconectar, migrar conversas, sincronizar histórico, última vez recriado]
+publico: humano
+tipo: referencia
+fontes:
+  - web:src/pages/settings/channels/whatsapp/EditWhatsApp.tsx
+  - web:src/pages/settings/channels/whatsapp/ChannelVersionUpdate.tsx
+  - web:src/pages/settings/channels/whatsapp/SyncZapHistoryModal.tsx
+  - web:src/pages/settings/channels/whatsapp/ForwardZapModal.tsx
+  - api-v0:server/controllers/IntegrationsController.js
+codigo:
+  - web:src/pages/settings/channels/whatsapp/**
+  - api-v0:server/controllers/WaboxController.js
+  - api-v0:server/modules/wabox/**
+  - api-v0:server/controllers/IntegrationsController.js
+  - web:src/pages/settings/channels/warmbox/**
+  - web:src/pages/settings/channels/index.tsx
+verificado_em: 2026-11-26
+---
+
+A tela **Canal de WhatsApp**, aberta ao clicar no canal em **Configurações** → **Chat** → **Canais**, reúne os campos, as ações e os interruptores de um canal de WhatsApp por QR Code (**Express** e **Clássica**).
+
+<Frame caption="Tela de configurações de um canal de WhatsApp Express conectado">
+  <img src="/images/ajuda/whatsapp/canal-express.webp" alt="Tela Canal de WhatsApp no modo Express conectado, mostrando o selo v5, Status, Última vez recriado, Descrição, Número, Versão v5, o bloco Ações e os interruptores Apenas Receptivo, Permitir Grupos de WhatsApp e Restringir visibilidade" />
+</Frame>
+
+## Campos e interruptores
+
+| Campo | O que faz | Express / Clássica |
+| --- | --- | --- |
+| **Status** | Mostra o estado atual do canal (veja [Canais: conectar e gerenciar](/docs/canais/visao-geral)). | Na **Clássica**, exibe ao lado **Atualizado** ou **Atualização disponível**. |
+| **Última vez recriado** | Exibe a data da última criação ou recriação e a ajuda "Recomendamos recriar a cada 60 dias". | Vale na **Clássica**. Na **Express**, o campo aparece, mas **Recriar** não altera essa data. |
+| **Descrição** | Nome do canal exibido na Kinbox (campo obrigatório). | Igual nos dois. |
+| **Número** | Número vinculado ao canal. Bloqueado para edição — para usar outro número, crie outro canal. | Igual nos dois. |
+| **Versão** | Identifica o tipo do canal. Campo bloqueado. | **v5** na **Express**; **Multidevice** ou **Versão antiga** na **Clássica**. |
+| **QRCode** | Exibido somente quando o status é **Necessário ler QR-Code**; atualiza a cada 10 segundos. | Na **Express**, inclui o link **Conectar com número de telefone**; na **Clássica**, não. |
+| **Apenas Receptivo** | Impede que o canal envie mensagens ativas ou seja selecionado em campanhas. | Igual nos dois. |
+| **Permitir Grupos de WhatsApp** | Seleciona quais grupos de WhatsApp do número você quer ler e responder na Kinbox. Por padrão, grupos são ignorados até serem marcados aqui. | Igual nos dois. |
+| **Restringir visibilidade** | Escolhe os grupos de membros da Kinbox que podem ver este canal. | Igual nos dois. |
+| **Aquecedor** | Configura um perfil de aquecimento para o canal. | Aparece somente em workspaces com recursos em teste. |
+| Campos personalizados de canal | Exibe os campos personalizados cadastrados para canais no workspace. | Igual nos dois. |
+
+O topo da tela também pode exibir o aviso de contato com o suporte, o alerta de número possivelmente bloqueado e, na **Clássica**, o aviso de atualização. Ao salvar alterações, a tela confirma com "Canal de WhatsApp salvo.".
+
+## Ações do canal
+
+As ações ficam no bloco **Ações** da tela e também no menu de três pontos da linha do canal.
+
+| Ação | Na Express | Na Clássica |
+| --- | --- | --- |
+| **Desconectar** | Desconecta o número e já reinicia a sessão, que volta a pedir o QR Code. Desativado enquanto o canal está criando ou reiniciando. | Apaga a sessão salva e desconecta. Desativado enquanto o canal está criando ou reiniciando. |
+| **Reiniciar canal** | Reinicia a sessão do número sem apagar conversas nem configurações. | Reinicia o canal. Se o canal exigir recriação, mostra "Necessário recriar o canal para reiniciar". |
+| **Sincronizar histórico** | Indisponível. | Disponível com o canal conectado; importa conversas recentes do WhatsApp (escolha a quantidade de conversas e de mensagens por conversa). |
+| **Migrar** (**Migrar conversas** na lista) | Transfere todas as conversas existentes para outro canal de WhatsApp (oficial ou QR Code). Pode levar algumas horas e faz parecer que as conversas sempre foram do canal de destino. | Igual à **Express**. |
+| **Recriar** | Apenas reinicia a sessão do número (não altera **Última vez recriado**). Desativado enquanto o canal está criando. | Abre a janela **Por favor, confirme** com **Tipo de conexão** para migrar para **Express** ou recriar na **Clássica**, exigindo ler o QR Code de novo. Veja [Migrar da conexão Clássica para a Express](/docs/canais/whatsapp/whatsapp-app/migracao-tipo-classico-para-alternativo). |
+
+## Atualizar canal (somente Clássica)
+
+Quando há uma versão mais nova na conexão **Clássica**, o topo da tela exibe **Nova versão do canal disponível.** com o botão **Atualizar canal**. Confirmar em **Atualizar agora** recria o canal mantendo a conexão **Clássica**, deixando-o indisponível por alguns instantes (podendo exigir nova leitura do QR Code), por isso a Kinbox recomenda fazer isso fora do horário de pico.
+
+## Permissões que mudam a tela
+
+- Com a restrição **Somente pode dar manutenção simples em canais**, os interruptores e **Migrar** ficam desativados e salvar exibe "Você não tem permissão para editar o canal". As ações **Desconectar**, **Reiniciar canal**, **Sincronizar histórico** e **Recriar** continuam liberadas.
+- Com a restrição **Somente pode ver canais na lista se estiver no grupo do canal**, **Migrar** e o botão de salvar ficam desativados.
+
+## Veja também
+
+- [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app)
+- [O que funciona e o que não funciona no WhatsApp QR Code](/docs/canais/whatsapp/whatsapp-app/o-que-funciona)
+- [Meu WhatsApp desconectou](/docs/canais/whatsapp/whatsapp-app/como-evitar-que-o-celular-desconecte)
