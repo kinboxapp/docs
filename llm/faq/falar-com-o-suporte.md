@@ -9,15 +9,9 @@ fontes:
   - web:src/components-old/header/HelpDrawer.tsx
   - web:src/components/navigation/GlobalSearch/useGlobalSearchCommands.tsx
 codigo:
-  - web:src/pages/auth/**
-  - web:src/components-old/SessionLimitReached.tsx
-  - web:src/components/feedback/BusinessHoursAccessLocked.tsx
-  - web:src/hooks/useSocket.tsx
-  - web:src/hooks/useSocketV2.ts
-  - api-v0:server/controllers/OperatorController.js
-  - api-v0:server/security/loginBruteForceGuard.js
-  - api:src/modules/operators/two-factor/**
-  - api:src/modules/events/events.gateway.ts
+  - web:src/components-old/header/UserDrop.tsx
+  - web:src/components-old/header/HelpDrawer.tsx
+  - web:src/components/navigation/GlobalSearch/useGlobalSearchCommands.tsx
 verificado_em: 2026-11-26
 ---
 

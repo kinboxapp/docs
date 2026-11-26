@@ -596,5 +596,19 @@
     "pergunta": "Esqueci a senha do meu e-mail pessoal do Gmail, como recupero?",
     "esperado": [],
     "tipo": "negativo"
+  },
+  {
+    "pergunta": "Como mudo minha foto e meu nome que aparecem para a equipe na Kinbox?",
+    "esperado": [
+      "docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario"
+    ],
+    "tipo": "guia"
+  },
+  {
+    "pergunta": "Como passo de um ambiente para outro sem precisar sair da minha conta?",
+    "esperado": [
+      "docs/conta/trocar-de-workspace"
+    ],
+    "tipo": "guia"
   }
 ]

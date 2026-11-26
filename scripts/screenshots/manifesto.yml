@@ -1166,9 +1166,13 @@
   passos:
     - esperar: 'text=Seu nome e sobrenome'
     - pausa: 1500
-  alvo: '.card-bordered:has-text("Imagem de perfil")'
+  alvo:
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Imagem de perfil"))'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail"))'
   mascarar:
-    - '.card-bordered:has-text("Imagem de perfil") .ant-space-item > span'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Imagem de perfil")) figure'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Nome")) .ant-space-item > span'
+    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("E-mail")) .ant-space-item > span'
   arquivo: images/ajuda/conta/perfil-informacoes.webp
   paginas:
     - docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario
@@ -1179,14 +1183,11 @@
   passos:
     - esperar: 'text=Peça um código do app autenticador ao entrar.'
     - pausa: 1000
-  alvo:
-    - 'h3:text-is("Segurança")'
-    - 'div.ant-row-space-between:has(> .ant-col > div:text-is("Verificação em duas etapas"))'
+  alvo: 'div.ant-row-space-between:has(> .ant-col > div:text-is("Verificação em duas etapas"))'
   mascarar: []
   arquivo: images/ajuda/conta/perfil-seguranca.webp
   paginas:
     - docs/conta/verificacao-em-duas-etapas
-    - docs/conta/senha-e-sessoes
 
 - id: conta-2fa-conectar
   url: /settings/account/profile
@@ -1197,10 +1198,10 @@
     - esperar: '.ant-modal-content >> text=Conecte seu app autenticador'
     - esperar: '.two-factor-connect-qr svg'
     - pausa: 800
-  alvo: '.ant-modal-content'
-  mascarar:
-    - '.two-factor-connect-qr'
-    - '.two-factor-connect code'
+  alvo:
+    - '.two-factor-connect div.font-medium:has-text("2. Digite o código")'
+    - '.ant-modal-content .ant-modal-footer'
+  mascarar: []
   arquivo: images/ajuda/conta/2fa-conectar-app.webp
   paginas:
     - docs/conta/verificacao-em-duas-etapas

@@ -7,14 +7,14 @@ tipo: referencia
 fontes:
   - web:src/pages/settings/profile/Notifications.tsx
   - web:src/sw.ts
-  - web:src/stores/inboxStore.jsx
+  - web:src/hooks/useSocket.tsx
   - web:src/hooks/useInit.tsx
   - api:src/modules/push-notifications/push-notifications.service.ts
   - api:src/modules/push-notifications/mobile-push.policy.ts
 codigo:
   - web:src/pages/settings/profile/Notifications.tsx
   - web:src/sw.ts
-  - web:src/stores/inboxStore.jsx
+  - web:src/hooks/useSocket.tsx
   - web:src/hooks/useInit.tsx
   - web:src/hooks/useToggleAvaliable.ts
   - web:src/hooks/useAutoAvaliableBusinessHours.tsx
@@ -28,7 +28,10 @@ verificado_em: 2026-11-26
 ## Push no navegador e no app
 
 - As opções de **Push** em **Configurações** → **Notificações** valem só para o workspace (na tela, **ambiente**) aberto e são as mesmas do app para celular: alterar em um lugar altera no outro.
-- Para receber push no navegador, **Habilitar notificações de desktop** e o tipo desejado precisam estar ligados. Clicar no aviso abre a conversa.
+- Para receber push no navegador, **Habilitar notificações de desktop** e o tipo desejado precisam estar ligados.
+- O navegador pede a permissão de notificações quando a Kinbox ou a **Caixa de entrada** abre, não ao salvar. Depois de liberar a permissão no navegador, é preciso recarregar a página para o push passar a funcionar.
+- O push não depende da disponibilidade: chega também com o membro **Indisponível**.
+- Conversa sem responsável não gera push de **Mensagem**.
 
 | Opção no navegador | Texto na tela | Quem recebe | Nome no app |
 | --- | --- | --- | --- |
@@ -55,22 +58,24 @@ verificado_em: 2026-11-26
 
 ## Sons
 
-- Os sons valem para a conta toda (todos os workspaces) e tocam só com a Kinbox aberta em alguma aba do navegador.
+- Os sons de **Configurações** → **Notificações** valem para a conta toda (todos os workspaces) e tocam só com a Kinbox aberta, numa aba só: a última aberta no navegador.
+- Os sons de nova mensagem e de nova conversa só tocam com o membro **Disponível** no workspace aberto e só para conversas que ele pode ver e que estão na visão ou no filtro aberto da **Caixa de entrada** (ou na conversa aberta). Não importa se a conversa está aberta ou se a aba está em foco.
 
 | Opção | Quando toca |
 | --- | --- |
-| **Quando receber nova mensagem** | Toca ao chegar mensagem do contato numa conversa da sua lista que não é a que está aberta (ou com a aba fora de foco) |
-| **Quando receber nova mensagem atribuída a mim** | Toca ao chegar mensagem do contato numa conversa da sua lista |
-| **Quando receber nova conversa** | Conversa nova que entra na lista ou no filtro aberto |
-| **Quando receber mensagem de time** | Mensagem de sala, menção, lembrete de tarefa e aviso de template |
+| **Quando receber nova mensagem** | Mensagem do contato numa conversa que entra na regra acima (o membro precisa estar **Disponível**) |
+| **Quando receber nova mensagem atribuída a mim** | Com **Quando receber nova mensagem** desligada: mensagem do contato numa conversa em que o membro é o responsável (o membro precisa estar **Disponível**) |
+| **Quando receber nova conversa** | Conversa nova que entra na visão ou no filtro aberto (o membro precisa estar **Disponível**) |
+| **Quando receber mensagem de time** | Mensagem de sala, menção, lembrete de tarefa e aviso de template (não depende da disponibilidade) |
 | **Quando ganhar uma negociação** | Ao marcar uma negociação como ganha (som de caixa registradora e aplausos) |
+| **Quando receber notificação de outro ambiente** | Não toca som nas situações desta página; para ver as conversas de outro workspace, troque para ele (veja [Trocar de workspace ou criar outro](/docs/conta/trocar-de-workspace)) |
 
-- **Recursos em teste (podem não aparecer em todos os workspaces):** **Quando receber ligação do WhatsApp** e **Quando receber ligação do WhatsApp em conversa sem responsável**.
+- **Recursos em teste (podem não aparecer em todos os workspaces):** **Quando receber ligação do WhatsApp** ("Toca e mostra o aviso para atender em qualquer tela") e **Quando receber ligação do WhatsApp em conversa sem responsável** ("Desligado, a ligação aparece só na lista de conversas"). Essas duas valem só para o workspace aberto (ficam junto das opções de push).
 
 ## Disponibilidade, inatividade e horário
 
 - **Troca manual:** feita na foto no canto superior direito → interruptor **Disponível** (**Disponível** "Recebe novos atendimentos" com bolinha verde / **Indisponível** "Sem novos atendimentos" com bolinha laranja). Vale só para o workspace aberto. Quem fica indisponível manualmente continua assim até alterar manualmente de volta ("Você está indisponível. Seu status permanecerá assim até que você altere manualmente para disponível.").
-- **Efeito:** ficar indisponível tira o membro da **Atribuição automática** de novas conversas. Conversas já atribuídas permanecem com o membro, e atribuição manual continua possível. Para interromper os avisos de push e som, é necessário desligá-los em **Notificações**.
+- **Efeito:** ficar indisponível tira o membro da **Atribuição automática** de novas conversas e silencia os sons de nova mensagem e de nova conversa. Conversas já atribuídas permanecem com o membro, e atribuição manual continua possível. O push (navegador e app) e o som de mensagem de time continuam; para pará-los, é necessário desligá-los em **Notificações**.
 - **Horário do papel** (**Limitar horário que pode ficar disponível**): fora do horário definido, o membro fica indisponível automaticamente e volta a ficar disponível no início do horário — apenas se a indisponibilidade tiver sido automática por horário.
 - **Indisponível por inatividade** (**Tornar indisponível se inativo.**): configuração do workspace em minutos. Após o tempo sem atividade em todas as abas abertas da Kinbox (mouse, teclado, rolagem, toque ou foco), o membro fica indisponível e volta a ficar disponível automaticamente ao interagir novamente. Não afeta quem ficou indisponível manualmente, quem tem **Não torna indisponível se ficar inativo** no papel nem o proprietário.
 - **Offline por inatividade** (**Tornar offline se inativo**): configuração do workspace (de 1 a 1444 minutos). Após o tempo sem atividade, a Kinbox desconecta a atualização em tempo real e mostra "Você foi desconectado por inatividade." com o botão **Reconectar**. Não afeta quem tem **Não torna offline se ficar inativo** nem o proprietário.

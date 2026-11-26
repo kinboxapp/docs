@@ -1,7 +1,7 @@
 ---
 title: Ficar disponível ou indisponível
 description: Como ligar e desligar sua disponibilidade no menu da sua foto, o que muda na atribuição automática e quando a Kinbox deixa você indisponível sozinha.
-keywords: [disponível, indisponível, disponibilidade, ausente, pausa, almoço, status, ficar offline, não recebo conversas, atribuição automática, inatividade, desconectado por inatividade]
+keywords: [disponível, indisponível, disponibilidade, ausente, pausa, almoço, status, não quero receber conversas, não recebo conversas, atribuição automática, inatividade, desconectado por inatividade]
 publico: humano
 tipo: guia
 fontes:
@@ -9,6 +9,7 @@ fontes:
   - web:src/hooks/useToggleAvaliable.ts
   - web:src/hooks/useInit.tsx
   - web:src/hooks/useAutoAvaliableBusinessHours.tsx
+  - web:src/hooks/useSocket.tsx
   - api-v0:server/controllers/OperatorController.js
 codigo:
   - web:src/components-old/header/UserDrop.tsx
@@ -17,6 +18,7 @@ codigo:
   - web:src/hooks/useCrossTabIdle.ts
   - web:src/hooks/useAutoAvaliableBusinessHours.tsx
   - web:src/layouts/BasicLayoutInit.tsx
+  - web:src/hooks/useSocket.tsx
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/OperatorController.js
 verificado_em: 2026-11-26
@@ -45,21 +47,21 @@ Sua disponibilidade define se você entra na **Atribuição automática** de nov
 
 Quando você fica indisponível manualmente, seu status continua assim até você ligar o interruptor de novo ("Você está indisponível. Seu status permanecerá assim até que você altere manualmente para disponível.").
 
-## O que não muda
+## O que muda e o que não muda
 
-Ficar indisponível tira você da atribuição automática, mas não altera o que já está sob sua responsabilidade:
+Ficar indisponível tira você da atribuição automática e silencia os sons de nova mensagem e de nova conversa da [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox). O resto continua:
 
 - As conversas que já são suas continuam na sua lista.
 - Outros membros ainda podem [atribuir ou transferir](/docs/conversas/atribuir-e-transferir) uma conversa para você manualmente.
-- Para parar os avisos de push e som das suas conversas, desligue-os em [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
+- Os avisos de push (no navegador e no app) continuam chegando. Para pará-los, desligue-os em [Receber notificações no navegador e no celular](/docs/conta/notificacoes).
 
 ## Quando a Kinbox muda sozinha
 
 O workspace ou o seu papel podem mudar sua disponibilidade automaticamente em três situações:
 
-- **Indisponível por inatividade:** se o workspace tiver a configuração **Tornar indisponível se inativo.** ligada, você fica indisponível após o tempo configurado sem interação em todas as abas abertas da Kinbox (mouse, teclado, rolagem, toque ou foco) e volta a ficar disponível sozinho ao mexer novamente. Essa regra não muda quem ficou indisponível manualmente, quem tem a permissão **Não torna indisponível se ficar inativo** no papel nem o proprietário.
+- **Indisponível por inatividade:** se o workspace tiver a configuração **Tornar indisponível se inativo.** ligada, você fica indisponível depois do tempo configurado sem mexer em nenhuma aba da Kinbox e volta a ficar disponível sozinho ao mexer de novo. Quem ficou indisponível manualmente continua assim.
 - **Horário do papel:** com a restrição **Limitar horário que pode ficar disponível**, você fica indisponível automaticamente fora do horário definido e volta a ficar disponível quando o horário começa — só se a indisponibilidade tiver sido automática por horário.
-- **Offline por inatividade:** se o workspace usar **Tornar offline se inativo**, após o tempo configurado sem atividade a Kinbox desconecta a atualização em tempo real e mostra "Você foi desconectado por inatividade." com o botão **Reconectar**. Clique em **Reconectar** para voltar. Essa regra não vale para quem tem a permissão **Não torna offline se ficar inativo** nem para o proprietário.
+- **Offline por inatividade:** se o workspace usar **Tornar offline se inativo**, após o tempo configurado sem atividade a Kinbox desconecta a atualização em tempo real e mostra "Você foi desconectado por inatividade." com o botão **Reconectar**. Clique em **Reconectar** para voltar.
 
 ## Antes de sair
 

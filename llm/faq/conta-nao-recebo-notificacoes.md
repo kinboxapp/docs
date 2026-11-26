@@ -1,6 +1,6 @@
 ---
 title: Por que não sou avisado das novas mensagens?
-description: Confira se Habilitar notificações de desktop e o tipo de aviso estão ligados em Configurações → Notificações, se o navegador permite alertas e se você está disponível.
+description: Confira se Habilitar notificações de desktop e o tipo de aviso estão ligados em Configurações → Notificações e se o navegador permite notificações; os sons de nova mensagem também pedem que você esteja disponível.
 keywords: [não recebo notificações, sem notificação, notificação não aparece, push não chega, som não toca, não toca alerta, aviso de mensagem, notificação no celular, não recebo conversas]
 publico: llm
 tipo: faq
@@ -14,7 +14,8 @@ codigo:
   - web:src/pages/settings/profile/NotificationPushSwitch.tsx
   - web:src/sw.ts
   - web:src/hooks/usePushNotification.ts
-  - web:src/stores/inboxStore.jsx
+  - web:src/hooks/useSocket.tsx
+  - web:src/pages/inbox/index.tsx
   - api:src/modules/push-notifications/**
   - api:src/modules/userInfo/**
   - mobile:src/app/notifications.tsx
@@ -32,12 +33,12 @@ Confira se o push está ligado em **Configurações** → **Notificações** (**
 Principais causas quando os avisos não chegam:
 
 - **Push desligado:** **Habilitar notificações de desktop** ou a opção do tipo (**Mensagem**, **Mensagem de time** ou **Atribuído**) está desativada em **Configurações** → **Notificações**.
-- **Permissão negada no navegador:** o navegador bloqueou as notificações da Kinbox (a tela mostra o aviso de permissão negada); libere nas configurações do navegador.
+- **Permissão negada no navegador:** o navegador bloqueou as notificações da Kinbox (a tela mostra o aviso de permissão negada); libere nas configurações do navegador e recarregue a página da Kinbox. O pedido de permissão aparece ao abrir a Kinbox ou a **Caixa de entrada**, não ao salvar.
 - **Kinbox aberta e visível na tela:** o push do navegador não aparece enquanto alguma aba da Kinbox está visível — nessa situação, só tocam os sons.
-- **Conversa não atribuída a você:** o push de **Mensagem** avisa apenas o responsável pela conversa.
+- **Conversa não atribuída a você:** o push de **Mensagem** e o de **Atribuído** avisam apenas o responsável pela conversa; conversa sem responsável não gera push. O push de **Mensagem de time** depende de menção numa sala ou de mensagem direta.
 - **Outro workspace:** as opções de **Push** valem só para o workspace aberto; configure também nos outros workspaces de que você participa.
-- **Som não toca:** o interruptor correspondente está desligado no cartão **Som**, a Kinbox não está aberta em uma aba ou a mensagem chegou na conversa que já está aberta em foco.
-- **No celular:** confira no app se **Receber notificações** está ligado; se **Quando receber** estiver em **Quando não estiver usando o web**, o celular não avisa enquanto você usa a Kinbox no navegador.
+- **Som não toca:** o interruptor correspondente está desligado no cartão **Som**, a Kinbox não está aberta, você está **Indisponível** (os sons de nova mensagem e de nova conversa só tocam com você disponível) ou a conversa não está na visão ou no filtro aberto da **Caixa de entrada**. Com várias abas abertas, o som toca só em uma.
+- **No celular:** confira no app se **Receber notificações** está ligado; se **Quando receber** estiver em **Quando não estiver usando o web**, o celular não avisa enquanto você usa a Kinbox no navegador; com **Só no horário comercial** ligado, o app só avisa dentro do horário comercial.
 - **Salas bloqueadas:** membros com a restrição **Não pode acessar as salas** no papel não recebem notificações de salas.
 - **Não recebo novas conversas (diferente de não receber avisos):** se novas conversas não estão caindo para você pela atribuição automática, confira se você não está **Indisponível** (manualmente, por inatividade ou por horário do papel).
 

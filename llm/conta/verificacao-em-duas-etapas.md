@@ -23,7 +23,7 @@ verificado_em: 2026-11-26
 
 - A verificação em duas etapas (2FA) exige um código TOTP de **6 dígitos** gerado por um app autenticador no celular (como Google Authenticator, Microsoft Authenticator, 1Password ou outro compatível). Não usa SMS nem e-mail como segundo fator.
 - Vale para a conta toda, em todos os workspaces, no navegador e no app para celular.
-- Também é exigida depois do login com **Continuar com o Google**.
+- Também é exigida depois do login com **Continuar com o Google** e, no app para iPhone, com **Continuar com Apple**.
 - Redefinir a senha não desativa a verificação em duas etapas.
 - Além de **Configurações** → **Perfil** → **Segurança**, quem entra por convite pode ativar ao concluir o cadastro, na tela **Proteja sua conta** (**Ativar agora** / **Agora não**).
 
@@ -58,6 +58,8 @@ verificado_em: 2026-11-26
 | "A verificação em duas etapas não está ativa." | Tentativa de gerenciar ou desativar sem estar ativa | Recarregar o perfil |
 | "A verificação expirou. Entre novamente." | Passaram mais de 5 minutos na tela do código no login ou houve várias tentativas erradas na mesma tela | Entrar novamente com e-mail e senha (ou Google) |
 | "Muitas tentativas. Aguarde 15 minutos e tente novamente." | Muitos códigos errados seguidos | Aguardar 15 minutos e tentar novamente |
+| "Muitas tentativas. Aguarde alguns instantes e tente novamente." | Muitas tentativas de verificação em pouco tempo | Aguardar alguns instantes e tentar novamente |
+| "Não foi possível verificar o código. Tente novamente." | Falha ao verificar o código (por exemplo, conexão) | Tentar novamente |
 
 ## E-mails de aviso
 
