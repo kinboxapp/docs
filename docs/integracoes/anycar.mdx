@@ -59,12 +59,12 @@ Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **A
 
 ## No bot
 
-No bloco **Integração** do bot, selecione **Consulta RENAJUD Plus na Anycar** em **Tipo de integração**, dentro do grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)). É a única ação pronta da Anycar no bot, não tem campos próprios na gaveta e é pulada no **Simular bot** — teste em uma conversa real.
+No bloco **Integração** do bot, selecione **Consulta RENAJUD Plus na Anycar** em **Tipo de integração**, dentro do grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)). É a única ação pronta da Anycar no bot, não tem campos próprios na gaveta e é pulada no **Simular bot** — publique o fluxo e teste em uma conversa real.
 
 Quando o fluxo passa pelo bloco, o bot lê a placa do campo personalizado `placa` do contato, consulta a **RENAJUD Plus** na Anycar e **envia o resultado formatado ao cliente na conversa**, como mensagem do bot. Se a placa estiver vazia ou inválida, a integração estiver desligada ou sem chave, ou a Anycar não responder, o cliente recebe a mensagem "Não foi possível realizar a consulta RENAJUD Plus no momento.".
 
 <Warning>
-  A ação do bot envia ao cliente, na conversa, o resultado completo da consulta **RENAJUD Plus** para a placa gravada no campo `placa` do contato — ela não confirma quem está falando nem se o veículo pertence ao contato. Use a ação apenas em fluxos nos quais o cliente possa ver esses dados.
+  A ação envia na conversa o resultado da consulta **RENAJUD Plus** para a placa salva no campo `placa` do contato. Confirme a identidade do cliente no fluxo do bot antes deste bloco.
 </Warning>
 
 ## Desligar a integração
@@ -73,7 +73,7 @@ Para desligar, abra **Anycar** em **Apps**, desligue **Habilitar integração** 
 
 ## Problemas comuns
 
-- **Aviso "A integração Anycar não está configurada para este workspace.".** O campo **Api Key** está vazio ou **Habilitar integração** está desligado no painel **Anycar**.
+- **Aviso "A integração Anycar não está configurada para este workspace.".** Na consulta **RENAJUD Plus**, o campo **Api Key** está vazio no painel **Anycar**. Nos outros tipos de consulta, a falta da chave aparece como "Você precisa configurar a chave de API do Anycar.".
 - **Aviso "Placa inválida. Revise e tente novamente.".** A placa digitada está fora do formato antigo (três letras e quatro números) ou Mercosul.
 - **Aviso "A consulta demorou mais que o esperado. Tente novamente.".** A Anycar passou de 15 segundos para responder; tente novamente.
 - **O bot respondeu "Não foi possível realizar a consulta RENAJUD Plus no momento.".** O campo `placa` não existe ou está vazio no contato, a placa é inválida, a integração está desligada ou sem **Api Key**, ou ocorreu falha na Anycar.

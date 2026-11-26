@@ -56,7 +56,7 @@ Esta integração usa o Asaas da sua empresa para atender seus clientes; se voc�
 
 ## No bot
 
-No bloco **Integração** do bot, escolha **Consulta boletos ASAAS** em **Tipo de integração**, dentro do grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)). A ação não tem campos próprios na gaveta e é pulada no **Simular bot** — teste em uma conversa real.
+No bloco **Integração** do bot, escolha **Consulta boletos ASAAS** em **Tipo de integração**, dentro do grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)). A ação não tem campos próprios na gaveta e é pulada no **Simular bot** — publique o fluxo e teste em uma conversa real.
 
 Quando o fluxo executa o bloco, o bot:
 
@@ -69,18 +69,18 @@ Quando o fluxo executa o bloco, o bot:
 O bot **não** gera boleto novo, não cria cobrança, não gera Pix nem link de pagamento, não inclui cobranças só de Pix ou cartão, não dá baixa, não cancela e não confirma pagamento.
 
 <Warning>
-  A ação envia ao cliente os boletos em aberto do CPF que estiver preenchido no campo `cpf` do contato — ela não confirma quem está falando na conversa. Garanta no fluxo do bot que o CPF pertence ao cliente antes de executar o bloco.
+  A ação envia na conversa os boletos em aberto encontrados para o CPF salvo no campo `cpf` do contato. Confirme a identidade do cliente no fluxo do bot antes deste bloco.
 </Warning>
 
 ## Desligar a integração
 
-Para marcar o app como desabilitado em **Apps**, abra **Asaas**, desligue **Habilitar integração** e clique em **Salvar**.
+Para marcar o app como desabilitado em **Apps**, abra **Asaas**, desligue **Habilitar integração** e clique em **Salvar**. Os dados preenchidos continuam salvos no painel.
 
-Desligar **Habilitar integração** **não** para a ação **Consulta boletos ASAAS** no bot. Para interromper o envio de boletos, retire o bloco do fluxo do bot.
+Desligar **Habilitar integração** **não** para a ação **Consulta boletos ASAAS** no bot. Para interromper o envio de boletos, retire o bloco do fluxo do bot e clique em **Publicar**.
 
 ## Problemas comuns
 
-- **O cliente pediu o boleto e não recebeu nada.** Falta o **Token** no painel **Asaas**, o contato está sem o campo `cpf` preenchido, ou ocorreu erro com o token ou com o Asaas. Nesses casos, a equipe vê uma mensagem interna na conversa, mas o cliente não recebe nada. Confira o token no painel e o CPF do contato.
+- **O cliente pediu o boleto e não recebeu nada.** Falta o **Token** no painel **Asaas**, o contato está sem o campo `cpf` preenchido, ou ocorreu erro com o token ou com o Asaas. Nesses casos, a equipe vê na conversa uma mensagem interna com o texto "Não foram encontrados boletos dentro dos parâmetros enviados", e o cliente não recebe nada. Confira o token no painel e o CPF do contato.
 - **O cliente recebeu "Não foram encontrados boletos dentro dos parâmetros enviados".** O CPF não está cadastrado no Asaas ou não há boleto pendente nem vencido para ele.
 - **Chegaram boletos de meses antigos.** A ação lista todos os boletos pendentes e vencidos de qualquer mês, não apenas os do mês atual.
 - **Quero gerar um boleto novo ou cobrar por Pix.** A integração do Asaas só consulta boletos que já existem. Para gerar um boleto na conversa, veja [Integrar com o Banco Inter](/docs/integracoes/banco-inter).
@@ -89,6 +89,6 @@ Desligar **Habilitar integração** **não** para a ação **Consulta boletos AS
 
 - Cada workspace mantém uma única integração Asaas.
 - Não há filtro por período: vêm todos os boletos pendentes ou vencidos de qualquer mês retornados na primeira página do Asaas.
-- Cada boleto é enviado em uma mensagem separada do bot, com 1 segundo de espera antes de cada envio.
+- Cada boleto chega ao cliente em uma mensagem separada do bot.
 - O campo `cpf` aceita pontuação (o bot usa só os dígitos); um CNPJ preenchido nesse mesmo campo também é consultado.
 - Se houver mais de um cliente com o mesmo CPF no Asaas, o bot usa apenas o primeiro encontrado.

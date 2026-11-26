@@ -1,7 +1,7 @@
 ---
 title: Integrar com a Sensedata
 description: Como ligar a Sensedata à Kinbox e ver, no painel da conversa, porte, grupo, status, CSM e fase do cliente do contato.
-keywords: [sensedata, customer success, cs, csm, health score, fase do cliente, status do cliente, token sensedata]
+keywords: [sensedata, customer success, cs, csm, fase do cliente, status do cliente, token sensedata]
 publico: humano
 tipo: guia
 fontes:
@@ -59,7 +59,7 @@ O bot não tem ação pronta da Sensedata.
 
 ## Desligar a integração
 
-Para desligar, abra **Sensedata** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. O quadro deixa de aparecer nas conversas.
+Para desligar, abra **Sensedata** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. O quadro deixa de aparecer nas conversas. Os dados preenchidos continuam salvos no painel.
 
 ## Problemas comuns
 
@@ -71,6 +71,5 @@ Para desligar, abra **Sensedata** em **Apps**, desligue **Habilitar integração
 
 - Cada workspace mantém uma única integração Sensedata.
 - A busca envia exatamente o telefone da conversa como guardado na Kinbox, sem testar variações (como adicionar ou remover nono dígito ou DDI).
-- A consulta se repete a cada troca de conversa, sem cache e sem gravar nada na Kinbox nem na Sensedata.
+- A consulta se repete a cada troca de conversa, sem gravar nada na Kinbox nem na Sensedata.
 - Se houver dois ou mais contatos com o mesmo telefone na Sensedata, o quadro usa apenas o primeiro devolvido.
-- Se o contato encontrado na Sensedata não tiver empresa vinculada, o quadro exibe **Não encontrado**.

@@ -51,8 +51,8 @@ A integração liga a conta do Banco Inter à Kinbox para o membro gerar boletos
 Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **Banco Inter** no painel **Detalhes** (veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O quadro não aparece para membros com a restrição **Esconder informações de integração** nem no modo de treino da Academia.
 
 - O quadro mostra apenas o botão **Gerar Boleto**, que fica desativado enquanto algum dos quatro campos do painel estiver vazio. Ele não lista dados do contato nem boletos emitidos antes.
-- Ao clicar em **Gerar Boleto**, abre a janela **Gerar Boleto** com os dados da cobrança (**Identificador**, **Valor** e **Data de vencimento**) e a seção **Pagador** (**CPF/CNPJ**, **Tipo de pessoa** com **Fisica** ou **Juridica**, **Nome** e endereço). A janela sempre abre vazia, sem preencher dados do contato. Depois de preencher, clique em **Gerar**.
-- Com o boleto emitido, o título muda para **Compartilhar boleto**, mostrando a **Linha Digitável** com o botão **Copiar** e o botão **Baixar PDF**, além de **Fechar**.
+- Ao clicar em **Gerar Boleto**, abre a janela **Gerar Boleto** com os dados da cobrança: **Identificador**, **Valor** e **Data de vencimento**. Abaixo fica a seção **Pagador**, com **CPF/CNPJ**, **Tipo de pessoa** (**Fisica** ou **Juridica**), **Nome** e endereço. A janela sempre abre vazia, sem preencher dados do contato. Depois de preencher, clique em **Gerar**.
+- Com o boleto emitido, o título muda para **Compartilhar boleto**, mostrando a **Linha Digitável** com o botão **Copiar** e o botão **Baixar PDF**. O botão **Fechar** do rodapé fica oculto nessa tela; para sair, feche a janela.
 - Nenhuma mensagem vai automaticamente ao contato: cole a linha digitável ou anexe o PDF na conversa. A integração também não gera Pix nem consulta, dá baixa ou cancela boletos já emitidos.
 
 ## No bot
@@ -61,7 +61,7 @@ O bot não tem ação pronta do Banco Inter. Para o bot enviar a segunda via de 
 
 ## Desligar a integração
 
-Para desligar, abra **Banco Inter** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. O quadro deixa de aparecer nas conversas.
+Para desligar, abra **Banco Inter** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. O quadro deixa de aparecer nas conversas. Os dados preenchidos continuam salvos no painel.
 
 ## Problemas comuns
 

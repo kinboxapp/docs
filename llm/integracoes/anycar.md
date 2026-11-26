@@ -1,6 +1,6 @@
 ---
 title: "Anycar: tipos de consulta, mensagens e ação do bot"
-description: "Regras técnicas da Anycar na Kinbox: os tipos de consulta, formatos de placa aceitos, mensagens de erro, resultado da consulta e o que a ação RENAJUD Plus do bot envia e grava."
+description: "Regras técnicas da Anycar na Kinbox: os tipos de consulta, formatos de placa aceitos, mensagens de erro, resultado da consulta e o que a ação RENAJUD Plus do bot envia."
 keywords: [anycar, tipos de consulta, renajud plus, placa inválida, consulta demorou, resultado da consulta, campo placa, bot anycar]
 publico: llm
 tipo: referencia
@@ -27,7 +27,7 @@ Complemento técnico de [Integrar com a Anycar](/docs/integracoes/anycar).
 
 ## Tipos de consulta no quadro
 
-O padrão selecionado é **RENAJUD Plus**. Os 25 tipos disponíveis em **Tipo de consulta** são:
+O padrão selecionado é **RENAJUD Plus**. Os 25 tipos disponíveis em **Tipo de consulta** são os abaixo; alguns trazem o ícone 🏡 no fim do nome (**Agregados - Própria (Placa)**, **Agregados + Renavam (Placa)**, **Fipe (Placa)**, **Recall** e **Leilão - Própria**):
 
 - **RENAJUD Plus**
 - **Estadual - TODAS UF´s**
@@ -62,7 +62,7 @@ O padrão selecionado é **RENAJUD Plus**. Os 25 tipos disponíveis em **Tipo de
   - Sem tipo selecionado: `"Selecione um tipo de consulta."`
   - Sem placa: `"Você precisa preencher a placa do veículo."`
   - Sem **Api Key** nos tipos que não são **RENAJUD Plus**: `"Você precisa configurar a chave de API do Anycar."`
-  - Sem **Api Key** ou integração desligada em **RENAJUD Plus**: `"A integração Anycar não está configurada para este workspace."`
+  - Sem **Api Key** em **RENAJUD Plus**: `"A integração Anycar não está configurada para este workspace."`
   - Placa fora do padrão: `"Placa inválida. Revise e tente novamente."`
   - Resposta da Anycar sem sucesso ou sem dados: `"A Anycar não conseguiu concluir a consulta. Tente novamente."` (ou a mensagem devolvida pela Anycar / `"Não foi possível concluir a consulta."`).
   - Tempo limite acima de 15 segundos: `"A consulta demorou mais que o esperado. Tente novamente."`
@@ -73,6 +73,5 @@ O padrão selecionado é **RENAJUD Plus**. Os 25 tipos disponíveis em **Tipo de
 Única ação pronta da Anycar no bloco **Integração** do bot, grupo **Outros** (sem campos próprios na gaveta; pulada no **Simular bot** — veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)).
 
 - **Leitura da placa:** lê o campo personalizado ativo e preenchido do contato cuja **Chave reservada** é `placa` (um campo chamado "Placa" gera essa chave; veja [Criar campos personalizados](/docs/configuracoes-no-workspace/campos-personalizados-no-kinbox)).
-- **Envio ao cliente:** envia o resultado formatado em linhas na conversa, como mensagem do bot para o cliente, com o título `"Consulta RENAJUD Plus"`. Quando o texto é longo, divide em mensagens de até cerca de 3.450 caracteres (continuações com o título `"Continuação da consulta RENAJUD Plus"`).
-- **Gravação no contato (`rejanud_plus`):** se existir no contato um campo personalizado com a **Chave reservada** `rejanud_plus` (escrito exatamente assim, com `rejanud`), o bot grava nele o resultado completo em JSON, desde que não ultrapasse 8.192 caracteres. Se o campo não existir ou se o resultado passar de 8.192 caracteres, nada é gravado e nenhum aviso aparece.
+- **Envio ao cliente:** envia o resultado formatado em linhas na conversa, como mensagem do bot para o cliente (confirme a identidade do cliente no fluxo do bot antes deste bloco), com o título `"Consulta RENAJUD Plus"`. Quando o texto é longo, divide em mensagens de até cerca de 3.450 caracteres (continuações com o título `"Continuação da consulta RENAJUD Plus"`).
 - **Falha no bot:** em caso de placa vazia ou inválida, integração desligada ou sem chave, ou falha na Anycar, o bot envia ao cliente na conversa: `"Não foi possível realizar a consulta RENAJUD Plus no momento."`.

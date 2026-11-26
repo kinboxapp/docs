@@ -20,7 +20,6 @@ Complemento técnico de [Integrar com o Banco Inter](/docs/integracoes/banco-int
 - **Permissão e conta:** o painel **Banco Inter** (**Configurações** → **Integrações** → **Apps** → **Banco Inter**) exige a permissão **Integrações** ou proprietário. Cada workspace mantém apenas uma integração Banco Inter.
 - **Permissão da aplicação no banco:** a aplicação criada no Banco Inter precisa ter acesso para emitir e consultar boletos de cobrança; sem esse acesso, a autenticação falha ao clicar em **Gerar Boleto**.
 - **Visibilidade e desligamento:** o quadro **Banco Inter** aparece no painel **Detalhes** apenas com **Habilitar integração** ligado, e fica oculto para membros com a restrição **Esconder informações de integração** ou no modo de treino da Academia. Desligar **Habilitar integração** oculta o quadro e interrompe o uso.
-- **Reaproveitamento de acesso:** ao clicar em **Gerar Boleto** sem acesso temporário guardado, a Kinbox autentica no Banco Inter e reaproveita esse acesso nas próximas emissões. Quando o acesso vence, a Kinbox renova automaticamente; se a autenticação falhar, o acesso guardado é limpo.
 
 ## Campos da janela Gerar Boleto
 
@@ -29,7 +28,7 @@ A janela sempre abre vazia (não preenche dados a partir do contato), exibe o av
 - **Cobrança:**
   - **Identificador** (obrigatório)
   - **Valor** (obrigatório, em reais, passo de centavos, mínimo `0`)
-  - **Data de vencimento** (obrigatória; exibe formato `DD/MM/AAAA HH:mm` e não permite escolher dia anterior a ontem, mas envia apenas a data `AAAA-MM-DD`)
+  - **Data de vencimento** (obrigatória; exibe formato `DD/MM/AAAA HH:mm` e não permite escolher dia anterior a ontem)
 - **Pagador:**
   - **CPF/CNPJ** (obrigatório)
   - **Tipo de pessoa** (obrigatório: **Fisica** ou **Juridica**)
@@ -43,7 +42,7 @@ A janela sempre abre vazia (não preenche dados a partir do contato), exibe o av
 
 ## Emissão, PDF e o que a integração não faz
 
-- **Tela Compartilhar boleto:** depois de gerar, o título passa a **Compartilhar boleto**, sem aviso de sucesso na tela e sem botão de envio ao contato. Exibe **Linha Digitável** (somente leitura), **Copiar** (aviso `"Linha digitável copiada para a área de transferência."`), **Baixar PDF** (baixa `boleto.pdf`) e **Fechar**.
+- **Tela Compartilhar boleto:** depois de gerar, o título passa a **Compartilhar boleto**, sem aviso de sucesso na tela e sem botão de envio ao contato. Exibe **Linha Digitável** (somente leitura), **Copiar** (aviso `"Linha digitável copiada para a área de transferência."`) e **Baixar PDF** (baixa `boleto.pdf`). O botão **Fechar** do rodapé fica oculto nessa tela; para sair, feche a janela.
 - **Sem gravação na Kinbox:** emitir um boleto não cria negociação, nota, tag nem registro no histórico da conversa e não envia mensagem ao contato.
 - **Fora do escopo:** não gera Pix ou QR Code, não lista boletos anteriores, não consulta status, não dá baixa, não cancela boletos e não possui ação pronta no bot.
 

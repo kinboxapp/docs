@@ -26,8 +26,8 @@ Posso cobrar o cliente pela conversa (Pix ou boleto)?
 Em parte: a Kinbox não gera Pix, link de pagamento nem cobrança no cartão, mas três integrações ajudam com boleto.
 
 - **[Integrar com o Banco Inter](/docs/integracoes/banco-inter):** o membro gera um boleto de cobrança pelo quadro **Banco Inter** na conversa, copia a **Linha Digitável** ou baixa o PDF (`boleto.pdf`) e envia ao cliente manualmente. Não gera Pix, não envia o boleto sozinha, não consulta nem cancela boletos e não tem ação no bot.
-- **[Integrar com o Asaas](/docs/integracoes/asaas):** o bot envia ao cliente a segunda via dos boletos em aberto (pendentes ou vencidos) cadastrados no Asaas, buscando pelo campo personalizado `cpf` do contato (ação **Consulta boletos ASAAS**). Não tem quadro na conversa e não gera boleto novo.
-- **[Integrar com a Hinova](/docs/integracoes/hinova):** o bot consulta os boletos do associado no sistema SGA pelo campo personalizado `cpf` do contato e envia ao cliente dados do boleto, link, linha digitável e PDF (ação **Consulta boletos SGA**, até 4 boletos). Não tem quadro na conversa e não gera boleto novo nem Pix.
+- **[Integrar com o Asaas](/docs/integracoes/asaas):** o bot envia ao cliente a segunda via dos boletos em aberto (pendentes ou vencidos) cadastrados no Asaas, buscando pelo campo personalizado `cpf` do contato (ação **Consulta boletos ASAAS**; confirme a identidade do cliente no fluxo do bot antes deste bloco). Não tem quadro na conversa e não gera boleto novo.
+- **[Integrar com a Hinova](/docs/integracoes/hinova):** o bot consulta os boletos do associado no sistema SGA pelo campo personalizado `cpf` do contato e envia ao cliente até 4 boletos encontrados no período, com os dados e o link de cada um (ação **Consulta boletos SGA**; confirme a identidade do associado no fluxo do bot antes deste bloco). Se não houver boleto no período, o cliente não recebe nada. Não tem quadro na conversa e não gera boleto novo nem Pix.
 
 O que **não existe** de forma nativa na Kinbox para cobrar clientes finais:
 

@@ -1633,9 +1633,9 @@
     "tipo": "guia"
   },
   {
-    "pergunta": "Quero que o bot mande sozinho a segunda via do boleto do Asaas quando o cliente pedir no WhatsApp. Como configuro?",
+    "pergunta": "Uso o Tiny como ERP. Consigo cadastrar o contato da conversa como cliente lá e ver o CPF e o endereço dele sem sair da Kinbox?",
     "esperado": [
-      "docs/integracoes/asaas"
+      "docs/integracoes/tiny-erp"
     ],
     "tipo": "guia"
   },

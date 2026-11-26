@@ -47,7 +47,7 @@ A integração liga o CRM Dom360 à Kinbox para o membro consultar ou criar o le
   <Step title="Associe os membros aos usuários do Dom360">
     Em **Associação de Usuários**, clique em **Associar Usuário** (fica ativo depois de preencher **Subdomínio** e **Token**). Na janela **Adicionar Associação**, selecione o **Usuário Kinbox** e o **Usuário Dom360** e clique em **Associar**. Repita para cada membro que vai usar a integração (use o **X** ao lado do par para remover).
 
-    A associação define quem entra como **Responsável** padrão ao criar um lead, quem assina comentários e chamados pelo quadro e para qual membro o bot transfere a conversa quando o cadastro já tem dono no Dom360. Sem associação, o quadro ainda funciona, mas sem responsável padrão.
+    A associação define quem entra como **Responsável** padrão ao criar um lead e quem assina comentários e chamados pelo quadro. Ela também define para qual membro o bot transfere a conversa quando o cadastro já tem dono no Dom360. Sem associação, o quadro ainda funciona, mas sem responsável padrão.
   </Step>
 
   <Step title="Habilite e salve">
@@ -68,7 +68,7 @@ Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **D
 
 ## No bot
 
-No bloco **Integração** do bot, dentro do grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)), há três ações prontas do Dom360, sem campos próprios na gaveta (puladas no **Simular bot** — teste em uma conversa real):
+No bloco **Integração** do bot, dentro do grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)), há três ações prontas do Dom360, sem campos próprios na gaveta (puladas no **Simular bot** — publique o fluxo e teste em uma conversa real):
 
 - **Criar lead no Dom360:** procura o telefone no Dom360; se não existir, cria o lead com os dados básicos do contato; se já existir, transfere a conversa para o membro associado ao responsável no Dom360.
 - **Consulta usuário no Dom360:** procura o telefone no Dom360 e, se houver responsável associado a um membro da Kinbox, transfere a conversa para esse membro (sem alterar nada no Dom360).
@@ -78,7 +78,7 @@ No bloco **Integração** do bot, dentro do grupo **Outros** (veja [Chamar um si
 
 Para desligar o quadro na conversa, abra **Dom360** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. O quadro deixa de aparecer e as configurações continuam salvas no painel.
 
-Desligar **Habilitar integração** **não** para as três ações do Dom360 no bot. Para interromper o uso no bot, retire esses blocos do fluxo do bot.
+Desligar **Habilitar integração** **não** para as três ações do Dom360 no bot. Para interromper o uso no bot, retire esses blocos do fluxo do bot e clique em **Publicar**.
 
 ## Problemas comuns
 

@@ -347,7 +347,8 @@
                   "docs/integracoes/rdstation-marketing-webhook",
                   "docs/integracoes/bitrix24",
                   "docs/integracoes/zoho",
-                  "docs/integracoes/nectarcrm"
+                  "docs/integracoes/nectarcrm",
+                  "docs/integracoes/dom360"
                 ]
               },
               {
@@ -355,13 +356,12 @@
                 "pages": [
                   "docs/integracoes/banco-inter",
                   "docs/integracoes/asaas",
-                  "docs/integracoes/tiny-erp",
-                  "docs/integracoes/smarters",
-                  "docs/integracoes/sensedata",
-                  "docs/integracoes/gestor-premium",
-                  "docs/integracoes/dom360",
                   "docs/integracoes/hinova",
-                  "docs/integracoes/anycar"
+                  "docs/integracoes/anycar",
+                  "docs/integracoes/tiny-erp",
+                  "docs/integracoes/sensedata",
+                  "docs/integracoes/smarters",
+                  "docs/integracoes/gestor-premium"
                 ]
               },
               {
