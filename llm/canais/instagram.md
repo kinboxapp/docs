@@ -1,7 +1,7 @@
 ---
 title: "Instagram: páginas elegíveis, permissões da Meta, unidades do plano e teste grátis"
 description: Regras do canal de Instagram na Kinbox, com as páginas que aparecem na conexão, o que é pedido à Meta, os limites do plano, as mensagens de erro e o que entra e sai nas conversas.
-keywords: [instagram, páginas elegíveis, conta profissional, instagram direct, plano trial, teste grátis, você não pode adicionar canais de instagram em plano trial, você precisa remover canais de instagram, story, menção, reels, vídeo como link, seu canal de necessita ser reconectado]
+keywords: [instagram, páginas elegíveis, conta profissional, conta comercial, instagram business, instagram direct, plano trial, teste grátis, você não pode adicionar canais de instagram em plano trial, você precisa remover canais de instagram, story, menção, reels, vídeo como link, seu canal de necessita ser reconectado]
 publico: llm
 tipo: referencia
 fontes:
@@ -31,7 +31,7 @@ Detalhes de referência da página humana [Conectar o Instagram](/docs/canais/in
 ## Páginas elegíveis e lista na conexão
 
 - Na conexão do Instagram, a Kinbox exibe apenas páginas do Facebook liberadas na janela da Meta que tenham uma conta do Instagram profissional vinculada.
-- Cada cartão exibe o `@usuário` e a foto do perfil do Instagram (se não houver usuário, exibe o nome e a foto da página do Facebook). Ao passar o mouse, aparece o ID da página.
+- Cada cartão exibe o `@usuário` e a foto do perfil do Instagram. Sem `@usuário`, mostra o nome da conta do Instagram ou, na falta dele, o nome da página. Sem foto no Instagram, usa a foto da página. Ao passar o mouse, aparece o ID da página.
 - A lista recebe no máximo 99 páginas da Meta.
 - Se nenhuma página elegível for encontrada, a tela mostra `"Não encontramos nenhuma página com as permissões necessárias."` e o botão **Tentar novamente**.
 - Uma página cuja conta do Instagram já é canal ativo deste workspace aparece desativada e não pode ser clicada, mesmo que o canal esteja **Desconectado**.
@@ -81,14 +81,14 @@ Quando a conversa é nova, a Kinbox busca o nome (ou o `@usuário`) e a foto do 
 - **Texto e foto:** enviados normalmente.
 - **Áudio:** convertido e enviado como áudio; o editor tem o botão **Áudio** para gravar.
 - **Vídeo e arquivo (documento):** chegam ao contato como link.
-- **Responder (citar) mensagem:** disponível no menu da mensagem, apenas para mensagens recebidas do canal.
+- **Responder (citar) mensagem:** disponível no menu da mensagem para mensagens recebidas e para mensagens enviadas com sucesso no Instagram. Não aparece em mensagens com erro nem em notas.
 - **Iniciar conversa:** não dá para iniciar uma conversa nova pelo Instagram na Kinbox; a conversa começa quando o contato escreve ([Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
-- **Prazo para responder:** a Kinbox não conta prazo nem trava o editor no Instagram. Mensagens enviadas por membros saem com a etiqueta de atendimento humano da Meta (`HUMAN_AGENT`); mensagens enviadas sem membro (como o [bot](/docs/bot/visao-geral)) saem sem essa etiqueta. O prazo para responder é definido pela Meta.
+- **Prazo para responder:** a Kinbox não mostra contador nem bloqueia a resposta por prazo no Instagram. A Meta ainda pode recusar o envio. Mensagens enviadas por membros saem com a etiqueta de atendimento humano da Meta (`HUMAN_AGENT`); mensagens enviadas sem membro (como o [bot](/docs/bot/visao-geral)) saem sem essa etiqueta. O prazo para responder é definido pela Meta.
 - **Erros de envio:** quando a Meta recusa uma mensagem, ela fica com ícone de erro e o motivo aparece ao passar o mouse precedido de `"#2 Error:"` (sem motivo específico, exibe `"Erro ao enviar mensagem"`). Se a recusa for por perda de acesso, o canal muda para **Desconectado** e a mensagem mostra `"Seu canal de necessita ser reconectado. Por favor acesse "Configurações -> Canais" e reconecte-o."`.
 
 ## Renovação do acesso, desconexão e reconexão
 
-- A cada 2 horas, a Kinbox renova automaticamente o acesso das páginas dos canais de Instagram **Conectados** (até 20 por rodada) cujo acesso esteja a menos de 1 hora de vencer. Se a Meta não renovar o acesso ou recusar um envio por perda de acesso, o canal fica **Desconectado**.
-- A dica exibida no selo **Desconectado** fala em conexão de internet, mas no Instagram a causa é a perda de acesso na Meta.
+- A Kinbox renova o acesso à página automaticamente. Se a Meta não renovar o acesso, ou se recusar um envio por perda de acesso, o canal fica **Desconectado**.
+- A dica do selo **Desconectado** diz `"Seu canal está desconectado. Verifique sua conexão de internet."`, mas no Instagram a causa é a perda de acesso na Meta.
 - Não existe botão de reconectar, e a página já conectada fica desativada na lista. Para reconectar, é necessário **Excluir** o canal e conectar a mesma página de novo em **Novo canal**: o mesmo canal volta ativo e **Conectado**, com o mesmo ID e as conversas antigas (excluir não apaga conversas e libera a unidade do plano). Ao voltar, **Ignorar menções** e **Ignorar resposta de story** permanecem como estavam, mas a lista de grupos de **Restringir visibilidade** volta vazia e precisa ser conferida.
 - Excluir e adicionar canais exige a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)) ou ser o proprietário do workspace, sem a restrição **Somente pode dar manutenção simples em canais** (que oculta **Novo canal** e **Excluir**). Veja [O Instagram ou o Facebook não conecta ou desconectou](/docs/canais/instagram/problemas-comuns).

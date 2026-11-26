@@ -10,13 +10,12 @@ fontes:
   - api-v0:server/controllers/MessengerController.js
   - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
 codigo:
-  - web:src/pages/settings/channels/AddChannel.tsx
-  - web:src/pages/settings/channels/facebook/**
-  - api-v0:server/controllers/IntegrationsController.js
+  - web:src/pages/inbox/Chat/index.tsx
+  - web:src/pages/inbox/Message.tsx
+  - web:src/components-old/inbox/NewMessageModal/index.tsx
   - api-v0:server/controllers/MessengerController.js
-  - api-v0:server/routes/IntegrationsApiRoutes.js
-  - api-v0:server/routes/MessengerApiRoutes.js
-  - api-v0:server/modules/accessRestriction/**
+  - api-v0:server/controllers/KinboxDirectController.js
+  - api-v0:server/modules/chat/auxiliary/sendMessageToClient.js
 verificado_em: 2026-11-26
 ---
 
@@ -26,7 +25,7 @@ Até quando posso responder uma mensagem do Messenger?
 
 ## Resposta
 
-A Kinbox não limita nem mostra prazo para responder no Facebook Messenger (nem no Instagram): o editor fica sempre liberado, sem contador, e quem define o prazo é a Meta.
+A Kinbox não mostra contador nem bloqueia a resposta por prazo no Facebook Messenger (nem no Instagram). Quem define o prazo é a Meta, que ainda pode recusar o envio.
 
 As mensagens enviadas por membros saem com a etiqueta de atendimento humano da Meta; mensagens enviadas sem membro (como o [bot](/docs/bot/visao-geral)) saem sem essa etiqueta. Se a Meta recusar o envio (por exemplo, por ter passado do prazo dela), a mensagem fica com ícone de erro, o motivo devolvido pela Meta aparece ao passar o mouse e, no Messenger, também surge um aviso na tela.
 
@@ -39,6 +38,6 @@ Veja mais em [Conectar o Facebook Messenger](/docs/canais/facebook/conectar).
 - qual é o prazo para responder no facebook messenger pela kinbox
 - o messenger tem janela igual ao whatsapp oficial na kinbox
 - por que minha mensagem no messenger ficou com erro depois de alguns dias
-- a kinbox trava o campo de resposta no instagram ou no facebook
+- a kinbox bloqueia o campo de resposta no instagram ou no facebook
 - consigo mandar a primeira mensagem para um contato pelo messenger
 - quanto tempo depois posso responder uma dm do instagram na kinbox

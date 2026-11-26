@@ -583,6 +583,14 @@
     "tipo": "faq"
   },
   {
+    "pergunta": "No teste grátis consigo conectar duas páginas do Facebook?",
+    "esperado": [
+      "llm/faq/canais-limite-do-plano",
+      "llm/canais/facebook/conectar"
+    ],
+    "tipo": "faq"
+  },
+  {
     "pergunta": "Dá para publicar posts e agendar stories do Instagram pela Kinbox?",
     "esperado": [],
     "tipo": "negativo"

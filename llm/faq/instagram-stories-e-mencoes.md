@@ -25,7 +25,7 @@ Respostas a stories e menções viram conversa?
 
 Sim. Por padrão, respostas aos seus stories e menções em stories de outras pessoas entram como conversa no canal de Instagram na Kinbox: a resposta chega com o story junto do texto, e a menção aparece como o botão `"Você foi mencionado em um Story"`, que abre o story.
 
-Se não quiser que elas criem conversa, abra o canal de Instagram em **Configurações** → **Chat** → **Canais** e ligue:
+Se não quiser que elas criem conversa, abra o canal de Instagram em **Configurações** → **Chat** → **Canais**, ligue as opções abaixo e clique em **Salvar**:
 
 - **Ignorar resposta de story** ("Não cria conversa se responderem ao seu story")
 - **Ignorar menções** ("Não cria conversa ao ser mencionado em um story")

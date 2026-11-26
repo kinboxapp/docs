@@ -9,6 +9,7 @@ fontes:
   - web:src/pages/settings/channels/AddChannel.tsx
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/modules/accessRestriction/rules.js
 codigo:
   - web:src/pages/settings/channels/index.tsx
   - web:src/pages/settings/channels/AddChannel.tsx
@@ -28,10 +29,10 @@ Um canal é uma conta de mensagem ligada ao seu workspace. As conversas dos cana
 Em **Conectar novo canal**, você pode conectar:
 
 - **WhatsApp**
-- **Facebook**
+- **Facebook** ([Conectar o Facebook Messenger](/docs/canais/facebook/conectar))
 - **Telegram**
 - **E-mail**
-- **Instagram**
+- **Instagram** ([Conectar o Instagram](/docs/canais/instagram))
 - **SMS**
 - **Widget** (chat no site)
 - **Customizado**
@@ -107,10 +108,12 @@ Confira o histórico nos dois canais antes de excluir o canal de origem.
 
 ## Limite de canais do plano
 
-O plano define quantos canais de WhatsApp você pode ter, somando os oficiais e os por QR Code. O Instagram tem limite próprio e não pode ser conectado no teste grátis. Nos planos pagos, os outros tipos não têm limite de quantidade, menos o **SMS**: um por workspace. No teste grátis, dá para conectar uma página do Facebook por workspace, e o Telegram e o e-mail também podem ter limite de quantidade. Para aumentar a quantidade, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
+O plano define quantos canais de WhatsApp você pode ter, somando os oficiais e os por QR Code. [O Instagram](/docs/canais/instagram) tem limite próprio e não pode ser conectado no teste grátis. Na assinatura paga atual, os outros tipos não têm limite de quantidade, menos o **SMS**: um por workspace. No teste grátis, o workspace pode ter até 1 página do Facebook, 1 canal de Telegram e 3 canais de e-mail. Workspaces com a assinatura antiga têm outros tetos (até 50 páginas do Facebook, 10 canais de Telegram e 10 de e-mail). Para aumentar a quantidade, veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
 
 ## Próximos passos
 
 - [Qual WhatsApp usar: oficial ou QR Code](/docs/canais/whatsapp/visao-geral)
 - [Conectar o WhatsApp oficial](/docs/canais/whatsapp-api-oficial-padrao)
 - [Conectar o WhatsApp pelo QR Code](/docs/canais/conectar-whatsapp-app)
+- [Conectar o Instagram](/docs/canais/instagram)
+- [Conectar o Facebook Messenger](/docs/canais/facebook/conectar)

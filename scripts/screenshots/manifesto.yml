@@ -1161,6 +1161,7 @@
 # personalizados do workspace de testes ficam fora do recorte.
 
 - id: instagram-conectar
+  largura: 1000
   url: /settings/channels/new/instagram
   passos:
     - esperar: '.g_settings_simple_page button:has-text("Conectar página do Instagram")'
@@ -1174,6 +1175,7 @@
     - docs/canais/instagram
 
 - id: facebook-conectar
+  largura: 1000
   url: /settings/channels/new/facebook
   passos:
     - esperar: '.g_settings_simple_page button:has-text("Conectar página do Facebook")'

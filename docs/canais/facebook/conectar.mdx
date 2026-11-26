@@ -21,13 +21,13 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-O canal de Facebook traz para a [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) as mensagens que as pessoas enviam para uma página do Facebook pelo Messenger, com conexão feita em uma janela da Meta. Comentários nos posts da página não entram na Kinbox.
+O canal de Facebook traz para a [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox) as mensagens que as pessoas mandam para uma página do Facebook pelo Messenger. A conexão é feita numa janela da Meta. Comentários nos posts da página não entram na Kinbox.
 
-<Note>Quem pode: o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)), sem a restrição **Somente pode dar manutenção simples em canais** (que oculta **Novo canal** e **Excluir**). O Facebook não usa unidade do plano pago; no teste grátis, dá para conectar uma página do Facebook por workspace. Veja [Canais: conectar e gerenciar](/docs/canais/visao-geral).</Note>
+<Note>Quem pode: o proprietário do workspace e membros com a permissão **Gerenciar Canais** ([Referência de permissões](/docs/administracao/referencia-de-permissoes)). Plano: o Facebook não usa unidade do plano pago; no teste grátis, dá para conectar uma página do Facebook por workspace.</Note>
 
 ## Antes de começar
 
-- Use na janela da Meta uma conta do Facebook com acesso à página que você quer conectar (a lista exibe as páginas liberadas por essa conta).
+- Use na janela da Meta uma conta do Facebook com acesso à página que você quer conectar. A lista mostra as páginas liberadas por essa conta.
 - Libere pop-ups do navegador para a Kinbox, porque a conexão abre uma janela da Meta.
 
 ## Passo a passo
@@ -52,23 +52,30 @@ O canal de Facebook traz para a [Caixa de entrada](/docs/conversas/caixa-de-entr
     De volta à Kinbox, em "Selecione a página que você deseja conectar abaixo", clique no cartão da página do Facebook. A conexão acontece na hora.
   </Step>
   <Step title="Confirme a conexão">
-    A Kinbox exibe "Conectado ao canal de Facebook" com o nome da página e volta para a lista de **Canais**.
+    A Kinbox mostra "Conectado ao canal de Facebook" com o nome da página e volta para a lista de **Canais**.
   </Step>
 </Steps>
 
 ## Depois de conectar
 
 - Na lista de **Canais**, o canal aparece com o nome da página, "Página do Facebook" logo abaixo e o selo verde **Conectado**.
-- Faça um teste: mande uma mensagem para a página pelo Messenger a partir de outra conta e confira a conversa chegando na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox).
+- Faça um teste: mande uma mensagem para a página pelo Messenger a partir de outra conta e confira a conversa chegando na **Caixa de entrada**.
 - Não dá para iniciar uma conversa nova pelo Messenger na Kinbox: a conversa começa quando o contato escreve (veja [Iniciar uma conversa com um contato](/docs/conversas/iniciar-conversa)).
-- Sobre o prazo para responder: a Kinbox não conta prazo nem trava o editor, e as mensagens dos membros saem com a etiqueta de atendimento humano da Meta. O prazo é definido pela Meta; se a Meta recusar, a mensagem fica com erro e o motivo aparece ao passar o mouse.
-- Para revisar as opções do canal, veja [Configurações do Instagram e do Facebook](/docs/canais/instagram/configuracoes).
+- A Kinbox não mostra contador nem bloqueia o campo de resposta. Quem aceita ou recusa a mensagem é a Meta.
 
 ## Problemas comuns
 
 - **A página não aparece ou surgiu "Não encontramos nenhuma página com as permissões necessárias.":** a conta do Facebook usada não liberou a página na janela da Meta.
 - **A página aparece desativada e não dá para clicar:** ela já é um canal ativo deste workspace, mesmo que esteja **Desconectado**.
 - **Apareceu "Esse canal já está ativado em outro ambiente":** a página já está conectada como canal ativo em outro workspace.
-- **O canal ficou Desconectado:** não existe botão de reconectar; exclua o canal em **Canais** e conecte a mesma página de novo pelo **Novo canal**. O canal volta com as conversas, e depois confira os grupos de **Restringir visibilidade**, que voltam vazios.
+- **Apareceu "Seu plano atual não permite adicionar o novo canal":** no teste grátis, o workspace já tem uma página do Facebook conectada.
+- **O canal ficou Desconectado:** não existe botão de reconectar. Siga o passo a passo de reconexão em **O canal está Desconectado**, na página de problemas comuns.
 
-Para ver todos os avisos e soluções, acesse [O Instagram ou o Facebook não conecta ou desconectou](/docs/canais/instagram/problemas-comuns).
+<CardGroup cols={2}>
+  <Card title="Configurações do Instagram e do Facebook" href="/docs/canais/instagram/configuracoes">
+    Cada campo do painel do canal, as opções de stories e as ações da lista de canais.
+  </Card>
+  <Card title="O Instagram ou o Facebook não conecta ou desconectou" href="/docs/canais/instagram/problemas-comuns">
+    Páginas que não aparecem, erros de plano, reconexão e mensagens com erro.
+  </Card>
+</CardGroup>

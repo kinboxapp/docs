@@ -1,7 +1,7 @@
 ---
 title: Quantos canais posso conectar no meu plano?
-description: O plano limita a soma de canais de WhatsApp ativos (oficiais e por QR Code) e tem limite próprio para Instagram; SMS permite um por workspace e, nos planos pagos, os demais tipos não têm limite de quantidade; no teste grátis, o Facebook permite uma página por workspace.
-keywords: [quantos canais, limite de canais, limite whatsapp, linhas de whatsapp, instagram plano trial, assinatura expirada, remover canais]
+description: O plano limita a soma de canais de WhatsApp ativos (oficiais e por QR Code) e tem limite próprio para Instagram; SMS permite um por workspace e, na assinatura paga atual, os demais tipos não têm limite de quantidade; no teste grátis, são até 1 página do Facebook, 1 Telegram e 3 e-mails.
+keywords: [quantos canais, limite de canais, limite whatsapp, linhas de whatsapp, instagram plano trial, assinatura expirada, remover canais, facebook teste grátis, limite facebook, seu plano atual não permite adicionar o novo canal]
 publico: llm
 tipo: faq
 fontes:
@@ -27,7 +27,7 @@ Quantos canais posso conectar no meu plano?
 
 ## Resposta
 
-A quantidade permitida depende do que está contratado no seu plano: canais de **WhatsApp** (somando WhatsApp oficial e QR Code) contam contra o número de linhas de WhatsApp do plano, **Instagram** tem limite próprio e não pode ser adicionado no teste grátis, **SMS** permite um canal por workspace, e, nos planos pagos, os demais tipos (**Telegram**, **E-mail**, **Widget**, **Facebook** e **Customizado**) não têm limite de quantidade. No teste grátis, dá para conectar uma página do **Facebook** por workspace (a segunda é recusada com `"Seu plano atual não permite adicionar o novo canal"`), e o **Telegram** e o **E-mail** também podem ter limite de quantidade.
+A quantidade permitida depende do que está contratado no seu plano: canais de **WhatsApp** (somando WhatsApp oficial e QR Code) contam contra o número de linhas de WhatsApp do plano, **Instagram** tem limite próprio e não pode ser adicionado no teste grátis, **SMS** permite um canal por workspace, e, na assinatura paga atual, os demais tipos (**Telegram**, **E-mail**, **Widget**, **Facebook** e **Customizado**) não têm limite de quantidade. No teste grátis, o workspace pode ter até 1 página do **Facebook**, 1 canal de **Telegram** e 3 canais de **E-mail**; acima disso, aparece `"Seu plano atual não permite adicionar o novo canal"`. Na assinatura antiga paga, os tetos são 50 páginas do Facebook, 10 canais de Telegram e 10 de e-mail.
 
 **Recriar** um canal de WhatsApp não passa pela checagem de limite do plano. Quando o limite é atingido ou há bloqueio de assinatura ao tentar criar um canal, a Kinbox pode exibir mensagens como:
 - `"Você precisa remover canais de Whatsapp para prosseguir com a contratação"` (assinatura atual, acima do limite de linhas de WhatsApp)

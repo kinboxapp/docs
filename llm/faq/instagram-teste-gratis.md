@@ -9,15 +9,12 @@ fontes:
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/modules/accessRestriction/funcionalitiesAccess.js
 codigo:
-  - web:src/pages/settings/channels/AddChannel.tsx
-  - web:src/pages/settings/channels/facebook/AddMetaChannel.tsx
-  - web:src/pages/settings/channels/facebook/getPageDisplay.ts
-  - web:src/pages/settings/channels/instagram/**
-  - web:src/pages/inbox/MessageContent.tsx
-  - api-v0:server/controllers/IntegrationsController.js
-  - api-v0:server/controllers/KinboxDirectController.js
-  - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/routes/IntegrationsApiRoutes.js
+  - api-v0:server/controllers/NewPaymentController.js
+  - api-v0:server/controllers/IntegrationsController.js
+  - api-v0:server/modules/accessRestriction/**
+  - web:src/pages/settings/channels/facebook/AddMetaChannel.tsx
+  - web:src/pages/settings/billing/v2/Checkout.tsx
 verificado_em: 2026-11-26
 ---
 
