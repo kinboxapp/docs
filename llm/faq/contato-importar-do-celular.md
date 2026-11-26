@@ -24,7 +24,7 @@ Posso importar os contatos do meu celular?
 
 ## Resposta
 
-Sim, pelo app da Kinbox para celular, desde que o seu papel tenha a permissão **Gerenciar Contatos** ou você seja o proprietário do workspace (sem essa permissão, a opção não aparece).
+Sim, pelo [app da Kinbox para celular](/docs/app/visao-geral), desde que o seu papel tenha a permissão **Gerenciar Contatos** ou você seja o proprietário do workspace (sem essa permissão, a opção não aparece).
 
 No app, abra a aba **Você** e toque em **Importar contatos do celular**. Depois de conceder acesso em "Permitir acesso aos contatos", o app lista os contatos da agenda que têm telefone ("Os contatos da agenda com telefone aparecerão aqui."), oferece **Selecionar todos** e **Desmarcar todos**, e conclui em **Importar**.
 

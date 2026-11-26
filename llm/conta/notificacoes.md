@@ -52,6 +52,7 @@ verificado_em: 2026-11-26
 - **Só no horário comercial**: o app só avisa dentro do horário padrão do workspace. Se o workspace não tiver horário padrão configurado, os avisos podem chegar a qualquer hora.
 - Com a mesma conversa ou sala aberta na tela do app, o app não repete o aviso.
 - Salas silenciadas pelo membro não geram push no app.
+- Guia completo das notificações do app: [Notificações no app](/docs/app/notificacoes-no-app).
 
 ### Restrição de salas e salvamento
 

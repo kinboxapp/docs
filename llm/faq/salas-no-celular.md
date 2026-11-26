@@ -1,6 +1,6 @@
 ---
 title: Posso usar as salas pelo celular?
-description: Sim. No app da Kinbox para celular, a aba Salas mostra as salas e mensagens diretas da equipe, com a maior parte das ações do computador.
+description: Sim. No app da Kinbox para celular (iPhone e celular Android), a aba Salas mostra as salas e mensagens diretas da equipe, com a maior parte das ações do computador.
 keywords: [salas no celular, chat interno no app, usar salas no aplicativo, mensagem direta no celular, criar sala no celular, notificações de salas no celular, reagir na sala no celular, thread no celular]
 publico: llm
 tipo: faq
@@ -24,7 +24,7 @@ Posso usar as salas pelo celular?
 
 ## Resposta
 
-Sim. No app da Kinbox para celular, a aba **Salas** mostra as salas e as mensagens diretas da equipe: dá para ler, escrever, mandar fotos, arquivos e áudio, apagar as próprias mensagens, silenciar salas e criar ou editar salas (com a permissão **Salas**). Algumas coisas não estão disponíveis no app: reagir, responder em thread, editar mensagem, fixar, salvar, buscar mensagens, a lista de **Menções** e a **Auditoria**.
+Sim. No app da Kinbox para celular (iPhone e celular Android; veja [App da Kinbox para celular: o que dá para fazer](/docs/app/visao-geral)), a aba **Salas** mostra as salas e as mensagens diretas da equipe: dá para ler, escrever, mandar fotos, arquivos e áudio, apagar as próprias mensagens, silenciar salas e criar ou editar salas (com a permissão **Salas**). Algumas coisas não estão disponíveis no app: reagir, responder em thread, editar mensagem, fixar, salvar, buscar mensagens, a lista de **Menções** e a **Auditoria**.
 
 A aba **Salas** é a segunda aba do app (entre **Conversas** e **Agenda**) e mostra o total de mensagens não lidas (`99+` a partir de 100), sem contar salas silenciadas. Para quem tem a restrição **Não pode acessar as salas**, a aba exibe "Sem acesso às salas" — "Seu perfil não permite acessar o chat do time neste workspace." — e o botão **Trocar workspace** (o proprietário nunca é bloqueado).
 

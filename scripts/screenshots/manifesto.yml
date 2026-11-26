@@ -3405,3 +3405,22 @@
   arquivo: images/ajuda/metas/analitico.webp
   paginas:
     - docs/metas/como-as-metas-sao-calculadas
+
+# Seção app-mobile (Sua conta e app › App para celular)
+#
+# O app nativo não é capturado (sem simulador com o workspace de documentação). Só o atalho do web para baixar o app.
+
+- id: app-menu-baixar-app
+  url: /settings/account/profile
+  passos:
+    - esperar: '.g_user_avatar'
+    - clicar: '.g_user_avatar'
+    - esperar: '.ant-dropdown-menu-item:has-text("Baixar app para celular")'
+    - pausa: 600
+  alvo:
+    - '.ant-dropdown-menu-item:has-text("Novidades")'
+    - '.ant-dropdown-menu-item:has-text("Voltar ao design antigo")'
+  mascarar: []
+  arquivo: images/ajuda/app/menu-baixar-app.webp
+  paginas:
+    - docs/app/visao-geral
