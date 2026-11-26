@@ -479,6 +479,218 @@
   paginas:
     - docs/bot/blocos-do-bot
 
+# Seção agente-de-ia (Automação e IA › Agentes de IA)
+#
+# Agente "Lia" do seed (sem canal e sem agente de voz, que é recurso em teste e não está ligado no workspace de
+# documentação). Nunca confirmar a conexão de um canal: os prints de "Conectar canal" param na janela aberta.
+
+- id: agente-lista
+  url: /settings/agents
+  passos:
+    - esperar: '.g_table_wrapper >> text=Lia'
+  alvo:
+    - '.g_card > header'
+    - '.g_card .g_table_wrapper'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/lista-de-agentes.webp
+  paginas:
+    - docs/agente-de-ia/visao-geral
+
+- id: agente-novo
+  url: /settings/agents/new
+  passos:
+    - esperar: 'text=Configuração manual'
+    - pausa: 800
+  alvo:
+    - 'h1:has-text("Como você quer criar seu agente?")'
+    - '#method'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/novo-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-editor
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - pausa: 1000
+  alvo:
+    - '#preview-panel'
+    - '#side-panel'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/editor-do-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-configuracoes
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
+    - esperar: '.ant-drawer-content >> text=Comportamento'
+    - clicar: '.ant-drawer-content >> text=0 responde imediatamente'
+    - pausa: 800
+  alvo: '.ant-drawer-body .rounded-app.mb-4:has-text("Configure como o agente deve se comportar")'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/configuracoes-do-agente.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-configuracoes-perfil
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=2'
+    - esperar: '.ant-drawer-content >> text=Informações básicas do agente'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer-body .rounded-app.mb-4:has-text("Informações básicas do agente")'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/configuracoes-perfil.webp
+  paginas:
+    - docs/agente-de-ia/criando-seu-agente-de-ia
+
+- id: agente-conectar-canal
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: 'button.group\/stack'
+    - esperar: '.ant-modal-content >> text=Gerenciar canais'
+    - pausa: 800
+  alvo:
+    - '.ant-modal-header'
+    - '.ant-modal-content >> text=Chat Do Site >> xpath=../..'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/conectar-canal.webp
+  paginas:
+    - docs/agente-de-ia/conectar-canais
+
+# Fluxograma de exemplo montado na hora (Início → Coletar dados → Subagente → Transferir), sem publicar: puxar a
+# seta do bloco e soltar no vazio cria o bloco ligado e abre "Selecione uma ação". Os blocos novos recebem os ids
+# 1, 2 e 3; no fim, "Enquadrar" (último botão da barra inferior) mostra o desenho inteiro.
+- id: agente-fluxograma
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
+    - esperar: '#side-panel .react-flow__node-start'
+    - pausa: 1000
+    - arrastar:
+        de: '#side-panel .react-flow__node-start .react-flow__handle.source'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 330
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Coletar dados'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Coletar dados")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - arrastar:
+        de: '#side-panel .react-flow__handle.source[data-nodeid="1"]'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 560
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Subagente'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Subagente")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - arrastar:
+        de: '#side-panel .react-flow__handle.source[data-nodeid="2"]'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 560
+    - esperar: '.ant-modal-content:visible >> text=Selecione uma ação'
+    - digitar:
+        seletor: '.ant-modal-content:visible input'
+        texto: 'Transferir'
+    - clicar: '.ant-modal-content:visible a.cursor-pointer:has-text("Transferir")'
+    - pausa: 1000
+    - tecla: Escape
+    - pausa: 800
+    - clicar: '#side-panel [class*="_board_bottom_center"] button >> nth=-1'
+    - pausa: 1500
+  alvo:
+    - '#side-panel .react-flow__node-start'
+    - '#side-panel .react-flow__node[data-id="1"]'
+    - '#side-panel .react-flow__node[data-id="2"]'
+    - '#side-panel .react-flow__node[data-id="3"]'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/fluxograma.webp
+  paginas:
+    - docs/agente-de-ia/fluxograma-e-etapas
+
+# Janela "Selecione uma ação", aberta ao puxar a seta do Início e soltar no vazio (nada é publicado).
+- id: agente-selecionar-acao
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#preview-panel button[class*="!size-11"] >> nth=1'
+    - esperar: '#side-panel .react-flow__node-start'
+    - pausa: 1000
+    - arrastar:
+        de: '#side-panel .react-flow__node-start .react-flow__handle.source'
+        para: '#side-panel .react-flow__pane'
+        x: 560
+        y: 330
+    - esperar: '.ant-modal-content >> text=Selecione uma ação'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/selecionar-acao.webp
+  paginas:
+    - docs/agente-de-ia/acoes-do-fluxograma
+
+- id: agente-adicionar-conhecimento
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#side-panel header:has-text("Conhecimento") a:has-text("Adicionar")'
+    - esperar: '.ant-modal-content >> text=Cole texto'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/adicionar-conhecimento.webp
+  paginas:
+    - docs/agente-de-ia/conhecimento
+
+- id: agente-selecionar-ferramenta
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#side-panel >> text=Canais conectados'
+    - clicar: '#side-panel header:has-text("Ferramentas") a:has-text("Adicionar")'
+    - esperar: '.ant-modal-content >> text=Selecione uma ferramenta'
+    - pausa: 800
+  alvo: '.ant-modal-content'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/selecionar-ferramenta.webp
+  paginas:
+    - docs/agente-de-ia/ferramentas
+
+# Chat de teste com uma pergunta (a resposta é gerada na hora e gasta saldo de cortesia do staging). O histórico do
+# teste fica no navegador da captura (perfil fora do repositório).
+- id: agente-testar
+  url: /settings/agents/6b0793fd9f2e3f185bc07afa
+  passos:
+    - esperar: '#preview-panel textarea'
+    - digitar:
+        seletor: '#preview-panel textarea'
+        texto: 'Até que horas vocês atendem no sábado?'
+    - tecla: Enter
+    - pausa: 25000
+  alvo: '#preview-panel'
+  mascarar: []
+  arquivo: images/ajuda/agente-de-ia/testar-agente.webp
+  paginas:
+    - docs/agente-de-ia/testar
+
 # Seção assinatura (Administração › Assinatura e cobrança)
 #
 # Só telas que não disparam cobrança: nenhum item clica em Continuar, Alterar Plano, Contratar, Salvar nem confirma
@@ -740,3 +952,82 @@
   arquivo: images/ajuda/whatsapp-templates/enviar-mensagem-template.webp
   paginas:
     - docs/canais/whatsapp/whatsapp-templates/enviar-template
+
+# Seção membros-e-permissoes
+
+# Lista de membros do workspace de documentação: 3 convidados fictícios (@example.com) com os papéis padrão e o
+# proprietário. A linha do proprietário (conta real) leva tarja na coluna do nome, da foto e do e-mail; o selo
+# "Proprietário" fica à mostra.
+- id: membros-lista
+  url: /settings/members
+  passos:
+    - esperar: 'text=Diego Santos'
+    - pausa: 1000
+  alvo:
+    - 'button:has-text("Convidar membro")'
+    - 'tr:has(a[href="/settings/members/5"])'
+  mascarar:
+    - 'tr:has(a[href="/settings/members/5"]) td:first-child'
+  arquivo: images/ajuda/membros-e-permissoes/membros-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+
+# Painel Convidar membro vazio: Nome, foto, E-mail, Permissão e o botão Convidar.
+- id: membros-convidar
+  url: /settings/members/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Convidar membro'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Convidar")'
+  arquivo: images/ajuda/membros-e-permissoes/convidar-membro.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+
+# Painel Editar membro de um convidado fictício (Diego Santos): Permissão, Disponível, Ativo e Grupos.
+- id: membros-editar
+  url: /settings/members/222
+  passos:
+    - esperar: '.ant-drawer-title >> text=Editar membro'
+    - esperar: 'text=Disponível'
+    - pausa: 800
+  # "Folga fixa da semana" só existe no staging (ainda não está no master do web): some do print.
+  esconder:
+    - '.ant-drawer .ant-form-item:has-text("Folga fixa da semana")'
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer button:has-text("Salvar")'
+  arquivo: images/ajuda/membros-e-permissoes/editar-membro.webp
+  paginas:
+    - docs/configuracoes-no-workspace/gerenciar-membros
+    - docs/administracao/licencas-e-propriedade
+
+# Lista de papéis (Permissões) com os três padrões e as iniciais dos membros fictícios.
+- id: permissoes-lista
+  url: /settings/roles
+  passos:
+    - esperar: 'text=Administrador'
+    - pausa: 800
+  alvo:
+    - 'button:has-text("Nova permissão")'
+    - 'tr:has-text("Administrador")'
+  arquivo: images/ajuda/membros-e-permissoes/permissoes-lista.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios
+
+# Painel Criar permissão com Home recolhida e Acesso as Conversas aberto (as 6 opções).
+- id: permissoes-acesso-as-conversas
+  url: /settings/roles/new
+  passos:
+    - esperar: '.ant-drawer-title >> text=Criar permissão'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Home")'
+    - clicar: '.ant-drawer .ant-collapse-header:has-text("Acesso as Conversas")'
+    - esperar: '.ant-drawer >> text=Por Grupo Limitado'
+    - pausa: 800
+  alvo:
+    - '.ant-drawer-header'
+    - '.ant-drawer label:has-text("Restrito")'
+  arquivo: images/ajuda/membros-e-permissoes/acesso-as-conversas.webp
+  paginas:
+    - docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios

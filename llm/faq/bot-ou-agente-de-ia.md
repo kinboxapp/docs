@@ -33,7 +33,7 @@ O **Bot** segue um fluxo montado com blocos e respostas previstas, enquanto o **
 Quando usar cada ferramenta (todas ficam em **Configurações** → **Automação**):
 
 - **Bot**: quando você quer menus fixos, coleta de dados com perguntas definidas e transferência para o time. Só gasta saldo se usar o bloco **Agente de IA**.
-- **Agentes de IA**: quando você quer que a IA converse de forma aberta, tire dúvidas com base de conhecimento e execute ações sozinha (como **Transferir para humano**). Cada canal é atendido por um único agente de IA; existe também o **Agente de voz** (**Beta**, para ligações do WhatsApp oficial, que pode não aparecer no workspace).
+- **Agentes de IA**: quando você quer que a IA converse de forma aberta, tire dúvidas com base de conhecimento e execute ações sozinha (como **Transferir para humano**). Cada canal tem um único agente de texto para as mensagens; no WhatsApp oficial com ligações, um **Agente de voz** à parte atende as ligações (**Beta**, pode não aparecer no workspace).
 - **Automações**: quando você quer reagir a eventos e tempos na Kinbox (como tempo sem resposta, ao resolver uma conversa ou ao adicionar tag; os gatilhos por tempo podem atrasar até 3 minutos) para executar ações nos bastidores, como atribuir, enviar mensagem ou executar bot. Não geram débito no saldo (só um bot com o bloco **Agente de IA** executado por elas gasta).
 - **Cenários**: quando você quer integrar outro sistema — começar por webhook, campanha, nova sessão ou agendamento cíclico e executar passos sobre contatos, conversas, negócios e produtos, com requisições HTTP e loops. Também não geram débito no saldo sozinhos.
 
