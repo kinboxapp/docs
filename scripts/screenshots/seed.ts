@@ -302,6 +302,117 @@ async function garantirFunil(api: Api, contatoIds: Record<string, string>, tagId
   log(`funil: "${PIPELINE.name}" com ${NEGOCIOS.length} negócios`)
 }
 
+/**
+ * CRM (prints da seção `funis`): produtos, responsáveis fictícios nos negócios do funil Vendas (para o print não mostrar a
+ * foto do dono do workspace, que é uma conta real), produtos num negócio, um negócio ganho e um perdido, e um funil
+ * operacional com dois tickets.
+ */
+const PRODUTOS = [
+  { name: 'Café especial 250 g', description: 'Grãos torrados na semana', price: 45, isActive: true },
+  { name: 'Kit presente', description: 'Caixa com dois cafés e uma caneca', price: 160, isActive: true },
+  { name: 'Assinatura mensal de café', description: 'Um pacote por mês, com entrega', price: 99.9, isActive: true },
+  { name: 'Caneca edição de inverno', description: 'Fora de linha', price: 39, isActive: false },
+]
+
+const RESPONSAVEIS: Record<string, string> = {
+  'Kit presente — Ana Souza': 'Bruno Carvalho',
+  'Kits corporativos — Carlos Pereira': 'Carla Mendes',
+  'Assinatura de café — Rafael Martins': 'Bruno Carvalho',
+  'Cesta de café da manhã — Beatriz Alves': 'Diego Santos',
+  'Reposição de estoque — Lucas Ferreira': 'Carla Mendes',
+  'Presente de aniversário — Fernanda Costa': 'Diego Santos',
+}
+
+const FUNIL_OPERACIONAL = {
+  name: 'Pós-venda',
+  stages: [
+    { id: 'recebido', name: 'Recebido', color: '#64748b' },
+    { id: 'analise', name: 'Em análise', color: '#0ea5e9' },
+    { id: 'aguardando', name: 'Aguardando cliente', color: '#f59e0b' },
+  ],
+  lostReasons: ['Sem retorno do cliente', 'Fora da política de troca'],
+  tickets: [
+    { name: 'Troca de produto — Beatriz Alves', contato: 'Beatriz Alves', stageId: 'analise', responsavel: 'Diego Santos' },
+    { name: 'Entrega atrasada — Carlos Pereira', contato: 'Carlos Pereira', stageId: 'recebido', responsavel: 'Bruno Carvalho' },
+  ],
+}
+
+async function garantirCrm(api: Api, contatoIds: Record<string, string>) {
+  // Produtos
+  const produtos = lista(await api.v3('GET', '/products?limit=100'))
+  for (const p of PRODUTOS) {
+    if (!produtos.some((x) => x.name === p.name)) produtos.push(await api.v3('POST', '/products', p))
+  }
+  const produto = (nome: string) => produtos.find((x) => x.name === nome)
+
+  // Responsáveis fictícios (membros convidados)
+  const operadores = lista(await api.v0('GET', '/operators?limit=100'))
+  const opId = (nome: string) => {
+    const membro = MEMBROS.find((m) => m.name === nome)
+    const op = operadores.find((o) => o.email === membro?.email)
+    return op ? Number(op.operatorId || op.id) : undefined
+  }
+
+  const vendas = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === PIPELINE.name)
+  if (vendas) {
+    const negocios = lista(await api.v3('GET', `/deals?pipelineId=${String(vendas.id || vendas._id)}&limit=100`))
+    for (const negocio of negocios) {
+      const responsavel = RESPONSAVEIS[negocio.name]
+      const operatorId = responsavel ? opId(responsavel) : undefined
+      const patch: Record<string, unknown> = {}
+      if (operatorId && negocio.operatorId !== operatorId) patch.operatorId = operatorId
+      if (negocio.name === 'Kit presente — Ana Souza' && !negocio.products?.length) {
+        const kit = produto('Kit presente')
+        const cafe = produto('Café especial 250 g')
+        if (kit && cafe) {
+          patch.products = [
+            { id: String(kit.id || kit._id), name: kit.name, price: kit.price, quantity: 2, discount: 0, discountType: 'percentage', total: 320 },
+            { id: String(cafe.id || cafe._id), name: cafe.name, price: cafe.price, quantity: 1, discount: 0, discountType: 'percentage', total: 45 },
+          ]
+          patch.value = 365
+        }
+      }
+      // Um negócio ganho e um perdido, para o quadro mostrar as três situações do cartão
+      if (negocio.name === 'Presente de aniversário — Fernanda Costa' && negocio.status !== 'won') {
+        Object.assign(patch, { status: 'won', wonLostDate: new Date().toISOString() })
+      }
+      if (negocio.name === 'Cesta de café da manhã — Beatriz Alves' && negocio.status !== 'lost') {
+        Object.assign(patch, { status: 'lost', lostReason: ['Preço'], wonLostDate: new Date().toISOString() })
+      }
+      if (Object.keys(patch).length) await api.v3('PATCH', `/deals/${negocio.id || negocio._id}`, patch)
+    }
+  }
+
+  // Funil operacional
+  let pos = lista(await api.v3('GET', '/pipelines')).find((p) => p.name === FUNIL_OPERACIONAL.name)
+  if (!pos) {
+    pos = await api.v3('POST', '/pipelines', {
+      name: FUNIL_OPERACIONAL.name,
+      kind: 'operational',
+      stages: FUNIL_OPERACIONAL.stages.map((s) => ({ ...s, requireds: [] })),
+      lostReasons: FUNIL_OPERACIONAL.lostReasons,
+      requiredCustomFieldIds: [],
+      privacy: { type: 'public' },
+      cadence: [],
+      rules: [],
+    })
+  }
+  const posId = String(pos.id || pos._id)
+  const tickets = lista(await api.v3('GET', `/deals?pipelineId=${posId}&limit=100`))
+  for (const t of FUNIL_OPERACIONAL.tickets) {
+    if (tickets.some((d) => d.name === t.name)) continue
+    await api.v3('POST', '/deals', {
+      name: t.name,
+      value: 0,
+      pipelineId: posId,
+      stageId: t.stageId,
+      contactId: Number(contatoIds[t.contato]),
+      operatorId: opId(t.responsavel),
+    })
+  }
+  log(`crm: ${PRODUTOS.length} produtos, responsáveis nos negócios de "${PIPELINE.name}", funil operacional "${FUNIL_OPERACIONAL.name}"`)
+}
+
 async function garantirMembros(api: Api) {
   const cargos = lista(await api.v0('GET', '/roles'))
   const operadores = lista(await api.v0('GET', '/operators?limit=100'))
@@ -609,8 +720,13 @@ const etapas: [string, () => Promise<unknown>][] = [
   ['organização do atendimento', () => garantirOrganizacao(api)],
   ['widget de exemplo', () => garantirWidgetExemplo(api)],
   ['clientes', () => garantirClientes(api, contatoIds)],
+  ['crm', () => garantirCrm(api, contatoIds)],
 ]
+// `bun seed.ts --so crm,funil` roda só as etapas listadas (as do começo, idempotentes, rodam sempre)
+const soArg = process.argv.indexOf('--so')
+const so = soArg > -1 ? process.argv[soArg + 1]?.split(',') : undefined
 for (const [nome, etapa] of etapas) {
+  if (so && !so.includes(nome)) continue
   try {
     await etapa()
   } catch (e) {
