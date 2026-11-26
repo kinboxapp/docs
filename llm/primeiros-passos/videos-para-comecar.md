@@ -74,7 +74,7 @@ Status exibidos em cada trilha: **Não iniciada**, **Em andamento**, **Certifica
 
 ## Assinatura vencida
 
-Com a assinatura ou o teste grátis vencido, a Academia abre normalmente, mas lições e exame ficam bloqueados com "A assinatura do workspace expirou. Renove para fazer as lições e o exame." Veja [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
+Com a assinatura ou o teste grátis vencido, a Academia abre normalmente. Quando a Kinbox mostrar o aviso de assinatura expirada, as lições e o exame ficam bloqueados com "A assinatura do workspace expirou. Renove para fazer as lições e o exame." Veja [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida).
 
 ## Sintomas e soluções
 
@@ -88,6 +88,6 @@ Com a assinatura ou o teste grátis vencido, a Academia abre normalmente, mas li
 | Meu certificado venceu após 1 ano | Validade de 1 ano; refazer o exame não emite outro certificado | Não há renovação pela Academia; fale com o suporte. A página de verificação passa a exibir "Certificado autêntico, mas vencido" com a data de vencimento |
 | "Tentativa de exame expirada. Comece o exame de novo." | O exame ficou aberto por muitas horas sem concluir | Iniciar uma nova tentativa em **Fazer exame** (não há limite de tentativas) |
 | Troquei de workspace e meu progresso zerou | Progresso e certificados são registrados por pessoa em cada workspace | Voltar ao workspace original para ver as insígnias; o link de verificação já emitido continua válido |
-| Lições e exame bloqueados com aviso de assinatura expirada | Assinatura ou teste grátis do workspace venceu | Regularizar em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida) |
+| Lições e exame bloqueados com aviso de assinatura expirada | A Kinbox está mostrando o aviso de assinatura expirada do workspace | Regularizar em [Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida) |
 
 Veja também [Continuar aprendendo: Academia e vídeos](/docs/primeiros-passos/videos-para-comecar).
