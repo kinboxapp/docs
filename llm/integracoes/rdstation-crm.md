@@ -35,6 +35,7 @@ Complemento técnico de [Integrar com o RD Station CRM](/docs/integracoes/rdstat
 ## Casos de borda
 
 - **Contato sem e-mail ou sem telefone:** a Kinbox envia os campos vazios sem aviso próprio; a aceitação depende das regras da conta no RD Station CRM.
+- **Aviso de sucesso sem negociação:** em alguns erros do RD, o aviso "Oportunidade criada no RD Station CRM." pode aparecer sem que a negociação tenha sido criada. Confira no RD antes de clicar de novo em **Add oportunidade**: um novo clique cria outra negociação, outro contato e outra empresa.
 - **Erro devolvido pelo RD ao criar oportunidade:** quando o RD retorna erro com a chave `error`, aparece um aviso com o texto do RD, mas o indicador de carregamento do quadro pode continuar ativo até trocar de conversa.
 - **Token inválido em Configurações:** a lista **Estágio do funil** abre vazia, sem mensagem de erro.
 - **Busca dentro de Estágio do funil:** digitar o nome da etapa não filtra a lista, pois a busca compara o texto com o identificador da etapa; role a lista manualmente para selecionar.

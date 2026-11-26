@@ -1811,8 +1811,9 @@
     - docs/canais/widget/configuracoes
 
 # Seção integracoes (Integrações e API › Apps e CRMs). Só abre os painéis, sem salvar credencial nem autorizar em
-# terceiros. Os exemplos de endereço dentro dos campos do Bitrix24 levam tarja. O botão Novo da tela Apps não cria nada para o cliente: some do print. Pipedrive e NectarCRM listam os
-# membros do workspace: a linha do dono (conta real) leva tarja.
+# terceiros. Nos painéis do Bitrix24 e do Zoho os campos recebem valores fictícios digitados (nada é salvo). O botão
+# Novo da tela Apps some do print. Pipedrive e NectarCRM listam os membros do workspace: a linha do dono (conta real)
+# leva tarja.
 
 # Configurações → Integrações → Apps: título, busca, filtro e as primeiras linhas (até RD Station Marketing).
 - id: integracoes-apps-lista
@@ -1887,29 +1888,46 @@
   url: /settings/apps/bitrix24
   passos:
     - esperar: '.ant-drawer-body #isEnabled'
+    - digitar:
+        seletor: '.ant-drawer-body #data_token_url'
+        texto: 'https://sua-empresa.bitrix24.com.br/rest/1/xxxxxxxxxx/'
+    - digitar:
+        seletor: '.ant-drawer-body #data_token_url_users'
+        texto: 'https://sua-empresa.bitrix24.com.br/rest/1/yyyyyyyyyy/'
+    - digitar:
+        seletor: '.ant-drawer-body #data_webhookUrl'
+        texto: 'https://sua-empresa.bitrix24.com.br/rest/1/zzzzzzzzzz/'
     - pausa: 800
   alvo:
     - '.ant-drawer-header'
     - '.ant-drawer-body button[type=submit]'
-  mascarar:
-    - '.ant-drawer-body #data_token_url'
-    - '.ant-drawer-body #data_token_url_users'
-    - '.ant-drawer-body #data_webhookUrl'
+  mascarar: []
   arquivo: images/ajuda/integracoes/bitrix24.webp
   paginas:
     - docs/integracoes/bitrix24
 
-# O exemplo do campo ID da Organização vem do código e parece um ID de verdade: tarja.
+# Campos com valores fictícios digitados, sem clicar em Obter token nem em Salvar.
 - id: integracoes-zoho
   url: /settings/apps/zoho
   passos:
     - esperar: '.ant-drawer-body #isEnabled'
+    - digitar:
+        seletor: '.ant-drawer-body #data_org_id'
+        texto: '000000000'
+    - digitar:
+        seletor: '.ant-drawer-body #data_client_id'
+        texto: '1000.XXXXXXXXXXXXXXXX'
+    - digitar:
+        seletor: '.ant-drawer-body #data_client_secret'
+        texto: 'xxxxxxxxxxxxxxxxxxxx'
+    - digitar:
+        seletor: '.ant-drawer-body #data_generatedCode'
+        texto: '1000.xxxxxxxxxxxxxxxx'
     - pausa: 800
   alvo:
     - '.ant-drawer-header'
     - '.ant-drawer-body button[type=submit]'
-  mascarar:
-    - '.ant-drawer-body #data_org_id'
+  mascarar: []
   arquivo: images/ajuda/integracoes/zoho.webp
   paginas:
     - docs/integracoes/zoho

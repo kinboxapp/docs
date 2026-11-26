@@ -30,6 +30,8 @@ Complemento técnico de [Integrar com o Bitrix24](/docs/integracoes/bitrix24).
 
 - **Permissão e conta:** o painel **Bitrix24** (**Configurações** → **Integrações** → **Apps** → **Bitrix24**) exige a permissão **Integrações** ou proprietário. Cada workspace mantém apenas uma integração Bitrix24.
 - **Visibilidade do quadro:** o quadro **Bitrix24** aparece no painel **Detalhes** apenas com **Habilitar integração** ligado, e fica oculto para quem tem a restrição **Esconder informações de integração** ou está no modo de treino da Academia.
+- **Habilitar integração e bot:** o interruptor só controla o quadro da conversa. As ações prontas do bot usam o **Webhook Url** salvo mesmo com **Habilitar integração** desligado. Com o interruptor ligado, o painel só salva se **Webhook para API REST de chamada (crm.lead.add)** estiver preenchido; quem usa só o bot salva com o interruptor desligado.
+- **Mapa de campos de Configurações (Ajustes do Bitrix):** fica salvo no painel, mas não altera o lead criado pelo quadro nem as ações do bot. No bot, vale o **Mapa de campos** configurado em cada bloco.
 - **Barra final obrigatória na URL:** cole o endereço completo de cada webhook terminado em `/` (conforme o exemplo do campo). O quadro e as listas de opções concatenam o método diretamente ao final da URL; sem a barra `/`, essas chamadas falham.
 
 | Campo no painel | Onde é usado | Permissões necessárias no Bitrix24 |

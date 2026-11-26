@@ -1,7 +1,7 @@
 ---
 title: "Apps e integrações: lista, status e onde aparecem"
-description: Referência das integrações nativas da tela Apps, regras de status, permissões, ações prontas do bot e casos de borda do NectarCRM e do webhook do RD Station Marketing.
-keywords: [apps, integrações, lista de apps, status instalado, esconder informações de integração, ações do bot, nectarcrm, webhook rd station, integrações retiradas]
+description: Referência das integrações nativas da tela Apps, regras de status, quem vê os quadros na conversa e ações prontas do bot.
+keywords: [apps, integrações, lista de apps, status instalado, esconder informações de integração, ações do bot, integrações retiradas, integrações sem quadro]
 publico: llm
 tipo: referencia
 fontes:
@@ -11,8 +11,6 @@ fontes:
   - web:src/components-old/chat/side/ContactDetails/**
   - web:src/pages/settings/index.tsx
   - api-v0:server/auxiliary/BotIntegrations.js
-  - web:src/components-old/chat/side/integrationApps/NectarCRMApp/Actions.tsx
-  - api:src/modules/webhooks/rdstation/rdstation-webhook.consumer.ts
 codigo:
   - web:src/pages/settings/integrations/Apps.tsx
   - web:src/pages/settings/integrations/AppsAldeia.tsx
@@ -21,8 +19,6 @@ codigo:
   - web:src/components-old/chat/side/ContactDetails/**
   - web:src/features/marketing-apps/**
   - api:src/modules/apps/**
-  - web:src/components-old/chat/side/integrationApps/NectarCRMApp/**
-  - api:src/modules/webhooks/rdstation/**
 verificado_em: 2026-11-26
 ---
 
@@ -62,10 +58,13 @@ Caminho no menu: **Configurações** → **Integrações** → **Apps** (`/setti
   - **Habilitar integração** está desligado;
   - o membro tem a restrição **Esconder informações de integração** no papel;
   - a conversa está no modo de treino da Academia.
+- **Integrações sem quadro na conversa:** Asaas e Hinova não têm quadro no painel **Detalhes**.
+- **Limite de uso:** as consultas dos quadros aos CRMs têm limite de uso. Se aparecer erro de limite, espere um minuto e tente de novo.
+- **Páginas complementares:** detalhes do NectarCRM em [Integrar com o NectarCRM](/docs/integracoes/nectarcrm) e do webhook de leads em [Receber leads do RD Station Marketing por webhook](/docs/integracoes/rdstation-marketing-webhook).
 
 ## Ações prontas no bot e app do agente de IA
 
-- **Bot (bloco Integração, grupo Outros):** usam a conexão configurada em **Apps** e são puladas na simulação do bot (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)):
+- **Bot (bloco Integração, grupo Outros):** há ações prontas de várias integrações (entre elas as listadas abaixo, além de Dom360 e Anycar); usam a conexão configurada em **Apps** e são puladas na simulação do bot (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)):
   - **HubSpot:** `Consulta contato no HubSpot`, `Consulta negócio no HubSpot`, `Atualiza negócio no HubSpot`, `Cria ou atualiza Objeto no HubSpot`.
   - **Bitrix24:** `Cria Oportunidade no Bitrix`, `Atualiza Oportunidade no Bitrix`, `Cria ou atualiza contato no Bitrix`.
   - **RD Station Marketing:** `Cria ou atualiza contato no RDMarketing`.
@@ -76,27 +75,4 @@ Caminho no menu: **Configurações** → **Integrações** → **Apps** (`/setti
 
 - **Retiradas da lista Apps:** Followize, Exact Spotter e Consulta de FGTS.
 - **Sem integração nativa em Apps:** Zapier, Make, n8n, Pluga, PipeRun, Moskit, ActiveCampaign, Salesforce, Mailchimp, Pipefy, Trello e Google Sheets (o bot oferece uma ação pronta para chamar o n8n no grupo **Outros**).
-- **Alternativas para sistemas fora da lista:** API pública com token de API, plugins (página externa dentro do painel da conversa), bloco **Integração** do bot com **Chamar endpoint** ([Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)) e **Cenários** com webhooks e requisições HTTP ([Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia)).
-
-## NectarCRM
-
-Detalhes complementares de [Integrar com o NectarCRM](/docs/integracoes/nectarcrm):
-
-- **Uma conta por workspace:** cada workspace tem uma única integração NectarCRM, com um campo de token por membro. Cada membro precisa do próprio token na linha dele para o botão **Add contato** ficar ativo.
-- **Vínculo e campos enviados:** a ligação do contato fica salva no campo personalizado oculto `nectarcrm_id`, criado automaticamente no primeiro uso. Em **Add contato**, se o contato da Kinbox tiver campos personalizados com as chaves `segmento` e `origem`, esses valores são enviados como Segmento e Origem no NectarCRM.
-- **Atenção ao Salvar dados:** a ação **Salvar dados** envia nome, telefone, e-mail e o valor do campo `origem`, e **substitui o Segmento do contato no NectarCRM pelo texto fixo `"WhatsApp/Kinbox"`**.
-- **Sem busca de duplicados:** **Add contato** não procura contato existente no NectarCRM e sempre cria um novo. Se você usar **Desfazer integração** e clicar em **Add contato** novamente, será criado um segundo contato no NectarCRM.
-- **Membro sem token em contato já ligado:** ao abrir a conversa de um contato já vinculado, o quadro tenta consultar o NectarCRM sem token, exibe o erro retornado pelo NectarCRM e deixa os campos vazios.
-- **Limites de chamada:** as chamadas passam pelo serviço de repasse da Kinbox com limite de 120 requisições por minuto e tempo de espera padrão de 60 segundos (máximo de 120 segundos).
-- **Bot e automações:** o NectarCRM não tem ações no bot nem nas automações.
-
-## Webhook de leads do RD Station Marketing
-
-Detalhes complementares de [Receber leads do RD Station Marketing por webhook](/docs/integracoes/rdstation-marketing-webhook):
-
-- **Processamento em fila:** ao receber uma chamada do RD Station Marketing, a Kinbox responde sucesso imediatamente e coloca os leads numa fila de processamento em segundo plano. Por isso, o teste no RD pode responder sucesso mesmo quando o formato recebido não gera contato.
-- **Formato e campos lidos:** o processamento lê apenas a lista `leads` do corpo da requisição e extrai três campos do topo de cada lead: `name` (nome), `email` (e-mail) e `mobile_phone` (telefone; se vazio, usa `personal_phone`). Campos de formulário, tags, campos personalizados (`cf_`), empresa e origem da conversão não são gravados.
-- **Contato existente:** a Kinbox busca contato existente no workspace apenas pelo **telefone** (considerando variações com e sem DDI `55`). Se encontrar um contato, não atualiza nome nem e-mail. Não há busca por e-mail.
-- **Lead sem telefone:** sem telefone não há busca de duplicados, então cada conversão recebida cria um novo contato no workspace (gerando contatos duplicados com o mesmo e-mail).
-- **Efeito no workspace:** cria apenas o contato (normalizando o telefone); não cria conversa nem envia mensagem.
-- **Corpos fora do formato de leads:** requisições sem a lista `leads` (como o formato por evento com `contact`) são aceitas na chegada e descartadas sem criar contato; falhas de processamento não são reexecutadas.
+- **Alternativas para sistemas fora da lista:** API pública com token de API ([Criar um token de API](/docs/desenvolvedor/tokens-de-api)), plugins, que abrem uma página externa dentro do painel da conversa ([Criar um plugin para o painel da conversa](/docs/desenvolvedor/criando-plugin-integracao)), bloco **Integração** do bot com **Chamar endpoint** ([Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)) e **Cenários** com webhooks e requisições HTTP ([Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia)).

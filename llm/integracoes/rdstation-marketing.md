@@ -27,13 +27,15 @@ Complemento técnico de [Integrar com o RD Station Marketing](/docs/integracoes/
 
 - **Permissão e conta:** o painel **RD Station Marketing** (**Configurações** → **Integrações** → **Apps** → **RD Station Marketing**) exige a permissão **Integrações** ou proprietário. Cada workspace mantém uma conexão RD Station Marketing.
 - **Por que salvar antes de conectar:** na primeira configuração, o retorno da autorização só conclui se o registro da integração já existir no workspace. Clicar em **Conectar** antes de clicar em **Salvar** deixa a página de retorno carregando indefinidamente sem aviso.
-- **Após conectar:** a conexão é gravada já com **Habilitar integração** ligado e exibe `"RD Station Marketing Conectado."`.
+- **Após conectar:** a conexão é gravada já com **Habilitar integração** ligado, exibe `"RD Station Marketing Conectado."` e a tela volta para a lista de apps. Se a conexão falhar, aparece `"Erro ao se conectar ao Rd Station Marketing"` (ou o texto do erro devolvido pelo RD).
 - **Desconectar:** remove o acesso salvo na Kinbox imediatamente (sem clicar em **Salvar**), sem alterar o interruptor **Habilitar integração** e sem revogar a autorização dentro da conta do RD Station Marketing.
 - **Visibilidade do quadro:** aparece no painel **Detalhes** apenas com **Habilitar integração** ligado, e fica oculto para quem tem a restrição **Esconder informações de integração** ou está no modo de treino da Academia.
 
 ## Busca por e-mail, dados exibidos e conversões
 
 - **E-mail como chave:** o quadro busca o contato no RD exclusivamente pelo e-mail do contato na Kinbox. Alterar o e-mail do contato na Kinbox faz o quadro buscar o novo e-mail no RD. **Atualizar contato** envia nome, celular, bio e tags, e não altera o e-mail no RD.
+- **Mensagens de erro do quadro:** ao criar um contato, um erro de e-mail mostra o texto devolvido pelo RD; outros erros aparecem como `"Erro ao criar contato - "` seguido do detalhe do RD. **Atualizar contato** com erro mostra `"Erro ao atualizar contato"`.
+- **País:** no quadro, o campo **País** hoje repete o valor de **Estado**.
 - **Campos exibidos no quadro (somente leitura):** mostra apenas campos preenchidos no RD — **Contato**, **Cargo**, **Telefone pessoal**, **Celular**, **Bio**, **Website**, **Cidade**, **Estado**, **Twitter**, **Facebook**, **Linkedin**, **Tags** e campos personalizados do RD (os de prefixo `cf_`, exibidos sem o prefixo).
 - **Criar contato como conversão:** gravado apenas ao clicar em **Salvar** no painel. Quando ligado, registra uma conversão no RD após criar ou atualizar o contato com os seguintes identificadores:
   - **No quadro da conversa:** `chat_kinbox`.

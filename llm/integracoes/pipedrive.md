@@ -25,7 +25,9 @@ Complemento técnico de [Integrar com o Pipedrive](/docs/integracoes/pipedrive).
 ## Tokens por membro e conta
 
 - **Permissão e conta:** o painel **Pipedrive** (**Configurações** → **Integrações** → **Apps** → **Pipedrive**) exige a permissão **Integrações** ou proprietário. Cada workspace mantém apenas uma integração Pipedrive.
-- **Token por membro:** cada membro precisa do próprio token de API do Pipedrive preenchido na linha dele para usar o quadro **Pipedrive** na conversa. Sem token na linha do membro, **Add contato** fica desativado.
+- **Token por membro:** na configuração atual, cada membro precisa do próprio token de API do Pipedrive preenchido na linha dele para usar o quadro **Pipedrive** na conversa. Sem token na linha do membro, **Add contato** fica desativado.
+- **Configuração antiga:** workspaces que configuraram o Pipedrive antes do painel por membro podem ter um token único da integração. Nesse caso, o quadro usa esse token para quem não tem token próprio.
+- **Habilitar integração:** desligar o interruptor esconde o quadro e também interrompe as ações do Pipedrive no bot.
 - **Remover o token de um membro:** não é possível apagar um token já salvo pela tela; para retirar o token de um membro, fale com o suporte da Kinbox.
 - **Visibilidade do quadro:** aparece no painel **Detalhes** apenas com **Habilitar integração** ligado, e fica oculto para quem tem a restrição **Esconder informações de integração** ou está no modo de treino da Academia.
 
@@ -41,7 +43,7 @@ Complemento técnico de [Integrar com o Pipedrive](/docs/integracoes/pipedrive).
 Disponíveis no bloco **Integração**, grupo **Outros** (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot); puladas na simulação):
 
 - **Ações listadas:** `Sincroniza contato, lead, deal, activity e notas no Pipedrive`, `Cria ou atualiza a deal no Pipedrive` e `Cria ou atualiza atividade de agenda no Pipedrive`. A gaveta do bloco não exibe campos próprios de configuração.
-- **Qual token o bot usa:** tenta o token do membro atribuído à conversa; se ele não tiver token preenchido no painel, usa o primeiro token preenchido da lista. Sem nenhum token cadastrado, registra erro como mensagem de sistema na conversa.
+- **Qual token o bot usa (diferente do quadro):** o bot procura primeiro o token de um membro ligado à conversa (o membro responsável, o membro definido na ação ou o responsável do contato no Pipedrive) e as configurações padrão da integração; só depois usa o primeiro token preenchido do painel. Sem nenhum token, registra erro como mensagem de sistema na conversa.
 - **Vínculo separado do quadro:** o bot guarda uma ligação própria com a pessoa do Pipedrive e, quando não existe, busca a pessoa pelo telefone. Ele não lê o campo `pipedriveid` usado pelo quadro; por isso, um contato vinculado pelo quadro pode não ser encontrado pelo bot se o telefone não coincidir.
 
 ## Casos de borda

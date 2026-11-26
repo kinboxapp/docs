@@ -30,12 +30,12 @@ A lista em **Configurações** → **Integrações** → **Apps** (disponível p
 
 Para conectar um CRM ou sistema que não está na lista, use uma destas opções:
 
-- **API pública:** o seu sistema lê e grava dados na Kinbox usando um token de API.
-- **Plugins:** exibe uma página do seu sistema dentro do painel da conversa.
+- **API pública:** o seu sistema lê e grava dados na Kinbox usando um token de API (veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api)).
+- **Plugins:** exibe uma página do seu sistema dentro do painel da conversa (veja [Criar um plugin para o painel da conversa](/docs/desenvolvedor/criando-plugin-integracao)).
 - **Bot com Chamar endpoint:** no bloco **Integração** do bot, chama a API do seu CRM durante o atendimento (veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot)).
 - **Cenários:** recebe webhooks e envia requisições HTTP para integrar sistemas fora do fluxo de um bot (veja [Bot, automações, cenários e agentes de IA: qual usar](/docs/conceitos/automacao-e-ia)).
 
-Para integração com ferramentas de automação como Zapier, Make e n8n, veja a pergunta sobre Zapier, Make e n8n (o bot também possui uma ação pronta para chamar o n8n no grupo **Outros**).
+**Zapier, Make, n8n e Pluga:** a Kinbox também não tem app pronto para essas ferramentas. Elas podem chamar a API pública da Kinbox com um token de API, e a Kinbox pode enviar dados a elas por **Cenários**. No bot, o grupo **Outros** do bloco **Integração** tem só uma ação pronta para chamar o n8n. Veja também [Para desenvolvedores: API, plugins, MCP e links](/docs/desenvolvedor/visao-geral).
 
 ## Variações
 

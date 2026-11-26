@@ -44,18 +44,13 @@ A integração com o RD Station Marketing **envia** dados da Kinbox para o RD: n
   </Step>
 
   <Step title="Conecte e autorize no RD">
-    Reabra **RD Station Marketing** se necessário, clique em **Conectar** e autorize o acesso na página do RD Station Marketing. Ao retornar para a Kinbox, aparece "RD Station Marketing Conectado." e o interruptor **Habilitar integração** já fica ligado.
+    Clique em **Conectar** e autorize o acesso na página do RD Station Marketing. Ao retornar para a Kinbox, aparece "RD Station Marketing Conectado.", a tela volta para a lista de apps e o interruptor **Habilitar integração** já fica ligado.
   </Step>
 
   <Step title="Ative conversões (opcional) e salve">
-    Se quiser registrar também uma conversão no RD sempre que um contato for criado ou atualizado pelo quadro ou pelo bot, ligue **Criar contato como conversão**, confirme **Habilitar integração** ligado e clique em **Salvar**.
+    Abra **RD Station Marketing** novamente na lista de apps. Se quiser registrar também uma conversão no RD sempre que um contato for criado ou atualizado pelo quadro ou pelo bot, ligue **Criar contato como conversão**, confirme **Habilitar integração** ligado e clique em **Salvar**.
   </Step>
 </Steps>
-
-## Desconectar ou desligar
-
-- **Desconectar:** abra **RD Station Marketing** em **Apps** e clique no botão vermelho **Desconectar**. O acesso é removido na hora na Kinbox (sem precisar clicar em **Salvar**), sem alterar **Habilitar integração** e sem revogar a autorização dentro do RD.
-- **Desligar:** para apenas ocultar o quadro nas conversas, desligue **Habilitar integração** e clique em **Salvar**.
 
 ## Usar na conversa
 
@@ -64,10 +59,15 @@ Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **R
 O quadro procura o contato no RD **pelo e-mail** do contato na Kinbox. Se você alterar o e-mail do contato na Kinbox, o quadro passa a buscar o novo e-mail no RD.
 
 - **Contato não encontrado (ou sem e-mail):** o quadro mostra **Add contato** (desativado se a conta não estiver conectada). Se o contato não tiver e-mail, clicar exibe "Necessário setar o e-mail para criar contato no RD Marketing.". Com e-mail preenchido, clicar cria o contato no RD com nome, e-mail, celular, observações (bio) e as [tags](/docs/configuracoes-no-workspace/criar-e-gerenciar-tags) da conversa em minúsculas, exibe "Contato salvo" e recarrega o quadro.
-- **Contato encontrado:** o quadro exibe em modo somente leitura os dados preenchidos no RD — **Contato**, **Cargo**, **Telefone pessoal**, **Celular**, **Bio**, **Website**, **Cidade**, **Estado**, **Twitter**, **Facebook**, **Linkedin**, **Tags** e campos personalizados do RD.
+- **Contato encontrado:** o quadro exibe em modo somente leitura os dados preenchidos no RD — **Contato**, **Cargo**, **Telefone pessoal**, **Celular**, **Bio**, **Website**, **Cidade**, **Estado**, **País** (que hoje repete o valor de **Estado**), **Twitter**, **Facebook**, **Linkedin**, **Tags** e campos personalizados do RD.
 - **Menu Ações (três pontos):**
   - **Ver contato:** abre a busca de leads do RD Station Marketing pelo e-mail do contato em uma nova aba.
   - **Atualizar contato:** envia nome, celular, observações e tags atuais da conversa para o contato no RD (não altera o e-mail) e exibe "Contato salvo". Se **Criar contato como conversão** estiver ligado, registra também a conversão.
+
+## Desconectar ou desligar
+
+- **Desconectar:** abra **RD Station Marketing** em **Apps** e clique no botão vermelho **Desconectar**. O acesso é removido na hora na Kinbox (sem precisar clicar em **Salvar**), sem alterar **Habilitar integração** e sem revogar a autorização dentro do RD.
+- **Desligar:** para apenas ocultar o quadro nas conversas, desligue **Habilitar integração** e clique em **Salvar**.
 
 ## No bot
 

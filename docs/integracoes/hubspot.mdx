@@ -22,7 +22,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-Com a integração do HubSpot ligada, cada conversa exibe o quadro **Hubspot** no painel **Detalhes** para encontrar o contato no HubSpot (por padrão, pelo telefone), criar o contato e criar ou editar negócios com produtos direto do atendimento. O quadro consulta o HubSpot na hora em que você abre a conversa, sem sincronização em segundo plano.
+Com a integração do HubSpot ligada, cada conversa exibe o quadro **Hubspot** no painel **Detalhes**. Nele você encontra o contato no HubSpot (por padrão, pelo telefone), cria o contato e cria ou edita negócios com produtos, sem sair do atendimento. O quadro consulta o HubSpot na hora em que você abre a conversa.
 
 Essa conexão é diferente do app **HubSpot** usado pelo agente de IA, que tem login próprio (veja [Dar ferramentas ao agente: Agenda, Google Calendar e HubSpot](/docs/agente-de-ia/ferramentas)).
 
@@ -32,10 +32,10 @@ Essa conexão é diferente do app **HubSpot** usado pelo agente de IA, que tem l
 
 ## Antes de começar
 
-- Crie um app privado no HubSpot com acesso de leitura e escrita a contatos e negócios, e leitura de proprietários, funis e produtos, e tenha em mãos o **token de acesso** dele.
-- Separe o **ID do portal** da sua conta no HubSpot. Ele é exigido no painel e usado para montar os links que abrem o contato e o negócio direto no HubSpot.
+- Crie um app privado no HubSpot com acesso de leitura e escrita a contatos e negócios, e leitura de usuários (responsáveis), funis e produtos, e tenha em mãos o **token de acesso** dele.
+- Separe o **ID do portal** da sua conta no HubSpot. Ele é exigido no painel e usado nos links que abrem o contato e o negócio no HubSpot.
 
-Tudo o que a integração faz no HubSpot funciona com o **Token**. O botão **Instalar App no Hubspot** é opcional e não substitui o token.
+Tudo o que a integração faz no HubSpot funciona com o **Token**.
 
 ## Passo a passo
 
@@ -52,53 +52,69 @@ Tudo o que a integração faz no HubSpot funciona com o **Token**. O botão **In
     </Frame>
   </Step>
 
-  <Step title="Configure campos e regras (opcional)">
-    Com um **Token** válido digitado, clique em **Configurações** para abrir **Ajustes do Hubspot**. A janela carrega propriedades e funis direto do seu HubSpot:
-
-    - **Campos de Formulário do Contato:** propriedades de contato do HubSpot que aparecem ao criar um contato pelo quadro (nome e sobrenome já vêm no formulário).
-    - **Campos de Formulário do Negócio:** propriedades de negócio que aparecem ao criar ou editar um negócio (nome, valor, funil, etapa e responsável já existem no formulário).
-    - **Identificador do contato:** define como o quadro encontra o contato no HubSpot (padrão **Celular**):
-      - **Celular:** busca pelo telefone do contato.
-      - **Id do contato do Hubspot:** busca pelo ID guardado no campo personalizado escolhido em **Campo de sincronização**.
-      - **Campo personalizado:** busca no HubSpot o contato cuja propriedade ligada em **Mapa de campos** tem o mesmo valor do **Campo de sincronização**.
-    - **Obrigatoriedade:** define campos do negócio obrigatórios para escolher uma etapa no quadro. Clique em **Add**, selecione **Selecione uma etapa** e **Selecione um campo de negócio** (entre os escolhidos em **Campos de Formulário do Negócio**).
-    - **Mapa de campos:** clique em **Campo** para ligar campos personalizados da Kinbox a propriedades de contato do HubSpot em **Selecione um campo do Hubspot**. Os valores já vêm preenchidos ao criar um contato pelo quadro (quando o campo também está em **Campos de Formulário do Contato**).
-    - **Tokens reservas:** se o seu workspace faz muitas chamadas ao HubSpot, você pode cadastrar tokens adicionais em **Tokens reservas** (clique em **Token** para adicionar uma linha).
-
-    Clique em **Salvar** dentro de **Ajustes do Hubspot** para devolver os ajustes ao painel.
+  <Step title="Ajuste campos e regras (opcional)">
+    Com um **Token** válido digitado, clique em **Configurações** para abrir **Ajustes do Hubspot**, faça os ajustes (veja [Ajustes opcionais](#ajustes-opcionais)) e clique em **Salvar** dentro de **Ajustes do Hubspot**.
   </Step>
 
   <Step title="Habilite e salve no painel do app">
-    Ligue **Habilitar integração** e clique em **Salvar** no painel **Hubspot** (os ajustes de **Configurações** só são gravados quando você clica em **Salvar** no painel do app).
+    Ligue **Habilitar integração** e clique em **Salvar** no painel **Hubspot**. Os ajustes de **Configurações** só são gravados quando você clica em **Salvar** no painel do app.
   </Step>
 </Steps>
 
-## Instalar o app da Kinbox no HubSpot (opcional)
+## Ajustes opcionais
 
-O botão **Instalar App no Hubspot** abre a tela de autorização do HubSpot em uma nova aba. Depois de instalar, o app da Kinbox aparece nos fluxos de trabalho do HubSpot.
+Em **Configurações** → **Ajustes do Hubspot** (os campos e funis vêm direto do seu HubSpot):
 
-Esse botão não substitui o **Token**: para o quadro da conversa, o bot, as automações e os fluxos funcionarem, o **Token** precisa estar preenchido e salvo no painel **Hubspot**.
+- **Campos de Formulário do Contato:** propriedades de contato que aparecem ao criar um contato pelo quadro.
+- **Campos de Formulário do Negócio:** propriedades de negócio que aparecem ao criar ou editar um negócio.
+- **Identificador do contato:** como o quadro encontra o contato no HubSpot: **Celular** (padrão), **Id do contato do Hubspot** ou **Campo personalizado**.
+- **Obrigatoriedade:** campos do negócio que ficam obrigatórios ao escolher uma etapa no quadro.
+- **Mapa de campos:** liga campos personalizados da Kinbox a propriedades de contato do HubSpot.
+- **Tokens reservas:** tokens adicionais, se o seu workspace faz muitas chamadas ao HubSpot.
+
+Nenhum ajuste é obrigatório: sem eles, o quadro procura o contato pelo telefone e mostra os formulários com nome, sobrenome e os campos básicos do negócio.
 
 ## Usar na conversa
 
 Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **Hubspot** no painel **Detalhes** (veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O quadro não aparece para membros com a restrição **Esconder informações de integração** nem no modo de treino da Academia.
 
-No modo padrão (**Celular**), o quadro abre o contato do HubSpot já vinculado ao contato da Kinbox; se ainda não houver vínculo (ou se o contato não existir mais no HubSpot), procura pelo telefone e guarda o vínculo encontrado.
+No modo padrão (**Celular**), o quadro abre o contato do HubSpot já vinculado ao contato da Kinbox. Se ainda não houver vínculo, procura pelo telefone e guarda o vínculo encontrado.
 
-- **Contato não encontrado:** clique em **Criar Contato** (botão desativado se o contato não tiver telefone, com a dica "Contato não possui número de telefone"). Na janela **Adicionar Contato**, confira **Nome**, **Sobrenome** e os campos configurados (telefone e e-mail do contato vão junto) e clique em **Cadastrar Contato**. O quadro só cria contatos novos; não edita contatos já existentes.
-- **Contato encontrado:** o cabeçalho mostra o nome, o telefone (ou e-mail), o botão **Abrir no HubSpot** (quando **ID do portal** está preenchido) e, no modo **Celular**, o botão **Trocar contato vinculado**.
-  - **Trocar contato vinculado:** abre uma busca por nome, e-mail ou telefone (até 20 resultados) para escolher outro contato do HubSpot e clicar em **Vincular**. A escolha fica gravada no contato da Kinbox.
-- **Negócios:** a lista mostra nome e etapa de cada negócio do contato. Passe o mouse sobre um item para ver **Status** (**Ganho**, **Perdido** ou **Aberto**), **Responsável**, **Valor**, **Funil**, **Etapa** e **Criado há**.
-- **Criar ou editar negócio:** clique em **Negócio** para criar, ou clique em um negócio da lista para editar. Na gaveta **Adicionar Negócio** / **Editar Negócio**, preencha **Nome**, **Funil de vendas**, **Etapa do funil**, **Responsável** (ao criar, vem sugerido o proprietário com o mesmo e-mail do membro logado), **Itens de linha** (clique em **Produto** para adicionar **Produto**, **Preço** e **Quantidade**), **Valor** e os campos de negócio configurados. Clique em **Cadastrar Negócio** ou **Salvar** (o quadro recarrega cerca de 5 segundos depois). Use **Ver no Hubspot** para abrir o negócio no HubSpot.
+- **Contato não encontrado:** clique em **Criar Contato**, confira **Nome**, **Sobrenome** e os campos configurados na janela **Adicionar Contato** e clique em **Cadastrar Contato**. O botão fica desativado se o contato não tiver telefone. O quadro só cria contatos novos; não edita contatos já existentes.
+- **Contato encontrado:** o cabeçalho mostra nome, telefone (ou e-mail), o botão **Abrir no HubSpot** (quando o **ID do portal** está preenchido) e, no modo **Celular**, o botão **Trocar contato vinculado**, que abre uma busca para vincular outro contato do HubSpot.
+- **Negócios:** a lista mostra o nome e a etapa de cada negócio do contato. Passe o mouse sobre um negócio para ver mais detalhes.
+
+### Criar ou editar um negócio
+
+<Steps>
+  <Step title="Abra o negócio">
+    Clique em **Negócio** para criar, ou clique em um negócio da lista para editar.
+  </Step>
+  <Step title="Preencha os dados">
+    Na gaveta **Adicionar Negócio** / **Editar Negócio**, preencha **Nome**, **Funil de vendas**, **Etapa do funil** e **Responsável** (ao criar, vem sugerido o usuário do HubSpot com o mesmo e-mail do membro logado), além do **Valor** e dos campos configurados.
+  </Step>
+  <Step title="Adicione produtos (opcional)">
+    Em **Itens de linha**, clique em **Produto** e informe **Produto**, **Preço** e **Quantidade**. Nos itens já salvos, **Preço** e **Quantidade** ficam desativados: para trocar um item, exclua-o (a exclusão vale na hora e não tem volta) e adicione outro.
+  </Step>
+  <Step title="Salve">
+    Clique em **Cadastrar Negócio** ou **Salvar**. O quadro recarrega alguns segundos depois. Ao editar um negócio, use **Ver no Hubspot** para abri-lo no HubSpot.
+  </Step>
+</Steps>
 
 ## No bot e nas automações
 
-- **No bot:** o bloco **Integração** (grupo **Outros**) oferece quatro ações prontas que usam o **Token** salvo no painel **Hubspot**: **Consulta contato no HubSpot**, **Consulta negócio no HubSpot**, **Atualiza negócio no HubSpot** e **Cria ou atualiza Objeto no HubSpot**. Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot).
-- **Nas automações:** a ação **Integração** traz **Atualizar responsável do negócio**, **Salvar mensagens no negócio do Hubspot** e **Salvar mensagens no contato do Hubspot**.
+- **No bot:** o bloco **Integração** (grupo **Outros**) tem ações prontas que usam o **Token** salvo no painel **Hubspot**, entre elas **Consulta contato no HubSpot**, **Consulta negócio no HubSpot**, **Atualiza negócio no HubSpot** e **Cria ou atualiza Objeto no HubSpot**. Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot).
+- **Nas automações:** a ação **Integração** traz opções do HubSpot, como **Atualizar responsável do negócio**, **Salvar mensagens no negócio do Hubspot** e **Salvar mensagens no contato do Hubspot**.
+
+## Instalar o app da Kinbox no HubSpot (opcional)
+
+O botão **Instalar App no Hubspot** abre a tela de autorização do HubSpot em uma nova aba. Depois de instalar, o app da Kinbox aparece nos fluxos de trabalho do HubSpot.
+
+Esse botão não substitui o **Token**: para o quadro da conversa, o bot, as automações e os fluxos de trabalho funcionarem, o **Token** precisa estar preenchido e salvo no painel **Hubspot**.
 
 ## Desligar a integração
 
-Para esconder o quadro nas conversas, abra **Hubspot** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. As ações do bot e das automações continuam usando o token mesmo com o interruptor desligado; para pará-las também, tire essas ações dos bots e das automações.
+Para esconder o quadro nas conversas, abra **Hubspot** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. As ações do bot, das automações e dos fluxos de trabalho do HubSpot continuam usando o token mesmo com o interruptor desligado. Para pará-las também, tire essas ações dos bots, das automações e dos fluxos de trabalho do HubSpot.
 
 ## Problemas comuns
 
@@ -107,4 +123,4 @@ Para esconder o quadro nas conversas, abra **Hubspot** em **Apps**, desligue **H
 - **O botão Criar Contato está desativado.** O contato da conversa não tem telefone cadastrado.
 - **O quadro mostra o contato errado.** Existem contatos duplicados no HubSpot com o mesmo telefone. No modo **Celular**, clique em **Trocar contato vinculado** e escolha o contato certo.
 - **Instalei pelo botão Instalar App no Hubspot e nada aparece na conversa.** O botão não configura o token. Preencha **ID do portal** e **Token**, ligue **Habilitar integração** e clique em **Salvar**.
-- **O formulário de negócio exige um campo.** A etapa selecionada tem regra ativa em **Configurações** → **Obrigatoriedade**.
+- **O formulário de negócio exige um campo.** A etapa selecionada tem regra em **Configurações** → **Obrigatoriedade**.

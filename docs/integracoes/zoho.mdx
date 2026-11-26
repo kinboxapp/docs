@@ -42,7 +42,7 @@ Tenha em mãos, a partir de um cliente configurado na sua conta do Zoho com aces
     Quando a troca dá certo, o campo **Refresh Token** aparece preenchido e o botão **Configurações** é liberado. Se **Refresh Token** não aparecer, gere um código novo no Zoho, cole em **Código gerado** e clique em **Obter token** novamente.
 
     <Frame caption="Painel de configuração do Zoho">
-      <img src="/images/ajuda/integracoes/zoho.webp" alt="Painel Zoho com os campos ID da Organização, Client ID, Client Secret, Código gerado, Refresh Token ao lado do botão Obter token, o botão Configurações, o interruptor Habilitar integração e o botão Salvar" />
+      <img src="/images/ajuda/integracoes/zoho.webp" alt="Painel Zoho com valores fictícios nos campos ID da Organização, Client ID, Client Secret e Código gerado, o campo Refresh Token vazio ao lado do botão Obter token, o botão Configurações, o interruptor Habilitar integração e o botão Salvar" />
     </Frame>
   </Step>
 
@@ -53,7 +53,7 @@ Tenha em mãos, a partir de um cliente configurado na sua conta do Zoho com aces
     - **Layout dos Negócios:** layout do Zoho usado ao criar ou editar um negócio.
     - **Campos de Negócios:** seleção múltipla dos campos desse layout que vão aparecer no formulário de negócio.
 
-    Clique em **Salvar** dentro de **Ajustes do Zoho** para devolver a configuração ao painel.
+    Clique em **Salvar** dentro de **Ajustes do Zoho** para devolver a configuração ao painel. O cartão **Mapa de campos** dessa janela fica salvo, mas não altera o que o quadro envia ao Zoho.
   </Step>
 
   <Step title="Habilite e salve no painel do app">
@@ -70,7 +70,7 @@ O quadro procura sempre pelo **telefone** do contato (apenas dígitos): primeiro
 - **Contato sem telefone:** o botão **Criar Lead** fica desativado com a dica "Contato não possui número de telefone".
 - **Nada encontrado:** clique em **Criar Lead** para abrir **Adicionar Lead** com os campos do **Layout dos Leads** (nome, sobrenome, e-mail e telefone vêm do contato quando o layout tem esses campos). Clique em **Cadastrar Lead**; ao concluir, aparece "Lead criado no Zoho".
 - **Lead encontrado:** o quadro mostra **Tipo** como Lead e o botão **Converter para contato**. Clicar converte o lead em contato no Zoho, exibe uma confirmação e passa a mostrar o contato no quadro.
-- **Contato encontrado:** o quadro mostra **Tipo** como Contato, a seção **Negócios:** com os negócios dele e o botão **Negócio** para criar um novo. Passar o mouse em um negócio mostra o cartão **Negócio Zoho** com **Responsável**, **Valor**, **Funil**, **Etapa**, **Fechamento**, **Criado há** e **Criado por**.
+- **Contato encontrado:** o quadro mostra **Tipo** como Contato, a seção **Negócios:** com os negócios dele e o botão **Negócio** para criar um novo. Passe o mouse sobre um negócio para ver mais detalhes.
 - **Criar ou editar negócio:** clique em **Negócio** ou em um negócio da lista para abrir **Adicionar Negócio** / **Editar Negócio**, com **Proprietário** e os campos escolhidos em **Campos de Negócios** (campos de data e de pesquisa não aparecem). Clique em **Cadastrar Negócio** ou **Salvar**; ao editar, use **Ver no Zoho** para abrir o negócio no Zoho CRM.
 - **Erros no quadro:** se a busca falhar, aparece "Erro ao buscar informações de contato do Zoho." com o botão **Recarregar**. Erros devolvidos pelo Zoho aparecem com o prefixo "Zoho:".
 
@@ -84,5 +84,5 @@ Para desligar, abra **Zoho CRM** em **Apps**, desligue **Habilitar integração*
 - **Refresh Token não aparece depois de clicar em Obter token.** O código gerado expirou ou já foi usado, ou **Client ID** / **Client Secret** estão incorretos. Gere um novo código no Zoho e tente novamente.
 - **O quadro mostra "Erro ao buscar informações de contato do Zoho."** O token expirou e não pôde ser renovado. Clique em **Recarregar**; se o erro continuar, gere um novo código no Zoho e clique em **Obter token** e **Salvar**.
 - **Adicionar Lead abre sem campos.** Falta escolher o **Layout dos Leads** em **Configurações**, clicar em **Salvar** nos ajustes e clicar em **Salvar** no painel **Zoho**.
-- **Aviso "Zoho: …" ao cadastrar.** Algum campo obrigatório no Zoho não está no formulário (como um campo de data). Inclua o campo em **Campos de Negócios** ou faça o cadastro direto no Zoho CRM.
+- **Aviso "Zoho: …" ao cadastrar.** Algum campo obrigatório no Zoho não aparece no formulário do quadro (por exemplo, um campo de data, que o formulário não exibe). Se o campo não estiver em **Campos de Negócios**, inclua-o; se for de data ou de pesquisa, faça o cadastro direto no Zoho CRM.
 - **O quadro não encontra um lead que já existe no Zoho.** A busca usa apenas o telefone: confira se o número salvo no Zoho corresponde ao telefone do contato na Kinbox.

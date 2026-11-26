@@ -1,6 +1,6 @@
 ---
 title: Integrar com o NectarCRM
-description: Como ligar o NectarCRM à Kinbox com o token de cada membro e criar contatos e salvar a conversa no NectarCRM direto da conversa.
+description: Como ligar o NectarCRM à Kinbox com o token de cada membro, criar contatos no NectarCRM e guardar o histórico do atendimento lá.
 keywords: [nectarcrm, nectar crm, nectar, integração nectarcrm, token nectarcrm, criar contato no nectar, salvar conversa no nectar]
 publico: humano
 tipo: guia
@@ -51,7 +51,12 @@ Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **N
 
 - **Contato ainda não ligado:** o quadro mostra o botão **Add contato** (desativado se o seu membro não tiver token salvo no painel). Clicar cria um contato no NectarCRM com nome, telefone e e-mail (quando preenchidos) — e também envia Segmento e Origem se o contato da Kinbox tiver campos personalizados com as chaves `segmento` e `origem`. Ao concluir, aparece "Contato criado no NectarCRM.".
 - **Contato já ligado:** o quadro mostra **Responsável**, **Segmento** e **Origem** (quando têm valor), além das contagens de **Oportunidades** e **Tarefas**, e o menu **Ações** (três pontos):
-  - **Salvar dados:** envia nome, telefone, e-mail e origem (do campo personalizado `origem`) do contato para o NectarCRM e também troca o Segmento do contato no NectarCRM; exibe "Contato atualizado".
+  - **Salvar dados:** envia nome, telefone, e-mail e origem (do campo personalizado `origem`) do contato para o NectarCRM e exibe "Contato atualizado".
+
+    <Warning>
+      **Salvar dados** substitui o Segmento do contato no NectarCRM pelo texto fixo "WhatsApp/Kinbox".
+    </Warning>
+
   - **Salvar conversa nas notas:** grava as últimas mensagens da conversa (até 100) como uma publicação com título e assunto "Conversa" no contato no NectarCRM, com nome, hora e data; ao terminar, aparece uma confirmação.
   - **Ver oportunidades:** abre a aba de oportunidades do contato no NectarCRM em uma nova aba.
   - **Ver contato:** abre a ficha do contato no NectarCRM em uma nova aba.
@@ -69,5 +74,5 @@ Para desligar, abra **NectarCRM** em **Apps**, desligue **Habilitar integração
 
 - **Botão Add contato desativado.** Falta preencher o token do seu membro no painel **NectarCRM**. Peça a quem tem a permissão **Integrações** para cadastrar o seu token.
 - **Erro do NectarCRM ao abrir a conversa ou ao criar contato.** O token na linha do seu membro está vazio ou inválido. Confira o token no NectarCRM e salve novamente no painel.
-- **O Segmento do contato mudou no NectarCRM.** A ação **Salvar dados** substitui o Segmento do contato no NectarCRM ao atualizar os dados.
+- **O Segmento do contato mudou para "WhatsApp/Kinbox" no NectarCRM.** É o efeito de **Salvar dados**, que sempre grava esse texto no Segmento.
 - **O quadro NectarCRM não aparece na conversa.** Confira se **Habilitar integração** está ligado, se o seu papel não tem a restrição **Esconder informações de integração** e se você não está no modo de treino da Academia.

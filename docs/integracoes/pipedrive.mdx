@@ -38,7 +38,7 @@ A integração liga cada membro da Kinbox à conta dele no Pipedrive. Na convers
     O painel mostra as colunas **Membro** e **Token**, com uma linha para cada membro do workspace (o proprietário aparece primeiro). Cole o token de API do Pipedrive na linha de cada membro que vai usar a integração.
 
     <Frame caption="Painel Pipedrive com um campo de token por membro">
-      <img src="/images/ajuda/integracoes/pipedrive.webp" alt="Painel Pipedrive com as colunas Membro e Token listando quatro membros com campos de token vazios, o interruptor Habilitar integração e o botão Salvar" />
+      <img src="/images/ajuda/integracoes/pipedrive.webp" alt="Painel Pipedrive com as colunas Membro e Token, uma linha por membro com o campo de token vazio, o interruptor Habilitar integração e o botão Salvar" />
     </Frame>
   </Step>
 
@@ -51,7 +51,10 @@ A integração liga cada membro da Kinbox à conta dele no Pipedrive. Na convers
 
 Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **Pipedrive** no painel **Detalhes** (veja [Caixa de entrada: visão geral](/docs/conversas/caixa-de-entrada-do-kinbox)). O quadro não aparece para membros com a restrição **Esconder informações de integração** nem no modo de treino da Academia.
 
-- **Contato ainda não ligado:** o quadro mostra o botão **Add contato** (desativado se o seu membro não tiver token salvo no painel). Clicar cria a pessoa no Pipedrive com nome, e-mail, telefone e os campos personalizados do contato que tenham o mesmo nome de campos de pessoa no Pipedrive (tipos texto, número, e-mail ou telefone), liga o contato a ela e exibe "Contato criado no pipedrive.".
+- **Contato ainda não ligado:** clique em **Add contato**. O botão fica desativado se o seu membro não tiver token salvo no painel.
+  - A Kinbox cria a pessoa no Pipedrive com nome, e-mail e telefone do contato e liga o contato a ela.
+  - Também vão os campos personalizados preenchidos que tenham o mesmo nome de um campo de pessoa no Pipedrive (de texto, número, e-mail ou telefone).
+  - Ao concluir, aparece "Contato criado no pipedrive.".
 - **Contato já ligado:** o quadro mostra **Oportunidades abertas** e **Atividades abertas** e o botão de menu **Ações** (três pontos) com cinco opções:
   - **Criar oportunidade:** abre a janela **Adicionar negócio** com **Título** (obrigatório), **Valor**, **Funil** (obrigatório) e **Etapa do funil** (obrigatório). Ao salvar, cria a oportunidade ligada à pessoa e atualiza a contagem.
   - **Salvar dados:** atualiza nome, e-mail, telefone e os campos personalizados compatíveis do contato no Pipedrive (exibe "Salvando dados no Pipedrive..." enquanto envia).
@@ -61,11 +64,11 @@ Com **Habilitar integração** ligado, abra uma conversa e localize o quadro **P
 
 ## No bot
 
-No bloco **Integração** do bot (grupo **Outros**), há três ações prontas do Pipedrive: **Sincroniza contato, lead, deal, activity e notas no Pipedrive**, **Cria ou atualiza a deal no Pipedrive** e **Cria ou atualiza atividade de agenda no Pipedrive**. Elas usam o token do membro da conversa ou, se ele não tiver, o primeiro token da lista do painel. Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot).
+No bloco **Integração** do bot (grupo **Outros**), há três ações prontas do Pipedrive: **Sincroniza contato, lead, deal, activity e notas no Pipedrive**, **Cria ou atualiza a deal no Pipedrive** e **Cria ou atualiza atividade de agenda no Pipedrive**. Elas usam o token do membro responsável pela conversa ou, se ele não tiver token, outro token salvo no painel. Veja [Chamar um sistema externo no bot](/docs/bot/integracoes-do-bot).
 
 ## Desligar a integração
 
-Para desligar, abra **Pipedrive** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. Os tokens salvos continuam guardados no painel.
+Para desligar, abra **Pipedrive** em **Apps**, desligue **Habilitar integração** e clique em **Salvar**. Isso esconde o quadro nas conversas e também interrompe as ações do Pipedrive no bot. Os tokens salvos continuam guardados no painel.
 
 ## Problemas comuns
 
