@@ -708,7 +708,7 @@ async function garantirAutomacoes(api: Api) {
   for (const a of exemplos) {
     const atual = existentes.find((x) => x.name === a.name)
     if (!atual) await api.v0('POST', '/automations', { ...a, active: false })
-    else if (JSON.stringify(atual.conditions ?? null) !== JSON.stringify(a.conditions ?? null)) {
+    else if (JSON.stringify(atual.conditions ?? null) !== JSON.stringify(a.conditions ?? null) || !!atual.conditions_active !== a.conditions_active) {
       await api.v0('PATCH', `/automations/${atual._id || atual.id}`, { conditions_active: a.conditions_active, conditions: a.conditions ?? null, active: false })
     }
   }

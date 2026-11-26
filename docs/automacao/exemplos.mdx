@@ -1,5 +1,5 @@
 ---
-title: "Exemplos de automação: follow-up, encerrar por inatividade e avaliação"
+title: "Exemplos de automação"
 description: Automações prontas para copiar na Kinbox — lembrete para quem não respondeu o orçamento, encerrar conversas paradas, pedir avaliação ao resolver, aviso fora do horário e mover conversas por tag.
 keywords: [exemplo de automação, follow-up automático, lembrete automático, encerrar conversa por inatividade, fechar conversa parada, resolver automaticamente, pedir avaliação, pesquisa de satisfação automática, mensagem fora do horário, mover por tag]
 publico: humano
@@ -45,7 +45,7 @@ Use estes modelos prontos como base para montar suas primeiras automações na K
 - Nos gatilhos de tempo, "Pode haver atraso de até 3 minutos.".
 - **Tempo sem nova mensagem** dispara uma vez por sessão, e a mensagem enviada pela automação não recomeça a contagem.
 - Se a conversa foi aberta pela API ou por uma integração, marque **Habilitar para sessões geradas por API ou Integração** (a caixa só aparece em **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo sem nova mensagem**).
-- **Enviar mensagem** envia apenas texto e o campo **Canal** não lista o WhatsApp oficial. No WhatsApp oficial fora da janela de 24 horas só sai template: nesses casos, use **Agendar mensagem template** em uma conversa do WhatsApp oficial em que o template está aprovado (veja [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)).
+- **Enviar mensagem** envia apenas texto e o campo **Canal** não lista os canais do WhatsApp oficial (API). No WhatsApp oficial fora da janela de 24 horas só sai template: nesses casos, use **Agendar mensagem template** em uma conversa do WhatsApp oficial em que o template está aprovado (veja [Enviar um template aprovado](/docs/canais/whatsapp/whatsapp-templates/enviar-template)).
 
 <Tip>
   Para o lembrete sair dentro do horário de atendimento, troque **Enviar mensagem** por **Agendar mensagem** com **Para quando?** em **Próximo horário comercial**: a ação agenda a mensagem para o horário comercial selecionado depois que o gatilho dispara (no fuso horário do workspace).
@@ -66,7 +66,7 @@ Use estes modelos prontos como base para montar suas primeiras automações na K
   <img src="/images/ajuda/automacao/automacao-editar.webp" alt="Painel Editar automação de Encerrar conversas paradas com gatilho Tempo sem nova mensagem, Minutos sem resposta 1440, Sem condições e ações Enviar mensagem e Resolver conversa" />
 </Frame>
 
-**O que acontece:** depois de 24 horas sem mensagem do contato nem de um membro (com possível atraso de até 3 minutos), a Kinbox envia a mensagem de aviso na própria conversa e resolve a sessão em seguida, na ordem cadastrada. Se o envio do aviso falhar, a conversa é resolvida mesmo assim. Se o contato escrever depois, começa uma sessão nova — ou a mesma sessão é reaberta se ainda estiver dentro do tempo de tolerância (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)).
+**O que acontece:** depois de 24 horas sem mensagem do contato nem de um membro (com possível atraso de até 3 minutos), a Kinbox tenta enviar a mensagem de aviso na própria conversa e resolve a sessão em seguida, na ordem cadastrada. Em canais sem janela de resposta (como o WhatsApp por QR Code), o aviso sai antes da resolução. No WhatsApp oficial, 24 horas sem mensagem do contato já fecham a janela de 24 horas: o aviso em texto não é entregue e a conversa é resolvida mesmo assim. Se o contato escrever depois, começa uma sessão nova — ou a mesma sessão é reaberta se ainda estiver dentro do tempo de tolerância (veja [Conversas, sessões e status](/docs/conceitos/conversas-e-sessoes)).
 
 <Note>
   Os exemplos **Lembrete de orçamento** e **Encerrar conversas paradas** usam o mesmo gatilho de tempo (**Tempo sem nova mensagem**). Só **uma** automação ligada vale por gatilho de tempo: ligue apenas uma das duas, ou junte as ações numa única automação se quiser que todas rodem após o mesmo tempo.
