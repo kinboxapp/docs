@@ -7,3 +7,29 @@ rss: true
 Aqui ficam as mudanças que você percebe ao usar a Kinbox: funcionalidades novas, melhorias e correções que mudam o uso. Cada novidade linka para a página da central que explica como usar.
 
 Para receber as novidades, assine o feed RSS pelo botão no topo da página.
+
+<Update label="27 de novembro de 2026" tags={["Automações", "Membros e perfil", "Relatórios", "API", "MCP"]} rss={{ date: "2026-11-27" }}>
+  ### Automações: gatilho Mensagem recebida do cliente e condição Texto da mensagem
+
+  As automações ganharam o gatilho **Mensagem recebida do cliente**, que dispara a cada mensagem recebida do contato, e a condição **Texto da mensagem** (exclusiva desse gatilho). Além disso, o limite de 10 execuções por sessão passou a valer separadamente para cada automação. Veja [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes).
+
+  ### Proprietário: Permissão fixa e preferência no Perfil
+
+  Em **Editar membro**, o campo **Permissão** do proprietário agora mostra **Proprietário** fixo e bloqueado. O proprietário também ganhou em **Configurações** → **Perfil** a opção **Não marca como lido ao abrir uma conversa**, abaixo de **Idioma**. A opção vale no navegador. Veja [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario).
+
+  ### Atendimento ao vivo: mapa de calor por setor e ajustes na fila
+
+  O **Atendimento ao vivo** ganhou o **Mapa de calor** por setor (grupo), com a lista **Setores** e a análise de cada setor, acessível pelo seletor **Escritório** | **Mapa de calor**, ao afastar a câmera ou após 15 segundos sem interação. Na mesma tela, a contagem de **atrasados** ao lado de **aguardando** não inclui mais as conversas da fila. Ao abrir a tela, conversas já encerradas não aparecem mais como esperando resposta. Veja [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo).
+
+  ### Relatório de Atribuição: atribuições da noite no dia certo
+
+  No relatório de **Atribuição**, as atribuições feitas das 21h à meia-noite (horário de Brasília) passaram a contar no dia em que aconteceram, em vez do dia seguinte. Veja [Relatório de atribuição](/docs/relatorios/atribuicao).
+
+  ### API: bloqueio por papel nas rotas `/v1`
+
+  As rotas antigas da API `/v1` passaram a responder `403` quando o papel de quem criou o token não permite a ação (o proprietário do workspace continua sem bloqueio). Veja [Criar um token de API](/docs/desenvolvedor/tokens-de-api).
+
+  ### MCP: consulta de campos e avisos na validação de fluxos
+
+  A IA conectada pelo MCP agora consegue consultar os campos aceitos de cada etapa de bot, agente de IA, cenário e automação e receber avisos sobre campos e referências ao validar fluxos antes de salvar. Veja [Conectar o Claude, o ChatGPT e outros agentes de IA (MCP)](/docs/desenvolvedor/mcp).
+</Update>
