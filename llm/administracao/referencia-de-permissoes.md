@@ -5,6 +5,8 @@ keywords: [efeito das permissões, papel padrão, administrador, supervisor, ate
 publico: llm
 tipo: referencia
 fontes:
+  - KIN-7799
+  - kinboxapp/kinbox-web#873
   - web:src/pages/settings/roles/permissionSections.tsx
   - web:src/pages/settings/roles/EditRole.tsx
   - web:src/pages/settings/members/index.tsx
@@ -16,9 +18,11 @@ fontes:
 codigo:
   - web:src/pages/settings/roles/**
   - web:src/pages/settings/members/**
+  - web:src/pages/settings/profile/**
   - web:src/pages/settings/index.tsx
   - web:src/layouts/BaseLayout.tsx
   - web:src/lib/helper.tsx
+  - web:src/lib/ownerPreferences.ts
   - web:src/hooks/useToggleAvaliable.ts
   - web:src/hooks/useBusinessHoursAccessLock.ts
   - api:src/modules/workspace-defaults/**
@@ -47,9 +51,9 @@ Um workspace (na tela, **ambiente**) novo vem com papéis prontos definidos pela
 
 - **Onde fica:** **Configurações** → **Ambiente** → **Permissões** (exige a permissão **Permissões** ou ser o proprietário). Na tela, o papel se chama **Permissão**: botão **Nova permissão**, painel **Criar permissão** / **Editar permissão**, busca `"Pesquisar por nome"`.
 - **Campos:** **Nome** (obrigatório; vazio exibe `"Por favor digite um nome."`), **Descrição** (`"(Opcional) Para ajudar a identificar o que essa permissão faz."`), bloco **Permissões** com um ícone ao lado do título (dica **Expandir tudo** / **Recolher tudo**) e seções na ordem da tela: **Home**, **Acesso as Conversas**, **Conversas**, **Negociações**, **Tarefas**, **Contatos**, **Relatórios**, **Canais**, **Gerenciamento do Ambiente**, **Agendas**, **Copiloto**, **Outros** e **Parceria** (só em workspace de parceiro). No layout antigo (tela de celular e marcas brancas), a seção **Gerenciamento do Ambiente** se chama **Gerenciar Ambiente**.
-- **Home:** só aparece para o proprietário ou quem tem **Gerenciar relatórios**. Opções: **Caixa de entrada** (padrão; `"Abre a caixa de entrada como primeira tela."`) ou **Dashboard** (`"Abre um dashboard como primeira tela."`; trancado com `"Ative a permissão \"Gerenciar relatórios\" para liberar esta opção."` enquanto **Gerenciar relatórios** está desmarcada), com **Dashboard inicial** (`"Ao escolher dashboard, a snapshot mais recente será aberta automaticamente."`).
+- **Home:** só aparece para o proprietário ou quem tem **Gerenciar relatórios**. Opções: **Caixa de entrada** (padrão; `"Abre a caixa de entrada como primeira tela."`) ou **Dashboard** (`"Abre um dashboard como primeira tela."`; trancado com `"Ative a permissão \"Gerenciar relatórios\" para liberar esta opção."` enquanto **Gerenciar relatórios** está desmarcada), com **Dashboard inicial** (`"Ao escolher dashboard, a snapshot mais recente será aberta automaticamente."`). A página inicial definida no papel é ignorada para o proprietário.
 - **Papel novo já vem marcado com:** **Global**, **Responder**, **Iniciar chat ativo**, **Resolver**, **Enviar notas privadas**, **Reabrir**, **Categorizar**, **Atribuir**, **Mover para grupo**, **Iniciar Bot**, **Agendar mensagem**, **Alterar propriedades do contato** e **Mesclar contatos**.
-- **Restrições:** ficam com marca vermelha quando ligadas. Dentro de **Conversas** e de **Outros**, um quadro chamado **Restrições** agrupa restrições adicionais. O proprietário passa em todas as permissões e não sofre restrições de papel, com duas exceções que valem também para ele quando o papel dele tem a opção: **Não mostrar sugestões de respostas** (seção **Copiloto**) e **Não marca como lido ao abrir uma conversa**.
+- **Restrições:** ficam com marca vermelha quando ligadas. Dentro de **Conversas** e de **Outros**, um quadro chamado **Restrições** agrupa restrições adicionais. O proprietário passa em todas as permissões e não sofre restrições de papel — inclusive **Não mostrar sugestões de respostas** (seção **Copiloto**) e **Não marca como lido ao abrir uma conversa** não valem mais pelo papel para ele. Para não marcar conversas como lidas ao abrir no navegador, o proprietário usa a opção pessoal **Não marca como lido ao abrir uma conversa** em **Configurações** → **Perfil** ([Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario)).
 - **Opções mutuamente exclusivas:** as 6 opções de **Acesso as Conversas** (sempre fica uma marcada); **Restringir relatórios aos grupos do membro** × **Restringir relatórios ao membro** (ambas podem ficar desmarcadas); **Pode inspecionar clientes (Básico)** × **Pode inspecionar clientes (Avançado)**.
 - **Opções que abrem campo extra:** **Limitar horário que pode responder**, **Limitar horário de acesso ao ambiente** e **Limitar horário que pode ficar disponível** (escolhem um horário de **Horários**); **Limitar canais que pode responder** (canais); **Impedir envio de palavras proibidas** (lista de palavras); **Limitar ambientes que pode visualizar** (ambientes).
 - **Permissão exclusiva do proprietário para marcar:** só o proprietário pode marcar **Pode resetar senha de membros**.
@@ -185,7 +189,7 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 
 | Opção | Efeito na tela | Mensagem |
 | --- | --- | --- |
-| **Não mostrar sugestões de respostas** | Oculta sugestões de respostas no chat e o botão para sugerir respostas. Vale também para o proprietário quando o papel dele tem essa opção. Veja [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia). | — |
+| **Não mostrar sugestões de respostas** | Oculta sugestões de respostas no chat e o botão para sugerir respostas. Vale apenas para membros que não são o proprietário (para o proprietário, o bloco aparece sempre que o copiloto está habilitado). Veja [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia). | — |
 
 ### Outros
 
@@ -204,7 +208,7 @@ O que cada relatório mostra com estas opções: [Como os relatórios contam ses
 | **Não pode acessar as salas** *(Restrições)* | Oculta o ícone **Salas** e bloqueia notificações das salas. Veja [Salas: o chat interno da equipe](/docs/salas/visao-geral). | — |
 | **Só pode ver membros que sejam dos seus grupos nos DMs.** *(Restrições)* | Limita mensagens diretas nas salas aos membros que compartilham algum grupo. Veja [Conversar nas salas: mensagens diretas, menções e threads](/docs/salas/usar-salas). | — |
 | **Somente pode ver frases rápidas na lista se estiver no grupo da frase rápida** *(Restrições)* | Mostra na lista apenas frases rápidas com restrição de visibilidade de grupos aos quais o membro pertence. | — |
-| **Não marca como lido ao abrir uma conversa** *(Restrições)* | Evita marcar a conversa como lida automaticamente ao abri-la. | — |
+| **Não marca como lido ao abrir uma conversa** *(Restrições)* | Evita marcar a conversa como lida automaticamente ao abri-la. Vale pelo papel apenas para membros que não são o proprietário. Para o proprietário, a opção fica em **Configurações** → **Perfil** (cartão **Preferências**, abaixo de **Idioma**, visível só para o proprietário; salva ao alternar, sem botão; herda o valor do papel antigo até o primeiro clique; se o salvamento falhar, o interruptor volta, aparece `"Não foi possível salvar as preferências."` e até recarregar a página a conversa pode usar o valor não salvo; vale apenas no navegador — no app do celular o proprietário continua marcando a conversa como lida). | — |
 | **Não mostrar aviso de ambiente expirando.** *(Restrições)* | Oculta o banner de aviso no topo da tela quando o workspace está prestes a expirar. | — |
 | **Não pode gerenciar widget.** *(Restrições)* | Esconde o cartão **Widget** em **Conectar novo canal**, os widgets da lista de **Canais** e a tela do widget (abrir a tela volta para **Canais**). Veja [Instalar o chat no seu site](/docs/canais/widget). | — |
 
@@ -250,10 +254,10 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 ## Membros: convite, edição, exclusão e senha
 
 - **Tela Membros** (**Configurações** → **Ambiente** → **Membros**, exige **Membros** ou ser o proprietário):
-  - Busca `"Pesquisar por nome ou e-mail"` também encontra pelo nome do papel.
+  - Busca `"Pesquisar por nome ou e-mail"` também encontra pelo nome do papel (para o proprietário, o filtro de papel não considera papel).
   - Filtro **Tudo**: **Tudo**, **Ativo** (ativo e já aceitou), **Inativo**, **Convite enviado** (ativo e ainda não aceitou), **Online**, **Offline**.
   - Situações: **Online**; `"~há X"` (`"Tempo desde a última vez que membro esteve online."`); **Convidado** (`"Foi enviado e-mail convidando a pessoa para a platforma mas ela ainda não aceitou."`); **Inativo** (linha riscada e apagada). Escudo verde: `"Verificação em duas etapas ativa"`.
-  - **Exportar** (menu **⋮** → **Exportar** → **CSV** ou **Excel**): arquivo `membros` com colunas ID, Nome, Email, Permissão, Online, Último login, Última vez online, Data de criação, Data do convite, Ativo, Verificação em duas etapas, Grupos e campos personalizados de membro.
+  - **Exportar** (menu **⋮** → **Exportar** → **CSV** ou **Excel**): arquivo `membros` com colunas ID, Nome, Email, Permissão (exibe **Proprietário** para o proprietário), Online, Último login, Última vez online, Data de criação, Data do convite, Ativo, Verificação em duas etapas, Grupos e campos personalizados de membro.
 - **Convite:**
   - E-mail enviado pela Kinbox (endereço que não recebe respostas) com assunto `"Convite para se juntar ao workspace {nome do workspace}"`.
   - Aviso após convidar: **Convite enviado** — `"{nome} deve se cadastrar no link que foi enviado para o e-mail {e-mail} para entrar no sistema."`.
@@ -265,7 +269,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
   - **E-mail** fica sempre bloqueado na edição; para corrigir e-mail errado, exclua o membro e convide de novo.
   - **Grupos** em **Editar membro** é somente leitura (`"Grupos que o membro pertence. Para editar vá nas configurações de grupo do seu ambiente."`; `"Nenhum grupo"` quando vazio).
   - Enquanto o convite não foi aceito, alterações em nome e foto não são aplicadas.
-  - O membro não troca o próprio papel (**Permissão** fica bloqueado ao editar a si mesmo, exceto para o proprietário). Para o proprietário, **Nome** fica bloqueado e **Disponível** / **Ativo** não aparecem.
+  - O membro não troca o próprio papel (**Permissão** fica bloqueado ao editar a si mesmo). Para o proprietário, **Permissão** também fica sempre bloqueado mostrando **Proprietário** fixo (com ícone de coroa), **Nome** fica bloqueado e **Disponível** / **Ativo** não aparecem. O menu do avatar também mostra **Proprietário** abaixo do nome.
   - **Ativo**: `"Somente membros ativos conseguem logar no sistema."` (desligado = **Inativo**, libera licença).
   - **Disponível**: o texto da tela fala em notificações (`"Somente membros disponíveis recebem notificações e estão elegíveis para receber novos atendimentos na atribuição automática."`): **Disponível** vale para as regras de rodízio entre membros e de "menos atendimentos" da atribuição automática, que só escolhem membros disponíveis (veja [Estratégias de atribuição automática](/docs/atendimento/estrategias-de-atribuicao)), e para os sons de nova mensagem e de nova conversa. **Atribuir para um membro** atribui mesmo a indisponível. O push (navegador e app) não depende de **Disponível**. A atribuição manual continua possível.
   - **Clonar**: abre **Convidar membro** com `"Cópia de {nome}"`, o mesmo e-mail e o mesmo papel (troque o e-mail para evitar `"Já existe um convite para esse operador"`).
@@ -292,7 +296,7 @@ Seção exibida apenas em workspaces de parceiro. **Pode inspecionar clientes (B
 - Total permitido = licenças contratadas + licenças de cortesia do plano, quando houver.
 - No limite, convidar falha com `"Número limite de operadores atingido"`. Com assinatura vencida há mais de 3 dias ([Minha assinatura venceu ou o pagamento falhou](/docs/assinatura/assinatura-vencida)), convidar falha com `"Assinatura expirada"` e reativar falha com `"Sua assinatura expirou"`.
 - Mais licenças: **Configurações** → **Assinatura** → **Mudar plano**, cartão **Membros** (exige **Assinatura** ou ser o proprietário; o número de licenças não pode ficar abaixo do total de membros ativos). Em teste grátis ou com a assinatura cancelada, o botão é **Assinar um plano**. Quando o plano é gerenciado por um parceiro, nenhum dos dois botões aparece: a mudança é feita com o parceiro. Veja [Assinar ou mudar o plano](/docs/assinatura/assinar-ou-mudar-plano).
-- **Exclusivo do proprietário:** excluir o workspace, transferir a propriedade e marcar **Pode resetar senha de membros**. Ele não sofre restrições de papel, exceto **Não mostrar sugestões de respostas** e **Não marca como lido ao abrir uma conversa**, que valem para ele quando o papel dele tem a opção, e não pode ser desativado, desconectado nem excluído.
+- **Exclusivo do proprietário:** excluir o workspace, transferir a propriedade, marcar **Pode resetar senha de membros** e ver a opção **Não marca como lido ao abrir uma conversa** em **Configurações** → **Perfil** (cartão **Preferências**, abaixo de **Idioma**; salva ao alternar, herda o valor do papel antigo até o primeiro clique e não vale no app do celular). Ele não sofre restrições de papel (nem **Não mostrar sugestões de respostas**, nem **Não marca como lido ao abrir uma conversa**, nem a página inicial **Home** do papel) e não pode ser desativado, desconectado nem excluído.
 - **Transferir propriedade:** só o proprietário vê **Tornar proprietário**, e apenas em membro ativo que já aceitou o convite. Janela **Transferir propriedade** (caixa de ciência obrigatória; sem marcar: `"Confirme que está ciente para continuar."`) → **Confirmar senha** (**Senha atual** → **Transferir propriedade**) → `"Propriedade transferida com sucesso!"`.
   - O escolhido vira **Proprietário** (sem papel); o antigo proprietário recebe o papel que o novo proprietário tinha; ambos são desconectados. Ação irreversível pela tela (só o novo proprietário pode transferir de volta).
   - Erros: `"Senha incorreta"` e `"O proprietário deve ser um operador ativo e já ter aceitado o convite"`.

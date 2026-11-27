@@ -5,6 +5,9 @@ keywords: [automação não funciona, automação não disparou, automação nã
 publico: humano
 tipo: solucao-de-problema
 fontes:
+  - KIN-7905
+  - kinboxapp/kinbox-web#921
+  - kinboxapp/kinbox-api-v0#141
   - web:src/pages/settings/automations/EditAutomations.tsx
   - api-v0:server/controllers/AutomationEventsController.js
   - api-v0:server/controllers/CallController.js
@@ -55,6 +58,7 @@ A automação está criada, mas não fez nada, executou só parte das ações, r
     Confira se o gatilho cobre exatamente o evento esperado:
 
     - **Nova conversa ou sessão** só dispara quando o contato abre a sessão; quando um membro envia a primeira mensagem, o gatilho é **Nova conversa ou sessão iniciada pelo membro**.
+    - **Mensagem recebida do cliente** não dispara para mensagens de membro, enviadas pelo celular do canal, de bot, notas internas, mensagens de sistema, mensagens enviadas por automação nem mensagens que o copiloto mantém resolvidas. Além disso, uma automação nova ou religada com esse gatilho pode levar até 1 minuto para começar a rodar.
     - **Tempo sem nenhuma resposta do membro na sessão nova** e **Tempo pendente** não contam em sessões iniciadas pelo membro e param assim que um membro responde. Para agir quando o contato para de responder depois da nossa mensagem, use **Tempo sem nova mensagem**.
     - **Tempo sem nova mensagem** dispara apenas uma vez por sessão.
     - **Ao resolver uma conversa** não roda quando a sessão tinha sido reaberta: para esse caso, o gatilho é **Ao resolver uma conversa reaberta**.
@@ -92,13 +96,13 @@ A automação está criada, mas não fez nada, executou só parte das ações, r
     Há duas causas principais:
 
     - **Uma ação falhou:** quando uma ação falha, as seguintes continuam rodando. Abra a automação e confira se algum item escolhido na ação que falhou (bot, regra de atribuição, grupo ou canal) foi apagado ou alterado.
-    - **Mais de 10 ações no mesmo evento:** quando uma ou mais automações disparam no mesmo evento (gatilhos que não são de tempo), só as **10 primeiras** ações somadas rodam. Reduza o total de ações ou divida em eventos diferentes.
+    - **Mais de 10 ações no mesmo evento:** quando uma ou mais automações disparam no mesmo evento (gatilhos que não são de tempo), só as **10 primeiras** ações somadas rodam, contando apenas as automações que ainda estão dentro do limite de execuções por sessão. Reduza o total de ações ou divida em eventos diferentes.
   </Accordion>
 
   <Accordion title="A automação parou de rodar numa conversa depois de várias vezes">
-    Existe um limite de repetição na mesma sessão para evitar repetições sem fim: quando ele é atingido, a automação para de rodar naquela sessão e a conversa mostra uma mensagem começando por `"Limite de execução de automação atingido"`.
+    Cada automação pode rodar no máximo **10 vezes** na mesma sessão (em um período de 1 dia), contado separadamente para cada automação. Quando esse limite é atingido, essa automação para de rodar naquela sessão (as outras continuam normalmente) e a conversa mostra uma mensagem começando por `"Limite de execução de automação atingido"`. No gatilho **Mensagem recebida do cliente**, esse aviso aparece uma única vez por automação por sessão; nos outros gatilhos, pode se repetir.
 
-    Revise se há automações que disparam umas às outras em cadeia — por exemplo, uma automação com a ação **Adicionar tag** disparando outra com o gatilho **Ao adicionar tag**.
+    Revise se há automações que disparam umas às outras em cadeia — por exemplo, uma automação com a ação **Adicionar tag** disparando outra com o gatilho **Ao adicionar tag** — ou se a conversa recebeu mais de 10 mensagens do contato usando o gatilho **Mensagem recebida do cliente**.
   </Accordion>
 
   <Accordion title="A ação de integração não faz nada">

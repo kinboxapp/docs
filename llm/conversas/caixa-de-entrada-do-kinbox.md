@@ -5,6 +5,8 @@ keywords: [permissões de conversa, restrições, acesso às conversas, global, 
 publico: llm
 tipo: referencia
 fontes:
+  - KIN-7799
+  - kinboxapp/kinbox-web#873
   - web:src/pages/settings/roles/permissionSections.tsx
   - web:src/lib/inboxUtils.ts
   - web:src/pages/inbox/ChatTextEditorPure.tsx
@@ -17,6 +19,7 @@ fontes:
 codigo:
   - web:src/pages/settings/roles/permissionSections.tsx
   - web:src/lib/inboxUtils.ts
+  - web:src/lib/ownerPreferences.ts
   - web:src/pages/inbox/ChatTextEditorPure.tsx
   - web:src/pages/inbox/Chat/index.tsx
   - web:src/pages/inbox/ChatHeader/index.tsx
@@ -51,7 +54,7 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 
 - Seguir uma conversa **não** a traz para a lista: as descrições da tela de **Limitado** e **Restrito** falam em "seguindo", mas o que vale é a tabela acima. A visão **Seguindo** mostra só as conversas seguidas que o membro já vê pelo acesso dele.
 - Abrir uma conversa (por link, notificação ou pesquisa): o membro abre as conversas que o acesso do papel mostra na lista, as que ele segue, as compartilhadas com ele e as atribuídas a ele em qualquer grupo. O proprietário e quem tem **Global** abrem tudo. Fora disso, a conversa fecha com "Você não tem permissão para ver essa conversa".
-- Proprietário do workspace: tem todas as permissões e não é afetado pelas restrições da seção, com duas exceções que valem também para ele quando o papel dele tem a opção: **Não mostrar sugestões de respostas** e **Não marca como lido ao abrir uma conversa** (veja a [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+- Proprietário do workspace: tem todas as permissões e não é afetado pelas restrições da seção, inclusive **Não mostrar sugestões de respostas** e **Não marca como lido ao abrir uma conversa** não valem mais pelo papel para ele. Para não marcar conversas como lidas ao abrir no navegador, o proprietário usa a opção pessoal **Não marca como lido ao abrir uma conversa** em **Configurações** → **Perfil** (só o proprietário vê; enquanto ele nunca alterar a opção no **Perfil**, herda o valor que o papel antigo tinha; no app do celular a conversa continua sendo marcada como lida). Para os demais membros, a restrição continua no papel (veja [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 - Página de conceito sobre papéis: [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis).
 
 ## Permissões da seção Conversas
@@ -151,7 +154,7 @@ Configurado em **Configurações** → **Ambiente** → **Permissões** (uma op�
 
 ## Matriz de diagnóstico: não consigo responder ou ver uma conversa
 
-O proprietário do workspace não sofre restrições de papel, com duas exceções que valem também para ele quando o papel dele tem a opção: **Não mostrar sugestões de respostas** e **Não marca como lido ao abrir uma conversa** (veja a [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
+O proprietário do workspace não sofre restrições de papel — nem **Não mostrar sugestões de respostas** nem **Não marca como lido ao abrir uma conversa** valem pelo papel para ele. Para não marcar conversas como lidas ao abrir no navegador, o proprietário usa a opção **Não marca como lido ao abrir uma conversa** em **Configurações** → **Perfil** (só o proprietário vê; no app do celular continua marcando como lida; veja [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 
 | Se o usuário vê | Causa | O que orientar |
 | --- | --- | --- |

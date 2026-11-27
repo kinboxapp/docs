@@ -5,6 +5,8 @@ keywords: [lista de permissões, todas as permissões, o que cada permissão faz
 publico: humano
 tipo: referencia
 fontes:
+  - KIN-7799
+  - kinboxapp/kinbox-web#873
   - web:src/pages/settings/roles/permissionSections.tsx
   - web:src/pages/settings/roles/EditRole.tsx
   - web:src/pages/settings/index.tsx
@@ -16,6 +18,7 @@ codigo:
   - web:src/pages/settings/index.tsx
   - web:src/layouts/BaseLayout.tsx
   - web:src/lib/helper.tsx
+  - web:src/lib/ownerPreferences.ts
   - web:src/pages/reports/useReports.tsx
   - web:src/pages/reports/ReportOverview/IndividualSummaries.tsx
 verificado_em: 2026-11-26
@@ -27,13 +30,13 @@ Todas as opções de um papel de permissão na Kinbox, seção por seção, na o
 
 Nesta central, **papel** é o conjunto de permissões dado a um membro. Na tela, esse conjunto se chama **Permissão** e fica em **Configurações** → **Ambiente** → **Permissões** (no workspace, chamado na tela de **ambiente**), disponível para o proprietário ou quem tem a permissão **Permissões**.
 
-- As opções de tipo **libera** dão acesso a uma tela ou ação; as de tipo **restringe** tiram um acesso e ficam com a marca vermelha quando ligadas. O proprietário do workspace passa em todas as permissões e não sofre restrições, com duas exceções que valem também para ele quando o papel dele tem a opção: **Não mostrar sugestões de respostas** (seção **Copiloto**) e **Não marca como lido ao abrir uma conversa**.
+- As opções de tipo **libera** dão acesso a uma tela ou ação; as de tipo **restringe** tiram um acesso e ficam com a marca vermelha quando ligadas. O proprietário do workspace passa em todas as permissões e não sofre restrições de papel, inclusive **Não mostrar sugestões de respostas** (seção **Copiloto**) e **Não marca como lido ao abrir uma conversa** — para o proprietário, **Não marca como lido ao abrir uma conversa** fica em **Configurações** → **Perfil** (veja [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario)), e a seção **Home** do papel não se aplica a ele.
 - Algumas opções se excluem entre si (marcar uma desmarca a outra) e algumas abrem um campo extra (horário, canais, palavras proibidas ou ambientes).
 - Sempre que um papel é editado, os membros com esse papel precisam entrar de novo na Kinbox: a sessão deles termina na próxima vez que abrirem ou atualizarem a página. Para o passo a passo de criar e editar papéis, veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 
 ## Home
 
-A seção **Home** só aparece para o proprietário ou para quem tem **Gerenciar relatórios**. Ela define a primeira tela exibida ao entrar no workspace: **Caixa de entrada** (padrão) ou **Dashboard** com um **Dashboard inicial** (liberado apenas quando **Gerenciar relatórios** está marcada no papel; ao entrar, o membro vê a versão mais recente salva desse dashboard).
+A seção **Home** só aparece para o proprietário ou para quem tem **Gerenciar relatórios**. Ela define a primeira tela exibida ao entrar no workspace: **Caixa de entrada** (padrão) ou **Dashboard** com um **Dashboard inicial** (liberado apenas quando **Gerenciar relatórios** está marcada no papel; ao entrar, o membro vê a versão mais recente salva desse dashboard). Para o proprietário, a página inicial definida no papel é ignorada.
 
 ## Acesso as Conversas
 
@@ -222,7 +225,7 @@ Os itens **Configurações** → **Agenda** → **Serviços** e **Local** só ap
 | --- | --- | --- |
 | **Não mostrar sugestões de respostas** | "Não aparecer sugestões de respostas no chat e nem o botão para sugerir respostas." | restringe |
 
-Esta restrição vale também para o proprietário do workspace quando o papel dele tem essa opção. Veja como as sugestões aparecem na conversa em [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia).
+Esta restrição vale apenas para membros que não são o proprietário do workspace (para o proprietário, as sugestões aparecem sempre que o copiloto está habilitado). Veja como as sugestões aparecem na conversa em [Usar o copiloto na conversa](/docs/copiloto/usar-o-copiloto-de-ia).
 
 ## Outros
 
@@ -250,7 +253,7 @@ As opções abaixo ficam no quadro **Restrições** dentro da seção **Outros**
 | **Não pode acessar as salas** | "Membro fica impossibilitado de acessar ou receber notificações das salas." Veja [Salas: o chat interno da equipe](/docs/salas/visao-geral). | restringe |
 | **Só pode ver membros que sejam dos seus grupos nos DMs.** | "Nas salas, somente pode ver e mandar mensagem direta para os membros que pertencem a um dos grupos que o membro pertence." Veja [Conversar nas salas: mensagens diretas, menções e threads](/docs/salas/usar-salas). | restringe |
 | **Somente pode ver frases rápidas na lista se estiver no grupo da frase rápida** | "Somente pode ver a frase rápida que tiver restrição de visibilidade habilitade e pertença a um dos grupos restringidos." | restringe |
-| **Não marca como lido ao abrir uma conversa** | "Ao visualizar conversas na listagem não é marcado como lido automaticamente. Serve para gestores que querem acompanhar as conversas sem atrapalhar o fluxo dos atendentes." | restringe |
+| **Não marca como lido ao abrir uma conversa** | "Ao visualizar conversas na listagem não é marcado como lido automaticamente. Serve para gestores que querem acompanhar as conversas sem atrapalhar o fluxo dos atendentes." Vale pelo papel apenas para membros que não são o proprietário; o proprietário configura essa preferência em **Configurações** → **Perfil** ([Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario)). | restringe |
 | **Não mostrar aviso de ambiente expirando.** | "Quando ambiente estiver expirando, não irá mostrar o banner no topo da tela de que o ambiente irá expirar em X dias." | restringe |
 | **Não pode gerenciar widget.** | Esconde o cartão **Widget** em **Conectar novo canal**, os widgets da lista de **Canais** e a tela do widget. Veja [Instalar o chat no seu site](/docs/canais/widget). | restringe |
 

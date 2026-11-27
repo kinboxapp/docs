@@ -5,6 +5,11 @@ keywords: [sla, sla de atendimento, tempo máximo de resposta, alerta de atraso,
 publico: llm
 tipo: faq
 fontes:
+  - KIN-7600
+  - kinboxapp/kinbox-web#755
+  - KIN-7872
+  - kinboxapp/kinbox-web#920
+  - kinboxapp/kinbox-api-v2#560
   - web:src/pages/settings/automations/EditAutomations.tsx
   - web:src/pages/settings/workspace/index.tsx
   - api-v0:server/services/AssignmentService.js
@@ -27,7 +32,7 @@ Para acompanhar e reagir à demora na resposta:
 
 - **Automação com gatilho de tempo:** use o gatilho **Tempo sem nenhuma resposta do membro na sessão nova** (campo **Minutos sem resposta**; pode haver atraso de até 3 minutos) para avisar, transferir ou executar outra ação. As automações também têm os gatilhos **Tempo sem nova mensagem** e **Tempo pendente** (veja [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes)).
 - **Indicação dinâmica de conversa pendente:** em **Configurações** → **Ambiente** → **Geral** (nas configurações gerais do workspace, chamado na tela de **ambiente**), muda a cor do círculo azul quando a conversa passa o tempo configurado em horas sem resposta do membro.
-- **Acompanhamento ao vivo:** o mapa de [Atendimento e vendas ao vivo](/docs/relatorios/ao-vivo) pinta cada conversa que espera resposta pelo tempo de espera, com estados de alerta e de atraso, e mostra a contagem de **atrasados** e a **pior espera**.
+- **Acompanhamento ao vivo:** o [Atendimento ao vivo](/docs/relatorios/ao-vivo) pinta cada conversa que espera resposta pelo tempo de espera (com estados de alerta e de atraso), oferece o **Mapa de calor** por setor com a lista **Setores** e a análise de cada setor, e mostra no topo **aguardando** com a contagem de **atrasados** (só conversas aguardando resposta, sem a fila) e **pior espera** com a contagem **acima do limite** (incluindo a fila).
 - **Relatórios de produtividade:** acompanhe TME e TMA em [Relatório de produtividade](/docs/relatorios/produtividade).
 
 ## Variações

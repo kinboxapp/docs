@@ -1,10 +1,15 @@
 ---
 title: Atendimento e vendas ao vivo
-description: Como acompanhar em tempo real, num mapa animado, a fila, as conversas que esperam resposta, a equipe online e as negociações de um funil.
-keywords: [ao vivo, atendimento ao vivo, vendas ao vivo, tempo real, fila, atrasados, modo tv, telão, monitorar equipe, operadores online, em pausa, negócios parados, sla, painel de atendimento, monitor de atendimento]
+description: Como acompanhar em tempo real a fila, as conversas que esperam resposta, a equipe online, o mapa de calor por setor e as negociações de um funil.
+keywords: [ao vivo, atendimento ao vivo, vendas ao vivo, tempo real, fila, atrasados, modo tv, telão, monitorar equipe, operadores online, em pausa, negócios parados, sla, painel de atendimento, monitor de atendimento, mapa de calor, setores, análise do setor]
 publico: humano
 tipo: guia
 fontes:
+  - KIN-7600
+  - kinboxapp/kinbox-web#755
+  - KIN-7872
+  - kinboxapp/kinbox-web#920
+  - kinboxapp/kinbox-api-v2#560
   - web:src/pages/live-view/index.tsx
   - web:src/pages/live-view/useLiveFloor.ts
   - web:src/pages/live-view/ui/KpiCards.tsx
@@ -18,7 +23,7 @@ codigo:
 verificado_em: 2026-11-26
 ---
 
-O **Atendimento ao vivo** e o **Vendas ao vivo** mostram a operação em tempo real num mapa animado em tela cheia, em **Relatórios** → **Atendimento ao vivo** e **Relatórios** → **Vendas ao vivo**.
+O **Atendimento ao vivo** e o **Vendas ao vivo** mostram a operação em tempo real num mapa animado em tela cheia, em **Relatórios** → **Atendimento ao vivo** e **Relatórios** → **Vendas ao vivo**. No **Atendimento ao vivo**, você também pode alternar para o **Mapa de calor** por setor (grupo), acompanhar a lista **Setores** e abrir a análise de cada setor.
 
 <Note>Para ver o **Atendimento ao vivo**, seu papel precisa da permissão **Gerenciar relatórios** (o proprietário do workspace sempre vê). Para ver o **Vendas ao vivo**, seu papel precisa também da permissão **Gerenciar negociações**: sem ela, o item não aparece no menu e a tela avisa que o seu perfil não tem acesso aos negócios, com o botão **Abrir Atendimento ao vivo**.</Note>
 
@@ -31,16 +36,19 @@ O **Atendimento ao vivo** e o **Vendas ao vivo** mostram a operação em tempo r
   <Step title="Confira os indicadores do topo">
     A barra do topo mostra os números do momento. No **Atendimento ao vivo**, para trocar o conjunto de números ou mostrar só alguns grupos, abra **Configurações** (ícone no canto superior direito) e use **Indicadores** e **Departamentos**. No **Vendas ao vivo**, clique no nome do funil, no topo, para escolher outro funil.
   </Step>
+  <Step title="Alterne entre Escritório e Mapa de calor (Atendimento ao vivo)">
+    No **Atendimento ao vivo**, use o seletor **Escritório** | **Mapa de calor** no rodapé para mudar de visão (ele não existe no **Vendas ao vivo** e some no modo TV). O mapa de calor também abre sozinho ao afastar a câmera ou após **15 segundos** sem interação.
+  </Step>
   <Step title="Leve para uma TV, se quiser">
-    Clique em **TV** (dica **Modo TV**) para deixar a tela pronta para um telão. Para voltar, clique em **Sair** ou aperte `Esc`.
+    Clique em **TV** (dica **Modo TV**) para deixar a tela pronta para um telão. No **Atendimento ao vivo**, o modo TV abre no mapa de calor, fica nele por até 12 segundos após o carregamento dos dados e depois inicia um passeio automático pelas áreas do mapa. Para voltar, clique em **Sair** ou aperte `Esc`.
   </Step>
 </Steps>
 
-A **Legenda**, na própria tela, explica cada símbolo do mapa. Clicar num contato ou numa mesa abre os detalhes.
+A **Legenda**, no canto inferior esquerdo, explica cada símbolo do mapa (incluindo a seção **De longe**, sobre o mapa de calor). Quando o mapa de calor está ativo, aparece ao lado uma legenda curta (**Espera**, **atraso** e **operador**). Clicar num contato ou numa mesa abre os detalhes.
 
 ## Quais conversas aparecem
 
-O mapa e a fila do **Atendimento ao vivo** mostram as mesmas conversas que você vê na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), conforme o **Acesso as Conversas** do seu papel (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)), e não as restrições de relatório. Já os números do conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) seguem as restrições de relatório do seu papel. O proprietário vê tudo.
+O mapa e a fila do **Atendimento ao vivo** mostram o atendimento atual de cada conversa e seguem as mesmas conversas que você vê na [Caixa de entrada](/docs/conversas/caixa-de-entrada-do-kinbox), conforme o **Acesso as Conversas** do seu papel (veja [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis)), e não as restrições de relatório. Já os números do conjunto **Tempo médio** (**resolvidas hoje** e **TM 1ª resposta**) seguem as restrições de relatório do seu papel. O proprietário vê tudo.
 
 Se o seu papel tiver a restrição **Esconder telefone**, o telefone dos contatos não aparece.
 
@@ -63,7 +71,7 @@ Se o seu papel tiver a restrição **Esconder telefone**, o telefone dos contato
 
 ### Tempo de espera e atraso
 
-O mapa pinta cada conversa que espera resposta pelo tempo de espera, contado desde que ela ficou pendente (ou, na falta disso, desde a última mensagem). Ela entra em alerta ao atingir o primeiro limite de tempo e passa a atrasada ao atingir o segundo.
+O mapa pinta cada conversa que espera resposta pelo tempo de espera, contado desde que ela ficou pendente (ou, na falta disso, desde a última mensagem). Ela entra em alerta ao atingir o primeiro limite de tempo e passa a atrasada ao atingir o segundo. Esse mesmo limite de atraso define também a intensidade do **Mapa de calor**, a lista **Setores** e o estado de cada setor.
 
 Esses dois tempos vêm da **Indicação dinâmica de conversa pendente**, em **Configurações** → **Ambiente** → **Geral** do workspace (na tela, **ambiente**), quando ela está ligada (veja [Mensagens automáticas e regras da caixa de entrada](/docs/administracao/mensagens-automaticas)). Se ela estiver desligada, os tempos são **10 minutos** e **20 minutos**.
 
@@ -75,8 +83,19 @@ Esses dois tempos vêm da **Indicação dinâmica de conversa pendente**, em **C
 
 Em **Configurações** → **Indicadores**, você escolhe o conjunto:
 
-- **Fila** (padrão): **na fila** (conversas sem membro responsável; a seta mostra a variação na última hora), **aguardando** (conversas esperando resposta de um membro), com a contagem de **atrasados**, que inclui também as conversas da fila, e **online** (membros online sobre o total da equipe, com os **em pausa**).
-- **Tempo médio**: **resolvidas hoje**, **TM 1ª resposta** (o TME de hoje) e **pior espera** (a maior espera agora, contando também as conversas da fila), com a contagem acima do limite.
+- **Fila** (padrão): **na fila** (conversas sem membro responsável; a seta mostra a variação na última hora), **aguardando** (conversas esperando resposta de um membro), com a contagem de **atrasados** — que conta apenas as atrasadas entre as que aguardam resposta, **sem incluir a fila** (por isso nunca passa do número de **aguardando**) —, e **online** (membros online sobre o total da equipe, com os **em pausa**).
+- **Tempo médio**: **resolvidas hoje**, **TM 1ª resposta** (o TME de hoje) e **pior espera** (a maior espera agora, contando também as conversas da fila), com a contagem **acima do limite**, que inclui também as conversas atrasadas da fila.
+
+### Mapa de calor por setor
+
+O **Mapa de calor** existe apenas no **Atendimento ao vivo** (não existe no **Vendas ao vivo**) e está disponível para quem tem acesso à tela.
+
+- **Como abrir e voltar:** clique em **Mapa de calor** no seletor do rodapé (**Escritório** | **Mapa de calor**), afaste a câmera (com a rolagem do mouse ou o botão **Afastar**) ou deixe a tela parada por **15 segundos** sem mexer no mouse nem no teclado (não ativa sozinho se algo estiver selecionado, se **Configurações** estiver aberto ou no modo TV). Clique em **Escritório** para voltar à cena.
+- **Como ler o mapa:** cada setor corresponde a um grupo do workspace (conversas na fila sem grupo ficam em **Sem departamento**, e o filtro **Departamentos** em **Configurações** limita os setores exibidos). Cada conversa que espera a equipe — na fila ou aguardando resposta — esquenta o mapa ao redor do guichê do setor ou da mesa de quem deve responder; conversas em **Vez do contato** e conversas com bot não esquentam. Quanto mais quente a cor, mais clientes esperando; vermelho indica atraso. Um setor hachurado indica que há clientes esperando e ninguém online nem em pausa para atender. Com o mapa ativo, os indicadores de humor e o feed de clientes irritados ficam escondidos; os indicadores do topo, a **Legenda** e a busca continuam disponíveis.
+- **Lista Setores:** no canto superior esquerdo, exibe o resumo (**crítico**, **em atenção** ou **Tudo no prazo**) e ordena os setores por prioridade (críticos primeiro, depois em atenção e em dia). Cada linha mostra o nome do setor, quantos clientes esperam, a barra de calor e a frase do momento. Passar o mouse sobre a lista pausa a reordenação para facilitar o clique.
+- **Análise do setor:** clique num setor no mapa ou na lista **Setores** para destacar o setor e abrir o painel à direita. Ele mostra o estado (**Crítico**, **Atenção**, **Tendência** ou **Em dia**), os números de **esperando**, **atrasados** (soma os atrasados aguardando resposta e os atrasados na fila — por isso pode ficar acima da soma por pessoa) e **pior espera**, a régua **Clientes por atendente**, o gráfico **Espera nos últimos minutos** (acompanha os últimos 3 minutos enquanto a tela está aberta) e o bloco **Por pessoa** (clicar numa pessoa sai do mapa e leva a câmera até ela).
+- **Controles da análise:** use **Setor anterior (←)** e **Próximo setor (→)** (ou as setas `←` e `→`) para navegar entre setores, **Ver o setor de perto** para sair do mapa e aproximar no setor, **Ampliar** / **Reduzir** para exibir os blocos extras (**Há quanto tempo esperam** e **Canais e números do dia**, com **Na fila**, **Pior espera**, **1ª resposta** e **Resolvidas hoje**) e **Fechar (Esc)** (ou `Esc`) para fechar.
+- **No modo TV:** o seletor **Escritório** | **Mapa de calor**, a lista **Setores**, a legenda do mapa e o painel do setor não aparecem.
 
 ## Vendas ao vivo
 

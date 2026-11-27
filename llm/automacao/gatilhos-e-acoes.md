@@ -1,10 +1,13 @@
 ---
 title: "Automações: ações aceitas por gatilho, atraso dos gatilhos por tempo e sessões criadas por API"
 description: Regras detalhadas das automações da Kinbox — quando cada gatilho dispara e para, uma automação por gatilho de tempo, limite de ações e de repetição, sessões de API ou integração, operadores das condições e bordas de cada ação.
-keywords: [regras automação, limite de ações automação, automação repetida, limite de execução de automação atingido, várias automações mesmo gatilho, sessão de integração, operadores condição, agendar template canal, automação hubspot, janela 24h automação, nome do cliente na mensagem, variáveis na mensagem da automação, first_name automação]
+keywords: [regras automação, limite de ações automação, automação repetida, limite de execução de automação atingido, várias automações mesmo gatilho, sessão de integração, operadores condição, agendar template canal, automação hubspot, janela 24h automação, nome do cliente na mensagem, variáveis na mensagem da automação, first_name automação, mensagem recebida do cliente, texto da mensagem]
 publico: llm
 tipo: referencia
 fontes:
+  - KIN-7905
+  - kinboxapp/kinbox-web#921
+  - kinboxapp/kinbox-api-v0#141
   - web:src/pages/settings/automations/EditAutomations.tsx
   - web:src/components-old/forms/ActionsInput/index.tsx
   - web:src/components-old/forms/ConditionsInput/index.tsx
@@ -37,8 +40,9 @@ Referência complementar de [Gatilhos, condições e ações das automações](/
 
 | Grupo | Gatilho | Quando dispara e bordas |
 | --- | --- | --- |
-| **Conversa** | **Nova conversa ou sessão** | Quando o contato manda uma mensagem que abre uma sessão nova (ou a primeira conversa). Não dispara em sessões abertas por membro, API ou integração. |
+| **Conversa** | **Nova conversa ou sessão** | Quando o contato manda uma mensagem que abre uma sessão nova (ou a primeira conversa). Não dispara em sessões abertas por membro, API ou integração. Na primeira mensagem de uma sessão nova, dispara junto com **Mensagem recebida do cliente**. |
 | **Conversa** | **Nova conversa ou sessão iniciada pelo membro** | Quando um membro começa uma sessão nova enviando a primeira mensagem. Exige um membro; sessões abertas pela API ou por integração não disparam. |
+| **Conversa** | **Mensagem recebida do cliente** | Quando o contato envia uma mensagem na conversa (não tem campo de minutos). Na primeira mensagem de uma sessão nova, dispara junto com **Nova conversa ou sessão**. Dispara também com bot atendendo e em mensagens de grupo. **Não** dispara para mensagem de membro, mensagem digitada no celular do canal, mensagem de bot, nota interna, mensagem de sistema, mensagem enviada por ação de automação nem mensagem mantida resolvida pelo copiloto ([Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto)). Uma automação nova ou religada com esse gatilho pode levar até 60 segundos para começar a rodar (desligar para na hora). |
 | **Conversa** | **Ao resolver uma conversa** | Quando uma sessão que não foi reaberta é resolvida. Não dispara quando a resolução é feita por uma automação nem quando a sessão tinha sido reaberta. |
 | **Conversa** | **Ao resolver uma conversa reaberta** | Quando é resolvida uma sessão que tinha sido reaberta dentro do tempo de tolerância. Excludente com **Ao resolver uma conversa**. |
 | **Conversa** | **Ao atribuir membro** | Quando a conversa recebe um membro responsável, inclusive pela atribuição automática. Não dispara quando a atribuição é feita diretamente por uma automação no caminho da conversa (mas uma regra de atribuição automática chamada por automação pode disparar). |
@@ -80,9 +84,9 @@ Referência complementar de [Gatilhos, condições e ações das automações](/
 
 - **Não é retroativa:** automações só reagem a eventos ocorridos depois de salvas e ligadas. Uma automação nova já nasce com **Ativo** ligado.
 - **Ordem e tolerância a falha:** há uma espera de cerca de 1 segundo antes de executar as ações. As ações rodam na ordem em que aparecem na tela; se uma ação falha, as seguintes continuam rodando.
-- **Limite de 10 ações por evento (gatilhos que não são de tempo):** todas as automações ligadas do mesmo gatilho cujas condições batem rodam. Suas ações são somadas (ordenadas pelo nome da automação e depois pela ordem das ações) e apenas as **10 primeiras** são executadas por evento.
-- **Limite de repetição:** a mesma automação roda no máximo cerca de 10 vezes na mesma sessão num período de 1 dia. Ao atingir esse teto, para de rodar nessa sessão e grava a mensagem de sistema começando por `"Limite de execução de automação atingido"`.
-- **Ações em cadeia:** ações executadas por automação não disparam **Ao resolver uma conversa**, **Ao atribuir membro** (pelo caminho direto da conversa) nem **Ao mover grupo**. Já **Adicionar tag** feita por automação dispara **Ao adicionar tag**, e uma regra de atribuição automática chamada por automação pode disparar **Ao atribuir membro**.
+- **Limite de 10 ações por evento (apenas fora dos gatilhos de tempo):** todas as automações ligadas do mesmo gatilho cujas condições batem rodam, ordenadas pelo nome da automação e depois pela ordem das ações. Apenas as **10 primeiras** ações das automações que ainda estão dentro do limite de execuções por sessão são executadas por evento: uma automação barrada pelo limite da sessão não consome esse teto, e se uma automação admitida passar do que falta para 10, só as primeiras ações dela rodam. Nos gatilhos de tempo não há esse teto de 10 ações por evento.
+- **Limite de repetição:** cada automação roda no máximo **10 vezes** na mesma sessão num período de 1 dia — a contagem vale separadamente para cada automação (inclusive nos gatilhos de tempo e em **Ao membro ficar online**); se uma estourar, as outras que casaram no mesmo evento continuam rodando. Na 11ª tentativa, a automação para de rodar nessa sessão e grava na conversa a mensagem de sistema `"Limite de execução de automação atingido - <idAutomação>-<idSessão>"`. No gatilho **Mensagem recebida do cliente**, esse aviso aparece uma única vez por automação por sessão; nos outros gatilhos, pode se repetir a cada nova tentativa acima do limite.
+- **Ações em cadeia:** ações executadas por automação não disparam **Mensagem recebida do cliente**, **Ao resolver uma conversa**, **Ao atribuir membro** (pelo caminho direto da conversa) nem **Ao mover grupo**. Já **Adicionar tag** feita por automação dispara **Ao adicionar tag**, e uma regra de atribuição automática chamada por automação pode disparar **Ao atribuir membro**.
 
 ## Condições: operadores por campo
 
@@ -98,6 +102,7 @@ Na lista de campos, **Estado**, **Origem da sessão**, **Janela de resposta** e 
 | --- | --- | --- |
 | **Contexto** | **Horário** | **está dentro de**, **está fora de** |
 | **Contexto** | **Tag** *(só em **Ao adicionar tag**)* | **é igual a**, **não é igual a** |
+| **Contexto** | **Texto da mensagem** *(só em **Mensagem recebida do cliente**)* | **contém**, **não contém**, **é igual a**, **não é igual a**, **começa com** |
 | **Contato** | **Tipo de contato** (**Primeira conversa do canal**, **Já conversou no canal**, **Contato novo**, **Contato já cadastrado**) | **é igual a** |
 | **Contato** | **Nome do contato**, **E-mail do contato** | **é igual a**, **não é igual a**, **contém**, **não contém**, **é vazio**, **não é vazio** |
 | **Contato** | **Celular do contato** | **é igual a**, **não é igual a**, **contém**, **não contém**, **começa com** |
@@ -110,6 +115,13 @@ Na lista de campos, **Estado**, **Origem da sessão**, **Janela de resposta** e 
 | **Conversa/Sessão** | **Minutos desde sessão criada** | **é maior que**, **é menor que** |
 | **Conversa/Sessão** | **Avaliação de atendimento** | **é igual a**, **é maior que**, **é menor que** |
 | **Conversa/Sessão** | Campos personalizados da sessão | Conforme o tipo do campo (veja a tabela abaixo) |
+
+Regras da condição **Texto da mensagem** (exclusiva do gatilho **Mensagem recebida do cliente**):
+
+- **Maiúsculas, acentos e espaços:** não diferencia maiúsculas de minúsculas, mas **diferencia acentos** (por exemplo, `boleto` não casa com `boléto` e `ação` não casa com `acao`). Espaços nas pontas do texto da mensagem e do valor configurado são aparados.
+- **Valor vazio:** um valor vazio ou só com espaços nunca casa (inclusive em **não contém**).
+- **Operadores:** **contém** e **não contém** comparam trecho do texto (não exigem palavra inteira); **é igual a** e **não é igual a** comparam o texto inteiro; **começa com** confere o início do texto. Não existem os operadores **é vazio** e **não é vazio** nessa condição.
+- **Mídia sem legenda:** apenas o texto da mensagem ou da legenda entra na comparação; mídia sem legenda tem texto vazio, por isso avalia como verdadeira em **não contém** e **não é igual a**, e como falsa em **contém**, **é igual a** e **começa com**.
 
 ### Campos personalizados
 
@@ -163,7 +175,7 @@ Não possui condições (condições ligadas são ignoradas).
 - Bot agendado por automação (ou iniciado em contato novo): `"Bot iniciado por Automação {nome}"`.
 - Contato novo (**Iniciar conversa**): `"Automação iniciada"`.
 - Resolver ou reabrir: exibe `"Automação"` no lugar do nome do membro.
-- Limite de repetição atingido: mensagem começando por `"Limite de execução de automação atingido"`.
+- Limite de repetição atingido (10 execuções por automação por sessão em 1 dia): `"Limite de execução de automação atingido - <idAutomação>-<idSessão>"` (aparece uma única vez por automação por sessão em **Mensagem recebida do cliente**; nos outros gatilhos, pode se repetir).
 
 ## Diagnóstico
 
@@ -186,7 +198,8 @@ Não possui condições (condições ligadas são ignoradas).
 | **Agendar mensagem template** falhou ou saiu no canal errado | O envio usa o canal da conversa (ignora o **Canal** escolhido) ou o template tem mídia no cabeçalho | Use em conversas do WhatsApp oficial onde o template está aprovado e sem mídia no cabeçalho |
 | **Agendar execução de bot** não rodou | A conversa não é de WhatsApp | Essa ação só funciona em conversas de WhatsApp |
 | **Avaliar atendimento** não enviou pesquisa | Regra da pesquisa de satisfação (ex.: sessão reaberta, já avaliada, sem mensagem do contato ou sem responsável) | Veja [Pedir avaliação no fim do atendimento](/docs/atendimento/pesquisa-de-satisfacao) |
-| Só parte das ações rodou | Uma ação falhou (item apagado) e as seguintes continuaram, ou o total de ações somadas no evento passou de 10 (só as 10 primeiras rodam) | Revise os campos de cada ação e mantenha até 10 ações por evento |
-| Parou de rodar numa conversa com `"Limite de execução de automação atingido"` | A mesma automação rodou cerca de 10 vezes na mesma sessão em 1 dia | Revise automações que se disparam em cadeia (ex.: **Adicionar tag** com **Ao adicionar tag**) |
+| **Mensagem recebida do cliente** não disparou | A mensagem era de membro, digitada no celular do canal, de bot, nota interna, mensagem de sistema, enviada por automação ou mantida resolvida pelo copiloto; ou a automação acabou de ser criada ou religada (pode levar até 60 segundos para começar a rodar); ou **Texto da mensagem** não bateu (diferencia acentos) | Confira a origem da mensagem, aguarde até 60 segundos após criar ou religar e revise acentos e operadores na condição **Texto da mensagem** |
+| Só parte das ações rodou | Uma ação falhou (item apagado) e as seguintes continuaram, ou o total de ações somadas no evento (fora dos gatilhos de tempo, contando só as automações ainda dentro do limite de 10 execuções por sessão) passou de 10 | Revise os campos de cada ação e mantenha até 10 ações por evento |
+| Parou de rodar numa conversa com `"Limite de execução de automação atingido"` | Essa automação atingiu o limite de **10 execuções** na mesma sessão em 1 dia (cada automação tem sua própria contagem) | Revise se há automações que se disparam em cadeia (ex.: **Adicionar tag** com **Ao adicionar tag**) ou se a sessão recebeu mais de 10 mensagens do contato com o gatilho **Mensagem recebida do cliente** |
 | **Mudar etapa do negócio no Hubspot** não fez nada | Essa opção do HubSpot na ação **Integração** não altera a etapa | Veja [Integrar com o HubSpot](/docs/integracoes/hubspot) |
 | **Tempo sem conversa ao criar contato** não abriu conversa | O contato já tinha conversa em algum canal, ou há outra automação ligada com o mesmo gatilho (só a primeira vale) | Confira se o contato já tinha conversa e mantenha apenas uma automação ligada com esse gatilho |

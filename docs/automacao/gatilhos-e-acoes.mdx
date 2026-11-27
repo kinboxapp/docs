@@ -1,10 +1,13 @@
 ---
 title: "Gatilhos, condições e ações das automações"
 description: Lista dos gatilhos, das condições e das ações das automações da Kinbox, com o que cada um faz e em quais gatilhos cada ação aparece.
-keywords: [gatilhos automação, lista de gatilhos, ações da automação, condições da automação, tempo sem nova mensagem, tempo pendente, janela de 24h, ao adicionar tag, agendar mensagem, executar bot, mover para grupo]
+keywords: [gatilhos automação, lista de gatilhos, ações da automação, condições da automação, tempo sem nova mensagem, tempo pendente, janela de 24h, ao adicionar tag, agendar mensagem, executar bot, mover para grupo, mensagem recebida do cliente, texto da mensagem]
 publico: humano
 tipo: referencia
 fontes:
+  - KIN-7905
+  - kinboxapp/kinbox-web#921
+  - kinboxapp/kinbox-api-v0#141
   - web:src/pages/settings/automations/EditAutomations.tsx
   - web:src/components-old/forms/ActionsInput/index.tsx
   - web:src/components-old/forms/ActionsInput/ActionScheduleTemplate.tsx
@@ -34,8 +37,9 @@ Cada automação tem um único **Gatilho**. Trocar o gatilho depois apaga as con
 
 | Gatilho | Quando acontece |
 | --- | --- |
-| **Nova conversa ou sessão** | O contato manda uma mensagem que abre uma sessão nova (ou a primeira conversa). |
+| **Nova conversa ou sessão** | O contato manda uma mensagem que abre uma sessão nova (ou a primeira conversa). Na primeira mensagem da sessão, também dispara **Mensagem recebida do cliente**. |
 | **Nova conversa ou sessão iniciada pelo membro** | Um membro começa uma sessão nova enviando a primeira mensagem. |
+| **Mensagem recebida do cliente** | O contato envia uma mensagem na conversa (inclusive na primeira mensagem de uma sessão nova). Não dispara para mensagens de membro, digitadas no celular do canal, de bot, notas internas, mensagens de sistema, mensagens enviadas por automação nem mensagens mantidas resolvidas pelo copiloto. |
 | **Ao resolver uma conversa** | Uma sessão (que não foi reaberta) é resolvida. Não roda quando a sessão tinha sido reaberta. |
 | **Ao resolver uma conversa reaberta** | É resolvida uma sessão que tinha sido reaberta dentro do tempo de tolerância. Nunca dispara junto com **Ao resolver uma conversa**. |
 | **Ao atribuir membro** | A conversa recebe um membro responsável (inclusive pela atribuição automática). |
@@ -86,7 +90,7 @@ Quando você preenche os dois blocos, precisam bater todas as condições do pri
 
 | Gatilhos | Grupo de campos | Campos disponíveis |
 | --- | --- | --- |
-| **Conversa** | **Contexto** | **Horário** (dentro ou fora de um horário cadastrado), **Tag** (só aparece no gatilho **Ao adicionar tag**; confere a tag que acabou de ser adicionada — se não aparecer, confira o gatilho escolhido) |
+| **Conversa** | **Contexto** | **Horário** (dentro ou fora de um horário cadastrado), **Tag** (só aparece no gatilho **Ao adicionar tag**; confere a tag que acabou de ser adicionada — se não aparecer, confira o gatilho escolhido) e **Texto da mensagem** (só aparece no gatilho **Mensagem recebida do cliente** — se não aparecer, confira o gatilho escolhido; aceita **contém**, **não contém**, **é igual a**, **não é igual a** e **começa com**; não diferencia maiúsculas de minúsculas, mas diferencia acentos) |
 | **Conversa** | **Contato** | **Tipo de contato** (**Primeira conversa do canal**, **Já conversou no canal**, **Contato novo**, **Contato já cadastrado**), **Nome do contato**, **E-mail do contato**, **Celular do contato**, **Negócios abertos do contato** e campos personalizados do contato |
 | **Conversa** | **Conversa/Sessão** | **Grupo**, **Atribuído**, **Campanha**, **Tags** (todas as tags da conversa), **Tipo de canal**, **Canal**, **Negócios abertos da conversa**, **Minutos desde sessão criada**, **Avaliação de atendimento**, **Ads** (**Google** / **Meta**) e campos personalizados da sessão |
 | **Ao membro ficar online** | **Contexto** | **Horário** |

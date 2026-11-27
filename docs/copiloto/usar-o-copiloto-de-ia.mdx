@@ -5,6 +5,8 @@ keywords: [usar copiloto, menu do copiloto, ícone de estrelas, resumir sessão,
 publico: humano
 tipo: guia
 fontes:
+  - KIN-7799
+  - kinboxapp/kinbox-web#873
   - web:src/pages/settings/copilot/CopilotChatDrop.tsx
   - web:src/pages/settings/copilot/chatCommands.ts
   - web:src/pages/inbox/ChatTextEditorPure.tsx
@@ -85,7 +87,7 @@ O bloco **Sugestões** aparece acima do editor quando todas as condições abaix
 - a conversa não está resolvida;
 - nenhum bot está atendendo a conversa;
 - a conversa está em **Onde o copiloto atua**;
-- o seu papel não tem a restrição **Não mostrar sugestões de respostas** (seção **Copiloto** do papel);
+- para membros que não são o proprietário do workspace, o papel não tem a restrição **Não mostrar sugestões de respostas** (seção **Copiloto** do papel; essa restrição não vale para o proprietário);
 - com **Sugestões automáticas** ligada, o workspace tem saldo na carteira.
 
 <Frame caption="Botão Sugestões exibido acima do editor da conversa">
@@ -128,4 +130,4 @@ Quando o saldo acaba, o menu do copiloto mostra **Seus créditos acabaram** com 
 - **O botão do copiloto não aparece no editor.** A função **Comandos de chat** pode não estar adicionada e salva, ou a conversa pode estar fora de **Onde o copiloto atua**. Peça a quem administra o workspace para conferir [Configurações do copiloto](/docs/copiloto/configuracoes-de-copiloto).
 - **Aparece "Escreva um texto para usar essa ação do assistente.".** Comandos de **Mudar texto**, **Mudar tom para** e **Personalizado** exigem algum texto no editor antes de clicar na ação.
 - **Aparece "Saldo insuficiente." ou "Seus créditos acabaram".** O saldo da carteira está baixo ou zerado. Peça a quem tem acesso ao financeiro para [adicionar saldo](/docs/assinatura/adicionar-saldo).
-- **O bloco Sugestões não aparece.** Confira se a última mensagem é do contato, se a conversa não está resolvida, se não há bot atendendo, se a conversa está em **Onde o copiloto atua**, se o seu papel não tem **Não mostrar sugestões de respostas** e se o workspace tem saldo.
+- **O bloco Sugestões não aparece.** Confira se a última mensagem é do contato, se a conversa não está resolvida, se não há bot atendendo, se a conversa está em **Onde o copiloto atua**, se o seu papel não tem **Não mostrar sugestões de respostas** (essa restrição vale apenas para membros que não são o proprietário) e se o workspace tem saldo.

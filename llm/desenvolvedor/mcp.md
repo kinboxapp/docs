@@ -1,11 +1,15 @@
 ---
 title: "MCP: clientes aceitos, OAuth e token, permissões e o que aparece na Auditoria"
 description: Referência do MCP da Kinbox — aplicativos e configurações, permissões da conexão, ferramentas por permissão, limites de uso, travas por papel, erros, parceiros, duração da conexão e registro na Auditoria.
-keywords: [mcp erro, rate_limited, provisional_lock, permission_denied, confirmation_required, limite mcp, limite diário por token de api, conexão expirou, autorização indisponível, pedido de autorização expirou, conversations_read, messages_send, auditoria mcp, parceiro mcp, scope_required, ferramenta não aparece, privacidade mcp, exemplos de pedidos]
+keywords: [mcp erro, rate_limited, provisional_lock, permission_denied, confirmation_required, limite mcp, limite diário por token de api, conexão expirou, autorização indisponível, pedido de autorização expirou, conversations_read, messages_send, automations_read, node_types, validate, FIELD_UNKNOWN, VALUE_INVALID, FIELD_REQUIRED, REF_NOT_FOUND, FIELD_WARNINGS_TRUNCATED, auditoria mcp, parceiro mcp, scope_required, ferramenta não aparece, privacidade mcp, exemplos de pedidos]
 publico: llm
 tipo: referencia
 fontes:
   - KIN-7851
+  - KIN-7898
+  - KIN-7903
+  - kinboxapp/kinbox-api-v2#561
+  - kinboxapp/kinbox-api-v2#563
   - api:src/modules/mcp/mcp-server.factory.ts
   - api:src/modules/mcp/mcp-rate-limit.service.ts
   - api:src/modules/mcp/mcp-auth.service.ts
@@ -49,9 +53,27 @@ A IA só enxerga as ferramentas das permissões concedidas na conexão: uma ferr
 
 | Permissão | Ferramentas e ações |
 | --- | --- |
-| **Ver** (`read`) | `conversations_read` (buscar, abrir, ler mensagens, status de envio e agendadas), `reports_read` (visão geral, produtividade, atribuição, avaliação e sessões; até 92 dias por pedido), `contacts_read` (contatos e organizações), `deals_read` (negociações, funis e produtos), `tasks_read`, `campaigns_read` (campanhas e resultados), `channels_read` (canais e status), `catalog_read` (membros, grupos, tags, campos personalizados, frases rápidas, templates, bots e horários), `team_read` (membros, papéis e regras de atribuição), `automations_read` (listar, abrir e validar bots, agentes, cenários e automações), `billing_read` (plano, faturas, créditos de SMS e saldo; exige **Assinatura** no papel), `get_guide`, `help_read` (busca na central de ajuda), `report_gap` (avisa o que faltou na central de ajuda ou no MCP) e `list_partner_workspaces` (com permissão de parceiro). |
+| **Ver** (`read`) | `conversations_read` (buscar, abrir, ler mensagens, status de envio e agendadas), `reports_read` (visão geral, produtividade, atribuição, avaliação e sessões; até 92 dias por pedido), `contacts_read` (contatos e organizações), `deals_read` (negociações, funis e produtos), `tasks_read`, `campaigns_read` (campanhas e resultados), `channels_read` (canais e status), `catalog_read` (membros, grupos, tags, campos personalizados, frases rápidas, templates, bots e horários), `team_read` (membros, papéis e regras de atribuição), `automations_read` (listar, abrir, validar e consultar a referência de campos de cada tipo de nó com `node_types` para bots, agentes, cenários e automações), `billing_read` (plano, faturas, créditos de SMS e saldo; exige **Assinatura** no papel), `get_guide`, `help_read` (busca na central de ajuda), `report_gap` (avisa o que faltou na central de ajuda ou no MCP) e `list_partner_workspaces` (com permissão de parceiro). |
 | **Alterar** (`write`) | `conversations_write` (resolver, reabrir, atribuir, mover de grupo, tags, nota interna, pendência, lida/não lida, seguir, campos, parar bot, cancelar agendamento, fixar nota, bloquear contato), `contacts_write` (criar, editar e excluir contatos e organizações), `deals_write` (criar, editar, mover etapa, excluir, ligar negociação à conversa, produtos e funis), `tasks_write`, `campaigns_write` (renomear, pausar e excluir; criar campanha pelo MCP só para WhatsApp por QR Code ou SMS, e a mensagem de campanha com template do WhatsApp oficial só muda pelo app), `settings_write` (tags, frases rápidas, campos personalizados, grupos e horários), `team_write` (convidar, editar, desativar e remover membros, papéis e regras de atribuição), `channels_write` (criar canal de WhatsApp por QR Code) e `automations_write` (criar e configurar bots, agentes, cenários e automações). |
 | **Enviar** (`send`) | `messages_send` (responder texto e mídia, iniciar conversa por telefone via WhatsApp ou SMS, reagir, encaminhar e apagar mensagem). Algumas ações de ferramentas de escrita exigem as duas permissões, **Alterar** e **Enviar**, e contam no limite de envio: em `conversations_write`, `start_bot` (iniciar bot), `schedule` (agendar mensagem) e `edit_schedule` (editar agendamento); em `campaigns_write`, `create` (criar campanha), `edit_message` (editar a mensagem) e `resume` (retomar). Em `automations_write`, criar já ativo, ligar ou editar um fluxo que pode rodar também exige **Alterar** e **Enviar**; rascunhos e desligar exigem só **Alterar**. |
+
+## Fluxos: `node_types` e avisos do `validate` (`automations_read`)
+
+- **Ação `node_types` (`automations_read`, somente leitura):** exige a permissão **Ver** (`read`) na conexão e a permissão correspondente do papel para o tipo de fluxo (**Bot**, **Agentes de IA**, **Cenários** ou **Automações**).
+  - **Parâmetros:** `kind` (obrigatório: `bot`, `agent`, `scenario` ou `automation`) e `types` (opcional: lista de strings, máx. 80 caracteres cada, até **10 itens** por chamada; não existe parâmetro `type` no singular).
+  - **Sem `types`:** devolve o índice do `kind`, com formato do nó (`shape`), variáveis (quando houver), campos comuns (`commonFields`) e a lista de tipos (`type`, `label` e `summary`, sem os campos individuais; tipos legados ficam fora do índice).
+  - **Com `types`:** devolve os campos aceitos de cada tipo pedido (nome, tipo, valores aceitos, obrigatoriedade, valor padrão e descrição curta, incluindo subcampos). Tipos não encontrados voltam em `unknownTypes` junto com `validTypes`; pedidos repetidos são deduplicados.
+- **Avisos do `validate` (`automations_read`):** o `validate` testa um fluxo sem gravar (inclusive um fluxo já salvo, passando apenas `id`). Além dos erros do validador do tipo de fluxo (que definem `ok: false` e impedem salvar ou ligar um fluxo executável), devolve avisos (`severity: "warning"`) que **não mudam o `ok`** e **aparecem apenas no `validate`** (não vêm nas respostas de `create` nem de `update` em `automations_write`):
+  - `FIELD_UNKNOWN`: chave no nó (ou `field` em condição de automação) que não consta na referência do tipo, quando o objeto não aceita chaves abertas.
+  - `VALUE_INVALID`: valor fora dos valores aceitos do campo (em lista, verifica cada item; em `node.data` de agente e em `template`, variável inteira `{{...}}` é aceita, mas texto misto não).
+  - `FIELD_REQUIRED`: campo obrigatório da referência ausente, nulo, vazio ou lista vazia (não conta campo condicional, com valor padrão, legado ou em objeto com `enabled: false`; não repete caminho já apontado como erro pelo validador do fluxo).
+  - `REF_NOT_FOUND`: id de referência que não existe no workspace, com dica da ferramenta que lista a entidade.
+  - `FIELD_WARNINGS_TRUNCATED`: aparece quando há muitos avisos de campo na mesma validação e a lista é cortada — corrija os avisos exibidos e rode `validate` novamente para ver o restante.
+- **O que `REF_NOT_FOUND` confere e o que não confere:**
+  - **Confere no workspace:** grupo, tag e canal (inativos contam como inexistentes); operador (vínculo com o workspace inativo conta como inexistente); horário de atendimento e regra de atribuição (inativos continuam contando como existentes); campanha, funil, etapa (quando há funil no mesmo objeto, confere nas etapas desse funil; se o funil não existe, só o funil avisa) e produto.
+  - **Não gera `REF_NOT_FOUND`:** id vazio, `0`, id com variável (`{...}` ou começando com `$`) ou fora do formato esperado; referência a outro nó; e entidades sem essa consulta — campo personalizado, template, base de conhecimento, credencial e itens de agenda (recurso e serviço).
+  - **Erros que bloqueiam em vez de só avisar:** referências a bot ou agente dentro de fluxos e, em automações, tag, grupo, canal ou bot inexistentes são apontados como **erro** pelo validador do fluxo (`REF_MISSING` na automação), impedindo salvar — nesses caminhos não sai aviso duplicado.
+- **Webhook de entrada em cenário:** cenário com gatilho de webhook de entrada (`webhook_inbound`) sem URL de webhook (`webhookUrl`) passa a dar erro (`REQUIRED_FIELD`), bloqueando o salvamento pela API e pelo MCP.
 
 ## Exemplos de pedidos
 

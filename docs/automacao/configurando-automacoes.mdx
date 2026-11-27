@@ -5,6 +5,9 @@ keywords: [criar automação, nova automação, configurar automação, configur
 publico: humano
 tipo: guia
 fontes:
+  - KIN-7905
+  - kinboxapp/kinbox-web#921
+  - kinboxapp/kinbox-api-v0#141
   - web:src/pages/settings/automations/index.tsx
   - web:src/pages/settings/automations/EditAutomations.tsx
   - web:src/components-old/forms/ActionsInput/index.tsx
@@ -72,7 +75,7 @@ Crie uma automação para que a Kinbox execute ações sozinha quando um evento 
 
     Para filtrar, ligue o interruptor de **Condições**, clique em **Condição** no bloco "Quando **todas** as condições são verdadeiras" ou em "E quando **qualquer** das condições são verdadeiras" e escolha campo, operador e valor. O **X** remove a linha.
 
-    O gatilho **Tempo sem conversa ao criar contato** não tem condições. Alguns campos só aparecem em gatilhos específicos — como **Tag**, que só aparece em **Ao adicionar tag**; se não aparecer, confira o gatilho escolhido. Veja todos os campos em [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes).
+    O gatilho **Tempo sem conversa ao criar contato** não tem condições. Alguns campos só aparecem em gatilhos específicos — como **Tag**, que só aparece em **Ao adicionar tag**, e **Texto da mensagem**, que só aparece em **Mensagem recebida do cliente**; se não aparecer, confira o gatilho escolhido. Veja todos os campos em [Gatilhos, condições e ações das automações](/docs/automacao/gatilhos-e-acoes).
 
     <Frame caption="Bloco de condições ligado com o filtro Tags contém Orçamento">
       <img src="/images/ajuda/automacao/automacao-condicoes.webp" alt="Seção Condições ligada mostrando o bloco Quando todas as condições são verdadeiras com Tags contém Orçamento, o botão Condição e o bloco E quando qualquer das condições são verdadeiras vazio" />

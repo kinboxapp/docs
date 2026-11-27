@@ -5,6 +5,8 @@ keywords: [copiloto não aparece, seus créditos acabaram, saldo insuficiente, e
 publico: llm
 tipo: referencia
 fontes:
+  - KIN-7799
+  - kinboxapp/kinbox-web#873
   - web:src/pages/settings/copilot/index.tsx
   - web:src/pages/settings/copilot/CopilotChatDrop.tsx
   - web:src/pages/inbox/Chat/CopilotAutoSuggest.tsx
@@ -98,7 +100,7 @@ Detalhes de referência das páginas [Configurações do copiloto](/docs/copilot
 
 ## Sugestões de resposta e frases rápidas
 
-- **Quando o bloco Sugestões aparece:** última mensagem (de texto/mídia, sem contar notas e eventos) é do contato, conversa não está resolvida, bot não está atendendo, conversa está em **Onde o copiloto atua** e o papel do membro não tem a restrição **Não mostrar sugestões de respostas**.
+- **Quando o bloco Sugestões aparece:** última mensagem (de texto/mídia, sem contar notas e eventos) é do contato, conversa não está resolvida, bot não está atendendo, conversa está em **Onde o copiloto atua** e, para membros que não são o proprietário, o papel não tem a restrição **Não mostrar sugestões de respostas** (para o proprietário, o bloco aparece sempre que o copiloto está habilitado).
 - **Com Sugestões automáticas ligada:** as sugestões são geradas ao abrir a conversa. Com saldo de R$ 0,20 ou menos, nada é gerado e o bloco **Sugestões** não aparece.
 - **Sob demanda:** mesmo sem **Sugestões automáticas** adicionada, o botão **Sugestões** aparece nas mesmas condições acima e gera sugestões ao clicar. Gerar uma nova sugestão consome saldo; a sugestão já gerada para a mesma última mensagem é reaproveitada sem nova cobrança. Com saldo de R$ 0,20 ou menos, o botão pode continuar aparecendo, mas o clique não gera sugestões. Para escondê-lo, use a restrição **Não mostrar sugestões de respostas** no papel ou restrinja **Onde o copiloto atua**.
 - **O que lê:** até **100 mensagens** da sessão atual (contato, membros e bot).
@@ -208,7 +210,7 @@ Uma recarga ou o fim do saldo pode levar até **30 segundos** para refletir nas 
 
 ## Restrições de papel
 
-- **Não mostrar sugestões de respostas** (seção **Copiloto** do papel; texto da tela: `"Não aparecer sugestões de respostas no chat e nem o botão para sugerir respostas."`). Vale também para o proprietário quando o papel dele tem essa restrição.
+- **Não mostrar sugestões de respostas** (seção **Copiloto** do papel; texto da tela: `"Não aparecer sugestões de respostas no chat e nem o botão para sugerir respostas."`). Vale apenas para membros que não são o proprietário do workspace (para o proprietário, as sugestões aparecem sempre que o copiloto está habilitado).
 - O menu de comandos depende da função **Comandos de chat**.
 - **Esconder sentimento do cliente** e **Esconder lead score** (quadro **Restrições** da seção **Conversas** do papel). Veja [Criar papéis e permissões](/docs/configuracoes-no-workspace/configurar-permissoes-dos-usuarios).
 
@@ -220,7 +222,7 @@ Uma recarga ou o fim do saldo pode levar até **30 segundos** para refletir nas 
 | Menu mostra **Seus créditos acabaram** | Saldo da carteira em R$ 0,10 ou menos. |
 | Comando mostra `"Saldo insuficiente."` | Saldo da carteira em R$ 0,20 ou menos. |
 | Comando mostra `"Escreva um texto para usar essa ação do assistente."` | Editor vazio ao acionar um comando de **Mudar texto**, **Mudar tom para** ou **Personalizado**. |
-| Bloco **Sugestões** não aparece | Última mensagem é de membro, conversa resolvida, bot atendendo, conversa fora de **Onde o copiloto atua**, restrição **Não mostrar sugestões de respostas** no papel ou, com **Sugestões automáticas** ligada, saldo em R$ 0,20 ou menos. |
+| Bloco **Sugestões** não aparece | Última mensagem é de membro, conversa resolvida, bot atendendo, conversa fora de **Onde o copiloto atua**, restrição **Não mostrar sugestões de respostas** no papel (apenas para membros que não são o proprietário) ou, com **Sugestões automáticas** ligada, saldo em R$ 0,20 ou menos. |
 | Botão **Sugestões** aparece, mas o clique não gera nada | Saldo da carteira em R$ 0,20 ou menos. |
 | Sugestões pararam de aparecer numa conversa com áudio | Saldo da carteira entre R$ 0,11 e R$ 0,90 com **Transcrever áudios** ligado: o áudio recente não é transcrito e as sugestões daquela conversa param, sem aviso. Adicione saldo ou desligue **Transcrever áudios**. |
 | Sugestão ignora a base de conhecimento | Base em status diferente de **Pronto** (ver [Base de conhecimento do bot e do copiloto](/docs/copiloto/base-de-conhecimento)), interruptor desligado ou regra de **Personalizar por grupo** apontando para outra base. |
