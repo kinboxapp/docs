@@ -5,6 +5,8 @@ keywords: [licença, licenças de membro, limite de membros, liberar licença, d
 publico: humano
 tipo: guia
 fontes:
+  - KIN-7799
+  - kinboxapp/kinbox-web#873
   - web:src/pages/settings/members/index.tsx
   - web:src/pages/settings/members/ChangeOwnerModal.tsx
   - web:src/pages/settings/members/ChangeOwnerPasswordModal.tsx
@@ -12,6 +14,7 @@ fontes:
   - api-v0:server/controllers/OperatorController.js
 codigo:
   - web:src/pages/settings/members/**
+  - web:src/lib/ownerPreferences.ts
   - web:src/pages/settings/billing/BillingV2.tsx
   - api-v0:server/controllers/NewPaymentController.js
   - api-v0:server/controllers/OperatorController.js
@@ -101,6 +104,6 @@ Cada workspace tem um único proprietário. Estas ações são exclusivas dele:
 - Excluir o workspace (veja [Excluir o workspace](/docs/administracao/excluir-workspace)).
 - Transferir a propriedade do workspace para outro membro ativo que já aceitou o convite.
 - Marcar a permissão **Pode resetar senha de membros** em um papel.
-- Além disso, o proprietário tem todas as permissões e não sofre restrições de papel, com duas exceções que valem também para ele quando o papel dele tem a opção: **Não mostrar sugestões de respostas** e **Não marca como lido ao abrir uma conversa** (veja a [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Ele não pode ser desativado, desconectado nem excluído.
+- Além disso, o proprietário tem todas as permissões e não sofre restrições de papel — nem **Não mostrar sugestões de respostas**, nem **Não marca como lido ao abrir uma conversa**, nem a página inicial (**Home**) do papel valem pelo papel para ele. Para não marcar conversas como lidas ao abrir no navegador, o proprietário usa a opção **Não marca como lido ao abrir uma conversa** em **Configurações** → **Perfil** (veja [Editar seu perfil](/docs/configuracoes-no-workspace/configurar-o-perfil-do-usuario) e [Referência de permissões](/docs/administracao/referencia-de-permissoes)). Ele não pode ser desativado, desconectado nem excluído.
 
 Veja também [Gerenciar membros](/docs/configuracoes-no-workspace/gerenciar-membros), [Workspace, membros e papéis](/docs/conceitos/workspace-membros-e-papeis) e [O convite não chegou ou o membro não consegue entrar](/docs/administracao/problemas-com-membros).

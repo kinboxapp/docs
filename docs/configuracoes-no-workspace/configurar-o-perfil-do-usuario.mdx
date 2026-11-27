@@ -1,19 +1,20 @@
 ---
 title: Editar seu perfil
-description: Como trocar sua foto, nome e celular, compartilhar suas conversas com colegas e escolher idioma, tema e fundo das conversas em Configurações → Perfil.
-keywords: [perfil, meu perfil, foto de perfil, trocar foto, nome, celular, trocar e-mail, compartilhar conversas, compartilhamento, idioma, inglês, tema, modo escuro, fundo da conversa, papel de parede, configurações da conta, usuário]
+description: Como trocar sua foto, nome e celular, compartilhar suas conversas com colegas e ajustar idioma, preferências do proprietário, tema e fundo das conversas em Configurações → Perfil.
+keywords: [perfil, meu perfil, foto de perfil, trocar foto, nome, celular, trocar e-mail, compartilhar conversas, compartilhamento, idioma, inglês, preferências, não marca como lido, proprietário, tema, modo escuro, fundo da conversa, papel de parede, configurações da conta, usuário]
 publico: humano
 tipo: guia
 fontes:
+  - KIN-7799
+  - kinboxapp/kinbox-web#873
   - web:src/pages/settings/profile/Profile.tsx
   - web:src/pages/settings/profile/LanguagePreference.tsx
   - web:src/pages/settings/ChatWallpaperSettings.tsx
   - web:src/pages/settings/roles/permissionSections.tsx
   - api-v0:server/controllers/OperatorController.js
 codigo:
-  - web:src/pages/settings/profile/Profile.tsx
-  - web:src/pages/settings/profile/LanguagePreference.tsx
-  - web:src/pages/settings/profile/useChangeTheme.tsx
+  - web:src/pages/settings/profile/**
+  - web:src/lib/ownerPreferences.ts
   - web:src/pages/settings/ChatWallpaperSettings.tsx
   - web:src/components-old/forms/ImageUploader/index.tsx
   - api-v0:server/routes/OperatorsApiRoutes.js
@@ -74,9 +75,12 @@ No cartão **Segurança**, você altera sua senha e ativa a verificação em dua
 
 Veja o passo a passo em [Trocar a senha, recuperar o acesso e sair da conta](/docs/conta/senha-e-sessoes) e [Ativar a verificação em duas etapas](/docs/conta/verificacao-em-duas-etapas).
 
-## Idioma
+## Idioma e preferências
 
-No cartão **Preferências**, em **Idioma**, escolha **Automático** (segue o idioma do navegador), **Português (Brasil)** ou **English**. A alteração salva na hora e vale para todos os workspaces.
+No cartão **Preferências**, você ajusta:
+
+- **Idioma:** escolha **Automático** (segue o idioma do navegador), **Português (Brasil)** ou **English**. A alteração salva na hora e vale para todos os workspaces.
+- **Não marca como lido ao abrir uma conversa** *(só o proprietário vê)*: aparece logo abaixo de **Idioma**, com o texto de ajuda "Acompanhe as conversas sem tirar o aviso de não lida dos atendentes.". O interruptor salva automaticamente ao alternar, sem botão de salvar. Se o salvamento falhar, o interruptor volta ao estado anterior e aparece "Não foi possível salvar as preferências.". Se o papel anterior do proprietário tinha essa restrição, o interruptor já abre ligado e esse valor continua valendo até o proprietário alterar a opção aqui. No [app da Kinbox para celular](/docs/app/visao-geral), a conversa continua sendo marcada como lida ao abrir. Para os demais membros do workspace, a opção não aparece no **Perfil** — a restrição continua sendo configurada no papel (veja [Referência de permissões](/docs/administracao/referencia-de-permissoes)).
 
 ## Tema e fundo das conversas
 
